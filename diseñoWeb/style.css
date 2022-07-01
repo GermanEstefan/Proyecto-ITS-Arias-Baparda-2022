@@ -65,6 +65,7 @@ li{
 
 .text-container {
     width: auto;
+    overflow: hidden;
 }
 
 .card-title {
@@ -76,3 +77,25 @@ li{
     max-height: 120px;
     overflow-y: scroll;
 }
+
+/* Scrollbar custom */
+
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background-color: rgba(215, 215, 215, 0.092);
+    border-radius: 3px;
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: rgba(146, 146, 146, 0.544);
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(120, 120, 120, 0.544);
+  }
