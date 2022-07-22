@@ -42,19 +42,19 @@
         
         <div class="form-container">
             <h2>Login</h2>
-            <form action="validate-user.php" method="POST" autocomplete="off">
-                <input type="text" name="employeeUserLogin" placeholder="Usuario">
+            <form action="./login-user.php" method="POST" autocomplete="off">
+                <input type="text" name="employeeCiLogin" placeholder="C.I">
                 <input type="password" name="employeePasswordLogin" placeholder="Contraseña">
-                <input type="password" name="employeePasswordConfirmLogin" placeholder="Confirmar contraseña">
                 <button>Iniciar sesion</button>
             </form>
         </div>
         
         <div class="form-container">
             <h2>Registro de nuevo usuario (Realizado por el Jefe)</h2>
-            <form action="" method="POST">
-                <input type="text" name="employeeUserRegister" placeholder="Usuario">
+            <form action="./register-user.php" method="POST">
+                <input type="text" name="employeeCiRegister" placeholder="Usuario">
                 <input type="text" name="employeePasswordRegister" placeholder="Contraseña">
+                <input type="text" name="employeePasswordConfirmRegister" placeholder="Confirmar contraseña">
                 <label for="rol">Rol:</label>
                 <select name="employeeRolRegister" id="rol">
                     <option value="vendedor">Vendedor</option>
