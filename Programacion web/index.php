@@ -67,7 +67,7 @@
 
         <div class="form-container">
             <h2>Alta de un nuevo producto</h2>
-            <form action="" method="POST">
+            <form action="./add-product.php" method="POST">
                 <label for="categoria">Categoria:</label>
                 <select name="productCategory">
                     <option value="guantes">Guantes</option>
@@ -82,10 +82,6 @@
                 <input type="file" name="productImage">
                 <button>Alta</button>
             </form>
-        </div>
-
-        <div class="form-container">
-            <h2>Aprovisionamiento de un producto existente</h2>
         </div>
         
     </main>
