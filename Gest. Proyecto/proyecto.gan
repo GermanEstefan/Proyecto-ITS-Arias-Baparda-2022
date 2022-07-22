@@ -1,0 +1,506 @@
+<?xml version="1.0" encoding="UTF-8"?><project name="Proyecto ITS" company="BINDEV" webLink="http://" view-date="2022-05-30" view-index="0" gantt-divider-location="498" resource-divider-location="336" version="3.2.3230" locale="es_ES">
+    <description>
+        <![CDATA[Se pide la creacion de un sitio web de venta de insumos para seguridad 
+y proteccion laboral ]]>
+    </description>
+    <view zooming-state="default:6" id="gantt-chart">
+        <field id="tpd3" name="Nombre" width="352" order="0"/>
+        <field id="tpd4" name="Fecha de inicio" width="73" order="1"/>
+        <field id="tpd5" name="Fecha de fin" width="72" order="2"/>
+        <option id="taskLabelUp" value=""/>
+        <option id="taskLabelDown" value="predecessors"/>
+        <option id="taskLabelLeft" value="id"/>
+        <option id="taskLabelRight" value="resources"/>
+        <option id="filter.completedTasks" value="false"/>
+        <timeline>
+            <![CDATA[116]]>
+        </timeline>
+        <option id="color.recent">
+            <![CDATA[#cc0000 #ff0000 #00cc00 #660066 #993300 #ffcc00 #00cccc #ff0033 #003333 #0033ff]]>
+        </option>
+    </view>
+    <view id="resource-table">
+        <field id="0" name="Nombre" width="187" order="0"/>
+        <field id="1" name="Función" width="145" order="1"/>
+    </view>
+    <!-- -->
+    <calendars>
+        <day-types>
+            <day-type id="0"/>
+            <day-type id="1"/>
+            <default-week id="1" name="default" sun="1" mon="0" tue="0" wed="0" thu="0" fri="0" sat="0"/>
+            <only-show-weekends value="false"/>
+            <overriden-day-types/>
+            <days/>
+        </day-types>
+    </calendars>
+    <tasks empty-milestones="true">
+        <taskproperties>
+            <taskproperty id="tpd0" name="type" type="default" valuetype="icon"/>
+            <taskproperty id="tpd1" name="priority" type="default" valuetype="icon"/>
+            <taskproperty id="tpd2" name="info" type="default" valuetype="icon"/>
+            <taskproperty id="tpd3" name="name" type="default" valuetype="text"/>
+            <taskproperty id="tpd4" name="begindate" type="default" valuetype="date"/>
+            <taskproperty id="tpd5" name="enddate" type="default" valuetype="date"/>
+            <taskproperty id="tpd6" name="duration" type="default" valuetype="int"/>
+            <taskproperty id="tpd7" name="completion" type="default" valuetype="int"/>
+            <taskproperty id="tpd8" name="coordinator" type="default" valuetype="text"/>
+            <taskproperty id="tpd9" name="predecessorsr" type="default" valuetype="text"/>
+        </taskproperties>
+        <task id="108" name="Planificacion primera entrega" color="#0033ff" meeting="false" start="2022-06-01" duration="46" complete="0" thirdDate="2022-06-01" thirdDate-constraint="0" expand="true">
+            <task id="109" name="Coordinación de reunión con cliente y comienzo de planificación" color="#0033ff" meeting="false" start="2022-06-01" duration="3" complete="0" thirdDate="2022-06-01" thirdDate-constraint="0" expand="false">
+                <depend id="84" type="2" difference="0" hardness="Strong"/>
+                <depend id="92" type="2" difference="0" hardness="Strong"/>
+                <depend id="110" type="2" difference="0" hardness="Strong"/>
+                <depend id="111" type="2" difference="0" hardness="Strong"/>
+                <depend id="115" type="2" difference="0" hardness="Strong"/>
+                <task id="0" name="Primera reunion con el cliente" color="#8cb6ce" meeting="false" start="2022-06-01" duration="1" complete="0" thirdDate="2022-06-01" thirdDate-constraint="0" expand="true" cost-manual-value="25.0" cost-calculated="true">
+                    <depend id="1" type="2" difference="0" hardness="Strong"/>
+                    <depend id="15" type="2" difference="0" hardness="Strong"/>
+                    <depend id="32" type="2" difference="0" hardness="Strong"/>
+                </task>
+                <task id="1" name="Definición del nombre del grupo" color="#8cb6ce" meeting="false" start="2022-06-02" duration="2" complete="0" thirdDate="2022-06-01" thirdDate-constraint="0" expand="true"/>
+                <task id="32" name="Realizar documento de integrantes del equipo" color="#8cb6ce" meeting="false" start="2022-06-02" duration="2" complete="0" thirdDate="2022-06-01" thirdDate-constraint="0" expand="true"/>
+                <task id="15" name="Determinar roles de los integrantes" color="#8cb6ce" meeting="false" start="2022-06-02" duration="2" complete="0" thirdDate="2022-06-01" thirdDate-constraint="0" expand="true">
+                    <depend id="2" type="2" difference="0" hardness="Strong"/>
+                    <depend id="16" type="2" difference="0" hardness="Strong"/>
+                    <depend id="20" type="2" difference="0" hardness="Strong"/>
+                    <depend id="31" type="2" difference="0" hardness="Strong"/>
+                    <depend id="34" type="2" difference="0" hardness="Strong"/>
+                    <depend id="85" type="2" difference="0" hardness="Strong"/>
+                </task>
+            </task>
+            <task id="110" name="Gestion de proyecto" color="#00cccc" meeting="false" start="2022-06-04" duration="26" complete="0" thirdDate="2022-06-04" thirdDate-constraint="0" expand="false">
+                <notes>
+                    <![CDATA[Estas guias estan como referencia por materias
+y se encuentran todas con la unidad de trabajo en 0
+son solo una guia para ayudar en el proceso de delegar las tareas
+a cada integrante del equipo.]]>
+                </notes>
+                <depend id="2" type="2" difference="0" hardness="Strong"/>
+                <depend id="3" type="2" difference="0" hardness="Strong"/>
+                <depend id="116" type="2" difference="0" hardness="Strong"/>
+                <task id="34" name="Determinar paradigma de organización del grupo" color="#8cb6ce" meeting="false" start="2022-06-04" duration="3" complete="0" thirdDate="2022-06-06" thirdDate-constraint="0" expand="true">
+                    <depend id="31" type="2" difference="0" hardness="Strong"/>
+                    <depend id="35" type="2" difference="0" hardness="Strong"/>
+                </task>
+                <task id="35" name="Realizar modelo de acta de reunión" color="#8cb6ce" meeting="false" start="2022-06-08" duration="1" complete="0" thirdDate="2022-06-01" thirdDate-constraint="0" expand="true">
+                    <depend id="31" type="2" difference="0" hardness="Strong"/>
+                </task>
+                <task id="31" name="Realizar cronograma de reuniones" color="#8cb6ce" meeting="false" start="2022-06-09" duration="7" complete="0" thirdDate="2022-06-01" thirdDate-constraint="0" expand="true">
+                    <depend id="33" type="2" difference="0" hardness="Strong"/>
+                </task>
+                <task id="33" name="Crear reglas del grupo" color="#8cb6ce" meeting="false" start="2022-06-17" duration="2" complete="0" thirdDate="2022-06-01" thirdDate-constraint="0" expand="true">
+                    <depend id="37" type="2" difference="0" hardness="Strong"/>
+                </task>
+                <task id="37" name="Determinar ciclo de vida del proyecto" color="#8cb6ce" meeting="false" start="2022-06-20" duration="2" complete="0" thirdDate="2022-06-01" thirdDate-constraint="0" expand="true">
+                    <depend id="16" type="2" difference="0" hardness="Strong"/>
+                    <depend id="21" type="2" difference="0" hardness="Strong"/>
+                    <depend id="36" type="2" difference="0" hardness="Strong"/>
+                    <depend id="98" type="2" difference="0" hardness="Strong"/>
+                </task>
+                <task id="16" name="Realizar documento de inicio y planificación" color="#00cccc" meeting="false" start="2022-06-22" duration="11" complete="0" thirdDate="2022-06-21" thirdDate-constraint="0" expand="false">
+                    <task id="21" name="Determinar Objetivos" color="#8cb6ce" meeting="false" start="2022-06-22" duration="1" complete="0" thirdDate="2022-06-01" thirdDate-constraint="0" expand="true">
+                        <depend id="22" type="2" difference="0" hardness="Strong"/>
+                    </task>
+                    <task id="22" name="Determinar alcance" color="#8cb6ce" meeting="false" start="2022-06-23" duration="1" complete="0" thirdDate="2022-06-01" thirdDate-constraint="0" expand="true">
+                        <depend id="23" type="2" difference="0" hardness="Strong"/>
+                    </task>
+                    <task id="23" name="Identificación de interesados internos" color="#8cb6ce" meeting="false" start="2022-06-24" duration="1" complete="0" thirdDate="2022-06-01" thirdDate-constraint="0" expand="true">
+                        <depend id="24" type="2" difference="0" hardness="Strong"/>
+                    </task>
+                    <task id="24" name="Identificación de interesados externos" color="#8cb6ce" meeting="false" start="2022-06-25" duration="1" complete="0" thirdDate="2022-06-01" thirdDate-constraint="0" expand="true">
+                        <depend id="25" type="2" difference="0" hardness="Strong"/>
+                    </task>
+                    <task id="25" name="Identificar recursos materiales" color="#8cb6ce" meeting="false" start="2022-06-27" duration="2" complete="0" thirdDate="2022-06-01" thirdDate-constraint="0" expand="true">
+                        <depend id="26" type="2" difference="0" hardness="Strong"/>
+                    </task>
+                    <task id="26" name="Estimación de tiempo de las entregas" color="#8cb6ce" meeting="false" start="2022-06-29" duration="1" complete="0" thirdDate="2022-06-01" thirdDate-constraint="0" expand="true">
+                        <depend id="27" type="2" difference="0" hardness="Strong"/>
+                    </task>
+                    <task id="27" name="Establecer hitos del proyecto" color="#8cb6ce" meeting="false" start="2022-06-30" duration="1" complete="0" thirdDate="2022-06-01" thirdDate-constraint="0" expand="true">
+                        <depend id="28" type="2" difference="0" hardness="Strong"/>
+                    </task>
+                    <task id="28" name="Establecer un cronograma a seguir" color="#8cb6ce" meeting="false" start="2022-07-01" duration="1" complete="0" thirdDate="2022-06-01" thirdDate-constraint="0" expand="true">
+                        <depend id="29" type="2" difference="0" hardness="Strong"/>
+                    </task>
+                    <task id="29" name="Establecer formas de comunicación internas y externas" color="#8cb6ce" meeting="false" start="2022-07-02" duration="1" complete="0" thirdDate="2022-06-01" thirdDate-constraint="0" expand="true">
+                        <depend id="30" type="2" difference="0" hardness="Strong"/>
+                    </task>
+                    <task id="30" name="Redactar especificaciones del producto final" color="#8cb6ce" meeting="false" start="2022-07-04" duration="1" complete="0" thirdDate="2022-06-01" thirdDate-constraint="0" expand="true"/>
+                </task>
+                <task id="36" name="Repositorio de GitHub" color="#00cccc" meeting="false" start="2022-06-22" duration="4" complete="0" thirdDate="2022-06-01" thirdDate-constraint="0" expand="false">
+                    <task id="98" name="Crear repositorio de GitHub" color="#8cb6ce" meeting="false" start="2022-06-22" duration="2" complete="0" thirdDate="2022-05-30" thirdDate-constraint="0" expand="true"/>
+                    <task id="100" name="Enviar invitación a los colaboradores de proyecto" color="#8cb6ce" meeting="false" start="2022-06-24" duration="2" complete="0" thirdDate="2022-05-30" thirdDate-constraint="0" expand="true"/>
+                </task>
+            </task>
+            <task id="84" name="Formacion empresarial" color="#ffcc00" meeting="false" start="2022-06-04" duration="19" complete="0" thirdDate="2022-06-06" thirdDate-constraint="0" expand="false">
+                <notes>
+                    <![CDATA[Estas guias estan como referencia por materias
+y se encuentran todas con la unidad de trabajo en 0
+son solo una guia para ayudar en el proceso de delegar las tareas
+a cada integrante del equipo.]]>
+                </notes>
+                <depend id="102" type="2" difference="0" hardness="Strong"/>
+                <depend id="116" type="2" difference="0" hardness="Strong"/>
+                <task id="85" name="Determinar actividad de la empresa" color="#8cb6ce" meeting="false" start="2022-06-04" duration="2" complete="0" thirdDate="2022-06-01" thirdDate-constraint="0" expand="true">
+                    <depend id="86" type="2" difference="0" hardness="Strong"/>
+                </task>
+                <task id="86" name="Determinar giro de la empresa" color="#8cb6ce" meeting="false" start="2022-06-07" duration="1" complete="0" thirdDate="2022-06-01" thirdDate-constraint="0" expand="true">
+                    <depend id="96" type="2" difference="0" hardness="Strong"/>
+                </task>
+                <task id="96" name="Determinar domicilio fiscal" color="#8cb6ce" meeting="false" start="2022-06-08" duration="2" complete="0" thirdDate="2022-06-01" thirdDate-constraint="0" expand="true">
+                    <depend id="97" type="2" difference="0" hardness="Strong"/>
+                </task>
+                <task id="97" name="Determinar recursos materiales" color="#8cb6ce" meeting="false" start="2022-06-10" duration="5" complete="0" thirdDate="2022-06-01" thirdDate-constraint="0" expand="true">
+                    <depend id="88" type="2" difference="0" hardness="Strong"/>
+                </task>
+                <task id="87" name="Determinar planeación estrategica de la empresa" color="#ffcc00" meeting="false" start="2022-06-16" duration="9" complete="0" thirdDate="2022-06-17" thirdDate-constraint="0" expand="false">
+                    <task id="88" name="Det. Objetivos" color="#8cb6ce" meeting="false" start="2022-06-16" duration="3" complete="0" thirdDate="2022-06-01" thirdDate-constraint="0" expand="true">
+                        <depend id="89" type="2" difference="0" hardness="Strong"/>
+                    </task>
+                    <task id="89" name="Det. Valores" color="#8cb6ce" meeting="false" start="2022-06-20" duration="2" complete="0" thirdDate="2022-06-01" thirdDate-constraint="0" expand="true">
+                        <depend id="90" type="2" difference="0" hardness="Strong"/>
+                    </task>
+                    <task id="90" name="Det. Vision" color="#8cb6ce" meeting="false" start="2022-06-22" duration="2" complete="0" thirdDate="2022-06-01" thirdDate-constraint="0" expand="true">
+                        <depend id="91" type="2" difference="0" hardness="Strong"/>
+                    </task>
+                    <task id="91" name="Det. Misión" color="#8cb6ce" meeting="false" start="2022-06-24" duration="2" complete="0" thirdDate="2022-06-01" thirdDate-constraint="0" expand="true"/>
+                </task>
+            </task>
+            <task id="111" name="Analisis y diseño de app web" color="#993300" meeting="false" start="2022-06-04" duration="19" complete="0" thirdDate="2022-06-06" thirdDate-constraint="0" expand="false">
+                <notes>
+                    <![CDATA[Estas guias estan como referencia por materias
+y se encuentran todas con la unidad de trabajo en 0
+son solo una guia para ayudar en el proceso de delegar las tareas
+a cada integrante del equipo.]]>
+                </notes>
+                <depend id="75" type="2" difference="0" hardness="Strong"/>
+                <depend id="82" type="2" difference="0" hardness="Strong"/>
+                <depend id="113" type="2" difference="0" hardness="Strong"/>
+                <depend id="116" type="2" difference="0" hardness="Strong"/>
+                <task id="17" name="Relevamiento de datos" color="#993300" meeting="false" start="2022-06-04" duration="7" complete="0" thirdDate="2022-06-06" thirdDate-constraint="0" expand="false">
+                    <task id="20" name="Determinar como se van a relevar los datos" color="#8cb6ce" meeting="false" start="2022-06-04" duration="2" complete="0" thirdDate="2022-06-04" thirdDate-constraint="0" expand="true">
+                        <depend id="19" type="2" difference="0" hardness="Strong"/>
+                    </task>
+                    <task id="19" name="Realizar modelo de formulario" meeting="false" start="2022-06-07" duration="2" complete="0" expand="true">
+                        <depend id="18" type="2" difference="0" hardness="Strong"/>
+                    </task>
+                    <task id="18" name="Realizar relevamiento de datos" meeting="false" start="2022-06-09" duration="3" complete="0" expand="true">
+                        <depend id="9" type="2" difference="0" hardness="Strong"/>
+                    </task>
+                </task>
+                <task id="11" name="Realizar Documento ERSE" color="#993300" meeting="false" start="2022-06-13" duration="12" complete="0" thirdDate="2022-06-01" thirdDate-constraint="0" expand="false">
+                    <depend id="79" type="2" difference="0" hardness="Strong"/>
+                    <depend id="81" type="2" difference="0" hardness="Strong"/>
+                    <depend id="102" type="2" difference="0" hardness="Strong"/>
+                    <task id="9" name="Determinar Objetivos" color="#8cb6ce" meeting="false" start="2022-06-13" duration="1" complete="0" thirdDate="2022-06-01" thirdDate-constraint="0" expand="true">
+                        <depend id="10" type="2" difference="0" hardness="Strong"/>
+                    </task>
+                    <task id="10" name="Determinar alcance" meeting="false" start="2022-06-14" duration="1" complete="0" expand="true">
+                        <depend id="52" type="2" difference="0" hardness="Strong"/>
+                    </task>
+                    <task id="52" name="Determinar limitaciones" meeting="false" start="2022-06-15" duration="1" complete="0" expand="true">
+                        <depend id="12" type="2" difference="0" hardness="Strong"/>
+                    </task>
+                    <task id="12" name="Determinar Roles de usuario del sitio" color="#8cb6ce" meeting="false" start="2022-06-16" duration="1" complete="0" thirdDate="2022-06-21" thirdDate-constraint="0" expand="true">
+                        <depend id="7" type="2" difference="0" hardness="Strong"/>
+                    </task>
+                    <task id="7" name="Determinar requerimientos funcionales del sistema" meeting="false" start="2022-06-17" duration="3" complete="0" expand="true">
+                        <depend id="8" type="2" difference="0" hardness="Strong"/>
+                        <depend id="66" type="2" difference="0" hardness="Strong"/>
+                    </task>
+                    <task id="8" name="Determinar requerimientos no funcionales" meeting="false" start="2022-06-21" duration="5" complete="0" expand="true">
+                        <depend id="5" type="2" difference="0" hardness="Strong"/>
+                    </task>
+                </task>
+            </task>
+            <task id="112" name="Diseño web" color="#660066" meeting="false" start="2022-06-27" duration="23" complete="0" thirdDate="2022-06-10" thirdDate-constraint="0" expand="false">
+                <notes>
+                    <![CDATA[Estas guias estan como referencia por materias
+y se encuentran todas con la unidad de trabajo en 0
+son solo una guia para ayudar en el proceso de delegar las tareas
+a cada integrante del equipo.]]>
+                </notes>
+                <depend id="116" type="2" difference="0" hardness="Strong"/>
+                <task id="2" name="Diseño del logo del equipo" color="#660066" meeting="false" start="2022-07-05" duration="16" complete="0" thirdDate="2022-06-10" thirdDate-constraint="0" expand="false">
+                    <task id="38" name="Realizar busqueda de referencias" color="#8cb6ce" meeting="false" start="2022-07-05" duration="1" complete="0" thirdDate="2022-06-10" thirdDate-constraint="0" expand="true">
+                        <depend id="39" type="2" difference="0" hardness="Strong"/>
+                    </task>
+                    <task id="39" name="Realizar bosquejos de ideas para el logo" color="#8cb6ce" meeting="false" start="2022-07-06" duration="3" complete="0" thirdDate="2022-06-11" thirdDate-constraint="0" expand="true">
+                        <depend id="40" type="2" difference="0" hardness="Strong"/>
+                    </task>
+                    <task id="40" name="Crear logo basado en referencias y bosquejo" color="#8cb6ce" meeting="false" start="2022-07-09" duration="3" complete="0" thirdDate="2022-06-15" thirdDate-constraint="0" expand="true">
+                        <depend id="41" type="2" difference="0" hardness="Strong"/>
+                    </task>
+                    <task id="41" name="Crear segundo prototipo de logo" meeting="false" start="2022-07-13" duration="3" complete="0" expand="true">
+                        <depend id="44" type="2" difference="0" hardness="Strong"/>
+                    </task>
+                    <task id="44" name="Redactar argumentación del logo del equipo" meeting="false" start="2022-07-16" duration="2" complete="0" expand="true">
+                        <depend id="42" type="2" difference="0" hardness="Strong"/>
+                    </task>
+                    <task id="42" name="Revisión del logo con los integrantes del equipo" meeting="false" start="2022-07-19" duration="1" complete="0" expand="true">
+                        <depend id="43" type="2" difference="0" hardness="Strong"/>
+                    </task>
+                    <task id="43" name="Redefinir logo de ser necesario" meeting="false" start="2022-07-20" duration="3" complete="0" expand="true"/>
+                </task>
+                <task id="3" name="Diseño del logo del cliente" color="#660066" meeting="false" start="2022-07-05" duration="16" complete="0" thirdDate="2022-07-04" thirdDate-constraint="0" expand="false">
+                    <task id="50" name="Analizar datos relevados del cliente con respecto a su logo" color="#8cb6ce" meeting="false" start="2022-07-05" duration="1" complete="0" thirdDate="2022-07-04" thirdDate-constraint="0" expand="true">
+                        <depend id="45" type="2" difference="0" hardness="Strong"/>
+                    </task>
+                    <task id="45" name="Hacer una busqueda de referencia" color="#8cb6ce" meeting="false" start="2022-07-06" duration="2" complete="0" thirdDate="2022-07-05" thirdDate-constraint="0" expand="true">
+                        <depend id="46" type="2" difference="0" hardness="Strong"/>
+                    </task>
+                    <task id="46" name="Bosquejar logo del cliente" meeting="false" start="2022-07-08" duration="3" complete="0" expand="true">
+                        <depend id="47" type="2" difference="0" hardness="Strong"/>
+                    </task>
+                    <task id="47" name="Diseñar un primer prototipo del logo" meeting="false" start="2022-07-12" duration="3" complete="0" expand="true">
+                        <depend id="51" type="2" difference="0" hardness="Strong"/>
+                    </task>
+                    <task id="51" name="Diseñar otro prototipo como logo secundario" meeting="false" start="2022-07-15" duration="3" complete="0" expand="true">
+                        <depend id="48" type="2" difference="0" hardness="Strong"/>
+                    </task>
+                    <task id="48" name="Mostrar al cliente los prototipos" meeting="false" start="2022-07-19" duration="1" complete="0" expand="true">
+                        <depend id="49" type="2" difference="0" hardness="Strong"/>
+                    </task>
+                    <task id="49" name="Aplicar cambios que puedan surgir" meeting="false" start="2022-07-20" duration="3" complete="0" expand="false"/>
+                </task>
+                <task id="102" name="Diseño del sitio web" color="#660066" meeting="false" start="2022-06-27" duration="20" complete="0" thirdDate="2022-06-27" thirdDate-constraint="0" expand="false">
+                    <task id="5" name="Realizar wireframe del sitio web" color="#8cb6ce" meeting="false" start="2022-06-27" duration="2" complete="0" thirdDate="2022-06-01" thirdDate-constraint="0" expand="true">
+                        <depend id="53" type="2" difference="0" hardness="Strong"/>
+                        <depend id="57" type="2" difference="0" hardness="Strong"/>
+                    </task>
+                    <task id="53" name="Determinar primer bosquejo del diseño de la pagina web" color="#8cb6ce" meeting="false" start="2022-06-29" duration="2" complete="0" thirdDate="2022-06-29" thirdDate-constraint="0" expand="true">
+                        <depend id="54" type="2" difference="0" hardness="Strong"/>
+                    </task>
+                    <task id="54" name="Determinar primer bosquejo del diseño mobile" meeting="false" start="2022-07-01" duration="2" complete="0" expand="true">
+                        <depend id="55" type="2" difference="0" hardness="Strong"/>
+                    </task>
+                    <task id="55" name="Pasar el bosquejo a wireframe en Figma" meeting="false" start="2022-07-04" duration="2" complete="0" expand="true">
+                        <depend id="101" type="2" difference="0" hardness="Strong"/>
+                    </task>
+                    <task id="101" name="Realizar página estatica a modo de prototipo" meeting="false" start="2022-07-06" duration="3" complete="0" expand="true">
+                        <depend id="57" type="2" difference="0" hardness="Strong"/>
+                    </task>
+                    <task id="56" name="Optimización SEO" color="#660066" meeting="false" start="2022-07-09" duration="9" complete="0" thirdDate="2022-06-01" thirdDate-constraint="0" expand="false">
+                        <task id="57" name="Determinar etiquetas semanticas para Header" color="#8cb6ce" meeting="false" start="2022-07-09" duration="3" complete="0" thirdDate="2022-06-01" thirdDate-constraint="0" expand="true">
+                            <depend id="58" type="2" difference="0" hardness="Strong"/>
+                        </task>
+                        <task id="58" name="Determinar etiquetas semanticas del menu de navegación" color="#8cb6ce" meeting="false" start="2022-07-13" duration="2" complete="0" thirdDate="2022-06-01" thirdDate-constraint="0" expand="true">
+                            <depend id="59" type="2" difference="0" hardness="Strong"/>
+                        </task>
+                        <task id="59" name="Determinar etiquetas semanticas del contenido principal" color="#8cb6ce" meeting="false" start="2022-07-15" duration="2" complete="0" thirdDate="2022-06-01" thirdDate-constraint="0" expand="true">
+                            <depend id="60" type="2" difference="0" hardness="Strong"/>
+                        </task>
+                        <task id="60" name="Determinar etiquetas semanticas del Footer" color="#8cb6ce" meeting="false" start="2022-07-18" duration="2" complete="0" thirdDate="2022-06-01" thirdDate-constraint="0" expand="true"/>
+                    </task>
+                </task>
+            </task>
+            <task id="113" name="Base de datos" color="#00cc00" meeting="false" start="2022-06-27" duration="17" complete="0" thirdDate="2022-06-24" thirdDate-constraint="0" expand="false">
+                <notes>
+                    <![CDATA[Estas guias estan como referencia por materias
+y se encuentran todas con la unidad de trabajo en 0
+son solo una guia para ayudar en el proceso de delegar las tareas
+a cada integrante del equipo.]]>
+                </notes>
+                <depend id="116" type="2" difference="0" hardness="Strong"/>
+                <task id="66" name="Realizar modelo conceptual de la BD" color="#8cb6ce" meeting="false" start="2022-06-27" duration="4" complete="0" thirdDate="2022-06-27" thirdDate-constraint="0" expand="true">
+                    <depend id="67" type="2" difference="0" hardness="Strong"/>
+                    <depend id="73" type="2" difference="0" hardness="Strong"/>
+                </task>
+                <task id="67" name="Diagrama D.E.R." color="#00cc00" meeting="false" start="2022-07-01" duration="13" complete="0" thirdDate="2022-06-29" thirdDate-constraint="0" expand="false">
+                    <task id="73" name="Determinar entidades que se van a utilizar" meeting="false" start="2022-07-01" duration="2" complete="0" expand="true">
+                        <depend id="74" type="2" difference="0" hardness="Strong"/>
+                    </task>
+                    <task id="74" name="Determinar atributos a utlizar en cada entidad" meeting="false" start="2022-07-04" duration="3" complete="0" expand="true">
+                        <depend id="68" type="2" difference="0" hardness="Strong"/>
+                    </task>
+                    <task id="68" name="Realizar modelo logico" meeting="false" start="2022-07-07" duration="2" complete="0" expand="true">
+                        <depend id="69" type="2" difference="0" hardness="Strong"/>
+                    </task>
+                    <task id="69" name="Realizar Esquema relacional" meeting="false" start="2022-07-09" duration="1" complete="0" expand="true">
+                        <depend id="70" type="2" difference="0" hardness="Strong"/>
+                        <depend id="114" type="2" difference="0" hardness="Strong"/>
+                    </task>
+                    <task id="70" name="Pasaje a tablas" meeting="false" start="2022-07-11" duration="1" complete="0" expand="true">
+                        <depend id="71" type="2" difference="0" hardness="Strong"/>
+                    </task>
+                    <task id="71" name="Realizar normalización" color="#8cb6ce" meeting="false" start="2022-07-12" duration="2" complete="0" thirdDate="2022-07-06" thirdDate-constraint="0" expand="true">
+                        <depend id="72" type="2" difference="0" hardness="Strong"/>
+                    </task>
+                    <task id="72" name="Realizar diccionario de datos" color="#8cb6ce" meeting="false" start="2022-07-14" duration="2" complete="0" thirdDate="2022-07-07" thirdDate-constraint="0" expand="true"/>
+                </task>
+            </task>
+            <task id="115" name="Sistemas Operativos" color="#cc0000" meeting="false" start="2022-06-06" duration="31" complete="0" thirdDate="2022-06-06" thirdDate-constraint="0" expand="false">
+                <notes>
+                    <![CDATA[Estas guias estan como referencia por materias
+y se encuentran todas con la unidad de trabajo en 0
+son solo una guia para ayudar en el proceso de delegar las tareas
+a cada integrante del equipo.]]>
+                </notes>
+                <depend id="6" type="2" difference="0" hardness="Strong"/>
+                <depend id="116" type="2" difference="0" hardness="Strong"/>
+                <task id="92" name="Implementar la maquina virtual" color="#cc0000" meeting="false" start="2022-06-06" duration="13" complete="0" thirdDate="2022-06-01" thirdDate-constraint="0" expand="false">
+                    <task id="93" name="Realizar instalacion del SO Linux CentOS" color="#8cb6ce" meeting="false" start="2022-06-06" duration="5" complete="0" thirdDate="2022-06-06" thirdDate-constraint="0" expand="true">
+                        <depend id="94" type="2" difference="0" hardness="Strong"/>
+                    </task>
+                    <task id="94" name="Configurar seguridad root" color="#8cb6ce" meeting="false" start="2022-06-11" duration="4" complete="0" thirdDate="2022-06-13" thirdDate-constraint="0" expand="true">
+                        <depend id="95" type="2" difference="0" hardness="Strong"/>
+                    </task>
+                    <task id="95" name="Determinar requerimientos del shell script de administracion del servidor" color="#8cb6ce" meeting="false" start="2022-06-16" duration="4" complete="0" thirdDate="2022-06-14" thirdDate-constraint="0" expand="true">
+                        <depend id="81" type="2" difference="0" hardness="Strong"/>
+                        <depend id="82" type="2" difference="0" hardness="Strong"/>
+                    </task>
+                </task>
+                <task id="75" name="Realizar doc. referente a SO" color="#cc0000" meeting="false" start="2022-06-27" duration="13" complete="0" thirdDate="2022-06-01" thirdDate-constraint="0" expand="false">
+                    <task id="76" name="Doc. argumentando SO de las terminales" color="#cc0000" meeting="false" start="2022-06-27" duration="4" complete="0" thirdDate="2022-06-27" thirdDate-constraint="0" expand="false">
+                        <task id="79" name="Definir relación costo - beneficio" color="#8cb6ce" meeting="false" start="2022-06-27" duration="2" complete="0" thirdDate="2022-06-29" thirdDate-constraint="0" expand="true">
+                            <depend id="78" type="2" difference="0" hardness="Strong"/>
+                        </task>
+                        <task id="78" name="Definir licenciamiento y soporte" color="#8cb6ce" meeting="false" start="2022-06-29" duration="2" complete="0" thirdDate="2022-07-01" thirdDate-constraint="0" expand="true">
+                            <depend id="103" type="2" difference="0" hardness="Strong"/>
+                        </task>
+                    </task>
+                    <task id="77" name="Doc. argumentando SO de los servidores" color="#cc0000" meeting="false" start="2022-07-01" duration="5" complete="0" thirdDate="2022-07-01" thirdDate-constraint="0" expand="false">
+                        <task id="103" name="Definir relación costo - beneficio" color="#8cb6ce" meeting="false" start="2022-07-01" duration="2" complete="0" thirdDate="2022-07-05" thirdDate-constraint="0" expand="true">
+                            <depend id="80" type="2" difference="0" hardness="Strong"/>
+                        </task>
+                        <task id="80" name="Definir licenciamiento y soporte" color="#8cb6ce" meeting="false" start="2022-07-04" duration="3" complete="0" thirdDate="2022-07-07" thirdDate-constraint="0" expand="true"/>
+                    </task>
+                    <task id="82" name="Menu de administración" color="#cc0000" meeting="false" start="2022-06-27" duration="13" complete="0" thirdDate="2022-06-27" thirdDate-constraint="0" expand="false">
+                        <task id="81" name="Determinar roles de usuarios (terminal y servidor)" color="#8cb6ce" meeting="false" start="2022-06-27" duration="4" complete="0" thirdDate="2022-06-29" thirdDate-constraint="0" expand="true">
+                            <depend id="83" type="2" difference="0" hardness="Strong"/>
+                        </task>
+                        <task id="83" name="Realizar shell para dar usuarios de alta" color="#8cb6ce" meeting="false" start="2022-07-01" duration="2" complete="0" thirdDate="2022-07-04" thirdDate-constraint="0" expand="true">
+                            <depend id="104" type="2" difference="0" hardness="Strong"/>
+                        </task>
+                        <task id="104" name="Realizar shell para modificar usuarios" color="#8cb6ce" meeting="false" start="2022-07-04" duration="3" complete="0" thirdDate="2022-07-06" thirdDate-constraint="0" expand="true">
+                            <depend id="105" type="2" difference="0" hardness="Strong"/>
+                        </task>
+                        <task id="105" name="Realizar shell para dar usuarios de baja" color="#8cb6ce" meeting="false" start="2022-07-07" duration="2" complete="0" thirdDate="2022-07-11" thirdDate-constraint="0" expand="true">
+                            <depend id="106" type="2" difference="0" hardness="Strong"/>
+                        </task>
+                        <task id="106" name="Realizar shell para asignar un grupo a los usuarios" color="#8cb6ce" meeting="false" start="2022-07-09" duration="1" complete="0" thirdDate="2022-07-13" thirdDate-constraint="0" expand="true">
+                            <depend id="107" type="2" difference="0" hardness="Strong"/>
+                        </task>
+                        <task id="107" name="Crear una cuenta de usuario para el administrador del sistema" meeting="false" start="2022-07-11" duration="1" complete="0" expand="true"/>
+                    </task>
+                </task>
+            </task>
+            <task id="6" name="Programacion web" color="#003333" meeting="false" start="2022-07-12" duration="11" complete="0" thirdDate="2022-06-01" thirdDate-constraint="0" expand="false">
+                <notes>
+                    <![CDATA[Estas guias estan como referencia por materias
+y se encuentran todas con la unidad de trabajo en 0
+son solo una guia para ayudar en el proceso de delegar las tareas
+a cada integrante del equipo.]]>
+                </notes>
+                <depend id="116" type="2" difference="0" hardness="Strong"/>
+                <task id="114" name="Determinar los formularios que se utlizaran" color="#8cb6ce" meeting="false" start="2022-07-12" duration="1" complete="0" thirdDate="2022-07-08" thirdDate-constraint="0" expand="true">
+                    <depend id="61" type="2" difference="0" hardness="Strong"/>
+                </task>
+                <task id="61" name="Realizar codigo en php con formularios" color="#8cb6ce" meeting="false" start="2022-07-13" duration="2" complete="0" thirdDate="2022-07-05" thirdDate-constraint="0" expand="true">
+                    <depend id="62" type="2" difference="0" hardness="Strong"/>
+                </task>
+                <task id="62" name="Realizar validación de campos vacíos" meeting="false" start="2022-07-15" duration="2" complete="0" expand="true">
+                    <depend id="64" type="2" difference="0" hardness="Strong"/>
+                </task>
+                <task id="64" name="Realizar validación de tipo de dato ingresado" meeting="false" start="2022-07-18" duration="2" complete="0" expand="true">
+                    <depend id="63" type="2" difference="0" hardness="Strong"/>
+                </task>
+                <task id="63" name="Realizar validación de tipo de usuario" meeting="false" start="2022-07-20" duration="2" complete="0" expand="true">
+                    <depend id="65" type="2" difference="0" hardness="Strong"/>
+                </task>
+                <task id="65" name="Implementar persistencia de datos mediante archivos" color="#8cb6ce" meeting="false" start="2022-07-22" duration="2" complete="0" thirdDate="2022-07-21" thirdDate-constraint="0" expand="true"/>
+            </task>
+            <task id="116" name="Primera entrega" color="#ff0000" shape="1,0,1,0,0,1,0,1,1,0,1,0,0,1,0,1" meeting="true" start="2022-07-25" duration="0" complete="0" thirdDate="2022-05-23" thirdDate-constraint="0" expand="true"/>
+        </task>
+    </tasks>
+    <resources>
+        <resource id="0" name="Fabricio Rivera" function="2" contacts="" phone=""/>
+        <resource id="1" name="German Estefan" function="6" contacts="" phone=""/>
+        <resource id="2" name="Nicolas Alvarez" function="4" contacts="" phone=""/>
+        <resource id="3" name="Ignacio Armand-Ugon" function="3" contacts="" phone=""/>
+    </resources>
+    <allocations>
+        <allocation task-id="109" resource-id="0" function="2" responsible="false" load="100.0"/>
+        <allocation task-id="110" resource-id="0" function="2" responsible="true" load="0.0"/>
+        <allocation task-id="34" resource-id="0" function="2" responsible="false" load="100.0"/>
+        <allocation task-id="35" resource-id="0" function="2" responsible="false" load="100.0"/>
+        <allocation task-id="31" resource-id="0" function="2" responsible="false" load="100.0"/>
+        <allocation task-id="33" resource-id="0" function="2" responsible="false" load="100.0"/>
+        <allocation task-id="37" resource-id="0" function="2" responsible="false" load="100.0"/>
+        <allocation task-id="16" resource-id="0" function="2" responsible="false" load="0.0"/>
+        <allocation task-id="21" resource-id="0" function="2" responsible="false" load="100.0"/>
+        <allocation task-id="22" resource-id="0" function="2" responsible="false" load="100.0"/>
+        <allocation task-id="23" resource-id="0" function="2" responsible="false" load="100.0"/>
+        <allocation task-id="24" resource-id="0" function="2" responsible="false" load="100.0"/>
+        <allocation task-id="25" resource-id="0" function="2" responsible="false" load="60.0"/>
+        <allocation task-id="26" resource-id="0" function="2" responsible="false" load="60.0"/>
+        <allocation task-id="27" resource-id="0" function="2" responsible="false" load="60.0"/>
+        <allocation task-id="28" resource-id="0" function="2" responsible="false" load="100.0"/>
+        <allocation task-id="29" resource-id="0" function="2" responsible="false" load="100.0"/>
+        <allocation task-id="30" resource-id="0" function="2" responsible="false" load="100.0"/>
+        <allocation task-id="112" resource-id="0" function="2" responsible="false" load="0.0"/>
+        <allocation task-id="2" resource-id="0" function="2" responsible="false" load="50.0"/>
+        <allocation task-id="3" resource-id="0" function="2" responsible="false" load="50.0"/>
+        <allocation task-id="113" resource-id="0" function="2" responsible="false" load="0.0"/>
+        <allocation task-id="66" resource-id="0" function="2" responsible="false" load="40.0"/>
+        <allocation task-id="109" resource-id="1" function="6" responsible="false" load="100.0"/>
+        <allocation task-id="115" resource-id="1" function="6" responsible="false" load="0.0"/>
+        <allocation task-id="92" resource-id="1" function="6" responsible="false" load="100.0"/>
+        <allocation task-id="75" resource-id="1" function="6" responsible="false" load="0.0"/>
+        <allocation task-id="76" resource-id="1" function="6" responsible="false" load="30.0"/>
+        <allocation task-id="77" resource-id="1" function="6" responsible="false" load="50.0"/>
+        <allocation task-id="82" resource-id="1" function="6" responsible="false" load="0.0"/>
+        <allocation task-id="81" resource-id="1" function="6" responsible="false" load="30.0"/>
+        <allocation task-id="83" resource-id="1" function="6" responsible="false" load="50.0"/>
+        <allocation task-id="104" resource-id="1" function="6" responsible="false" load="50.0"/>
+        <allocation task-id="105" resource-id="1" function="6" responsible="false" load="100.0"/>
+        <allocation task-id="106" resource-id="1" function="6" responsible="false" load="100.0"/>
+        <allocation task-id="107" resource-id="1" function="6" responsible="false" load="100.0"/>
+        <allocation task-id="113" resource-id="1" function="6" responsible="false" load="0.0"/>
+        <allocation task-id="66" resource-id="1" function="6" responsible="false" load="40.0"/>
+        <allocation task-id="110" resource-id="1" function="6" responsible="false" load="0.0"/>
+        <allocation task-id="36" resource-id="1" function="6" responsible="false" load="100.0"/>
+        <allocation task-id="6" resource-id="1" function="6" responsible="false" load="0.0"/>
+        <allocation task-id="114" resource-id="1" function="6" responsible="false" load="100.0"/>
+        <allocation task-id="61" resource-id="1" function="6" responsible="false" load="100.0"/>
+        <allocation task-id="62" resource-id="1" function="6" responsible="false" load="100.0"/>
+        <allocation task-id="64" resource-id="1" function="6" responsible="false" load="100.0"/>
+        <allocation task-id="63" resource-id="1" function="6" responsible="false" load="100.0"/>
+        <allocation task-id="65" resource-id="1" function="6" responsible="false" load="100.0"/>
+        <allocation task-id="109" resource-id="2" function="4" responsible="true" load="100.0"/>
+        <allocation task-id="111" resource-id="2" function="4" responsible="false" load="0.0"/>
+        <allocation task-id="17" resource-id="2" function="4" responsible="false" load="100.0"/>
+        <allocation task-id="11" resource-id="2" function="4" responsible="false" load="100.0"/>
+        <allocation task-id="113" resource-id="2" function="4" responsible="true" load="0.0"/>
+        <allocation task-id="66" resource-id="2" function="4" responsible="true" load="100.0"/>
+        <allocation task-id="67" resource-id="2" function="4" responsible="false" load="100.0"/>
+        <allocation task-id="109" resource-id="3" function="3" responsible="false" load="100.0"/>
+        <allocation task-id="84" resource-id="3" function="3" responsible="false" load="0.0"/>
+        <allocation task-id="85" resource-id="3" function="3" responsible="false" load="100.0"/>
+        <allocation task-id="86" resource-id="3" function="3" responsible="false" load="100.0"/>
+        <allocation task-id="96" resource-id="3" function="3" responsible="false" load="100.0"/>
+        <allocation task-id="97" resource-id="3" function="3" responsible="false" load="100.0"/>
+        <allocation task-id="87" resource-id="3" function="3" responsible="false" load="100.0"/>
+        <allocation task-id="112" resource-id="3" function="3" responsible="true" load="0.0"/>
+        <allocation task-id="102" resource-id="3" function="3" responsible="false" load="0.0"/>
+        <allocation task-id="5" resource-id="3" function="3" responsible="false" load="60.0"/>
+        <allocation task-id="53" resource-id="3" function="3" responsible="false" load="60.0"/>
+        <allocation task-id="54" resource-id="3" function="3" responsible="false" load="100.0"/>
+        <allocation task-id="55" resource-id="3" function="3" responsible="false" load="100.0"/>
+        <allocation task-id="101" resource-id="3" function="3" responsible="false" load="100.0"/>
+        <allocation task-id="56" resource-id="3" function="3" responsible="false" load="100.0"/>
+        <allocation task-id="113" resource-id="3" function="3" responsible="false" load="0.0"/>
+        <allocation task-id="66" resource-id="3" function="3" responsible="false" load="40.0"/>
+    </allocations>
+    <vacations/>
+    <previous/>
+    <roles roleset-name="Default"/>
+    <roles>
+        <role id="2" name="Administrador, Diseñador"/>
+        <role id="3" name="Diseñador, Programador"/>
+        <role id="4" name="Analista, Base de datos"/>
+        <role id="6" name="Tecnico, Programador"/>
+    </roles>
+</project>
