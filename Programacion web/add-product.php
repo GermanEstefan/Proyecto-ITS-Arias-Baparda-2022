@@ -21,10 +21,10 @@
             is_numeric($productStock)
         ){
             $productos = fopen("productos.txt", "a");
-            $producto = $productCategory . ":" .  $productName . ":" . $productCost . $productDescription . $productStock ."\n";
+            $producto = $productCategory . ":" .  $productName . ":" . $productCost . ":" . $productDescription . ":" . $productStock ."\n";
             fputs($productos, $producto);
             echo "<h1>Producto dado de alta con exito</h1>";
-            echo "<a href='/proyecto-web'>Volver</a>";
+            echo "<a href='/'>Volver</a>";
         }else{
             echo "Campos invalidos";
         }

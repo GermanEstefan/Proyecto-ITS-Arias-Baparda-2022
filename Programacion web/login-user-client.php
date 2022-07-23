@@ -8,22 +8,18 @@
 </head>
 <body>
 <?php
-    $employeeCiLogin = $_POST["employeeCiLogin"];
-    $employeePasswordLogin = $_POST["employeePasswordLogin"];
-
-    if( 
-        isset($employeeCiLogin) && is_numeric($employeeCiLogin) &&
-        isset($employeePasswordLogin)
-    ){
-        $users = fopen("usuarios.txt","r");
-        while(!feof($users)){
-            $user = fgets($users);
+    $clientEmailLogin = $_POST["clientEmailLogin"];
+    $clientPasswordLogin = $_POST["clientPasswordLogin"];
+   
+    if( isset($clientEmailLogin) && isset($clientPasswordLogin) ){
+        $usersClients = fopen("usuarios-clientes.txt","r");
+        while(!feof($usersClients)){
+            $user = fgets($usersClients);
             $userFields = explode(":", $user);
             $userExist = false;
-            if($employeeCiLogin == $userFields[0] && $employeePasswordLogin == $userFields[1] ){
+            if($clientEmailLogin == $userFields[0] && $clientPasswordLogin == $userFields[1] ){
                 $userExist = true;
                 echo "<h1>Bienvienido: " . "<span style='color:red'>" . $userFields[0] . "</span></h1>"; 
-                echo "<h2>Rol: " . "<span style='color: blueviolet'>". $userFields[2] ."</span></h2>";
                 break;    
             }
         }

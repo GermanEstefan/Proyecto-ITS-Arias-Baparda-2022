@@ -1,0 +1,4 @@
+guantes:Guantesulis:100:Unos guantes:100
+pantalones:Pantalonesulis:200:Unos pants:400
+remera:Remersuli:200:Unas remeras:250
+casco:Cascosuli:540:Unos cascos:321
