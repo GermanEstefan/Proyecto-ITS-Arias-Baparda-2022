@@ -20,8 +20,8 @@ y proteccion laboral ]]>
         </option>
     </view>
     <view id="resource-table">
-        <field id="0" name="Nombre" width="187" order="0"/>
-        <field id="1" name="Función" width="145" order="1"/>
+        <field id="0" name="Nombre" width="178" order="0"/>
+        <field id="1" name="Función" width="139" order="1"/>
     </view>
     <!-- -->
     <calendars>
@@ -47,7 +47,7 @@ y proteccion laboral ]]>
             <taskproperty id="tpd8" name="coordinator" type="default" valuetype="text"/>
             <taskproperty id="tpd9" name="predecessorsr" type="default" valuetype="text"/>
         </taskproperties>
-        <task id="108" name="Planificacion primera entrega" color="#0033ff" meeting="false" start="2022-06-01" duration="46" complete="0" thirdDate="2022-06-01" thirdDate-constraint="0" expand="true">
+        <task id="108" name="Planificacion primera entrega" color="#0033ff" meeting="false" start="2022-06-01" duration="45" complete="0" thirdDate="2022-06-01" thirdDate-constraint="0" expand="true">
             <task id="109" name="Coordinación de reunión con cliente y comienzo de planificación" color="#0033ff" meeting="false" start="2022-06-01" duration="3" complete="0" thirdDate="2022-06-01" thirdDate-constraint="0" expand="false">
                 <depend id="84" type="2" difference="0" hardness="Strong"/>
                 <depend id="92" type="2" difference="0" hardness="Strong"/>
@@ -129,7 +129,7 @@ a cada integrante del equipo.]]>
                     </task>
                     <task id="30" name="Redactar especificaciones del producto final" color="#8cb6ce" meeting="false" start="2022-07-04" duration="1" complete="0" thirdDate="2022-06-01" thirdDate-constraint="0" expand="true"/>
                 </task>
-                <task id="36" name="Repositorio de GitHub" color="#00cccc" meeting="false" start="2022-06-22" duration="4" complete="0" thirdDate="2022-06-01" thirdDate-constraint="0" expand="false">
+                <task id="36" name="Repositorio de GitHub" color="#00cccc" meeting="false" start="2022-06-22" duration="4" complete="0" thirdDate="2022-06-01" thirdDate-constraint="0" expand="true">
                     <task id="98" name="Crear repositorio de GitHub" color="#8cb6ce" meeting="false" start="2022-06-22" duration="2" complete="0" thirdDate="2022-05-30" thirdDate-constraint="0" expand="true"/>
                     <task id="100" name="Enviar invitación a los colaboradores de proyecto" color="#8cb6ce" meeting="false" start="2022-06-24" duration="2" complete="0" thirdDate="2022-05-30" thirdDate-constraint="0" expand="true"/>
                 </task>
@@ -143,19 +143,22 @@ a cada integrante del equipo.]]>
                 </notes>
                 <depend id="102" type="2" difference="0" hardness="Strong"/>
                 <depend id="116" type="2" difference="0" hardness="Strong"/>
-                <task id="85" name="Determinar actividad de la empresa" color="#8cb6ce" meeting="false" start="2022-06-04" duration="2" complete="0" thirdDate="2022-06-01" thirdDate-constraint="0" expand="true">
+                <task id="123" name="Realizar la introducción referente a como nuestra empresa cubre una necesidad" meeting="false" start="2022-06-04" duration="1" complete="0" expand="true">
+                    <depend id="85" type="2" difference="0" hardness="Strong"/>
+                </task>
+                <task id="85" name="Determinar actividad de la empresa" color="#8cb6ce" meeting="false" start="2022-06-06" duration="2" complete="0" thirdDate="2022-06-01" thirdDate-constraint="0" expand="true">
                     <depend id="86" type="2" difference="0" hardness="Strong"/>
                 </task>
-                <task id="86" name="Determinar giro de la empresa" color="#8cb6ce" meeting="false" start="2022-06-07" duration="1" complete="0" thirdDate="2022-06-01" thirdDate-constraint="0" expand="true">
+                <task id="86" name="Determinar giro de la empresa" color="#8cb6ce" meeting="false" start="2022-06-08" duration="1" complete="0" thirdDate="2022-06-01" thirdDate-constraint="0" expand="true">
                     <depend id="96" type="2" difference="0" hardness="Strong"/>
                 </task>
-                <task id="96" name="Determinar domicilio fiscal" color="#8cb6ce" meeting="false" start="2022-06-08" duration="2" complete="0" thirdDate="2022-06-01" thirdDate-constraint="0" expand="true">
+                <task id="96" name="Determinar domicilio fiscal" color="#8cb6ce" meeting="false" start="2022-06-09" duration="2" complete="0" thirdDate="2022-06-01" thirdDate-constraint="0" expand="true">
                     <depend id="97" type="2" difference="0" hardness="Strong"/>
                 </task>
-                <task id="97" name="Determinar recursos materiales" color="#8cb6ce" meeting="false" start="2022-06-10" duration="5" complete="0" thirdDate="2022-06-01" thirdDate-constraint="0" expand="true">
+                <task id="97" name="Determinar recursos materiales" color="#8cb6ce" meeting="false" start="2022-06-11" duration="4" complete="0" thirdDate="2022-06-01" thirdDate-constraint="0" expand="true">
                     <depend id="88" type="2" difference="0" hardness="Strong"/>
                 </task>
-                <task id="87" name="Determinar planeación estrategica de la empresa" color="#ffcc00" meeting="false" start="2022-06-16" duration="9" complete="0" thirdDate="2022-06-17" thirdDate-constraint="0" expand="false">
+                <task id="87" name="Determinar planeación estrategica de la empresa" color="#ffcc00" meeting="false" start="2022-06-16" duration="9" complete="0" thirdDate="2022-06-17" thirdDate-constraint="0" expand="true">
                     <task id="88" name="Det. Objetivos" color="#8cb6ce" meeting="false" start="2022-06-16" duration="3" complete="0" thirdDate="2022-06-01" thirdDate-constraint="0" expand="true">
                         <depend id="89" type="2" difference="0" hardness="Strong"/>
                     </task>
@@ -282,7 +285,7 @@ a cada integrante del equipo.]]>
                     <task id="101" name="Realizar página estatica a modo de prototipo" meeting="false" start="2022-07-06" duration="3" complete="0" expand="true">
                         <depend id="57" type="2" difference="0" hardness="Strong"/>
                     </task>
-                    <task id="56" name="Optimización SEO" color="#660066" meeting="false" start="2022-07-09" duration="9" complete="0" thirdDate="2022-06-01" thirdDate-constraint="0" expand="false">
+                    <task id="56" name="Optimización SEO" color="#660066" meeting="false" start="2022-07-09" duration="9" complete="0" thirdDate="2022-06-01" thirdDate-constraint="0" expand="true">
                         <task id="57" name="Determinar etiquetas semanticas para Header" color="#8cb6ce" meeting="false" start="2022-07-09" duration="3" complete="0" thirdDate="2022-06-01" thirdDate-constraint="0" expand="true">
                             <depend id="58" type="2" difference="0" hardness="Strong"/>
                         </task>
@@ -308,7 +311,7 @@ a cada integrante del equipo.]]>
                     <depend id="67" type="2" difference="0" hardness="Strong"/>
                     <depend id="73" type="2" difference="0" hardness="Strong"/>
                 </task>
-                <task id="67" name="Diagrama D.E.R." color="#00cc00" meeting="false" start="2022-07-01" duration="13" complete="0" thirdDate="2022-06-29" thirdDate-constraint="0" expand="false">
+                <task id="67" name="Diagrama D.E.R." color="#00cc00" meeting="false" start="2022-07-01" duration="13" complete="0" thirdDate="2022-06-29" thirdDate-constraint="0" expand="true">
                     <task id="73" name="Determinar entidades que se van a utilizar" meeting="false" start="2022-07-01" duration="2" complete="0" expand="true">
                         <depend id="74" type="2" difference="0" hardness="Strong"/>
                     </task>
@@ -331,7 +334,7 @@ a cada integrante del equipo.]]>
                     <task id="72" name="Realizar diccionario de datos" color="#8cb6ce" meeting="false" start="2022-07-14" duration="2" complete="0" thirdDate="2022-07-07" thirdDate-constraint="0" expand="true"/>
                 </task>
             </task>
-            <task id="115" name="Sistemas Operativos" color="#cc0000" meeting="false" start="2022-06-06" duration="31" complete="0" thirdDate="2022-06-06" thirdDate-constraint="0" expand="false">
+            <task id="115" name="Sistemas Operativos" color="#cc0000" meeting="false" start="2022-06-06" duration="30" complete="0" thirdDate="2022-06-06" thirdDate-constraint="0" expand="false">
                 <notes>
                     <![CDATA[Estas guias estan como referencia por materias
 y se encuentran todas con la unidad de trabajo en 0
@@ -340,7 +343,7 @@ a cada integrante del equipo.]]>
                 </notes>
                 <depend id="6" type="2" difference="0" hardness="Strong"/>
                 <depend id="116" type="2" difference="0" hardness="Strong"/>
-                <task id="92" name="Implementar la maquina virtual" color="#cc0000" meeting="false" start="2022-06-06" duration="13" complete="0" thirdDate="2022-06-01" thirdDate-constraint="0" expand="false">
+                <task id="92" name="Implementar la maquina virtual" color="#cc0000" meeting="false" start="2022-06-06" duration="13" complete="0" thirdDate="2022-06-01" thirdDate-constraint="0" expand="true">
                     <task id="93" name="Realizar instalacion del SO Linux CentOS" color="#8cb6ce" meeting="false" start="2022-06-06" duration="5" complete="0" thirdDate="2022-06-06" thirdDate-constraint="0" expand="true">
                         <depend id="94" type="2" difference="0" hardness="Strong"/>
                     </task>
@@ -352,42 +355,57 @@ a cada integrante del equipo.]]>
                         <depend id="82" type="2" difference="0" hardness="Strong"/>
                     </task>
                 </task>
-                <task id="75" name="Realizar doc. referente a SO" color="#cc0000" meeting="false" start="2022-06-27" duration="13" complete="0" thirdDate="2022-06-01" thirdDate-constraint="0" expand="false">
-                    <task id="76" name="Doc. argumentando SO de las terminales" color="#cc0000" meeting="false" start="2022-06-27" duration="4" complete="0" thirdDate="2022-06-27" thirdDate-constraint="0" expand="false">
-                        <task id="79" name="Definir relación costo - beneficio" color="#8cb6ce" meeting="false" start="2022-06-27" duration="2" complete="0" thirdDate="2022-06-29" thirdDate-constraint="0" expand="true">
+                <task id="75" name="Realizar doc. referente a SO" color="#cc0000" meeting="false" start="2022-06-27" duration="12" complete="0" thirdDate="2022-06-01" thirdDate-constraint="0" expand="true">
+                    <task id="76" name="Doc. argumentando SO de las terminales" color="#cc0000" meeting="false" start="2022-06-27" duration="4" complete="0" thirdDate="2022-06-27" thirdDate-constraint="0" expand="true">
+                        <task id="119" name="Busqueda de datos con relaciones a SO windows" meeting="false" start="2022-06-27" duration="1" complete="0" expand="true">
+                            <depend id="79" type="2" difference="0" hardness="Strong"/>
+                        </task>
+                        <task id="79" name="Definir relación costo - beneficio" color="#8cb6ce" meeting="false" start="2022-06-28" duration="2" complete="0" thirdDate="2022-06-29" thirdDate-constraint="0" expand="true">
                             <depend id="78" type="2" difference="0" hardness="Strong"/>
                         </task>
-                        <task id="78" name="Definir licenciamiento y soporte" color="#8cb6ce" meeting="false" start="2022-06-29" duration="2" complete="0" thirdDate="2022-07-01" thirdDate-constraint="0" expand="true">
+                        <task id="78" name="Definir licenciamiento y soporte" color="#8cb6ce" meeting="false" start="2022-06-30" duration="1" complete="0" thirdDate="2022-07-01" thirdDate-constraint="0" expand="true">
+                            <depend id="118" type="2" difference="0" hardness="Strong"/>
+                        </task>
+                    </task>
+                    <task id="77" name="Doc. argumentando SO de los servidores" color="#cc0000" meeting="false" start="2022-07-01" duration="7" complete="0" thirdDate="2022-07-01" thirdDate-constraint="0" expand="false">
+                        <task id="118" name="Busqueda de datos comparativos entre CentOS y Ubuntu" color="#8cb6ce" meeting="false" start="2022-07-01" duration="2" complete="0" thirdDate="2022-07-01" thirdDate-constraint="0" expand="true">
                             <depend id="103" type="2" difference="0" hardness="Strong"/>
                         </task>
-                    </task>
-                    <task id="77" name="Doc. argumentando SO de los servidores" color="#cc0000" meeting="false" start="2022-07-01" duration="5" complete="0" thirdDate="2022-07-01" thirdDate-constraint="0" expand="false">
-                        <task id="103" name="Definir relación costo - beneficio" color="#8cb6ce" meeting="false" start="2022-07-01" duration="2" complete="0" thirdDate="2022-07-05" thirdDate-constraint="0" expand="true">
+                        <task id="103" name="Definir relación costo - beneficio" color="#8cb6ce" meeting="false" start="2022-07-04" duration="2" complete="0" thirdDate="2022-07-05" thirdDate-constraint="0" expand="true">
                             <depend id="80" type="2" difference="0" hardness="Strong"/>
                         </task>
-                        <task id="80" name="Definir licenciamiento y soporte" color="#8cb6ce" meeting="false" start="2022-07-04" duration="3" complete="0" thirdDate="2022-07-07" thirdDate-constraint="0" expand="true"/>
+                        <task id="80" name="Definir licenciamiento y soporte" color="#8cb6ce" meeting="false" start="2022-07-06" duration="3" complete="0" thirdDate="2022-07-07" thirdDate-constraint="0" expand="true"/>
                     </task>
-                    <task id="82" name="Menu de administración" color="#cc0000" meeting="false" start="2022-06-27" duration="13" complete="0" thirdDate="2022-06-27" thirdDate-constraint="0" expand="false">
-                        <task id="81" name="Determinar roles de usuarios (terminal y servidor)" color="#8cb6ce" meeting="false" start="2022-06-27" duration="4" complete="0" thirdDate="2022-06-29" thirdDate-constraint="0" expand="true">
+                    <task id="82" name="Menu de administración" color="#cc0000" meeting="false" start="2022-06-27" duration="12" complete="0" thirdDate="2022-06-27" thirdDate-constraint="0" expand="false">
+                        <task id="81" name="Determinar roles de usuarios (terminal y servidor)" color="#8cb6ce" meeting="false" start="2022-06-27" duration="2" complete="0" thirdDate="2022-06-29" thirdDate-constraint="0" expand="true">
                             <depend id="83" type="2" difference="0" hardness="Strong"/>
                         </task>
-                        <task id="83" name="Realizar shell para dar usuarios de alta" color="#8cb6ce" meeting="false" start="2022-07-01" duration="2" complete="0" thirdDate="2022-07-04" thirdDate-constraint="0" expand="true">
+                        <task id="83" name="Realizar shell para dar usuarios de alta" color="#8cb6ce" meeting="false" start="2022-06-29" duration="2" complete="0" thirdDate="2022-07-04" thirdDate-constraint="0" expand="true">
                             <depend id="104" type="2" difference="0" hardness="Strong"/>
                         </task>
-                        <task id="104" name="Realizar shell para modificar usuarios" color="#8cb6ce" meeting="false" start="2022-07-04" duration="3" complete="0" thirdDate="2022-07-06" thirdDate-constraint="0" expand="true">
+                        <task id="104" name="Realizar shell para modificar usuarios" color="#8cb6ce" meeting="false" start="2022-07-01" duration="1" complete="0" thirdDate="2022-07-06" thirdDate-constraint="0" expand="true">
                             <depend id="105" type="2" difference="0" hardness="Strong"/>
                         </task>
-                        <task id="105" name="Realizar shell para dar usuarios de baja" color="#8cb6ce" meeting="false" start="2022-07-07" duration="2" complete="0" thirdDate="2022-07-11" thirdDate-constraint="0" expand="true">
+                        <task id="105" name="Realizar shell para dar usuarios de baja" color="#8cb6ce" meeting="false" start="2022-07-02" duration="2" complete="0" thirdDate="2022-07-11" thirdDate-constraint="0" expand="true">
                             <depend id="106" type="2" difference="0" hardness="Strong"/>
                         </task>
-                        <task id="106" name="Realizar shell para asignar un grupo a los usuarios" color="#8cb6ce" meeting="false" start="2022-07-09" duration="1" complete="0" thirdDate="2022-07-13" thirdDate-constraint="0" expand="true">
+                        <task id="106" name="Realizar shell para asignar un grupo a los usuarios" color="#8cb6ce" meeting="false" start="2022-07-05" duration="1" complete="0" thirdDate="2022-07-13" thirdDate-constraint="0" expand="true">
+                            <depend id="120" type="2" difference="0" hardness="Strong"/>
+                        </task>
+                        <task id="120" name="Realizar shell para modificar un grupo" color="#8cb6ce" meeting="false" start="2022-07-06" duration="1" complete="0" thirdDate="2022-07-06" thirdDate-constraint="0" expand="true">
+                            <depend id="121" type="2" difference="0" hardness="Strong"/>
+                        </task>
+                        <task id="121" name="Realizar shell para eliminar un grupo" color="#8cb6ce" meeting="false" start="2022-07-07" duration="1" complete="0" thirdDate="2022-07-07" thirdDate-constraint="0" expand="true">
+                            <depend id="122" type="2" difference="0" hardness="Strong"/>
+                        </task>
+                        <task id="122" name="Realizar shell para hacer consultas sobre usuarios y grupos" color="#8cb6ce" meeting="false" start="2022-07-08" duration="1" complete="0" thirdDate="2022-07-08" thirdDate-constraint="0" expand="true">
                             <depend id="107" type="2" difference="0" hardness="Strong"/>
                         </task>
-                        <task id="107" name="Crear una cuenta de usuario para el administrador del sistema" meeting="false" start="2022-07-11" duration="1" complete="0" expand="true"/>
+                        <task id="107" name="Crear una cuenta de usuario para el administrador del sistema" color="#8cb6ce" meeting="false" start="2022-07-09" duration="1" complete="0" thirdDate="2022-07-07" thirdDate-constraint="0" expand="true"/>
                     </task>
                 </task>
             </task>
-            <task id="6" name="Programacion web" color="#003333" meeting="false" start="2022-07-12" duration="11" complete="0" thirdDate="2022-06-01" thirdDate-constraint="0" expand="false">
+            <task id="6" name="Programacion web" color="#003333" meeting="false" start="2022-07-11" duration="11" complete="0" thirdDate="2022-06-01" thirdDate-constraint="0" expand="false">
                 <notes>
                     <![CDATA[Estas guias estan como referencia por materias
 y se encuentran todas con la unidad de trabajo en 0
@@ -395,24 +413,24 @@ son solo una guia para ayudar en el proceso de delegar las tareas
 a cada integrante del equipo.]]>
                 </notes>
                 <depend id="116" type="2" difference="0" hardness="Strong"/>
-                <task id="114" name="Determinar los formularios que se utlizaran" color="#8cb6ce" meeting="false" start="2022-07-12" duration="1" complete="0" thirdDate="2022-07-08" thirdDate-constraint="0" expand="true">
+                <task id="114" name="Determinar los formularios que se utlizaran" color="#8cb6ce" meeting="false" start="2022-07-11" duration="1" complete="0" thirdDate="2022-07-08" thirdDate-constraint="0" expand="true">
                     <depend id="61" type="2" difference="0" hardness="Strong"/>
                 </task>
-                <task id="61" name="Realizar codigo en php con formularios" color="#8cb6ce" meeting="false" start="2022-07-13" duration="2" complete="0" thirdDate="2022-07-05" thirdDate-constraint="0" expand="true">
+                <task id="61" name="Realizar codigo en php con formularios" color="#8cb6ce" meeting="false" start="2022-07-12" duration="2" complete="0" thirdDate="2022-07-05" thirdDate-constraint="0" expand="true">
                     <depend id="62" type="2" difference="0" hardness="Strong"/>
                 </task>
-                <task id="62" name="Realizar validación de campos vacíos" meeting="false" start="2022-07-15" duration="2" complete="0" expand="true">
+                <task id="62" name="Realizar validación de campos vacíos" meeting="false" start="2022-07-14" duration="2" complete="0" expand="true">
                     <depend id="64" type="2" difference="0" hardness="Strong"/>
                 </task>
-                <task id="64" name="Realizar validación de tipo de dato ingresado" meeting="false" start="2022-07-18" duration="2" complete="0" expand="true">
+                <task id="64" name="Realizar validación de tipo de dato ingresado" meeting="false" start="2022-07-16" duration="2" complete="0" expand="true">
                     <depend id="63" type="2" difference="0" hardness="Strong"/>
                 </task>
-                <task id="63" name="Realizar validación de tipo de usuario" meeting="false" start="2022-07-20" duration="2" complete="0" expand="true">
+                <task id="63" name="Realizar validación de tipo de usuario" meeting="false" start="2022-07-19" duration="2" complete="0" expand="true">
                     <depend id="65" type="2" difference="0" hardness="Strong"/>
                 </task>
-                <task id="65" name="Implementar persistencia de datos mediante archivos" color="#8cb6ce" meeting="false" start="2022-07-22" duration="2" complete="0" thirdDate="2022-07-21" thirdDate-constraint="0" expand="true"/>
+                <task id="65" name="Implementar persistencia de datos mediante archivos" color="#8cb6ce" meeting="false" start="2022-07-21" duration="2" complete="0" thirdDate="2022-07-21" thirdDate-constraint="0" expand="false"/>
             </task>
-            <task id="116" name="Primera entrega" color="#ff0000" shape="1,0,1,0,0,1,0,1,1,0,1,0,0,1,0,1" meeting="true" start="2022-07-25" duration="0" complete="0" thirdDate="2022-05-23" thirdDate-constraint="0" expand="true"/>
+            <task id="116" name="Primera entrega" color="#ff0000" shape="1,0,1,0,0,1,0,1,1,0,1,0,0,1,0,1" meeting="true" start="2022-07-23" duration="0" complete="0" thirdDate="2022-05-23" thirdDate-constraint="0" expand="true"/>
         </task>
     </tasks>
     <resources>
@@ -453,10 +471,10 @@ a cada integrante del equipo.]]>
         <allocation task-id="77" resource-id="1" function="6" responsible="false" load="50.0"/>
         <allocation task-id="82" resource-id="1" function="6" responsible="false" load="0.0"/>
         <allocation task-id="81" resource-id="1" function="6" responsible="false" load="30.0"/>
-        <allocation task-id="83" resource-id="1" function="6" responsible="false" load="50.0"/>
+        <allocation task-id="83" resource-id="1" function="6" responsible="false" load="30.0"/>
         <allocation task-id="104" resource-id="1" function="6" responsible="false" load="50.0"/>
-        <allocation task-id="105" resource-id="1" function="6" responsible="false" load="100.0"/>
-        <allocation task-id="106" resource-id="1" function="6" responsible="false" load="100.0"/>
+        <allocation task-id="105" resource-id="1" function="6" responsible="false" load="50.0"/>
+        <allocation task-id="106" resource-id="1" function="6" responsible="false" load="50.0"/>
         <allocation task-id="107" resource-id="1" function="6" responsible="false" load="100.0"/>
         <allocation task-id="113" resource-id="1" function="6" responsible="false" load="0.0"/>
         <allocation task-id="66" resource-id="1" function="6" responsible="false" load="40.0"/>
@@ -469,6 +487,9 @@ a cada integrante del equipo.]]>
         <allocation task-id="64" resource-id="1" function="6" responsible="false" load="100.0"/>
         <allocation task-id="63" resource-id="1" function="6" responsible="false" load="100.0"/>
         <allocation task-id="65" resource-id="1" function="6" responsible="false" load="100.0"/>
+        <allocation task-id="120" resource-id="1" function="6" responsible="false" load="50.0"/>
+        <allocation task-id="121" resource-id="1" function="6" responsible="false" load="50.0"/>
+        <allocation task-id="122" resource-id="1" function="6" responsible="false" load="50.0"/>
         <allocation task-id="109" resource-id="2" function="4" responsible="true" load="100.0"/>
         <allocation task-id="111" resource-id="2" function="4" responsible="false" load="0.0"/>
         <allocation task-id="17" resource-id="2" function="4" responsible="false" load="100.0"/>
@@ -478,7 +499,6 @@ a cada integrante del equipo.]]>
         <allocation task-id="67" resource-id="2" function="4" responsible="false" load="100.0"/>
         <allocation task-id="109" resource-id="3" function="3" responsible="false" load="100.0"/>
         <allocation task-id="84" resource-id="3" function="3" responsible="false" load="0.0"/>
-        <allocation task-id="85" resource-id="3" function="3" responsible="false" load="100.0"/>
         <allocation task-id="86" resource-id="3" function="3" responsible="false" load="100.0"/>
         <allocation task-id="96" resource-id="3" function="3" responsible="false" load="100.0"/>
         <allocation task-id="97" resource-id="3" function="3" responsible="false" load="100.0"/>
@@ -493,6 +513,7 @@ a cada integrante del equipo.]]>
         <allocation task-id="56" resource-id="3" function="3" responsible="false" load="100.0"/>
         <allocation task-id="113" resource-id="3" function="3" responsible="false" load="0.0"/>
         <allocation task-id="66" resource-id="3" function="3" responsible="false" load="40.0"/>
+        <allocation task-id="123" resource-id="3" function="3" responsible="false" load="100.0"/>
     </allocations>
     <vacations/>
     <previous/>
