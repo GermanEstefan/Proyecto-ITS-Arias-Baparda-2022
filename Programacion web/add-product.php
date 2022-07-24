@@ -24,7 +24,7 @@
             $producto = $productCategory . ":" .  $productName . ":" . $productCost . ":" . $productDescription . ":" . $productStock ."\n";
             fputs($productos, $producto);
             echo "<h1>Producto dado de alta con exito</h1>";
-            echo "<a href='/'>Volver</a>";
+            echo "<a href='/Programacion web'>Volver</a>";
         }else{
             echo "Campos invalidos";
         }

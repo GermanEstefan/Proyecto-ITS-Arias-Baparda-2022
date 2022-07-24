@@ -23,7 +23,7 @@
             is_numeric($productStockEdit)
         ){
             echo "<h1>Producto editado con exito</h1>";
-            echo "<a href='/'>Volver</a>";
+            echo "<a href='/Programacion web'>Volver</a>";
         }else{
             echo "Campos invalidos";
         }

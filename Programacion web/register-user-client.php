@@ -28,7 +28,7 @@
         fputs($archivo, $linea);
         echo "Usuario dado de alta con exito";
         echo "<br>";
-        echo "<a href='/'>Volver</a>";
+        echo "<a href='/Programacion web'>Volver</a>";
     }else{
         echo "ERROR";
     }
