@@ -1,9 +1,7 @@
 <?php
-include("./models/Usuario.php");
-include("./models/Funcionario.php");
-include("./models/Cliente.php");
-require_once("./database/Conexion.php");
-$bd = new Conexion();
+include("./models/User.php");
+include("./models/Employee.php");
+include("./models/Customer.php");
 
 //Este valor identifica cuando es un usuario CLIENTE(1) o FUNCIONARIO(2)
 $typeOfUser = $_GET['typeUser'];
@@ -13,12 +11,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $bodyOfRequest = file_get_contents('php://input');
     $userData = json_decode($bodyOfRequest);
     
-    $email = $userData->email;
-    $nombre = $userData->nombre;
-    $apellido = $userData->apellido;
-    $telefono = $userData->telefono;
+    $mail = $userData->mail;
+    $name = $userData->name;
+    $surname = $userData->surname;
+    $phone = $userData->phone;
     $password = $userData->password;
-    $direccion = $userData->direccion;
+    $address = $userData->address;
 
     //Valida que ningun dato venga nulo y que no sean string vacios.
     foreach ($userData as $value) {
@@ -29,18 +27,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     //Validamos que sea un email valido
-    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    if (!filter_var($mail, FILTER_VALIDATE_EMAIL)) {
         echo "Email invalido";
         die();
     }
 
     //Validamos que sea realmente un nombre o un apellido con expresiones regulares
-    if (!preg_match("/^[a-zA-z]*$/", $nombre) || !preg_match("/^[a-zA-z]*$/", $apellido)) {
+    if (!preg_match("/^[a-zA-z]*$/", $name) || !preg_match("/^[a-zA-z]*$/", $surname)) {
         echo "Nombre o apellido invalido";
     }
 
     //Validamos que el telefono sea un entero
-    if (!is_int($telefono)) {
+    if (!is_int($phone)) {
         echo "Telefono invalido";
         die();
     }
@@ -52,7 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     //Validamos que la direccion sea un string
-    if (!is_string($direccion)) {
+    if (!is_string($address)) {
         echo "Direccion invalida";
         die();
     }
@@ -60,9 +58,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if ($typeOfUser == 1) {
 
         //Validar estos campos
-        $tipoCli = $userData->tipoCli;
+        $typeCustomer = $userData->typeCustomer;
+        $company = $userData->company;
         $nRut = $userData->nRut;
-        $empresa = $userData->empresa;
 
         //$query = "INSERT INTO cliente (mail, nombre, apellido, telefono, direccion, password) VALUES ($email, $nombre, $apellido, $telefono, $direccion, $tipoCli, $nRut, $empresa)";
         /*$resultOfQuery = $bd->getData($query);
@@ -71,13 +69,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     } elseif ($typeOfUser == 2) {
 
         //Validar estos campos
-        $sueldo = $userData->sueldo;
-        $estado = $userData->estado;
+        $ci = $userData->ci;
+        $salary = $userData->salary;
         $rol = $userData->rol;
+        
+        //Validamos que sea un rol valido.
+        //(1: VENDEDOR, 2: COMPRADOR, 3:JEFE)
+        $validRols = array(1,2,3);
+        if(!in_array($rol, $validRols)){
+            echo "Rol invalido";
+            die();
+        }
 
-        $query = "INSERT INTO funcionario (mail, nombre, apellido, telefono, direccion, password) VALUES ($email, $nombre, $apellido, $telefono, $direccion, $sueldo, $estado, $rol)";
-        /*$resultOfQuery = $bd->getData($query);
-            echo $resultOfQuery;*/
+        if(!is_int($ci)){
+            echo "CI invalida";
+            die();
+        }
+        $newEmployee = new Employee($mail, $name, $surname, $phone, $password, $address, $salary, $rol, $ci);
+        echo $newEmployee->save();
 
     } else {
         echo "Error";
