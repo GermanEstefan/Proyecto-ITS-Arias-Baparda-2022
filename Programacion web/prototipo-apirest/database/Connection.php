@@ -30,17 +30,33 @@
         }
 
         public function getData($query){
-            $arrayFromResults = array();
-            $results = $this->connection->query($query);
-            while($row = $results->fetch_assoc()){
-                array_push($arrayFromResults, $row);
-            }
-            return json_encode($arrayFromResults);
+            return $this->connection->query($query);
         }
 
         public function setData($query){
-            $resultsOfQuery = $this->connection->query($query);
-            return $this->connection->affected_rows;
+            return $this->connection->query($query);
+        }
+
+        public function setDataByTransacction($querys){
+            $result_transaccion = true;
+            $this->connection->begin_transaction(MYSQLI_TRANS_START_READ_WRITE);
+            foreach ($querys as $query) { 
+                if(!$this->setData($query)){
+                    $result_transaccion = false;
+                }
+            }
+            if($result_transaccion){
+                $this->connection->commit();
+            }else{
+                $this->connection->rollback();
+            }
+            return $result_transaccion;
         }
     }
+    /*$arrayFromResults = array();
+    /*while($row = $results->fetch_assoc()){
+         array_push($arrayFromResults, $row);
+    }
+        return json_encode($arrayFromResults);*/
 ?>
+

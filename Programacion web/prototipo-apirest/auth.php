@@ -1,15 +1,17 @@
 <?php
+include('./helpers/Response.php');
 include("./models/User.php");
 include("./models/Employee.php");
 include("./models/Customer.php");
 
-//Este valor identifica cuando es un usuario CLIENTE(1) o FUNCIONARIO(2)
-$typeOfUser = $_GET['typeUser'];
+$typeOfUser = $_GET['typeUser']; //Este valor identifica cuando es un usuario CLIENTE(1) o FUNCIONARIO(2)
+$response = new Response(); //Esta instancia va a ser utilizado a lo largo del controlador para las respuestas.
+header('Content-Type: application/json'); //Le decimos al agente que consuma el servidor que vamos a devolver JSON.
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-    $bodyOfRequest = file_get_contents('php://input');
-    $userData = json_decode($bodyOfRequest);
+    $bodyOfRequest = file_get_contents('php://input'); //Obtiene el body de la request sin procesar(JSON).
+    $userData = json_decode($bodyOfRequest); //Transforma el JSON en un objeto de PHP.
     
     $mail = $userData->mail;
     $name = $userData->name;
@@ -18,40 +20,29 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $password = $userData->password;
     $address = $userData->address;
 
-    //Valida que ningun dato venga nulo y que no sean string vacios.
-    foreach ($userData as $value) {
+    $formValid = true; //Esta bandera es para verificar que el formulario sea valido.
+
+    
+    foreach ($userData as $value) { //Valida que ningun dato venga nulo y que no sean string vacios.
         if (is_null($value) || empty($value)) {
-            echo "Campos vacios";
-            die();
+            $formValid = false;
         }
     }
 
-    //Validamos que sea un email valido
-    if (!filter_var($mail, FILTER_VALIDATE_EMAIL)) {
-        echo "Email invalido";
-        die();
+    //Validamos que sea un email valido, ademas del nombre y apellido.
+    if (!filter_var($mail, FILTER_VALIDATE_EMAIL) || !preg_match("/^[a-zA-z]*$/", $name) || !preg_match("/^[a-zA-z]*$/", $surname) ) {
+        $formValid = false;
     }
 
-    //Validamos que sea realmente un nombre o un apellido con expresiones regulares
-    if (!preg_match("/^[a-zA-z]*$/", $name) || !preg_match("/^[a-zA-z]*$/", $surname)) {
-        echo "Nombre o apellido invalido";
+    //Validamos que el telefono sea un entero, la contraseña sea mayor a 5 digitos y que la direccion sea un string
+    if (!is_int($phone) || !(strlen($password) > 6) || !is_string($address)) {
+        $formValid = false;
     }
 
-    //Validamos que el telefono sea un entero
-    if (!is_int($phone)) {
-        echo "Telefono invalido";
-        die();
-    }
-
-    //Validamos que la contraseña sea mayor a 5 digitos
-    if (strlen($password) < 6) {
-        echo "Contra invalida";
-        die();
-    }
-
-    //Validamos que la direccion sea un string
-    if (!is_string($address)) {
-        echo "Direccion invalida";
+    //Si entro en algun if anterior, seignifica que tiene campos invalidos, por lo tanto:
+    if(!$formValid){
+        http_response_code(400);
+        echo $response->error400();
         die();
     }
 
@@ -62,34 +53,48 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $company = $userData->company;
         $nRut = $userData->nRut;
 
-        //$query = "INSERT INTO cliente (mail, nombre, apellido, telefono, direccion, password) VALUES ($email, $nombre, $apellido, $telefono, $direccion, $tipoCli, $nRut, $empresa)";
-        /*$resultOfQuery = $bd->getData($query);
-            echo $resultOfQuery;*/
+        //Aca hay que definir la logica para el usuario CLIENTE (PENDIENTE)
 
     } elseif ($typeOfUser == 2) {
 
-        //Validar estos campos
         $ci = $userData->ci;
-        $salary = $userData->salary;
         $rol = $userData->rol;
-        
+
         //Validamos que sea un rol valido.
         //(1: VENDEDOR, 2: COMPRADOR, 3:JEFE)
         $validRols = array(1,2,3);
         if(!in_array($rol, $validRols)){
-            echo "Rol invalido";
+            http_response_code(400);
+            echo $response->error400("Rol invalido");
             die();
         }
 
         if(!is_int($ci)){
-            echo "CI invalida";
+            http_response_code(400);
+            echo $response->error400();
             die();
         }
-        $newEmployee = new Employee($mail, $name, $surname, $phone, $password, $address, $salary, $rol, $ci);
-        echo $newEmployee->save();
-
+        $newEmployee = new Employee($mail, $name, $surname, $phone, $password, $address, $rol, $ci);
+        $employeeExist = $newEmployee->getEmployee($ci);
+        
+        if($employeeExist->num_rows > 0){
+            http_response_code(200);
+            echo $response->error200("El empleado con la ci: $ci ya existe");
+        }else{
+            $resultOfSave = $newEmployee->save();
+            if($resultOfSave){
+                http_response_code(200);
+                echo $response->successfully("Empleado dado de alta con exito");
+            }else{
+                http_response_code(500);
+                echo $response->error500();
+            }
+        }
+        
     } else {
-        echo "Error";
+        http_response_code(400);
+        echo $response->error400();
+        die();
     }
 }
 ?>

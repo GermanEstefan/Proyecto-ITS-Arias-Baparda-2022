@@ -18,8 +18,6 @@
             $this->address = $address;
             $this->connection = new Connection();
         }
-
-        //Invocar a al instancia de la BD y definir funcion para dar de alta un usuario
     }
         
 ?>
