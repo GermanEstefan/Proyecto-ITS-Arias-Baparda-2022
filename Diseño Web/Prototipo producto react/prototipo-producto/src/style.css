@@ -1,3 +1,126 @@
+.button {
+  display: inline-block;
+  padding: 0.5em;
+  height: 100%;
+  font-weight: 200;
+  font-size: x-large;
+  height: 100%;
+}
+
+.button:hover {
+  transform: scale(1.1);
+  transition: 0.3s;
+}
+
+.banner_container {
+  width: 75%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10em;
+  position: relative;
+  text-align: center;
+  color: white;
+}
+.banner_container img {
+  width: 100%;
+  filter: opacity(0.9);
+}
+.banner_container div {
+  position: absolute;
+  bottom: 4px;
+  right: 0;
+  padding: 2.5em;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0), rgba(245, 153, 15, 0.4862745098));
+  color: black;
+  font-size: x-large;
+  font-weight: 600;
+  border-top-left-radius: 10px;
+}
+.banner_container div:hover {
+  transform: perspective(30deg);
+  transition: 1s;
+}
+
+.footer {
+  background-color: #f5990f;
+  bottom: 0;
+  width: 100%;
+  z-index: 99;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1em 0;
+}
+.footer ul {
+  list-style: none;
+  display: flex;
+  width: 60%;
+  justify-content: space-around;
+  font-size: medium;
+}
+.footer ul li {
+  display: inline-block;
+}
+.footer img {
+  margin-right: 2em;
+}
+
+.main {
+  margin-top: 8em;
+  width: 75%;
+  margin-left: auto;
+  margin-right: auto;
+}
+.main .main_header {
+  display: flex;
+  align-items: center;
+  background: linear-gradient(15deg, #bccddb 70%, #f5990f);
+}
+.main .main_header h1 {
+  font-weight: 200;
+  margin-left: 1em;
+}
+.main .card-container {
+  margin: 4em 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.card {
+  max-width: 300px;
+  min-width: 200px;
+  height: auto;
+  padding: 1em;
+  border-radius: 5px;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  cursor: pointer;
+}
+.card img {
+  padding-bottom: 2em;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 90%;
+}
+.card .text-container h2 {
+  padding: 1em;
+  width: auto;
+  overflow: hidden;
+  text-align: center;
+  background-color: #bccddb;
+}
+.card .text-container p {
+  overflow-y: scroll;
+  max-height: 200px;
+}
+
+.card:hover {
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+  transition: 0.3s;
+  transform: translateY(-1px);
+}
+
 body {
   margin: 0;
   font-family: "Roboto", sans-serif;
@@ -34,128 +157,6 @@ header .navbar nav ul {
   height: 100%;
   align-items: center;
   justify-content: space-around;
-}
-header .navbar nav ul li {
-  display: inline-block;
-  padding: 0.5em;
-  height: 100%;
-}
-header .navbar nav ul li:hover {
-  transform: scale(1.1);
-  transition: 0.3s;
-}
-header .navbar nav ul a {
-  font-weight: 200;
-  font-size: x-large;
-  height: 100%;
-}
-header .banner_container {
-  width: 75%;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 10em;
-  position: relative;
-  text-align: center;
-  color: white;
-}
-header .banner_container img {
-  width: 100%;
-  filter: opacity(0.9);
-}
-header .banner_container div {
-  position: absolute;
-  bottom: 4px;
-  right: 0;
-  padding: 2.5em;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0), rgba(245, 153, 15, 0.4862745098));
-  color: black;
-  font-size: x-large;
-  font-weight: 600;
-  border-top-left-radius: 10px;
-}
-header .banner_container div:hover {
-  transform: perspective(30deg);
-  transition: 1s;
-}
-
-main {
-  margin-top: 8em;
-  width: 75%;
-  margin-left: auto;
-  margin-right: auto;
-}
-main .main_header {
-  display: flex;
-  align-items: center;
-  background: linear-gradient(15deg, #bccddb 70%, #f5990f);
-}
-main .main_header h1 {
-  font-weight: 200;
-  margin-left: 1em;
-}
-main .card-container {
-  margin: 4em 0;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-}
-main .card-container .card {
-  max-width: 360px;
-  min-width: 260px;
-  height: auto;
-  padding: 2em;
-  border-radius: 5px;
-  margin: 1em;
-  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-  cursor: pointer;
-}
-main .card-container .card img {
-  padding-bottom: 2em;
-  margin-bottom: 1em;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 90%;
-}
-main .card-container .card .text-container h2 {
-  padding: 1em;
-  width: auto;
-  overflow: hidden;
-  text-align: center;
-  background-color: #bccddb;
-}
-main .card-container .card .text-container p {
-  overflow-y: scroll;
-  max-height: 200px;
-}
-main .card-container .card:hover {
-  box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
-  transition: 0.3s;
-  transform: translateY(-1px);
-}
-
-footer {
-  background-color: #f5990f;
-  bottom: 0;
-  width: 100%;
-  z-index: 99;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 1em 0;
-}
-footer ul {
-  list-style: none;
-  display: flex;
-  width: 60%;
-  justify-content: space-around;
-  font-size: medium;
-}
-footer ul li {
-  display: inline-block;
-}
-footer img {
-  margin-right: 2em;
 }
 
 /* Scrollbar custom */

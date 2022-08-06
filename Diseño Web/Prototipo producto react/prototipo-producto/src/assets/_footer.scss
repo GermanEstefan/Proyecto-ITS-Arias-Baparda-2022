@@ -1,0 +1,24 @@
+.footer {
+    background-color: $naranja;
+    bottom: 0;
+    width: 100%;
+    z-index: 99;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1em 0;
+    ul {
+      list-style: none;
+      display: flex;
+      width: 60%;
+      justify-content: space-around;
+      font-size: medium;
+      li {
+        display: inline-block;
+      }
+    }
+    img {
+      margin-right: 2em;
+    }
+  }
+  

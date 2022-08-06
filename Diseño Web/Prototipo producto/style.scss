@@ -46,7 +46,7 @@ header {
         }
         li:hover {
           transform: scale(1.1);
-          transition: 0.4s;
+          transition: 0.3s;
         }
         a {
           font-weight: 200;
@@ -219,4 +219,26 @@ footer {
 
 ::selection {
   background: $naranja_transparente;
+}
+
+
+
+.underline_animated {
+	position: relative;
+}
+
+.underline_animated::after {
+	position: absolute;
+	content: "";
+	width: 0%;
+	height: 2px;
+	background-color: black;
+	left: 50%;
+	bottom: -5px;
+	transition: all 0.2s ease-in-out;
+}
+
+.underline_animated:hover::after {
+	width: 100%;
+	left: 0;
 }
