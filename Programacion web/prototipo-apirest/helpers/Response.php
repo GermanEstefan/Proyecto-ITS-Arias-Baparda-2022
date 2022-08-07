@@ -29,8 +29,26 @@ class Response{
     public function error400($msg = "Datos enviados incompletos o con formato incorrecto"){
         $this->response['status'] = "error";
         $this->response['result'] = array(
-            "error_id" => "400",
+            "status" => "400",
             "error_msg" => $msg
+        );
+        return json_encode($this->response);
+    }
+
+    public function error401($msg = "No autorizado"){
+        $this->response['status'] = "error";
+        $this->response['result'] = array(
+            "status" => "491",
+            "error_msg" => $msg
+        );
+        return json_encode($this->response);
+    }
+
+    public function error405(){
+        $this->response['status'] = "error";
+        $this->response['result'] = array(
+            "status" => "405",
+            "error_msg" => "Metodo no autorizado"
         );
         return json_encode($this->response);
     }
@@ -43,16 +61,6 @@ class Response{
             "error_msg" => $msg
         );
         return json_encode($this->response);
-    }
-
-
-    public function error_401($valor = "No autorizado"){
-        $this->response['status'] = "error";
-        $this->response['result'] = array(
-            "error_id" => "401",
-            "error_msg" => $valor
-        );
-        return $this->response;
     }
     
 }

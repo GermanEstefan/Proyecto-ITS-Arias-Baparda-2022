@@ -53,10 +53,5 @@
             return $result_transaccion;
         }
     }
-    /*$arrayFromResults = array();
-    /*while($row = $results->fetch_assoc()){
-         array_push($arrayFromResults, $row);
-    }
-        return json_encode($arrayFromResults);*/
 ?>
 
