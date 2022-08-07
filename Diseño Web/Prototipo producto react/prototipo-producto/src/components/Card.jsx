@@ -1,15 +1,17 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
-const Card = ({goTo, img, title}) => {
+const Card = ({img, title}) => {
+  
   return (
     <div className="card">
-      <a href={goTo}>
+      <Link to={`/category${title}`}>
         <img src={img} alt="" />
 
         <div className="text-container">
           <h2>{title}</h2>
         </div>
-      </a>
+      </Link>
     </div>
   );
 };

@@ -3,7 +3,15 @@ import Carrito from "./../img/Carrito.jpg";
 import LogoCliente from "./../img/Logo-nombre.jpg";
 import Button from "./Button";
 import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
+import { useNavigate } from "react-router-dom";
 const Navbar = () => {
+
+  const navigate = useNavigate()
+const goTo = (path) => {
+    navigate(path)
+  }
   return (
     <header>
       <div className="navbar">
@@ -13,30 +21,26 @@ const Navbar = () => {
         <nav>
           <ul>
             <li>
-              <Link to={'/contact'}>
+              
               <Button
+              onClick={() => goTo('/contact')  }
                 text="Contacto"
               ></Button>
-              </Link>
             </li>
             <li>
             <Button
-                onClick={() => {
-                  console.log("Click!");
-                }}
+                onClick={() => goTo('/login')  }
                 text="Ingresar"
               ></Button>
             </li>
             <li>
               <Button
-                onClick={() => {
-                  console.log("Click!");
-                }}
+                onClick={() => goTo('/register')  }
                 text="Registrarse"
               ></Button>
             </li>
             <li>
-              <img className="carrito" src={Carrito} width="50px" alt="Carrit" />
+              <Link to={'/'}><FontAwesomeIcon className="icon" icon={faShoppingCart}/></Link>
             </li>
           </ul>
         </nav>

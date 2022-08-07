@@ -5,8 +5,10 @@
   font-weight: 200;
   font-size: x-large;
   height: 100%;
+  cursor: pointer;
 }
 .button:hover {
   transform: scale(1.1);
   transition: 0.3s;
 }
+

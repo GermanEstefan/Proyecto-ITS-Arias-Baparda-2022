@@ -1,14 +1,23 @@
-$naranja: #f5990f;
-$naranja_transparente: #f5990f7c;
-$gris: #bccddb;
-@import './assets/button';
-@import './assets/banner';
-@import './assets/footer';
-@import './assets/categoryList';
-@import './assets/card';
+$orange: #f5990f;
+$transparent_orange: #f5990f7c;
+$gray: #bccddb;
+$dark_gray: #9ba6af;
+@import "./assets/button";
+@import "./assets/banner";
+@import "./assets/footer";
+@import "./assets/categoryList";
+@import "./assets/card";
+@import "./assets/categoryPage";
+@import "./assets/pageTitle";
+@import "./assets/productCard";
+@import "./assets/navbar";
+@import "./assets/login";
+
 
 body {
+  
   margin: 0;
+  padding: 0;
   font-family: "Roboto", sans-serif;
   a {
     text-decoration: none;
@@ -16,60 +25,20 @@ body {
   }
 }
 
-// H E A D E R
+//  SCROLLBAR CUSTOM
 
-header {
-  .navbar {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    background-color: white;
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 99;
-    img {
-      cursor: pointer;
-      padding: 1.5em;
-    }
-    nav {
-      width: 50%;
-      height: 100%;
-      ul {
-        list-style: none;
-        margin: 0;
-        padding: 0;
-        display: flex;
-        height: 100%;
-        align-items: center;
-        justify-content: space-around;
-      }
-    }
-  }
-
-}
-
-// H E A D E R  E N D S
-
-
-
-
-
-/* Scrollbar custom */
-
-/* width */
+//  width
 ::-webkit-scrollbar {
   width: 10px;
 }
 
-/* Track */
+// Track
 ::-webkit-scrollbar-track {
   background-color: rgba(215, 215, 215, 0.092);
   border-radius: 3px;
 }
 
-/* Handle */
+// Handle
 ::-webkit-scrollbar-thumb {
   background: rgba(146, 146, 146, 0.544);
 }
@@ -78,36 +47,32 @@ header {
   background: rgba(120, 120, 120, 0.544);
 }
 
-/* Text selection color custom */
+// CUSTOM TEXT SELECTION
 
 ::-moz-selection {
-  /* Code for Firefox */
-
-  background: $naranja_transparente;
+  background: $transparent_orange;
 }
 
 ::selection {
-  background: $naranja_transparente;
+  background: $transparent_orange;
 }
 
-
-
 .underline_animated {
-	position: relative;
+  position: relative;
 }
 
 .underline_animated::after {
-	position: absolute;
-	content: "";
-	width: 0%;
-	height: 2px;
-	background-color: black;
-	left: 50%;
-	bottom: -5px;
-	transition: all 0.2s ease-in-out;
+  position: absolute;
+  content: "";
+  width: 0%;
+  height: 2px;
+  background-color: black;
+  left: 50%;
+  bottom: -5px;
+  transition: all 0.2s ease-in-out;
 }
 
 .underline_animated:hover::after {
-	width: 100%;
-	left: 0;
+  width: 100%;
+  left: 0;
 }
