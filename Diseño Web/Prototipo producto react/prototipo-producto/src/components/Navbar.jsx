@@ -1,5 +1,4 @@
 import React from "react";
-import Carrito from "./../img/Carrito.jpg";
 import LogoCliente from "./../img/Logo-nombre.jpg";
 import Button from "./Button";
 import { Link } from "react-router-dom";

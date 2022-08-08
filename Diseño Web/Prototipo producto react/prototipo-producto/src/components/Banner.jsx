@@ -5,7 +5,7 @@ const Banner = () => {
   return (
     <>
       <div className="banner_container">
-        <img src={BannerImage} alt="Snow" />
+        <img src={BannerImage} alt="" />
         <div>
           Nos encargamos de distribuir lo mejor en productos para la seguridad
           laboral en tu empresa ponele

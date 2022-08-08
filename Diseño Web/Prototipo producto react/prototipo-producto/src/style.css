@@ -44,6 +44,7 @@
 
 .footer {
   background-color: #f5990f;
+  position: fixed;
   bottom: 0;
   width: 100%;
   z-index: 99;
@@ -310,9 +311,8 @@ header .navbar nav ul {
   align-items: center;
 }
 
-p {
+h1 {
   text-align: center;
-  font-size: x-large;
 }
 
 form {
@@ -362,6 +362,8 @@ button:hover {
 }
 
 body {
+  background-color: #fff;
+  min-height: 100vh;
   margin: 0;
   padding: 0;
   font-family: "Roboto", sans-serif;

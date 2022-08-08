@@ -11,10 +11,10 @@ const Footer = () => {
       <li>Moltke 1194, Montevideo</li>
     </ul>
     <div>
-      <a href=""
+      <a href="https://www.facebook.com/people/Natalia-Viera-Seguridad-Corporal/100076407723343/"
         ><img src={facebookIcon} width="50px" alt=""
       /></a>
-      <a href=""
+      <a href="https://www.instagram.com/seguridad_corporal/?hl=es"
         ><img src={instagramIcon} width="50px" alt=""
       /></a>
     </div>

@@ -1,7 +1,7 @@
 import React from "react";
 import Guantes from "./../img/guantes.jpg";
 import Card from "./Card";
-import Navbar from "./Navbar";
+
 
 const CategoriesList = () => {
   const categoriesList = [

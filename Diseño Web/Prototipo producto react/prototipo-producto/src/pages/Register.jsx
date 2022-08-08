@@ -9,21 +9,21 @@ const Register = () => {
     <div className='form-container'>
 
 
-        <img src={Imagen} width='650px'></img>
+        <img src={Imagen} width='650px' alt=''></img>
         <Formik>
 
             <form className='form'>
-            <p>Registrate para comenzar tu experiencia</p>
+            <h1>Registrate para comenzar tu experiencia</h1>
                 <div>
-                    <input placeholder='Nombre'></input>
+                    <input type="text" placeholder='Nombre'></input>
                 </div>
                 <div>
-                    <input placeholder='Email'></input>
+                    <input type="text" placeholder='Email'></input>
                 </div><div>
-                    <input placeholder='Contraseña'></input>
+                    <input type="text" placeholder='Contraseña'></input>
                 </div>
                 <div>
-                    <input placeholder='Confirmar contraseña'></input>
+                    <input type="text" placeholder='Confirmar contraseña'></input>
                 </div>
                 <button>Registrarse</button>
                 <br/>
