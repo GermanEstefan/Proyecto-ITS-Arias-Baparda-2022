@@ -42,7 +42,7 @@ header .navbar nav ul li {
 }
 header .navbar nav ul li:hover {
   transform: scale(1.1);
-  transition: 0.4s;
+  transition: 0.3s;
 }
 header .navbar nav ul a {
   font-weight: 200;
@@ -209,6 +209,26 @@ footer img:hover {
 
 ::selection {
   background: rgba(245, 153, 15, 0.4862745098);
+}
+
+.underline_animated {
+  position: relative;
+}
+
+.underline_animated::after {
+  position: absolute;
+  content: "";
+  width: 0%;
+  height: 2px;
+  background-color: black;
+  left: 50%;
+  bottom: -5px;
+  transition: all 0.2s ease-in-out;
+}
+
+.underline_animated:hover::after {
+  width: 100%;
+  left: 0;
 }
 
 /*# sourceMappingURL=style.css.map */

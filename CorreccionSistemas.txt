@@ -1,0 +1,8 @@
+Correccion de la entrega de Sistemas
+
+- Problemas con las licencias de Windows
+- No se especifica soporte de S.O de terminal
+- Rol de soporte sin funciones específicas
+
+
+Nota de entrega 10

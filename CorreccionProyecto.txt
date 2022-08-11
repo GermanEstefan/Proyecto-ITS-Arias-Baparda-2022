@@ -1,0 +1,18 @@
+Correcciones sobre la entrega de Gestión de proyecto
+
+- Errores de sintaxis
+- Costo tentativo
+- Cronograma tentativo no acorde con calendario de reunion
+- Formas de comunicación incorrectas
+- Producto final mal enfocado (solo se entrega el sitio web)
+- Normas poco claras en su contenido
+- Faltan roles clave para el desarrollo del proyecto
+- El ciclo de vida no coincide con el Gantt
+- Información adicional irrelevante
+
+Nota de proyecto 8
+
+Estefan 10
+Rivero 10
+Armanddugon 
+Alvarez 10
