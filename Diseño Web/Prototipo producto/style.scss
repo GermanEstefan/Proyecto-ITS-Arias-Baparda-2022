@@ -26,7 +26,7 @@ header {
     z-index: 99;
     img {
       cursor: pointer;
-      padding: 1.5em;
+      padding: 1em;
     }
     nav {
       width: 50%;
@@ -60,10 +60,15 @@ header {
   // B A N N E R
 
   .banner_container {
-    width: 75%;
+    @media (min-width: 1200px) {
+      width: 75%;
+    }
+    @media (max-width: 1200px) {
+      width: 90%;
+    }
     margin-left: auto;
     margin-right: auto;
-    margin-top: 10em;
+    margin-top: 8em;
     position: relative;
     text-align: center;
     color: white;
@@ -73,21 +78,18 @@ header {
     }
     div {
       position: absolute;
+      width: 65%;
       bottom: 4px;
       right: 0;
-      padding: 2.5em;
-      background: linear-gradient(
-        135deg,
-        rgba(255, 255, 255, 0),
-        $naranja_transparente
-      );
-      color: black;
+      padding: 2em;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0), $naranja);
+      color: white;
       font-size: x-large;
       font-weight: 600;
       border-top-left-radius: 10px;
     }
     div:hover {
-      transform:perspective(30deg );
+      transform: perspective(30deg);
       transition: 1s;
     }
   }
@@ -101,13 +103,18 @@ header {
 
 main {
   margin-top: 8em;
-  width: 75%;
+  @media (min-width: 1200px) {
+    width: 75%;
+  }
+  @media (max-width: 1200px) {
+    width: 90%;
+  }
   margin-left: auto;
   margin-right: auto;
   .main_header {
     display: flex;
     align-items: center;
-    background:linear-gradient(15deg, $gris 70%, $naranja);
+    background: linear-gradient(15deg, $gris 70%, $naranja);
     h1 {
       font-weight: 200;
       margin-left: 1em;
@@ -119,17 +126,16 @@ main {
     flex-wrap: wrap;
     justify-content: space-around;
     .card {
-      max-width: 360px;
-      min-width: 260px;
+      max-width: 240px;
+      min-width: 200px;
       height: auto;
-      padding: 2em;
+      padding: 1em;
       border-radius: 5px;
       margin: 1em;
       box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
       cursor: pointer;
       img {
         padding-bottom: 2em;
-        margin-bottom: 1em;
         display: block;
         margin-left: auto;
         margin-right: auto;
@@ -145,12 +151,13 @@ main {
         }
         p {
           overflow-y: scroll;
-        max-height: 200px;
+          max-height: 200px;
         }
       }
     }
-    .card:hover{
-      box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+    .card:hover {
+      box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px,
+        rgba(0, 0, 0, 0.22) 0px 15px 12px;
       transition: 0.3s;
       transform: translateY(-1px);
     }
@@ -182,6 +189,10 @@ footer {
   }
   img {
     margin-right: 2em;
+  }
+  img:hover {
+    transform: scale(1.1);
+    transition: 0.3s;
   }
 }
 
