@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { useParams } from "react-router-dom";
 import PageTitle from "../components/PageTitle";
 import ProductCard from "../components/ProductCard";
@@ -7,6 +7,10 @@ import Guantes from "./../img/guantes.jpg";
 
 const CategoryPage = () => {
   const { title } = useParams();
+
+  useEffect(() => {
+    window.scroll(0, 0)
+  }, [])
 
   const productsList = [
     {

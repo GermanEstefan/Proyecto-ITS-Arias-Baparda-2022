@@ -13,7 +13,7 @@ const Register = () => {
         <Formik>
 
             <form className='form'>
-            <p>Registrate para comenzar tu experiencia</p>
+            <h1>Registrate para comenzar tu experiencia</h1>
                 <div>
                     <input placeholder='Nombre'></input>
                 </div>
