@@ -41,7 +41,9 @@
             $result_transaccion = true;
             $this->connection->begin_transaction(MYSQLI_TRANS_START_READ_WRITE);
             foreach ($querys as $query) { 
-                if(!$this->setData($query)){
+                $result = $this->setData($query);
+                echo $result;
+                if(!$result){
                     $result_transaccion = false;
                 }
             }
