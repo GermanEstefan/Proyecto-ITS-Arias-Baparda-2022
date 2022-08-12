@@ -7,7 +7,7 @@ const Login = () => {
   return (
     <>
       <div className="form-container">
-        <img src={Imagen} width="650px"></img>
+        <img className={'form-img'} src={Imagen} ></img>
         <Formik
           handleChange={(valores) => {
             console.log(valores);

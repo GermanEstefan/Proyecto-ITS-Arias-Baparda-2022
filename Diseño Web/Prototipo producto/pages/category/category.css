@@ -20,7 +20,7 @@ header .navbar {
 }
 header .navbar img {
   cursor: pointer;
-  padding: 1.5em;
+  padding: 1em;
 }
 header .navbar nav {
   width: 50%;

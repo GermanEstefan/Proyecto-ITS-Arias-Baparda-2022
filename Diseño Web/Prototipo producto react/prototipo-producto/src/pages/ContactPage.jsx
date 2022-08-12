@@ -6,7 +6,7 @@ const ContactPage = () => {
   return (
     <>
     <div className='form-container'>
-        <img src={Imagen} width="650px"></img>
+        <img className="form-img" src={Imagen}></img>
       <Formik>
         <form className="form">
           <h1>Envianos tu mensaje</h1>

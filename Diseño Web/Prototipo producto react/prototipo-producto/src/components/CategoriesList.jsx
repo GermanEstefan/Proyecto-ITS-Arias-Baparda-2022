@@ -14,6 +14,12 @@ const CategoriesList = () => {
     {
       name: "HIGIENES",
     },
+    {
+      name: "Otras cosas",
+    },
+    {
+      name: "zapatos",
+    },
   ];
   return (
     <>
