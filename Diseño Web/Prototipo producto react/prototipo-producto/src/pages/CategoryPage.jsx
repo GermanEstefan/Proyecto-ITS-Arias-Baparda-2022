@@ -3,6 +3,8 @@ import { useParams } from "react-router-dom";
 import PageTitle from "../components/PageTitle";
 import ProductCard from "../components/ProductCard";
 import Guantes from "./../img/guantes.jpg";
+import { useMediaQuery } from "react-responsive";
+import Card from './../components/Card'
 
 
 const CategoryPage = () => {
@@ -11,6 +13,8 @@ const CategoryPage = () => {
   useEffect(() => {
     window.scroll(0, 0)
   }, [])
+
+  const isMobile = useMediaQuery({ query: '(max-width: 1000px)'})
 
   const productsList = [
     {
@@ -53,10 +57,10 @@ const CategoryPage = () => {
   return (
     <div className="main">
       <PageTitle title={title} isArrow={true}/>
-      <div class="card-container">
+      <div className="card-container">
         {
-          productsList.map((product) => {
-            return (<ProductCard title={product.name} description={product.description} img={Guantes}/>)
+          productsList.map((product, index) => {
+            return (isMobile ? <Card title={product.name} img={Guantes} key={index}/>: <ProductCard title={product.name} description={product.description} img={Guantes} key={index}/>)
           })
         }
       </div>

@@ -89,7 +89,7 @@
 }
 
 .card {
-  max-width: 300px;
+  max-width: 280px;
   min-width: 200px;
   height: auto;
   padding: 1em;
@@ -227,6 +227,7 @@
 }
 
 .product-card {
+  max-width: 750px;
   padding: 20px;
   display: flex;
   align-items: center;
