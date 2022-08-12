@@ -1,6 +1,5 @@
 .card {
-    max-width: 300px;
-    min-width: 200px;
+    width: 220px;
     height: auto;
     padding: 1em;
     border-radius: 5px;
@@ -11,7 +10,7 @@
       display: block;
       margin-left: auto;
       margin-right: auto;
-      width: 90%;
+      width: 80%;
     }
     .text-container {
       h2 {
