@@ -1,0 +1,7 @@
+Segunda entrega
+● D.E.R. de la situación planteada. Versión completa.
+● Normalización (hasta 3FN)
+● Modelo Físico
+o Sentencias DDL y DML utilizadas para crear la Base de Datos
+o Estudio de los permisos sobre BD y tablas considerando los diferentes roles.
+o Implementación de la Base de Datos en el servidor MySQL de la máquina virtual.
