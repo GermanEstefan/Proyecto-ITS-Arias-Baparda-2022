@@ -14,7 +14,7 @@ const CategoryPage = () => {
     window.scroll(0, 0)
   }, [])
 
-  const isMobile = useMediaQuery({ query: '(max-width: 1000px)'})
+  const isMobile = useMediaQuery({ query: '(max-width: 900px)'})
 
   const productsList = [
     {

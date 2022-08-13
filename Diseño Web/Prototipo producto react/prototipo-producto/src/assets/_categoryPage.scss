@@ -1,5 +1,8 @@
 .main {
     margin-top: 11em;
+    @media (max-width: 1000px) {
+      width: 100%;
+    }
     width: 75%;
     margin-left: auto;
     margin-right: auto;
@@ -27,6 +30,9 @@
       }
     }
     .card-container {
+      @media (max-width: 900px) {
+        width: 100%;
+      }
       width: 80%;
       margin: 4em auto;
       .card {
