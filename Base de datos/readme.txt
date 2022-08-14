@@ -1,4 +1,4 @@
-STG - Ambiente de Staging
+STG - Ambiente de Staging - pruebas sobre la base de datos
 
 Referencias:
 
@@ -18,12 +18,12 @@ EMPLOYEE            ci
 ROLE                name_role
 CLIENT              user_represent
 PHOTO               id_photo
-GALERY              id_photo, barcode
+GALERY              id_photo + barcode
 PRODUCT             barcode
-PROMO               PROMO ES UN PRODUCTO QUE CONTIENE UNA LISTA DE PRODUCTOS
+PROMO               PROMO ES UN PRODUCTO(barcode) + QUE CONTIENE UNA LISTA DE PRODUCTOS (barcode)
 SALE                id_sale
 STATUS              id_status
-REPORT              id_sale, id_status
-SALE DETAIL         id_sale , barcode
+REPORT              id_sale + id_status
+SALE DETAIL         id_sale + barcode
 SUPPLY              id_supply
-SUPPLY DETAIL       id_supply , barcode
+SUPPLY DETAIL       id_supply + barcode
