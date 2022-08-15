@@ -1,4 +1,4 @@
----INSERT PARA TIRAR EN STG BINDEVSTG
+---INSERT PARA TIRAR EN prod
 INSERT INTO `bindev`.`users` (`email`, `name`, `surname`, `address`, `phone`, `password`) VALUES ('correo1@gmail.com', 'Nicolas', 'Alvarez', 'direccion 1', '098776554', 'password1');
 INSERT INTO `bindev`.`users` (`email`, `name`, `surname`, `address`, `phone`, `password`) VALUES ('correo2@gmail.com', 'Rodrigo', 'Gimenez', 'direccion2', '267482', 'password2');
 INSERT INTO `bindev`.`users` (`email`, `name`, `surname`, `address`, `phone`, `password`) VALUES ('correo3@gmail.com', 'Pablo ', 'Gimenez', 'direccion 2', '098098098', 'password3');

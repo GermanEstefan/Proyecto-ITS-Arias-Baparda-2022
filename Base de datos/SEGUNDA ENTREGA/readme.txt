@@ -27,3 +27,9 @@ REPORT              id_sale + id_status
 SALE DETAIL         id_sale + barcode
 SUPPLY              id_supply
 SUPPLY DETAIL       id_supply + barcode
+
+ID de los registro PROMO es 1000 (Category , Size , Desing , Product)
+1000 PROMO BASICA
+1001 PROMO PYME
+1002 PROMO MEDIUM
+1003 PROMO BIG 
