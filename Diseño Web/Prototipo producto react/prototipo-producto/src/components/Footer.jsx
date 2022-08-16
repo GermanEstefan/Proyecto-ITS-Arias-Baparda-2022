@@ -10,12 +10,12 @@ const Footer = () => {
       <li>092 065 001</li>
       <li>Moltke 1194, Montevideo</li>
     </ul>
-    <div>
+    <div className='img-container'>
       <a href=""
-        ><img src={facebookIcon} width="50px" alt=""
+        ><img src={facebookIcon} width="50px" height='50px' alt=""
       /></a>
       <a href=""
-        ><img src={instagramIcon} width="50px" alt=""
+        ><img src={instagramIcon} width="50px" height='50px'  alt=""
       /></a>
     </div>
   </div>

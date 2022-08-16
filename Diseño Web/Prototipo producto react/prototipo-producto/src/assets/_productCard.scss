@@ -1,49 +1,49 @@
 .product-card {
   max-width: 1100px;
   width: 100%;
-    padding: 20px;
-    display: flex;
-    align-items: center;
-    position: relative;
-    margin-bottom: 50px;
-    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  position: relative;
+  margin-bottom: 50px;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 
-    img {
-      padding-bottom: 2em;
-      margin-bottom: 1em;
-      left: 0;
+  img {
+    padding-bottom: 2em;
+    margin-bottom: 1em;
+    left: 0;
+  }
+  .product-text-container {
+    h2 {
+      padding: 0.5em;
+      width: auto;
+      overflow: hidden;
+      text-align: center;
+      background-color: #bccddb;
     }
-    .product-text-container {
-      h2 {
-        padding: 0.5em;
-        width: auto;
-        overflow: hidden;
-        text-align: center;
-        background-color: #bccddb;
-      }
-      p {
-        overflow-y: scroll;
-        max-height: 200px;
-      }
-      a {
-        min-width: 180px;
-        height: 50px;
-        padding: 0 30px;
-        background-color: $orange;
-        display: inline-block;
-        border-radius: 100px;
-        display: inline-flex;
-        justify-content: space-between;
-        align-items: center;
-        position: absolute;
-        right: 20px;
-        bottom: -20px;
-      }
+    p {
+      overflow-y: scroll;
+      max-height: 200px;
+    }
+    a {
+      min-width: 180px;
+      height: 50px;
+      padding: 0 30px;
+      background-color: $orange;
+      display: inline-block;
+      border-radius: 100px;
+      display: inline-flex;
+      justify-content: space-between;
+      align-items: center;
+      position: absolute;
+      right: 20px;
+      bottom: -20px;
     }
   }
-  .product-card:hover {
-    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px,
-      rgba(0, 0, 0, 0.22) 0px 15px 12px;
-    transition: 0.3s;
-    transform: translateY(-1px);
-  }
+}
+.product-card:hover {
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px,
+    rgba(0, 0, 0, 0.22) 0px 15px 12px;
+  transition: 0.3s;
+  transform: translateY(-1px);
+}
