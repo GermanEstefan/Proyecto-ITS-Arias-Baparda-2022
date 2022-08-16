@@ -3,7 +3,7 @@
   height: 100vh;
   margin: 6em auto;
   display: flex;
-  @media (max-width: 1400px) {
+  @media (max-width: 1100px) {
     flex-direction: column;
   }
 
@@ -25,11 +25,15 @@ h1 {
   width: 55%;
 }
 form {
-  background-color: $orange;
-  padding: 2em 0;
+  @media (min-width: 1100px) {
+    transform: translate(-30px);
+    
+  }
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+  background-color: rgba(255, 255, 255, 0.884);
+  padding: 2em 1em 3em 1em;
   border-radius: 10px;
   width: 100%;
-  margin-bottom: 2em;
 }
 
 input {
@@ -41,7 +45,22 @@ input {
   font-size: 16px;
   font-size: max(16px, 1em);
   font-family: inherit;
-  border: 2px solid var(--input-border);
+  border: 2px solid black;
+  max-width: 200px;
+}
+
+textarea {
+  padding: 15px;
+  display: block;
+  width: 60%;
+  border-radius: 5px;
+  margin: 1em auto;
+  font-size: 16px;
+  font-size: max(16px, 1em);
+  font-family: inherit;
+  border: 2px solid black;
+  max-width: 200px;
+  resize: none;
 }
 
 button {

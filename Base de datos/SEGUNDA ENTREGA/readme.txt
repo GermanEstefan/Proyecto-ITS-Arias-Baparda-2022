@@ -12,10 +12,10 @@ DISBURSE            id_disburse
 SIZE                id_size
 DISCOUNT            id_discount
 SUPPLIER            id_supplier
-USER                id_users
-EMPLOYEE            ci
+USER                id_user
+EMPLOYEE            user_employee
 ROLE                name_role
-CLIENT              user_represent
+CLIENT              client_user
 PHOTO               id_photo
 GALERY              id_photo + barcode
 PRODUCT             barcode
