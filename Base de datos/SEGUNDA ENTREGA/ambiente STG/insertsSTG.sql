@@ -9,16 +9,9 @@ INSERT INTO `bindevstg`.`user` (`email`, `name`, `surname`, `address`, `phone`, 
 INSERT INTO `bindevstg`.`user` (`email`, `name`, `surname`, `address`, `phone`, `password`) VALUES ('correo8@seguridadcorporal.com', 'lucas', 'rodriguez', '18 de julio 2377', '22334455', 'password8');
 INSERT INTO `bindevstg`.`user` (`email`, `name`, `surname`, `address`, `phone`, `password`) VALUES ('correo9@seguridadcorporal.com', 'esteban ', 'quito', 'no me acuerdo', '09828848', 'password9');
 INSERT INTO `bindevstg`.`user` (`email`, `name`, `surname`, `address`, `phone`, `password`) VALUES ('correo10@seguridadcorporal.com', 'maximilian', 'fija', 'rio negro entre j carlos rodriguez y marcelino gutierrez', '56778883', 'password10');
-INSERT INTO `bindevstg`.`client` (`client_user`, `company_name`, `rut_nr`) VALUES ('5','','');
-INSERT INTO `bindevstg`.`client` (`client_user`, `company_name`, `rut_nr`) VALUES ('6', 'construseguros sucursal centro','211211211211');
-INSERT INTO `bindevstg`.`client` (`client_user`, `company_name`, `rut_nr`) VALUES ('7', 'construseguros sucursal pando','211211211211');
-INSERT INTO `bindevstg`.`client` (`client_user`, `company_name`, `rut_nr`) VALUES ('8','empresa otra','322');
 INSERT INTO `bindevstg`.`role` (`name_role`, `description`) VALUES ('VENDEDOR', 'EL VENDEDOR');
 INSERT INTO `bindevstg`.`role` (`name_role`, `description`) VALUES ('COMPRADOR', 'EL COMPRADOR');
 INSERT INTO `bindevstg`.`role` (`name_role`, `description`) VALUES ('JEFE', 'EL JEFE');
-INSERT INTO `bindevstg`.`employee` (`ci`, `employee_user`, `employee_role`) VALUES ('12345678', '8', 'vendedor');
-INSERT INTO `bindevstg`.`employee` (`ci`, `employee_user`, `employee_role`) VALUES ('12121212', '9', 'comprador');
-INSERT INTO `bindevstg`.`employee` (`ci`, `employee_user`, `employee_role`) VALUES ('12312332', '10', 'jefe');
 INSERT INTO `bindevstg`.`category` (`id_category`, `name`, `description`) VALUES ('1', 'REMERAS', 'LAS MEJORES REMERAS');
 INSERT INTO `bindevstg`.`category` (`id_category`, `name`, `description`) VALUES ('2', 'BUZOS', 'LOS MEJORES BUZOS');
 INSERT INTO `bindevstg`.`category` (`id_category`, `name`, `description`) VALUES ('3', 'CHALECOS', 'LOS MEJORES CHALECOS');
@@ -101,11 +94,6 @@ INSERT INTO `bindevstg`.`delivery_time` (`id_delivery`, `name`, `description`) V
 INSERT INTO `bindevstg`.`SALE` (`address`, `user_purchase`, `sale_delivery`, `pay_met`) VALUES ('LIBRES 1675', '7', '1', '1');
 INSERT INTO `bindevstg`.`SALE` (`address`, `user_purchase`, `sale_delivery`, `pay_met`) VALUES ('LEVANTA EN LOCAL', '6', '5', '4');
 INSERT INTO `bindevstg`.`SALE` (`address`, `user_purchase`, `sale_delivery`, `pay_met`) VALUES ('LIBRES 16653', '5', '4', '3');
-INSERT INTO `bindevstg`.`PROMO` (`is_product`, `have_product`, `quantity`) VALUES ('1', '19', '3');
-INSERT INTO `bindevstg`.`PROMO` (`is_product`, `have_product`, `quantity`) VALUES ('1', '20', '1');
-INSERT INTO `bindevstg`.`PROMO` (`is_product`, `have_product`, `quantity`) VALUES ('3', '12', '10');
-INSERT INTO `bindevstg`.`PROMO` (`is_product`, `have_product`, `quantity`) VALUES ('3', '13', '10');
-INSERT INTO `bindevstg`.`PROMO` (`is_product`, `have_product`, `quantity`) VALUES ('3', '15', '10');
 INSERT INTO `bindevstg`.`DISCOUNT` (`value`, `description`) VALUES ('0.20', '20%OFF');
 INSERT INTO `bindevstg`.`DISCOUNT` (`value`, `description`) VALUES ('0.30', '30%OFF');
 INSERT INTO `bindevstg`.`DISCOUNT` (`value`, `description`) VALUES ('0.50', '50%OFF');
