@@ -60,13 +60,8 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `bindevstg`.`supplier`
 -- -----------------------------------------------------
-<<<<<<< HEAD
-CREATE TABLE IF NOT EXISTS `bindevSTG`.`supplier` (
-  `id_supplier` INT AUTO_INCREMENT NOT NULL,
-=======
 CREATE TABLE IF NOT EXISTS `bindevstg`.`supplier` (
-  `id_supplier` INT NOT NULL,
->>>>>>> a06181623f0859e21e84976970027a9e13f79b73
+  `id_supplier` INT AUTO_INCREMENT NOT NULL,
   `rut` varchar(12) NOT NULL,
   `company_name` VARCHAR(150) NOT NULL,
   `address` VARCHAR(500) NOT NULL,
@@ -89,17 +84,10 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
-<<<<<<< HEAD
--- Table `bindevSTG`.`user`
+-- Table `bindevstg`.`user`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `bindevSTG`.`user` (
+CREATE TABLE IF NOT EXISTS `bindevstg`.`user` (
   `id_user` INT(8) NOT NULL AUTO_INCREMENT,
-=======
--- Table `bindevstg`.`users`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `bindevstg`.`users` (
-  `id_user` INT NOT NULL AUTO_INCREMENT,
->>>>>>> a06181623f0859e21e84976970027a9e13f79b73
   `email` VARCHAR(200) NOT NULL,
   `name` VARCHAR(150) NOT NULL,
   `surname` VARCHAR(150) NOT NULL,
@@ -168,13 +156,8 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `bindevstg`.`discount`
 -- -----------------------------------------------------
-<<<<<<< HEAD
-CREATE TABLE IF NOT EXISTS `bindevSTG`.`discount` (
-  `value` DECIMAL(4, 2) NOT NULL,
-=======
 CREATE TABLE IF NOT EXISTS `bindevstg`.`discount` (
-  `value` FLOAT NOT NULL,
->>>>>>> a06181623f0859e21e84976970027a9e13f79b73
+  `value` DECIMAL(4, 2) NOT NULL,
   `description` VARCHAR(500) NOT NULL,
   `state` TINYINT(1) default 1,
   PRIMARY KEY (`value`),
@@ -200,11 +183,7 @@ CREATE TABLE IF NOT EXISTS `bindevstg`.`employee` (
     ON UPDATE RESTRICT,
   CONSTRAINT `FK_employee_user`
     FOREIGN KEY (`employee_user`)
-<<<<<<< HEAD
-    REFERENCES `bindevSTG`.`user` (`id_user`)
-=======
-    REFERENCES `bindevstg`.`users` (`id_user`)
->>>>>>> a06181623f0859e21e84976970027a9e13f79b73
+    REFERENCES `bindevstg`.`user` (`id_user`)
     ON DELETE RESTRICT
     ON UPDATE RESTRICT)
 ENGINE = InnoDB;
@@ -213,24 +192,15 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `bindevstg`.`client`
 -- -----------------------------------------------------
-<<<<<<< HEAD
-CREATE TABLE IF NOT EXISTS `bindevSTG`.`client` (
-  `client_user` INT(8) NOT NULL,
-=======
 CREATE TABLE IF NOT EXISTS `bindevstg`.`client` (
-  `client_user` INT NOT NULL,
->>>>>>> a06181623f0859e21e84976970027a9e13f79b73
+  `client_user` INT(8) NOT NULL,
   `company_name` VARCHAR(300) NULL,
   `rut_nr` varchar(12) NULL,
   PRIMARY KEY (`client_user`),
   constraint `UN_rut_company` UNIQUE  (`rut_nr`, `company_name`),
   CONSTRAINT `FK_user_id`
     FOREIGN KEY (`client_user`)
-<<<<<<< HEAD
-    REFERENCES `bindevSTG`.`user` (`id_user`)
-=======
-    REFERENCES `bindevstg`.`users` (`id_user`)
->>>>>>> a06181623f0859e21e84976970027a9e13f79b73
+    REFERENCES `bindevstg`.`user` (`id_user`)
     ON DELETE RESTRICT
     ON UPDATE RESTRICT)
 ENGINE = InnoDB;
@@ -239,15 +209,9 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `bindevstg`.`supply`
 -- -----------------------------------------------------
-<<<<<<< HEAD
-CREATE TABLE IF NOT EXISTS `bindevSTG`.`supply` (
+CREATE TABLE IF NOT EXISTS `bindevstg`.`supply` (
   `id_supply` INT(8) NOT NULL AUTO_INCREMENT,
   `date` DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
-=======
-CREATE TABLE IF NOT EXISTS `bindevstg`.`supply` (
-  `id_supply` INT NOT NULL AUTO_INCREMENT ,
-  `date` DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL ,
->>>>>>> a06181623f0859e21e84976970027a9e13f79b73
   `supplier_id` INT NOT NULL,
   `employee_ci` INT NOT NULL,
   `disburse_method` INT NOT NULL,
@@ -275,13 +239,8 @@ AUTO_INCREMENT = 300000;
 -- -----------------------------------------------------
 -- Table `bindevstg`.`product`
 -- -----------------------------------------------------
-<<<<<<< HEAD
-CREATE TABLE IF NOT EXISTS `bindevSTG`.`product` (
-  `barcode` INT(8) NOT NULL AUTO_INCREMENT,
-=======
 CREATE TABLE IF NOT EXISTS `bindevstg`.`product` (
-  `barcode` INT NOT NULL AUTO_INCREMENT,
->>>>>>> a06181623f0859e21e84976970027a9e13f79b73
+  `barcode` INT(8) NOT NULL AUTO_INCREMENT,
   `id_product` INT NOT NULL,
   `name` VARCHAR(200) NOT NULL,
   `product_category` INT NOT NULL,
@@ -316,13 +275,8 @@ AUTO_INCREMENT = 12312300;
 -- -----------------------------------------------------
 -- Table `bindevstg`.`galery`
 -- -----------------------------------------------------
-<<<<<<< HEAD
-CREATE TABLE IF NOT EXISTS `bindevSTG`.`galery` (
-  `product_galery` INT(8) NOT NULL,
-=======
 CREATE TABLE IF NOT EXISTS `bindevstg`.`galery` (
-  `product_galery` INT NOT NULL,
->>>>>>> a06181623f0859e21e84976970027a9e13f79b73
+  `product_galery` INT(8) NOT NULL,
   `photo_galery` INT NOT NULL,
   PRIMARY KEY (`product_galery`, `photo_galery`),
 	CONSTRAINT `FK_product_galery`
@@ -341,15 +295,9 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `bindevstg`.`supply_detail`
 -- -----------------------------------------------------
-<<<<<<< HEAD
-CREATE TABLE IF NOT EXISTS `bindevSTG`.`supply_detail` (
+CREATE TABLE IF NOT EXISTS `bindevstg`.`supply_detail` (
   `supply_id` INT(8) NOT NULL,
   `barcode_id` INT(8) NOT NULL,
-=======
-CREATE TABLE IF NOT EXISTS `bindevstg`.`supply_detail` (
-  `supply_id` INT NOT NULL,
-  `barcode_id` INT NOT NULL,
->>>>>>> a06181623f0859e21e84976970027a9e13f79b73
   `quantity` INT NOT NULL,
   `cost_unit` DECIMAL(10,2) NOT NULL,
   `amount_total` DECIMAL(10,2) NULL COMMENT 'cost_unit por quantity',
@@ -370,13 +318,8 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `bindevstg`.`sale`
 -- -----------------------------------------------------
-<<<<<<< HEAD
-CREATE TABLE IF NOT EXISTS `bindevSTG`.`sale` (
-  `id_sale` INT(8) NOT NULL AUTO_INCREMENT,
-=======
 CREATE TABLE IF NOT EXISTS `bindevstg`.`sale` (
-  `id_sale` INT NOT NULL AUTO_INCREMENT,
->>>>>>> a06181623f0859e21e84976970027a9e13f79b73
+  `id_sale` INT(8) NOT NULL AUTO_INCREMENT,
   `date` DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL ,
   `address` VARCHAR(500) NOT NULL,
   `user_purchase` INT(8) NOT NULL,
@@ -405,13 +348,8 @@ AUTO_INCREMENT=700000;
 -- -----------------------------------------------------
 -- Table `bindevstg`.`report`
 -- -----------------------------------------------------
-<<<<<<< HEAD
-CREATE TABLE IF NOT EXISTS `bindevSTG`.`report` (
-  `sale_report` INT(8) NOT NULL,
-=======
 CREATE TABLE IF NOT EXISTS `bindevstg`.`report` (
-  `sale_report` INT NOT NULL,
->>>>>>> a06181623f0859e21e84976970027a9e13f79b73
+  `sale_report` INT(8) NOT NULL,
   `status_report` INT NOT NULL,
   `employee_report` INT(8) NOT NULL,
   `date` DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL ,
@@ -439,15 +377,9 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `bindevstg`.`sale_detail`
 -- -----------------------------------------------------
-<<<<<<< HEAD
-CREATE TABLE IF NOT EXISTS `bindevSTG`.`sale_detail` (
+CREATE TABLE IF NOT EXISTS `bindevstg`.`sale_detail` (
   `sale_id` INT(8) NOT NULL,
   `product_sale` INT(8) NOT NULL,
-=======
-CREATE TABLE IF NOT EXISTS `bindevstg`.`sale_detail` (
-  `sale_id` INT NOT NULL,
-  `product_sale` INT NOT NULL,
->>>>>>> a06181623f0859e21e84976970027a9e13f79b73
   `quantity` INT NOT NULL,
   `unit_price` DECIMAL(10,2) NOT NULL,
   `sale_discount` DECIMAL(4,2) NULL,
@@ -474,15 +406,9 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `bindevstg`.`promo`
 -- -----------------------------------------------------
-<<<<<<< HEAD
-CREATE TABLE IF NOT EXISTS `bindevSTG`.`promo` (
+CREATE TABLE IF NOT EXISTS `bindevstg`.`promo` (
   `is_product` INT(8) NOT NULL,
   `have_product` INT(8) NOT NULL,
-=======
-CREATE TABLE IF NOT EXISTS `bindevstg`.`promo` (
-  `is_product` INT NOT NULL,
-  `have_product` INT NOT NULL,
->>>>>>> a06181623f0859e21e84976970027a9e13f79b73
   `quantity` INT NOT NULL,
   PRIMARY KEY (`is_product`, `have_product`),
   CONSTRAINT `FK_is_product`
