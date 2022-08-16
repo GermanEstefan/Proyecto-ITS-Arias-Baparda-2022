@@ -1,0 +1,8 @@
+____________________VALORES INICIALES___________________________
+TABLE     PK             TYPE              VALUE INITIAL
+USER      id_user   int(8)  AUTOINCREMENT  COMIENZA EN 5000
+SUPPLY    id_sUPPLY int(8)  AUTOINCREMENT  COMIENZA EN 300000
+SALE      id_sale   int(8)  AUTOINCREMENT  COMIENZA EN 700000
+PRODUCT   barcode   int(8)  AUTOINCREMENT  COMIENZA EN 12312300
+________________________________________________________________
+

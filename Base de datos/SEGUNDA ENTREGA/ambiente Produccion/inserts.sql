@@ -1,14 +1,14 @@
----INSERT PARA TIRAR EN prod
-INSERT INTO `bindev`.`users` (`email`, `name`, `surname`, `address`, `phone`, `password`) VALUES ('correo1@gmail.com', 'Nicolas', 'Alvarez', 'direccion 1', '098776554', 'password1');
-INSERT INTO `bindev`.`users` (`email`, `name`, `surname`, `address`, `phone`, `password`) VALUES ('correo2@gmail.com', 'Rodrigo', 'Gimenez', 'direccion2', '267482', 'password2');
-INSERT INTO `bindev`.`users` (`email`, `name`, `surname`, `address`, `phone`, `password`) VALUES ('correo3@gmail.com', 'Pablo ', 'Gimenez', 'direccion 2', '098098098', 'password3');
-INSERT INTO `bindev`.`users` (`email`, `name`, `surname`, `address`, `phone`, `password`) VALUES ('correo4@gmail.com', 'ana maria', 'libertad', 'direcc generica', '457', 'password4');
-INSERT INTO `bindev`.`users` (`email`, `name`, `surname`, `address`, `phone`, `password`) VALUES ('correo5@gmail.com', 'emilia ', 'de guzman', 'direccion salto al fondo', '25443', 'password5');
-INSERT INTO `bindev`.`users` (`email`, `name`, `surname`, `address`, `phone`, `password`) VALUES ('correo6@gmail.com', 'clara', 'hiliarse', 'Al fondo que hay lugar', '45988864', 'password6');
-INSERT INTO `bindev`.`users` (`email`, `name`, `surname`, `address`, `phone`, `password`) VALUES ('correo7@seguridadcorporal.com', 'patricia', 'gutierrez', 'direccion otra', '2334513', 'password7');
-INSERT INTO `bindev`.`users` (`email`, `name`, `surname`, `address`, `phone`, `password`) VALUES ('correo8@seguridadcorporal.com', 'lucas', 'rodriguez', '18 de julio 2377', '22334455', 'password8');
-INSERT INTO `bindev`.`users` (`email`, `name`, `surname`, `address`, `phone`, `password`) VALUES ('correo9@seguridadcorporal.com', 'esteban ', 'quito', 'no me acuerdo', '09828848', 'password9');
-INSERT INTO `bindev`.`users` (`email`, `name`, `surname`, `address`, `phone`, `password`) VALUES ('correo10@seguridadcorporal.com', 'maximilian', 'fija', 'rio negro entre j carlos rodriguez y marcelino gutierrez', '56778883', 'password10');
+---INSERT PARA TIRAR EN STG BINDEVSTG
+INSERT INTO `bindev`.`user` (`email`, `name`, `surname`, `address`, `phone`, `password`) VALUES ('correo1@gmail.com', 'Nicolas', 'Alvarez', 'direccion 1', '098776554', 'password1');
+INSERT INTO `bindev`.`user` (`email`, `name`, `surname`, `address`, `phone`, `password`) VALUES ('correo2@gmail.com', 'Rodrigo', 'Gimenez', 'direccion2', '267482', 'password2');
+INSERT INTO `bindev`.`user` (`email`, `name`, `surname`, `address`, `phone`, `password`) VALUES ('correo3@gmail.com', 'Pablo ', 'Gimenez', 'direccion 2', '098098098', 'password3');
+INSERT INTO `bindev`.`user` (`email`, `name`, `surname`, `address`, `phone`, `password`) VALUES ('correo4@gmail.com', 'ana maria', 'libertad', 'direcc generica', '457', 'password4');
+INSERT INTO `bindev`.`user` (`email`, `name`, `surname`, `address`, `phone`, `password`) VALUES ('correo5@gmail.com', 'emilia ', 'de guzman', 'direccion salto al fondo', '25443', 'password5');
+INSERT INTO `bindev`.`user` (`email`, `name`, `surname`, `address`, `phone`, `password`) VALUES ('correo6@gmail.com', 'clara', 'hiliarse', 'Al fondo que hay lugar', '45988864', 'password6');
+INSERT INTO `bindev`.`user` (`email`, `name`, `surname`, `address`, `phone`, `password`) VALUES ('correo7@seguridadcorporal.com', 'patricia', 'gutierrez', 'direccion otra', '2334513', 'password7');
+INSERT INTO `bindev`.`user` (`email`, `name`, `surname`, `address`, `phone`, `password`) VALUES ('correo8@seguridadcorporal.com', 'lucas', 'rodriguez', '18 de julio 2377', '22334455', 'password8');
+INSERT INTO `bindev`.`user` (`email`, `name`, `surname`, `address`, `phone`, `password`) VALUES ('correo9@seguridadcorporal.com', 'esteban ', 'quito', 'no me acuerdo', '09828848', 'password9');
+INSERT INTO `bindev`.`user` (`email`, `name`, `surname`, `address`, `phone`, `password`) VALUES ('correo10@seguridadcorporal.com', 'maximilian', 'fija', 'rio negro entre j carlos rodriguez y marcelino gutierrez', '56778883', 'password10');
 INSERT INTO `bindev`.`client` (`client_user`, `company_name`, `rut_nr`) VALUES ('5','','');
 INSERT INTO `bindev`.`client` (`client_user`, `company_name`, `rut_nr`) VALUES ('6', 'construseguros sucursal centro','211211211211');
 INSERT INTO `bindev`.`client` (`client_user`, `company_name`, `rut_nr`) VALUES ('7', 'construseguros sucursal pando','211211211211');

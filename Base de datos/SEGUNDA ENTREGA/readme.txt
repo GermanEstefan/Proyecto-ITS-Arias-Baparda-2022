@@ -3,7 +3,6 @@ STG - Ambiente de Staging - pruebas sobre la base de datos
 Referencias:
 
 LLAVES PRIMARIAS
-
 TABLA                   PK
 CATEGORY            id_category
 DESING              id_desing
@@ -28,8 +27,3 @@ SALE DETAIL         id_sale + barcode
 SUPPLY              id_supply
 SUPPLY DETAIL       id_supply + barcode
 
-ID de los registro PROMO es 1000 (Category , Size , Desing , Product)
-1000 PROMO BASICA
-1001 PROMO PYME
-1002 PROMO MEDIUM
-1003 PROMO BIG 
