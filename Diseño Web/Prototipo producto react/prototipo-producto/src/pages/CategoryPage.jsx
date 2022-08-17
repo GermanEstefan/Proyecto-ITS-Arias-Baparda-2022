@@ -63,22 +63,22 @@ const CategoryPage = () => {
         animationInDuration="500"
         isVisible={true}
       >
-      <div className="card-container">
-        {productsList.map((product, index) => {
-          return isMobile ? (
-            <Card title={product.name} img={Guantes} key={index} />
+        <div className="card-container">
+          {productsList.map((product, index) => {
+            return isMobile ? (
+              <Card title={product.name} img={Guantes} key={index} />
             ) : (
-            <ProductCard
-            className="animate__animated animate__bounce"
-            title={product.name}
-            description={product.description}
-            img={Guantes}
-              key={index}
-            />
-          );
-        })}
-      </div>
-            </Animated>
+              <ProductCard
+                className="animate__animated animate__bounce"
+                title={product.name}
+                description={product.description}
+                img={Guantes}
+                key={index}
+              />
+            );
+          })}
+        </div>
+      </Animated>
     </div>
   );
 };

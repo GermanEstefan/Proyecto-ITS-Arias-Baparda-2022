@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { Formik } from "formik";
 import Imagen from "./../img/Obreros.jpg";
 import { Animated } from "react-animated-css";
