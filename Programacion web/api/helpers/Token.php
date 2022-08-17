@@ -7,13 +7,13 @@ class Token {
 
     private $secretPass = "Dasdgfdsdsad213fdkmsaMSSGgg";
         
-    public function generateToken($emailUser, $rol = null){
+    public function generateToken($idUser, $rol = null){
         $actualTime = time();
         $token = array(
             "iat" => $actualTime,
             "exp" => $actualTime + (60*60*24),
             "data" => [
-                "email" => $emailUser,
+                "idUser" => $idUser,
                 "rol" => $rol
             ]
         );

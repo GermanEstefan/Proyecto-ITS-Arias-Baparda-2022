@@ -1,6 +1,6 @@
 <?php
     require_once("./database/Connection.php");
-    class User {
+    class User extends Connection {
 
         protected $email;
         protected $name;

@@ -2,15 +2,13 @@
 
     class Customer extends User{
 
-        private $typeCustomer;
         private $company;
         private $nRut;  
 
-        function __construct($email, $name, $surname, $phone, $password, $address, $typeCustomer, $company, $nRut){
+        function __construct($email, $name, $surname, $phone, $password, $address, $company, $nRut){
             parent::__construct($email, $name, $surname, $phone, $password, $address);
-            $this->typeCustomer = $typeCustomer;
             $this->company = $company;
-            $this->nRut = $nRut;
+            $this->nRut = $nRut;    
         }
 
         public static function getCustomerByEmail($email){
@@ -20,11 +18,23 @@
         }
         
         public function save(){
-            //Hay que aplicar una TRANSACCION(PENDIENTE)
+            $instanceMySql = $this->connection->getInstance();
+            $instanceMySql->begin_transaction(MYSQLI_TRANS_START_READ_WRITE);
+            $result_transaccion = true;
             $userInsert = "INSERT INTO user(email, name, surname, phone, address, password) VALUES ('$this->email', '$this->name', '$this->surname', '$this->phone', '$this->address', '$this->password' )";
-            $customerInsert = "INSERT INTO customer(email, type_customer, company, rut) VALUES ('$this->email', '$this->typeCustomer', '$this->company', '$this->nRut')";
-            $querys = array($userInsert, $customerInsert); 
-            return $this->connection->setDataByTransacction($querys);
+            $resultUserInsert = $instanceMySql->query($userInsert);
+            if(!$resultUserInsert) $result_transaccion = false;
+            $idGeneratedFromUserInsert = $instanceMySql->insert_id;  
+            $customerInsert = "INSERT INTO customer(id_customer, email, company, nrut) VALUES ($idGeneratedFromUserInsert, '$this->email', '$this->company', '$this->nRut')";
+            $resultCustomerInsert = $instanceMySql->query($customerInsert);
+            if(!$resultCustomerInsert) $result_transaccion = false;
+            if($result_transaccion){
+                $instanceMySql->commit();
+                return $idGeneratedFromUserInsert;
+            }else{
+                $instanceMySql->rollback();
+                return false;
+            }
         }
 
     }

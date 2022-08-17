@@ -37,6 +37,10 @@
             return $this->connection->query($query);
         }
 
+        public function getInstance(){
+            return $this->connection;
+        }
+
         public function setDataByTransacction($querys){
             $result_transaccion = true;
             $this->connection->begin_transaction(MYSQLI_TRANS_START_READ_WRITE);
