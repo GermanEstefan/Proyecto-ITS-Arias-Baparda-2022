@@ -3,6 +3,7 @@
     align-items: center;
     background:linear-gradient(15deg, $gray 70%, $orange);
     a {
+        position: absolute;
         border-radius: 100px;
         padding: 10px;
         margin-left: 1.5em;
@@ -14,7 +15,6 @@
     a:hover {
         background-color: #9daebb;
         transition: 0.4s;
-        padding: 20px;
     }
     h1 {
       font-weight: 200;

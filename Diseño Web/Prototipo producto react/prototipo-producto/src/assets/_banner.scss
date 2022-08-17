@@ -1,4 +1,7 @@
 .banner_container {
+  @media (max-width: 1000px) {
+    width: 100%;
+  }
     width: 75%;
     margin-left: auto;
     margin-right: auto;

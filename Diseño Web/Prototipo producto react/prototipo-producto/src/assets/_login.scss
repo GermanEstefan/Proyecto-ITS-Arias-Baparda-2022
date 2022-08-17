@@ -1,66 +1,92 @@
 .form-container {
-    width: 80vw;
-    height: 100vh;
-    margin: 6em auto;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    background-color: #fff;
-    align-items: center;
+  width: 80vw;
+  height: 100vh;
+  margin: 6em auto;
+  display: flex;
+  @media (max-width: 1100px) {
+    flex-direction: column;
+  }
+
+  flex-direction: row;
+  justify-content: center;
+  background-color: #fff;
+  align-items: center;
 }
 
 h1 {
-    width: 100%;
-    text-align: center;
+  width: 100%;
+  text-align: center;
 }
 
 .form-img {
-    width: 55%;
+  @media (max-width: 1000px) {
+    width: 90%;
+  }
+  width: 55%;
 }
 form {
-    background-color: $orange;
-    padding: 1em    ;
-    border-radius: 10px;
-    width: 100%;
-    min-height: 350px;
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px,
+    rgba(0, 0, 0, 0.22) 0px 15px 12px;
+  background-color: rgba(255, 255, 255, 0.884);
+  padding: 2em;
+  border-radius: 10px;
+  transform: translate(-30px);  
+  width: 100%;
+}
+
+p {
+  text-align: center;
 }
 
 input {
-    padding: 15px;
-    display: block;
-    width: 60%;
-    border-radius: 5px;
-    margin: 1em auto;
-    font-size: 16px;
-    font-size: max(16px, 1em);
-    font-family: inherit;    
-    border: 2px solid var(--input-border);
-    
+  padding: 15px;
+  display: block;
+  width: 60%;
+  border-radius: 5px;
+  margin: 1em auto;
+  font-size: 16px;
+  font-size: max(16px, 1em);
+  font-family: inherit;
+  border: 2px solid black;
+  max-width: 200px;
+}
+
+textarea {
+  padding: 15px;
+  display: block;
+  width: 60%;
+  border-radius: 5px;
+  margin: 1em auto;
+  font-size: 16px;
+  font-size: max(16px, 1em);
+  font-family: inherit;
+  border: 2px solid black;
+  max-width: 200px;
+  resize: none;
 }
 
 button {
-    display: block;
-    width: 40%;
-    margin: auto;
-    padding: 1em;
-    background-color: $gray;
-    border: 15px;
-    border-radius: 6px;
-    font-weight: bold;
-    font-size: large;
-    cursor: pointer;
+  display: block;
+  width: 40%;
+  margin: auto;
+  padding: 1em;
+  background-color: $gray;
+  border: 15px;
+  border-radius: 6px;
+  font-weight: bold;
+  font-size: large;
+  cursor: pointer;
 }
 
 button:hover {
-    background: $dark_gray;
-    transition: 0.4s;
-    
+  background: $dark_gray;
+  transition: 0.4s;
 }
 
 .link {
-    text-align: center;
-    display: block;
-    width: 40%;
-    margin: auto;
-    text-decoration: underline;
+  text-align: center;
+  display: block;
+  width: 40%;
+  margin: auto;
+  text-decoration: underline;
 }

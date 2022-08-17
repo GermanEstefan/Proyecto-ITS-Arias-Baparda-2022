@@ -1,7 +1,6 @@
 import React from "react";
 import Guantes from "./../img/guantes.jpg";
 import Card from "./Card";
-import Navbar from "./Navbar";
 
 const CategoriesList = () => {
   const categoriesList = [
@@ -30,7 +29,7 @@ const CategoriesList = () => {
         <div className="card-container">
           {categoriesList.map((category) => {
             return (
-              <Card title={category.name} img={Guantes} goTo={"./category"} />
+              <Card title={category.name} img={Guantes} />
             );
           })}
         </div>
