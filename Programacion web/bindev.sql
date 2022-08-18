@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 18-08-2022 a las 01:18:48
+-- Tiempo de generación: 18-08-2022 a las 02:58:38
 -- Versión del servidor: 10.4.20-MariaDB
 -- Versión de PHP: 7.3.29
 
@@ -57,6 +57,17 @@ CREATE TABLE `employee` (
   `ci` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Volcado de datos para la tabla `employee`
+--
+
+INSERT INTO `employee` (`id_employe`, `name_rol`, `ci`) VALUES
+(38, 'JEFE', 12321321),
+(35, 'JEFE', 50219376),
+(37, 'JEFE', 50787787),
+(40, 'VENDEDOR', 123123123),
+(39, 'VENDEDOR', 2147483647);
+
 -- --------------------------------------------------------
 
 --
@@ -104,7 +115,12 @@ INSERT INTO `user` (`id_user`, `email`, `name`, `surname`, `phone`, `password`, 
 (18, 'tarado@gmail.com', 'German', 'Rstefan', 93422646, '1234567', 'Pepito pepito', 1),
 (19, 'pruebita@gmail.com', 'German', 'Rstefan', 93422646, '1234567', 'Pepito pepito', 1),
 (20, 'pruebita2xd@gmail.com', 'German', 'Rstefan', 93422646, '1234567', 'Pepito pepito', 1),
-(21, 'pruebita2222xd@gmail.com', 'German', '', 0, '1234567', '', 1);
+(21, 'pruebita2222xd@gmail.com', 'German', '', 0, '1234567', '', 1),
+(35, 'german.estefan81@gmail.com', 'German', 'Rstefan', 93422646, '1234567', 'Pepito pepito', 1),
+(37, 'german.estefanoooo81@gmail.com', 'German', 'Rstefan', 93422646, '1234567', 'Pepito pepito', 1),
+(38, 'gfffo81@gmail.com', 'German', 'Rstefan', 93422646, '1234567', 'Pepito pepito', 1),
+(39, 'asasasa@gmail.com', 'German', 'Rstefan', 93422646, '1234567', 'Pepito pepito', 1),
+(40, 'perrito@gmail.com', 'German', 'Rstefan', 93422646, '1234567', 'Pepito pepito', 1);
 
 --
 -- Índices para tablas volcadas
@@ -122,7 +138,7 @@ ALTER TABLE `customer`
 ALTER TABLE `employee`
   ADD UNIQUE KEY `FK_Ci` (`ci`),
   ADD KEY `FK_ROL` (`name_rol`),
-  ADD KEY `id_employe` (`id_employe`);
+  ADD KEY `FK_USER` (`id_employe`);
 
 --
 -- Indices de la tabla `rol`
@@ -152,7 +168,7 @@ ALTER TABLE `rol`
 -- AUTO_INCREMENT de la tabla `user`
 --
 ALTER TABLE `user`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- Restricciones para tablas volcadas
@@ -163,7 +179,7 @@ ALTER TABLE `user`
 --
 ALTER TABLE `employee`
   ADD CONSTRAINT `FK_ROL` FOREIGN KEY (`name_rol`) REFERENCES `rol` (`name_rol`),
-  ADD CONSTRAINT `employee_ibfk_1` FOREIGN KEY (`id_employe`) REFERENCES `user` (`id_user`);
+  ADD CONSTRAINT `FK_USER` FOREIGN KEY (`id_employe`) REFERENCES `user` (`id_user`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

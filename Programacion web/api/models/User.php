@@ -25,6 +25,12 @@
             $query = "SELECT * from user WHERE email='$email'";
             return $conecction->getData($query)->fetch_assoc();
         }
+
+        public static function getUserById($id){
+            $conecction = new Connection();
+            $query = "SELECT * from user WHERE id_user='$id'";
+            return $conecction->getData($query)->fetch_assoc();
+        }
     }
         
 ?>

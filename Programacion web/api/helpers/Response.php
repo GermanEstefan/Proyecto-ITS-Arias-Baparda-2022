@@ -38,7 +38,7 @@ class Response{
     public function error401($msg = "No autorizado"){
         $this->response['status'] = "error";
         $this->response['result'] = array(
-            "status" => "491",
+            "status" => "401",
             "error_msg" => $msg
         );
         return json_encode($this->response);

@@ -17,11 +17,30 @@
             return $conecction->getData($query)->fetch_assoc();
         }
 
+        public static function getEmployeeById($id){
+            $conecction = new Connection();
+            $query = "SELECT * from employee WHERE id_employe='$id'";
+            return $conecction->getData($query)->fetch_assoc();
+        }
+
         public function save(){
+            $instanceMySql = $this->connection->getInstance();
+            $instanceMySql->begin_transaction(MYSQLI_TRANS_START_READ_WRITE);
+            $result_transaccion = true;
             $userInsert = "INSERT INTO user(email, name, surname, phone, address, password) VALUES ('$this->email', '$this->name', '$this->surname', '$this->phone', '$this->address', '$this->password' )";
-            $employeeInsert = "INSERT INTO employee(email, name_rol, ci) VALUES ('$this->email', '$this->rol', '$this->ci' )";
-            $querys = array($userInsert, $employeeInsert); 
-            return $this->connection->setDataByTransacction($querys);
+            $resultUserInsert = $instanceMySql->query($userInsert);
+            if(!$resultUserInsert)  $result_transaccion = false;
+            $idGeneratedFromUserInsert = $instanceMySql->insert_id;
+            $employeeInsert = "INSERT INTO employee(id_employe, name_rol, ci) VALUES ($idGeneratedFromUserInsert, '$this->rol', $this->ci)";
+            $resultEmployeeInsert = $instanceMySql->query($employeeInsert);
+            if(!$resultEmployeeInsert) $result_transaccion = false;
+            if($result_transaccion){
+                $instanceMySql->commit();
+                return $idGeneratedFromUserInsert;
+            }else{
+                $instanceMySql->rollback();
+                return false;
+            }
         }
     }
 

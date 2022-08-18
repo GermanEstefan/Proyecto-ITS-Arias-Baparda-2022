@@ -2,6 +2,7 @@
 require_once "vendor/autoload.php";
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
+require_once('./helpers/Response.php');
 
 class Token {
 
@@ -22,9 +23,13 @@ class Token {
     }
 
     public function verifyToken($token){
-        $isValid = JWT::decode($token, new Key($this->secretPass, 'HS256'));
-        return $isValid;
+        $response = new Response();
+        try {
+            return JWT::decode($token, new Key($this->secretPass, 'HS256'));
+        } catch (Exception $e) {
+            http_response_code(401);
+            echo $response->error401("Token invalido");
+            die();
+        }
     }
-    
-
 }
