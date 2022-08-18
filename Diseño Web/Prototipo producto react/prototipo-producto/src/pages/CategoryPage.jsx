@@ -3,18 +3,15 @@ import { useParams } from "react-router-dom";
 import PageTitle from "../components/PageTitle";
 import ProductCard from "../components/ProductCard";
 import Guantes from "./../img/guantes.jpg";
-import { useMediaQuery } from "react-responsive";
-import Card from "./../components/Card";
 import { Animated } from "react-animated-css";
 
 const CategoryPage = () => {
-  const { title } = useParams();
+  const { category } = useParams();
 
   useEffect(() => {
     window.scroll(0, 0);
   }, []);
 
-  const isMobile = useMediaQuery({ query: "(max-width: 700px)" });
 
   const productsList = [
     {
@@ -56,7 +53,7 @@ const CategoryPage = () => {
 
   return (
     <div className="main">
-      <PageTitle title={title} isArrow={true} />
+      <PageTitle title={category} isArrow={true} />
       <Animated
         animationIn="fadeInLeft"
         animationOut="fadeOut"
@@ -65,12 +62,10 @@ const CategoryPage = () => {
       >
         <div className="card-container">
           {productsList.map((product, index) => {
-            return isMobile ? (
-              <Card title={product.name} img={Guantes} key={index} />
-            ) : (
+            return (
               <ProductCard
                 className="animate__animated animate__bounce"
-                title={product.name}
+                product={product.name}
                 description={product.description}
                 img={Guantes}
                 key={index}

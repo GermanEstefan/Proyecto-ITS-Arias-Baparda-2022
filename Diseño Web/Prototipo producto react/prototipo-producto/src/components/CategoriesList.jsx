@@ -29,7 +29,7 @@ const CategoriesList = () => {
         <div className="card-container">
           {categoriesList.map((category) => {
             return (
-              <Card title={category.name} img={Guantes} />
+              <Card category={category.name} img={Guantes} />
             );
           })}
         </div>

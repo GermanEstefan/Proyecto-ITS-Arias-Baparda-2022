@@ -9,6 +9,7 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import ProductPage from "./pages/ProductPage";
 
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
@@ -18,9 +19,10 @@ root.render(
     <Routes>
       <Route path="/" element={<App />} />
       <Route path="/contact" element={<ContactPage />} />
-      <Route path="/:title" element={<CategoryPage />} />
+      <Route path="/:category" element={<CategoryPage />} ></Route>
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
+      <Route path="/:category/:name" element={<ProductPage />} />
     </Routes>
     <Footer />
   </BrowserRouter>

@@ -1,11 +1,14 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 
-const ProductPage = () => {
+const ProductPage = (name, description, img) => {
   useEffect(() => {
     window.scroll(0, 0);
   }, []);
+  console.log(name, description)
   return (
-    <div>ProductPage</div>
+    <div style={{marginTop:'8em'}}>
+      asasdasd
+    </div>
   )
 }
 

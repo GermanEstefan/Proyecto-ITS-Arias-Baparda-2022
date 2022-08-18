@@ -1,15 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const Card = ({img, title}) => {
+const Card = ({img, category}) => {
   
   return (
     <div className="card">
-      <Link to={`/${title}`}>
+      <Link to={`/${category}`}>
         <img src={img} alt="" />
 
         <div className="text-container">
-          <h2>{title}</h2>
+          <h2>{category}</h2>
         </div>
       </Link>
     </div>
