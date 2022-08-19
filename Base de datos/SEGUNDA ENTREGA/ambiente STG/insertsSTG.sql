@@ -1,4 +1,4 @@
----INSERT PARA TIRAR EN STG BINDEVSTG
+
 INSERT INTO `bindevstg`.`user` (`email`, `name`, `surname`, `address`, `phone`, `password`) VALUES ('correo1@gmail.com', 'Nicolas', 'Alvarez', 'direccion 1', '098776554', 'password1');
 INSERT INTO `bindevstg`.`user` (`email`, `name`, `surname`, `address`, `phone`, `password`) VALUES ('correo2@gmail.com', 'Rodrigo', 'Gimenez', 'direccion2', '267482', 'password2');
 INSERT INTO `bindevstg`.`user` (`email`, `name`, `surname`, `address`, `phone`, `password`) VALUES ('correo3@gmail.com', 'Pablo ', 'Gimenez', 'direccion 2', '098098098', 'password3');
@@ -9,6 +9,12 @@ INSERT INTO `bindevstg`.`user` (`email`, `name`, `surname`, `address`, `phone`, 
 INSERT INTO `bindevstg`.`user` (`email`, `name`, `surname`, `address`, `phone`, `password`) VALUES ('correo8@seguridadcorporal.com', 'lucas', 'rodriguez', '18 de julio 2377', '22334455', 'password8');
 INSERT INTO `bindevstg`.`user` (`email`, `name`, `surname`, `address`, `phone`, `password`) VALUES ('correo9@seguridadcorporal.com', 'esteban ', 'quito', 'no me acuerdo', '09828848', 'password9');
 INSERT INTO `bindevstg`.`user` (`email`, `name`, `surname`, `address`, `phone`, `password`) VALUES ('correo10@seguridadcorporal.com', 'maximilian', 'fija', 'rio negro entre j carlos rodriguez y marcelino gutierrez', '56778883', 'password10');
+INSERT INTO `bindevstg`.`user` (`email`, `name`, `surname`, `address`, `phone`, `password`) VALUES ('Lcarambula@seguridadcorporal.com', 'Leonardo', 'Carambula', 'Programacion Web', '22114433', 'lcarambula');
+INSERT INTO `bindevstg`.`user` (`email`, `name`, `surname`, `address`, `phone`, `password`) VALUES ('Lacuna@seguridadcorporal.com', 'Laura', 'Acuna', 'Diseño Web', '098465773 098887766', 'lacuna');
+INSERT INTO `bindevstg`.`user` (`email`, `name`, `surname`, `address`, `phone`, `password`) VALUES ('Cbarrios@seguridadcorporal.com', 'Christian', 'Barrios', 'Sist Ope y Gest de Proy', '098098098', 'cbarrios');
+INSERT INTO `bindevstg`.`user` (`email`, `name`, `surname`, `address`, `phone`, `password`) VALUES ('Agonzalez@seguridadcorporal.com', 'Ana', 'Gonzalez', 'ADA', '123123321', 'agonzalez');
+INSERT INTO `bindevstg`.`user` (`email`, `name`, `surname`, `address`, `phone`, `password`) VALUES ('Nhernandez@seguridadcorporal.com', 'Nora', 'Hernandez', 'UTU', '123123123', 'nhernandez');
+INSERT INTO `bindevstg`.`user` (`email`, `name`, `surname`, `address`, `phone`, `password`) VALUES ('Bgates@seguridadcorporal.com', 'Bill', 'Gates', 'Estados Unidos', '1234567890000', 'bgates');
 INSERT INTO `bindevstg`.`role` (`name_role`, `description`) VALUES ('VENDEDOR', 'EL VENDEDOR');
 INSERT INTO `bindevstg`.`role` (`name_role`, `description`) VALUES ('COMPRADOR', 'EL COMPRADOR');
 INSERT INTO `bindevstg`.`role` (`name_role`, `description`) VALUES ('JEFE', 'EL JEFE');

@@ -1,4 +1,4 @@
----INSERT PARA TIRAR EN STG BINDEVSTG
+
 INSERT INTO `bindev`.`user` (`email`, `name`, `surname`, `address`, `phone`, `password`) VALUES ('correo1@gmail.com', 'Nicolas', 'Alvarez', 'direccion 1', '098776554', 'password1');
 INSERT INTO `bindev`.`user` (`email`, `name`, `surname`, `address`, `phone`, `password`) VALUES ('correo2@gmail.com', 'Rodrigo', 'Gimenez', 'direccion2', '267482', 'password2');
 INSERT INTO `bindev`.`user` (`email`, `name`, `surname`, `address`, `phone`, `password`) VALUES ('correo3@gmail.com', 'Pablo ', 'Gimenez', 'direccion 2', '098098098', 'password3');
@@ -9,16 +9,15 @@ INSERT INTO `bindev`.`user` (`email`, `name`, `surname`, `address`, `phone`, `pa
 INSERT INTO `bindev`.`user` (`email`, `name`, `surname`, `address`, `phone`, `password`) VALUES ('correo8@seguridadcorporal.com', 'lucas', 'rodriguez', '18 de julio 2377', '22334455', 'password8');
 INSERT INTO `bindev`.`user` (`email`, `name`, `surname`, `address`, `phone`, `password`) VALUES ('correo9@seguridadcorporal.com', 'esteban ', 'quito', 'no me acuerdo', '09828848', 'password9');
 INSERT INTO `bindev`.`user` (`email`, `name`, `surname`, `address`, `phone`, `password`) VALUES ('correo10@seguridadcorporal.com', 'maximilian', 'fija', 'rio negro entre j carlos rodriguez y marcelino gutierrez', '56778883', 'password10');
-INSERT INTO `bindev`.`client` (`client_user`, `company_name`, `rut_nr`) VALUES ('5','','');
-INSERT INTO `bindev`.`client` (`client_user`, `company_name`, `rut_nr`) VALUES ('6', 'construseguros sucursal centro','211211211211');
-INSERT INTO `bindev`.`client` (`client_user`, `company_name`, `rut_nr`) VALUES ('7', 'construseguros sucursal pando','211211211211');
-INSERT INTO `bindev`.`client` (`client_user`, `company_name`, `rut_nr`) VALUES ('8','empresa otra','322');
+INSERT INTO `bindev`.`user` (`email`, `name`, `surname`, `address`, `phone`, `password`) VALUES ('Lcarambula@seguridadcorporal.com', 'Leonardo', 'Carambula', 'Programacion Web', '22114433', 'lcarambula');
+INSERT INTO `bindev`.`user` (`email`, `name`, `surname`, `address`, `phone`, `password`) VALUES ('Lacuna@seguridadcorporal.com', 'Laura', 'Acuna', 'Diseño Web', '098465773 098887766', 'lacuna');
+INSERT INTO `bindev`.`user` (`email`, `name`, `surname`, `address`, `phone`, `password`) VALUES ('Cbarrios@seguridadcorporal.com', 'Christian', 'Barrios', 'Sist Ope y Gest de Proy', '098098098', 'cbarrios');
+INSERT INTO `bindev`.`user` (`email`, `name`, `surname`, `address`, `phone`, `password`) VALUES ('Agonzalez@seguridadcorporal.com', 'Ana', 'Gonzalez', 'ADA', '123123321', 'agonzalez');
+INSERT INTO `bindev`.`user` (`email`, `name`, `surname`, `address`, `phone`, `password`) VALUES ('Nhernandez@seguridadcorporal.com', 'Nora', 'Hernandez', 'UTU', '123123123', 'nhernandez');
+INSERT INTO `bindev`.`user` (`email`, `name`, `surname`, `address`, `phone`, `password`) VALUES ('Bgates@seguridadcorporal.com', 'Bill', 'Gates', 'Estados Unidos', '1234567890000', 'bgates');
 INSERT INTO `bindev`.`role` (`name_role`, `description`) VALUES ('VENDEDOR', 'EL VENDEDOR');
 INSERT INTO `bindev`.`role` (`name_role`, `description`) VALUES ('COMPRADOR', 'EL COMPRADOR');
 INSERT INTO `bindev`.`role` (`name_role`, `description`) VALUES ('JEFE', 'EL JEFE');
-INSERT INTO `bindev`.`employee` (`ci`, `employee_user`, `employee_role`) VALUES ('12345678', '8', 'vendedor');
-INSERT INTO `bindev`.`employee` (`ci`, `employee_user`, `employee_role`) VALUES ('12121212', '9', 'comprador');
-INSERT INTO `bindev`.`employee` (`ci`, `employee_user`, `employee_role`) VALUES ('12312332', '10', 'jefe');
 INSERT INTO `bindev`.`category` (`id_category`, `name`, `description`) VALUES ('1', 'REMERAS', 'LAS MEJORES REMERAS');
 INSERT INTO `bindev`.`category` (`id_category`, `name`, `description`) VALUES ('2', 'BUZOS', 'LOS MEJORES BUZOS');
 INSERT INTO `bindev`.`category` (`id_category`, `name`, `description`) VALUES ('3', 'CHALECOS', 'LOS MEJORES CHALECOS');
@@ -101,11 +100,6 @@ INSERT INTO `bindev`.`delivery_time` (`id_delivery`, `name`, `description`) VALU
 INSERT INTO `bindev`.`SALE` (`address`, `user_purchase`, `sale_delivery`, `pay_met`) VALUES ('LIBRES 1675', '7', '1', '1');
 INSERT INTO `bindev`.`SALE` (`address`, `user_purchase`, `sale_delivery`, `pay_met`) VALUES ('LEVANTA EN LOCAL', '6', '5', '4');
 INSERT INTO `bindev`.`SALE` (`address`, `user_purchase`, `sale_delivery`, `pay_met`) VALUES ('LIBRES 16653', '5', '4', '3');
-INSERT INTO `bindev`.`PROMO` (`is_product`, `have_product`, `quantity`) VALUES ('1', '19', '3');
-INSERT INTO `bindev`.`PROMO` (`is_product`, `have_product`, `quantity`) VALUES ('1', '20', '1');
-INSERT INTO `bindev`.`PROMO` (`is_product`, `have_product`, `quantity`) VALUES ('3', '12', '10');
-INSERT INTO `bindev`.`PROMO` (`is_product`, `have_product`, `quantity`) VALUES ('3', '13', '10');
-INSERT INTO `bindev`.`PROMO` (`is_product`, `have_product`, `quantity`) VALUES ('3', '15', '10');
 INSERT INTO `bindev`.`DISCOUNT` (`value`, `description`) VALUES ('0.20', '20%OFF');
 INSERT INTO `bindev`.`DISCOUNT` (`value`, `description`) VALUES ('0.30', '30%OFF');
 INSERT INTO `bindev`.`DISCOUNT` (`value`, `description`) VALUES ('0.50', '50%OFF');

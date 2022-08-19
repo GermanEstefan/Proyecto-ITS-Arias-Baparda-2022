@@ -51,9 +51,9 @@ CREATE TABLE IF NOT EXISTS `bindevstg`.`disburse` (
   `id_disburse` INT NOT NULL,
   `name` VARCHAR(150) NOT NULL,
   `description` VARCHAR(500) NOT NULL,
-  `state` TINYINT(1) default 1,
+  `state` TINYINT default 1,
   PRIMARY KEY (`id_disburse`),
-  constraint `CH_state` CHECK (`state`<=1 and `state`>=0),
+  constraint `CH_state_disburse` CHECK (`state`<=1 and `state`>=0),
   constraint `disburse_UNIQUE` UNIQUE(`name`))
 ENGINE = InnoDB;
 
@@ -66,9 +66,9 @@ CREATE TABLE IF NOT EXISTS `bindevstg`.`supplier` (
   `company_name` VARCHAR(150) NOT NULL,
   `address` VARCHAR(500) NOT NULL,
   `phone` VARCHAR(200) NOT NULL,
-  `state` TINYINT(1) default 1,
+  `state` TINYINT default 1,
   PRIMARY KEY (`id_supplier`),
-  constraint `CH_state` CHECK (`state`<=1 and `state`>=0),
+  constraint `CH_state_supplier` CHECK (`state`<=1 and `state`>=0),
   constraint `UN_rut_sucursal` UNIQUE  (`rut` , `company_name` ))
 ENGINE = InnoDB;
 
@@ -87,16 +87,16 @@ ENGINE = InnoDB;
 -- Table `bindevstg`.`user`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `bindevstg`.`user` (
-  `id_user` INT(8) NOT NULL AUTO_INCREMENT,
+  `id_user` INT NOT NULL AUTO_INCREMENT,
   `email` VARCHAR(200) NOT NULL,
   `name` VARCHAR(150) NOT NULL,
   `surname` VARCHAR(150) NOT NULL,
   `address` VARCHAR(500) NULL,
   `phone` VARCHAR(50) NULL,
   `password` VARCHAR(200) NOT NULL,
-  `state` TINYINT(1) default 1,
+  `state` TINYINT default 1,
   PRIMARY KEY (`id_user`),
-  constraint `CH_state` CHECK (`state`<=1 and `state`>=0),
+  constraint `CH_state_user` CHECK (`state`<=1 and `state`>=0),
   constraint `email_UNIQUE` UNIQUE (`email`))
 ENGINE = InnoDB;
 ALTER Table user
@@ -120,9 +120,9 @@ CREATE TABLE IF NOT EXISTS `bindevstg`.`delivery_time` (
   `id_delivery` INT NOT NULL,
   `name` VARCHAR(150) NOT NULL,
   `description` VARCHAR(500) NOT NULL,
-  `state` TINYINT(1) default 1,
+  `state` TINYINT default 1,
   PRIMARY KEY (`id_delivery`),
-  constraint `CH_state` CHECK (`state`<=1 and `state`>=0))
+  constraint `CH_state_delivery` CHECK (`state`<=1 and `state`>=0))
 ENGINE = InnoDB;
 
 
@@ -133,9 +133,9 @@ CREATE TABLE IF NOT EXISTS `bindevstg`.`payment_method` (
   `id_pay_meth` INT NOT NULL,
   `name` VARCHAR(150) NOT NULL,
   `description` VARCHAR(500) NOT NULL,
-  `state` TINYINT(1) default 1,
+  `state` TINYINT default 1,
   PRIMARY KEY (`id_pay_meth`),
-  constraint `CH_state` CHECK (`state`<=1 and `state`>=0),
+  constraint `CH_state_PayMet` CHECK (`state`<=1 and `state`>=0),
   constraint `UN_pay_meth` UNIQUE (`name`))
 ENGINE = InnoDB;
 
@@ -147,7 +147,7 @@ CREATE TABLE IF NOT EXISTS `bindevstg`.`photos` (
   `id_photo` INT NOT NULL,
   `name` VARCHAR(150) NOT NULL,
   `description` VARCHAR(500) NOT NULL,
-  `state` TINYINT(1) default 1,
+  `state` TINYINT default 1,
   PRIMARY KEY (`id_photo`),
 constraint `CH_state` CHECK (`state`<=1 and `state`>=0))
 ENGINE = InnoDB;
@@ -159,9 +159,9 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `bindevstg`.`discount` (
   `value` DECIMAL(4, 2) NOT NULL,
   `description` VARCHAR(500) NOT NULL,
-  `state` TINYINT(1) default 1,
+  `state` TINYINT default 1,
   PRIMARY KEY (`value`),
-  constraint `CH_state` CHECK (`state`<=1 and `state`>=0))
+  constraint `CH_state_Discount` CHECK (`state`<=1 and `state`>=0))
 ENGINE = InnoDB;
 
 
@@ -170,12 +170,12 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `bindevstg`.`employee` (
   `ci` INT NOT NULL,
-  `employee_user` INT(8) NOT NULL,
+  `employee_user` INT NOT NULL,
   `employee_role` VARCHAR(100) NOT NULL,
-  `state` TINYINT(1) default 1,
+  `state` TINYINT default 1,
   PRIMARY KEY (`employee_user`),
   constraint `UN_ci` unique (`ci`),
-  constraint `CH_state` CHECK (`state`<=1 and `state`>=0),
+  constraint `CH_state_employee` CHECK (`state`<=1 and `state`>=0),
   CONSTRAINT `FK_employee_role`
     FOREIGN KEY (`employee_role`)
     REFERENCES `bindevstg`.`role` (`name_role`)
@@ -189,11 +189,11 @@ CREATE TABLE IF NOT EXISTS `bindevstg`.`employee` (
 ENGINE = InnoDB;
 
 
--- -----------------------------------------------------
+-- -----------------------------------------------------state
 -- Table `bindevstg`.`client`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `bindevstg`.`client` (
-  `client_user` INT(8) NOT NULL,
+  `client_user` INT NOT NULL,
   `company_name` VARCHAR(300) NULL,
   `rut_nr` varchar(12) NULL,
   PRIMARY KEY (`client_user`),
@@ -210,7 +210,7 @@ ENGINE = InnoDB;
 -- Table `bindevstg`.`supply`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `bindevstg`.`supply` (
-  `id_supply` INT(8) NOT NULL AUTO_INCREMENT,
+  `id_supply` INT NOT NULL AUTO_INCREMENT,
   `date` DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
   `supplier_id` INT NOT NULL,
   `employee_ci` INT NOT NULL,
@@ -240,7 +240,7 @@ AUTO_INCREMENT = 300000;
 -- Table `bindevstg`.`product`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `bindevstg`.`product` (
-  `barcode` INT(8) NOT NULL AUTO_INCREMENT,
+  `barcode` INT NOT NULL AUTO_INCREMENT,
   `id_product` INT NOT NULL,
   `name` VARCHAR(200) NOT NULL,
   `product_category` INT NOT NULL,
@@ -249,9 +249,9 @@ CREATE TABLE IF NOT EXISTS `bindevstg`.`product` (
   `stock` INT NOT NULL,
   `price` DECIMAL(10,2) NOT NULL,
   `description` VARCHAR(500) NOT NULL,
-  `state` TINYINT(1) default 1,
+  `state` TINYINT default 1,
   PRIMARY KEY (`barcode`),
-  constraint `CH_state` CHECK (`state`<=1 and `state`>=0),
+  constraint `CH_state_product` CHECK (`state`<=1 and `state`>=0),
   constraint `UN_product` UNIQUE (`id_product`, `product_category`, `product_desing`, `product_size`),
   CONSTRAINT `FK_category_product`
     FOREIGN KEY (`product_category`)
@@ -276,7 +276,7 @@ AUTO_INCREMENT = 12312300;
 -- Table `bindevstg`.`galery`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `bindevstg`.`galery` (
-  `product_galery` INT(8) NOT NULL,
+  `product_galery` INT NOT NULL,
   `photo_galery` INT NOT NULL,
   PRIMARY KEY (`product_galery`, `photo_galery`),
 	CONSTRAINT `FK_product_galery`
@@ -296,8 +296,8 @@ ENGINE = InnoDB;
 -- Table `bindevstg`.`supply_detail`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `bindevstg`.`supply_detail` (
-  `supply_id` INT(8) NOT NULL,
-  `barcode_id` INT(8) NOT NULL,
+  `supply_id` INT NOT NULL,
+  `barcode_id` INT NOT NULL,
   `quantity` INT NOT NULL,
   `cost_unit` DECIMAL(10,2) NOT NULL,
   `amount_total` DECIMAL(10,2) NULL COMMENT 'cost_unit por quantity',
@@ -319,10 +319,10 @@ ENGINE = InnoDB;
 -- Table `bindevstg`.`sale`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `bindevstg`.`sale` (
-  `id_sale` INT(8) NOT NULL AUTO_INCREMENT,
+  `id_sale` INT NOT NULL AUTO_INCREMENT,
   `date` DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL ,
   `address` VARCHAR(500) NOT NULL,
-  `user_purchase` INT(8) NOT NULL,
+  `user_purchase` INT NOT NULL,
   `sale_delivery` INT NOT NULL,
   `pay_met` INT NOT NULL,
   PRIMARY KEY (`id_sale`),
@@ -349,9 +349,9 @@ AUTO_INCREMENT=700000;
 -- Table `bindevstg`.`report`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `bindevstg`.`report` (
-  `sale_report` INT(8) NOT NULL,
+  `sale_report` INT NOT NULL,
   `status_report` INT NOT NULL,
-  `employee_report` INT(8) NOT NULL,
+  `employee_report` INT NOT NULL,
   `date` DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL ,
   `comment` VARCHAR(500) NULL,
   PRIMARY KEY (`sale_report`, `status_report`),
@@ -378,8 +378,8 @@ ENGINE = InnoDB;
 -- Table `bindevstg`.`sale_detail`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `bindevstg`.`sale_detail` (
-  `sale_id` INT(8) NOT NULL,
-  `product_sale` INT(8) NOT NULL,
+  `sale_id` INT NOT NULL,
+  `product_sale` INT NOT NULL,
   `quantity` INT NOT NULL,
   `unit_price` DECIMAL(10,2) NOT NULL,
   `sale_discount` DECIMAL(4,2) NULL,
@@ -407,8 +407,8 @@ ENGINE = InnoDB;
 -- Table `bindevstg`.`promo`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `bindevstg`.`promo` (
-  `is_product` INT(8) NOT NULL,
-  `have_product` INT(8) NOT NULL,
+  `is_product` INT NOT NULL,
+  `have_product` INT NOT NULL,
   `quantity` INT NOT NULL,
   PRIMARY KEY (`is_product`, `have_product`),
   CONSTRAINT `FK_is_product`
