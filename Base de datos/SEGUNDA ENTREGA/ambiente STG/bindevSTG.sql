@@ -190,16 +190,16 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------state
--- Table `bindevstg`.`client`
+-- Table `bindevstg`.`customer`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `bindevstg`.`client` (
-  `client_user` INT NOT NULL,
+CREATE TABLE IF NOT EXISTS `bindevstg`.`customer` (
+  `customer_user` INT NOT NULL,
   `company_name` VARCHAR(300) NULL,
   `rut_nr` varchar(12) NULL,
-  PRIMARY KEY (`client_user`),
+  PRIMARY KEY (`customer_user`),
   constraint `UN_rut_company` UNIQUE  (`rut_nr`, `company_name`),
   CONSTRAINT `FK_user_id`
-    FOREIGN KEY (`client_user`)
+    FOREIGN KEY (`customer_user`)
     REFERENCES `bindevstg`.`user` (`id_user`)
     ON DELETE RESTRICT
     ON UPDATE RESTRICT)
@@ -326,9 +326,9 @@ CREATE TABLE IF NOT EXISTS `bindevstg`.`sale` (
   `sale_delivery` INT NOT NULL,
   `pay_met` INT NOT NULL,
   PRIMARY KEY (`id_sale`),
-  CONSTRAINT `FK_client_user`
+  CONSTRAINT `FK_customer_user`
     FOREIGN KEY (`user_purchase`)
-    REFERENCES `bindevstg`.`client` (`client_user`)
+    REFERENCES `bindevstg`.`customer` (`customer_user`)
     ON DELETE RESTRICT
     ON UPDATE RESTRICT,
   CONSTRAINT `FK_delivery_sale`
