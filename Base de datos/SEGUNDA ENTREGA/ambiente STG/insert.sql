@@ -123,3 +123,13 @@ INSERT INTO `bindevstg`.`photos` (`id_photo`, `name`, `description`) VALUES ('91
 INSERT INTO `bindevstg`.`photos` (`id_photo`, `name`, `description`) VALUES ('916', 'Remera rosa', 'Foto de una remera');
 INSERT INTO `bindevstg`.`photos` (`id_photo`, `name`, `description`) VALUES ('917', 'Remera blanca', 'Foto de una remera');
 INSERT INTO `bindevstg`.`photos` (`id_photo`, `name`, `description`) VALUES ('918', 'Remera negra', 'Foto de una remera');
+INSERT INTO `bindevstg`.`employee` (`ci`, `employee_user`, `employee_role`, `state`) VALUES ('12345010', '5010', 'jefe', '1');
+INSERT INTO `bindevstg`.`employee` (`ci`, `employee_user`, `employee_role`, `state`) VALUES ('12345011', '5011', 'comprador', '1');
+INSERT INTO `bindevstg`.`employee` (`ci`, `employee_user`, `employee_role`, `state`) VALUES ('12345012', '5012', 'comprador', '0');
+INSERT INTO `bindevstg`.`employee` (`ci`, `employee_user`, `employee_role`, `state`) VALUES ('12345013', '5013', 'vendedor', '1');
+INSERT INTO `bindevstg`.`customer` (`customer_user`) VALUES ('5000');
+INSERT INTO `bindevstg`.`customer` (`customer_user`) VALUES ('5001');
+INSERT INTO `bindevstg`.`customer` (`customer_user`, `company_name`, `rut_nr`) VALUES ('5002', 'marcus company', '211111111');
+INSERT INTO `bindevstg`.`customer` (`customer_user`, `company_name`, `rut_nr`) VALUES ('5003', 'marcus company sede florida', '211111111');
+INSERT INTO `bindevstg`.`customer` (`customer_user`, `company_name`, `rut_nr`) VALUES ('5004', 'marcus company sede flores', '211111111');
+INSERT INTO `bindevstg`.`customer` (`customer_user`) VALUES ('5010');
