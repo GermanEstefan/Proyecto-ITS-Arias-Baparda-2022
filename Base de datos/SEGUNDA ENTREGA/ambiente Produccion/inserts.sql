@@ -97,9 +97,6 @@ INSERT INTO `bindev`.`delivery_time` (`id_delivery`, `name`, `description`) VALU
 INSERT INTO `bindev`.`delivery_time` (`id_delivery`, `name`, `description`) VALUES ('3', 'Tarde', 'L a V De 17 a 20 HS');
 INSERT INTO `bindev`.`delivery_time` (`id_delivery`, `name`, `description`) VALUES ('4', 'Finde', 'Sabados de 8 a 13 hs');
 INSERT INTO `bindev`.`delivery_time` (`id_delivery`, `name`, `description`) VALUES ('5', 'Pick-UP', 'Levanta en local');
-INSERT INTO `bindev`.`SALE` (`address`, `user_purchase`, `sale_delivery`, `pay_met`) VALUES ('LIBRES 1675', '7', '1', '1');
-INSERT INTO `bindev`.`SALE` (`address`, `user_purchase`, `sale_delivery`, `pay_met`) VALUES ('LEVANTA EN LOCAL', '6', '5', '4');
-INSERT INTO `bindev`.`SALE` (`address`, `user_purchase`, `sale_delivery`, `pay_met`) VALUES ('LIBRES 16653', '5', '4', '3');
 INSERT INTO `bindev`.`discount` (`value`, `description`) VALUES ('0.20', '20%OFF');
 INSERT INTO `bindev`.`discount` (`value`, `description`) VALUES ('0.30', '30%OFF');
 INSERT INTO `bindev`.`discount` (`value`, `description`) VALUES ('0.50', '50%OFF');

@@ -1,4 +1,3 @@
-
 INSERT INTO `bindevstg`.`user` (`email`, `name`, `surname`, `address`, `phone`, `password`) VALUES ('correo1@gmail.com', 'Nicolas', 'Alvarez', 'direccion 1', '098776554', 'password1');
 INSERT INTO `bindevstg`.`user` (`email`, `name`, `surname`, `address`, `phone`, `password`) VALUES ('correo2@gmail.com', 'Rodrigo', 'Gimenez', 'direccion2', '267482', 'password2');
 INSERT INTO `bindevstg`.`user` (`email`, `name`, `surname`, `address`, `phone`, `password`) VALUES ('correo3@gmail.com', 'Pablo ', 'Gimenez', 'direccion 2', '098098098', 'password3');
@@ -97,9 +96,6 @@ INSERT INTO `bindevstg`.`delivery_time` (`id_delivery`, `name`, `description`) V
 INSERT INTO `bindevstg`.`delivery_time` (`id_delivery`, `name`, `description`) VALUES ('3', 'Tarde', 'L a V De 17 a 20 HS');
 INSERT INTO `bindevstg`.`delivery_time` (`id_delivery`, `name`, `description`) VALUES ('4', 'Finde', 'Sabados de 8 a 13 hs');
 INSERT INTO `bindevstg`.`delivery_time` (`id_delivery`, `name`, `description`) VALUES ('5', 'Pick-UP', 'Levanta en local');
-INSERT INTO `bindevstg`.`SALE` (`address`, `user_purchase`, `sale_delivery`, `pay_met`) VALUES ('LIBRES 1675', '7', '1', '1');
-INSERT INTO `bindevstg`.`SALE` (`address`, `user_purchase`, `sale_delivery`, `pay_met`) VALUES ('LEVANTA EN LOCAL', '6', '5', '4');
-INSERT INTO `bindevstg`.`SALE` (`address`, `user_purchase`, `sale_delivery`, `pay_met`) VALUES ('LIBRES 16653', '5', '4', '3');
 INSERT INTO `bindevstg`.`discount` (`value`, `description`) VALUES ('0.20', '20%OFF');
 INSERT INTO `bindevstg`.`discount` (`value`, `description`) VALUES ('0.30', '30%OFF');
 INSERT INTO `bindevstg`.`discount` (`value`, `description`) VALUES ('0.50', '50%OFF');
