@@ -7,7 +7,7 @@ include("./helpers/Token.php");
 $response = new Response(); //Esta instancia va a ser utilizado a lo largo del controlador para las respuestas.
 $jwt = new Token();
 header('Content-Type: application/json'); //Le decimos al agente que consuma el servidor que vamos a devolver JSON.
-
+header('Access-Control-Allow-Origin: *');
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     if( !isset($_GET['url']) ){

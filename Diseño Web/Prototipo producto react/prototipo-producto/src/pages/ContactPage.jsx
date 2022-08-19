@@ -10,30 +10,17 @@ const ContactPage = () => {
   return (
     <>
       <div className="form-container">
-        <img className="form-img" src={Imagen}></img>
+        <img className="form-img" src={Imagen} alt='Imagen'></img>
         <Animated
           animationIn="slideInRight"
           animationOut="fadeOut"
           isVisible={true}
         >
-          <Formik
-            handleChange={(valores) => {
-              console.log(valores);
-            }}
-            initialValues={{
-              topic: "",
-              message: "asdasd",
-            }}
-            handleSubmit={(valores) => {
-              console.log("se envió");
-              console.log(valores);
-            }}
-          >
-            {({ values, handleChange, handleSubmit }) => (
-              <form className="form" onSubmit={handleSubmit}>
+       
+              <form className="form">
                 <h1>Envianos tu mensaje</h1>
                 <div>
-                  <input name="topic" id="topic" value={values.topic} onChange={handleChange} placeholder="Asunto"></input>
+                  <input name="topic" id="topic"  placeholder="Asunto"></input>
                 </div>
                 <div>
                   <textarea
@@ -42,17 +29,13 @@ const ContactPage = () => {
                     rows={7}
                     maxLength={130}
                     placeholder="Mensaje"
-                    value={values.message}
-                    onChange={handleChange}
                   ></textarea>
-                  <p>{values.message.length}/130</p>
+                  <p>/130</p>
                 </div>
                 <button className="link" to={"/register"}>
                   Enviar
                 </button>
               </form>
-            )}
-          </Formik>
         </Animated>
       </div>
     </>
