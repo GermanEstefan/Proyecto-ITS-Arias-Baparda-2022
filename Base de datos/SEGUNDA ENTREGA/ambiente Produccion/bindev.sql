@@ -331,7 +331,7 @@ CREATE TABLE IF NOT EXISTS `bindev`.`sale` (
   `user_purchase` INT NOT NULL,
   `sale_delivery` INT NOT NULL,
   `pay_met` INT NOT NULL,
-  `total` DECIMAL(10,2) NOT NULL,
+ `total` DECIMAL(10,2) NOT NULL default 0,
   PRIMARY KEY (`id_sale`),
   CONSTRAINT `FK_customer_user`
     FOREIGN KEY (`user_purchase`)
