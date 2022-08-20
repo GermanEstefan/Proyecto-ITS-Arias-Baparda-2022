@@ -222,6 +222,7 @@ CREATE TABLE IF NOT EXISTS `bindevstg`.`supply` (
   `employee_ci` INT NOT NULL,
   `disburse_method` INT NOT NULL,
   `comment` VARCHAR(500) NULL,
+  `total` DECIMAL(10,2) NOT NULL default 0,
   PRIMARY KEY (`id_supply`),
   CONSTRAINT `FK_supply_supplier`
     FOREIGN KEY (`supplier_id`)
@@ -306,7 +307,7 @@ CREATE TABLE IF NOT EXISTS `bindevstg`.`supply_detail` (
   `barcode_id` INT NOT NULL,
   `quantity` INT NOT NULL,
   `cost_unit` DECIMAL(10,2) NOT NULL,
-  `amount_total` DECIMAL(10,2) NULL COMMENT 'cost_unit por quantity',
+  `amount_total` DECIMAL(10,2) NOT NULL, 
   PRIMARY KEY (`supply_id`, `barcode_id`),
 CONSTRAINT `FK_product_reference`
     FOREIGN KEY (`barcode_id`)
@@ -430,7 +431,6 @@ CREATE TABLE IF NOT EXISTS `bindevstg`.`promo` (
 ENGINE = InnoDB;
 
 DROP TRIGGER IF EXISTS `bindevstg`.`sale_detail_VALIDATION`;
-
 DELIMITER $$
 USE `bindevstg`$$
 CREATE DEFINER = CURRENT_USER TRIGGER `bindevstg`.`sale_detail_VALIDATION` BEFORE INSERT ON `sale_detail` FOR EACH ROW
@@ -448,31 +448,23 @@ update sale set total = total + new.total where id_sale = new.sale_id;
 else
 SIGNAL SQLSTATE '45000' SET message_text = 'NO HAY STOCK SUFICIENTE PARA REALIZAR LA OPERACION';
 END if;
-
 END$$
 DELIMITER ;
 
-
+DROP TRIGGER IF EXISTS `bindevstg`.`supply_detail_AMOUNT_TOTAL_AUTO`;
 DELIMITER $$
 USE `bindevstg`$$
 CREATE DEFINER = CURRENT_USER TRIGGER `bindevstg`.`supply_detail_AMOUNT_TOTAL_AUTO` BEFORE INSERT ON `supply_detail` FOR EACH ROW
 BEGIN
 set new.amount_total = new.cost_unit * new.quantity;
+update supply set total = total + new.amount_total where id_supply = new.supply_id;
 END$$
 DELIMITER ;
 
-USE `bindevstg`;
-
-DELIMITER $$
-
-USE `bindevstg`$$
-DROP TRIGGER IF EXISTS `bindevstg`.`supply_detail_Actua_Stock_Product` $$
-DELIMITER ;
-DROP TRIGGER IF EXISTS `bindevstg`.`supply_detail_AFTER_INSERT`;
-
+DROP TRIGGER IF EXISTS `bindevstg`.`supply_detail_Actualiza_stock`;
 DELIMITER $$
 USE `bindevstg`$$
-CREATE DEFINER = CURRENT_USER TRIGGER `bindevstg`.`supply_detail_AFTER_INSERT` AFTER INSERT ON `supply_detail` FOR EACH ROW
+CREATE DEFINER = CURRENT_USER TRIGGER `bindevstg`.`supply_detail_Actualiza_stock` AFTER INSERT ON `supply_detail` FOR EACH ROW
 BEGIN
 update product set stock = stock + new.quantity where barcode = new.barcode_id; 
 END$$
