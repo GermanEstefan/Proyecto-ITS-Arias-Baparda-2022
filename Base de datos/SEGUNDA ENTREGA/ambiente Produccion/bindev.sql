@@ -423,6 +423,57 @@ CREATE TABLE IF NOT EXISTS `bindev`.`promo` (
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
+DROP TRIGGER IF EXISTS `bindev`.`sale_detail_VALIDATION`;
+
+DELIMITER $$
+USE `bindev`$$
+CREATE DEFINER = CURRENT_USER TRIGGER `bindev`.`sale_detail_VALIDATION` BEFORE INSERT ON `sale_detail` FOR EACH ROW
+BEGIN
+declare stockTemp int;
+declare totalParc decimal(10,2);
+declare totalDesc decimal(10,2);
+set stockTemp = (select stock from product where new.product_sale = barcode)-new.quantity;
+if (stockTemp >=0) then 
+update product set stock = stockTemp where barcode = new.product_sale;
+set totalParc = new.quantity * (select price from product where new.product_sale = barcode);
+set totalDesc = totalParc * new.sale_discount;
+set new.total = totalParc - totalDesc;
+update sale set total = total + new.total where id_sale = new.sale_id;
+else
+SIGNAL SQLSTATE '45000' SET message_text = 'NO HAY STOCK SUFICIENTE PARA REALIZAR LA OPERACION';
+END if;
+
+END$$
+DELIMITER ;
+
+
+DELIMITER $$
+USE `bindev`$$
+CREATE DEFINER = CURRENT_USER TRIGGER `bindev`.`supply_detail_AMOUNT_TOTAL_AUTO` BEFORE INSERT ON `supply_detail` FOR EACH ROW
+BEGIN
+set new.amount_total = new.cost_unit * new.quantity;
+END$$
+DELIMITER ;
+
+USE `bindev`;
+
+DELIMITER $$
+
+USE `bindev`$$
+DROP TRIGGER IF EXISTS `bindev`.`supply_detail_Actua_Stock_Product` $$
+DELIMITER ;
+DROP TRIGGER IF EXISTS `bindev`.`supply_detail_AFTER_INSERT`;
+
+DELIMITER $$
+USE `bindev`$$
+CREATE DEFINER = CURRENT_USER TRIGGER `bindev`.`supply_detail_AFTER_INSERT` AFTER INSERT ON `supply_detail` FOR EACH ROW
+BEGIN
+update product set stock = stock + new.quantity where barcode = new.barcode_id; 
+END$$
+DELIMITER ;
+
+
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
