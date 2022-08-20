@@ -16,8 +16,14 @@ CREATE TABLE IF NOT EXISTS `bindev`.`category` (
   `id_category` INT NOT NULL,
   `name` VARCHAR(100) NOT NULL,
   `description` VARCHAR(500) NOT NULL,
+  `picture` int NOT NULL,
   PRIMARY KEY (`id_category`),
-  constraint `category_UNIQUE` UNIQUE  (`name`))
+  constraint `category_UNIQUE` UNIQUE  (`name`),
+   CONSTRAINT `FK_picture_category`
+    FOREIGN KEY (`picture`)
+    REFERENCES `bindev`.`photos` (`id_photo`)
+    ON DELETE cascade
+    ON UPDATE cascade)
 ENGINE = InnoDB;
 
 -- -----------------------------------------------------
@@ -325,6 +331,7 @@ CREATE TABLE IF NOT EXISTS `bindev`.`sale` (
   `user_purchase` INT NOT NULL,
   `sale_delivery` INT NOT NULL,
   `pay_met` INT NOT NULL,
+  `total` DECIMAL(10,2) NOT NULL,
   PRIMARY KEY (`id_sale`),
   CONSTRAINT `FK_customer_user`
     FOREIGN KEY (`user_purchase`)
@@ -381,9 +388,8 @@ CREATE TABLE IF NOT EXISTS `bindev`.`sale_detail` (
   `sale_id` INT NOT NULL,
   `product_sale` INT NOT NULL,
   `quantity` INT NOT NULL,
-  `unit_price` DECIMAL(10,2) NOT NULL,
   `sale_discount` DECIMAL(4,2) NULL,
-  `amount_total` DECIMAL(10,2) NOT NULL,
+  `total` DECIMAL(10,2) NOT NULL,
   PRIMARY KEY (`sale_id`, `product_sale`),
   CONSTRAINT `FK_id_sale`
     FOREIGN KEY (`sale_id`)
