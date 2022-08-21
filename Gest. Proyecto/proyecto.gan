@@ -1,12 +1,12 @@
-<?xml version="1.0" encoding="UTF-8"?><project name="Proyecto ITS" company="BINDEV" webLink="http://" view-date="2022-06-13" view-index="0" gantt-divider-location="498" resource-divider-location="336" version="3.2.3230" locale="es_ES">
+<?xml version="1.0" encoding="UTF-8"?><project name="Proyecto ITS" company="BINDEV" webLink="http://" view-date="2022-05-01" view-index="0" gantt-divider-location="483" resource-divider-location="336" version="3.2.3230" locale="es_ES">
     <description>
         <![CDATA[Se pide la creacion de un sitio web de venta de insumos para seguridad 
 y proteccion laboral ]]>
     </description>
-    <view zooming-state="default:6" id="gantt-chart">
-        <field id="tpd3" name="Nombre" width="352" order="0"/>
-        <field id="tpd4" name="Fecha de inicio" width="73" order="1"/>
-        <field id="tpd5" name="Fecha de fin" width="72" order="2"/>
+    <view zooming-state="default:8" id="gantt-chart">
+        <field id="tpd3" name="Nombre" width="330" order="0"/>
+        <field id="tpd4" name="Fecha de inicio" width="69" order="1"/>
+        <field id="tpd5" name="Fecha de fin" width="68" order="2"/>
         <option id="taskLabelUp" value=""/>
         <option id="taskLabelDown" value="predecessors"/>
         <option id="taskLabelLeft" value="id"/>
@@ -16,12 +16,12 @@ y proteccion laboral ]]>
             <![CDATA[116]]>
         </timeline>
         <option id="color.recent">
-            <![CDATA[#ff0000 #003333 #660066 #993300 #00cc00 #ffcc00 #00cccc #cc0000 #ff0033 #0033ff]]>
+            <![CDATA[#00cccc #ff0000 #003333 #660066 #993300 #00cc00 #ffcc00 #cc0000 #ff0033 #0033ff]]>
         </option>
     </view>
     <view id="resource-table">
-        <field id="0" name="Nombre" width="177" order="0"/>
-        <field id="1" name="Función" width="140" order="1"/>
+        <field id="0" name="Nombre" width="176" order="0"/>
+        <field id="1" name="Función" width="141" order="1"/>
     </view>
     <!-- -->
     <calendars>
@@ -47,7 +47,7 @@ y proteccion laboral ]]>
             <taskproperty id="tpd8" name="coordinator" type="default" valuetype="text"/>
             <taskproperty id="tpd9" name="predecessorsr" type="default" valuetype="text"/>
         </taskproperties>
-        <task id="108" name="Planificacion hasta segunda entrega" color="#0033ff" meeting="false" start="2022-06-01" duration="82" complete="0" thirdDate="2022-06-01" thirdDate-constraint="0" expand="true">
+        <task id="108" name="Planificacion hasta segunda entrega" color="#0033ff" meeting="false" start="2022-06-01" duration="94" complete="0" thirdDate="2022-06-01" thirdDate-constraint="0" expand="true">
             <task id="109" name="Coordinación de reunión con cliente y comienzo de planificación" color="#0033ff" meeting="false" start="2022-06-01" duration="3" complete="0" thirdDate="2022-06-01" thirdDate-constraint="0" expand="false">
                 <depend id="84" type="2" difference="0" hardness="Strong"/>
                 <depend id="92" type="2" difference="0" hardness="Strong"/>
@@ -439,30 +439,76 @@ a cada integrante del equipo.]]>
                 <depend id="129" type="2" difference="0" hardness="Strong"/>
                 <depend id="130" type="2" difference="0" hardness="Strong"/>
             </task>
-            <task id="125" name="Gestion Proyecto" color="#00cccc" meeting="false" start="2022-07-23" duration="11" complete="0" thirdDate="2022-07-25" thirdDate-constraint="0" expand="false">
+            <task id="125" name="Gestion Proyecto" color="#00cccc" meeting="false" start="2022-07-23" duration="27" complete="0" thirdDate="2022-07-25" thirdDate-constraint="0" expand="false">
                 <notes>
                     <![CDATA[Estas guias estan como referencia por materias
 y se encuentran todas con la unidad de trabajo en 0
 son solo una guia para ayudar en el proceso de delegar las tareas
 a cada integrante del equipo.]]>
                 </notes>
-                <task id="134" name="Realizar plan de contingencias" color="#8cb6ce" meeting="false" start="2022-07-25" duration="10" complete="0" thirdDate="2022-07-23" thirdDate-constraint="0" expand="true"/>
-                <task id="139" name="Realizar control de avance" meeting="false" start="2022-07-23" duration="1" complete="0" expand="true"/>
-                <task id="140" name="Realizar plan de marketing" meeting="false" start="2022-07-23" duration="1" complete="0" expand="true"/>
+                <task id="185" name="Hacer correcciones de la primer entrega" color="#8cb6ce" meeting="false" start="2022-07-23" duration="7" complete="0" thirdDate="2022-07-23" thirdDate-constraint="0" expand="true">
+                    <depend id="134" type="2" difference="0" hardness="Strong"/>
+                </task>
+                <task id="134" name="Realizar plan de contingencias" color="#8cb6ce" meeting="false" start="2022-08-01" duration="7" complete="0" thirdDate="2022-07-23" thirdDate-constraint="0" expand="false">
+                    <depend id="140" type="2" difference="0" hardness="Strong"/>
+                    <task id="186" name="Determinar riesgos potenciales para el desarrollo" color="#8cb6ce" meeting="false" start="2022-08-01" duration="2" complete="0" thirdDate="2022-07-23" thirdDate-constraint="0" expand="true">
+                        <depend id="188" type="2" difference="0" hardness="Strong"/>
+                    </task>
+                    <task id="188" name="Determinar tipo de riesgo" color="#8cb6ce" meeting="false" start="2022-08-03" duration="2" complete="0" thirdDate="2022-07-26" thirdDate-constraint="0" expand="true">
+                        <depend id="187" type="2" difference="0" hardness="Strong"/>
+                    </task>
+                    <task id="187" name="Determinar niveles de riesgo" meeting="false" start="2022-08-05" duration="1" complete="0" expand="true">
+                        <depend id="139" type="2" difference="0" hardness="Strong"/>
+                    </task>
+                    <task id="139" name="Determinar contramedidas" meeting="false" start="2022-08-06" duration="1" complete="0" expand="true">
+                        <depend id="189" type="2" difference="0" hardness="Strong"/>
+                    </task>
+                    <task id="189" name="Hacer un seguimiento de riesgos" meeting="false" start="2022-08-08" duration="1" complete="0" expand="true"/>
+                </task>
+                <task id="140" name="Realizar plan de marketing" color="#8cb6ce" meeting="false" start="2022-08-09" duration="13" complete="0" thirdDate="2022-08-09" thirdDate-constraint="0" expand="false">
+                    <task id="190" name="Determinar propuesta de valor" color="#8cb6ce" meeting="false" start="2022-08-09" duration="2" complete="0" thirdDate="2022-08-09" thirdDate-constraint="0" expand="true">
+                        <depend id="191" type="2" difference="0" hardness="Strong"/>
+                    </task>
+                    <task id="191" name="Segmento de mercado" color="#8cb6ce" meeting="false" start="2022-08-11" duration="2" complete="0" thirdDate="2022-08-11" thirdDate-constraint="0" expand="true">
+                        <depend id="192" type="2" difference="0" hardness="Strong"/>
+                    </task>
+                    <task id="192" name="Canales de venta" meeting="false" start="2022-08-13" duration="1" complete="0" expand="true">
+                        <depend id="193" type="2" difference="0" hardness="Strong"/>
+                    </task>
+                    <task id="193" name="Fuentes de ingreso" meeting="false" start="2022-08-15" duration="1" complete="0" expand="true">
+                        <depend id="194" type="2" difference="0" hardness="Strong"/>
+                    </task>
+                    <task id="194" name="Recursos clave" color="#8cb6ce" meeting="false" start="2022-08-16" duration="2" complete="0" thirdDate="2022-08-16" thirdDate-constraint="0" expand="true">
+                        <depend id="195" type="2" difference="0" hardness="Strong"/>
+                    </task>
+                    <task id="195" name="Actividades clave" color="#8cb6ce" meeting="false" start="2022-08-18" duration="1" complete="0" thirdDate="2022-08-18" thirdDate-constraint="0" expand="true">
+                        <depend id="196" type="2" difference="0" hardness="Strong"/>
+                    </task>
+                    <task id="196" name="Asociaciones clave" meeting="false" start="2022-08-19" duration="1" complete="0" expand="true">
+                        <depend id="197" type="2" difference="0" hardness="Strong"/>
+                    </task>
+                    <task id="197" name="Estructura de costes" color="#8cb6ce" meeting="false" start="2022-08-20" duration="3" complete="0" thirdDate="2022-08-20" thirdDate-constraint="0" expand="true"/>
+                </task>
             </task>
-            <task id="129" name="Formacion Empresarial" color="#ffcc00" meeting="false" start="2022-07-23" duration="11" complete="0" thirdDate="2022-07-25" thirdDate-constraint="0" expand="false">
+            <task id="129" name="Formacion Empresarial" color="#ffcc00" meeting="false" start="2022-07-28" duration="21" complete="0" thirdDate="2022-07-25" thirdDate-constraint="0" expand="false">
                 <notes>
                     <![CDATA[Estas guias estan como referencia por materias
 y se encuentran todas con la unidad de trabajo en 0
 son solo una guia para ayudar en el proceso de delegar las tareas
 a cada integrante del equipo.]]>
                 </notes>
-                <task id="133" name="Realizar forma juridica" color="#8cb6ce" meeting="false" start="2022-07-25" duration="10" complete="0" thirdDate="2022-07-23" thirdDate-constraint="0" expand="true"/>
-                <task id="141" name="Crear plan de inversiones" meeting="false" start="2022-07-23" duration="1" complete="0" expand="true"/>
-                <task id="142" name="Crear plan de financiación" meeting="false" start="2022-07-23" duration="1" complete="0" expand="true"/>
-                <task id="143" name="Realizar matriz FODA" meeting="false" start="2022-07-23" duration="1" complete="0" expand="true"/>
+                <task id="143" name="Realizar matriz FODA" color="#8cb6ce" meeting="false" start="2022-07-28" duration="1" complete="0" thirdDate="2022-08-08" thirdDate-constraint="0" expand="true">
+                    <depend id="133" type="2" difference="0" hardness="Strong"/>
+                </task>
+                <task id="133" name="Realizar forma juridica" color="#8cb6ce" meeting="false" start="2022-07-29" duration="10" complete="0" thirdDate="2022-07-23" thirdDate-constraint="0" expand="true">
+                    <depend id="141" type="2" difference="0" hardness="Strong"/>
+                </task>
+                <task id="141" name="Crear plan de inversiones" color="#8cb6ce" meeting="false" start="2022-08-10" duration="5" complete="0" thirdDate="2022-08-10" thirdDate-constraint="0" expand="true">
+                    <depend id="142" type="2" difference="0" hardness="Strong"/>
+                </task>
+                <task id="142" name="Crear plan de financiación" color="#8cb6ce" meeting="false" start="2022-08-16" duration="5" complete="0" thirdDate="2022-08-16" thirdDate-constraint="0" expand="true"/>
             </task>
-            <task id="130" name="Sistemas Operativos" color="#ff0000" meeting="false" start="2022-07-25" duration="33" complete="0" thirdDate="2022-07-25" thirdDate-constraint="0" expand="false">
+            <task id="130" name="Sistemas Operativos" color="#ff0000" meeting="false" start="2022-07-25" duration="45" complete="0" thirdDate="2022-07-25" thirdDate-constraint="0" expand="false">
                 <notes>
                     <![CDATA[Estas guias estan como referencia por materias
 y se encuentran todas con la unidad de trabajo en 0
@@ -474,7 +520,6 @@ a cada integrante del equipo.]]>
                     <depend id="161" type="2" difference="0" hardness="Strong"/>
                     <depend id="163" type="2" difference="0" hardness="Strong"/>
                     <depend id="172" type="2" difference="0" hardness="Strong"/>
-                    <depend id="173" type="2" difference="0" hardness="Strong"/>
                     <task id="164" name="Configurar adaptador de red" color="#8cb6ce" meeting="false" start="2022-07-25" duration="5" complete="0" thirdDate="2022-07-23" thirdDate-constraint="0" expand="true">
                         <depend id="167" type="2" difference="0" hardness="Strong"/>
                         <depend id="175" type="2" difference="0" hardness="Strong"/>
@@ -489,31 +534,48 @@ a cada integrante del equipo.]]>
                     </task>
                     <task id="179" name="Importar Dump de la base de datos de Workbench" color="#ff0000" meeting="false" start="2022-08-05" duration="2" complete="0" thirdDate="2022-07-23" thirdDate-constraint="0" expand="true">
                         <depend id="158" type="2" difference="0" hardness="Strong"/>
-                    </task>
-                    <task id="175" name="Configurar servicio ssh" color="#8cb6ce" meeting="false" start="2022-07-30" duration="5" complete="0" thirdDate="2022-07-26" thirdDate-constraint="0" expand="true"/>
-                </task>
-                <task id="161" name="Realizar configuracion de las terminales" color="#8cb6ce" meeting="false" start="2022-08-15" duration="5" complete="0" thirdDate="2022-07-23" thirdDate-constraint="0" expand="false">
-                    <task id="174" name="Configurar adaptador de red" color="#8cb6ce" meeting="false" start="2022-08-15" duration="5" complete="0" thirdDate="2022-07-23" thirdDate-constraint="0" expand="true"/>
-                </task>
-                <task id="162" name="Instalar software de terceros" meeting="false" start="2022-07-25" duration="14" complete="0" expand="false">
-                    <task id="168" name="Elección e instalacion del software de monitoreo" color="#8cb6ce" meeting="false" start="2022-07-25" duration="7" complete="0" thirdDate="2022-07-23" thirdDate-constraint="0" expand="true">
-                        <depend id="169" type="2" difference="0" hardness="Strong"/>
-                    </task>
-                    <task id="169" name="Elegir e instalar antivirus" color="#8cb6ce" meeting="false" start="2022-08-02" duration="7" complete="0" thirdDate="2022-07-23" thirdDate-constraint="0" expand="true"/>
-                </task>
-                <task id="163" name="Determinar respaldo y recuperación de datos" meeting="false" start="2022-08-15" duration="15" complete="0" expand="false">
-                    <task id="176" name="Determinar maquina virtual destinada al backup de datos" color="#8cb6ce" meeting="false" start="2022-08-15" duration="5" complete="0" thirdDate="2022-08-04" thirdDate-constraint="0" expand="true">
-                        <depend id="178" type="2" difference="0" hardness="Strong"/>
-                    </task>
-                    <task id="178" name="Configurar conexion con la maquina de respaldos" color="#8cb6ce" meeting="false" start="2022-08-20" duration="5" complete="0" thirdDate="2022-07-23" thirdDate-constraint="0" expand="true">
                         <depend id="177" type="2" difference="0" hardness="Strong"/>
                     </task>
-                    <task id="177" name="Realizar menu para respaldo de la BD" color="#8cb6ce" meeting="false" start="2022-08-26" duration="5" complete="0" thirdDate="2022-08-04" thirdDate-constraint="0" expand="true"/>
+                    <task id="175" name="Configurar servicio ssh" color="#8cb6ce" meeting="false" start="2022-07-30" duration="2" complete="0" thirdDate="2022-07-26" thirdDate-constraint="0" expand="true"/>
                 </task>
-                <task id="172" name="Realizar menu de monitoreo de recursos del servidor" color="#8cb6ce" meeting="false" start="2022-08-08" duration="7" complete="0" thirdDate="2022-08-04" thirdDate-constraint="0" expand="true">
-                    <depend id="173" type="2" difference="0" hardness="Strong"/>
+                <task id="163" name="Determinar respaldo y recuperación de datos" color="#8cb6ce" meeting="false" start="2022-08-08" duration="9" complete="0" thirdDate="2022-08-10" thirdDate-constraint="0" expand="false">
+                    <task id="176" name="Determinar maquina virtual destinada al backup de datos" color="#8cb6ce" meeting="false" start="2022-08-08" duration="2" complete="0" thirdDate="2022-08-04" thirdDate-constraint="0" expand="true">
+                        <depend id="181" type="2" difference="0" hardness="Strong"/>
+                    </task>
+                    <task id="181" name="Configurar usuarios y permisos" meeting="false" start="2022-08-10" duration="1" complete="0" expand="true">
+                        <depend id="178" type="2" difference="0" hardness="Strong"/>
+                    </task>
+                    <task id="178" name="Configurar adaptador de red" color="#8cb6ce" meeting="false" start="2022-08-11" duration="2" complete="0" thirdDate="2022-07-23" thirdDate-constraint="0" expand="true">
+                        <depend id="182" type="2" difference="0" hardness="Strong"/>
+                    </task>
+                    <task id="182" name="Configurar servicio ssh" color="#8cb6ce" meeting="false" start="2022-08-13" duration="3" complete="0" thirdDate="2022-08-08" thirdDate-constraint="0" expand="true">
+                        <depend id="183" type="2" difference="0" hardness="Strong"/>
+                    </task>
+                    <task id="183" name="Realizar conexion con la maquina virtual del servidor web" meeting="false" start="2022-08-17" duration="1" complete="0" expand="true">
+                        <depend id="174" type="2" difference="0" hardness="Strong"/>
+                        <depend id="177" type="2" difference="0" hardness="Strong"/>
+                    </task>
                 </task>
-                <task id="173" name="Realizar menu de administracion del motor de la BD" color="#8cb6ce" meeting="false" start="2022-08-16" duration="12" complete="0" thirdDate="2022-08-04" thirdDate-constraint="0" expand="true"/>
+                <task id="161" name="Realizar configuracion de las terminales" color="#8cb6ce" meeting="false" start="2022-08-18" duration="6" complete="0" thirdDate="2022-07-23" thirdDate-constraint="0" expand="false">
+                    <task id="174" name="Configurar adaptador de red" color="#8cb6ce" meeting="false" start="2022-08-18" duration="5" complete="0" thirdDate="2022-07-23" thirdDate-constraint="0" expand="true">
+                        <depend id="198" type="2" difference="0" hardness="Strong"/>
+                    </task>
+                    <task id="198" name="Configurar claves RSA" meeting="false" start="2022-08-24" duration="1" complete="0" expand="true"/>
+                </task>
+                <task id="177" name="Realizar menu para respaldo de la BD" color="#8cb6ce" meeting="false" start="2022-08-18" duration="8" complete="0" thirdDate="2022-08-04" thirdDate-constraint="0" expand="false">
+                    <depend id="168" type="2" difference="0" hardness="Strong"/>
+                    <depend id="180" type="2" difference="0" hardness="Strong"/>
+                </task>
+                <task id="162" name="Instalar software de terceros" color="#8cb6ce" meeting="false" start="2022-08-27" duration="14" complete="0" thirdDate="2022-07-25" thirdDate-constraint="0" expand="false">
+                    <task id="168" name="Elección e instalacion del software de monitoreo" color="#8cb6ce" meeting="false" start="2022-08-27" duration="7" complete="0" thirdDate="2022-07-23" thirdDate-constraint="0" expand="true">
+                        <depend id="169" type="2" difference="0" hardness="Strong"/>
+                    </task>
+                    <task id="169" name="Elegir e instalar antivirus" color="#8cb6ce" meeting="false" start="2022-09-05" duration="7" complete="0" thirdDate="2022-07-23" thirdDate-constraint="0" expand="true">
+                        <depend id="172" type="2" difference="0" hardness="Strong"/>
+                        <depend id="180" type="2" difference="0" hardness="Strong"/>
+                    </task>
+                </task>
+                <task id="172" name="Realizar menu de monitoreo de recursos del servidor" color="#8cb6ce" meeting="false" start="2022-09-13" duration="2" complete="0" thirdDate="2022-08-04" thirdDate-constraint="0" expand="true"/>
             </task>
             <task id="127" name="Base de datos" color="#00cc00" meeting="false" start="2022-07-25" duration="10" complete="0" thirdDate="2022-07-25" thirdDate-constraint="0" expand="false">
                 <notes>
@@ -540,6 +602,7 @@ a cada integrante del equipo.]]>
                     <depend id="179" type="2" difference="0" hardness="Strong"/>
                 </task>
                 <task id="157" name="Implementación de la base de datos en la maquina virtual" color="#ff0000" meeting="false" start="2022-08-03" duration="2" complete="0" thirdDate="2022-07-23" thirdDate-constraint="0" expand="true">
+                    <depend id="158" type="2" difference="0" hardness="Strong"/>
                     <depend id="179" type="2" difference="0" hardness="Strong"/>
                 </task>
             </task>
@@ -610,10 +673,10 @@ a cada integrante del equipo.]]>
                 </task>
                 <task id="160" name="Validación de usuarios en la BD" color="#8cb6ce" meeting="false" start="2022-08-23" duration="3" complete="0" thirdDate="2022-08-20" thirdDate-constraint="0" expand="true"/>
             </task>
-            <task id="180" name="Realizar pruebas sobre la maquina virtual" color="#8cb6ce" meeting="false" start="2022-09-01" duration="3" complete="0" thirdDate="2022-09-01" thirdDate-constraint="0" expand="true">
+            <task id="180" name="Realizar pruebas sobre la maquina virtual" color="#8cb6ce" meeting="false" start="2022-09-15" duration="3" complete="0" thirdDate="2022-09-01" thirdDate-constraint="0" expand="true">
                 <depend id="131" type="2" difference="0" hardness="Strong"/>
             </task>
-            <task id="131" name="Segunda entrega" color="#cc0000" shape="1,0,1,0,0,1,0,1,1,0,1,0,0,1,0,1" meeting="true" start="2022-09-05" duration="0" complete="0" thirdDate="2022-05-30" thirdDate-constraint="0" expand="true"/>
+            <task id="131" name="Segunda entrega" color="#cc0000" shape="1,0,1,0,0,1,0,1,1,0,1,0,0,1,0,1" meeting="true" start="2022-09-19" duration="0" complete="0" thirdDate="2022-05-30" thirdDate-constraint="0" expand="true"/>
         </task>
     </tasks>
     <resources>
