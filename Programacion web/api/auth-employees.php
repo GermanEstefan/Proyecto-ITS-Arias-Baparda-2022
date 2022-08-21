@@ -41,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo $response->error401("No hay un token presente");
         die();
     }
-    $jwt->verifyToken($tokenOfUser);
+    $jwt->verifyToken(getallheaders()['access-token']);
     echo $response->successfully("Autenticacion realizada con exito");
 
 } else {
