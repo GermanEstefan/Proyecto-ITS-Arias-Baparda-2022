@@ -444,7 +444,7 @@ update product set stock = stockTemp where barcode = new.product_sale;
 set totalParc = new.quantity * (select price from product where new.product_sale = barcode);
 set totalDesc = totalParc * new.sale_discount;
 set new.total = totalParc - totalDesc;
-update sale set total = total + new.total where id_sale = new.sale_id;
+update sale set total = ((total + new.total) * 1.22) where id_sale = new.sale_id;
 else
 SIGNAL SQLSTATE '45000' SET message_text = 'NO HAY STOCK SUFICIENTE PARA REALIZAR LA OPERACION';
 END if;
@@ -457,7 +457,7 @@ USE `bindev`$$
 CREATE DEFINER = CURRENT_USER TRIGGER `bindev`.`supply_detail_AMOUNT_TOTAL_AUTO` BEFORE INSERT ON `supply_detail` FOR EACH ROW
 BEGIN
 set new.amount_total = new.cost_unit * new.quantity;
-update supply set total = total + new.amount_total where id_supply = new.supply_id;
+update supply set total = ((total + new.amount_total) * 1.22) where id_supply = new.supply_id;
 END$$
 DELIMITER ;
 
