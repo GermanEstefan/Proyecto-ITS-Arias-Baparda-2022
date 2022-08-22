@@ -103,6 +103,13 @@ class EmployeeController{
             die();
         }
 
+        $employeeState = $employeeExistInDatabase['state'];
+        if($employeeState == 0){
+            http_response_code(401);
+            echo $this->response->error401("El empleado con la ci: $ci se encuentra dado de baja");
+            die();
+        }
+
         $employeeId = $employeeExistInDatabase['id_employe'];
         $userInDatabase = UserModel::getUserById($employeeId);
         $userInDatabasePassword = $userInDatabase['password'];
@@ -115,10 +122,18 @@ class EmployeeController{
         $userToken = $this->jwt->generateToken($employeeId);
         $bodyResponse = array(
             "token" => $userToken,
-            "name" => $userInDatabase['name']
+            "email" => $userInDatabase['email'],
+            "name" => $userInDatabase['name'],
+            "surname" => $userInDatabase['surname'],
+            "phone" => $userInDatabase['phone'],
+            "address" => $userInDatabase['address']
         );
         echo $this->response->successfully("Autenticacion realizada con exito", $bodyResponse);
         die();
+    }
+
+    public function deleteEmployee($idOfEmployee){
+        //En proceso...
     }
 
 }

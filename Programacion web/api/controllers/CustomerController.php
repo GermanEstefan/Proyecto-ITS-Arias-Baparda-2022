@@ -88,8 +88,14 @@ class CustomerController
             die();
         }
 
-        $customerInDatabasePassword = $customerExistInDatabase['password'];
+        $customerInDatabaseState = $customerExistInDatabase['state'];
+        if($customerInDatabaseState == 0){
+            http_response_code(401);
+            echo $this->response->error401("Este usuario se encuentra dado de baja, contacte con el administrador.");
+            die();
+        }
 
+        $customerInDatabasePassword = $customerExistInDatabase['password'];
         if (!($password == $customerInDatabasePassword)) {
             http_response_code(401);
             echo $this->response->error401('Credenciales incorrectas');
@@ -97,11 +103,14 @@ class CustomerController
         }
 
         $customerInDatabaseId = $customerExistInDatabase['id_user'];
-        $customerInDatabaseName = $customerExistInDatabase['name'];
         $userToken = $this->jwt->generateToken($customerInDatabaseId);
         $bodyResponse = array(
             "token" => $userToken,
-            "name" => $customerInDatabaseName
+            "email" => $customerExistInDatabase['email'],
+            "name" => $customerExistInDatabase['name'],
+            "surname" => $customerExistInDatabase['surname'],
+            "phone" => $customerExistInDatabase['phone'],
+            "address" => $customerExistInDatabase['address']
         );
         
         echo $this->response->successfully("Autenticacion realizada con exito", $bodyResponse);
