@@ -6,3 +6,13 @@ SALE      id_sale   int(8)  AUTOINCREMENT  COMIENZA EN 700000
 PRODUCT   barcode   int(8)  AUTOINCREMENT  COMIENZA EN 12312300
 ________________________________________________________________
 
+TABLAS CON STATE - Esperan un 1 o 0 DataType TINYINT(1)
+disburse
+payment_method
+supplier
+user
+employee
+delivery_time
+photos
+discount
+product
