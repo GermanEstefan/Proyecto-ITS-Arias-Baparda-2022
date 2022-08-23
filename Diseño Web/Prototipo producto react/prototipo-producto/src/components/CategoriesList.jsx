@@ -27,9 +27,9 @@ const CategoriesList = () => {
           <h1>CATÁLOGO</h1>
         </div>
         <div className="card-container">
-          {categoriesList.map((category) => {
+          {categoriesList.map((category, index) => {
             return (
-              <Card category={category.name} img={Guantes} />
+              <Card key={index} category={category.name} img={Guantes} />
             );
           })}
         </div>

@@ -1,32 +1,53 @@
-import React, { useEffect } from "react";
-
+import React, { useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import Imagen from "./../img/Obreros.jpg";
 import { Animated } from "react-animated-css";
 import { useForm } from "../hooks/useForm";
 import { URL } from "../API/URL";
+import { userStatusContext } from "../App";
 
 const Login = () => {
+  const [isMounted, setIsMounted] = useState(true);
+  const { userData, setUserData } = useContext(userStatusContext);
+  const navigate = useNavigate();
+  console.log(userData);
+
   useEffect(() => {
     window.scroll(0, 0);
   }, []);
 
+  useEffect(() => {
+    return () => {
+      setIsMounted(false);
+    };
+  }, [userData]);
+
   const initialValues = {
     email: "",
-    password: ""
+    password: "",
   };
   const [values, handleValuesChange, resetForm] = useForm(initialValues);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const endpoint = URL + "auth-customers.php?url=login";
-    console.log(values);
     fetch(endpoint, {
       method: "POST",
       body: JSON.stringify(values),
     })
       .then((resp) => resp.json())
-      .then((respToJson) => console.log(respToJson));
+      .then((respToJson) => {
+        localStorage.setItem("token", respToJson.result.data.token);
+        if (isMounted) {
+          setUserData(respToJson.result.data);
+          console.log(userData);
+          navigate("/");
+          resetForm();
+        }
+      }).catch((error) => {
+        console.log(error)
+      });
   };
   return (
     <>

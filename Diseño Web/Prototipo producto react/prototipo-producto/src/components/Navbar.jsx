@@ -1,5 +1,5 @@
 import React from "react";
-import LogoCliente from "./../img/Logo-nombre.jpg";
+import LogoCliente from "./../img/Cliente-nombre1.svg";
 import Button from "./Button";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -18,7 +18,7 @@ const Navbar = () => {
     <header>
       <div className="navbar">
         <Link to={"/"}>
-          <img src={LogoCliente} width="220px" alt="Logo de la empresa" />
+          <img src={LogoCliente} width="300px" alt="Logo de la empresa" />
         </Link>
         <nav>
           {isMobile ? (
