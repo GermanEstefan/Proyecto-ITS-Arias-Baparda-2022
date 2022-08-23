@@ -1,16 +1,22 @@
-import React from "react";
+import React, {useContext, useState} from "react";
 import BannerImage from './../img/Banner.jpg'
-
+import BannerImage2 from './../img/Escudo.svg'
+import { userStatusContext } from "../App";
 const Banner = () => {
+  const { userData } = useContext(userStatusContext);
+  console.log(userData)
   return (
     <>
+   
       <div className="banner_container">
         <img src={BannerImage} alt="Snow" />
         <div>
-          Nos encargamos de distribuir lo mejor en productos para la seguridad
-          laboral en tu empresa ponele
+          <img src={BannerImage2} alt="" />
         </div>
       </div>
+      {
+      userData.name ? <h1>Bienvenido {userData.name}</h1>: <h1>No hay data</h1>
+    }
     </>
   );
 };

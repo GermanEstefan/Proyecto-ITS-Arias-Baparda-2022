@@ -33,6 +33,7 @@ const Register = () => {
     })
       .then((resp) => resp.json())
       .then((respToJson) => console.log(respToJson));
+      resetForm()
   };
 
   return (

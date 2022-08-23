@@ -10,15 +10,15 @@ const ProductCard = ({ img, product, description }) => {
   return isMobile ? (
     <Card img={img} category={product} />
   ) : (
-    <div class="product-card">
+    <div className="product-card">
       <img src={img} width="200px" alt="" />
 
-      <div class="product-text-container">
+      <div className="product-text-container">
         <h2>{product}</h2>
         <p>{description}</p>
         <Link to={`/${category}/${product}`}>
           <span>Ver mas</span>
-          <i class="fas fa-arrow-right"></i>
+          <i className="fas fa-arrow-right"></i>
         </Link>
       </div>
     </div>
