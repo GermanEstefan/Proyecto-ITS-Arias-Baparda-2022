@@ -195,7 +195,7 @@ CREATE TABLE IF NOT EXISTS `bindev`.`employee` (
 ENGINE = InnoDB;
 
 
--- -----------------------------------------------------state
+-- -----------------------------------------------------
 -- Table `bindev`.`customer`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `bindev`.`customer` (
