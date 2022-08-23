@@ -470,6 +470,15 @@ update product set stock = stock + new.quantity where barcode = new.barcode_id;
 END$$
 DELIMITER ;
 
+DROP TRIGGER IF EXISTS `bindev`.`Auto_insertado`;
+DELIMITER $$
+USE `bindev`$$
+CREATE DEFINER = CURRENT_USER TRIGGER `bindev`.`Auto_insertado` AFTER INSERT ON `user` FOR EACH ROW
+BEGIN
+insert customer set customer_user = new.id_user; 
+END$$
+DELIMITER ;
+
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;

@@ -1,0 +1,22 @@
+EJEMPLO DEL JSON
+
+[
+        {
+            "address": "{{direccion}}",
+            "id_user":"{{cliente}}",
+            "id_delivery":"{{horario de entrega}}",
+            "paymet":"{{medio de pago}}"
+        },
+    [
+        {
+            "barcode": "{{id_prod}}",
+            "quantity": "{{cantidad}}",
+            "discount": "{{descuento}}"
+        },
+        {
+            "barcode": "{{id_prod}}",
+            "quantity": "{{cantidad}}",
+            "discount": "{{descuento}}"
+        }
+    ]
+]
