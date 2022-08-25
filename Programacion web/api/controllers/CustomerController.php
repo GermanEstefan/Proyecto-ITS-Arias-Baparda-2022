@@ -1,5 +1,7 @@
 <?php
 
+use function PHPSTORM_META\type;
+
 include_once('./helpers/Response.php');
 include_once("./helpers/Token.php");
 include_once("./models/CustomerModel.php");
@@ -21,11 +23,18 @@ class CustomerController
     private function validateBodyOfRegisterCustomer($userData)
     {
         $bodyOfRequest = UserController::validateBodyOfRegisterUser($userData);
-        if (!$bodyOfRequest || !isset($userData['company']) || !isset($userData['nRut'])) {
+
+        if(!$bodyOfRequest || !isset($userData['type'])){
             return false;
-        } else {
-            return $userData;
         }
+        $typeOfUser = $userData['type'];
+        if(!($typeOfUser === 'COMPANY' || $typeOfUser === 'NORMAL')){
+            return false;
+        }
+        if($typeOfUser === 'COMPANY'){
+            if( !isset($bodyOfRequest['company']) || !isset($bodyOfRequest['nRut']) || empty($bodyOfRequest['company']) || empty($bodyOfRequest['nRut'])  ) return false;
+        }
+        return $userData;
     }
 
     public function registerCustomer($userData)
@@ -34,7 +43,7 @@ class CustomerController
         $bodyIsValid = $this->validateBodyOfRegisterCustomer($userData);
         if (!$bodyIsValid) {
             http_response_code(400);
-            $this->response->error400();
+            echo $this->response->error400();
             die();
         }
 
@@ -44,20 +53,36 @@ class CustomerController
         $phone = $userData['phone'];
         $password = $userData['password'];
         $address = $userData['address'];
-        $company = $userData['company'];
-        $nRut = $userData['nRut'];
+        $type = $userData['type'];
 
-        $customerExist = CustomerModel::getCustomerByEmail($email);
+        $customerExist = UserModel::getUserByEmail($email);
         if ($customerExist) {
             http_response_code(200);
             echo $this->response->error200("Ya existe un cliente ingresado con el email: " . $customerExist['email']);
             die();
         }
 
-        $newCustomer = new CustomerModel($email, $name, $surname, $phone, $password, $address, $company, $nRut);
-        $idOfUserSaved = $newCustomer->save(); //Si se guarda con exito, devuelve el ID del customer dado de alta.
-        if ($idOfUserSaved) {
-            $userToken = $this->jwt->generateToken($idOfUserSaved);
+        $idOfCustomerSaved = null;
+        if($type === 'COMPANY'){
+            //USUARIO TIPO EMPRESA
+            $company = $userData['company'];
+            $nRut = $userData['nRut'];
+            $customerTypeCompanyExistByRut = CustomerModel::getCustomerByRut($nRut);
+            if($customerTypeCompanyExistByRut){
+                http_response_code(200);
+                echo $this->response->error200("Ya existe una empresa ingreado con ese RUT: " . $userData['nRut']);
+                die();
+            }
+            $newCustomerTypeCompany = new CustomerModel($email, $name, $surname, $phone, $password, $address, $company, $nRut);
+            $idOfCustomerSaved = $newCustomerTypeCompany->save();
+        }else{
+            //USUARIO TIPO NORMAL
+            $newCustomerTypeNormal = new UserModel($email, $name, $surname, $phone, $password, $address);
+            $idOfCustomerSaved = $newCustomerTypeNormal->save();
+        }
+   
+        if ($idOfCustomerSaved) {
+            $userToken = $this->jwt->generateToken($idOfCustomerSaved);
             $bodyResponse = array(
                 "token" => $userToken
             );
@@ -88,17 +113,17 @@ class CustomerController
             die();
         }
 
-        $customerInDatabaseState = $customerExistInDatabase['state'];
-        if($customerInDatabaseState == 0){
-            http_response_code(401);
-            echo $this->response->error401("Este usuario se encuentra dado de baja, contacte con el administrador.");
-            die();
-        }
-
         $customerInDatabasePassword = $customerExistInDatabase['password'];
         if (!($password == $customerInDatabasePassword)) {
             http_response_code(401);
             echo $this->response->error401('Credenciales incorrectas');
+            die();
+        }
+
+        $customerInDatabaseState = $customerExistInDatabase['state'];
+        if($customerInDatabaseState == 0){
+            http_response_code(401);
+            echo $this->response->error401("Este usuario se encuentra dado de baja, contacte con el administrador.");
             die();
         }
 

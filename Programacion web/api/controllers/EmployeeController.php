@@ -31,7 +31,7 @@ class EmployeeController{
         $bodyIsValid = $this->validateBodyOfRegisterEmployee($userData);
         if (!$bodyIsValid) {
             http_response_code(400);
-            $this->response->error400();
+            echo $this->response->error400();
             die();
         }
 
@@ -45,7 +45,7 @@ class EmployeeController{
         //Si tiene un token, y es valido lo decodificamos y obtenemos su ID.
         $idOfUser = $this->jwt->verifyToken(getallheaders()['access-token'])->data->idUser;
         $employee = EmployeeModel::getEmployeeById($idOfUser);
-        $rolOfEmployee = $employee['name_rol'];
+        $rolOfEmployee = $employee['employee_role'];
         if(!($rolOfEmployee == 'JEFE')){
             http_response_code(401);
             echo $this->response->error401("Usted no esta autorizado para relizar esta accion");
@@ -110,7 +110,7 @@ class EmployeeController{
             die();
         }
 
-        $employeeId = $employeeExistInDatabase['id_employe'];
+        $employeeId = $employeeExistInDatabase['employee_user'];
         $userInDatabase = UserModel::getUserById($employeeId);
         $userInDatabasePassword = $userInDatabase['password'];
         if (!($password == $userInDatabasePassword)) {

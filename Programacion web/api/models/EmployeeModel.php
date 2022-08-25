@@ -20,7 +20,7 @@
 
         public static function getEmployeeById($id){
             $conecction = new Connection();
-            $query = "SELECT * from employee WHERE id_employe='$id'";
+            $query = "SELECT * from employee WHERE employee_user='$id'";
             return $conecction->getData($query)->fetch_assoc();
         }
 
@@ -32,7 +32,7 @@
             $resultUserInsert = $instanceMySql->query($userInsert);
             if(!$resultUserInsert)  $result_transaccion = false;
             $idGeneratedFromUserInsert = $instanceMySql->insert_id;
-            $employeeInsert = "INSERT INTO employee(id_employe, name_rol, ci) VALUES ($idGeneratedFromUserInsert, '$this->rol', $this->ci)";
+            $employeeInsert = "INSERT INTO employee(employee_user, employee_role, ci) VALUES ($idGeneratedFromUserInsert, '$this->rol', $this->ci)";
             $resultEmployeeInsert = $instanceMySql->query($employeeInsert);
             if(!$resultEmployeeInsert) $result_transaccion = false;
             if($result_transaccion){

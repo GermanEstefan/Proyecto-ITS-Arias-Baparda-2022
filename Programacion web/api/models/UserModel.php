@@ -31,6 +31,16 @@
             $query = "SELECT * from user WHERE id_user='$id'";
             return $conecction->getData($query)->fetch_assoc();
         }
+                
+        public function save(){
+            $userInsert = "INSERT INTO user(email, name, surname, phone, address, password) VALUES ('$this->email', '$this->name', '$this->surname', '$this->phone', '$this->address', '$this->password' )";
+            $result = $this->connection->setData($userInsert);
+            if($result){
+                return $this->connection->getLastIdInserted();
+            }else{
+                return false;
+            }
+        }
     }
         
 ?>

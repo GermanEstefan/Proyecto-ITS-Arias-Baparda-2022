@@ -12,7 +12,7 @@ class UserController{
             !isset($userData['surname']) ||
             !isset($userData['phone']) ||
             !isset($userData['password']) ||
-            !isset($userData['address'])
+            !isset($userData['address']) 
         ) $formValid = false;
 
         //Validamos que sea un email valido.
@@ -20,7 +20,7 @@ class UserController{
 
         //Validamos que el telefono sea un entero, la contraseña sea mayor a 5 digitos.
         if (!(strlen($userData['password']) > 6) || !is_string($userData['address'])) $formValid = false;
-
+     
         if (!$formValid) {
             return false;
         } else {

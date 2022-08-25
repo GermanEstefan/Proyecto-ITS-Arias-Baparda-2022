@@ -37,6 +37,10 @@
             return $this->connection->query($query);
         }
 
+        public function getLastIdInserted(){
+            return $this->connection->insert_id;
+        }
+
         public function getInstance(){
             return $this->connection;
         }

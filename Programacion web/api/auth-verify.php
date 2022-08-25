@@ -33,7 +33,7 @@ if($_SERVER['REQUEST_METHOD'] === 'GET'){
         "address" => $userData['address']
     );
     http_response_code(200);
-    echo $response->successfully("Autenticacion realizada con exito", $bodyResponse);
+    echo $response->successfully("Token valido", $bodyResponse);
     die();
 }
 ?>
