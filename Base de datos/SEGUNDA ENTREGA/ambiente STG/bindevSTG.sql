@@ -75,7 +75,7 @@ CREATE TABLE IF NOT EXISTS `bindevstg`.`supplier` (
   `state` TINYINT default 1,
   PRIMARY KEY (`id_supplier`),
   constraint `CH_state_supplier` CHECK (`state`<=1 and `state`>=0),
-  constraint `UN_rut_sucursal` UNIQUE  (`rut` , `company_name` ))
+  constraint `UN_rut` UNIQUE  (`rut`))
 ENGINE = InnoDB;
 
 
@@ -203,7 +203,7 @@ CREATE TABLE IF NOT EXISTS `bindevstg`.`customer` (
   `company_name` VARCHAR(300) NULL,
   `rut_nr` varchar(12) NULL,
   PRIMARY KEY (`customer_user`),
-  constraint `UN_rut_company` UNIQUE  (`rut_nr`, `company_name`),
+  constraint `UN_rut` UNIQUE  (`rut_nr`),
   CONSTRAINT `FK_user_id`
     FOREIGN KEY (`customer_user`)
     REFERENCES `bindevstg`.`user` (`id_user`)
