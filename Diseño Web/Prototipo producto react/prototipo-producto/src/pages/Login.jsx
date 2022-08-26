@@ -11,7 +11,6 @@ const Login = () => {
   const [isMounted, setIsMounted] = useState(true);
   const { userData, setUserData } = useContext(userStatusContext);
   const navigate = useNavigate();
-  console.log(userData);
 
   useEffect(() => {
     window.scroll(0, 0);
@@ -41,12 +40,11 @@ const Login = () => {
         localStorage.setItem("token", respToJson.result.data.token);
         if (isMounted) {
           setUserData(respToJson.result.data);
-          console.log(userData);
           navigate("/");
           resetForm();
         }
       }).catch((error) => {
-        console.log(error)
+        console.error(error)
       });
   };
   return (

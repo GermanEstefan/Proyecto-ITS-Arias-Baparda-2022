@@ -1,16 +1,23 @@
-import React from "react";
+import React, { useContext } from "react";
 import LogoCliente from "./../img/Cliente-nombre1.svg";
 import Button from "./Button";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
-import {useMediaQuery} from "react-responsive";
+import { useMediaQuery } from "react-responsive";
+import { userStatusContext } from "../App";
 const Navbar = () => {
+  const { userData } = useContext(userStatusContext);
   const navigate = useNavigate();
   const goTo = (path) => {
     navigate(path);
   };
+
+  const handleLogOut  = () => {
+    localStorage.setItem("token", '');
+    navigate('/')
+  }
 
   const isMobile = useMediaQuery({ query: "(max-width: 1000px)" });
 
@@ -32,7 +39,11 @@ const Navbar = () => {
                 ></Button>
               </li>
               <li>
-                <Button onClick={() => goTo("/login")} text="Ingresar"></Button>
+                {!userData ? (
+                  <Button onClick={() => goTo("/login")} text="Ingresar" />
+                ) : (
+                  <Button onClick={handleLogOut} text={"Salir"} />
+                )}
               </li>
               <li>
                 <Button

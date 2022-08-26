@@ -5,8 +5,10 @@ import Imagen from "./../img/Obreros.jpg";
 import { Animated } from "react-animated-css";
 import { useForm } from "../hooks/useForm";
 import { URL } from "../API/URL";
-
+import Swal from 'sweetalert2'
+import { useNavigate } from "react-router-dom";
 const Register = () => {
+  const navigate = useNavigate()
   useEffect(() => {
     window.scroll(0, 0);
   }, []);
@@ -32,7 +34,21 @@ const Register = () => {
       body: JSON.stringify(values),
     })
       .then((resp) => resp.json())
-      .then((respToJson) => console.log(respToJson));
+      .then((respToJson) => {
+        console.log(respToJson)
+        
+        Swal.fire({
+          icon: 'success',
+          text: 'Te registraste exitosamente',
+          timer: 1000,
+          showConfirmButton: false,
+        })
+        setTimeout(() => {
+          navigate('/')
+        }, 1000);
+      }).catch((error) => {
+        console.error(error)
+      })
       resetForm()
   };
 
@@ -79,6 +95,7 @@ const Register = () => {
               <input
                 name="password"
                 id="password"
+                type={'password'}
                 value={values.password}
                 placeholder="Contraseña"
                 onChange={handleValuesChange}

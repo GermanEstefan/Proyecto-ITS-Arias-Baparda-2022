@@ -1,7 +1,0 @@
-{
-    "server":"localhost",
-    "user":"root",
-    "password":"",
-    "database":"bindev",
-    "port":"3306"
-}

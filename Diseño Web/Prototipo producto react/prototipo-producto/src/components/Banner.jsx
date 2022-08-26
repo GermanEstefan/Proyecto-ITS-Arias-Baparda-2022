@@ -1,10 +1,9 @@
-import React, {useContext, useState} from "react";
+import React, {useContext} from "react";
 import BannerImage from './../img/Banner.jpg'
 import BannerImage2 from './../img/Escudo.svg'
 import { userStatusContext } from "../App";
 const Banner = () => {
   const { userData } = useContext(userStatusContext);
-  console.log(userData)
   return (
     <>
    

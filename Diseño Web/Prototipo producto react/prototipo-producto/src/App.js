@@ -1,6 +1,5 @@
 import React, { Fragment, createContext, useEffect, useState } from "react";
 import HomaPage from "./pages/HomaPage";
-import { useNavigate } from "react-router-dom";
 import { Routes, Route } from "react-router-dom";
 import ContactPage from "./pages/ContactPage";
 import CategoryPage from "./pages/CategoryPage";
@@ -10,40 +9,48 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import ProductPage from "./pages/ProductPage";
 import { verifyAuth } from "./helpers/verifyAuth";
+import { useNavigate } from "react-router-dom";
 
 export const userStatusContext = createContext({});
 
 function App() {
   const [userData, setUserData] = useState({});
-  const [checkingAuth, setCheckingAuth] = useState(true);
+  const [isChecking, setIsChecking] = useState(false);
   const navigate = useNavigate();
   console.log("--App--");
+
+  console.log("--userData---");
+  console.log(userData);
   useEffect(() => {
+    setIsChecking(true);
+    window.scroll(0, 0);
     verifyAuth().then((resp) => {
-      console.log(resp);
+      setIsChecking(true);
       if (!resp) {
-        setCheckingAuth(false);
+        setIsChecking(false);
+        console.log("No hay respuesta");
         return;
       }
-      setCheckingAuth(false);
-      console.log('useEffect')
-      console.log(resp.result.data)
-      navigate("/");
+      setUserData(resp.result.data);
+      navigate('/')
+      setIsChecking(false);
     });
   }, []);
-  console.log(userData)
 
   return (
     <userStatusContext.Provider value={{ userData, setUserData }}>
-      {checkingAuth ? (
-        <h1>Checking auth...</h1>
-      ) : (
-        <Fragment>
-          <Navbar />
-          {
-            (!userData.name) ?
-              <Login></Login>
-            :
+      <Fragment>
+        {isChecking ? (
+          <h1>Checking...</h1>
+        ) : !userData.name ? (
+          <Routes>
+            <Route path="/" element={<Login />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+          </Routes>
+        ) : (
+          <>
+            <Navbar />
             <Routes>
               <Route path="/" element={<HomaPage />} />
               <Route path="/contact" element={<ContactPage />} />
@@ -52,10 +59,10 @@ function App() {
               <Route path="/register" element={<Register />} />
               <Route path="/:category/:name" element={<ProductPage />} />
             </Routes>
-          }
-          <Footer />
-        </Fragment>
-      )}
+            <Footer />
+          </>
+        )}
+      </Fragment>
     </userStatusContext.Provider>
   );
 }
