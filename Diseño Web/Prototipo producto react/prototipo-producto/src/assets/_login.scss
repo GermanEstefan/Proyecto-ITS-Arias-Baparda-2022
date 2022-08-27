@@ -65,7 +65,7 @@ textarea {
   resize: none;
 }
 
-button {
+.submitButton {
   display: block;
   width: 40%;
   margin: auto;
@@ -78,7 +78,7 @@ button {
   cursor: pointer;
 }
 
-button:hover {
+.submitButton:hover {
   background: $dark_gray;
   transition: 0.4s;
 }

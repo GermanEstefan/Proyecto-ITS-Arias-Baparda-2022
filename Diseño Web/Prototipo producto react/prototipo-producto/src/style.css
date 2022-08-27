@@ -413,7 +413,7 @@ textarea {
   resize: none;
 }
 
-button {
+.submitButton {
   display: block;
   width: 40%;
   margin: auto;
@@ -426,7 +426,7 @@ button {
   cursor: pointer;
 }
 
-button:hover {
+.submitButton:hover {
   background: #9ba6af;
   transition: 0.4s;
 }
@@ -439,7 +439,29 @@ button:hover {
   text-decoration: underline;
 }
 
+.paginationContainer {
+  display: flex;
+}
+
+.paginationBtn {
+  display: block;
+  margin: 2px;
+  padding: 1em;
+  background-color: #bccddb;
+  border: 10px;
+  border-radius: 2px;
+  font-weight: bold;
+  font-size: large;
+  cursor: pointer;
+}
+
+.paginationBtn:hover {
+  background: #9ba6af;
+  transition: 0.1s;
+}
+
 body {
+  scroll-behavior: smooth;
   margin: 0;
   padding: 0;
   font-family: "Roboto", sans-serif;

@@ -12,8 +12,10 @@ $dark_gray: #9ba6af;
 @import "./assets/productCard";
 @import "./assets/navbar";
 @import "./assets/login";
+@import "./assets/pagination";
 
 body {
+  scroll-behavior: smooth;
   margin: 0;
   padding: 0;
   font-family: "Roboto", sans-serif;

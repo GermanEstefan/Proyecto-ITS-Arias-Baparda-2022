@@ -53,11 +53,11 @@ const Navbar = () => {
                   text="Registrarse"
                 ></Button>
               </li>
-              <li>
+              {userData.name && <li>
                 <Link to={"/"}>
                   <FontAwesomeIcon className="icon" icon={faShoppingCart} />
                 </Link>
-              </li>
+              </li>}
             </ul>
           )}
         </nav>

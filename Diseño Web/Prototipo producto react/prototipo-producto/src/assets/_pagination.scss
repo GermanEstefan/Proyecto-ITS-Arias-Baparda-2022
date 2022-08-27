@@ -1,0 +1,21 @@
+.paginationContainer {
+  display: flex;
+}
+
+.paginationBtn {
+  display: block;
+
+  margin: 2px;
+  padding: 1em;
+  background-color: $gray;
+  border: 10px;
+  border-radius: 2px;
+
+  font-weight: bold;
+  font-size: large;
+  cursor: pointer;
+}
+.paginationBtn:hover {
+  background: $dark_gray;
+  transition: 0.1s;
+}

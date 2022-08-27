@@ -9,7 +9,7 @@ const ContactPage = () => {
   }, []);
 
   const handleSubmit = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     Swal.fire({
       icon: "warning",
       text: "Esta funcionalidad aún no está implementada",
@@ -41,7 +41,11 @@ const ContactPage = () => {
               ></textarea>
               <p>/130</p>
             </div>
-            <button type="submit" className="link" to={"/register"}>
+            <button
+              className="submitButton link"
+              type="submit"
+              to={"/register"}
+            >
               Enviar
             </button>
           </form>

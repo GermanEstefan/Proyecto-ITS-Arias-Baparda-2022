@@ -77,7 +77,7 @@ const Login = () => {
                 onChange={handleValuesChange}
               ></input>
             </div>
-            <button type="submit">Ingresar</button>
+            <button className="submitButton" type="submit">Ingresar</button>
             <br />
             <Link className="link" to={"/register"}>
               Registrarse
