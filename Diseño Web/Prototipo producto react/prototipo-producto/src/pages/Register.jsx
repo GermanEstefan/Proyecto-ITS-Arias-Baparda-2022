@@ -28,7 +28,7 @@ const Register = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const endpoint = URL + "auth-customers.php?url=register";
-    console.log(values)
+    console.log(endpoint)
     fetch(endpoint, {
       method: "POST",
       body: JSON.stringify(values),
