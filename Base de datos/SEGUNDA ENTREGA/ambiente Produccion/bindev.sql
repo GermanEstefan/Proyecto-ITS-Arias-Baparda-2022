@@ -217,7 +217,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `bindev`.`supply` (
   `id_supply` INT NOT NULL AUTO_INCREMENT,
-  `date` DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
+  `date` DATETIME NOT NULL,
   `supplier_id` INT NOT NULL,
   `employee_ci` INT NOT NULL,
   `disburse_method` INT NOT NULL,
@@ -327,7 +327,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `bindev`.`sale` (
   `id_sale` INT NOT NULL AUTO_INCREMENT,
-  `date` DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL ,
+  `date` DATETIME NOT NULL ,
   `address` VARCHAR(500) NOT NULL,
   `user_purchase` INT NOT NULL,
   `sale_delivery` INT NOT NULL,
@@ -360,7 +360,7 @@ CREATE TABLE IF NOT EXISTS `bindev`.`report` (
   `sale_report` INT NOT NULL,
   `status_report` INT NOT NULL,
   `employee_report` INT NOT NULL,
-  `date` DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL ,
+  `date` DATETIME NOT NULL ,
   `comment` VARCHAR(500) NULL,
   PRIMARY KEY (`sale_report`, `status_report`),
   CONSTRAINT `UN_report_sale` UNIQUE (`sale_report`, `status_report`, `date`),
