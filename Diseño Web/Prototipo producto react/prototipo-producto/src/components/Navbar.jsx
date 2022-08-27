@@ -7,6 +7,7 @@ import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
 import { userStatusContext } from "../App";
+
 const Navbar = () => {
   const { userData } = useContext(userStatusContext);
   const navigate = useNavigate();
@@ -15,8 +16,9 @@ const Navbar = () => {
   };
 
   const handleLogOut  = () => {
-    localStorage.setItem("token", '');
-    navigate('/')
+    localStorage.setItem("token", ''); 
+    window.location.reload(false);
+    console.log('reload')
   }
 
   const isMobile = useMediaQuery({ query: "(max-width: 1000px)" });
@@ -39,8 +41,8 @@ const Navbar = () => {
                 ></Button>
               </li>
               <li>
-                {!userData ? (
-                  <Button onClick={() => goTo("/login")} text="Ingresar" />
+                {!userData.name ? (
+                  <Button onClick={() => goTo("/login")} text={"Ingresar"} />
                 ) : (
                   <Button onClick={handleLogOut} text={"Salir"} />
                 )}

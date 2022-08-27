@@ -42,13 +42,7 @@ function App() {
       <Fragment>
         {isChecking ? (
           <h1>Checking...</h1>
-        ) : !userData.name ? (
-          <Routes>
-            <Route path="/" element={<Login />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-          </Routes>
-        ) : (
+        ) : 
           <>
             <Navbar />
             <Routes>
@@ -61,7 +55,7 @@ function App() {
             </Routes>
             <Footer />
           </>
-        )}
+        }
       </Fragment>
     </userStatusContext.Provider>
   );
