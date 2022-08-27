@@ -28,7 +28,6 @@ function App() {
       setIsChecking(true);
       if (!resp) {
         setIsChecking(false);
-        console.log("No hay respuesta");
         return;
       }
       setUserData(resp.result.data);
