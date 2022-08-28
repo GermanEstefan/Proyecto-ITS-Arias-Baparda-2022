@@ -264,7 +264,7 @@
   margin-left: 1em;
 }
 .main_header .icon {
-  font-size: 2em;
+  font-size: 5em;
 }
 
 .product-card {
@@ -330,7 +330,7 @@ header .navbar img {
   padding: 1em;
 }
 header .navbar nav {
-  width: 50%;
+  width: 40%;
   height: 100%;
 }
 header .navbar nav ul {

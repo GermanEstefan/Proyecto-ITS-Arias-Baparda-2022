@@ -47,9 +47,8 @@ const Login = () => {
       if (respToJson.status === 'successfully') {
         if (isMounted) {
           setUserData(respToJson.result.data);
-          navigate("/");
           localStorage.setItem("token", respToJson.result.data.token);
-          resetForm();
+          navigate("/");
         }
       }
     } catch (error) {

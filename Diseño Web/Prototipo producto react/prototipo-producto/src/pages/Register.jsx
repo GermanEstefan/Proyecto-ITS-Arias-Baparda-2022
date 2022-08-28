@@ -1,16 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import Imagen from "./../img/Obreros.jpg";
 import { Animated } from "react-animated-css";
 import { useForm } from "../hooks/useForm";
 import { URL } from "../API/URL";
 import Swal from "sweetalert2";
+import { userStatusContext } from "../App";
 import { useNavigate } from "react-router-dom";
 import Input from "../components/Input";
 import { isEmail, isEmpty, isValidPassword } from "../helpers/validateForms";
 
 const Register = () => {
-
+  const { setUserData } = useContext(userStatusContext);
   const navigate = useNavigate();
   useEffect(() => {
     window.scroll(0, 0);
@@ -23,7 +24,7 @@ const Register = () => {
     phone: "",
     password: "",
     address: "",
-    type: "NORMAL"
+    type: "NORMAL",
   };
 
   const [values, handleValuesChange] = useForm(initialValues);
@@ -33,26 +34,28 @@ const Register = () => {
     surname: true,
     phone: true,
     password: true,
-    address: true
+    address: true,
   });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(errorStatusForm)
-    if (Object.values(errorStatusForm).includes(true)){
+    if (Object.values(errorStatusForm).includes(true)) {
       return Swal.fire({
         icon: "error",
         text: "Formulario incompleto",
         timer: 3000,
         showConfirmButton: true,
       });
-    } 
+    }
     try {
       const endpoint = URL + "auth-customers.php?url=register";
-      const resp = await fetch(endpoint, { method: "POST", body: JSON.stringify(values) })
+      const resp = await fetch(endpoint, {
+        method: "POST",
+        body: JSON.stringify(values),
+      });
       const respToJson = await resp.json();
       console.log(respToJson);
-      if (respToJson.status === 'error') {
+      if (respToJson.status === "error") {
         return Swal.fire({
           icon: "error",
           text: respToJson.result.error_msg,
@@ -60,22 +63,22 @@ const Register = () => {
           showConfirmButton: true,
         });
       }
-      if (respToJson.status === 'successfully') {
+      if (respToJson.status === "successfully") {
         Swal.fire({
           icon: "success",
           text: "Te registraste exitosamente",
           timer: 2000,
           showConfirmButton: false,
         });
-        localStorage.setItem('token', respToJson.result.data.token)
+        setUserData(respToJson.result.data);
+        localStorage.setItem("token", respToJson.result.data.token);
         setTimeout(() => {
           navigate("/");
         }, 2000);
       }
-
     } catch (error) {
-      console.error(error);
-      alert('ERROR, contactar al admin');
+      console.log(error);
+      alert("ERROR, contactar al admin");
     }
   };
 
@@ -92,7 +95,6 @@ const Register = () => {
           <div className="form">
             <h1>Registrate para comenzar tu experiencia</h1>
             <form onSubmit={handleSubmit} autoComplete="off">
-
               <Input
                 name="name"
                 id="name"

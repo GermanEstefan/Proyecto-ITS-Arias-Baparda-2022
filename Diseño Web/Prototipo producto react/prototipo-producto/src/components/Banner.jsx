@@ -13,9 +13,6 @@ const Banner = () => {
           <img src={BannerImage2} alt="" />
         </div>
       </div>
-      {
-      userData.name ? <h1>Bienvenido {userData.name}</h1>: <h1>Ingresa con tu cuenta</h1>
-    }
     </>
   );
 };

@@ -4,6 +4,7 @@ import Button from "./Button";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
+import { faArrowRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
 import { userStatusContext } from "../App";
@@ -15,10 +16,10 @@ const Navbar = () => {
     navigate(path);
   };
 
-  const handleLogOut  = () => {
-    localStorage.setItem("token", ''); 
+  const handleLogOut = () => {
+    localStorage.setItem("token", "");
     window.location.reload(false);
-  }
+  };
 
   const isMobile = useMediaQuery({ query: "(max-width: 1000px)" });
 
@@ -34,29 +35,43 @@ const Navbar = () => {
           ) : (
             <ul>
               <li>
-                <Button
-                  onClick={() => goTo("/contact")}
-                  text="Contacto"
-                ></Button>
+                <Button onClick={() => goTo("/contact")} text="Contacto" />
               </li>
               <li>
                 {!userData.name ? (
                   <Button onClick={() => goTo("/login")} text={"Ingresar"} />
                 ) : (
-                  <Button onClick={handleLogOut} text={"Salir"} />
+                  <Button text={`${userData.name} ${userData.surname}`} />
                 )}
               </li>
               <li>
-                <Button
-                  onClick={() => goTo("/register")}
-                  text="Registrarse"
-                ></Button>
+                {!userData.name ? (
+                  <Button
+                    onClick={() => goTo("/register")}
+                    text="Registrarse"
+                  />
+                ) : (
+                  <Button
+                    onClick={handleLogOut}
+                    text={
+                      <FontAwesomeIcon
+                        className="icon"
+                        icon={faArrowRightFromBracket}
+                      />
+                    }
+                  ></Button>
+                )}
               </li>
-              {userData.name && <li>
-                <Link to={"/"}>
-                  <FontAwesomeIcon className="icon" icon={faShoppingCart} />
-                </Link>
-              </li>}
+              {userData.name && (
+                <li>
+                  <Button
+                    onClick={() => goTo("/")}
+                    text={
+                      <FontAwesomeIcon className="icon" icon={faShoppingCart} />
+                    }
+                  />
+                </li>
+              )}
             </ul>
           )}
         </nav>
