@@ -1,4 +1,4 @@
-import React, { Fragment, createContext, useEffect, useState } from "react";
+import React, { createContext, useEffect, useState } from "react";
 import HomaPage from "./pages/HomaPage";
 import { Routes, Route } from "react-router-dom";
 import ContactPage from "./pages/ContactPage";
@@ -17,47 +17,47 @@ function App() {
   const [userData, setUserData] = useState({});
   const [isChecking, setIsChecking] = useState(false);
   const navigate = useNavigate();
-  console.log("--App--");
 
-  console.log("--userData---");
-  console.log(userData);
   useEffect(() => {
     setIsChecking(true);
     window.scroll(0, 0);
-    verifyAuth().then((resp) => {
-      setIsChecking(true);
-      if (!resp) {
-        setIsChecking(false);
-        return;
-      }
-      setUserData(resp.result.data);
-      navigate('/')
-      setIsChecking(false);
-    });
-  }, []);
-
-  return (
-    <userStatusContext.Provider value={{ userData, setUserData }}>
-      <Fragment>
-        {isChecking ? (
-          <h1>Checking...</h1>
-        ) : 
-          <>
-            <Navbar />
-            <Routes>
-              <Route path="/" element={<HomaPage />} />
-              <Route path="/contact" element={<ContactPage />} />
-              <Route path="/:category" element={<CategoryPage />}></Route>
-              <Route path="/login" element={<Login />} />
-              <Route path="/register" element={<Register />} />
-              <Route path="/:category/:name" element={<ProductPage />} />
-            </Routes>
-            <Footer />
-          </>
+    verifyAuth()
+      .then( res => {
+        setIsChecking(true);
+        if (!res) {
+          setIsChecking(false);
+          return;
         }
-      </Fragment>
-    </userStatusContext.Provider>
-  );
+        setUserData(res.result.data);
+        navigate('/')
+        setIsChecking(false);
+      })
+  },[])
+
+
+
+return (
+  <userStatusContext.Provider value={{ userData, setUserData }}>
+    <>
+      {isChecking ? (
+        <h1>Checking...</h1>
+      ) :
+        <>
+          <Navbar />
+          <Routes>
+            <Route path="/" element={<HomaPage />} />
+            <Route path="/contact" element={<ContactPage />} />
+            <Route path="/:category" element={<CategoryPage />}></Route>
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/:category/:name" element={<ProductPage />} />
+          </Routes>
+          <Footer />
+        </>
+      }
+    </>
+  </userStatusContext.Provider>
+);
 }
 
 export default App;

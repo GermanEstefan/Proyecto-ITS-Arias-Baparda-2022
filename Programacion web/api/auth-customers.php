@@ -4,6 +4,7 @@ include('./controllers/CustomerController.php');
 
 header('Content-Type: application/json'); //Le decimos al agente que consuma el servidor que vamos a devolver JSON.
 header('Access-Control-Allow-Origin: *'); //CORS
+header("Access-Control-Allow-Headers: *");
 
 $response = new Response(); 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {

@@ -6,6 +6,7 @@ require_once('./helpers/Response.php');
 
 header('Content-Type: application/json'); //Le decimos al agente que consuma el servidor que vamos a devolver JSON.
 header('Access-Control-Allow-Origin: *'); //CORS
+header("Access-Control-Allow-Headers: *");
 
 $jwt = new Token();
 $response = new Response();

@@ -5,6 +5,7 @@ include('./controllers/EmployeeController.php');
 
 header('Content-Type: application/json'); //Le decimos al agente que consuma el servidor que vamos a devolver JSON.
 header('Access-Control-Allow-Origin: *'); //CORS
+header("Access-Control-Allow-Headers: *");
 
 $response = new Response(); //Esta instancia va a ser utilizado a lo largo del controlador para las respuestas.
 $employeeController = new EmployeeController(); 
