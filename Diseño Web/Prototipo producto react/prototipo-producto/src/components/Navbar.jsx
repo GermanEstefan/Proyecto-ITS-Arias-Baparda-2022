@@ -18,7 +18,6 @@ const Navbar = () => {
   const handleLogOut  = () => {
     localStorage.setItem("token", ''); 
     window.location.reload(false);
-    console.log('reload')
   }
 
   const isMobile = useMediaQuery({ query: "(max-width: 1000px)" });

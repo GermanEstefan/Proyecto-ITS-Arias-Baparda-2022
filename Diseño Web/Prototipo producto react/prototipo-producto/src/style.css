@@ -373,7 +373,7 @@ h1 {
   }
 }
 
-form {
+.form {
   box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
   background-color: rgba(255, 255, 255, 0.884);
   padding: 2em;
@@ -381,42 +381,41 @@ form {
   transform: translate(-30px);
   width: 100%;
 }
+.form div {
+  display: block;
+  margin: auto;
+}
 
 p {
   text-align: center;
 }
 
 input {
-  padding: 15px;
   display: block;
-  width: 60%;
-  border-radius: 5px;
-  margin: 1em auto;
+  margin: auto;
+  padding: 15px;
   font-size: 16px;
   font-size: max(16px, 1em);
   font-family: inherit;
   border: 2px solid black;
-  max-width: 200px;
+  border-radius: 5px;
 }
 
 textarea {
-  padding: 15px;
   display: block;
-  width: 60%;
-  border-radius: 5px;
   margin: 1em auto;
+  padding: 15px;
   font-size: 16px;
   font-size: max(16px, 1em);
   font-family: inherit;
   border: 2px solid black;
-  max-width: 200px;
+  border-radius: 5px;
   resize: none;
 }
 
 .submitButton {
-  display: block;
-  width: 40%;
   margin: auto;
+  display: block;
   padding: 1em;
   background-color: #bccddb;
   border: 15px;
@@ -437,6 +436,12 @@ textarea {
   width: 40%;
   margin: auto;
   text-decoration: underline;
+}
+
+.formAlert {
+  color: rgb(218, 0, 0);
+  text-align: left;
+  margin: 0;
 }
 
 .paginationContainer {

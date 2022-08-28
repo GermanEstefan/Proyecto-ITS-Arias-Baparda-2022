@@ -6,10 +6,13 @@ import { Animated } from "react-animated-css";
 import { useForm } from "../hooks/useForm";
 import { URL } from "../API/URL";
 import { userStatusContext } from "../App";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCircleExclamation } from "@fortawesome/free-solid-svg-icons";
 
 const Login = () => {
   const [isMounted, setIsMounted] = useState(true);
   const { userData, setUserData } = useContext(userStatusContext);
+  const [formErrors, setFormErrors] = useState({});
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -27,9 +30,17 @@ const Login = () => {
     password: "",
   };
   const [values, handleValuesChange, resetForm] = useForm(initialValues);
+  const validate = (valuesParam) => {
+    const errors = {};
+    if (!valuesParam.name) errors.name = "El nombre es requerido";
+    if (!valuesParam.password) errors.password = "La contraseña es requerido";
+    setFormErrors(errors);
+    return errors;
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    validate(values);
     const endpoint = URL + "auth-customers.php?url=login";
     fetch(endpoint, {
       method: "POST",
@@ -37,14 +48,16 @@ const Login = () => {
     })
       .then((resp) => resp.json())
       .then((respToJson) => {
+        console.log(respToJson);
         localStorage.setItem("token", respToJson.result.data.token);
         if (isMounted) {
           setUserData(respToJson.result.data);
           navigate("/");
           resetForm();
         }
-      }).catch((error) => {
-        console.error(error)
+      })
+      .catch((error) => {
+        console.error(error);
       });
   };
   return (
@@ -67,6 +80,12 @@ const Login = () => {
                 placeholder="Email"
                 onChange={handleValuesChange}
               ></input>
+              {formErrors.name && (
+                <p className="formAlert">
+                  {formErrors.name}{" "}
+                  <FontAwesomeIcon icon={faCircleExclamation} />
+                </p>
+              )}
             </div>
             <div>
               <input
@@ -76,8 +95,16 @@ const Login = () => {
                 placeholder="Contraseña"
                 onChange={handleValuesChange}
               ></input>
+              {formErrors.password && (
+                <p className="formAlert">
+                  {formErrors.password}{" "}
+                  <FontAwesomeIcon icon={faCircleExclamation} />
+                </p>
+              )}
             </div>
-            <button className="submitButton" type="submit">Ingresar</button>
+            <button className="submitButton" type="submit">
+              Ingresar
+            </button>
             <br />
             <Link className="link" to={"/register"}>
               Registrarse
