@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-
 import { Link } from "react-router-dom";
 import Imagen from "./../img/Obreros.jpg";
 import { Animated } from "react-animated-css";
@@ -7,9 +6,11 @@ import { useForm } from "../hooks/useForm";
 import { URL } from "../API/URL";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCircleExclamation } from "@fortawesome/free-solid-svg-icons";
+import Input from "../components/Input";
+import { isEmail, isEmpty, isValidPassword } from "../helpers/validateForms";
+
 const Register = () => {
+
   const navigate = useNavigate();
   useEffect(() => {
     window.scroll(0, 0);
@@ -22,51 +23,60 @@ const Register = () => {
     phone: "",
     password: "",
     address: "",
-    company: "",
-    nRut: "",
+    type: "NORMAL"
   };
-
-  const [formErrors, setFormErrors] = useState({});
 
   const [values, handleValuesChange] = useForm(initialValues);
+  const [errorStatusForm, setErrorStatusForm] = useState({
+    email: true,
+    name: true,
+    surname: true,
+    phone: true,
+    password: true,
+    address: true
+  });
 
-  const validate = (valuesParam) => {
-    const errors = {};
-    if (!valuesParam.name) errors.name = "El nombre es requerido";
-    if (!valuesParam.surname) errors.surname = "El apellido es requerido";
-    if (!valuesParam.email) errors.email = "El mail es requerido";
-    if (!valuesParam.password) errors.password = "La contraseña es requerido";
-    setFormErrors(errors);
-    return errors;
-  };
-
-  useEffect(() => {}, [values]);
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    validate(values);
-    const endpoint = URL + "auth-customers.php?url=register";
-    fetch(endpoint, {
-      method: "POST",
-      body: JSON.stringify(values),
-    })
-      .then((resp) => resp.json())
-      .then((respToJson) => {
-        console.log(respToJson);
-        localStorage.setItem("token", "");
+    console.log(errorStatusForm)
+    if (Object.values(errorStatusForm).includes(true)){
+      return Swal.fire({
+        icon: "error",
+        text: "Formulario incompleto",
+        timer: 3000,
+        showConfirmButton: true,
+      });
+    } 
+    try {
+      const endpoint = URL + "auth-customers.php?url=register";
+      const resp = await fetch(endpoint, { method: "POST", body: JSON.stringify(values) })
+      const respToJson = await resp.json();
+      console.log(respToJson);
+      if (respToJson.status === 'error') {
+        return Swal.fire({
+          icon: "error",
+          text: respToJson.result.error_msg,
+          timer: 3000,
+          showConfirmButton: true,
+        });
+      }
+      if (respToJson.status === 'successfully') {
         Swal.fire({
           icon: "success",
           text: "Te registraste exitosamente",
-          timer: 1000,
+          timer: 2000,
           showConfirmButton: false,
         });
+        localStorage.setItem('token', respToJson.result.data.token)
         setTimeout(() => {
           navigate("/");
-        }, 1000);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+        }, 2000);
+      }
+
+    } catch (error) {
+      console.error(error);
+      alert('ERROR, contactar al admin');
+    }
   };
 
   return (
@@ -81,77 +91,71 @@ const Register = () => {
         >
           <div className="form">
             <h1>Registrate para comenzar tu experiencia</h1>
-            <form onSubmit={handleSubmit}>
-              <div>
-                <input
-                  name="name"
-                  id="name"
-                  value={values.name}
-                  placeholder="Nombre"
-                  onChange={handleValuesChange}
-                ></input>
-                {formErrors.name && (
-                  <p className="formAlert">
-                    {formErrors.name}{" "}
-                    <FontAwesomeIcon icon={faCircleExclamation} />
-                  </p>
-                )}
-              </div>
-              <div>
-                <input
-                  name="surname"
-                  id="surname"
-                  value={values.surname}
-                  placeholder="Apellido"
-                  onChange={handleValuesChange}
-                ></input>
-                {formErrors.surname && (
-                  <p className="formAlert">
-                    {formErrors.surname}{" "}
-                    <FontAwesomeIcon icon={faCircleExclamation} />
-                  </p>
-                )}
-              </div>
-              <div>
-                <input
-                  name="email"
-                  id="email"
-                  value={values.email}
-                  placeholder="Email"
-                  onChange={handleValuesChange}
-                ></input>
-                {formErrors.email && (
-                  <p className="formAlert">
-                    {formErrors.email}{" "}
-                    <FontAwesomeIcon icon={faCircleExclamation} />
-                  </p>
-                )}
-              </div>
-              <div>
-                <input
-                  name="password"
-                  id="password"
-                  type={"password"}
-                  value={values.password}
-                  placeholder="Contraseña"
-                  onChange={handleValuesChange}
-                ></input>
-                {formErrors.password && (
-                  <p className="formAlert">
-                    {formErrors.password}{" "}
-                    <FontAwesomeIcon icon={faCircleExclamation} />
-                  </p>
-                )}
-              </div>
-              {/* <div>
-              <input
-                name="cpassword"
-                id="cpassword"
-                value={password2}
-                placeholder="Confirmar contraseña"
-                onChange={(e) => setPassword2(e.target.value)}
-              ></input>
-            </div> */}
+            <form onSubmit={handleSubmit} autoComplete="off">
+
+              <Input
+                name="name"
+                id="name"
+                value={values.name}
+                placeholder="Nombre"
+                onChange={handleValuesChange}
+                setErrorStatusForm={setErrorStatusForm}
+                validateFunction={isEmpty}
+              />
+
+              <Input
+                name="surname"
+                id="surname"
+                value={values.surname}
+                placeholder="Apellido"
+                onChange={handleValuesChange}
+                setErrorStatusForm={setErrorStatusForm}
+                validateFunction={isEmpty}
+              />
+
+              <Input
+                name="email"
+                id="email"
+                value={values.email}
+                placeholder="Email"
+                onChange={handleValuesChange}
+                setErrorStatusForm={setErrorStatusForm}
+                validateFunction={isEmail}
+              />
+
+              <Input
+                name="password"
+                id="password"
+                type={"password"}
+                value={values.password}
+                placeholder="Contraseña"
+                onChange={handleValuesChange}
+                setErrorStatusForm={setErrorStatusForm}
+                validateFunction={isValidPassword}
+              />
+
+              <Input
+                name="address"
+                id="address"
+                type={"text"}
+                value={values.address}
+                placeholder="Direccion"
+                onChange={handleValuesChange}
+                setErrorStatusForm={setErrorStatusForm}
+                validateFunction={null}
+              />
+
+              <Input
+                name="phone"
+                id="phone"
+                type={"text"}
+                value={values.phone}
+                placeholder="Telefono"
+                onChange={handleValuesChange}
+                setErrorStatusForm={setErrorStatusForm}
+                validateFunction={null}
+              />
+
               <button className="submitButton" type="submit">
                 Registrarse
               </button>

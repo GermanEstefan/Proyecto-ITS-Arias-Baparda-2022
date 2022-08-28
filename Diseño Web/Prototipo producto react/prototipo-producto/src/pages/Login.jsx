@@ -6,13 +6,14 @@ import { Animated } from "react-animated-css";
 import { useForm } from "../hooks/useForm";
 import { URL } from "../API/URL";
 import { userStatusContext } from "../App";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCircleExclamation } from "@fortawesome/free-solid-svg-icons";
+import Input from "../components/Input";
+import { isEmail, isValidPassword } from "../helpers/validateForms";
+import Swal from "sweetalert2";
 
 const Login = () => {
+
   const [isMounted, setIsMounted] = useState(true);
   const { userData, setUserData } = useContext(userStatusContext);
-  const [formErrors, setFormErrors] = useState({});
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -25,41 +26,38 @@ const Login = () => {
     };
   }, [userData]);
 
-  const initialValues = {
-    email: "",
-    password: "",
-  };
-  const [values, handleValuesChange, resetForm] = useForm(initialValues);
-  const validate = (valuesParam) => {
-    const errors = {};
-    if (!valuesParam.name) errors.name = "El nombre es requerido";
-    if (!valuesParam.password) errors.password = "La contraseña es requerido";
-    setFormErrors(errors);
-    return errors;
-  };
+  const [values, handleValuesChange, resetForm] = useForm({ email: "", password: "" });
+  const [errorStatusForm, setErrorStatusForm] = useState({ email: true, password: true });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    validate(values);
-    const endpoint = URL + "auth-customers.php?url=login";
-    fetch(endpoint, {
-      method: "POST",
-      body: JSON.stringify(values),
-    })
-      .then((resp) => resp.json())
-      .then((respToJson) => {
-        console.log(respToJson);
-        localStorage.setItem("token", respToJson.result.data.token);
+    if(Object.values(errorStatusForm).includes(true)) return;
+    try {
+      const endpoint = URL + "auth-customers.php?url=login";
+      const resp = await fetch(endpoint, { method: "POST", body: JSON.stringify(values) });
+      const respToJson = await resp.json();
+      if (respToJson.status === 'error') {
+        return Swal.fire({
+          icon: "error",
+          text: respToJson.result.error_msg,
+          timer: 3000,
+          showConfirmButton: true,
+        });
+      } 
+      if (respToJson.status === 'successfully') {
         if (isMounted) {
           setUserData(respToJson.result.data);
           navigate("/");
+          localStorage.setItem("token", respToJson.result.data.token);
           resetForm();
         }
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  };
+      }
+    } catch (error) {
+      console.error(error);
+      alert('ERROR, comunicarse con el administrador')
+    }
+  }
+
   return (
     <>
       <div className="form-container">
@@ -70,38 +68,26 @@ const Login = () => {
           animationInDuration={500}
           isVisible={true}
         >
-          <form className="form" onSubmit={handleSubmit}>
+          <form className="form" onSubmit={handleSubmit} autoComplete="off">
             <h1>Bienvenido, por favor ingresa tus datos</h1>
-            <div>
-              <input
-                name="email"
-                id="email"
-                value={values.email}
-                placeholder="Email"
-                onChange={handleValuesChange}
-              ></input>
-              {formErrors.name && (
-                <p className="formAlert">
-                  {formErrors.name}{" "}
-                  <FontAwesomeIcon icon={faCircleExclamation} />
-                </p>
-              )}
-            </div>
-            <div>
-              <input
-                name="password"
-                id="password"
-                value={values.password}
-                placeholder="Contraseña"
-                onChange={handleValuesChange}
-              ></input>
-              {formErrors.password && (
-                <p className="formAlert">
-                  {formErrors.password}{" "}
-                  <FontAwesomeIcon icon={faCircleExclamation} />
-                </p>
-              )}
-            </div>
+            <Input
+              name="email"
+              id="email"
+              value={values.email}
+              placeholder="Email"
+              onChange={handleValuesChange}
+              setErrorStatusForm={setErrorStatusForm}
+              validateFunction={isEmail}
+            />
+            <Input
+              name="password"
+              id="password"
+              value={values.password}
+              placeholder="Contraseña"
+              onChange={handleValuesChange}
+              setErrorStatusForm={setErrorStatusForm}
+              validateFunction={isValidPassword}
+            />
             <button className="submitButton" type="submit">
               Ingresar
             </button>

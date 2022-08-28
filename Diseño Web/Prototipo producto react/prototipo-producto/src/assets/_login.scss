@@ -42,15 +42,29 @@ p {
   text-align: center;
 }
 
-input {
-  display: block;
-  margin: auto;
-  padding: 15px;
-  font-size: 16px;
-  font-size: max(16px, 1em);
-  font-family: inherit;
-  border: 2px solid black;
-  border-radius: 5px;
+.input-wrapper{
+  position: relative;
+  text-align: center;
+  .input-wrapper__input{
+    display: block;
+    margin: 25px auto;
+    padding: 15px;
+    font-size: 16px;
+    font-size: max(16px, 1em);
+    font-family: inherit;
+    border: 2px solid black;
+    border-radius: 5px;
+    &:focus{
+      outline: none;
+    }
+  }
+  .input-wrapper__msg-error{
+   position: absolute;
+   bottom: -20px;
+   left: 0;
+   right: 0;
+   color: red;
+  }
 }
 
 textarea {
