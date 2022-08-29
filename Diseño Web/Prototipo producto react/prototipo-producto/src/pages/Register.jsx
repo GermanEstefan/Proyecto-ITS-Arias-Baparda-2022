@@ -32,9 +32,9 @@ const Register = () => {
     email: true,
     name: true,
     surname: true,
-    phone: true,
+    phone: false,
     password: true,
-    address: true,
+    address: false,
   });
 
   const handleSubmit = async (e) => {
@@ -78,7 +78,7 @@ const Register = () => {
       }
     } catch (error) {
       console.log(error);
-      alert("ERROR, contactar al admin");
+      alert("Error, informe al administrador");
     }
   };
 
@@ -141,7 +141,7 @@ const Register = () => {
                 id="address"
                 type={"text"}
                 value={values.address}
-                placeholder="Direccion"
+                placeholder="Dirección"
                 onChange={handleValuesChange}
                 setErrorStatusForm={setErrorStatusForm}
                 validateFunction={null}
@@ -152,7 +152,7 @@ const Register = () => {
                 id="phone"
                 type={"text"}
                 value={values.phone}
-                placeholder="Telefono"
+                placeholder="Teléfono"
                 onChange={handleValuesChange}
                 setErrorStatusForm={setErrorStatusForm}
                 validateFunction={null}
