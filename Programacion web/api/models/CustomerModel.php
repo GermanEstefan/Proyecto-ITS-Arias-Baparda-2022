@@ -5,8 +5,8 @@
         private $company;
         private $nRut;  
 
-        function __construct($email, $name, $surname, $phone, $password, $address, $company, $nRut){
-            parent::__construct($email, $name, $surname, $phone, $password, $address);
+        function __construct($email, $name, $surname, $password, $company, $nRut){
+            parent::__construct($email, $name, $surname, $password);
             $this->company = $company;
             $this->nRut = $nRut;    
         }
@@ -27,7 +27,7 @@
             $instanceMySql = $this->connection->getInstance();
             $instanceMySql->begin_transaction(MYSQLI_TRANS_START_READ_WRITE);
             $result_transaccion = true;
-            $queryOfUser = "INSERT INTO user(email, name, surname, phone, address, password) VALUES ('$this->email', '$this->name', '$this->surname', '$this->phone', '$this->address', '$this->password' )";
+            $queryOfUser = "INSERT INTO user(email, name, surname, password) VALUES ('$this->email', '$this->name', '$this->surname', '$this->password' )";
             $resultOfQueryUser = $instanceMySql->query($queryOfUser);
             if(!$resultOfQueryUser)  $result_transaccion = false;
             $idOfUserGenerated = $instanceMySql->insert_id;

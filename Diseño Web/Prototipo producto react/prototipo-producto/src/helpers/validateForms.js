@@ -12,8 +12,8 @@ export const isEmail = (value) => {
 } 
 
 export const isValidPassword = (value) => {
-    if(value.trim().length <= 6){
-        return {error:true, message: 'La contraseña debe ser mayor a 6 digitos'}
+    if(value.trim().length <= 5){
+        return {error:true, message: 'La contraseña debe ser mayor a 5 digitos'}
     }
     return {error:false, message: null};
 }

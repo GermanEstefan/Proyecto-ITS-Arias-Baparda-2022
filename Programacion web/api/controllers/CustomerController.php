@@ -1,7 +1,5 @@
 <?php
 
-use function PHPSTORM_META\type;
-
 include_once('./helpers/Response.php');
 include_once("./helpers/Token.php");
 include_once("./models/CustomerModel.php");
@@ -50,9 +48,7 @@ class CustomerController
         $email = $userData['email'];
         $name = $userData['name'];
         $surname = $userData['surname'];
-        $phone = $userData['phone'];
         $password = $userData['password'];
-        $address = $userData['address'];
         $type = $userData['type'];
 
         $customerExist = UserModel::getUserByEmail($email);
@@ -73,11 +69,11 @@ class CustomerController
                 echo $this->response->error200("Ya existe una empresa ingreado con ese RUT: " . $userData['nRut']);
                 die();
             }
-            $newCustomerTypeCompany = new CustomerModel($email, $name, $surname, $phone, $password, $address, $company, $nRut);
+            $newCustomerTypeCompany = new CustomerModel($email, $name, $surname, $password, $company, $nRut);
             $idOfCustomerSaved = $newCustomerTypeCompany->save();
         }else{
             //USUARIO TIPO NORMAL
-            $newCustomerTypeNormal = new UserModel($email, $name, $surname, $phone, $password, $address);
+            $newCustomerTypeNormal = new UserModel($email, $name, $surname, $password);
             $idOfCustomerSaved = $newCustomerTypeNormal->save();
         }
    
@@ -133,9 +129,7 @@ class CustomerController
             "token" => $userToken,
             "email" => $customerExistInDatabase['email'],
             "name" => $customerExistInDatabase['name'],
-            "surname" => $customerExistInDatabase['surname'],
-            "phone" => $customerExistInDatabase['phone'],
-            "address" => $customerExistInDatabase['address']
+            "surname" => $customerExistInDatabase['surname']
         );
         
         echo $this->response->successfully("Autenticacion realizada con exito", $bodyResponse);

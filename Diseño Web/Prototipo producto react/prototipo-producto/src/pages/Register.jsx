@@ -21,9 +21,7 @@ const Register = () => {
     email: "",
     name: "",
     surname: "",
-    phone: "",
     password: "",
-    address: "",
     type: "NORMAL",
   };
 
@@ -32,9 +30,7 @@ const Register = () => {
     email: true,
     name: true,
     surname: true,
-    phone: false,
     password: true,
-    address: false,
   });
 
   const handleSubmit = async (e) => {
@@ -54,7 +50,6 @@ const Register = () => {
         body: JSON.stringify(values),
       });
       const respToJson = await resp.json();
-      console.log(respToJson);
       if (respToJson.status === "error") {
         return Swal.fire({
           icon: "error",
@@ -70,7 +65,10 @@ const Register = () => {
           timer: 2000,
           showConfirmButton: false,
         });
-        setUserData(respToJson.result.data);
+        setUserData({
+          name: values.name,
+          surname: values.surname
+        });
         localStorage.setItem("token", respToJson.result.data.token);
         setTimeout(() => {
           navigate("/");
@@ -134,28 +132,6 @@ const Register = () => {
                 onChange={handleValuesChange}
                 setErrorStatusForm={setErrorStatusForm}
                 validateFunction={isValidPassword}
-              />
-
-              <Input
-                name="address"
-                id="address"
-                type={"text"}
-                value={values.address}
-                placeholder="Dirección"
-                onChange={handleValuesChange}
-                setErrorStatusForm={setErrorStatusForm}
-                validateFunction={null}
-              />
-
-              <Input
-                name="phone"
-                id="phone"
-                type={"text"}
-                value={values.phone}
-                placeholder="Teléfono"
-                onChange={handleValuesChange}
-                setErrorStatusForm={setErrorStatusForm}
-                validateFunction={null}
               />
 
               <button className="submitButton" type="submit">

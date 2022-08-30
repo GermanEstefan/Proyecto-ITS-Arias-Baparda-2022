@@ -81,6 +81,7 @@ const Login = () => {
             <Input
               name="password"
               id="password"
+              type="password"
               value={values.password}
               placeholder="Contraseña"
               onChange={handleValuesChange}

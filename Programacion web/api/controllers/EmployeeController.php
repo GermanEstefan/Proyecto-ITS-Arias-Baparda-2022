@@ -55,9 +55,7 @@ class EmployeeController{
         $email = $userData['email'];
         $name = $userData['name'];
         $surname = $userData['surname'];
-        $phone = $userData['phone'];
         $password = $userData['password'];
-        $address = $userData['address'];
         $rol = $userData['rol'];
         $ci = $userData['ci'];
 
@@ -74,7 +72,7 @@ class EmployeeController{
             die();
         }
 
-        $newEmployee = new EmployeeModel($email, $name, $surname, $phone, $password, $address, $rol, $ci);
+        $newEmployee = new EmployeeModel($email, $name, $surname, $password, $rol, $ci);
         $resultOfSave = $newEmployee->save();
         if ($resultOfSave) {
             http_response_code(200);
@@ -124,9 +122,7 @@ class EmployeeController{
             "token" => $userToken,
             "email" => $userInDatabase['email'],
             "name" => $userInDatabase['name'],
-            "surname" => $userInDatabase['surname'],
-            "phone" => $userInDatabase['phone'],
-            "address" => $userInDatabase['address']
+            "surname" => $userInDatabase['surname']
         );
         echo $this->response->successfully("Autenticacion realizada con exito", $bodyResponse);
         die();

@@ -6,8 +6,8 @@
         private $rol;
         private $ci;
 
-        function __construct($email, $name, $surname, $phone, $password, $address, $rol, $ci){
-            parent::__construct($email, $name, $surname, $phone, $password, $address);
+        function __construct($email, $name, $surname, $password, $rol, $ci){
+            parent::__construct($email, $name, $surname, $password);
             $this->rol = $rol;
             $this->ci = $ci;
         }
@@ -28,7 +28,7 @@
             $instanceMySql = $this->connection->getInstance();
             $instanceMySql->begin_transaction(MYSQLI_TRANS_START_READ_WRITE);
             $result_transaccion = true;
-            $userInsert = "INSERT INTO user(email, name, surname, phone, address, password) VALUES ('$this->email', '$this->name', '$this->surname', '$this->phone', '$this->address', '$this->password' )";
+            $userInsert = "INSERT INTO user(email, name, surname, password) VALUES ('$this->email', '$this->name', '$this->surname', '$this->password' )";
             $resultUserInsert = $instanceMySql->query($userInsert);
             if(!$resultUserInsert)  $result_transaccion = false;
             $idGeneratedFromUserInsert = $instanceMySql->insert_id;

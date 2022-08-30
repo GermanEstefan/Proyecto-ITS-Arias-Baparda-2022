@@ -5,18 +5,14 @@
         protected $email;
         protected $name;
         protected $surname;
-        protected $phone;
         protected $password;
-        protected $address;
         protected $connection;
 
-        function __construct($email, $name, $surname, $phone, $password, $address){
+        function __construct($email, $name, $surname, $password ){
             $this->email = $email;
             $this->name = $name;
             $this->surname = $surname;
             $this->password = $password;
-            $this->phone = $phone;
-            $this->address = $address;
             $this->connection = new Connection();
         }
 
@@ -33,7 +29,7 @@
         }
                 
         public function save(){
-            $userInsert = "INSERT INTO user(email, name, surname, phone, address, password) VALUES ('$this->email', '$this->name', '$this->surname', '$this->phone', '$this->address', '$this->password' )";
+            $userInsert = "INSERT INTO user(email, name, surname, password) VALUES ('$this->email', '$this->name', '$this->surname', '$this->password' )";
             $result = $this->connection->setData($userInsert);
             if($result){
                 return $this->connection->getLastIdInserted();
