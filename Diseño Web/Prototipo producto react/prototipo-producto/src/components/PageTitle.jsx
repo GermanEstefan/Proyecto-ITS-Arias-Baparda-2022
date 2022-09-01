@@ -8,7 +8,7 @@ const PageTitle = ({ title, isArrow, arrowGoTo = '/'}) => {
     <div className="main_header">
       {
           isArrow && (<Link to={arrowGoTo}>
-          <FontAwesomeIcon className="icon" icon={faArrowLeft} />
+          <FontAwesomeIcon size="2x" icon={faArrowLeft} />
         </Link>)
       }
       <h1>{title}</h1>

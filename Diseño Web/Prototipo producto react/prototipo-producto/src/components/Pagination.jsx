@@ -29,7 +29,7 @@ const Pagination = ({ currentPage, itemsPerPage, totalItems, paginate }) => {
             className="paginationBtn"
             onClick={() => paginate(1)}
           >
-            <FontAwesomeIcon className="icon" icon={faArrowRight} />
+            <FontAwesomeIcon icon={faArrowRight} />
           </button>
         </span>
       </div>

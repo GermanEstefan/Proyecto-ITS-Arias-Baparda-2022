@@ -55,19 +55,19 @@ const Navbar = () => {
                     onClick={handleLogOut}
                     text={
                       <FontAwesomeIcon
-                        className="icon"
+                      size="2x"
                         icon={faArrowRightFromBracket}
                       />
                     }
                   ></Button>
                 )}
               </li>
-              {userData.name && (
+              {!userData.name && (
                 <li>
                   <Button
                     onClick={() => goTo("/")}
                     text={
-                      <FontAwesomeIcon className="icon" icon={faShoppingCart} />
+                      <FontAwesomeIcon icon={faShoppingCart} />
                     }
                   />
                 </li>
