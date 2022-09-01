@@ -14,7 +14,7 @@
   </head>
   <body>
     <!-- NAVBAR -->
-    <nav class="navbar fixed-top navbar-expand-lg bg-light">
+    <nav class="navbar fixed-top navbar-expand-lg bg-light p-0">
       <div class="container-fluid">
         <a class="navbar-brand" href="index.html"
           ><img src="./img/Bindev.svg" alt="Logo" width="120px"
@@ -185,42 +185,35 @@
       width="500px"
       alt="---"
     />
-    <form class="m-auto d-block w-70 mx-4 min-vh-100">
+    <div>
       <h1 class="text-center">Contacto</h1>
-      <fieldset disabled>
-        <legend>Contactanos</legend>
+      <form class="w-50 d-block m-auto">
         <div class="mb-3">
-          <label for="disabledTextInput" class="form-label">Asunto</label>
+          <label for="exampleInputEmail1" class="form-label">Nombre</label>
           <input
             type="text"
-            id="disabledTextInput"
             class="form-control"
-            placeholder="Disabled input"
+            aria-describedby="emailHelp"
           />
         </div>
         <div class="mb-3">
-          <label for="disabledSelect" class="form-label">Mensaje</label>
-          <select id="disabledSelect" class="form-select">
-            <option>asdasd</option>
-          </select>
-        </div>
-        <div class="mb-3">
-          <div class="form-check">
-            <input
-              class="form-check-input"
-              type="checkbox"
-              id="disabledFieldsetCheck"
-              disabled
-            />
-            <label class="form-check-label" for="disabledFieldsetCheck">
-              yisdagsdvas
-            </label>
+          <label for="exampleInputEmail1" class="form-label">Correo</label>
+          <input
+            type="email"
+            class="form-control"
+            aria-describedby="emailHelp"
+          />
+          <div id="emailHelp" class="form-text">
+            No compartiremos tu correo con nadie mas.
           </div>
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-      </fieldset>
-    </form>
-
+        <div class="mb-3">
+          <label for="exampleInputPassword1" class="form-label">Mensaje</label>
+          <textarea type="text" class="form-control" maxlength="100"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Enviar</button>
+      </form>
+    </div>
     <!-- FOOTER -->
     <div class="container">
       <footer class="py-3 my-4">
