@@ -1,14 +1,13 @@
 import React, { useEffect, useState, useContext } from "react";
 import { Link } from "react-router-dom";
-import Imagen from "./../img/Obreros.jpg";
-import { Animated } from "react-animated-css";
-import { useForm } from "../hooks/useForm";
-import { URL } from "../API/URL";
+import Imagen from "../../assets/img/Obreros.jpg";
+import { useForm } from "../../hooks/useForm";
+import { URL } from "../../API/URL";
 import Swal from "sweetalert2";
-import { userStatusContext } from "../App";
+import { userStatusContext } from "../../App";
 import { useNavigate } from "react-router-dom";
-import Input from "../components/Input";
-import { isEmail, isEmpty, isValidPassword } from "../helpers/validateForms";
+import { isEmail, isEmpty, isValidPassword } from "../../helpers/validateForms";
+import Input from "../../components/store/Input";
 
 const Register = () => {
   const { setUserData } = useContext(userStatusContext);
@@ -58,6 +57,7 @@ const Register = () => {
           showConfirmButton: true,
         });
       }
+      console.log(respToJson)
       if (respToJson.status === "successfully") {
         Swal.fire({
           icon: "success",
@@ -81,18 +81,11 @@ const Register = () => {
   };
 
   return (
-    <>
+ 
       <div className="form-container">
-        <img className={"form-img"} src={Imagen} alt="Imagen"></img>
-        <Animated
-          animationIn="slideInRight"
-          animationOut="fadeOut"
-          animationInDuration={500}
-          isVisible={true}
-        >
-          <div className="form">
-            <h1>Registrate para comenzar tu experiencia</h1>
+        <img className={"form-img"} src={Imagen} alt="Imagen"/>
             <form onSubmit={handleSubmit} autoComplete="off">
+            <h1>Registrate para comenzar tu experiencia</h1>
               <Input
                 name="name"
                 id="name"
@@ -134,7 +127,7 @@ const Register = () => {
                 validateFunction={isValidPassword}
               />
 
-              <button className="submitButton" type="submit">
+              <button className="submit-button" type="submit">
                 Registrarse
               </button>
               <br />
@@ -142,10 +135,8 @@ const Register = () => {
                 Ingresar
               </Link>
             </form>
-          </div>
-        </Animated>
       </div>
-    </>
+   
   );
 };
 

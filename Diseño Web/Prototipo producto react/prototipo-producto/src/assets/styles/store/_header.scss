@@ -1,0 +1,126 @@
+
+.hedaer-store {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 15vh;
+  background-color: #fff;
+
+  .hedaer-store__logo{
+    width: 60vw;
+    max-width: 300px;
+  }
+
+  .hedaer-store__hamb{
+    font-size: 2rem;
+    color: $orange;
+  }
+
+  .hedaer-store__nav-desktop{
+    margin: auto 0;
+  }
+
+  .hedaer-store__nav-desktop > ul{
+    display: flex;
+    align-items: center;
+    a {
+      position: relative;
+      cursor: pointer;
+      margin-right: 60px;
+      font-size: 1.5rem;
+      &::after{
+        content: '';
+        height: 2px;
+        width: 0;
+        background-color: $orange;
+        position: absolute;
+        bottom: -10px;
+        left: 0;
+        transition: .5s;
+      }
+      &:hover::after{
+        width: 100%;
+      }
+    }
+    svg{
+      font-size: 2rem;
+      color: $orange;
+      cursor: pointer;
+      margin-right: 20px;
+      transition: color .5s;
+      &:hover{
+        color: $transparent_orange;
+      }
+    }
+  }
+}
+
+.nav-mobile-store{
+  background-color: #f2f2f2;
+  width: 60vw;
+  max-width: 280px;
+  height: 100vh;
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: 2;
+  box-shadow: 1px 2px 13px 3px rgba(0,0,0,0.23) inset;
+  -webkit-box-shadow: 1px 2px 13px 3px rgba(0,0,0,0.23) inset;
+  -moz-box-shadow: 1px 2px 13px 3px rgba(0,0,0,0.23) inset;
+  animation: openMenu .5s ease-in;
+  strong{
+    font-size: 1.2rem;
+    position: absolute;
+    left: 20px;
+    top: 20px;
+    color: $orange;
+    font-weight: normal;
+  }
+  ul{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    li{
+      margin-bottom: 50px;
+      margin-right: 20px;
+      font-size: 1.6rem;
+      font-weight: lighter;
+    }
+  }
+  img{
+    position: absolute;
+    bottom: 20px;
+    right: 0;
+    width: 60vw;
+    max-width:200px;
+  }
+}
+
+.close-menu{
+  animation: closeMenu .5s ease-out;
+  right: -60vw;
+}
+
+@keyframes openMenu{
+  from{
+    right: -60vw;
+  }
+  to{
+    right: 0;
+  }
+}
+
+@keyframes closeMenu{
+  from{
+    right: 0;
+  }
+  to{
+    right: -60vw;
+  }
+}

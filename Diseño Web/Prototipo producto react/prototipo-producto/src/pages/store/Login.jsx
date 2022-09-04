@@ -1,32 +1,20 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
-import Imagen from "./../img/Obreros.jpg";
-import { Animated } from "react-animated-css";
-import { useForm } from "../hooks/useForm";
-import { URL } from "../API/URL";
-import { userStatusContext } from "../App";
-import Input from "../components/Input";
-import { isEmail, isValidPassword } from "../helpers/validateForms";
+import Imagen from "../../assets/img/Obreros.jpg";
+import { isEmail, isValidPassword } from "../../helpers/validateForms";
 import Swal from "sweetalert2";
+import { URL } from "../../API/URL";
+import { userStatusContext } from "../../App";
+import { useForm } from "../../hooks/useForm";
+import Input from "../../components/store/Input";
 
 const Login = () => {
 
-  const [isMounted, setIsMounted] = useState(true);
-  const { userData, setUserData } = useContext(userStatusContext);
+  const { setUserData } = useContext(userStatusContext);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    window.scroll(0, 0);
-  }, []);
-
-  useEffect(() => {
-    return () => {
-      setIsMounted(false);
-    };
-  }, [userData]);
-
-  const [values, handleValuesChange, resetForm] = useForm({ email: "", password: "" });
+  const [values, handleValuesChange] = useForm({ email: "", password: "" });
   const [errorStatusForm, setErrorStatusForm] = useState({ email: true, password: true });
 
   const handleSubmit = async (e) => {
@@ -44,12 +32,21 @@ const Login = () => {
           showConfirmButton: true,
         });
       } 
+      console.log(respToJson)
       if (respToJson.status === 'successfully') {
-        if (isMounted) {
-          setUserData(respToJson.result.data);
-          localStorage.setItem("token", respToJson.result.data.token);
-          navigate("/");
-        }
+        setUserData({
+          name: respToJson.result.data.name,
+          surname: respToJson.result.data.surname,
+          auth: true
+        });
+        localStorage.setItem("token", respToJson.result.data.token);
+        Swal.fire({
+          icon: "success",
+          text: "Ingreso exitoso",
+          timer: 2000,
+          showConfirmButton: false,
+        });
+        setTimeout(() => navigate("/"), 2000);
       }
     } catch (error) {
       console.error(error);
@@ -58,16 +55,10 @@ const Login = () => {
   }
 
   return (
-    <>
+    <main className="login-page">
       <div className="form-container">
         <img className={"form-img"} src={Imagen} alt="Imagen"></img>
-        <Animated
-          animationIn="slideInRight"
-          animationOut="fadeOut"
-          animationInDuration={500}
-          isVisible={true}
-        >
-          <form className="form" onSubmit={handleSubmit} autoComplete="off">
+          <form onSubmit={handleSubmit} autoComplete="off">
             <h1>Bienvenido, por favor ingresa tus datos</h1>
             <Input
               name="email"
@@ -88,7 +79,7 @@ const Login = () => {
               setErrorStatusForm={setErrorStatusForm}
               validateFunction={isValidPassword}
             />
-            <button className="submitButton" type="submit">
+            <button className="submit-button" type="submit">
               Ingresar
             </button>
             <br />
@@ -96,9 +87,8 @@ const Login = () => {
               Registrarse
             </Link>
           </form>
-        </Animated>
       </div>
-    </>
+    </main>
   );
 };
 

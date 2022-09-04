@@ -1,10 +1,10 @@
 import React from 'react'
-import facebookIcon from './../img/facebook-brands.svg'
-import instagramIcon from './../img/instagram-brands.svg'
+import facebookIcon from '../../assets/img/facebook-brands.svg'
+import instagramIcon from '../../assets/img/instagram-brands.svg'
 
 const Footer = () => {
   return (
-    <div className='footer'>
+    <footer className='footer'>
     <ul>
       <li>seguridadcorporal@gmail.com</li>
       <li>092 065 001</li>
@@ -18,7 +18,7 @@ const Footer = () => {
         ><img src={instagramIcon} width="50px" height='50px'  alt=""
       /></a>
     </div>
-  </div>
+  </footer>
   )
 }
 

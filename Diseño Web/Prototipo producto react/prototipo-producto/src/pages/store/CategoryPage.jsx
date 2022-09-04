@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import PageTitle from "../components/PageTitle";
-import ProductCard from "../components/ProductCard";
-import Guantes from "./../img/guantes.jpg";
-import { Animated } from "react-animated-css";
-import Pagination from "../components/Pagination";
+import Guantes from "../../assets/img/guantes.jpg";
+import PageTitle from "../../components/store/PageTitle";
+import Pagination from "../../components/store/Pagination";
+import ProductCard from "../../components/store/ProductCard";
 
 const CategoryPage = () => {
   const { category } = useParams();

@@ -1,0 +1,50 @@
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 100px 0;
+  padding: 30px;
+  @media screen and (max-width: 800px){
+    margin: 50px 0;
+  }
+
+  .card {
+    max-width: 280px;
+    min-width: 200px;
+    height: auto;
+    padding: 1em;
+    border-radius: 5px;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    cursor: pointer;
+
+    img {
+      padding-bottom: 2em;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      width: 80%;
+    }
+
+    .text-container {
+      h2 {
+        padding: 1em;
+        width: auto;
+        overflow: hidden;
+        text-align: center;
+        background-color: #bccddb;
+      }
+
+      p {
+        overflow-y: scroll;
+        max-height: 200px;
+      }
+    }
+
+    &:hover {
+      box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px,
+        rgba(0, 0, 0, 0.22) 0px 15px 12px;
+      transition: 0.3s;
+      transform: translateY(-1px);
+    }
+  }
+}

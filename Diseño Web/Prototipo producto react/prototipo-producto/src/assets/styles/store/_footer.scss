@@ -1,5 +1,6 @@
 .footer {
   background-color: $orange;
+  padding: 20px 0;
   @media (max-width: 600px) {
     flex-direction: column-reverse;
     padding: 0;
