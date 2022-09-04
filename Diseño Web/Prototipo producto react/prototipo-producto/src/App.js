@@ -1,17 +1,14 @@
 import React, { createContext } from "react";
 import { Routes, Route } from "react-router-dom";
-import Footer from "./components/store/Footer";
 import Register from "./pages/store/Register";
-import Header from "./components/store/Header";
 import CategoryPage from "./pages/store/CategoryPage";
 import Login from "./pages/store/Login";
 import ProductPage from "./pages/store/ProductPage";
 import Contact from "./pages/store/Contact";
 import Home from "./pages/store/Home";
-import ShoppingCart from "./components/store/ShoppingCart";
-import { useMediaQuery } from "react-responsive";
 import Loading from "./components/store/Loading";
 import useAuth from "./hooks/useAuth";
+import ContainerBase from "./components/store/ContainerBase";
 
 export const userStatusContext = createContext({});
 
@@ -23,28 +20,24 @@ const App = () => {
     auth: false
   });
 
-  const isMobile = useMediaQuery({ query: "(max-width: 800px)" });
-
   return (
     isChecking
-    ?
-    <Loading />
-    :
-    <>
+      ?
+      <Loading />
+      :
       <userStatusContext.Provider value={{ userData, setUserData }}>
-        <Header />
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/category/:category" element={<CategoryPage />} />
-          <Route path="/category/:category/:id" element={<ProductPage />} />
+          <Route path="/" element={<ContainerBase><Home /></ContainerBase>} />
+          <Route path="/login" element={<ContainerBase><Login /></ContainerBase>} />
+          <Route path="/register" element={<ContainerBase><Register /></ContainerBase>} />
+          <Route path="/contact" element={<ContainerBase><Contact /></ContainerBase>} />
+          <Route path="/category/:category" element={<ContainerBase><CategoryPage /></ContainerBase>} />
+          <Route path="/category/:category/:id" element={<ContainerBase><ProductPage /></ContainerBase>} />
         </Routes>
-        {isMobile && <ShoppingCart />}
-        <Footer />
+        <Routes>
+          <Route path="/admin/login" element={<h1>Login admin</h1>} />
+        </Routes>
       </userStatusContext.Provider>
-    </>
   );
 }
 
