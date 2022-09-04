@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { userStatusContext } from "../../App";
 import LogoCliente from "../../assets/img/Cliente-nombre1.svg";
 
@@ -27,7 +27,7 @@ const NavMobile = ({ openMenu, setOpenMenu, refMenu }) => {
                 <strong>{`${userData.name}  ${userData.surname}`}</strong>
             }
             <ul>
-                <Link to='/'><li>Inicio</li></Link>
+                <li onClick={ () => handleNavigate('/')} >Inicio</li>
                 {
                     userData.auth
                     ?
