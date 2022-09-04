@@ -1,16 +1,42 @@
-import React, {useEffect} from "react";
-import BannerImage from '../../assets/img/Banner.jpg'
+import React from "react";
 import CategoriesList from "../../components/store/CategoriesList";
+import facebookIcon from '../../assets/img/facebook-brands.svg';
+import instagramIcon from '../../assets/img/instagram-brands.svg'
+import messageIcon from '../../assets/img/message-solid.svg'
+import whatsappIcon from '../../assets/img/whatsapp.svg'
+import { useMediaQuery } from "react-responsive";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
-  useEffect(() => {
-    window.scroll(0, 0);
-  }, []);
+
+  const isMobile = useMediaQuery({ query: "(max-width: 800px)" });
+  const navigate = useNavigate();
 
   return (
     <main className="home-page">
-      <img src={BannerImage} alt="Snow" className="home-page__banner" />
-      <h1 className="home-page__title">CATÁLOGO</h1>
+      <section className="home-page__banner">
+
+        <div className="home-page__banner__info">
+          <h1>Seguridad Corporal</h1>
+          <p>Lideres del mercado, excelente calidad y precio, somos tu mejor opcion.</p>
+          <button>Ver productos</button>
+        </div>
+
+        {
+          !isMobile
+          &&
+          <div className="home-page__banner__contact">
+            <strong>¡ Contactanos !</strong>
+            <div>
+              <img src={facebookIcon} alt="facebook" />
+              <img src={instagramIcon} alt="instagram" />
+              <img src={messageIcon} alt="message" onClick={() => navigate('/contact')} />
+              <img src={whatsappIcon} alt="whatsapp" />
+            </div>
+          </div>
+        }
+      </section>
+      <h1 className="home-page__title">Categorias</h1>
       <CategoriesList />
     </main>
   );

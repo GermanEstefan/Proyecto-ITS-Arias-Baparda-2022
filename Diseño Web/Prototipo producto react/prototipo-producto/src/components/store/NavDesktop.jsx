@@ -27,7 +27,6 @@ const NavDesktop = () => {
                     <>
                         <Link to='/login'><li>Ingresar</li></Link>
                         <Link to='/register'><li>Registrarse</li></Link>
-                        <Link to='/contact'><li>Contacto</li></Link>
                     </>
                 }
                 <ShoppingCart/>

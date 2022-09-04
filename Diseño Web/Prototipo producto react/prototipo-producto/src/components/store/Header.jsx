@@ -5,7 +5,7 @@ import { useMediaQuery } from "react-responsive";
 import NavMobile from "./NavMobile";
 import NavDesktop from "./NavDesktop";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars } from "@fortawesome/free-solid-svg-icons";
+import { faBars, faSearch } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 import { useRef } from "react";
 
@@ -28,16 +28,23 @@ const Header = () => {
         <Link to='/' className="hedaer-store__logo">
           <img src={LogoCliente} alt="Logo de la empresa" />
         </Link>
-          {
-            isMobile ?
-            <FontAwesomeIcon
-              icon={faBars} 
-              className="hedaer-store__hamb"
-              onClick={() => setOpenMenu(true)} 
-            /> 
-            :
-            <NavDesktop/>
-          }
+        { 
+          !isMobile && 
+          <form className="hedaer-store__search">
+            <FontAwesomeIcon icon={faSearch}/>
+            <input type="text" placeholder="Buscar productos"/>
+          </form> 
+        }
+        {
+          isMobile ?
+          <FontAwesomeIcon
+            icon={faBars} 
+            className="hedaer-store__hamb"
+            onClick={() => setOpenMenu(true)} 
+          /> 
+          :
+          <NavDesktop/>
+        }
       </header>
       { isMobile && <NavMobile openMenu={openMenu} setOpenMenu={setOpenMenu} refMenu = {navMobileRef} /> }
       { (isMobile && openMenu) && <div onClick={handleCloseMenu} ref={shadowCloseRef} className="shadow-close"></div> }

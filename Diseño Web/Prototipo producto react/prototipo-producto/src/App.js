@@ -12,6 +12,8 @@ import Contact from "./pages/store/Contact";
 import Home from "./pages/store/Home";
 import ShoppingCart from "./components/store/ShoppingCart";
 import { useMediaQuery } from "react-responsive";
+import Loading from "./components/store/Loading";
+
 
 export const userStatusContext = createContext({});
 
@@ -52,7 +54,7 @@ function App() {
       {
         isChecking
           ?
-          <h1>Cargando...</h1>
+          <Loading/>
           :
           <>
             <Header />

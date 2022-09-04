@@ -1,27 +1,55 @@
 
 .hedaer-store {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
   position: fixed;
   top: 0;
   width: 100%;
-  height: 15vh;
+  height: 10vh;
   background-color: #fff;
   z-index: 1;
 
   .hedaer-store__logo{
     width: 60vw;
     max-width: 300px;
+    position: absolute;
+    left: 20px;
   }
 
   .hedaer-store__hamb{
     font-size: 2rem;
     color: $orange;
+    right: 20px;
+    position: absolute;
+  }
+
+  .hedaer-store__search{
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 40vw;
+    max-width: 400px;
+    @media (max-width: 1200px) {
+      display: none;
+    }
+    svg{
+      position: absolute;
+      left: 10px;
+      color: $orange;
+      font-size: 1.5rem;
+    }
+    input{
+      width: inherit;
+      padding-left: 50px;
+      border: 1px solid $orange;
+      background-color: #f2f2f2;
+    }
   }
 
   .hedaer-store__nav-desktop{
-    margin: auto 0;
+    position: absolute;
+    right: 20px;
   }
 
   .hedaer-store__nav-desktop > ul{
@@ -30,8 +58,8 @@
     a {
       position: relative;
       cursor: pointer;
-      margin-right: 60px;
-      font-size: 1.5rem;
+      margin-right: 40px;
+      font-size: 1.4rem;
       &::after{
         content: '';
         height: 2px;
