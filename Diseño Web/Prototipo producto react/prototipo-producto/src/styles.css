@@ -426,6 +426,7 @@
   width: 100%;
   height: 15vh;
   background-color: #fff;
+  z-index: 1;
 }
 .hedaer-store .hedaer-store__logo {
   width: 60vw;
