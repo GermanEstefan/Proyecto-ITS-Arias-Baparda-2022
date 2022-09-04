@@ -3,10 +3,16 @@ import { Link, useNavigate } from "react-router-dom";
 import { userStatusContext } from "../../App";
 import LogoCliente from "../../assets/img/Cliente-nombre1.svg";
 
-const NavMobile = ({ openMenu, refMenu }) => {
+const NavMobile = ({ openMenu, setOpenMenu, refMenu }) => {
 
     const {userData} = useContext(userStatusContext);
     const navigate = useNavigate();
+
+    const handleNavigate = (route) => {
+        setOpenMenu(false);
+        navigate(route)
+    }
+
     const handleLogout = () => {
         localStorage.removeItem('token');
         window.location.reload();
@@ -32,9 +38,9 @@ const NavMobile = ({ openMenu, refMenu }) => {
                     </>
                     :
                     <>
-                        <Link to='/contact'><li>Contacto</li></Link>
-                        <Link to='/login'><li>Ingresar</li></Link>
-                        <Link to='/register'><li>Registrarse</li></Link>
+                        <li onClick={ () => handleNavigate('/contact') } >Contacto</li>
+                        <li onClick={() => handleNavigate('/login')}>Ingresar</li>
+                        <li onClick={() => handleNavigate('/register')}>Registrarse</li>
                     </>
                 }
                 

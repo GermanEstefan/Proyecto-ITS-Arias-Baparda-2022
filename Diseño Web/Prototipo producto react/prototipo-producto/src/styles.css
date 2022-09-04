@@ -18,6 +18,7 @@
     min-width: initial;
     box-shadow: none;
     width: 90vw;
+    margin: 7em auto;
   }
 }
 .form-container img {
