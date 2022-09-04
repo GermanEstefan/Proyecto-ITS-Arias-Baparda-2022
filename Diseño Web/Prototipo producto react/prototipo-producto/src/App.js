@@ -13,12 +13,11 @@ import { useMediaQuery } from "react-responsive";
 import Loading from "./components/store/Loading";
 import useAuth from "./hooks/useAuth";
 
-
 export const userStatusContext = createContext({});
 
 const App = () => {
 
-  const {userData, setUserData, isChecking} = useAuth({
+  const { userData, setUserData, isChecking } = useAuth({
     name: null,
     surname: null,
     auth: false
@@ -27,27 +26,25 @@ const App = () => {
   const isMobile = useMediaQuery({ query: "(max-width: 800px)" });
 
   return (
-    <userStatusContext.Provider value={{ userData, setUserData }}>
-      {
-        isChecking
-        ?
-        <Loading/>
-        :
-        <>
-          <Header />
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/:category" element={<CategoryPage />} />
-            <Route path="/:category/:name" element={<ProductPage />} />
-          </Routes>
-          { isMobile && <ShoppingCart/>}
-          <Footer/>
-        </>
-      }
-    </userStatusContext.Provider>
+    isChecking
+    ?
+    <Loading />
+    :
+    <>
+      <userStatusContext.Provider value={{ userData, setUserData }}>
+        <Header />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/category/:category" element={<CategoryPage />} />
+          <Route path="/category/:category/:id" element={<ProductPage />} />
+        </Routes>
+        {isMobile && <ShoppingCart />}
+        <Footer />
+      </userStatusContext.Provider>
+    </>
   );
 }
 

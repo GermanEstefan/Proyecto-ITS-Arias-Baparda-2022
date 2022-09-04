@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import Guantes from "../../assets/img/guantes.jpg";
 import PageTitle from "../../components/store/PageTitle";
@@ -6,10 +6,17 @@ import Pagination from "../../components/store/Pagination";
 import ProductCard from "../../components/store/ProductCard";
 
 const CategoryPage = () => {
+  
   const { category } = useParams();
-
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(3);
+  
+  /*
+    Esta pantalla va a tener un endpoint que va a traer
+    todos los item en base al nombre de la categoria.
+    El valor "category" obtenido por parametros solo es para hacer
+    la request. 
+  */
 
   const productsList = [
     {
@@ -126,10 +133,6 @@ const CategoryPage = () => {
   const paginate = (number) => {
     setCurrentPage(currentPage + number);
   };
-
-  useEffect(() => {
-    window.scroll(0, 0);
-  }, []);
 
   return (
     <div className="main">

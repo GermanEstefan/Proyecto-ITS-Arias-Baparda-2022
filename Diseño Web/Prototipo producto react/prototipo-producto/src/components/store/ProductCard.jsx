@@ -3,9 +3,10 @@ import { Link, useParams } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
 import Card from "./Card";
 import { Animated } from "react-animated-css";
-const ProductCard = ({ img, product, description }) => {
-  const { category } = useParams();
 
+const ProductCard = ({ img, product, description }) => {
+  
+  const { category } = useParams();
   const isMobile = useMediaQuery({ query: "(max-width: 700px)" });
 
   return (
@@ -24,7 +25,7 @@ const ProductCard = ({ img, product, description }) => {
           <div className="product-text-container">
             <h2>{product}</h2>
             <p>{description}</p>
-            <Link to={`/${category}/${product}`}>
+            <Link to={`/category/${category}/${product}`}>
               <span>Ver mas</span>
               <i className="fas fa-arrow-right"></i>
             </Link>
