@@ -4,7 +4,7 @@ import { useMediaQuery } from "react-responsive";
 import Card from "./Card";
 import { Animated } from "react-animated-css";
 
-const ProductCard = ({ img, product, description }) => {
+const ProductCard = ({ img, product, description, id }) => {
   
   const { category } = useParams();
   const isMobile = useMediaQuery({ query: "(max-width: 700px)" });
@@ -17,7 +17,7 @@ const ProductCard = ({ img, product, description }) => {
       isVisible={true}
     >
       {isMobile ? (
-        <Card img={img} category={product} />
+        <Card img={img} title={product} />
       ) : (
         <div className="product-card">
           <img src={img} width="200px" alt="" />
@@ -25,7 +25,7 @@ const ProductCard = ({ img, product, description }) => {
           <div className="product-text-container">
             <h2>{product}</h2>
             <p>{description}</p>
-            <Link to={`/category/${category}/${product}`}>
+            <Link to={`/category/${category}/${id}`}>
               <span>Ver mas</span>
               <i className="fas fa-arrow-right"></i>
             </Link>

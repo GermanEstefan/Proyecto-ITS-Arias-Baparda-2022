@@ -9,8 +9,6 @@ const Pagination = ({ currentPage, itemsPerPage, totalItems, paginate }) => {
     pageNumbers.push(i);
   }
 
-  console.log(currentPage);
-
   return (
     <nav>
       <div className="paginationContainer">

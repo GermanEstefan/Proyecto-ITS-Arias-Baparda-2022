@@ -1,5 +1,5 @@
 
-.hedaer-store {
+.header-store {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -9,22 +9,23 @@
   height: 10vh;
   background-color: #fff;
   z-index: 1;
+  padding: 4px 0 2px 0;
 
-  .hedaer-store__logo{
+  .header-store__logo{
     width: 60vw;
     max-width: 300px;
     position: absolute;
     left: 20px;
   }
 
-  .hedaer-store__hamb{
+  .header-store__hamb{
     font-size: 2rem;
     color: $orange;
     right: 20px;
     position: absolute;
   }
 
-  .hedaer-store__search{
+  .header-store__search{
     position: relative;
     display: flex;
     align-items: center;
@@ -47,12 +48,12 @@
     }
   }
 
-  .hedaer-store__nav-desktop{
+  .header-store__nav-desktop{
     position: absolute;
     right: 20px;
   }
 
-  .hedaer-store__nav-desktop > ul{
+  .header-store__nav-desktop > ul{
     display: flex;
     align-items: center;
     a {

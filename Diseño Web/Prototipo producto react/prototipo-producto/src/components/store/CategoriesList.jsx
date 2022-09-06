@@ -15,7 +15,7 @@ const CategoriesList = () => {
     },
     {
       name: "Higiene",
-      slug: "tools"
+      slug: "Higiene en ingles"
     },
     {
       name: "Zapatos",
@@ -32,7 +32,7 @@ const CategoriesList = () => {
       {
         categoriesList.map((category, index) => {
           return (
-            <Card key={index} category={category.name} slug={category.slug} img={Guantes} />
+            <Card key={index} title={category.name} slug={category.slug} img={Guantes} />
           );
         })
       }

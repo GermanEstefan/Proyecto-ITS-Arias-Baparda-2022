@@ -24,13 +24,13 @@ const Header = () => {
 
   return (
     <>
-      <header className="hedaer-store">
-        <Link to='/' className="hedaer-store__logo">
+      <header className="header-store">
+        <Link to='/' className="header-store__logo">
           <img src={LogoCliente} alt="Logo de la empresa" />
         </Link>
         { 
           !isMobile && 
-          <form className="hedaer-store__search">
+          <form className="header-store__search">
             <FontAwesomeIcon icon={faSearch}/>
             <input type="text" placeholder="Buscar productos"/>
           </form> 
@@ -39,7 +39,7 @@ const Header = () => {
           isMobile ?
           <FontAwesomeIcon
             icon={faBars} 
-            className="hedaer-store__hamb"
+            className="header-store__hamb"
             onClick={() => setOpenMenu(true)} 
           /> 
           :

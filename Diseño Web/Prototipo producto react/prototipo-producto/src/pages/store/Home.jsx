@@ -7,7 +7,7 @@ import whatsappIcon from '../../assets/img/whatsapp.svg'
 import { useMediaQuery } from "react-responsive";
 import { useNavigate } from "react-router-dom";
 
-const Home = () => {
+const   Home = () => {
 
   const isMobile = useMediaQuery({ query: "(max-width: 800px)" });
   const navigate = useNavigate();

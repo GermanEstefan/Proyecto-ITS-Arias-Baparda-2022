@@ -423,7 +423,7 @@
   transform: translateY(-1px);
 }
 
-.hedaer-store {
+.header-store {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -433,20 +433,21 @@
   height: 10vh;
   background-color: #fff;
   z-index: 1;
+  padding: 4px 0 2px 0;
 }
-.hedaer-store .hedaer-store__logo {
+.header-store .header-store__logo {
   width: 60vw;
   max-width: 300px;
   position: absolute;
   left: 20px;
 }
-.hedaer-store .hedaer-store__hamb {
+.header-store .header-store__hamb {
   font-size: 2rem;
   color: #f5990f;
   right: 20px;
   position: absolute;
 }
-.hedaer-store .hedaer-store__search {
+.header-store .header-store__search {
   position: relative;
   display: flex;
   align-items: center;
@@ -454,37 +455,37 @@
   max-width: 400px;
 }
 @media (max-width: 1200px) {
-  .hedaer-store .hedaer-store__search {
+  .header-store .header-store__search {
     display: none;
   }
 }
-.hedaer-store .hedaer-store__search svg {
+.header-store .header-store__search svg {
   position: absolute;
   left: 10px;
   color: #f5990f;
   font-size: 1.5rem;
 }
-.hedaer-store .hedaer-store__search input {
+.header-store .header-store__search input {
   width: inherit;
   padding-left: 50px;
   border: 1px solid #f5990f;
   background-color: #f2f2f2;
 }
-.hedaer-store .hedaer-store__nav-desktop {
+.header-store .header-store__nav-desktop {
   position: absolute;
   right: 20px;
 }
-.hedaer-store .hedaer-store__nav-desktop > ul {
+.header-store .header-store__nav-desktop > ul {
   display: flex;
   align-items: center;
 }
-.hedaer-store .hedaer-store__nav-desktop > ul a {
+.header-store .header-store__nav-desktop > ul a {
   position: relative;
   cursor: pointer;
   margin-right: 40px;
   font-size: 1.4rem;
 }
-.hedaer-store .hedaer-store__nav-desktop > ul a::after {
+.header-store .header-store__nav-desktop > ul a::after {
   content: "";
   height: 2px;
   width: 0;
@@ -494,17 +495,17 @@
   left: 0;
   transition: 0.5s;
 }
-.hedaer-store .hedaer-store__nav-desktop > ul a:hover::after {
+.header-store .header-store__nav-desktop > ul a:hover::after {
   width: 100%;
 }
-.hedaer-store .hedaer-store__nav-desktop > ul svg {
+.header-store .header-store__nav-desktop > ul svg {
   font-size: 2rem;
   color: #f5990f;
   cursor: pointer;
   margin-right: 20px;
   transition: color 0.5s;
 }
-.hedaer-store .hedaer-store__nav-desktop > ul svg:hover {
+.header-store .header-store__nav-desktop > ul svg:hover {
   color: rgba(245, 153, 15, 0.4862745098);
 }
 
@@ -735,6 +736,31 @@
 }
 .user-panel-page section {
   padding: 20px;
+}
+
+.productPage {
+  display: flex;
+  margin-top: 8em;
+  min-height: 100vh;
+}
+@media screen and (max-width: 800px) {
+  .productPage {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+.productPage .productPage__img {
+  width: 40%;
+}
+.productPage .productPage__description {
+  width: 60%;
+}
+.productPage .productPage__description .productPage__description__header {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: #bccddb;
+  padding: 5px;
 }
 
 body {

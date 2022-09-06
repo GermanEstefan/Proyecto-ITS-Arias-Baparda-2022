@@ -6,11 +6,10 @@ import Pagination from "../../components/store/Pagination";
 import ProductCard from "../../components/store/ProductCard";
 
 const CategoryPage = () => {
-  
   const { category } = useParams();
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(3);
-  
+
   /*
     Esta pantalla va a tener un endpoint que va a traer
     todos los item en base al nombre de la categoria.
@@ -20,6 +19,7 @@ const CategoryPage = () => {
 
   const productsList = [
     {
+      id:1,
       name: "tuki",
       description:
         "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quidem consequuntur animi aliquid nulla rem nostrum nesciunt voluptas ea quos quo cum, ratione non voluptatibus! Iure recusandae officiis nostrum quasi dolor.",
@@ -147,11 +147,12 @@ const CategoryPage = () => {
               description={product.description}
               img={Guantes}
               key={index}
+              id={product.id}
             />
           );
         })}
         <Pagination
-        currentPage={currentPage}
+          currentPage={currentPage}
           itemsPerPage={itemsPerPage}
           totalItems={productsList.length}
           paginate={paginate}

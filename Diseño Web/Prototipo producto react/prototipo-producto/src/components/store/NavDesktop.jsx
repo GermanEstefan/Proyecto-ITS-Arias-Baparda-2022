@@ -12,7 +12,7 @@ const NavDesktop = () => {
     const [openUserMenu, setOpenUserMenu] = useState(false);
 
     return (
-        <nav className="hedaer-store__nav-desktop">
+        <nav className="header-store__nav-desktop">
             <ul>
                 {
                     userData.auth
