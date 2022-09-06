@@ -9,6 +9,7 @@ import Home from "./pages/store/Home";
 import Loading from "./components/store/Loading";
 import useAuth from "./hooks/useAuth";
 import ContainerBase from "./components/store/ContainerBase";
+import UserPanel from "./pages/store/UserPanel";
 
 export const userStatusContext = createContext({});
 
@@ -33,6 +34,7 @@ const App = () => {
           <Route path="/contact" element={<ContainerBase><Contact /></ContainerBase>} />
           <Route path="/category/:category" element={<ContainerBase><CategoryPage /></ContainerBase>} />
           <Route path="/category/:category/:id" element={<ContainerBase><ProductPage /></ContainerBase>} />
+          <Route path="/panel-user" element={<ContainerBase><UserPanel/></ContainerBase>} />
         </Routes>
         <Routes>
           <Route path="/admin/login" element={<h1>Login admin</h1>} />

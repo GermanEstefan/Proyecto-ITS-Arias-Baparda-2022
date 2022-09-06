@@ -67,7 +67,8 @@ const Register = () => {
         });
         setUserData({
           name: values.name,
-          surname: values.surname
+          surname: values.surname,
+          auth: true
         });
         localStorage.setItem("token", respToJson.result.data.token);
         setTimeout(() => {

@@ -1,0 +1,18 @@
+.user-panel-page{
+    display: flex;
+    aside{
+        padding: 20px;
+        h1{
+            color: $orange;
+        }
+        ul{
+            li{
+                margin-bottom: 30px;
+                cursor: pointer;
+            }
+        }
+    }
+    section{
+        padding: 20px;
+    }
+}
