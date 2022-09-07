@@ -1,18 +1,45 @@
 .user-panel-page{
+    padding: 30px 0;
     display: flex;
     aside{
-        padding: 20px;
+        padding: 30px;
+        width: 20%;
+        border-right: 1px solid $orange;
+        text-align: center;
         h1{
             color: $orange;
+            margin: 30px 0;
         }
         ul{
             li{
                 margin-bottom: 30px;
+                font-size: 1.1rem;
                 cursor: pointer;
             }
         }
     }
     section{
-        padding: 20px;
+        padding: 30px;
+        width: 80%;
+        display: flex;
+        justify-content: center;
+        form{
+            width: 350px;
+            display: flex;
+            flex-direction: column;
+            h2{
+                text-align: center;
+            }
+            div{
+                display: flex;
+                flex-direction: column;
+                input{
+                    margin-bottom: 10px;
+                }
+                label{
+                    margin-bottom: 8px;
+                }
+            }
+        }
     }
 }

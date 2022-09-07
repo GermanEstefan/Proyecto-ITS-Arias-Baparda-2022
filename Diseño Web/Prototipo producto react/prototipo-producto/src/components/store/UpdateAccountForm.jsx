@@ -5,40 +5,52 @@ import { useForm } from "../../hooks/useForm";
 import Input from "./Input";
 
 const UpdateAccountForm = () => {
-    
+
     const [values, handleValuesChange] = useForm({});
-    
+
     const handleSubmit = (e) => {
         e.preventDefault();
         alert('Submit');
     }
 
-    return(
-        <form onSubmit={handleSubmit}>
-            
-            <label htmlFor="">Nombre: </label>
-            <Input
-                onChange = {handleValuesChange}
-                validateFunction = {isEmpty}
-            />
+    return (
+        <form onSubmit={handleSubmit} className="">
 
-            <label htmlFor="">Apellido: </label>
-            <Input
-                onChange = {handleValuesChange}
-                validateFunction = {isEmpty}
-            />
+            <h2>Datos personales</h2>
 
-            <label htmlFor="">Direccion: </label>
-            <input 
-                type="text" 
-                onChange={handleValuesChange} 
-            />
+            <div>
+                <label htmlFor="">Nombre: </label>
+                <Input
+                    onChange={handleValuesChange}
+                    validateFunction={isEmpty}
+                />
+            </div>
 
-            <label htmlFor="">Telefono: </label>
-            <input 
-                type="text" 
-                onChange={handleValuesChange} 
-            />
+            <div>
+                <label htmlFor="">Apellido: </label>
+                <Input
+                    onChange={handleValuesChange}
+                    validateFunction={isEmpty}
+                />
+            </div>
+
+            <div>
+                <label htmlFor="">Direccion: </label>
+                <input
+                    type="text"
+                    onChange={handleValuesChange}
+                />
+            </div>
+
+            <div>
+                <label htmlFor="">Telefono: </label>
+                <input
+                    type="text"
+                    onChange={handleValuesChange}
+                />
+            </div>
+
+            <button className="submit-button">Modificar</button>
 
         </form>
     )

@@ -87,7 +87,6 @@
 }
 .input-wrapper .input-wrapper__input {
   display: block;
-  margin: 10px auto;
   font-family: inherit;
 }
 .input-wrapper .input-wrapper__input:focus {
@@ -722,20 +721,47 @@
 }
 
 .user-panel-page {
+  padding: 30px 0;
   display: flex;
 }
 .user-panel-page aside {
-  padding: 20px;
+  padding: 30px;
+  width: 20%;
+  border-right: 1px solid #f5990f;
+  text-align: center;
 }
 .user-panel-page aside h1 {
   color: #f5990f;
+  margin: 30px 0;
 }
 .user-panel-page aside ul li {
   margin-bottom: 30px;
+  font-size: 1.1rem;
   cursor: pointer;
 }
 .user-panel-page section {
-  padding: 20px;
+  padding: 30px;
+  width: 80%;
+  display: flex;
+  justify-content: center;
+}
+.user-panel-page section form {
+  width: 350px;
+  display: flex;
+  flex-direction: column;
+}
+.user-panel-page section form h2 {
+  text-align: center;
+}
+.user-panel-page section form div {
+  display: flex;
+  flex-direction: column;
+}
+.user-panel-page section form div input {
+  margin-bottom: 10px;
+}
+.user-panel-page section form div label {
+  margin-bottom: 8px;
 }
 
 .productPage {

@@ -87,17 +87,13 @@
     position: relative;
     text-align: center;
     margin-bottom: 10px;
-
     .input-wrapper__input {
         display: block;
-        margin: 10px auto;
         font-family: inherit;
-
         &:focus {
             outline: none;
         }
     }
-
     .input-wrapper__msg-error {
         position: absolute;
         bottom: -12px;
