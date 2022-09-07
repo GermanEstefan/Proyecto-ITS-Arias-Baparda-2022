@@ -1,10 +1,8 @@
 import { useEffect, useState } from "react"
-import { useNavigate } from "react-router-dom";
 import { verifyAuth } from "../helpers/verifyAuth";
 
 const useAuth = (initialState) => {
 
-    const navigate = useNavigate();
     const [isChecking, setIsChecking] = useState(false);
     const [userData, setUserData] = useState(initialState);
     
@@ -22,7 +20,6 @@ const useAuth = (initialState) => {
               surname: res.result.data.surname,
               auth: true
             });
-            navigate('/')
             setIsChecking(false);
           })
       }, [])

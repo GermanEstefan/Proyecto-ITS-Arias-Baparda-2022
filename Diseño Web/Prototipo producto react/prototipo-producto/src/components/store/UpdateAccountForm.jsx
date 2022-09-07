@@ -1,15 +1,28 @@
 
 import React from "react";
+import { useContext, useState } from "react";
+import { userStatusContext } from "../../App";
 import { isEmpty } from "../../helpers/validateForms";
 import { useForm } from "../../hooks/useForm";
 import Input from "./Input";
 
 const UpdateAccountForm = () => {
 
-    const [values, handleValuesChange] = useForm({});
+    const {userData} = useContext(userStatusContext);
+
+    const [values, handleValuesChange] = useForm({
+        name: userData.name, 
+        surname: userData.surname, 
+        address: userData.address,
+        phone: userData.phone,
+        email: userData.email 
+    });
+
+    const [errorStatusForm, setErrorStatusForm] = useState({ name: true, surname: true })
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        if(Object.values(errorStatusForm).includes(true)) return;
         alert('Submit');
     }
 
@@ -23,6 +36,8 @@ const UpdateAccountForm = () => {
                 <Input
                     onChange={handleValuesChange}
                     validateFunction={isEmpty}
+                    value = {values.name}
+                    setErrorStatusForm = {setErrorStatusForm}
                 />
             </div>
 
@@ -31,6 +46,8 @@ const UpdateAccountForm = () => {
                 <Input
                     onChange={handleValuesChange}
                     validateFunction={isEmpty}
+                    value = {values.surname}
+                    setErrorStatusForm = {setErrorStatusForm}
                 />
             </div>
 
@@ -39,6 +56,7 @@ const UpdateAccountForm = () => {
                 <input
                     type="text"
                     onChange={handleValuesChange}
+                    value = {values.addres}
                 />
             </div>
 
@@ -47,6 +65,7 @@ const UpdateAccountForm = () => {
                 <input
                     type="text"
                     onChange={handleValuesChange}
+                    value = {values.phone}
                 />
             </div>
 
