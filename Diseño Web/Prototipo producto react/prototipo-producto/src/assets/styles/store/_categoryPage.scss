@@ -6,29 +6,7 @@
     width: 75%;
     margin-left: auto;
     margin-right: auto;
-    .main_header {
-      display: flex;
-      align-items: center;
-      background:linear-gradient(15deg, $gray 70%, $orange);
-      a {
-          border-radius: 100px;
-          padding: 10px;
-          margin-left: 1.5em;
-          transition: 0.4s;
-          i {
-              font-size: x-large;
-          }
-      }   
-      a:hover {
-          background-color: #9daebb;
-          transition: 0.4s;
-          padding: 20px;
-      }
-      h1 {
-        font-weight: 200;
-        margin-left: 1em;
-      }
-    }
+    
     .card-container {
       @media (max-width: 900px) {
         width: 100%;

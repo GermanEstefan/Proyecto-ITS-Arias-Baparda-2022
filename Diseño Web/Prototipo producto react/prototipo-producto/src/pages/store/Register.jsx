@@ -57,7 +57,6 @@ const Register = () => {
           showConfirmButton: true,
         });
       }
-      console.log(respToJson)
       if (respToJson.status === "successfully") {
         Swal.fire({
           icon: "success",

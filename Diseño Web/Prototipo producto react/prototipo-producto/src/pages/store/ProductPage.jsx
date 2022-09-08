@@ -1,20 +1,20 @@
 import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Guantes from "../../assets/img/guantes.jpg";
-import { faCartPlus } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import PageTitle from "../../components/store/PageTitle";
+import Carousel from "react-responsive-carousel";
 
 const ProductPage = () => {
-  const { id } = useParams();
+  const { category, id } = useParams();
   useEffect(() => {
     window.scroll(0, 0);
   }, []);
-  console.log(id);
 
   // Usar el id con un endpoint para traer todos los datos del producto a mostrar
 
-  const porductMock = {
+  const productMock = {
     name: "Su producto",
+    price: "10.500",
     description:
       "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Deleniti facilis labore modi quo sapiente expedita nesciunt quos deseruntnobis provident",
   };
@@ -22,18 +22,25 @@ const ProductPage = () => {
   return (
     <div className="productPage">
       <div className="productPage__img">
-        <img src={Guantes} alt="Imagen del producto" />
+        <div>
+          <img width={'300px'} src={Guantes} alt="Imagen del producto" />
+        </div>
       </div>
       <div className="productPage__description">
-        <div className="productPage__description__header">
-          <h1>
-            {porductMock.name}{" "}
-          </h1>
-            <a href="">
-              <FontAwesomeIcon icon={faCartPlus} size='2x'/>
-            </a>
+        <PageTitle
+          title={productMock.name}
+          isArrow={true}
+          arrowGoTo={`/category/${category}`}
+        />
+
+        <div className="productPage__description__body">
+          <p>{productMock.price}$</p>
+          <p>{productMock.description}</p>
         </div>
-        <p>{porductMock.description}</p>
+        <div className="productPage__description__buttons">
+          <button className="buyBtn">Comprar</button>
+          <button className="addBtn">Agregar al carrito</button>
+        </div>
       </div>
     </div>
   );

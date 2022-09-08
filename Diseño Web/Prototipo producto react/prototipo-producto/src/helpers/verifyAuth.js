@@ -14,7 +14,6 @@ export const verifyAuth = async () => {
       },
     })
     const respToJson = await resp.json()
-    console.log(respToJson)
 
     if (respToJson.status === 'successfully') {
       return respToJson;

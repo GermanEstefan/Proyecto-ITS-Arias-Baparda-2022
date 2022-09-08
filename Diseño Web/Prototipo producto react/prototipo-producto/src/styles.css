@@ -265,29 +265,6 @@
     width: 100%;
   }
 }
-.main .main_header {
-  display: flex;
-  align-items: center;
-  background: linear-gradient(15deg, #bccddb 70%, #f5990f);
-}
-.main .main_header a {
-  border-radius: 100px;
-  padding: 10px;
-  margin-left: 1.5em;
-  transition: 0.4s;
-}
-.main .main_header a i {
-  font-size: x-large;
-}
-.main .main_header a:hover {
-  background-color: #9daebb;
-  transition: 0.4s;
-  padding: 20px;
-}
-.main .main_header h1 {
-  font-weight: 200;
-  margin-left: 1em;
-}
 .main .card-container {
   width: 80%;
   margin: 4em auto;
@@ -761,7 +738,7 @@
 
 .productPage {
   display: flex;
-  margin-top: 8em;
+  margin-top: 2em;
   min-height: 100vh;
 }
 @media screen and (max-width: 800px) {
@@ -771,17 +748,64 @@
   }
 }
 .productPage .productPage__img {
+  margin: auto;
   width: 40%;
 }
+.productPage .productPage__img img {
+  margin: auto;
+  display: block;
+}
+@media screen and (max-width: 800px) {
+  .productPage .productPage__img {
+    width: 100%;
+  }
+}
 .productPage .productPage__description {
+  margin: auto 1em;
   width: 60%;
 }
-.productPage .productPage__description .productPage__description__header {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
+@media screen and (max-width: 800px) {
+  .productPage .productPage__description {
+    width: 100%;
+  }
+}
+.productPage .productPage__description .productPage__description__buttons button {
+  border: none;
+  padding: 8px;
+  cursor: pointer;
+  display: block;
+  width: 50%;
+  margin: 5px auto;
+}
+.productPage .productPage__description .productPage__description__buttons .buyBtn {
+  background-color: #f5990f;
+}
+.productPage .productPage__description .productPage__description__buttons .addBtn {
   background-color: #bccddb;
-  padding: 5px;
+}
+
+.main_header {
+  display: flex;
+  align-items: center;
+  background: linear-gradient(15deg, #bccddb 70%, #f5990f);
+}
+.main_header a {
+  border-radius: 100px;
+  padding: 10px;
+  margin-left: 1.5em;
+  transition: 0.4s;
+}
+.main_header a i {
+  font-size: x-large;
+}
+.main_header a:hover {
+  background-color: #9daebb;
+  transition: 0.4s;
+  padding: 20px;
+}
+.main_header h1 {
+  font-weight: 200;
+  margin-left: 1em;
 }
 
 body {
