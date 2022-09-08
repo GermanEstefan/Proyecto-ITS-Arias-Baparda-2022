@@ -22,7 +22,7 @@ const UpdateAccountForm = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         if(Object.values(errorStatusForm).includes(true)) return;
-        alert('Submit');
+        alert('En proceso de implementacion...');
     }
 
     return (

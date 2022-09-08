@@ -26,4 +26,19 @@ class UserController{
         }
 
     }
+
+    public static function validateBodyOfUpdateUser($userData){
+
+        if (
+            !isset($userData['name']) ||
+            !isset($userData['surname']) ||
+            !isset($userData['address']) ||
+            !isset($userData['phone']) 
+        ) {
+            return false;
+        }else{
+            return $userData;
+        }
+
+    }
 }

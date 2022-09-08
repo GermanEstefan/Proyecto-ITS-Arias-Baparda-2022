@@ -35,6 +35,23 @@ class CustomerController
         return $userData;
     }
 
+    /*
+    EN PROCESO...
+    public function updateCustomer($userData)
+    {
+        $bodyOfRequest = UserController::validateBodyOfUpdateUser($userData);
+        if(!$bodyOfRequest){
+            http_response_code(400);
+            echo $this->response->error400();
+            die();
+        }
+
+        $name = $userData['name'];
+        $surname = $userData['surname'];
+        $address = $userData['address'];
+        $phone = $userData['phone'];
+    }*/
+
     public function registerCustomer($userData)
     {
 
