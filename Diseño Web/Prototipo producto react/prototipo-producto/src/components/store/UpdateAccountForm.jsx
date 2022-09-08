@@ -14,8 +14,7 @@ const UpdateAccountForm = () => {
         name: userData.name, 
         surname: userData.surname, 
         address: userData.address,
-        phone: userData.phone,
-        email: userData.email 
+        phone: userData.phone
     });
 
     const [errorStatusForm, setErrorStatusForm] = useState({ name: true, surname: true })
@@ -31,12 +30,16 @@ const UpdateAccountForm = () => {
 
             <h2>Datos personales</h2>
 
+            <label htmlFor="">Email:</label>
+            <span>{userData.email}</span>
+
             <div>
                 <label htmlFor="">Nombre: </label>
                 <Input
                     onChange={handleValuesChange}
                     validateFunction={isEmpty}
                     value = {values.name}
+                    name = 'name'
                     setErrorStatusForm = {setErrorStatusForm}
                 />
             </div>
@@ -48,6 +51,7 @@ const UpdateAccountForm = () => {
                     validateFunction={isEmpty}
                     value = {values.surname}
                     setErrorStatusForm = {setErrorStatusForm}
+                    name = 'surname'
                 />
             </div>
 
@@ -56,7 +60,8 @@ const UpdateAccountForm = () => {
                 <input
                     type="text"
                     onChange={handleValuesChange}
-                    value = {values.addres}
+                    value = {values.address}
+                    name = 'address'
                 />
             </div>
 
@@ -66,6 +71,7 @@ const UpdateAccountForm = () => {
                     type="text"
                     onChange={handleValuesChange}
                     value = {values.phone}
+                    name = 'phone'
                 />
             </div>
 

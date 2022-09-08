@@ -32,8 +32,7 @@ const NavMobile = ({ openMenu, setOpenMenu, refMenu }) => {
                     userData.auth
                     ?
                     <>
-                        <li onClick={() => alert('En proceso de implementacion')}>Transacciones</li>
-                        <li onClick={() => alert('En proceso de implementacion')}>Configuracion</li>
+                        <li onClick={() => handleNavigate('/panel-user')}>Configuracion</li>
                         <li style={{color:'red'}} onClick={handleLogout}>Salir</li>
                     </>
                     :

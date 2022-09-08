@@ -1,9 +1,17 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import UpdateAccountForm from "../../components/store/UpdateAccountForm";
 
 const UserPanel = () => {
     
     const [view, setView] = useState('personalInformation');
+    const navigate = useNavigate()
+
+    const handleLogout = () => {
+        localStorage.removeItem('token');
+        window.location.reload();
+        navigate('/')
+    }
 
     const handleChangeView = (view) => {
         setView(view)
@@ -19,6 +27,7 @@ const UserPanel = () => {
                     <li onClick={() => handleChangeView('buyHistory')} >Historial de compras</li>
                     <li onClick={() => handleChangeView('payMethods')}>Metodos de pago</li>
                     <li onClick={() => handleChangeView('disabledAccount')}>Desactivar cuenta</li>
+                    <li onClick={handleLogout}>Cerrar sesion</li>
                 </ul>
             </aside>
             <section>

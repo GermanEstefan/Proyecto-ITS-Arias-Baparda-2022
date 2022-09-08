@@ -103,40 +103,6 @@
     }
 }
 
-/*Componente user menu*/
-.user-menu {
-    position: relative;
-    div {
-        margin-top: 10px;
-        background-color: #f2f2f2;
-        position: absolute;
-        right: 0;
-        padding: 15px;
-        border-radius: 10px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        strong{
-            margin-bottom: 20px;
-            font-size: 1.2rem;
-        }
-        ul {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-end;
-            li {
-                display: flex;
-                align-items: center;
-                margin-bottom: 20px;
-                cursor: pointer;
-                span {
-                    margin-right: 10px;
-                }
-            }
-        }
-    }
-}
-
 /*Componente ShoppingCart*/
 .shopping-cart-mobile{
     position: fixed;

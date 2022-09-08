@@ -68,6 +68,9 @@ const Register = () => {
         setUserData({
           name: values.name,
           surname: values.surname,
+          email: values.email,
+          address: null,
+          phone: null,
           auth: true
         });
         localStorage.setItem("token", respToJson.result.data.token);

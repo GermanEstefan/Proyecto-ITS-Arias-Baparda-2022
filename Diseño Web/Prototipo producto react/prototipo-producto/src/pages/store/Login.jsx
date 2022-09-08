@@ -37,6 +37,9 @@ const Login = () => {
         setUserData({
           name: respToJson.result.data.name,
           surname: respToJson.result.data.surname,
+          email: respToJson.result.data.email,
+          phone: respToJson.result.data.phone,
+          address: respToJson.result.data.address,
           auth: true
         });
         localStorage.setItem("token", respToJson.result.data.token);

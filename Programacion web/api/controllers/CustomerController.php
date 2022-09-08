@@ -129,7 +129,9 @@ class CustomerController
             "token" => $userToken,
             "email" => $customerExistInDatabase['email'],
             "name" => $customerExistInDatabase['name'],
-            "surname" => $customerExistInDatabase['surname']
+            "surname" => $customerExistInDatabase['surname'],
+            "phone" => $customerExistInDatabase['phone'],
+            "address" => $customerExistInDatabase['address']
         );
         
         echo $this->response->successfully("Autenticacion realizada con exito", $bodyResponse);

@@ -100,40 +100,6 @@
   color: red;
 }
 
-/*Componente user menu*/
-.user-menu {
-  position: relative;
-}
-.user-menu div {
-  margin-top: 10px;
-  background-color: #f2f2f2;
-  position: absolute;
-  right: 0;
-  padding: 15px;
-  border-radius: 10px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-.user-menu div strong {
-  margin-bottom: 20px;
-  font-size: 1.2rem;
-}
-.user-menu div ul {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-}
-.user-menu div ul li {
-  display: flex;
-  align-items: center;
-  margin-bottom: 20px;
-  cursor: pointer;
-}
-.user-menu div ul li span {
-  margin-right: 10px;
-}
-
 /*Componente ShoppingCart*/
 .shopping-cart-mobile {
   position: fixed;
@@ -724,11 +690,24 @@
   padding: 30px 0;
   display: flex;
 }
+@media (max-width: 800px) {
+  .user-panel-page {
+    flex-direction: column;
+    padding: 0;
+  }
+}
 .user-panel-page aside {
-  padding: 30px;
+  padding: 60px;
   width: 20%;
   border-right: 1px solid #f5990f;
   text-align: center;
+}
+@media (max-width: 800px) {
+  .user-panel-page aside {
+    width: 100%;
+    padding: 0;
+    border-right: none;
+  }
 }
 .user-panel-page aside h1 {
   color: #f5990f;
@@ -745,10 +724,26 @@
   display: flex;
   justify-content: center;
 }
+@media (max-width: 800px) {
+  .user-panel-page section {
+    width: 100%;
+    padding: 0;
+  }
+}
 .user-panel-page section form {
-  width: 350px;
+  width: 90vw;
+  max-width: 350px;
   display: flex;
   flex-direction: column;
+}
+@media (max-width: 800px) {
+  .user-panel-page section form {
+    margin: 20px 0;
+  }
+}
+.user-panel-page section form span {
+  margin: 5px 0 15px 0;
+  color: rgba(0, 0, 0, 0.421);
 }
 .user-panel-page section form h2 {
   text-align: center;
