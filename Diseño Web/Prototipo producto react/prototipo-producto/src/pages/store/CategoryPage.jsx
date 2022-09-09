@@ -6,6 +6,7 @@ import Pagination from "../../components/store/Pagination";
 import ProductCard from "../../components/store/ProductCard";
 
 const CategoryPage = () => {
+  
   const { category } = useParams();
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(3);

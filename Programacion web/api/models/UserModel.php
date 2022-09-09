@@ -27,6 +27,12 @@
             $query = "SELECT * from user WHERE id_user='$id'";
             return $conecction->getData($query)->fetch_assoc();
         }
+
+        public static function updateUser($id, $name, $surname, $address, $phone){
+            $conecction = new Connection();
+            $query = "UPDATE user SET name = '$name', surname = '$surname', address = '$address', phone = '$phone' WHERE id_user = $id ";
+            return $conecction->setData($query);
+        }
                 
         public function save(){
             $userInsert = "INSERT INTO user(email, name, surname, password) VALUES ('$this->email', '$this->name', '$this->surname', '$this->password' )";

@@ -35,10 +35,9 @@ class CustomerController
         return $userData;
     }
 
-    /*
-    EN PROCESO...
     public function updateCustomer($userData)
     {
+        $idOfUserRequested = $this->jwt->getIdUserOfRequest();
         $bodyOfRequest = UserController::validateBodyOfUpdateUser($userData);
         if(!$bodyOfRequest){
             http_response_code(400);
@@ -50,7 +49,14 @@ class CustomerController
         $surname = $userData['surname'];
         $address = $userData['address'];
         $phone = $userData['phone'];
-    }*/
+        
+        $result = UserModel::updateUser($idOfUserRequested, $name, $surname, $address, $phone);
+        if(!$result){
+            echo $this->response->error500();
+            die();
+        } 
+        echo $this->response->successfully("Actualizacion realizada con exito");
+    }
 
     public function registerCustomer($userData)
     {

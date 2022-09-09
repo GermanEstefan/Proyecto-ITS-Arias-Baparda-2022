@@ -1,6 +1,7 @@
 
 import React from "react";
 import { useContext, useState } from "react";
+import { URL } from "../../API/URL";
 import { userStatusContext } from "../../App";
 import { isEmpty } from "../../helpers/validateForms";
 import { useForm } from "../../hooks/useForm";
@@ -19,10 +20,11 @@ const UpdateAccountForm = () => {
 
     const [errorStatusForm, setErrorStatusForm] = useState({ name: true, surname: true })
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         if(Object.values(errorStatusForm).includes(true)) return;
-        alert('En proceso de implementacion...');
+        const resp = await fetch(URL + "auth-customers.php?url=update");
+        console.log(resp)
     }
 
     return (

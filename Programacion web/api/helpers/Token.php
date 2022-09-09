@@ -32,4 +32,16 @@ class Token {
             die();
         }
     }
+
+    public function getIdUserOfRequest(){
+        $response = new Response();
+        if (!isset(getallheaders()['access-token'])) {
+            http_response_code(401);
+            echo $response->error401("No hay un token presente");
+            die();
+        }
+        $idOfUser = $this->verifyToken(getallheaders()['access-token'])->data->idUser;
+        return $idOfUser;
+    }
+
 }

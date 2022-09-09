@@ -9,7 +9,8 @@ const UserPanel = () => {
 
     const handleLogout = () => {
         localStorage.removeItem('token');
-        navigate('/')
+        navigate('/');
+        window.location.reload();
     }
 
     const handleChangeView = (view) => {
