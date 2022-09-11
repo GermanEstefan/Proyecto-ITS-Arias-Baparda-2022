@@ -1,0 +1,60 @@
+usuario administrador:
+- user: master
+- password: bindev
+
+instale:
+1- ssh
+ - esta configurado en el puerto 2244, con root remoto deshabilitado
+ - configure el firewall para que abra el puerto
+ - instale y configure semanage para que acepte el puerto
+ - estan creadas las claves RSA para q no se queje cada ves q te queres conectar
+
+2- rsync
+ - instale rsync
+
+3- esta configurado el adaptador puente con la ip manual 192.168.1.6 para el cliente
+							 192.168.1.2 para el servidor
+
+NOTAS: sobre el servidor
+-el usuario del servidor es: "respaldo"
+-la password es: "coquii1212"
+
+sobre la base de datos
+-hice un mysql_secure_installation, el root ahora tiene el login remoto deshabilitado
+-le puse password al root(la idea es q no se use igual pero bueno)
+-la pass es: bindev
+
+- cree un usuario administrador para la base de datos
+user: master
+pass: 1234
+
+- quedan los scripts en la carpeta Sripts/ del usuario master
+
+- la carpeta de respaldos es donde se guardan los archivos comprimidos antes de ser enviados
+- al servidor, es para archivos temporales, se mandan al servidor y se borran de ahi
+
+- los logs de todas las cosas, o casi todas (capaz me falto alguna) estan en
+/var/log/customlogs/
+
+- los logs del sistema van en la carpeta predeterminada de cada cosa
+/var/log/
+
+4 -instale y configure rsyslog
+  -para q mande los logs al servidor, algunos logs se mandan con rsync(porque no se como 
+    hacerlo co rsyslog)
+  -el archivo de backup de la base de datos crea sus propios logs bajo el nombre de:
+  -local1.info que es como esta configurado en el archivo rsyslog
+	
+5 -El tema del software de monitoreo
+  -el que use es Prometheus, para usarlo esta el usuario:
+	-user: prometheus
+	-pass: prom
+  -se ejecuta desde el navegador web, en localhost:90
+  -ni idea de como se usa :P
+
+6 -el tema antivirus --Pendiente
+
+7 -Nota de posibles problemas de conexion
+  -hacer nmtui y desactivar/activar todas las conexiones, en ambas maquinas si es necesario
+LINK  ################################################################
+https://drive.google.com/drive/folders/1Qcarugox6EYYgVzg4sfXSny7zEPsJ1Z2?usp=sharing
