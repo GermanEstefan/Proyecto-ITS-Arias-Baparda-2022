@@ -1,8 +1,6 @@
-STG - Ambiente de Staging - pruebas sobre la base de datos
-
 Referencias:
 
-LLAVES PRIMARIAS
+        LLAVES PRIMARIAS
 TABLA                   PK
 CATEGORY            id_category
 DESING              id_desing
