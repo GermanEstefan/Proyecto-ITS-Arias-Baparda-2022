@@ -1,0 +1,14 @@
+Para probar la APP y que funcione hay que copiar todo lo que esta dentro de la carpeta "Build de la aplicacion completa" y pegarla en la raiz del
+servidor web de apache en el caso de xamp(htdocs). ya que la URL de
+la API que consume el cliente apunta a window.origin/api/endpoints....
+window.origin apunta a el dominio donde se esta ejecutando el cliente
+en mi caso(localhost).
+Ademas de importar la base de datos con las querys basicas.
+EN CASO DE QUERER PROBAR EL CLIENTE IR A LA CARPETA
+/Diseño web/Prototipo producto react/prototipo-producto instalar las 
+dependencias con npm install y luego npm start.
+(HAY QUE TENER NODE y NPM INSTALADO).
+Los comandos mencionados anteriromente hay que ejecutarlos en la
+raiz del proyecto de React.
+Lo hay dentro de la carpeta build de la aplicacion es la version
+minificada del front end.

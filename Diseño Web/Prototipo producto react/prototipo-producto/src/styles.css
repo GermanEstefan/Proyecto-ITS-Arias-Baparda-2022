@@ -695,6 +695,10 @@
   font-size: 1.1rem;
   cursor: pointer;
 }
+.user-panel-page aside ul :last-child {
+  color: red;
+  font-weight: bold;
+}
 .user-panel-page section {
   padding: 30px;
   width: 80%;

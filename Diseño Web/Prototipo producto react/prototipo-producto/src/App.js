@@ -36,9 +36,6 @@ const App = () => {
           <Route path="/category/:category/:id" element={<ContainerBase><ProductPage /></ContainerBase>} />
           <Route path="/panel-user" element={<ContainerBase><UserPanel/></ContainerBase>} />
         </Routes>
-        <Routes>
-          <Route path="/admin/login" element={<h1>Login admin</h1>} />
-        </Routes>
       </userStatusContext.Provider>
   );
 }
