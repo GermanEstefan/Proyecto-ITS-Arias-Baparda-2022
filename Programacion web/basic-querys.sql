@@ -1,25 +1,16 @@
-INSERT INTO `role` (`name_role`, `description`) VALUES
-('COMPRADOR', 'SER UN COMPRADOR'),
-('JEFE', 'SER UN JEFE'),
-('VENDEDOR', 'SER UN VENDEDOR');
 
-INSERT INTO `user` (`id_user`, `email`, `name`, `surname`, `address`, `phone`, `password`, `state`) VALUES
-(5063, 'test@test.com', 'Test', 'Testing', '', '', '123456', 1),
-(5064, 'jefe@jefe.com', 'Jefesito', 'Jefesin', 'jefe 123123', '11222122', '123456', 1),
-(5066, 'vendedor@vendedor.com', 'Venedorrrr', 'Vendedoristo', NULL, NULL, '123456', 1),
-(5067, 'comprador@comprador.com', 'Compradorr', 'Compradorsitoo', NULL, NULL, '123456', 1),
-(5068, 'juancito@gmail.com', 'Juan', 'Perez', NULL, NULL, '123456', 1);
+INSERT INTO `bindev`.`role` (`name_role`, `description`) VALUES ('VENDEDOR', 'SER UN VENDEDOR');
+INSERT INTO `bindev`.`role` (`name_role`, `description`) VALUES ('COMPRADOR', 'SER UN COMPRADOR');
+INSERT INTO `bindev`.`role` (`name_role`, `description`) VALUES ('JEFE', 'SER UN JEFE');
 
-INSERT INTO `customer` (`customer_user`, `company_name`, `rut_nr`) VALUES
-(5063, NULL, NULL),
-(5064, NULL, NULL),
-(5066, NULL, NULL),
-(5067, NULL, NULL),
-(5068, 'Empresa SA', '12312312');
+INSERT INTO `bindev`.`user` (`email`, `name`, `surname`, `address`, `phone`, `password`) VALUES ('test@test.com', 'Test', 'Testing','', '','123456');
+INSERT INTO `bindev`.`user` (`email`, `name`, `surname`, `address`, `phone`, `password`) VALUES ('jefe@jefe.com', 'Jefesito', 'Jefesin','jefe 123123', '11222122','123456');
+INSERT INTO `bindev`.`user` (`email`, `name`, `surname`, `address`, `phone`, `password`) VALUES ('vendedor@vendedor.com', 'Venedorrrr', 'Vendedoristo','', '','123456');
+INSERT INTO `bindev`.`user` (`email`, `name`, `surname`, `address`, `phone`, `password`) VALUES ('comprador@comprador.com', 'Compradorr', 'Compradorsitoo','', '','123456');
+INSERT INTO `bindev`.`user` (`email`, `name`, `surname`, `address`, `phone`, `password`) VALUES ('juancito@gmail.com', 'Juan', 'Perez','', '','123456');
 
-INSERT INTO `employee` (`ci`, `employee_user`, `employee_role`, `state`) VALUES
-(50219376, 5064, 'JEFE', 1),
-(50219375, 5066, 'VENDEDOR', 1),
-(50219374, 5067, 'COMPRADOR', 1);
+INSERT INTO `bindev`.`employee` (`ci`, `employee_user`, `employee_role`) VALUES (50219376, 5001, 'JEFE');
+INSERT INTO `bindev`.`employee` (`ci`, `employee_user`, `employee_role`) VALUES (50219375, 5002, 'VENDEDOR');
+INSERT INTO `bindev`.`employee` (`ci`, `employee_user`, `employee_role`) VALUES (50219374, 5003, 'COMPRADOR');
 
-
+UPDATE `bindev`.`customer` SET `company_name` = 'Empresa SA', `rut_nr` = '12312312' WHERE (`customer_user` = '5004');
