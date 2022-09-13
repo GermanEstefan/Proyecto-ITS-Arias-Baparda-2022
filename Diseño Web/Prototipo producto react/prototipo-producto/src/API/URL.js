@@ -1,1 +1,0 @@
-export const URL = process.env.REACT_APP_API_URL === 'PROD' ? window.origin+'/api/' : process.env.REACT_APP_API_URL

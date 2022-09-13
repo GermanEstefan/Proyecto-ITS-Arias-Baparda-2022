@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { verifyAuth } from "../helpers/verifyAuth";
+import { verifyAuth } from "../API/api";
 
 const useAuth = (initialState) => {
 

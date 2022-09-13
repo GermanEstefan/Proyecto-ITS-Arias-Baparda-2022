@@ -1,11 +1,10 @@
 import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
-import { URL } from "../../API/URL";
+import { fetchApi } from "../../API/api";
 import { userStatusContext } from "../../App";
 import LogoCliente from "../../assets/img/Cliente-nombre1.svg";
 import { useForm } from "../../hooks/useForm";
-
 
 const LoginAdm = () => {
 
@@ -16,27 +15,22 @@ const LoginAdm = () => {
     const handleLogin = async (e) => {
         e.preventDefault();
         try {
-            const resp = await fetch(URL + "auth-employees.php?url=login", {
-                method: 'POST',
-                body: JSON.stringify(values)
-            });
-            const respToJson = await resp.json();
-            if (respToJson.status === 'error') {
+            const resp = await fetchApi("auth-employees.php?url=login", 'POST', values)
+            if (resp.status === 'error') {
                 return Swal.fire({
                     icon: "error",
-                    text: respToJson.result.error_msg,
+                    text: resp.result.error_msg,
                     timer: 3000,
                     showConfirmButton: true,
                 });
             }
-            console.log(respToJson)
-            if (respToJson.status === 'successfully') {
+            if (resp.status === 'successfully') {
                 setUserData({
-                    name: respToJson.result.data.name,
-                    surname: respToJson.result.data.surname,
-                    email: respToJson.result.data.email,
-                    phone: respToJson.result.data.phone,
-                    address: respToJson.result.data.address,
+                    name: resp.result.data.name,
+                    surname: resp.result.data.surname,
+                    email: resp.result.data.email,
+                    phone: resp.result.data.phone,
+                    address: resp.result.data.address,
                     auth: true
                 });
                 Swal.fire({
@@ -49,9 +43,7 @@ const LoginAdm = () => {
                 setTimeout(() => {
                     navigate('/admin/dashboard');
                 }, 1000)
-                
-            }
-
+            }  
         } catch (error) {
             alert(error);
         }

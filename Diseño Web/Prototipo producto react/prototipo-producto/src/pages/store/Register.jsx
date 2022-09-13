@@ -2,12 +2,12 @@ import React, { useEffect, useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import Imagen from "../../assets/img/Obreros.jpg";
 import { useForm } from "../../hooks/useForm";
-import { URL } from "../../API/URL";
 import Swal from "sweetalert2";
 import { userStatusContext } from "../../App";
 import { useNavigate } from "react-router-dom";
 import { isEmail, isEmpty, isValidPassword } from "../../helpers/validateForms";
 import Input from "../../components/store/Input";
+import { fetchApi } from "../../API/api";
 
 const Register = () => {
   const { setUserData } = useContext(userStatusContext);
@@ -43,21 +43,16 @@ const Register = () => {
       });
     }
     try {
-      const endpoint = URL + "auth-customers.php?url=register";
-      const resp = await fetch(endpoint, {
-        method: "POST",
-        body: JSON.stringify(values),
-      });
-      const respToJson = await resp.json();
-      if (respToJson.status === "error") {
+      const resp = await fetchApi("auth-customers.php?url=register", "POST", values); 
+      if (resp.status === "error") {
         return Swal.fire({
           icon: "error",
-          text: respToJson.result.error_msg,
+          text: resp.result.error_msg,
           timer: 3000,
           showConfirmButton: true,
         });
       }
-      if (respToJson.status === "successfully") {
+      if (resp.status === "successfully") {
         Swal.fire({
           icon: "success",
           text: "Te registraste exitosamente",
@@ -72,10 +67,8 @@ const Register = () => {
           phone: null,
           auth: true
         });
-        localStorage.setItem("token", respToJson.result.data.token);
-        setTimeout(() => {
-          navigate("/");
-        }, 2000);
+        localStorage.setItem("token", resp.result.data.token);
+        setTimeout(() => navigate("/"), 2000);
       }
     } catch (error) {
       console.log(error);

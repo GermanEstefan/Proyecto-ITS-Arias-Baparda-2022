@@ -1,12 +1,12 @@
 
 import React from "react";
 import { useContext, useState } from "react";
-import { URL } from "../../API/URL";
 import { userStatusContext } from "../../App";
 import { isEmpty } from "../../helpers/validateForms";
 import { useForm } from "../../hooks/useForm";
 import Swal from "sweetalert2";
 import Input from "./Input";
+import { fetchApi } from "../../API/api";
 
 const UpdateAccountForm = () => {
 
@@ -25,15 +25,8 @@ const UpdateAccountForm = () => {
         e.preventDefault();
         if (Object.values(errorStatusForm).includes(true)) return;
         try {
-            const resp = await fetch(URL + "auth-customers.php?url=update", {
-                method: 'PUT',
-                body: JSON.stringify(values),
-                headers: {
-                    'access-token': localStorage.getItem('token') || ''
-                }
-            });
-            const respToJson = await resp.json();
-            if (respToJson.status === 'successfully') {
+            const resp = await fetchApi("auth-customers.php?url=update", "PUT", values)
+            if (resp.status === 'successfully') {
                 Swal.fire({
                     icon: "success",
                     text: "Datos acutalizados correctamente",
@@ -43,7 +36,7 @@ const UpdateAccountForm = () => {
             } else {
                 return Swal.fire({
                     icon: "error",
-                    text: respToJson.result.error_msg,
+                    text: resp.result.error_msg,
                     timer: 3000,
                     showConfirmButton: true,
                 });
@@ -56,7 +49,6 @@ const UpdateAccountForm = () => {
                 showConfirmButton: true,
             });
         }
-
     }
 
     return (

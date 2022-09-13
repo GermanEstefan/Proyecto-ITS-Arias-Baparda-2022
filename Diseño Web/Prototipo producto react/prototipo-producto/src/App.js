@@ -11,6 +11,7 @@ import useAuth from "./hooks/useAuth";
 import ContainerBase from "./components/store/ContainerBase";
 import UserPanel from "./pages/store/UserPanel";
 import LoginAdm from "./pages/admin/LoginAdm";
+import DashboardAdm from "./pages/admin/DashboardAdm";
 
 export const userStatusContext = createContext({});
 
@@ -37,7 +38,7 @@ const App = () => {
           <Route path="/category/:category/:id" element={<ContainerBase><ProductPage /></ContainerBase>} />
           <Route path="/panel-user" element={<ContainerBase><UserPanel/></ContainerBase>} />
           <Route path="/admin/login" element={<LoginAdm/>} />
-          <Route path="/admin/dashboard" element={ <h1>Dashboard</h1> } />
+          <Route path="/admin/dashboard" element={ <DashboardAdm/> } />
         </Routes>
       </userStatusContext.Provider>
   );

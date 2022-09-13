@@ -4,10 +4,10 @@ import { Link } from "react-router-dom";
 import Imagen from "../../assets/img/Obreros.jpg";
 import { isEmail, isValidPassword } from "../../helpers/validateForms";
 import Swal from "sweetalert2";
-import { URL } from "../../API/URL";
 import { userStatusContext } from "../../App";
 import { useForm } from "../../hooks/useForm";
 import Input from "../../components/store/Input";
+import { fetchApi } from "../../API/api";
 
 const Login = () => {
 
@@ -21,28 +21,25 @@ const Login = () => {
     e.preventDefault();
     if(Object.values(errorStatusForm).includes(true)) return;
     try {
-      const endpoint = URL + "auth-customers.php?url=login";
-      const resp = await fetch(endpoint, { method: "POST", body: JSON.stringify(values) });
-      const respToJson = await resp.json();
-      if (respToJson.status === 'error') {
+      const resp = await fetchApi("auth-customers.php?url=login","POST", values)
+      if (resp.status === 'error') {
         return Swal.fire({
           icon: "error",
-          text: respToJson.result.error_msg,
+          text: resp.result.error_msg,
           timer: 3000,
           showConfirmButton: true,
         });
       } 
-      console.log(respToJson)
-      if (respToJson.status === 'successfully') {
+      if (resp.status === 'successfully') {
         setUserData({
-          name: respToJson.result.data.name,
-          surname: respToJson.result.data.surname,
-          email: respToJson.result.data.email,
-          phone: respToJson.result.data.phone,
-          address: respToJson.result.data.address,
+          name: resp.result.data.name,
+          surname: resp.result.data.surname,
+          email: resp.result.data.email,
+          phone: resp.result.data.phone,
+          address: resp.result.data.address,
           auth: true
         });
-        localStorage.setItem("token", respToJson.result.data.token);
+        localStorage.setItem("token", resp.result.data.token);
         Swal.fire({
           icon: "success",
           text: "Ingreso exitoso",
