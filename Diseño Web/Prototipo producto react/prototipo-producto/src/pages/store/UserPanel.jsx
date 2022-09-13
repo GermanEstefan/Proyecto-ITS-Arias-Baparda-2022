@@ -18,7 +18,7 @@ const UserPanel = () => {
     }
     
     return(
-        <main className="user-panel-page">
+        <main className="user-panel-page main-client">
             <aside>
                 <h1>Configuracion</h1>
                 <ul>

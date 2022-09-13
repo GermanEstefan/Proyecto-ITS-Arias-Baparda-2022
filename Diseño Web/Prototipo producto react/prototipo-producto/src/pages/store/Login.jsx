@@ -58,7 +58,7 @@ const Login = () => {
   }
 
   return (
-    <main className="login-page">
+    <main className="login-page main-client">
       <div className="form-container">
         <img className={"form-img"} src={Imagen} alt="Imagen"></img>
           <form onSubmit={handleSubmit} autoComplete="off">

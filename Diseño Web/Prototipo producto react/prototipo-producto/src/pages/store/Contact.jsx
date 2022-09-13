@@ -19,7 +19,7 @@ const Contact = () => {
   };
   return (
 
-    <main className="form-container">
+    <main className="form-container main-client">
       <img className="form-img" src={Imagen} alt="Imagen"></img>
         <form className="form" onSubmit={handleSubmit} autoComplete="off">
           <h1>Envianos tu mensaje</h1>

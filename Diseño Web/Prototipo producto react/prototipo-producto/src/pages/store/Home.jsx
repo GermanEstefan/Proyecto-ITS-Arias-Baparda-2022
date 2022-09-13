@@ -13,7 +13,7 @@ const   Home = () => {
   const navigate = useNavigate();
 
   return (
-    <main className="home-page">
+    <main className="home-page main-client">
       <section className="home-page__banner">
 
         <div className="home-page__banner__info">
