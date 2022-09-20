@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import Guantes from "../../assets/img/guantes.jpg";
+import ContainerBase from "../../components/store/ContainerBase";
 import PageTitle from "../../components/store/PageTitle";
 import Pagination from "../../components/store/Pagination";
 import ProductCard from "../../components/store/ProductCard";
 
 const CategoryPage = () => {
-  
+
   const { category } = useParams();
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(3);
@@ -20,7 +21,7 @@ const CategoryPage = () => {
 
   const productsList = [
     {
-      id:1,
+      id: 1,
       name: "tuki",
       description:
         "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quidem consequuntur animi aliquid nulla rem nostrum nesciunt voluptas ea quos quo cum, ratione non voluptatibus! Iure recusandae officiis nostrum quasi dolor.",
@@ -136,30 +137,32 @@ const CategoryPage = () => {
   };
 
   return (
-    <div className="main">
-      <PageTitle title={category} isArrow={true} />
+    <ContainerBase>
+      <div className="main">
+        <PageTitle title={category} isArrow={true} />
 
-      <div className="card-container">
-        {currentItems.map((product, index) => {
-          return (
-            <ProductCard
-              className="animate__animated animate__bounce"
-              product={product.name}
-              description={product.description}
-              img={Guantes}
-              key={index}
-              id={product.id}
-            />
-          );
-        })}
-        <Pagination
-          currentPage={currentPage}
-          itemsPerPage={itemsPerPage}
-          totalItems={productsList.length}
-          paginate={paginate}
-        />
+        <div className="card-container">
+          {currentItems.map((product, index) => {
+            return (
+              <ProductCard
+                className="animate__animated animate__bounce"
+                product={product.name}
+                description={product.description}
+                img={Guantes}
+                key={index}
+                id={product.id}
+              />
+            );
+          })}
+          <Pagination
+            currentPage={currentPage}
+            itemsPerPage={itemsPerPage}
+            totalItems={productsList.length}
+            paginate={paginate}
+          />
+        </div>
       </div>
-    </div>
+    </ContainerBase>
   );
 };
 

@@ -6,39 +6,42 @@ import messageIcon from '../../assets/img/message-solid.svg'
 import whatsappIcon from '../../assets/img/whatsapp.svg'
 import { useMediaQuery } from "react-responsive";
 import { useNavigate } from "react-router-dom";
+import ContainerBase from "../../components/store/ContainerBase";
 
-const   Home = () => {
+const Home = () => {
 
   const isMobile = useMediaQuery({ query: "(max-width: 800px)" });
   const navigate = useNavigate();
 
   return (
-    <main className="home-page main-client">
-      <section className="home-page__banner">
+    <ContainerBase>
+      <main className="home-page main-client">
+        <section className="home-page__banner">
 
-        <div className="home-page__banner__info">
-          <h1>Seguridad Corporal</h1>
-          <p>Lideres del mercado, excelente calidad y precio, somos tu mejor opcion.</p>
-          <button>Ver productos</button>
-        </div>
-
-        {
-          !isMobile
-          &&
-          <div className="home-page__banner__contact">
-            <strong>¡ Contactanos !</strong>
-            <div>
-              <img src={facebookIcon} alt="facebook" />
-              <img src={instagramIcon} alt="instagram" />
-              <img src={messageIcon} alt="message" onClick={() => navigate('/contact')} />
-              <img src={whatsappIcon} alt="whatsapp" />
-            </div>
+          <div className="home-page__banner__info">
+            <h1>Seguridad Corporal</h1>
+            <p>Lideres del mercado, excelente calidad y precio, somos tu mejor opcion.</p>
+            <button>Ver productos</button>
           </div>
-        }
-      </section>
-      <h1 className="home-page__title">Categorias</h1>
-      <CategoriesList />
-    </main>
+
+          {
+            !isMobile
+            &&
+            <div className="home-page__banner__contact">
+              <strong>¡ Contactanos !</strong>
+              <div>
+                <img src={facebookIcon} alt="facebook" />
+                <img src={instagramIcon} alt="instagram" />
+                <img src={messageIcon} alt="message" onClick={() => navigate('/contact')} />
+                <img src={whatsappIcon} alt="whatsapp" />
+              </div>
+            </div>
+          }
+        </section>
+        <h1 className="home-page__title">Categorias</h1>
+        <CategoriesList />
+      </main>
+    </ContainerBase>
   );
 };
 

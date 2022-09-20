@@ -8,6 +8,7 @@ import { userStatusContext } from "../../App";
 import { useForm } from "../../hooks/useForm";
 import Input from "../../components/store/Input";
 import { fetchApi } from "../../API/api";
+import ContainerBase from "../../components/store/ContainerBase";
 
 const Login = () => {
 
@@ -19,9 +20,9 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if(Object.values(errorStatusForm).includes(true)) return;
+    if (Object.values(errorStatusForm).includes(true)) return;
     try {
-      const resp = await fetchApi("auth-customers.php?url=login","POST", values)
+      const resp = await fetchApi("auth-customers.php?url=login", "POST", values)
       if (resp.status === 'error') {
         return Swal.fire({
           icon: "error",
@@ -29,7 +30,7 @@ const Login = () => {
           timer: 3000,
           showConfirmButton: true,
         });
-      } 
+      }
       if (resp.status === 'successfully') {
         setUserData({
           name: resp.result.data.name,
@@ -55,9 +56,10 @@ const Login = () => {
   }
 
   return (
-    <main className="login-page main-client">
-      <div className="form-container">
-        <img className={"form-img"} src={Imagen} alt="Imagen"></img>
+    <ContainerBase>
+      <main className="login-page main-client">
+        <div className="form-container">
+          <img className={"form-img"} src={Imagen} alt="Imagen"></img>
           <form onSubmit={handleSubmit} autoComplete="off">
             <h1>Bienvenido, por favor ingresa tus datos</h1>
             <Input
@@ -87,8 +89,9 @@ const Login = () => {
               Registrarse
             </Link>
           </form>
-      </div>
-    </main>
+        </div>
+      </main>
+    </ContainerBase>
   );
 };
 

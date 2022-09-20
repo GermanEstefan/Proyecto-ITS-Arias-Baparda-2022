@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import ContainerBase from "../../components/store/ContainerBase";
 import UpdateAccountForm from "../../components/store/UpdateAccountForm";
 
 const UserPanel = () => {
@@ -18,6 +19,7 @@ const UserPanel = () => {
     }
     
     return(
+        <ContainerBase>
         <main className="user-panel-page main-client">
             <aside>
                 <h1>Configuracion</h1>
@@ -56,6 +58,7 @@ const UserPanel = () => {
                 }
             </section>
         </main>
+        </ContainerBase>
     )
 }
 

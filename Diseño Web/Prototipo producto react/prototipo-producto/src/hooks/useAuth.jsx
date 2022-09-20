@@ -21,6 +21,7 @@ const useAuth = (initialState) => {
               email: res.result.data.email,
               phone: res.result.data.phone,
               address: res.result.data.address,
+              rol : res.result.data.rol,
               auth: true
             });
             setIsChecking(false);

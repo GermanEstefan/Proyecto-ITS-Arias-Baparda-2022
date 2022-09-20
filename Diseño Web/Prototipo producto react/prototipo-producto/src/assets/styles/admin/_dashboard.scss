@@ -1,0 +1,30 @@
+.container-admin {
+    display: flex;
+    .dashboard_menu {
+        width: 20vw;
+        border-right: 1px solid $orange;
+        min-height: 100vh;
+        padding: 30px;
+
+        .dashboard_menu_list {
+            .dashboard_menu_list_item {
+                margin-bottom: 30px;
+                cursor: pointer;
+
+                span {
+                    font-size: 1.5rem;
+                }
+
+                ul {
+                    margin-top: 10px;
+                    padding-left: 15px;
+
+                    li {
+                        margin-bottom: 15px;
+                        font-size: 1.2rem;
+                    }
+                }
+            }
+        }
+    }
+}

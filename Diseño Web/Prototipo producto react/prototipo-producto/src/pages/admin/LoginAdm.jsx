@@ -31,8 +31,10 @@ const LoginAdm = () => {
                     email: resp.result.data.email,
                     phone: resp.result.data.phone,
                     address: resp.result.data.address,
+                    rol: resp.result.data.rol,
                     auth: true
                 });
+                localStorage.setItem("token", resp.result.data.token);
                 Swal.fire({
                     icon: "success",
                     text: "Ingreso exitoso",

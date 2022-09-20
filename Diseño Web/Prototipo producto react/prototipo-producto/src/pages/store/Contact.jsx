@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import Imagen from "../../assets/img/Obreros.jpg";
 import Swal from "sweetalert2";
+import ContainerBase from "../../components/store/ContainerBase";
 
 const Contact = () => {
 
@@ -18,16 +19,16 @@ const Contact = () => {
     });
   };
   return (
-
-    <main className="form-container main-client">
-      <img className="form-img" src={Imagen} alt="Imagen"></img>
+    <ContainerBase>
+      <main className="form-container main-client">
+        <img className="form-img" src={Imagen} alt="Imagen"></img>
         <form className="form" onSubmit={handleSubmit} autoComplete="off">
           <h1>Envianos tu mensaje</h1>
-          <input 
-            name="topic" 
-            id="topic" 
-            placeholder="Asunto" 
-            className="input" 
+          <input
+            name="topic"
+            id="topic"
+            placeholder="Asunto"
+            className="input"
           />
 
           <textarea
@@ -43,10 +44,10 @@ const Contact = () => {
             type="submit"
             to={"/register"}
           >Enviar</button>
-          
-        </form>
-    </main>
 
+        </form>
+      </main>
+    </ContainerBase>
   );
 };
 

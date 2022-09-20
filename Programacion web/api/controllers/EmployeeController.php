@@ -108,6 +108,7 @@ class EmployeeController{
             die();
         }
 
+        $employeeRol = $employeeExistInDatabase['employee_role'];
         $employeeId = $employeeExistInDatabase['employee_user'];
         $userInDatabase = UserModel::getUserById($employeeId);
         $userInDatabasePassword = $userInDatabase['password'];
@@ -117,12 +118,13 @@ class EmployeeController{
             die();
         }
 
-        $userToken = $this->jwt->generateToken($employeeId);
+        $userToken = $this->jwt->generateToken($employeeId, $employeeRol);
         $bodyResponse = array(
             "token" => $userToken,
             "email" => $userInDatabase['email'],
             "name" => $userInDatabase['name'],
-            "surname" => $userInDatabase['surname']
+            "surname" => $userInDatabase['surname'],
+            "rol" => $employeeRol
         );
         echo $this->response->successfully("Autenticacion realizada con exito", $bodyResponse);
         die();
