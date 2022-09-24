@@ -2,6 +2,7 @@ $orange: #f5990f;
 $transparent_orange: #f5990f7c;
 $gray: #bccddb;
 $dark_gray: #9ba6af;
+$black: #121212;
 
 @import "./assets/styles/store/reusable";
 @import "./assets/styles/store/footer";
@@ -15,8 +16,7 @@ $dark_gray: #9ba6af;
 @import "./assets/styles/store/productPage";
 @import "./assets/styles/store/pageTitle";
 @import "./assets/styles/admin/login";
-@import "./assets/styles/admin/header";
-@import "./assets/styles/admin/dashboard";
+@import "./assets/styles/admin/containerBase";
 
 
 body{

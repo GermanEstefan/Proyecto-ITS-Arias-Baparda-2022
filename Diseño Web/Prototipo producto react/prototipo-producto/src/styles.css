@@ -846,6 +846,7 @@
   background-color: #f2f2f2;
   align-items: center;
   font-size: 1.2rem;
+  position: fixed;
 }
 .header-admin img {
   width: 250px;
@@ -864,26 +865,57 @@
 .container-admin {
   display: flex;
 }
-.container-admin .dashboard_menu {
-  width: 20vw;
-  border-right: 1px solid #f5990f;
+.container-admin aside {
+  background-color: #121212;
+  color: #fff;
   min-height: 100vh;
-  padding: 30px;
+  padding: 0 30px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
-.container-admin .dashboard_menu .dashboard_menu_list .dashboard_menu_list_item {
+.container-admin aside > img {
+  position: absolute;
+  top: 20px;
+  width: 180px;
+}
+.container-admin aside .aside_menu_item {
   margin-bottom: 30px;
+}
+.container-admin aside .aside_menu_item .aside_menu_item_container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+  transition: 0.3s;
   cursor: pointer;
 }
-.container-admin .dashboard_menu .dashboard_menu_list .dashboard_menu_list_item span {
-  font-size: 1.5rem;
+.container-admin aside .aside_menu_item .aside_menu_item_container:hover {
+  color: #f5990f;
 }
-.container-admin .dashboard_menu .dashboard_menu_list .dashboard_menu_list_item ul {
-  margin-top: 10px;
+.container-admin aside .aside_menu_item .aside_menu_item_container .aside_menu_item_container_icon {
+  color: #f5990f;
+  margin-right: 15px;
+}
+.container-admin aside .aside_menu_item .aside_menu_item_container .aside_menu_item_container_icon2 {
+  margin-left: 30px;
+  font-size: 0.5rem;
+}
+.container-admin aside .aside_menu_item .aside_menu_item_container span {
+  font-size: 1rem;
+}
+.container-admin aside .aside_menu_item ul {
   padding-left: 15px;
 }
-.container-admin .dashboard_menu .dashboard_menu_list .dashboard_menu_list_item ul li {
+.container-admin aside .aside_menu_item ul li {
   margin-bottom: 15px;
-  font-size: 1.2rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.container-admin aside .aside_menu_item ul li:hover {
+  color: #f5990f;
 }
 
 body {
