@@ -10,8 +10,15 @@ import Loading from "./components/store/Loading";
 import useAuth from "./hooks/useAuth";
 import UserPanel from "./pages/store/UserPanel";
 import LoginAdm from "./pages/admin/LoginAdm";
-import Users from "./pages/admin/Users";
-import HomeAdmin from "./pages/admin/HomeAdmin";
+import ContainerBase from "./components/admin/ContainerBase";
+import CreateUser from "./pages/admin/CreateUser";
+import ListUsers from "./pages/admin/ListUsers";
+import ActionUsers from "./pages/admin/ActionUsers";
+import CreateCategory from "./pages/admin/CreateCategorys";
+import ListCateogorys from "./pages/admin/ListCategorys";
+import ListProducts from "./pages/admin/ListProducts";
+import CreateProducts from "./pages/admin/CreateProducts";
+import ListShipments from "./pages/admin/ListShipments";
 
 export const userStatusContext = createContext({});
 
@@ -41,7 +48,15 @@ const App = () => {
           <Route path="/category/:category/:id" element={<ProductPage />} />
           <Route path="/panel-user" element={<UserPanel/>} />
           <Route path="/admin/login" element={<LoginAdm/>} />
-          <Route path="/admin" element={ <HomeAdmin/> } />
+          <Route path="/admin" element={ <ContainerBase/> } />
+          <Route path="/admin/users/create" element={ <CreateUser/> } />
+          <Route path="/admin/users/list" element={ <ListUsers/> } />
+          <Route path="/admin/users/actions" element={ <ActionUsers/> } />
+          <Route path="/admin/categorys/create" element={ <CreateCategory /> } />
+          <Route path="/admin/categorys/list" element={ <ListCateogorys/> } />
+          <Route path="/admin/products/create" element={ <CreateProducts/> } />
+          <Route path="/admin/products/list" element={ <ListProducts/> } />
+          <Route path="/admin/shipments/list" element={ <ListShipments/> } />
         </Routes>
       </userStatusContext.Provider>
   );

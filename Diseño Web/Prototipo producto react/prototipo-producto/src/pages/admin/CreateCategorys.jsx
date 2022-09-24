@@ -1,14 +1,14 @@
 import React from 'react'
 import ContainerBase from '../../components/admin/ContainerBase';
 
-const HomeAdmin = () => {
+const CreateCategory = () => {
     return (
         <ContainerBase>
             <section>
-                <h1>asdasdasdasd</h1>
+                <h1>Crear categoria</h1>
             </section>
         </ContainerBase>
     )
 }
 
-export default HomeAdmin;
+export default CreateCategory;

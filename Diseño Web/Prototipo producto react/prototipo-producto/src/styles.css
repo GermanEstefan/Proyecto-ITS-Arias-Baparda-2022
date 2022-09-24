@@ -840,32 +840,44 @@
 
 .header-admin {
   display: flex;
-  justify-content: space-around;
+  height: 60px;
   width: 100vw;
   padding: 10px 0;
-  background-color: #f2f2f2;
+  background-color: #f5990f;
   align-items: center;
   font-size: 1.2rem;
   position: fixed;
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
 }
-.header-admin img {
-  width: 250px;
+.header-admin .header-admin_config {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  right: 20px;
 }
-.header-admin span {
-  margin-left: 30px;
+.header-admin .header-admin_config > svg {
+  font-size: 2rem;
+  margin-right: 15px;
+  cursor: pointer;
+  transition: 0.3s;
 }
-.header-admin span strong {
-  color: #f5990f;
+.header-admin .header-admin_config > svg:hover {
+  color: #5f5f5f;
 }
-.header-admin .header-admin_logout {
-  font-size: 2.5rem;
-  color: #f5990f;
+.header-admin .header-admin_config > div {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.header-admin .header-admin_config > div span {
+  margin-bottom: 3px;
 }
 
 .container-admin {
   display: flex;
 }
 .container-admin aside {
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   background-color: #121212;
   color: #fff;
   min-height: 100vh;
@@ -915,6 +927,13 @@
   transition: 0.3s;
 }
 .container-admin aside .aside_menu_item ul li:hover {
+  color: #f5990f;
+}
+.container-admin > section {
+  margin-top: 80px;
+}
+
+.selected {
   color: #f5990f;
 }
 

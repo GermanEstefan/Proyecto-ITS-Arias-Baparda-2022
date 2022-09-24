@@ -1,31 +1,43 @@
 
 .header-admin{
     display: flex;
-    justify-content: space-around;
+    height: 60px;
     width: 100vw;
     padding: 10px 0;
-    background-color: #f2f2f2;
+    background-color: $orange;
     align-items: center;
     font-size: 1.2rem;
     position: fixed;
-    img{
-        width: 250px;
-    }
-    span{
-        margin-left: 30px;
-        strong{
-            color: $orange;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+    .header-admin_config{
+        display: flex;
+        align-items: center;
+        position: absolute;
+        right: 20px;
+        > svg {
+            font-size: 2rem;
+            margin-right: 15px;
+            cursor: pointer;
+            transition: .3s;
+            &:hover{
+                color: lighten($color: $black, $amount: 30%);
+            }
         }
-    }
-    .header-admin_logout{
-        font-size: 2.5rem;
-        color: $orange;
+        >div{
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            span{
+                margin-bottom: 3px;
+            }
+        }
     }
 }
 
 .container-admin {
     display: flex;
     aside {
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
         background-color: $black;
         color: #fff;
         min-height: 100vh;
@@ -75,4 +87,11 @@
             }
         }
     }
+    > section{
+        margin-top: 80px;
+    }
+}
+
+.selected{
+    color: $orange;
 }

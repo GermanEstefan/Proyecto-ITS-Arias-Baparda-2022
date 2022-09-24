@@ -11,6 +11,7 @@ const useAuth = (initialState) => {
         verifyAuth()
           .then(res => {
             setIsChecking(true);
+            console.log(res)
             if (!res) {
               setIsChecking(false);
               return;

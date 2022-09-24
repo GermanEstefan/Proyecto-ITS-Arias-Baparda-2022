@@ -43,7 +43,7 @@ const LoginAdm = () => {
                 });
                 resetForm();
                 setTimeout(() => {
-                    navigate('/admin/dashboard');
+                    navigate('/admin');
                 }, 1000)
             }  
         } catch (error) {
