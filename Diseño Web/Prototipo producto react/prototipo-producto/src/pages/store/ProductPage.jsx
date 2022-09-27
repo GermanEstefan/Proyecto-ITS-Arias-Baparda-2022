@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Guantes from "../../assets/img/guantes.jpg";
 import PageTitle from "../../components/store/PageTitle";
-import Carousel from "react-responsive-carousel";
 import ContainerBase from "../../components/store/ContainerBase";
 
 const ProductPage = () => {
