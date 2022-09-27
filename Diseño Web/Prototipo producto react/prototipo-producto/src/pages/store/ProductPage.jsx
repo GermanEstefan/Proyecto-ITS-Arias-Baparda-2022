@@ -21,26 +21,27 @@ const ProductPage = () => {
 
   return (
     <ContainerBase>
-      <div className="productPage">
-        <div className="productPage__img">
-          <div>
-            <img width={'300px'} src={Guantes} alt="Imagen del producto" />
+      <div className="productContainer">
+        <PageTitle
+          title={productMock.name}
+          isArrow={true}
+          arrowGoTo={`/category/${category}`}
+        />
+        <div className="productPage">
+          <div className="productPage__img">
+            <div>
+              <img width={"300px"} src={Guantes} alt="Imagen del producto" />
+            </div>
           </div>
-        </div>
-        <div className="productPage__description">
-          <PageTitle
-            title={productMock.name}
-            isArrow={true}
-            arrowGoTo={`/category/${category}`}
-          />
-
-          <div className="productPage__description__body">
-            <p>{productMock.price}$</p>
-            <p>{productMock.description}</p>
-          </div>
-          <div className="productPage__description__buttons">
-            <button className="buyBtn">Comprar</button>
-            <button className="addBtn">Agregar al carrito</button>
+          <div className="productPage__description">
+            <div className="productPage__description__body">
+              <p>{productMock.price}$</p>
+              <p>{productMock.description}</p>
+            </div>
+            <div className="productPage__description__buttons">
+              <button className="buyBtn">Comprar</button>
+              <button className="addBtn">Agregar al carrito</button>
+            </div>
           </div>
         </div>
       </div>

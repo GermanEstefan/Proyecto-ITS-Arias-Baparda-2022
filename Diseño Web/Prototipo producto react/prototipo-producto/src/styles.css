@@ -740,40 +740,43 @@
   margin-bottom: 8px;
 }
 
-.productPage {
+.productContainer {
+  margin: 20vh auto auto auto;
+  min-height: 80vh;
+  width: 75vw;
+}
+.productContainer .productPage {
   display: flex;
-  margin-top: 2em;
-  min-height: 100vh;
 }
 @media screen and (max-width: 800px) {
-  .productPage {
+  .productContainer .productPage {
     flex-direction: column;
     align-items: center;
   }
 }
-.productPage .productPage__img {
-  margin: auto;
+.productContainer .productPage .productPage__img {
+  margin-top: 4em;
   width: 40%;
 }
-.productPage .productPage__img img {
+.productContainer .productPage .productPage__img img {
   margin: auto;
   display: block;
 }
 @media screen and (max-width: 800px) {
-  .productPage .productPage__img {
+  .productContainer .productPage .productPage__img {
     width: 100%;
   }
 }
-.productPage .productPage__description {
+.productContainer .productPage .productPage__description {
   margin: auto 1em;
   width: 60%;
 }
 @media screen and (max-width: 800px) {
-  .productPage .productPage__description {
+  .productContainer .productPage .productPage__description {
     width: 100%;
   }
 }
-.productPage .productPage__description .productPage__description__buttons button {
+.productContainer .productPage .productPage__description .productPage__description__buttons button {
   border: none;
   padding: 8px;
   cursor: pointer;
@@ -781,10 +784,10 @@
   width: 50%;
   margin: 5px auto;
 }
-.productPage .productPage__description .productPage__description__buttons .buyBtn {
+.productContainer .productPage .productPage__description .productPage__description__buttons .buyBtn {
   background-color: #f5990f;
 }
-.productPage .productPage__description .productPage__description__buttons .addBtn {
+.productContainer .productPage .productPage__description .productPage__description__buttons .addBtn {
   background-color: #bccddb;
 }
 
