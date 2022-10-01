@@ -1,163 +1,172 @@
 /*Formularios(Registro, login, contacto)*/
 .form-container {
-    width: 70vw;
-    min-width: 800px;
-    height: 600px;
-    display: flex;
-    justify-content: center;
-    background-color: #fff;
-    align-items: center;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-    border-radius: 10px;
-    margin: 15em auto;
+  width: 70vw;
+  min-width: 800px;
+  height: 600px;
+  display: flex;
+  justify-content: center;
+  background-color: #fff;
+  align-items: center;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  border-radius: 10px;
+  margin: 15em auto;
+
+  @media (max-width: 800px) {
+    flex-direction: column;
+    height: initial;
+    min-width: initial;
+    box-shadow: none;
+    width: 90vw;
+    margin: 7em auto;
+  }
+
+  img {
+    width: 50%;
+    height: 100%;
+    object-fit: cover;
+    object-position: left;
+    border-radius: 10px 0 0 10px;
 
     @media (max-width: 800px) {
-        flex-direction: column;
-        height: initial;
-        min-width: initial;
-        box-shadow: none;
-        width: 90vw;
-        margin: 7em auto;
+      border-radius: 10px;
+      width: 100%;
+      height: 50%;
+    }
+  }
+
+  form {
+    padding: 20px;
+    width: 50%;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+
+    @media (max-width: 800px) {
+      width: 100%;
+      height: 50%;
+      justify-content: center;
     }
 
-    img {
-        width: 50%;
-        height: 100%;
-        object-fit: cover;
-        object-position: left;
-        border-radius: 10px 0 0 10px;
-
-        @media (max-width: 800px) {
-            border-radius: 10px;
-            width: 100%;
-            height: 50%;
-        }
+    h1 {
+      width: 100%;
+      text-align: center;
     }
 
-    form {
-        padding: 20px;
-        width: 50%;
-        background-color: #fff;
-        display: flex;
-        flex-direction: column;
-
-        @media (max-width: 800px) {
-            width: 100%;
-            height: 50%;
-            justify-content: center;
-        }
-
-        h1 {
-            width: 100%;
-            text-align: center;
-        }
-
-        a {
-            text-align: center;
-        }
-
-        input,
-        textarea {
-            display: block;
-            margin: 10px auto;
-        }
+    a {
+      text-align: center;
     }
+
+    input[type="text"],
+    input[type="password"],
+    textarea {
+      display: block;
+      margin: 10px auto;
+    }
+    label {
+      display: flex;
+      align-items: baseline;
+      justify-content: center;
+      input[type="checkbox"] {
+        margin: 0 5px;
+      }
+    }
+  }
 }
 
 /*Boton formularios*/
 .submit-button {
-    margin: 10px auto;
-    display: block;
-    padding: 1em;
-    background-color: $gray;
-    border: 15px;
-    border-radius: 6px;
-    font-weight: bold;
-    font-size: large;
-    cursor: pointer;
+  margin: 10px auto;
+  display: block;
+  padding: 1em;
+  background-color: $gray;
+  border: 15px;
+  border-radius: 6px;
+  font-weight: bold;
+  font-size: large;
+  cursor: pointer;
 
-    &:hover {
-        background: $dark_gray;
-        transition: 0.4s;
-    }
+  &:hover {
+    background: $dark_gray;
+    transition: 0.4s;
+  }
 }
 
 /*Componente input*/
 .input-wrapper {
-    position: relative;
-    text-align: center;
-    margin-bottom: 10px;
-    .input-wrapper__input {
-        display: block;
-        font-family: inherit;
-        &:focus {
-            outline: none;
-        }
+  position: relative;
+  text-align: center;
+  margin-bottom: 10px;
+  .input-wrapper__input {
+    display: block;
+    font-family: inherit;
+    &:focus {
+      outline: none;
     }
-    .input-wrapper__msg-error {
-        position: absolute;
-        bottom: -12px;
-        left: 0;
-        right: 0;
-        color: red;
-    }
+  }
+  .input-wrapper__msg-error {
+    position: absolute;
+    bottom: -12px;
+    left: 0;
+    right: 0;
+    color: red;
+  }
 }
 
 /*Componente ShoppingCart*/
-.shopping-cart-mobile{
-    position: fixed;
-    bottom: 20px;
-    left: 20px;
-    font-size: 2rem;
-    color: $orange;
-    padding: 25px;
-    border-radius: 50px;
-    background-color: rgba(0, 0, 0, 0.637);
+.shopping-cart-mobile {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  font-size: 2rem;
+  color: $orange;
+  padding: 25px;
+  border-radius: 50px;
+  background-color: rgba(0, 0, 0, 0.637);
 }
 
-.shopping-cart-desktop{
-    display: flex;
-    align-items: center;
-    span{
-        font-size: 1.2rem;
-        color: black;
-        font-weight: bold;
-    }
+.shopping-cart-desktop {
+  display: flex;
+  align-items: center;
+  span {
+    font-size: 1.2rem;
+    color: black;
+    font-weight: bold;
+  }
 }
 
 /*Pantalla oscura*/
 .shadow-close {
-    width: 100vw;
-    height: 100vh;
-    background-color: rgba(0, 0, 0, 0.589);
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 1;
-    animation: fadeIn .5s ease-in;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.589);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  animation: fadeIn 0.5s ease-in;
 }
 
 .fade-out {
-    animation: fadeOut .5s ease-out;
-    opacity: 0;
+  animation: fadeOut 0.5s ease-out;
+  opacity: 0;
 }
 
 @keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
+  from {
+    opacity: 0;
+  }
 
-    to {
-        opacity: 1;
-    }
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes fadeOut {
-    from {
-        opacity: 1;
-    }
+  from {
+    opacity: 1;
+  }
 
-    to {
-        opacity: 0;
-    }
+  to {
+    opacity: 0;
+  }
 }
