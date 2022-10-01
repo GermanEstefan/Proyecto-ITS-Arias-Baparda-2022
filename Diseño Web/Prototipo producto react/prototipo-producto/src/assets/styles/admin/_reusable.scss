@@ -1,0 +1,71 @@
+
+.opacity {
+    opacity: .5;
+}
+.fetching-data-message{
+    font-size: 1.5rem;
+}
+.warning-message {
+    color: rgb(209, 32, 32);
+    font-size: 1.2rem;
+    text-align: center;
+}
+.successfully-message {
+    color: green;
+    font-size: 1.2rem;
+    text-align: center;
+}
+.input-form {
+    border: 1px solid $orange;
+    background-color: #f2f2f2;
+    border-radius: 5px;
+    font-weight: bold;
+}
+.select-form{
+    padding: 4px 0;
+    border-radius: 5px;
+    border: 1px solid $orange;
+    background-color: #f2f2f2;
+    border-radius: 5px;
+    &:focus{
+        outline: none;
+    }
+    font-weight: bold;
+}
+.button-form{
+    font-weight: bold;
+    background-color: $orange;
+    border: 1px solid #fff;
+    color: #fff;
+    padding: 8px 0;
+    border-radius: 5px;
+    font-size: 1rem;
+    border: 1px solid $orange;
+    cursor: pointer;
+    transition: .5s;
+    &:hover {
+        background-color: transparent;
+        border: 1px solid $orange;
+        color: black;
+    }
+}
+
+.table-template{
+    border-radius: 5px;
+    th,td{
+        border-radius: 5px;
+        background-color: #f2f2f2;
+        padding: 8px;
+        font-weight: bold;
+        text-align: center;
+    }
+    th{
+        color: $orange;
+        font-size: 1.1rem;
+    }
+    .controls-table{
+        color: $orange;
+        font-size: 1.3rem;
+        cursor: pointer;
+    }
+}

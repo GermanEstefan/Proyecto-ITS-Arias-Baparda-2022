@@ -18,7 +18,7 @@ class EmployeeController{
 
     public function validateBodyOfRegisterEmployee($userData){
         $bodyOfRequest = UserController::validateBodyOfRegisterUser($userData);
-        if (!$bodyOfRequest || !isset($userData['rol']) || !isset($userData['ci'])) {
+        if (!$bodyOfRequest || !isset($userData['rol']) || !isset($userData['ci']) ||  !isset($userData['address']) || !isset($userData['phone']) ) {
             return false;
         } else {
             return $userData;
@@ -35,15 +35,8 @@ class EmployeeController{
             die();
         }
 
-        //Verificacion del token.
-        if (!isset(getallheaders()['access-token'])) {
-            http_response_code(401);
-            echo $this->response->error401("No hay un token presente");
-            die();
-        }
-
-        //Si tiene un token, y es valido lo decodificamos y obtenemos su ID.
-        $idOfUser = $this->jwt->verifyToken(getallheaders()['access-token'])->data->idUser;
+        //Verificamos el token y si es valido, obtenemos el id de usuario.
+        $idOfUser = $this->jwt->verifyTokenAndGetIdUserFromRequest();
         $employee = EmployeeModel::getEmployeeById($idOfUser);
         $rolOfEmployee = $employee['employee_role'];
         if(!($rolOfEmployee == 'JEFE')){
@@ -58,6 +51,8 @@ class EmployeeController{
         $password = $userData['password'];
         $rol = $userData['rol'];
         $ci = $userData['ci'];
+        $phone = $userData['phone'];
+        $address = $userData['address'];
 
         $employeeExist = EmployeeModel::getEmployeeByCi($ci);
         if ($employeeExist) {
@@ -72,12 +67,12 @@ class EmployeeController{
             die();
         }
 
-        $newEmployee = new EmployeeModel($email, $name, $surname, $password, $rol, $ci);
+        $newEmployee = new EmployeeModel($email, $name, $surname, $password, $rol, $ci, $phone, $address);
         $resultOfSave = $newEmployee->save();
         if ($resultOfSave) {
             http_response_code(200);
             echo $this->response->successfully("Empleado dado de alta con exito");
-        } else {
+        } else { 
             http_response_code(500);
             echo $this->response->error500();
         }
@@ -128,6 +123,19 @@ class EmployeeController{
         );
         echo $this->response->successfully("Autenticacion realizada con exito", $bodyResponse);
         die();
+    }
+
+    public function getEmployees(){
+        $idOfUser = $this->jwt->verifyTokenAndGetIdUserFromRequest();
+        $employee = EmployeeModel::getEmployeeById($idOfUser);
+        $rolOfEmployee = $employee['employee_role'];
+        if(!($rolOfEmployee == 'JEFE')){
+            http_response_code(401);
+            echo $this->response->error401("Usted no esta autorizado para relizar esta accion");
+            die();
+        }
+        $employees = EmployeeModel::getEmployees();
+        echo json_encode($employees); 
     }
 
     public function deleteEmployee($idOfEmployee){

@@ -27,7 +27,7 @@ const Aside = () => {
         <aside>
             <img src={LogoCliente} alt="logo" />
             <ul className="aside_menu">
-                <li className="aside_menu_item">
+                <li className={`aside_menu_item`}>
                     <div className="aside_menu_item_container" onClick={() => handleOpenSubMenu('users')} >
                         <FontAwesomeIcon icon={faUser} className="aside_menu_item_container_icon"/>
                         <span>Usuarios</span>
@@ -39,18 +39,14 @@ const Aside = () => {
                         <ul>
                             <li 
                                 onClick={() => navigate('/admin/users/create') }
-                                className={ (action === 'create' && page === 'users') && 'selected' } 
+                                className={ (action === 'create' && page === 'users') ? 'selected' : '' } 
                             >Crear un nuevo usuario</li>
 
                             <li 
                                 onClick={() => navigate('/admin/users/list') }
-                                className={ (action === 'list' && page === 'users') && 'selected' }
+                                className={ (action === 'list' && page === 'users') ? 'selected' : '' }
                             >Listar usuarios</li>
 
-                            <li 
-                                onClick={() => navigate('/admin/users/actions') }
-                                className={ (action === 'actions' && page === 'users') && 'selected' }
-                            >Ver acciones realizadas</li>
                         </ul>
                     }
 
@@ -68,12 +64,12 @@ const Aside = () => {
                         <ul>
                             <li 
                                 onClick={() => navigate('/admin/categorys/create') }
-                                className={ (action === 'create' && page === 'categorys') && 'selected' }
+                                className={ (action === 'create' && page === 'categorys') ? 'selected' : '' }
                             >Crear una nueva categoria</li>
 
                             <li 
                                 onClick={() => navigate('/admin/categorys/list') }
-                                className={ (action === 'list' && page === 'categorys') && 'selected' }
+                                className={ (action === 'list' && page === 'categorys') ? 'selected' : '' }
                             >Listar categorias</li>
                         </ul>
                     }
@@ -91,12 +87,12 @@ const Aside = () => {
                         <ul>
                             <li 
                                 onClick={() => navigate('/admin/products/create') }
-                                className={ (action === 'create' && page === 'products') && 'selected' }
+                                className={ (action === 'create' && page === 'products') ? 'selected' : '' }
                             >Añadir un nuevo producto</li>
 
                             <li 
                                 onClick={() => navigate('/admin/products/list') }
-                                className={ (action === 'list' && page === 'products') && 'selected' }
+                                className={ (action === 'list' && page === 'products') ? 'selected' : '' }
                             >Listar productos</li>
                         </ul>
                     }
@@ -114,7 +110,7 @@ const Aside = () => {
                         <ul>
                             <li 
                                 onClick={() => navigate('/admin/shipments/list') } 
-                                className={ (action === 'list' && page === 'shipments') && 'selected' } 
+                                className={ (action === 'list' && page === 'shipments') ? 'selected' : '' } 
                             >Listar envios</li>
                         </ul>
                     }

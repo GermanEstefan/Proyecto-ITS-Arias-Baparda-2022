@@ -9,7 +9,7 @@ export const fetchApi = async (endpoint, method, data) => {
         },
         body: JSON.stringify(data)
     });
-    const respToJson = await resp.json()
+    const respToJson = await resp.json();
     return respToJson;
 }
 

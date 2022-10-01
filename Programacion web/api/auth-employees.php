@@ -35,15 +35,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             die();     
     }
 
-} else if($_SERVER['REQUEST_METHOD'] === 'DELETE'){
-    /*ENDOPOINT EN PROCESO... 
-    if( !isset($_GET($idEmployee)) ){
-        http_response_code(400);
-        echo $response->error400();
-        die();
-    }
-    $idOfUser = $_GET($idEmployee);
-    $employeeController->deleteEmployee($idOfUser);*/
+} else if($_SERVER['REQUEST_METHOD'] === 'GET'){
+    $employeeController->getEmployees();
     die();
 }else{
     //Metodo no permitido.

@@ -6,13 +6,17 @@
         protected $name;
         protected $surname;
         protected $password;
+        protected $phone;
+        protected $address;
         protected $connection;
 
-        function __construct($email, $name, $surname, $password ){
+        function __construct($email, $name, $surname, $password, $phone, $address ){
             $this->email = $email;
             $this->name = $name;
             $this->surname = $surname;
             $this->password = $password;
+            $this->phone = $phone;
+            $this->address = $address;
             $this->connection = new Connection();
         }
 

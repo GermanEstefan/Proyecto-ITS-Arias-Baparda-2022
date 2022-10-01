@@ -41,19 +41,21 @@
         background-color: $black;
         color: #fff;
         min-height: 100vh;
-        padding: 0 30px;
+        padding: 0 40px;
         position: relative;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        width: 50vw;
+        max-width: 250px;
         > img {
             position: absolute;
             top: 20px;
             width: 180px;
         }
         .aside_menu_item {
-            margin-bottom: 30px;
+            margin-bottom: 50px;
             .aside_menu_item_container {
                 display: flex;
                 align-items: center;
@@ -71,13 +73,13 @@
                     font-size: .5rem;
                 }
                 cursor: pointer;
-                span { font-size: 1rem; }
+                span { font-size: 1.5rem; }
             }
             ul {
                 padding-left: 15px;
                 li {
                     margin-bottom: 15px;
-                    font-size: .9rem;
+                    font-size: 1.1rem;
                     cursor: pointer;
                     transition: .3s;
                     &:hover{

@@ -37,7 +37,7 @@ class CustomerController
 
     public function updateCustomer($userData)
     {
-        $idOfUserRequested = $this->jwt->getIdUserOfRequest();
+        $idOfUserRequested = $this->jwt->verifyTokenAndGetIdUserFromRequest();
         $bodyOfRequest = UserController::validateBodyOfUpdateUser($userData);
         if(!$bodyOfRequest){
             http_response_code(400);

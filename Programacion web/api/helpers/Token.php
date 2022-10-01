@@ -33,7 +33,7 @@ class Token {
         }
     }
 
-    public function getIdUserOfRequest(){
+    public function verifyTokenAndGetIdUserFromRequest(){
         $response = new Response();
         if (!isset(getallheaders()['access-token'])) {
             http_response_code(401);

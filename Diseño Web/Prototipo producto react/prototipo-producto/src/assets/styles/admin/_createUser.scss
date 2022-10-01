@@ -1,0 +1,47 @@
+.create-user {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-color: #f2f2f2;
+        border-radius: 10px;
+        padding: 50px 40px;
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+        width: 50vw;
+        max-width: 550px;
+        >h1 {
+            margin: 0 0 40px 0;
+            color: $orange;
+        }
+        >div {
+            display: flex;
+            margin-bottom: 20px;
+            width: 100%;
+            justify-content: center;
+            align-items: center;
+            >div {
+                display: flex;
+                flex-direction: column;
+                width: 50%;
+                >label {
+                    margin-bottom: 5px;
+                    color: #121212;
+                    font-weight: bold;
+                }
+            }
+            > :first-child {margin-right: 25px;}
+        }
+        button {
+            margin-top: 20px;
+            width: 100%;
+        }
+        > span {
+            margin-top: 20px;
+        }
+    }
+}

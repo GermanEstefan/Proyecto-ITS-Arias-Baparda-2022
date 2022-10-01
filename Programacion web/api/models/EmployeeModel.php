@@ -6,8 +6,8 @@
         private $rol;
         private $ci;
 
-        function __construct($email, $name, $surname, $password, $rol, $ci){
-            parent::__construct($email, $name, $surname, $password);
+        function __construct($email, $name, $surname, $password, $rol, $ci, $phone, $address){
+            parent::__construct($email, $name, $surname, $password, $phone, $address);
             $this->rol = $rol;
             $this->ci = $ci;
         }
@@ -24,11 +24,17 @@
             return $conecction->getData($query)->fetch_assoc();
         }
 
+        public static function getEmployees(){
+            $conecction = new Connection();
+            $query = "SELECT * from employee";
+            return $conecction->getData($query)->fetch_all(MYSQLI_ASSOC);
+        }
+
         public function save(){
             $instanceMySql = $this->connection->getInstance();
             $instanceMySql->begin_transaction(MYSQLI_TRANS_START_READ_WRITE);
             $result_transaccion = true;
-            $userInsert = "INSERT INTO user(email, name, surname, password) VALUES ('$this->email', '$this->name', '$this->surname', '$this->password' )";
+            $userInsert = "INSERT INTO user(email, name, surname, password, phone, address) VALUES ('$this->email', '$this->name', '$this->surname', '$this->password', '$this->phone', '$this->address' )";
             $resultUserInsert = $instanceMySql->query($userInsert);
             if(!$resultUserInsert)  $result_transaccion = false;
             $idGeneratedFromUserInsert = $instanceMySql->insert_id;
