@@ -5,11 +5,23 @@ export const useForm = (initState) => {
 
   const handleValuesChange = ({ target }) => {
     if (target.name === "type") {
-        console.log('useForm if: ' + target.name +  ' ' + target.value)
-      setValues({
-        ...values,
-        [target.name]: target.value ? "COMPANY" : "NORMAL",
-      });
+      if (target.checked) {
+        setValues({
+          ...values,
+          [target.name]: "COMPANY",
+        });
+      }
+      if (!target.checked) {
+        setValues({
+          ...values,
+          [target.name]: "NORMAL",
+        });
+        //Quitamos los campos company y nRut del objeto
+        setValues((current) => {
+          const { company, nRut, ...rest } = current;
+          return rest;
+        });
+      }
     }
     if (target.name !== "type") {
       setValues({
@@ -17,7 +29,6 @@ export const useForm = (initState) => {
         [target.name]: target.value,
       });
     }
-    console.log(values);
   };
 
   const resetForm = () => setValues(initState);

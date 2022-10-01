@@ -18,11 +18,6 @@ const Register = () => {
     window.scroll(0, 0);
   }, []);
 
-  useEffect(() => {
-    console.log(values)
-  }, [values])
-  
-
   const initialValues = {
     email: "",
     name: "",
@@ -143,15 +138,15 @@ const Register = () => {
           </label>
           {(values.type === "COMPANY") && 
          <Animated
-         animationIn="fadeInLeft"
-         animationOut="fadeOut"
-         animationInDuration="500"
+         animationIn="fadeInDown"
+         animationOut="fadeOutUp"
+         animationInDuration={500}
          isVisible={true}
        >
           <Input
             name="nRut"
             id="nRut"
-            value={values.name}
+            value={values.nRut}
             placeholder="nRut"
             onChange={handleValuesChange}
             setErrorStatusForm={setErrorStatusForm}
@@ -160,7 +155,7 @@ const Register = () => {
           <Input
             name="company"
             id="company"
-            value={values.surname}
+            value={values.company}
             placeholder="Empresa"
             onChange={handleValuesChange}
             setErrorStatusForm={setErrorStatusForm}

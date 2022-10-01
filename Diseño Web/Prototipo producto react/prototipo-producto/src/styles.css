@@ -164,6 +164,11 @@
     opacity: 0;
   }
 }
+.displayNone {
+  height: 0;
+  transition: height 0.5s ease;
+}
+
 .footer {
   background-color: #f5990f;
   padding: 20px 0;

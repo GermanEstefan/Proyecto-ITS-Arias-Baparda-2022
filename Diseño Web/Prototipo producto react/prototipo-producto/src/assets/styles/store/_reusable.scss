@@ -170,3 +170,9 @@
     opacity: 0;
   }
 }
+
+
+.displayNone {
+  height: 0;
+  transition: height .5s ease;
+}
