@@ -57,10 +57,19 @@
 .form-container form a {
   text-align: center;
 }
-.form-container form input,
+.form-container form input[type=text],
+.form-container form input[type=password],
 .form-container form textarea {
   display: block;
   margin: 10px auto;
+}
+.form-container form label {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+}
+.form-container form label input[type=checkbox] {
+  margin: 0 5px;
 }
 
 /*Boton formularios*/
@@ -156,6 +165,11 @@
     opacity: 0;
   }
 }
+.displayNone {
+  height: 0;
+  transition: height 0.5s ease;
+}
+
 .footer {
   background-color: #f5990f;
   padding: 20px 0;
@@ -891,6 +905,31 @@
   color: #f5990f;
   font-size: 1.3rem;
   cursor: pointer;
+}
+
+.cartItem {
+  max-width: 1100px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  margin: 5px auto 5px auto;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+.cartItem .cartItem__img {
+  margin: 10px;
+  left: 0;
+}
+.cartItem .cartItem__text {
+  margin: 5px;
+  width: 70%;
+}
+.cartItem .CartItem__actions {
+  display: flex;
+  justify-content: space-between;
+}
+.cartItem .CartItem__actions .CartItem__actionsAmount {
+  margin: 0 2px 0 2px;
+  width: 30px;
 }
 
 .login-page-adm {

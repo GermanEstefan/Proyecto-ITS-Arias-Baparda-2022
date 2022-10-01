@@ -9,6 +9,7 @@ import { isEmail, isEmpty, isValidPassword } from "../../helpers/validateForms";
 import Input from "../../components/store/Input";
 import { fetchApi } from "../../API/api";
 import ContainerBase from "../../components/store/ContainerBase";
+import { Animated } from "react-animated-css";
 
 const Register = () => {
   const { setUserData } = useContext(userStatusContext);
@@ -30,7 +31,7 @@ const Register = () => {
     email: true,
     name: true,
     surname: true,
-    password: true,
+    password: true
   });
 
   const handleSubmit = async (e) => {
@@ -44,7 +45,11 @@ const Register = () => {
       });
     }
     try {
-      const resp = await fetchApi("auth-customers.php?url=register", "POST", values);
+      const resp = await fetchApi(
+        "auth-customers.php?url=register",
+        "POST",
+        values
+      );
       if (resp.status === "error") {
         return Swal.fire({
           icon: "error",
@@ -66,7 +71,7 @@ const Register = () => {
           email: values.email,
           address: null,
           phone: null,
-          auth: true
+          auth: true,
         });
         localStorage.setItem("token", resp.result.data.token);
         setTimeout(() => navigate("/"), 2000);
@@ -78,7 +83,6 @@ const Register = () => {
   };
 
   return (
-
     <ContainerBase>
       <div className="form-container">
         <img className={"form-img"} src={Imagen} alt="Imagen" />
@@ -93,7 +97,6 @@ const Register = () => {
             setErrorStatusForm={setErrorStatusForm}
             validateFunction={isEmpty}
           />
-
           <Input
             name="surname"
             id="surname"
@@ -103,7 +106,6 @@ const Register = () => {
             setErrorStatusForm={setErrorStatusForm}
             validateFunction={isEmpty}
           />
-
           <Input
             name="email"
             id="email"
@@ -113,7 +115,6 @@ const Register = () => {
             setErrorStatusForm={setErrorStatusForm}
             validateFunction={isEmail}
           />
-
           <Input
             name="password"
             id="password"
@@ -124,7 +125,44 @@ const Register = () => {
             setErrorStatusForm={setErrorStatusForm}
             validateFunction={isValidPassword}
           />
-
+          <label>
+            <Input
+              name="type"
+              id="type"
+              type={"checkbox"}
+              value={values.type === 'COMPANY'}
+              onChange={handleValuesChange}
+              setErrorStatusForm={setErrorStatusForm}
+            />
+            Empresa
+          </label>
+          {(values.type === "COMPANY") && 
+         <Animated
+         animationIn="fadeInDown"
+         animationOut="fadeOutUp"
+         animationInDuration={500}
+         isVisible={true}
+       >
+          <Input
+            name="nRut"
+            id="nRut"
+            value={values.nRut}
+            placeholder="nRut"
+            onChange={handleValuesChange}
+            setErrorStatusForm={setErrorStatusForm}
+            validateFunction={isEmpty}
+          />
+          <Input
+            name="company"
+            id="company"
+            value={values.company}
+            placeholder="Empresa"
+            onChange={handleValuesChange}
+            setErrorStatusForm={setErrorStatusForm}
+            validateFunction={isEmpty}
+          />
+          </Animated>
+          }
           <button className="submit-button" type="submit">
             Registrarse
           </button>

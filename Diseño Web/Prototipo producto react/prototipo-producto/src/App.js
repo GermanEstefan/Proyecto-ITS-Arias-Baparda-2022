@@ -19,6 +19,7 @@ import ListCateogorys from "./pages/admin/ListCategorys";
 import ListProducts from "./pages/admin/ListProducts";
 import CreateProducts from "./pages/admin/CreateProducts";
 import ListShipments from "./pages/admin/ListShipments";
+import ShoppingCartPage from "./pages/store/ShoppingCartPage";
 
 export const userStatusContext = createContext({});
 
@@ -44,6 +45,7 @@ const App = () => {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/shoppingCart" element={<ShoppingCartPage />} />
           <Route path="/category/:category" element={<CategoryPage />} />
           <Route path="/category/:category/:id" element={<ProductPage />} />
           <Route path="/panel-user" element={<UserPanel/>} />

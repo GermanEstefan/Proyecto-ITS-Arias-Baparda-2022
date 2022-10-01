@@ -479,6 +479,25 @@ insert customer set customer_user = new.id_user;
 END$$
 DELIMITER ;
 
+DROP TRIGGER IF EXISTS `bindev`.`ProdDispoParaPromo`;
+
+DELIMITER $$
+USE `bindev`$$
+CREATE DEFINER = CURRENT_USER TRIGGER `bindev`.`ProdDispoParaPromo` BEFORE INSERT ON `promo` FOR EACH ROW
+BEGIN
+declare stockTempo int;
+set stockTempo = (select stock from product where new.have_product = barcode)-new.quantity;
+if (new.quantity <=0) then
+SIGNAL SQLSTATE '45002' SET message_text = 'CANTIDAD INCORRECTA';
+else
+if (stockTempo >=0) then 
+update product set stock = stockTempo where barcode = new.have_product;
+else
+SIGNAL SQLSTATE '45001' SET message_text = 'NO HAY STOCK DEL PRODUCTO PARA AGREGAR AL PRODUCTO';
+END if;
+END if;
+end$$
+DELIMITER ;
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
