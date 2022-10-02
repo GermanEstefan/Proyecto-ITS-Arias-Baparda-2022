@@ -13,13 +13,13 @@ import LoginAdm from "./pages/admin/LoginAdm";
 import ContainerBase from "./components/admin/ContainerBase";
 import CreateUser from "./pages/admin/CreateUser";
 import ListUsers from "./pages/admin/ListUsers";
-import ActionUsers from "./pages/admin/ActionUsers";
-import CreateCategory from "./pages/admin/CreateCategorys";
-import ListCateogorys from "./pages/admin/ListCategorys";
 import ListProducts from "./pages/admin/ListProducts";
 import CreateProducts from "./pages/admin/CreateProducts";
 import ListShipments from "./pages/admin/ListShipments";
 import ShoppingCartPage from "./pages/store/ShoppingCartPage";
+import Categorys from "./pages/admin/Categorys";
+import Colors from "./pages/admin/Colors";
+import Sizes from "./pages/admin/Sizes";
 
 export const userStatusContext = createContext({});
 
@@ -53,9 +53,9 @@ const App = () => {
           <Route path="/admin" element={ <ContainerBase/> } />
           <Route path="/admin/users/create" element={ <CreateUser/> } />
           <Route path="/admin/users/list" element={ <ListUsers/> } />
-          <Route path="/admin/users/actions" element={ <ActionUsers/> } />
-          <Route path="/admin/categorys/create" element={ <CreateCategory /> } />
-          <Route path="/admin/categorys/list" element={ <ListCateogorys/> } />
+          <Route path="/admin/generals/categorys" element={ <Categorys /> } />
+          <Route path="/admin/generals/sizes" element={ <Sizes/> } />
+          <Route path="/admin/generals/colors" element={ <Colors/> } />
           <Route path="/admin/products/create" element={ <CreateProducts/> } />
           <Route path="/admin/products/list" element={ <ListProducts/> } />
           <Route path="/admin/shipments/list" element={ <ListShipments/> } />

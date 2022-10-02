@@ -6,7 +6,7 @@ import {  useLocation, useNavigate } from "react-router-dom";
 
 const Aside = () => {
 
-    const visibilityInit = { users: false, categorys: false, products: false, shipments: false }
+    const visibilityInit = { users: false, generals: false, products: false, shipments: false }
     const [visibility, setVisibility] = useState(visibilityInit);
     const [actualPageAndAction, setActualPageAndAction] = useState({action: '', page: ''});
     const {action, page} = actualPageAndAction;
@@ -53,24 +53,29 @@ const Aside = () => {
                 </li>
 
                 <li className="aside_menu_item">
-                    <div className="aside_menu_item_container" onClick={() => handleOpenSubMenu('categorys')} >
+                    <div className="aside_menu_item_container" onClick={() => handleOpenSubMenu('generals')} >
                         <FontAwesomeIcon icon={faSprayCanSparkles} className="aside_menu_item_container_icon"/>
-                        <span>Categorias</span>
+                        <span>Generales</span>
                         <FontAwesomeIcon icon={faChevronDown} className="aside_menu_item_container_icon2" />
                     </div>
                     {
-                        visibility.categorys
+                        visibility.generals
                         &&
                         <ul>
                             <li 
-                                onClick={() => navigate('/admin/categorys/create') }
-                                className={ (action === 'create' && page === 'categorys') ? 'selected' : '' }
-                            >Crear una nueva categoria</li>
+                                onClick={() => navigate('/admin/generals/categorys') }
+                                className={ (action === 'categorys' && page === 'generals') ? 'selected' : '' }
+                            >Categorias</li>
 
                             <li 
-                                onClick={() => navigate('/admin/categorys/list') }
-                                className={ (action === 'list' && page === 'categorys') ? 'selected' : '' }
-                            >Listar categorias</li>
+                                onClick={() => navigate('/admin/generals/sizes') }
+                                className={ (action === 'sizes' && page === 'generals') ? 'selected' : '' }
+                            >Talles</li>
+
+                            <li 
+                                onClick={() => navigate('/admin/generals/colors') }
+                                className={ (action === 'colors' && page === 'generals') ? 'selected' : '' }
+                            >Colores</li>
                         </ul>
                     }
                 </li>

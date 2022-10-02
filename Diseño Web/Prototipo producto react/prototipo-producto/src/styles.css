@@ -842,12 +842,14 @@
   color: rgb(209, 32, 32);
   font-size: 1.2rem;
   text-align: center;
+  font-weight: bold;
 }
 
 .successfully-message {
   color: green;
   font-size: 1.2rem;
   text-align: center;
+  font-weight: bold;
 }
 
 .input-form {

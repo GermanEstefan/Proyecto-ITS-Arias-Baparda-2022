@@ -1,15 +1,14 @@
 import React from 'react'
 import ContainerBase from '../../components/admin/ContainerBase';
 
-const ActionUsers = () => {
-
+const Sizes = () => {
     return (
         <ContainerBase>
             <section>
-               <h1>Acciones de usuarios</h1>                       
+                <h1>Crear talles</h1>
             </section>
         </ContainerBase>
     )
 }
 
-export default ActionUsers;
+export default Sizes;
