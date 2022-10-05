@@ -13,7 +13,7 @@ USE `bindev` ;
 -- Table `bindev`.`category`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `bindev`.`category` (
-  `id_category` INT NOT NULL,
+  `id_category` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(100) NOT NULL,
   `description` VARCHAR(500) NOT NULL,
   `picture` int NOT NULL,
@@ -27,14 +27,14 @@ CREATE TABLE IF NOT EXISTS `bindev`.`category` (
 ENGINE = InnoDB;
 
 -- -----------------------------------------------------
--- Table `bindev`.`desing`
+-- Table `bindev`.`design`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `bindev`.`desing` (
-  `id_desing` INT NOT NULL,
+CREATE TABLE IF NOT EXISTS `bindev`.`design` (
+  `id_design` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(150) NOT NULL,
   `description` VARCHAR(500) NOT NULL,
-  PRIMARY KEY (`id_desing`),
-  constraint `desing_UNIQUE` UNIQUE (`name`))
+  PRIMARY KEY (`id_design`),
+  constraint `design_UNIQUE` UNIQUE (`name`))
 ENGINE = InnoDB;
 
 
@@ -49,19 +49,6 @@ CREATE TABLE IF NOT EXISTS `bindev`.`size` (
   constraint `size_UNIQUE` UNIQUE (`name` ))
 ENGINE = InnoDB;
 
-
--- -----------------------------------------------------
--- Table `bindev`.`disburse`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `bindev`.`disburse` (
-  `id_disburse` INT NOT NULL,
-  `name` VARCHAR(150) NOT NULL,
-  `description` VARCHAR(500) NOT NULL,
-  `state` TINYINT default 1,
-  PRIMARY KEY (`id_disburse`),
-  constraint `CH_state_disburse` CHECK (`state`<=1 and `state`>=0),
-  constraint `disburse_UNIQUE` UNIQUE(`name`))
-ENGINE = InnoDB;
 
 -- -----------------------------------------------------
 -- Table `bindev`.`supplier`
@@ -111,7 +98,7 @@ AUTO_INCREMENT=5000;
 -- Table `bindev`.`status`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `bindev`.`status` (
-  `id_status` INT NOT NULL,
+  `id_status` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(150) NOT NULL,
   `description` VARCHAR(500) NOT NULL,
   PRIMARY KEY (`id_status`),
@@ -123,7 +110,7 @@ ENGINE = InnoDB;
 -- Table `bindev`.`delivery_time`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `bindev`.`delivery_time` (
-  `id_delivery` INT NOT NULL,
+  `id_delivery` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(150) NOT NULL,
   `description` VARCHAR(500) NOT NULL,
   `state` TINYINT default 1,
@@ -133,24 +120,10 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `bindev`.`payment_method`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `bindev`.`payment_method` (
-  `id_pay_meth` INT NOT NULL,
-  `name` VARCHAR(150) NOT NULL,
-  `description` VARCHAR(500) NOT NULL,
-  `state` TINYINT default 1,
-  PRIMARY KEY (`id_pay_meth`),
-  constraint `CH_state_PayMet` CHECK (`state`<=1 and `state`>=0),
-  constraint `UN_pay_meth` UNIQUE (`name`))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
 -- Table `bindev`.`photos`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `bindev`.`photos` (
-  `id_photo` INT NOT NULL,
+  `id_photo` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(150) NOT NULL,
   `description` VARCHAR(500) NOT NULL,
   `state` TINYINT default 1,
@@ -159,16 +132,6 @@ constraint `CH_state` CHECK (`state`<=1 and `state`>=0))
 ENGINE = InnoDB;
 
 
--- -----------------------------------------------------
--- Table `bindev`.`discount`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `bindev`.`discount` (
-  `value` DECIMAL(4, 2) NOT NULL,
-  `description` VARCHAR(500) NOT NULL,
-  `state` TINYINT default 1,
-  PRIMARY KEY (`value`),
-  constraint `CH_state_Discount` CHECK (`state`<=1 and `state`>=0))
-ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
@@ -219,8 +182,7 @@ CREATE TABLE IF NOT EXISTS `bindev`.`supply` (
   `id_supply` INT NOT NULL AUTO_INCREMENT,
   `date` DATETIME NOT NULL,
   `supplier_id` INT NOT NULL,
-  `employee_ci` INT NOT NULL,
-  `disburse_method` INT NOT NULL,
+  `employee_id` INT NOT NULL,
   `comment` VARCHAR(500) NULL,
   `total` DECIMAL(10,2) NOT NULL default 0,
   PRIMARY KEY (`id_supply`),
@@ -230,13 +192,8 @@ CREATE TABLE IF NOT EXISTS `bindev`.`supply` (
     ON DELETE RESTRICT
     ON UPDATE CASCADE,
   CONSTRAINT `FK_supply_employee`
-    FOREIGN KEY (`employee_ci`)
-    REFERENCES `bindev`.`employee` (`ci`)
-    ON DELETE RESTRICT
-    ON UPDATE cascade,
-  CONSTRAINT `FK_supply_disburse`
-    FOREIGN KEY (`disburse_method`)
-    REFERENCES `bindev`.`disburse` (`id_disburse`)
+    FOREIGN KEY (`employee_id`)
+    REFERENCES `bindev`.`employee` (`id`)
     ON DELETE RESTRICT
     ON UPDATE cascade)
 ENGINE = InnoDB;
@@ -251,7 +208,7 @@ CREATE TABLE IF NOT EXISTS `bindev`.`product` (
   `id_product` INT NOT NULL,
   `name` VARCHAR(200) NOT NULL,
   `product_category` INT NOT NULL,
-  `product_desing` INT NOT NULL,
+  `product_design` INT NOT NULL,
   `product_size` INT NOT NULL,
   `stock` INT NOT NULL,
   `price` DECIMAL(10,2) NOT NULL,
@@ -259,15 +216,15 @@ CREATE TABLE IF NOT EXISTS `bindev`.`product` (
   `state` TINYINT default 1,
   PRIMARY KEY (`barcode`),
   constraint `CH_state_product` CHECK (`state`<=1 and `state`>=0),
-  constraint `UN_product` UNIQUE (`id_product`, `product_category`, `product_desing`, `product_size`),
+  constraint `UN_product` UNIQUE (`id_product`, `product_category`, `product_design`, `product_size`),
   CONSTRAINT `FK_category_product`
     FOREIGN KEY (`product_category`)
     REFERENCES `bindev`.`category` (`id_category`)
     ON DELETE RESTRICT
     ON UPDATE CASCADE,
-  CONSTRAINT `FK_desing_product`
-    FOREIGN KEY (`product_desing`)
-    REFERENCES `bindev`.`desing` (`id_desing`)
+  CONSTRAINT `FK_design_product`
+    FOREIGN KEY (`product_design`)
+    REFERENCES `bindev`.`design` (`id_design`)
     ON DELETE RESTRICT
     ON UPDATE CASCADE,
   CONSTRAINT `FK_size_product`
@@ -331,7 +288,6 @@ CREATE TABLE IF NOT EXISTS `bindev`.`sale` (
   `address` VARCHAR(500) NOT NULL,
   `user_purchase` INT NOT NULL,
   `sale_delivery` INT NOT NULL,
-  `pay_met` INT NOT NULL,
   `total` DECIMAL(10,2) NOT NULL default 0,
   PRIMARY KEY (`id_sale`),
   CONSTRAINT `FK_customer_user`
@@ -343,12 +299,7 @@ CREATE TABLE IF NOT EXISTS `bindev`.`sale` (
     FOREIGN KEY (`sale_delivery`)
     REFERENCES `bindev`.`delivery_time` (`id_delivery`)
     ON DELETE RESTRICT
-    ON UPDATE CASCADE,
-  CONSTRAINT `FK_pay_sale`
-    FOREIGN KEY (`pay_met`)
-    REFERENCES `bindev`.`payment_method` (`id_pay_meth`)
-    ON DELETE RESTRICT
-    ON UPDATE RESTRICT)
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 ALTER TABLE sale
 AUTO_INCREMENT=700000;
@@ -437,13 +388,11 @@ CREATE DEFINER = CURRENT_USER TRIGGER `bindev`.`sale_detail_VALIDATION` BEFORE I
 BEGIN
 declare stockTemp int;
 declare totalParc decimal(10,2);
-declare totalDesc decimal(10,2);
 set stockTemp = (select stock from product where new.product_sale = barcode)-new.quantity;
 if (stockTemp >=0) then 
 update product set stock = stockTemp where barcode = new.product_sale;
 set totalParc = new.quantity * (select price from product where new.product_sale = barcode);
-set totalDesc = totalParc * new.sale_discount;
-set new.total = totalParc - totalDesc;
+set new.total = totalParc;
 update sale set total = ((total + new.total) * 1.22) where id_sale = new.sale_id;
 else
 SIGNAL SQLSTATE '45000' SET message_text = 'NO HAY STOCK SUFICIENTE PARA REALIZAR LA OPERACION';

@@ -13,13 +13,15 @@
 
         public static function getCustomerByEmail($email){
             $conecction = new Connection();
-            $query = "SELECT * from customer WHERE email='$email'";
+            $query = "SELECT u.id_user, u.name, u.surname, u.email, u.address, u.phone , c.company_name, c.rut_nr
+            FROM user u INNER JOIN customer c WHERE c.customer_user = u.id_user and u.email = '$email'";
             return $conecction->getData($query)->fetch_assoc();
         }
 
         public static function getCustomerByRut($nRut){
             $conecction = new Connection();
-            $query = "SELECT * from customer WHERE rut_nr='$nRut'";
+            $query = "SELECT u.id_user, u.name, u.surname, u.email, u.address, u.phone , c.company_name, c.rut_nr
+            FROM user u INNER JOIN customer c WHERE c.rut_nr='$nRut'";
             return $conecction->getData($query)->fetch_assoc();
         }
         

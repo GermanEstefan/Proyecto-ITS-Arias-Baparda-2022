@@ -33,6 +33,13 @@
             $query = "UPDATE user SET name = '$name', surname = '$surname', address = '$address', phone = '$phone' WHERE id_user = $id ";
             return $conecction->setData($query);
         }
+
+        public static function DisableUser($id){
+            $conecction = new Connection();
+            $query = "UPDATE user SET state = 0 WHERE id_user = $id ";
+            return $conecction->setData($query);
+        
+        } 
                 
         public function save(){
             $userInsert = "INSERT INTO user(email, name, surname, password) VALUES ('$this->email', '$this->name', '$this->surname', '$this->password' )";

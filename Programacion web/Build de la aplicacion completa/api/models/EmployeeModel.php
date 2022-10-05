@@ -14,15 +14,31 @@
 
         public static function getEmployeeByCi($ci){
             $conecction = new Connection();
-            $query = "SELECT * from employee WHERE ci='$ci'";
+            $query = "SELECT u.id_user, e.employee_role, e.ci, u.name, u.surname, u.email, u.address, u.phone
+            FROM user u INNER JOIN employee e WHERE e.employee_user = u.id_user and ci = '$ci'";
             return $conecction->getData($query)->fetch_assoc();
         }
 
-        public static function getEmployeeById($id){
+        public static function getEmployeeByIdUser($id){
             $conecction = new Connection();
-            $query = "SELECT * from employee WHERE employee_user='$id'";
+            $query = "SELECT u.id_user, e.employee_role, e.ci, u.name, u.surname, u.email, u.address, u.phone
+            FROM user u INNER JOIN employee e WHERE e.employee_user ='$id'";
             return $conecction->getData($query)->fetch_assoc();
         }
+
+        public static function UpdateRoleEmployee($ci, $rol){
+            $conecction = new Connection();
+            $query = "UPDATE employee SET employee_role = '$rol' WHERE ci ='$ci'";
+            return $conecction->setData($query);
+        
+        } 
+
+        public static function DisableEmployee($ci){
+            $conecction = new Connection();
+            $query = "UPDATE employee SET state = 0 WHERE ci ='$ci'";
+            return $conecction->setData($query);
+        
+        } 
 
         public function save(){
             $instanceMySql = $this->connection->getInstance();
