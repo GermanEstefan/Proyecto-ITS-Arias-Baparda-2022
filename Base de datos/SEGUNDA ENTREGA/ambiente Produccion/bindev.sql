@@ -340,7 +340,6 @@ CREATE TABLE IF NOT EXISTS `bindev`.`sale_detail` (
   `sale_id` INT NOT NULL,
   `product_sale` INT NOT NULL,
   `quantity` INT NOT NULL,
-  `sale_discount` DECIMAL(4,2) NULL,
   `total` DECIMAL(10,2) NOT NULL,
   PRIMARY KEY (`sale_id`, `product_sale`),
   CONSTRAINT `FK_id_sale`
@@ -352,12 +351,7 @@ CREATE TABLE IF NOT EXISTS `bindev`.`sale_detail` (
     FOREIGN KEY (`product_sale`)
     REFERENCES `bindev`.`product` (`barcode`)
     ON DELETE RESTRICT
-    ON UPDATE RESTRICT,
-  CONSTRAINT `FK_value_discount`
-    FOREIGN KEY (`sale_discount`)
-    REFERENCES `bindev`.`discount` (`value`)
-    ON DELETE RESTRICT
-    ON UPDATE RESTRICT)
+    ON UPDATE RESTRICT
 ENGINE = InnoDB;
 
 
