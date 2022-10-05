@@ -182,7 +182,7 @@ CREATE TABLE IF NOT EXISTS `bindev`.`supply` (
   `id_supply` INT NOT NULL AUTO_INCREMENT,
   `date` DATETIME NOT NULL,
   `supplier_id` INT NOT NULL,
-  `employee_id` INT NOT NULL,
+  `employee_ci` INT NOT NULL,
   `comment` VARCHAR(500) NULL,
   `total` DECIMAL(10,2) NOT NULL default 0,
   PRIMARY KEY (`id_supply`),
@@ -192,8 +192,8 @@ CREATE TABLE IF NOT EXISTS `bindev`.`supply` (
     ON DELETE RESTRICT
     ON UPDATE CASCADE,
   CONSTRAINT `FK_supply_employee`
-    FOREIGN KEY (`employee_id`)
-    REFERENCES `bindev`.`employee` (`id`)
+    FOREIGN KEY (`employee_ci`)
+    REFERENCES `bindev`.`employee` (`ci`)
     ON DELETE RESTRICT
     ON UPDATE cascade)
 ENGINE = InnoDB;
