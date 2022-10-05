@@ -351,7 +351,7 @@ CREATE TABLE IF NOT EXISTS `bindev`.`sale_detail` (
     FOREIGN KEY (`product_sale`)
     REFERENCES `bindev`.`product` (`barcode`)
     ON DELETE RESTRICT
-    ON UPDATE RESTRICT
+    ON UPDATE RESTRICT)
 ENGINE = InnoDB;
 
 
