@@ -1,11 +1,18 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+
 import { useParams } from "react-router-dom";
 import Guantes from "../../assets/img/guantes.jpg";
 import PageTitle from "../../components/store/PageTitle";
 import ContainerBase from "../../components/store/ContainerBase";
-
+import { userStatusContext } from "../../App";
 const ProductPage = () => {
+  const { userData } = useContext(userStatusContext);
   const { category, id } = useParams();
+  const [cart, setCart] = useState(() => {
+    const saved = localStorage.getItem("cart");
+  const initialValue = JSON.parse(saved);
+  return initialValue || [{}];
+  });
   useEffect(() => {
     window.scroll(0, 0);
   }, []);
@@ -17,6 +24,12 @@ const ProductPage = () => {
     price: "10.500",
     description:
       "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Deleniti facilis labore modi quo sapiente expedita nesciunt quos deseruntnobis provident",
+  };
+  const handleAddToCart = () => {
+    console.log("add");
+
+    setCart([...cart, { id: new Date() }]);
+    localStorage.setItem("cart", JSON.stringify(cart));
   };
 
   return (
@@ -39,8 +52,19 @@ const ProductPage = () => {
               <p>{productMock.description}</p>
             </div>
             <div className="productPage__description__buttons">
-              <button className="buyBtn">Comprar</button>
-              <button className="addBtn">Agregar al carrito</button>
+              <button className="buyBtn" disabled={!userData.auth}>
+                Comprar
+              </button>
+              <button
+                className="addBtn"
+                disabled={userData.auth}
+                onClick={handleAddToCart}
+              >
+                Agregar al carrito
+              </button>
+              {!userData.auth && (
+                <p>Registrate e ingresa para comenzar a comprar</p>
+              )}
             </div>
           </div>
         </div>

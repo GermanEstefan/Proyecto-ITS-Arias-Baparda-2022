@@ -805,6 +805,9 @@
 .productContainer .productPage .productPage__description .productPage__description__buttons .addBtn {
   background-color: #bccddb;
 }
+.productContainer .productPage .productPage__description .productPage__description__buttons p {
+  text-align: center;
+}
 
 .main_header {
   display: flex;

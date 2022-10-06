@@ -17,7 +17,7 @@ export const verifyAuth = async () => {
     try {
         const resp = await fetchApi("auth-verify.php", "GET")
         if (resp.status === 'successfully') {
-            return resp;
+            return resp;    
         } else {
             return null;
         }

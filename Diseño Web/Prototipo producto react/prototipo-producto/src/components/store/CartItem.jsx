@@ -1,5 +1,4 @@
 import React from "react";
-import { Link, useParams } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
 import Card from "./Card";
 import { Animated } from "react-animated-css";
