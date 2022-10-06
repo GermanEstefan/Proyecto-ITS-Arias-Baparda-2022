@@ -24,7 +24,7 @@
         }
         
         public function save(){
-            $instanceMySql = parent::getInstance();
+            $instanceMySql = parent::$conecction->getInstance();
             $instanceMySql->begin_transaction(MYSQLI_TRANS_START_READ_WRITE);
             $result_transaccion = true;
             $queryOfUser = "INSERT INTO user(email, name, surname, password) VALUES ('$this->email', '$this->name', '$this->surname', '$this->password' )";

@@ -1,6 +1,7 @@
 <?php
     require_once("./database/Connection.php");
-    class UserModel extends Connection {
+    
+    class UserModel{
 
         protected $email;
         protected $name;
@@ -8,6 +9,7 @@
         protected $password;
         protected $phone;
         protected $address;
+        protected $conecction;
 
         function __construct($email, $name, $surname, $password, $phone, $address ){
             $this->email = $email;
@@ -16,7 +18,7 @@
             $this->password = $password;
             $this->phone = $phone;
             $this->address = $address;
-            parent::__construct();
+            $this->conecction = new Connection();
         }
 
         public static function getUserByEmail($email){
@@ -39,9 +41,9 @@
                 
         public function save(){
             $userInsert = "INSERT INTO user(email, name, surname, password) VALUES ('$this->email', '$this->name', '$this->surname', '$this->password' )";
-            $result = parent::setData($userInsert);
+            $result = $this->conecction->setData($userInsert);
             if($result){
-                return parent::getLastIdInserted();
+                return $this->conecction->getLastIdInserted();
             }else{
                 return false;
             }

@@ -31,7 +31,7 @@
         }
 
         public function save(){
-            $instanceMySql = $this->connection->getInstance();
+            $instanceMySql = parent::$conecction->getInstance();
             $instanceMySql->begin_transaction(MYSQLI_TRANS_START_READ_WRITE);
             $result_transaccion = true;
             $userInsert = "INSERT INTO user(email, name, surname, password, phone, address) VALUES ('$this->email', '$this->name', '$this->surname', '$this->password', '$this->phone', '$this->address' )";
