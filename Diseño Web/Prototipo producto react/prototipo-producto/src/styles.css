@@ -830,6 +830,11 @@
   margin-left: 1em;
 }
 
+.container_section {
+  width: 100%;
+  min-height: 100vh;
+}
+
 .opacity {
   opacity: 0.5;
 }
@@ -907,6 +912,13 @@
   color: #f5990f;
   font-size: 1.3rem;
   cursor: pointer;
+}
+
+.flex-column-center-xy {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .cartItem {
@@ -1062,7 +1074,6 @@
 }
 
 .create-user {
-  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1116,7 +1127,6 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 100%;
 }
 .list-users > h1 {
   color: #f5990f;
@@ -1124,6 +1134,27 @@
 .list-users table {
   width: 50vw;
   max-width: 700px;
+}
+
+.categorys-manage h2 {
+  text-align: center;
+}
+.categorys-manage form {
+  display: flex;
+  flex-direction: column;
+  max-width: 350px;
+  width: 50vw;
+  margin-bottom: 50px;
+}
+.categorys-manage form input {
+  margin-bottom: 25px;
+}
+.categorys-manage form span {
+  margin-top: 20px;
+}
+.categorys-manage table {
+  width: 50vw;
+  max-width: 800px;
 }
 
 body {

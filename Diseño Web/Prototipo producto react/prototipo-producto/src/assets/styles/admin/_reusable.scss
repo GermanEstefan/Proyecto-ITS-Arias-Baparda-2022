@@ -1,4 +1,7 @@
-
+.container_section{
+    width: 100%;
+    min-height: 100vh;
+}
 .opacity {
     opacity: .5;
 }
@@ -70,4 +73,11 @@
         font-size: 1.3rem;
         cursor: pointer;
     }
+}
+
+.flex-column-center-xy{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
