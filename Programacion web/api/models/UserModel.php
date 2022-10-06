@@ -8,7 +8,6 @@
         protected $password;
         protected $phone;
         protected $address;
-        protected $connection;
 
         function __construct($email, $name, $surname, $password, $phone, $address ){
             $this->email = $email;
@@ -17,7 +16,7 @@
             $this->password = $password;
             $this->phone = $phone;
             $this->address = $address;
-            $this->connection = new Connection();
+            parent::__construct();
         }
 
         public static function getUserByEmail($email){
@@ -40,9 +39,9 @@
                 
         public function save(){
             $userInsert = "INSERT INTO user(email, name, surname, password) VALUES ('$this->email', '$this->name', '$this->surname', '$this->password' )";
-            $result = $this->connection->setData($userInsert);
+            $result = parent::setData($userInsert);
             if($result){
-                return $this->connection->getLastIdInserted();
+                return parent::getLastIdInserted();
             }else{
                 return false;
             }

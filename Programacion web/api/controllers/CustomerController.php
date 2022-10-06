@@ -96,7 +96,7 @@ class CustomerController
             $idOfCustomerSaved = $newCustomerTypeCompany->save();
         }else{
             //USUARIO TIPO NORMAL
-            $newCustomerTypeNormal = new UserModel($email, $name, $surname, $password);
+            $newCustomerTypeNormal = new UserModel($email, $name, $surname, $password, "", "");
             $idOfCustomerSaved = $newCustomerTypeNormal->save();
         }
    

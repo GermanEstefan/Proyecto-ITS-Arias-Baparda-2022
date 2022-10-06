@@ -48,3 +48,4 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     echo $response->error405();
     die();
 }
+?>

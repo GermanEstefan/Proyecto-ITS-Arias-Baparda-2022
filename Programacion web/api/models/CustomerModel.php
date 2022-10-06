@@ -6,7 +6,7 @@
         private $nRut;  
 
         function __construct($email, $name, $surname, $password, $company, $nRut){
-            parent::__construct($email, $name, $surname, $password);
+            parent::__construct($email, $name, $surname, $password, "", "");
             $this->company = $company;
             $this->nRut = $nRut;    
         }
@@ -24,7 +24,7 @@
         }
         
         public function save(){
-            $instanceMySql = $this->connection->getInstance();
+            $instanceMySql = parent::getInstance();
             $instanceMySql->begin_transaction(MYSQLI_TRANS_START_READ_WRITE);
             $result_transaccion = true;
             $queryOfUser = "INSERT INTO user(email, name, surname, password) VALUES ('$this->email', '$this->name', '$this->surname', '$this->password' )";
