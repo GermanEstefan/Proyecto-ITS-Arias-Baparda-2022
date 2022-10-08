@@ -33,7 +33,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $idCategory = $_GET['idCategory'];
     $category->updateCategory($idCategory, $categoryData);    
     die();
-    
+
+}else if($_SERVER['REQUEST_METHOD'] === 'DELETE'){
+
+    if(!isset($_GET['idCategory'])){
+        //Si manda este parametro seignifica que quiere obtener una categoria en particular
+        echo $response->error200("Error falta Id");    
+        die();
+    }
+    $idSize = $_GET['idCategory'];
+    $size->deleteCategory($idCategory);   
 
 }else {
     echo $response->error200("Metodo no permitido");
