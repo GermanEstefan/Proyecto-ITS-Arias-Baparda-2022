@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { fetchApi } from "../../API/api";
+import ContainerBase from "../../components/admin/ContainerBase";
 
 const EditSize = () => {
 
@@ -23,12 +24,12 @@ const EditSize = () => {
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
-        fetchApi(`sizes.php?idSize=${idOfSize}`, 'GET' )
+        fetchApi(`sizes.php?idSize=${idOfSize}`, 'GET')
             .then(res => {
-                console.log(res)
+                console.log(res.result.data)
                 setSizeValues({
-                    name: res.name,
-                    description: res.description
+                    name: res.result.data.name,
+                    description: res.result.data.description
                 })
             })
             .catch(err => console.error(err))
@@ -40,7 +41,7 @@ const EditSize = () => {
         try {
             const resp = await fetchApi(`sizes.php?idSize=${idOfSize}`, 'PUT', sizeValues);
             console.log(resp);
-            if(resp.status === 'error'){
+            if (resp.status === 'error') {
                 setError({ showMessage: true, message: resp.result.error_msg, error: true });
                 return setTimeout(() => setError(initStateLoading), 3000)
             }
@@ -55,39 +56,41 @@ const EditSize = () => {
     }
 
     return (
-        <section className='container_section flex-column-center-xy'>
-            <form onSubmit={handleSubmit} autoComplete="off" >
+        <ContainerBase>
+            <section className='container_section generals-layout flex-column-center-xy'>
+                <form onSubmit={handleSubmit} autoComplete="off" >
+                    <h2>Editar talle</h2>
+                    <label htmlFor="">Nombre</label>
+                    <input
+                        type="text"
+                        className='input-form'
+                        required
+                        value={name}
+                        name='name'
+                        onChange={handleChangeInputs}
+                    />
 
-                <label htmlFor="">Nombre</label>
-                <input
-                    type="text"
-                    className='input-form'
-                    required
-                    value={name}
-                    name='name'
-                    onChange={handleChangeInputs}
-                />
+                    <label htmlFor="">Descripcion</label>
+                    <input
+                        type="text"
+                        className='input-form'
+                        required
+                        value={description}
+                        name='description'
+                        onChange={handleChangeInputs}
+                    />
 
-                <label htmlFor="">Descripcion</label>
-                <input
-                    type="text"
-                    className='input-form'
-                    required
-                    value={description}
-                    name='description'
-                    onChange={handleChangeInputs}
-                />
-
-                <button
-                    className={`button-form ${loading && 'opacity'}`}
-                    disabled={loading}
-                >{loading ? 'Cargando...' : 'EDITAR TALLE'}</button>
-                {
-                    error.showMessage &&
-                    <span className={`${error.error ? 'warning-message' : 'successfully-message'} `} >{error.message}</span>
-                }
-            </form>
-        </section>
+                    <button
+                        className={`button-form ${loading && 'opacity'}`}
+                        disabled={loading}
+                    >{loading ? 'Cargando...' : 'EDITAR TALLE'}</button>
+                    {
+                        error.showMessage &&
+                        <span className={`${error.error ? 'warning-message' : 'successfully-message'} `} >{error.message}</span>
+                    }
+                </form>
+            </section>
+        </ContainerBase>
     )
 }
 
