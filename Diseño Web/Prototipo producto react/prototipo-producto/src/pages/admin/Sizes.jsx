@@ -1,16 +1,36 @@
 
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { fetchApi } from '../../API/api';
 import ContainerBase from '../../components/admin/ContainerBase';
 
 const Sizes = () => {
 
-    const [loadingFlags, setLoadingFlags] = useState({ createCategory: false, fetchingCategorys: true });
+    const [loadingFlags, setLoadingFlags] = useState({ fetchingSizes: true });
+    const [sizes, setSizes] = useState([]);
+ 
+    useEffect( () => {
+        fetchApi('sizes.php', 'GET')
+            .then( sizes => {
+                console.log(sizes);
+                if(!sizes) return;
+                setSizes(sizes);
+            })
+            .catch( err => console.error(err))
+            .finally(() => setLoadingFlags({...loadingFlags, fetchingSizes: false}))
+    },[])
 
     return (
         <ContainerBase>
             <section className='container_section flex-column-center-xy'>
-                <h1>Crear talles</h1>
-
+                
+                {
+                    loadingFlags
+                    ? <span>Obteniendo talles...</span>
+                    : <>
+                    <h1>Talles</h1>
+                        
+                    </>
+                }
             </section>
         </ContainerBase>
     )

@@ -1,6 +1,6 @@
 <?php
     require_once("./database/Connection.php");
-    class User extends Connection {
+    class UserModel {
 
         protected $email;
         protected $name;
@@ -17,7 +17,7 @@
             $this->password = $password;
             $this->phone = $phone;
             $this->address = $address;
-            parent::__construct();
+            $this->conecction = new Connection();
         }
 
         public static function getUserByEmail($email){
@@ -65,6 +65,7 @@
                 return false;
             }
         }
+        
     }
         
 ?>

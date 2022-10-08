@@ -15,13 +15,7 @@ $response = new Response();
 
 if($_SERVER['REQUEST_METHOD'] === 'GET'){
 
-    if (!isset(getallheaders()['access-token'])) {
-        http_response_code(401);
-        echo $response->error401("No hay un token presente");
-        die();
-    }
-
-    $idOfUser = $jwt->verifyToken(getallheaders()['access-token'])->data->idUser;
+    $idOfUser = $jwt->verifyTokenAndGetIdUserFromRequest();
     $userData = UserModel::getUserById($idOfUser);
     $employeeData = EmployeeModel::getEmployeeById($idOfUser);
 
