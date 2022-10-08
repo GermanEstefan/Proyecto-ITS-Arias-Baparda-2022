@@ -57,7 +57,7 @@ class SizeController {
             echo $this->response->error200("El talle con el ID $idSize no existe");
             die();
         }
-        echo $this->response->successfully("Talle obtenido con exito", json_encode($size));  
+        echo $this->response->successfully("Talle obtenido con exito", $size);  
     }
 
     public function updateSize($idSize,$sizeData){
