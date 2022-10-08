@@ -61,7 +61,7 @@ class CategoryController {
     }
 
     public function updateCategory($idCategory,$categoryData){
-
+        $this->jwt->verifyTokenAndGetIdUserFromRequest(); 
         $bodyIsValid = $this->validateBodyOfCategory($categoryData);
         if(!$bodyIsValid) echo $this->response->error400();
 
@@ -87,6 +87,20 @@ class CategoryController {
         }
         echo $this->response->successfully("Categoria actualizada con exito");
     }
+
+    public function deleteCategory($idCategory){
+        $this->jwt->verifyTokenAndGetIdUserFromRequest();
+        $existSize = CategoryModel::getCategoryById($idCategory);
+        if (!$existSize){
+            echo $this->response->error200('El id de la categoria enviado no existe');
+            die();
+        }
+
+        $result = SizeModel::deleteCategory($idCategory);
+        if(!$result){
+            echo $this->response->error500();
+            die();
+        }
 }
 
 ?>
