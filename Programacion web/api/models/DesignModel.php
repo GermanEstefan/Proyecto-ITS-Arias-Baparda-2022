@@ -34,6 +34,12 @@
             $query = "UPDATE design SET name = '$name', description = '$description' WHERE id = $id";
             return $conecction->setData($query);
         }
+
+        public static function deleteDesign($idDesign){
+            $conecction = new Connection();
+            $query = "DELETE FROM design WHERE id_design = '$idDesign'";
+            return $conecction->setData($query);
+        }
                 
         public function save(){
             $designInsert = "INSERT INTO design (name, description) VALUES ('$this->name', '$this->description' )";

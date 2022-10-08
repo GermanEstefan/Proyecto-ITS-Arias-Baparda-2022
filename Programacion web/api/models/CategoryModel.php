@@ -34,6 +34,12 @@
             $query = "UPDATE category SET name = '$name', description = '$description' WHERE id_category = '$idCategory' ";
             return $conecction->setData($query);
         }
+
+        public static function deleteCategory($idCategory){
+            $conecction = new Connection();
+            $query = "DELETE FROM category WHERE id_category = '$idCategory'";
+            return $conecction->setData($query);
+        }
                 
         public function save(){
             $categoryInsert = "INSERT INTO category (name, description) VALUES ('$this->name', '$this->description' )";

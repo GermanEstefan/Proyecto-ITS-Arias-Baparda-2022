@@ -34,7 +34,13 @@
             $query = "UPDATE size SET name = '$name', description = '$description' WHERE id_size = '$idSize'";
             return $conecction->setData($query);
         }
-                
+
+        public static function deleteSize($idSize){
+            $conecction = new Connection();
+            $query = "DELETE FROM size WHERE id_size = '$idSize'";
+            return $conecction->setData($query);
+        }
+
         public function save(){
             $sizeInsert = "INSERT INTO size (name, description) VALUES ('$this->name', '$this->description' )";
             $result = parent::setData($sizeInsert);
