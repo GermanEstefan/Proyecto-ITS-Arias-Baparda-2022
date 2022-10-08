@@ -68,11 +68,6 @@ class CategoryController {
         $nameCategory = $categoryData['name'];
         $descriptionCategory = $categoryData['description'];
 
-        $nameExist = CategoryModel::getCategoryByName($nameCategory);
-        if($nameExist){
-            echo $this->response->error200("El nombre de categoria $nameCategory ya existe");
-            die();
-        }
 
         $category = new CategoryModel($nameCategory, $descriptionCategory);
         $result = $category->updateCategory($nameCategory,$descriptionCategory);

@@ -18,12 +18,7 @@ CREATE TABLE IF NOT EXISTS `bindev`.`category` (
   `description` VARCHAR(500) NOT NULL,
   `picture` int NOT NULL,
   PRIMARY KEY (`id_category`),
-  constraint `category_UNIQUE` UNIQUE  (`name`),
-   CONSTRAINT `FK_picture_category`
-    FOREIGN KEY (`picture`)
-    REFERENCES `bindev`.`photos` (`id_photo`)
-    ON DELETE cascade
-    ON UPDATE cascade)
+  constraint `category_UNIQUE` UNIQUE  (`name`)
 ENGINE = InnoDB;
 
 -- -----------------------------------------------------
