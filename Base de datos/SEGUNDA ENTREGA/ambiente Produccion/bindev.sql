@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS `bindev`.`category` (
   `id_category` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(100) NOT NULL,
   `description` VARCHAR(500) NOT NULL,
-  `picture` int NOT NULL,
+  `picture` varchar(500) NULL,
   PRIMARY KEY (`id_category`),
   constraint `category_UNIQUE` UNIQUE  (`name`)
 ENGINE = InnoDB;
