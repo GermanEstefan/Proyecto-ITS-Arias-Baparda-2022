@@ -61,7 +61,7 @@ class SizeController {
     }
 
     public function updateSize($idSize,$sizeData){
-
+        $this->jwt->verifyTokenAndGetIdUserFromRequest();
         $bodyIsValid = $this->validateBodyOfSize($sizeData);
         if(!$bodyIsValid) echo $this->response->error400();
 
@@ -85,6 +85,22 @@ class SizeController {
             die();
         }
         echo $this->response->successfully("Talle actualizada con exito");
+    }
+
+    public function deleteSize($idSize){
+        $this->jwt->verifyTokenAndGetIdUserFromRequest();
+        $existSize = SizeModel::getSizeById($idSize);
+        if (!$existSize){
+            echo $this->response->error200('El id del talle enviado no existe');
+            die();
+        }
+
+        $result = SizeModel::deleteSize($idSize);
+        if(!$result){
+            echo $this->response->error500();
+            die();
+        }
+        echo $this->response->successfully("Talle eliminado exitosamente");
     }
 }
 

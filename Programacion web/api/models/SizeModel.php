@@ -19,7 +19,7 @@
 
         public static function getSizeById($id){
             $conecction = new Connection();
-            $query = "SELECT * from size WHERE id_size='$id'";
+            $query = "SELECT * from size WHERE id_size=$id";
             return $conecction->getData($query)->fetch_assoc();
         }
 
@@ -37,7 +37,7 @@
 
         public static function deleteSize($idSize){
             $conecction = new Connection();
-            $query = "DELETE FROM size WHERE id_size = '$idSize'";
+            $query = "DELETE FROM size WHERE id_size = $idSize";
             return $conecction->setData($query);
         }
 
