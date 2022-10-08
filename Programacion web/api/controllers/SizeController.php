@@ -68,11 +68,6 @@ class SizeController {
         $nameSize = $sizeData['name'];
         $descriptionSize = $sizeData['description'];
 
-        $nameExist = SizeModel::getSizeByName($nameSize);
-        if($nameExist){
-            echo $this->response->error200("El nombre de talle $nameSize ya existe");
-            die();
-        }
 
         $size = new SizeModel($nameSize, $descriptionSize);
         $result = $size->updateSize($nameSize, $descriptionSize);
