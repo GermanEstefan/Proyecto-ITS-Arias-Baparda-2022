@@ -17,10 +17,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 }else if($_SERVER['REQUEST_METHOD'] === 'GET'){
 
-    if(isset($_GET['nameSize'])){
+    if(isset($_GET['idSize'])){
         //Si manda este parametro seignifica que quiere obtener una categoria en particular
-        $nameSize = $_GET['nameSize'];
-        $size->getSize($nameSize);
+        $idSize = $_GET['idSize'];
+        $size->getSize($idSize);
         die();
     }
     $size->getSizes();

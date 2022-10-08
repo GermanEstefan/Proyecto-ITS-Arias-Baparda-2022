@@ -18,8 +18,11 @@ import CreateProducts from "./pages/admin/CreateProducts";
 import ListShipments from "./pages/admin/ListShipments";
 import ShoppingCartPage from "./pages/store/ShoppingCartPage";
 import Categorys from "./pages/admin/Categorys";
-import Colors from "./pages/admin/Colors";
 import Sizes from "./pages/admin/Sizes";
+import Design from "./pages/admin/Design";
+import EditCategory from "./pages/admin/EditCategory";
+import EditSize from "./pages/admin/EditSize";
+import EditDesign from "./pages/admin/EditDesign";
 
 export const userStatusContext = createContext({});
 
@@ -54,8 +57,11 @@ const App = () => {
           <Route path="/admin/users/create" element={ <CreateUser/> } />
           <Route path="/admin/users/list" element={ <ListUsers/> } />
           <Route path="/admin/generals/categorys" element={ <Categorys /> } />
+          <Route path="/admin/generals/categorys/edit/:idOfCategory" element={ <EditCategory /> } />
           <Route path="/admin/generals/sizes" element={ <Sizes/> } />
-          <Route path="/admin/generals/colors" element={ <Colors/> } />
+          <Route path="/admin/generals/sizes/edit/:idOfSize" element={ <EditSize/> } />
+          <Route path="/admin/generals/designs" element={ <Design/> } />
+          <Route path="/admin/generals/designs/edit/:idOfDesign" element={ <EditDesign/> } />
           <Route path="/admin/products/create" element={ <CreateProducts/> } />
           <Route path="/admin/products/list" element={ <ListProducts/> } />
           <Route path="/admin/shipments/list" element={ <ListShipments/> } />

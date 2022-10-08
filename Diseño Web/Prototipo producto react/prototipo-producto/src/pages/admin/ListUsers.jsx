@@ -13,7 +13,11 @@ const ListUsers = () => {
 
     useEffect(() => {
         fetchApi('auth-employees.php', 'GET')
-            .then(resp => setEmployees(resp))
+            .then(resp => {
+                console.log(resp)
+                setEmployees(resp)
+                
+            })
             .catch(err => {
                 alert('Error interno');
                 console.log(err);
@@ -45,10 +49,10 @@ const ListUsers = () => {
                                     </tr>
                                     {
                                         employees.map(employe => (
-                                            <tr key={employe.id}>
-                                                <td>{employe.id}</td>
+                                            <tr key={employe.employee_user}>
+                                                <td>{employe.employee_user}</td>
                                                 <td>{employe.ci}</td>
-                                                <td>{employe.rol}</td>
+                                                <td>{employe.employee_role}</td>
                                                 <td>{employe.email}</td>
                                                 <td>{employe.name}</td>
                                                 <td>{employe.surname}</td>

@@ -1,12 +1,16 @@
 
+import { faPencil, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useState } from 'react'
 import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { fetchApi } from '../../API/api';
 import ContainerBase from '../../components/admin/ContainerBase';
 import { useForm } from '../../hooks/useForm';
 
 const Categorys = () => {
 
+    const navigate = useNavigate();
     const [values, handleValuesChange, resetForm] = useForm({ name: '', description: '' });
     const { name, description } = values;
     const initStateLoading = {
@@ -58,7 +62,7 @@ const Categorys = () => {
 
     return (
         <ContainerBase>
-            <section className="container_section categorys-manage flex-column-center-xy">
+            <section className="container_section categorys-manage generals-layout flex-column-center-xy">
                 {
                     loadingFlags.fetchingCategorys
                         ? <span className='fetching-data-message'>Obteniendo categorias...</span>
@@ -110,6 +114,7 @@ const Categorys = () => {
                                                     <th>Id</th>
                                                     <th>Nombre</th>
                                                     <th>Descripcion</th>
+                                                    <th colSpan={2}>Controles</th>
                                                 </tr>
                                                 {
                                                     categorys.map(category => (
@@ -117,6 +122,8 @@ const Categorys = () => {
                                                             <td>{category.id_category}</td>
                                                             <td>{category.name}</td>
                                                             <td>{category.description}</td>
+                                                            <td className="controls-table"><FontAwesomeIcon icon={faTrash} /></td>
+                                                            <td className="controls-table" onClick={() => navigate(`/admin/generals/categorys/edit/${category.id_category}`)}><FontAwesomeIcon icon={faPencil} /></td>
                                                         </tr>
                                                     ))
                                                 }

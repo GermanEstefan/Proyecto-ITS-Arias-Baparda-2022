@@ -51,13 +51,13 @@ class SizeController {
         echo $cateogrysToJson;
     }
 
-    public function getSize($name){
-        $size = SizeModel::getSizeByName($name);
+    public function getSize($idSize){
+        $size = SizeModel::getSizeById($idSize);
         if(!$size){
-            echo $this->response->error200("El talle con nombre $name no existe");
+            echo $this->response->error200("El talle con el ID $idSize no existe");
             die();
         }
-        echo json_encode($size);  
+        echo $this->response->successfully("Talle obtenido con exito", json_encode($size));  
     }
 
     public function updateSize($idSize,$sizeData){

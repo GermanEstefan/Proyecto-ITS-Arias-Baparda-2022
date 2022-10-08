@@ -73,8 +73,8 @@ const Aside = () => {
                             >Talles</li>
 
                             <li 
-                                onClick={() => navigate('/admin/generals/colors') }
-                                className={ (action === 'colors' && page === 'generals') ? 'selected' : '' }
+                                onClick={() => navigate('/admin/generals/designs') }
+                                className={ (action === 'designs' && page === 'generals') ? 'selected' : '' }
                             >Colores</li>
                         </ul>
                     }

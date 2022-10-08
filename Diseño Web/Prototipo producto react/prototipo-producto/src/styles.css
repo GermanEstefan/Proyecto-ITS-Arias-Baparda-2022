@@ -924,6 +924,27 @@
   justify-content: center;
 }
 
+.generals-layout h2 {
+  text-align: center;
+}
+.generals-layout form {
+  display: flex;
+  flex-direction: column;
+  max-width: 350px;
+  width: 50vw;
+  margin-bottom: 50px;
+}
+.generals-layout form input {
+  margin-bottom: 25px;
+}
+.generals-layout form span {
+  margin-top: 20px;
+}
+.generals-layout table {
+  width: 50vw;
+  max-width: 800px;
+}
+
 .cartItem {
   max-width: 1100px;
   width: 100%;
@@ -1137,27 +1158,6 @@
 .list-users table {
   width: 50vw;
   max-width: 700px;
-}
-
-.categorys-manage h2 {
-  text-align: center;
-}
-.categorys-manage form {
-  display: flex;
-  flex-direction: column;
-  max-width: 350px;
-  width: 50vw;
-  margin-bottom: 50px;
-}
-.categorys-manage form input {
-  margin-bottom: 25px;
-}
-.categorys-manage form span {
-  margin-top: 20px;
-}
-.categorys-manage table {
-  width: 50vw;
-  max-width: 800px;
 }
 
 body {
