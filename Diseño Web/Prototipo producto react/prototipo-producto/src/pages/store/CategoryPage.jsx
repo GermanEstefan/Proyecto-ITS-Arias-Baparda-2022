@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Guantes from "../../assets/img/guantes.jpg";
 import ContainerBase from "../../components/store/ContainerBase";
@@ -11,6 +11,11 @@ const CategoryPage = () => {
   const { category } = useParams();
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(3);
+
+  useEffect(() => {
+    window.scroll(0, 0);
+  }, []);
+
 
   /*
     Esta pantalla va a tener un endpoint que va a traer

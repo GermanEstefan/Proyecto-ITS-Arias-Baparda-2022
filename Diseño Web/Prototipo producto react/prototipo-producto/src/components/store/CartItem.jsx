@@ -1,12 +1,9 @@
 import React from "react";
-import { useMediaQuery } from "react-responsive";
-import Card from "./Card";
 import { Animated } from "react-animated-css";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const CartItem = ({ img, product, precio, id }) => {
-  const isMobile = useMediaQuery({ query: "(max-width: 700px)" });
 
   return (
     <Animated

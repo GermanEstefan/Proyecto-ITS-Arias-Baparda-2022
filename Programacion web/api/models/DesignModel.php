@@ -29,9 +29,9 @@
             return $conecction->getData($query)->fetch_assoc();
         }
 
-        public static function updateDesign($id, $name, $description){
+        public static function updateDesign($name, $description){
             $conecction = new Connection();
-            $query = "UPDATE design SET name = '$name', description = '$description' WHERE id_design = $id ";
+            $query = "UPDATE design SET name = '$name', description = '$description' WHERE name = $name ";
             return $conecction->setData($query);
         }
                 

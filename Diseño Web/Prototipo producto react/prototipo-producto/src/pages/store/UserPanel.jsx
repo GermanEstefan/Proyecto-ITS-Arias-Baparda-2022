@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ContainerBase from "../../components/store/ContainerBase";
 import UpdateAccountForm from "../../components/store/UpdateAccountForm";
+import UpdatePasswordForm from "../../components/store/UpdatePasswordForm";
 
 const UserPanel = () => {
     
@@ -40,7 +41,7 @@ const UserPanel = () => {
                     :
                     view === 'changePassword'
                     ?
-                    <h1>Cambiar contraseña</h1>
+                    <UpdatePasswordForm/>
                     :
                     view === 'buyHistory'
                     ?

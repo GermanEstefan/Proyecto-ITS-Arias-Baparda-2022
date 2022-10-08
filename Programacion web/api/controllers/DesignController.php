@@ -37,8 +37,8 @@ class DesignController {
             echo $this->response->error200("El diseño con nombre $name ya existe");
             die();
         }
-        $size = new SizeModel($name, $description);
-        $result = $size->save();
+        $desing = new DesignModel($name, $description);
+        $result = $desing->save();
         if(!$result){
             echo $this->response->error500();
             die();
