@@ -2,7 +2,6 @@ import React from "react";
 import { useMediaQuery } from "react-responsive";
 
 const CartDetails = ({ total }) => {
-  const isMobile = useMediaQuery({ query: "(max-width: 700px)" });
 
   return (
     <>

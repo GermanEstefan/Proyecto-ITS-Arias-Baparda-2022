@@ -1,41 +1,31 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { fetchApi } from "../../API/api";
 import Guantes from "../../assets/img/guantes.jpg";
 import Card from "./Card";
 
 const CategoriesList = () => {
+  const [categories, setcategories] = useState([]);
 
-  const categoriesList = [
-    {
-      name: "Accesorios",
-      slug:"accessories"
-    },
-    {
-      name: "Herramientas",
-      slug: "tools"
-    },
-    {
-      name: "Higiene",
-      slug: "Higiene en ingles"
-    },
-    {
-      name: "Zapatos",
-      slug: "shoes"
-    },
-    {
-      name: "Otras",
-      slug: "others"
-    },
-  ];
+  useEffect(() => {
+    getCategories();  
+  }, []);
+
+  const getCategories = async () => {
+    setcategories(await fetchApi("categorys.php", "GET"));
+  };
 
   return (
     <div className="card-container">
-      {
-        categoriesList.map((category, index) => {
-          return (
-            <Card key={index} title={category.name} slug={category.slug} img={Guantes} />
-          );
-        })
-      }
+      {categories.map((category, index) => {
+        return (
+          <Card
+            key={index}
+            title={category.name}
+            slug={category.name}
+            img={Guantes}
+          />
+        );
+      })}
     </div>
   );
 };

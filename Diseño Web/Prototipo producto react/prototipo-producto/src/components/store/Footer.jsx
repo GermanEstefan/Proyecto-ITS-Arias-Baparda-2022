@@ -11,10 +11,10 @@ const Footer = () => {
       <li>Moltke 1194, Montevideo</li>
     </ul>
     <div className='img-container'>
-      <a href="#" target="_blank" rel="noopener noreferrer"
+      <a href="www.google.com" target="_blank" rel="noopener noreferrer"
         ><img src={facebookIcon} width="50px" height='50px' alt=""
       /></a>
-      <a href="#" target="_blank" rel="noopener noreferrer"
+      <a href="www.google.com" target="_blank" rel="noopener noreferrer"
         ><img src={instagramIcon} width="50px" height='50px'  alt=""
       /></a>
     </div>

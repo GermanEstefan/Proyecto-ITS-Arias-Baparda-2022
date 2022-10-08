@@ -13,7 +13,7 @@ const ProductCard = ({ img, product, description, id }) => {
     <Animated
       animationIn="fadeInLeft"
       animationOut="fadeOut"
-      animationInDuration="500"
+      animationInDuration={500}
       isVisible={true}
     >
       {isMobile ? (
