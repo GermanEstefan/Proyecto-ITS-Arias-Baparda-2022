@@ -7,7 +7,6 @@ require_once('./helpers/Response.php');
 class Token {
 
     private $secretPass = "Dasdgfdsdsad213fdkmsaMSSGgg";
-        
     public function generateToken($idUser, $rol = null){
         $actualTime = time();
         $token = array(

@@ -42,7 +42,7 @@ ENGINE = InnoDB;
 -- Table `bindev`.`size`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `bindev`.`size` (
-  `id_size` INT NOT NULL,
+  `id_size` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(150) NOT NULL,
   `description` VARCHAR(500) NOT NULL,
   PRIMARY KEY (`id_size`),

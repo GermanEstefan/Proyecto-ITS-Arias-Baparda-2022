@@ -31,7 +31,7 @@
 
         public static function updateCategory($name, $description){
             $conecction = new Connection();
-            $query = "UPDATE category SET name = '$name', description = '$description' WHERE name = $name ";
+            $query = "UPDATE category SET name = '$name', description = '$description' WHERE name = '$name' ";
             return $conecction->setData($query);
         }
                 

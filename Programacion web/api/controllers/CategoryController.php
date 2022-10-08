@@ -75,7 +75,7 @@ class CategoryController {
         }
 
         $category = new CategoryModel($nameCategory, $descriptionCategory);
-        $result = $category->save();
+        $result = $category->updateCategory($nameCategory,$descriptionCategory);
         if(!$result){
             echo $this->response->error500();
             die();

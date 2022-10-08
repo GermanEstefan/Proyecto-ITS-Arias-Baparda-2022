@@ -2,14 +2,13 @@
     require_once("./database/Connection.php");
     class SizeModel extends Connection {
 
-        private $id;
         private $name;
         private $description;
 
-        function __construct($id, $name, $description){
-            $this->id = $id;
+        function __construct($name, $description){
             $this->name = $name;
             $this->description = $description;
+            parent::__construct();
         }
 
         public static function getSizeByName($name){
@@ -24,26 +23,25 @@
             return $conecction->getData($query)->fetch_assoc();
         }
 
-        public static function getAllSize(){
+        public static function getAllSizes(){
             $conecction = new Connection();
             $query = "SELECT * from size ";
-            return $conecction->getData($query)->fetch_assoc();
+            return $conecction->getData($query)->fetch_all(MYSQLI_ASSOC);
         }
 
-        public static function updateSize($id, $name, $description){
+        public static function updateSize( $name, $description){
             $conecction = new Connection();
-            $query = "UPDATE size SET name = '$name', description = '$description' WHERE id_size = $id ";
+            $query = "UPDATE size SET name = '$name', description = '$description' WHERE name = '$name'";
             return $conecction->setData($query);
         }
                 
         public function save(){
-            $sizeInsert = "INSERT INTO size (id_size, name, description) VALUES ('$this->id','$this->name', '$this->description' )";
-            $result = $this->connection->setData($sizeInsert);
-            if($result){
-                return $this->connection->getLastIdInserted();
-            }else{
+            $sizeInsert = "INSERT INTO size (name, description) VALUES ('$this->name', '$this->description' )";
+            $result = parent::setData($sizeInsert);
+            if(!$result){
                 return false;
             }
+            return true;
         }
     }
         
