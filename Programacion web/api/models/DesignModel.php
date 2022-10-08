@@ -26,12 +26,12 @@
         public static function getAllDesign(){
             $conecction = new Connection();
             $query = "SELECT * from design ";
-            return $conecction->getData($query)->fetch_assoc();
+            return $conecction->getData($query)->fetch_all();
         }
 
-        public static function updateDesign($name, $description){
+        public static function updateDesign($id, $name, $description){
             $conecction = new Connection();
-            $query = "UPDATE design SET name = '$name', description = '$description' WHERE name = $name ";
+            $query = "UPDATE design SET name = '$name', description = '$description' WHERE id = $id";
             return $conecction->setData($query);
         }
                 

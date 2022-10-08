@@ -2,7 +2,7 @@
 
 include_once('./helpers/Response.php');
 include_once("./helpers/Token.php");
-include_once("./models/SizeModel.php");
+include_once("./models/DesignModel.php");
 
 class DesignController {
 
@@ -32,8 +32,8 @@ class DesignController {
         $name = $designData['name'];
         $description = $designData['description'];
 
-        $sizeExist = DesignModel::getDesignByName($name);
-        if($sizeExist){
+        $designExist = DesignModel::getDesignByName($name);
+        if($designExist){
             echo $this->response->error200("El diseño con nombre $name ya existe");
             die();
         }
@@ -60,7 +60,7 @@ class DesignController {
         echo json_encode($design);  
     }
 
-    public function updateSize($designData){
+    public function updateDesign($idDesign,$designData){
 
         $bodyIsValid = $this->validateBodyOfDesign($designData);
         if(!$bodyIsValid) echo $this->response->error400();
@@ -68,20 +68,22 @@ class DesignController {
         $nameDesign = $designData['name'];
         $descriptionDesign = $designData['description'];
 
-        $nameExist = DesignModel::getDesignByName($nameDesign);
-        if($nameExist){
-            echo $this->response->error200("El nombre de talle $nameDesign ya existe");
+        $existDesign = DesignModel::getDesignById($idDesign);
+        if (!$existDesign){
+            echo $this->response->error200('El id del diseño enviado no existe');
             die();
         }
 
-        $design = new DesignModel($nameDesign, $descriptionDesign);
-        $result = $design->updateDesign($nameDesign, $descriptionDesign);
+        $existName = DesignModel::getDesignByName($nameDesign);
+        if ($existName){
+            echo $this->response->error200('El nombre del diseño ya existe');
+            die();
+        }
+        $result = DesignModel::updateDesign($idDesign, $nameDesign, $descriptionDesign);
         if(!$result){
             echo $this->response->error500();
             die();
         }
-        echo $this->response->successfully("Talle actualizada con exito");
+        echo $this->response->successfully("Diseño actualizado con exito");
     }
 }
-
-?>
