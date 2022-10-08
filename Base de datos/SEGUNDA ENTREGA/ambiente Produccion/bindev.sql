@@ -18,7 +18,7 @@ CREATE TABLE IF NOT EXISTS `bindev`.`category` (
   `description` VARCHAR(500) NOT NULL,
   `picture` varchar(500) NULL,
   PRIMARY KEY (`id_category`),
-  constraint `category_UNIQUE` UNIQUE  (`name`)
+  constraint `category_UNIQUE` UNIQUE  (`name`))
 ENGINE = InnoDB;
 
 -- -----------------------------------------------------
