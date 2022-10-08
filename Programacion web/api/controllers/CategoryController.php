@@ -60,17 +60,27 @@ class CategoryController {
         echo json_encode($category);  
     }
 
-    public function updateCategory($categoryData){
+    public function updateCategory($idCategory,$categoryData){
 
         $bodyIsValid = $this->validateBodyOfCategory($categoryData);
         if(!$bodyIsValid) echo $this->response->error400();
 
         $nameCategory = $categoryData['name'];
         $descriptionCategory = $categoryData['description'];
+        
+        $existCategory = CategoryModel::getCategoryById($idCategory);
+        if (!$existCategory){
+            echo $this->response->error200('El id de la categoria enviado no existe');
+            die();
+        }
 
+        $existName = CategoryModel::getCategoryByName($nameCategory);
+        if ($existName){
+            echo $this->response->error200('El nombre de la categoria ya existe');
+            die();
+        }
 
-        $category = new CategoryModel($nameCategory, $descriptionCategory);
-        $result = $category->updateCategory($nameCategory,$descriptionCategory);
+        $result = CategoryModel::updateCategory($idCategory,$nameCategory,$descriptionCategory);
         if(!$result){
             echo $this->response->error500();
             die();

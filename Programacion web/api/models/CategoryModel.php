@@ -29,9 +29,9 @@
             return $conecction->getData($query)->fetch_all(MYSQLI_ASSOC);
         }
 
-        public static function updateCategory($name, $description){
+        public static function updateCategory($idCategory,$name, $description){
             $conecction = new Connection();
-            $query = "UPDATE category SET name = '$name', description = '$description' WHERE name = '$name' ";
+            $query = "UPDATE category SET name = '$name', description = '$description' WHERE id_category = '$idCategory' ";
             return $conecction->setData($query);
         }
                 

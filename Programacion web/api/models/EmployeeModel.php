@@ -14,19 +14,19 @@
 
         public static function getEmployeeByCi($ci){
             $conecction = new Connection();
-            $query = "SELECT * from employee WHERE ci='$ci'";
+            $query = "SELECT e.employee_user,e.employee_role,e.state,u.email, u.name,u.surname,u.address,u.phone from employee e inner join user u on e.employee_user = u.id_user and e.ci = '$ci'";
             return $conecction->getData($query)->fetch_assoc();
         }
 
         public static function getEmployeeById($id){
             $conecction = new Connection();
-            $query = "SELECT * from employee WHERE employee_user='$id'";
+            $query = "SELECT e.employee_user,e.employee_role,e.state,u.email, u.name,u.surname,u.address,u.phone from employee e inner join user u on e.employee_user = u.id_user and e.employee_user = '$id'";
             return $conecction->getData($query)->fetch_assoc();
         }
 
         public static function getEmployees(){
             $conecction = new Connection();
-            $query = "SELECT * from employee";
+            $query = "SELECT e.employee_user,e.employee_role,e.state,u.email, u.name,u.surname,u.address,u.phone from employee e inner join user u on e.employee_user = u.id_user";
             return $conecction->getData($query)->fetch_all(MYSQLI_ASSOC);
         }
 

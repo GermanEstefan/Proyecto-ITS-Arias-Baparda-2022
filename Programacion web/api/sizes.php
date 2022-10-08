@@ -26,12 +26,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $size->getSizes();
 
 }else if($_SERVER['REQUEST_METHOD'] === 'PUT'){
-    //Editar categoria
-    if(isset($_GET['idSize'])){
-        $idSize = $_GET['idSize'];
-        $size->updateSize($idSize, $sizeData);    
+    //Editar talle
+    if(!isset($_GET['idSize'])){
+        echo $response->error200("Error falta Id");    
         die();
-    }
+    }    
+    $idSize = $_GET['idSize'];
+    $size->updateSize($idSize, $sizeData);    
+    die();
+    
     
 }else {
     echo $response->error200("Metodo no permitido");

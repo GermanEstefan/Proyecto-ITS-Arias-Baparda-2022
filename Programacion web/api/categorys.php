@@ -26,8 +26,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $category->getCategorys();
 
 }else if($_SERVER['REQUEST_METHOD'] === 'PUT'){
-    //Editar categoria
-    $category->updateCategory($categoryData);
+    if(!isset($_GET['idCategory'])){
+        echo $response->error200("Error falta Id");    
+    die();
+    }    
+    $idCategory = $_GET['idCategory'];
+    $category->updateCategory($idCategory, $categoryData);    
+    die();
+    
+
 }else {
     echo $response->error200("Metodo no permitido");
 }
