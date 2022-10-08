@@ -11,7 +11,7 @@ import { fetchApi } from "../../API/api";
 const UpdateAccountForm = () => {
 
     const { userData } = useContext(userStatusContext);
-
+    console.log(userData)
     const [values, handleValuesChange] = useForm({
         name: userData.name,
         surname: userData.surname,
