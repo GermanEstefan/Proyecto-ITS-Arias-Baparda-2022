@@ -60,7 +60,7 @@ class SizeController {
         echo json_encode($size);  
     }
 
-    public function updateSize($sizeData){
+    public function updateSize($idSize,$sizeData){
 
         $bodyIsValid = $this->validateBodyOfSize($sizeData);
         if(!$bodyIsValid) echo $this->response->error400();
@@ -68,9 +68,18 @@ class SizeController {
         $nameSize = $sizeData['name'];
         $descriptionSize = $sizeData['description'];
 
+        $existSize = SizeModel::getSizeById($idSize);
+        if (!$existSize){
+            echo $this->response->error200('El id del talle enviado no existe');
+            die();
+        }
 
-        $size = new SizeModel($nameSize, $descriptionSize);
-        $result = $size->updateSize($nameSize, $descriptionSize);
+        $existName = SizeModel::getSizeByName($nameSize);
+        if ($existName){
+            echo $this->response->error200('El nombre del talle ya existe');
+            die();
+        }
+        $result = SizeModel::updateSize($idSize, $nameSize, $descriptionSize);
         if(!$result){
             echo $this->response->error500();
             die();

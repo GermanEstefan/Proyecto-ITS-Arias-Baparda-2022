@@ -27,7 +27,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 }else if($_SERVER['REQUEST_METHOD'] === 'PUT'){
     //Editar categoria
-    $size->updateSize($sizeData);
+    if(isset($_GET['idSize'])){
+        $idSize = $_GET['idSize'];
+        $size->updateSize($idSize, $sizeData);    
+        die();
+    }
+    
 }else {
     echo $response->error200("Metodo no permitido");
 }

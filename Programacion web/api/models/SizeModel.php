@@ -29,9 +29,9 @@
             return $conecction->getData($query)->fetch_all(MYSQLI_ASSOC);
         }
 
-        public static function updateSize( $name, $description){
+        public static function updateSize($idSize, $name, $description){
             $conecction = new Connection();
-            $query = "UPDATE size SET name = '$name', description = '$description' WHERE name = '$name'";
+            $query = "UPDATE size SET name = '$name', description = '$description' WHERE id_size = '$idSize'";
             return $conecction->setData($query);
         }
                 
