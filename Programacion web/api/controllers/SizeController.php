@@ -19,7 +19,7 @@ class SizeController {
         if( !isset($sizeData['name']) ||  !isset($sizeData['description']) ) return false;
         return $sizeData;
     }
-    
+    //CREAR
     public function saveSize($sizeData){
         /*
             En este metodo no precisamos el ID del usuario, lo unico que validamos es que tenga un token y sea valido. 
@@ -45,7 +45,7 @@ class SizeController {
         }
         echo $this->response->successfully("Talle dado de alta con exito");
     }
-
+    //CONSULTAR
     public function getSizes(){
         $cateogrysToJson = json_encode(SizeModel::getAllSizes()); 
         echo $cateogrysToJson;
@@ -59,7 +59,7 @@ class SizeController {
         }
         echo $this->response->successfully("Talle obtenido con exito", $size);  
     }
-
+    //EDITAR
     public function updateSize($idSize,$sizeData){
         $this->jwt->verifyTokenAndGetIdUserFromRequest();
         $bodyIsValid = $this->validateBodyOfSize($sizeData);
@@ -86,7 +86,7 @@ class SizeController {
         }
         echo $this->response->successfully("Talle actualizada con exito");
     }
-
+    //BORRAR
     public function deleteSize($idSize){
         $this->jwt->verifyTokenAndGetIdUserFromRequest();
         $existSize = SizeModel::getSizeById($idSize);

@@ -32,7 +32,7 @@
         public static function updateSize($idSize, $name, $description){
             $conecction = new Connection();
             $query = "UPDATE size SET name = '$name', description = '$description' WHERE id_size = '$idSize'";
-            return $conecction->setData($query);
+            return $conecction->setData($query)->fetch_assoc();
         }
 
         public static function deleteSize($idSize){

@@ -25,16 +25,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
     $size->getSizes();
 
-}else if($_SERVER['REQUEST_METHOD'] === 'DELETE'){
-
-    if(!isset($_GET['idSize'])){
-        //Si manda este parametro seignifica que quiere obtener una categoria en particular
-        echo $response->error200("Error falta Id");    
-        die();
-    }
-    $idSize = $_GET['idSize'];
-    $size->deleteSize($idSize);
-    
 }else if($_SERVER['REQUEST_METHOD'] === 'PUT'){
     //Editar talle
     if(!isset($_GET['idSize'])){
@@ -45,7 +35,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $size->updateSize($idSize, $sizeData);    
     die();
     
-    
+}else if($_SERVER['REQUEST_METHOD'] === 'DELETE'){
+
+    if(!isset($_GET['idSize'])){
+        echo $response->error200("Error falta Id");    
+        die();
+    }
+    $idSize = $_GET['idSize'];
+    $size->deleteSize($idSize);
+    die();
 }else {
     echo $response->error200("Metodo no permitido");
 }

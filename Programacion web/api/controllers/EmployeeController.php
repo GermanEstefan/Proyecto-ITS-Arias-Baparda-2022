@@ -37,7 +37,7 @@ class EmployeeController{
 
         //Verificamos el token y si es valido, obtenemos el id de usuario.
         $idOfUser = $this->jwt->verifyTokenAndGetIdUserFromRequest();
-        $employee = EmployeeModel::getEmployeeById($idOfUser);
+        $employee = EmployeeModel::getRoleOfEmployeeById($idOfUser);
         $rolOfEmployee = $employee['employee_role'];
         if(!($rolOfEmployee == 'JEFE')){
             http_response_code(401);
@@ -127,7 +127,7 @@ class EmployeeController{
 
     public function getEmployees(){
         $idOfUser = $this->jwt->verifyTokenAndGetIdUserFromRequest();
-        $employee = EmployeeModel::getEmployeeById($idOfUser);
+        $employee = EmployeeModel::getRoleOfEmployeeById($idOfUser);
         $rolOfEmployee = $employee['employee_role'];
         if(!($rolOfEmployee == 'JEFE')){
             http_response_code(401);

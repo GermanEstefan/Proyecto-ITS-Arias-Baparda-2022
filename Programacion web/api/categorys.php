@@ -17,12 +17,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 }else if($_SERVER['REQUEST_METHOD'] === 'GET'){
 
-    if(isset($_GET['nameCategory'])){
-        //Si manda este parametro seignifica que quiere obtener una categoria en particular
-        $nameCategory = $_GET['nameCategory'];
-        $category->getCategory($nameCategory);
+    if(!isset($_GET['nameCategory'])){
+        echo $response->error200("Error, falta name");
         die();
     }
+        $nameCategory = $_GET['nameCategory'];
+        $category->getCategory($nameCategory);
     $category->getCategorys();
 
 }else if($_SERVER['REQUEST_METHOD'] === 'PUT'){
@@ -41,8 +41,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo $response->error200("Error falta Id");    
         die();
     }
-    $idSize = $_GET['idCategory'];
-    $size->deleteCategory($idCategory);   
+    $idCategory = $_GET['idCategory'];
+    $category->deleteCategory($idCategory);   
 
 }else {
     echo $response->error200("Metodo no permitido");

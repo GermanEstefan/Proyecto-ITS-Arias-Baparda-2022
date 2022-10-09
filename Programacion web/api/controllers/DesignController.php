@@ -19,7 +19,7 @@ class DesignController {
         if( !isset($designData['name']) ||  !isset($designData['description']) ) return false;
         return $designData;
     }
-    
+    //CREAR
     public function saveDesign($designData){
         /*
             En este metodo no precisamos el ID del usuario, lo unico que validamos es que tenga un token y sea valido. 
@@ -45,7 +45,7 @@ class DesignController {
         }
         echo $this->response->successfully("Nuevo diseño dado de alta con exito");
     }
-
+    //CONSULTAR
     public function getDesigns(){
         $designToJson = json_encode(DesignModel::getAllDesign()); 
         echo $designToJson;
@@ -59,7 +59,7 @@ class DesignController {
         }
         echo json_encode($design);  
     }
-
+    //EDITAR
     public function updateDesign($idDesign,$designData){
 
         $bodyIsValid = $this->validateBodyOfDesign($designData);
@@ -86,4 +86,7 @@ class DesignController {
         }
         echo $this->response->successfully("Diseño actualizado con exito");
     }
+    //BORRAR
+    
 }
+

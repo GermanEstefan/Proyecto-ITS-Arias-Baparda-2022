@@ -89,9 +89,9 @@ class CategoryController {
     }
     public function deleteCategory($idCategory){
         $this->jwt->verifyTokenAndGetIdUserFromRequest();
-        $existSize = CategoryModel::getCategoryById($idCategory);
-        if (!$existSize){
-            echo $this->response->error200('El id de la categoria enviada no existe');
+        $existCategory = CategoryModel::getCategoryById($idCategory);
+        if (!$existCategory){
+            echo $this->response->error200('El id de la categoria no fue enviado');
             die();
         }
 

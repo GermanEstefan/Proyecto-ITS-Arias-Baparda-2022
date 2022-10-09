@@ -36,6 +36,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         die();
     }
     
+}else if($_SERVER['REQUEST_METHOD'] === 'DELETE'){
+
+    if(!isset($_GET['idDesign'])){
+        //Si manda este parametro seignifica que quiere obtener una categoria en particular
+        echo $response->error200("Error falta Id");    
+        die();
+    }
+    $idDesign = $_GET['idDesign'];
+    $design->deleteDesign($idDesign);
 }else {
     echo $response->error200("Metodo no permitido");
 }
