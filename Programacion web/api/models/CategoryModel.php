@@ -37,6 +37,12 @@
             return $conecction->setData($query);
         }
 
+        public static function updateCategoryNotName($idCategory, $description, $picture){
+            $conecction = new Connection();
+            $query = "UPDATE category SET description = '$description', picture = '$picture' WHERE id_category = '$idCategory' ";
+            return $conecction->setData($query);
+        }
+
         public static function deleteCategory($idCategory){
             $conecction = new Connection();
             $query = "DELETE FROM category WHERE id_category = '$idCategory'";

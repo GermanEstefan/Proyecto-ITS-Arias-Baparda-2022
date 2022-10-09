@@ -75,7 +75,7 @@ class CategoryController {
         echo $this->response->error400('Error en los datos enviados');
         die();
         }
-        
+
         $nameCategory = $categoryData['name'];
         $descriptionCategory = $categoryData['description'];
         $pictureCategory = $categoryData['picture'];
@@ -85,13 +85,14 @@ class CategoryController {
             echo $this->response->error203('La categoria indicada no es correcta');
             die();
         }
-        //logica que hay que revisar
-        $existName = CategoryModel::getCategoryByName($nameCategory);
-        if ($existName){
-            echo $this->response->error203('El nombre de la categoria ya existe');
+
+        $notChangeName = CategoryModel::getCategoryByName($nameCategory);
+        if ($notChangeName){
+            $result = CategoryModel::updateCategoryNotName($idCategory,$descriptionCategory,$pictureCategory);
+            echo $this->response->successfully("Categoria actualizada con exitossss");
             die();
         }
-
+        
         $result = CategoryModel::updateCategory($idCategory,$nameCategory,$descriptionCategory,$pictureCategory);
         if(!$result){
             echo $this->response->error500();
