@@ -16,6 +16,15 @@ class Response{
         return json_encode($this->response);
     }
 
+    public function error203($msg = "Nuevo mensaje de error - Datos incorrectos"){
+        $this->response['status'] = "error";
+        $this->response['result'] = array(
+            "status" => "203",
+            "error_msg" => $msg
+        );
+        return json_encode($this->response);
+    }
+
     public function successfully($msg = "Operacion realizada con exito", $data = "Nada que enviar"){
         $this->response['status'] = "successfully";
         $this->response['result'] = array(

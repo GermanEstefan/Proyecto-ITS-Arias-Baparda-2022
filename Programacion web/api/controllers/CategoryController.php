@@ -16,7 +16,11 @@ class CategoryController {
     }
 
     private function validateBodyOfCategory($categoryData){
-        if( !isset($categoryData['name']) ||  !isset($categoryData['description']) ) return false;
+        if( !isset($categoryData['name']) 
+        ||  !isset($categoryData['description']) 
+        || !isset($categoryData['picture'])) 
+        return false;
+        //aca tenemos que validar mas cosas como que tenga un largo especifico (se pueden enviar nombre de ctegoria con valor " ")
         return $categoryData;
     }
     
@@ -27,17 +31,21 @@ class CategoryController {
         */
         $this->jwt->verifyTokenAndGetIdUserFromRequest(); 
         $bodyIsValid = $this->validateBodyOfCategory($categoryData);
-        if(!$bodyIsValid) echo $this->response->error400();
-
+        if(!$bodyIsValid){
+             echo $this->response->error400('Error en los datos enviados');
+        die();
+        }
+        
         $name = $categoryData['name'];
         $description = $categoryData['description'];
+        $pictureCategory = $categoryData['picture'];
 
         $categoryExist = CategoryModel::getCategoryByName($name);
         if($categoryExist){
-            echo $this->response->error200("La categoria con el nombre $name ya existe");
+            echo $this->response->error203("La categoria con el nombre $name ya existe");
             die();
         }
-        $category = new CategoryModel($name, $description);
+        $category = new CategoryModel($name, $description, $pictureCategory);
         $result = $category->save();
         if(!$result){
             echo $this->response->error500();
@@ -54,7 +62,7 @@ class CategoryController {
     public function getCategory($name){
         $category = CategoryModel::getCategoryByName($name);
         if(!$category){
-            echo $this->response->error200("La categoria con el nombre $name no existe");
+            echo $this->response->error203("La categoria con el nombre $name no existe");
             die();
         }
         echo json_encode($category);  
@@ -63,35 +71,40 @@ class CategoryController {
     public function updateCategory($idCategory,$categoryData){
         $this->jwt->verifyTokenAndGetIdUserFromRequest(); 
         $bodyIsValid = $this->validateBodyOfCategory($categoryData);
-        if(!$bodyIsValid) echo $this->response->error400();
-
+        if(!$bodyIsValid) {
+        echo $this->response->error400('Error en los datos enviados');
+        die();
+        }
+        
         $nameCategory = $categoryData['name'];
         $descriptionCategory = $categoryData['description'];
+        $pictureCategory = $categoryData['picture'];
         
         $existCategory = CategoryModel::getCategoryById($idCategory);
         if (!$existCategory){
-            echo $this->response->error200('El id de la categoria enviado no existe');
+            echo $this->response->error203('La categoria indicada no es correcta');
             die();
         }
-
+        //logica que hay que revisar
         $existName = CategoryModel::getCategoryByName($nameCategory);
         if ($existName){
-            echo $this->response->error200('El nombre de la categoria ya existe');
+            echo $this->response->error203('El nombre de la categoria ya existe');
             die();
         }
 
-        $result = CategoryModel::updateCategory($idCategory,$nameCategory,$descriptionCategory);
+        $result = CategoryModel::updateCategory($idCategory,$nameCategory,$descriptionCategory,$pictureCategory);
         if(!$result){
             echo $this->response->error500();
             die();
         }
         echo $this->response->successfully("Categoria actualizada con exito");
     }
+
     public function deleteCategory($idCategory){
         $this->jwt->verifyTokenAndGetIdUserFromRequest();
         $existCategory = CategoryModel::getCategoryById($idCategory);
         if (!$existCategory){
-            echo $this->response->error200('El id de la categoria no fue enviado');
+            echo $this->response->error203('La categoria indicada no es correcta');
             die();
         }
 

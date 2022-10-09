@@ -4,10 +4,12 @@
 
         private $name;
         private $description;
+        private $picture;
 
-        function __construct($name, $description){
+        function __construct($name, $description, $picture){
             $this->name = $name;
             $this->description = $description;
+            $this->picture = $picture;
             parent::__construct();
         }
 
@@ -17,9 +19,9 @@
             return $conecction->getData($query)->fetch_assoc();
         }
 
-        public static function getCategoryById($id){
+        public static function getCategoryById($idCategory){
             $conecction = new Connection();
-            $query = "SELECT * from category WHERE id_category='$id'";
+            $query = "SELECT * from category WHERE id_category='$idCategory'";
             return $conecction->getData($query)->fetch_assoc();
         }
 
@@ -29,9 +31,9 @@
             return $conecction->getData($query)->fetch_all(MYSQLI_ASSOC);
         }
 
-        public static function updateCategory($idCategory,$name, $description){
+        public static function updateCategory($idCategory,$name, $description, $picture){
             $conecction = new Connection();
-            $query = "UPDATE category SET name = '$name', description = '$description' WHERE id_category = '$idCategory' ";
+            $query = "UPDATE category SET name = '$name', description = '$description', picture = '$picture' WHERE id_category = '$idCategory' ";
             return $conecction->setData($query);
         }
 
@@ -42,7 +44,7 @@
         }
                 
         public function save(){
-            $categoryInsert = "INSERT INTO category (name, description) VALUES ('$this->name', '$this->description' )";
+            $categoryInsert = "INSERT INTO category (name, description,picture) VALUES ('$this->name', '$this->description', '$this->picture' )";
             $result = parent::setData($categoryInsert);
             if(!$result){
                 return false;

@@ -17,17 +17,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 }else if($_SERVER['REQUEST_METHOD'] === 'GET'){
 
-    if(!isset($_GET['nameCategory'])){
-        echo $response->error200("Error, falta name");
-        die();
-    }
+    if(isset($_GET['nameCategory'])){
         $nameCategory = $_GET['nameCategory'];
         $category->getCategory($nameCategory);
+        die();
+    }
     $category->getCategorys();
 
 }else if($_SERVER['REQUEST_METHOD'] === 'PUT'){
     if(!isset($_GET['idCategory'])){
-        echo $response->error200("Error falta Id");    
+        echo $response->error203("Error no se envio ID");    
     die();
     }    
     $idCategory = $_GET['idCategory'];
@@ -35,10 +34,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     die();
 
 }else if($_SERVER['REQUEST_METHOD'] === 'DELETE'){
-
     if(!isset($_GET['idCategory'])){
-        //Si manda este parametro seignifica que quiere obtener una categoria en particular
-        echo $response->error200("Error falta Id");    
+        echo $response->error203("Error no se envio el ID");    
         die();
     }
     $idCategory = $_GET['idCategory'];
