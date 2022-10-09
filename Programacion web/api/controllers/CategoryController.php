@@ -59,10 +59,19 @@ class CategoryController {
         echo $cateogrysToJson;
     }
 
-    public function getCategory($name){
+    public function getCategoryName($name){
         $category = CategoryModel::getCategoryByName($name);
         if(!$category){
             echo $this->response->error203("La categoria con el nombre $name no existe");
+            die();
+        }
+        echo json_encode($category);  
+    }
+    
+    public function getCategoryId($idCategory){
+        $category = CategoryModel::getCategoryById($idCategory);
+        if(!$category){
+            echo $this->response->error203("La categoria con el id $idCategory no existe");
             die();
         }
         echo json_encode($category);  

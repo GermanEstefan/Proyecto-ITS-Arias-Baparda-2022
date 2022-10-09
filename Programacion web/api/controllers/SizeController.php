@@ -16,10 +16,13 @@ class SizeController {
     }
 
     private function validateBodyOfSize($sizeData){
-        if( !isset($sizeData['name']) ||  !isset($sizeData['description']) ) return false;
+        if( !isset($sizeData['name']) 
+        ||  !isset($sizeData['description']))
+        return false;
+        //aca tenemos que validar mas cosas como que tenga un largo especifico (se pueden enviar nombre de ctegoria con valor " ")
         return $sizeData;
     }
-    //CREAR
+    
     public function saveSize($sizeData){
         /*
             En este metodo no precisamos el ID del usuario, lo unico que validamos es que tenga un token y sea valido. 
@@ -27,14 +30,17 @@ class SizeController {
         */
         $this->jwt->verifyTokenAndGetIdUserFromRequest(); 
         $bodyIsValid = $this->validateBodyOfSize($sizeData);
-        if(!$bodyIsValid) echo $this->response->error400();
-
+        if(!$bodyIsValid){
+             echo $this->response->error400('Error en los datos enviados');
+        die();
+        }
+        
         $name = $sizeData['name'];
         $description = $sizeData['description'];
 
         $sizeExist = SizeModel::getSizeByName($name);
         if($sizeExist){
-            echo $this->response->error200("El talle con nombre $name ya existe");
+            echo $this->response->error203("el talle con el nombre $name ya existe");
             die();
         }
         $size = new SizeModel($name, $description);
@@ -43,55 +49,67 @@ class SizeController {
             echo $this->response->error500();
             die();
         }
-        echo $this->response->successfully("Talle dado de alta con exito");
-    }
-    //CONSULTAR
-    public function getSizes(){
-        $cateogrysToJson = json_encode(SizeModel::getAllSizes()); 
-        echo $cateogrysToJson;
+        echo $this->response->successfully("Talle creado con exito");
     }
 
-    public function getSize($idSize){
-        $size = SizeModel::getSizeById($idSize);
+    public function getSizes(){
+        $sizesToJson = json_encode(SizeModel::getAllSizes()); 
+        echo $sizesToJson;
+    }
+
+    public function getSizeName($name){
+        $size = SizeModel::getSizeByName($name);
         if(!$size){
-            echo $this->response->error200("El talle con el ID $idSize no existe");
+            echo $this->response->error203("El talle con el nombre $name no existe");
             die();
         }
-        echo $this->response->successfully("Talle obtenido con exito", $size);  
+        echo json_encode($size);  
     }
-    //EDITAR
+    public function getSizeId($idSize){
+        $size = SizeModel::getSizeById($idSize);
+        if(!$size){
+            echo $this->response->error203("El talle con id $idSize no existe");
+            die();
+        }
+        echo json_encode($size);  
+    }
     public function updateSize($idSize,$sizeData){
-        $this->jwt->verifyTokenAndGetIdUserFromRequest();
+        $this->jwt->verifyTokenAndGetIdUserFromRequest(); 
         $bodyIsValid = $this->validateBodyOfSize($sizeData);
-        if(!$bodyIsValid) echo $this->response->error400();
+        if(!$bodyIsValid) {
+        echo $this->response->error400('Error en los datos enviados');
+        die();
+        }
 
         $nameSize = $sizeData['name'];
         $descriptionSize = $sizeData['description'];
-
+                
         $existSize = SizeModel::getSizeById($idSize);
         if (!$existSize){
-            echo $this->response->error200('El id del talle enviado no existe');
+            echo $this->response->error203('El talle indicado no es correcto');
             die();
         }
 
-        $existName = SizeModel::getSizeByName($nameSize);
-        if ($existName){
-            echo $this->response->error200('El nombre del talle ya existe');
+        $notChangeName = SizeModel::getSizeByName($nameSize);
+        if ($notChangeName){
+            $result = SizeModel::updateSizeNotName($idSize,$descriptionSize);
+            echo $this->response->successfully("Talle actualizado con exito");
             die();
         }
-        $result = SizeModel::updateSize($idSize, $nameSize, $descriptionSize);
+        
+        $result = SizeModel::updateSize($idSize,$nameSize,$descriptionSize);
         if(!$result){
             echo $this->response->error500();
             die();
         }
-        echo $this->response->successfully("Talle actualizada con exito");
+        echo $this->response->successfully("Talle actualizado con exito");
     }
-    //BORRAR
+
     public function deleteSize($idSize){
         $this->jwt->verifyTokenAndGetIdUserFromRequest();
         $existSize = SizeModel::getSizeById($idSize);
         if (!$existSize){
-            echo $this->response->error200('El id del talle enviado no existe');
+            echo $this->response->error203('Talle indicado no es correcto');
             die();
         }
 
@@ -100,7 +118,7 @@ class SizeController {
             echo $this->response->error500();
             die();
         }
-        echo $this->response->successfully("Talle eliminado exitosamente");
+        echo $this->response->successfully("Talle eliminado correctamente");
     }
 }
 

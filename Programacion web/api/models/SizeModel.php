@@ -17,9 +17,9 @@
             return $conecction->getData($query)->fetch_assoc();
         }
 
-        public static function getSizeById($id){
+        public static function getSizeById($idSize){
             $conecction = new Connection();
-            $query = "SELECT * from size WHERE id_size=$id";
+            $query = "SELECT * from size WHERE id_size='$idSize'";
             return $conecction->getData($query)->fetch_assoc();
         }
 
@@ -29,20 +29,26 @@
             return $conecction->getData($query)->fetch_all(MYSQLI_ASSOC);
         }
 
-        public static function updateSize($idSize, $name, $description){
+        public static function updateSize($idSize,$name, $description ){
             $conecction = new Connection();
-            $query = "UPDATE size SET name = '$name', description = '$description' WHERE id_size = '$idSize'";
-            return $conecction->setData($query)->fetch_assoc();
+            $query = "UPDATE size SET name = '$name', description = '$description' WHERE id_size = '$idSize' ";
+            return $conecction->setData($query);
+        }
+
+        public static function updateSizeNotName($idSize, $description, ){
+            $conecction = new Connection();
+            $query = "UPDATE size SET description = '$description' WHERE id_size = '$idSize' ";
+            return $conecction->setData($query);
         }
 
         public static function deleteSize($idSize){
             $conecction = new Connection();
-            $query = "DELETE FROM size WHERE id_size = $idSize";
+            $query = "DELETE FROM size WHERE id_size = '$idSize'";
             return $conecction->setData($query);
         }
-
+                
         public function save(){
-            $sizeInsert = "INSERT INTO size (name, description) VALUES ('$this->name', '$this->description' )";
+            $sizeInsert = "INSERT INTO size (name, description) VALUES ('$this->name', '$this->description')";
             $result = parent::setData($sizeInsert);
             if(!$result){
                 return false;

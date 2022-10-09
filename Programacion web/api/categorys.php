@@ -19,7 +19,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if(isset($_GET['nameCategory'])){
         $nameCategory = $_GET['nameCategory'];
-        $category->getCategory($nameCategory);
+        $category->getCategoryName($nameCategory);
+        die();
+    }
+    if(isset($_GET['idCategory'])){
+        $idCategory = $_GET['idCategory'];
+        $category->getCategoryId($idCategory);
         die();
     }
     $category->getCategorys();
