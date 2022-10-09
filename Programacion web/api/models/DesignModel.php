@@ -2,13 +2,13 @@
     require_once("./database/Connection.php");
     class DesignModel extends Connection {
 
-        protected $name;
-        protected $description;
+        private $name;
+        private $description;
 
         function __construct($name, $description){
             $this->name = $name;
             $this->description = $description;
-            $this->connection = new Connection();
+            parent::__construct();
         }
 
         public static function getDesignByName($name){
@@ -17,21 +17,27 @@
             return $conecction->getData($query)->fetch_assoc();
         }
 
-        public static function getDesignById($id){
+        public static function getDesignById($idDesign){
             $conecction = new Connection();
-            $query = "SELECT * from design WHERE id_design='$id'";
+            $query = "SELECT * from design WHERE id_design='$idDesign'";
             return $conecction->getData($query)->fetch_assoc();
         }
-        
-        public static function getAllDesign(){
+
+        public static function getAllDesigns(){
             $conecction = new Connection();
             $query = "SELECT * from design ";
-            return $conecction->getData($query)->fetch_all();
+            return $conecction->getData($query)->fetch_all(MYSQLI_ASSOC);
         }
 
-        public static function updateDesign($id, $name, $description){
+        public static function updateDesign($idDesign,$name, $description ){
             $conecction = new Connection();
-            $query = "UPDATE design SET name = '$name', description = '$description' WHERE id = $id";
+            $query = "UPDATE design SET name = '$name', description = '$description' WHERE id_design = '$idDesign' ";
+            return $conecction->setData($query);
+        }
+
+        public static function updateDesignNotName($idDesign, $description, ){
+            $conecction = new Connection();
+            $query = "UPDATE design SET description = '$description' WHERE id_design = '$idDesign' ";
             return $conecction->setData($query);
         }
 
@@ -42,13 +48,12 @@
         }
                 
         public function save(){
-            $designInsert = "INSERT INTO design (name, description) VALUES ('$this->name', '$this->description' )";
-            $result = $this->connection->setData($designInsert);
-            if($result){
-                return $this->connection->getLastIdInserted();
-            }else{
+            $designInsert = "INSERT INTO design (name, description) VALUES ('$this->name', '$this->description')";
+            $result = parent::setData($designInsert);
+            if(!$result){
                 return false;
             }
+            return true;
         }
     }
         

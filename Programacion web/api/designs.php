@@ -19,11 +19,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if(isset($_GET['nameDesign'])){
         $nameDesign = $_GET['nameDesign'];
-        $design->getDesign($nameDesign);
+        $design->getDesignName($nameDesign);
         die();
-    }else if(isset($_GET['idDesing'])){
+    }else if(isset($_GET['idDesign'])){
         $idDesign = $_GET['idDesign'];
-        $design->getDesign($idDesign);
+        $design->getDesignId($idDesign);
         die();
     }
     $design->getDesigns();
