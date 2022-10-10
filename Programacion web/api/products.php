@@ -28,8 +28,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         die();
     }
     $product->getProducts();
+}else if($_SERVER['REQUEST_METHOD'] === 'PUT'){
+    if(!isset($_GET['barcode'])){
+        echo $response->error203("Error falta especificar codigo de barra");    
+        die();
+    }    
+    $barcode = $_GET['barcode'];
+    $product->updateProducts($barcode,$productData);
+    die();
 
 }else {
-    echo $response->error200("Metodo no permitido");
+    echo $response->error203("Metodo no permitido");
 }
 ?>

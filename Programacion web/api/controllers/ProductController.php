@@ -49,28 +49,25 @@ class ProductController {
         $stock = $productData['stock'];
         $price = $productData['price'];
         $description = $productData['description'];
-        
+
         //Valido que exista la categoria
         $categoryExist = CategoryModel::getCategoryById($prodCategory);
         if(!$categoryExist){
             echo $this->response->error203("Esta intentando ingresar una categoria que no existe");
             die();
         }
-        
-        //Valido que exista el talle
-        $sizeExist = SizeModel::getSizeById($prodSize);
-        if(!$sizeExist){
-            echo $this->response->error203("Esta intentando ingresar una talle que no existe");
-            die();
-        }
-        
         //Valido que exista el diseño
         $designExist = DesignModel::getDesignById($prodDesign);
         if(!$designExist){
             echo $this->response->error203("Esta intentando ingresar un diseño que no existe");
             die();
         }
-        
+        //Valido que exista el talle
+        $sizeExist = SizeModel::getSizeById($prodSize);
+        if(!$sizeExist){
+            echo $this->response->error203("Esta intentando ingresar una talle que no existe");
+            die();
+        }
         //Valido que no exista el producto
         $productExist = ProductModel::identifyProduct($idProduct,$prodCategory,$prodDesign,$prodSize);
         if($productExist){
@@ -111,4 +108,58 @@ class ProductController {
         }
         echo json_encode($product);  
     }
+    //MODIFICACIONES
+    public function updateProducts($barcode,$productData){
+        $this->jwt->verifyTokenAndGetIdUserFromRequest(); 
+        $bodyIsValid = $this->validateBodyOfProduct($productData);
+        if(!$bodyIsValid) {
+        echo $this->response->error400('Error en los datos enviados');
+        die();
+        }
+        $idProduct = $productData['idProduct'];
+        $name = $productData['name'];
+        $prodCategory = $productData['prodCategory'];
+        $prodDesign = $productData['prodDesign'];
+        $prodSize = $productData['prodSize'];
+        $stock = $productData['stock'];
+        $price = $productData['price'];
+        $description = $productData['description'];
+
+        //Valido que exista el producto
+        $productExist = ProductModel::getProductByBarcode($barcode);
+        if(!$productExist){
+            echo $this->response->error203("Esta intentando modificar un producto que no existe");
+            die();
+        }
+        //Valido que solo quiera actualizar atributos del producto
+        $updateAttributes = ProductModel::identifyProduct($idProduct,$prodCategory,$prodDesign,$prodSize);
+        if($updateAttributes){
+            $result = ProductModel::updateAttributesOfProduct($barcode,$name,$stock,$price,$description);
+            echo $this->response->successfully("Producto actualizado con exito");
+            die();
+        }
+        //Valido que exista la categoria a actualizar
+        $categoryExist = CategoryModel::getCategoryById($prodCategory);
+        if(!$categoryExist){
+            echo $this->response->error203("Esta intentando ingresar una categoria que no existe");
+            die();
+        }
+        //Valido que exista el diseño a actualizar
+        $designExist = DesignModel::getDesignById($prodDesign);
+        if(!$designExist){
+            echo $this->response->error203("Esta intentando ingresar un diseño que no existe");
+            die();
+        }
+        //Valido que exista el talle a actualizar
+        $sizeExist = SizeModel::getSizeById($prodSize);
+        if(!$sizeExist){
+            echo $this->response->error203("Esta intentando ingresar una talle que no existe");
+            die();
+        }
+        $result = ProductModel::updateProduct($barcode,$idProduct,$name,$prodCategory,$prodDesign,$prodSize,$stock,$price,$description);
+        if(!$result){
+            echo $this->response->error500();
+        }
+        echo $this->response->successfully("Producto actualizado con exito");
+    }         
 }

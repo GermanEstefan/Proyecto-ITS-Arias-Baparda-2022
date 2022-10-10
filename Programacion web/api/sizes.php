@@ -32,23 +32,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }else if($_SERVER['REQUEST_METHOD'] === 'PUT'){
     //Editar talle
     if(!isset($_GET['idSize'])){
-        echo $response->error200("Error falta Id");    
+        echo $response->error203("Error falta Id");    
         die();
     }    
     $idSize = $_GET['idSize'];
-    $size->updateSize($idSize, $sizeData);    
+    $size->updateSize($idSize, $sizeData);
     die();
     
 }else if($_SERVER['REQUEST_METHOD'] === 'DELETE'){
 
     if(!isset($_GET['idSize'])){
-        echo $response->error200("Error falta Id");    
+        echo $response->error203("Error falta Id");    
         die();
     }
     $idSize = $_GET['idSize'];
     $size->deleteSize($idSize);
     die();
 }else {
-    echo $response->error200("Metodo no permitido");
+    echo $response->error203("Metodo no permitido");
 }
 ?>

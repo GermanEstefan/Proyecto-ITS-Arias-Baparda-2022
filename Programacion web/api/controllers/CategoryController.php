@@ -71,7 +71,6 @@ class CategoryController {
         }
         echo json_encode($category);  
     }
-    
     public function getCategoryId($idCategory){
         $category = CategoryModel::getCategoryById($idCategory);
         if(!$category){
@@ -80,7 +79,7 @@ class CategoryController {
         }
         echo json_encode($category);  
     }
-
+    //MODIFICACIONES
     public function updateCategory($idCategory,$categoryData){
         $this->jwt->verifyTokenAndGetIdUserFromRequest(); 
         $bodyIsValid = $this->validateBodyOfCategory($categoryData);
@@ -92,20 +91,20 @@ class CategoryController {
         $nameCategory = $categoryData['name'];
         $descriptionCategory = $categoryData['description'];
         $pictureCategory = $categoryData['picture'];
-        
+        //Validamos que exista la categoria
         $existCategory = CategoryModel::getCategoryById($idCategory);
         if (!$existCategory){
             echo $this->response->error203('La categoria indicada no es correcta');
             die();
         }
-
+        //Validamos que solo quiera actualizar el nombre
         $notChangeName = CategoryModel::getCategoryByName($nameCategory);
         if ($notChangeName){
             $result = CategoryModel::updateCategoryNotName($idCategory,$descriptionCategory,$pictureCategory);
             echo $this->response->successfully("Categoria actualizada con exitossss");
             die();
         }
-        
+
         $result = CategoryModel::updateCategory($idCategory,$nameCategory,$descriptionCategory,$pictureCategory);
         if(!$result){
             echo $this->response->error500();
@@ -116,6 +115,7 @@ class CategoryController {
     //ELIMINAR
     public function deleteCategory($idCategory){
         $this->jwt->verifyTokenAndGetIdUserFromRequest();
+        
         //Valido que exista la categoria
         $existCategory = CategoryModel::getCategoryById($idCategory);
         if (!$existCategory){
