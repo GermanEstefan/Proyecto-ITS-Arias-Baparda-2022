@@ -57,11 +57,8 @@ class CategoryController {
     //CONSULTAS
     public function getCategorys(){
         $categorys = CategoryModel::getAllCategorys();
-        if(!$categorys){
-            echo $this->response->error203("No hay Categorias");
-            die();
-        }
-        echo json_encode($categorys);
+        echo $this->response->successfully('Categorias obtenidas:',$categorys);
+        die();
     }    
     public function getCategoryName($name){
         $category = CategoryModel::getCategoryByName($name);

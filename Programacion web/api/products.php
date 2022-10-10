@@ -42,6 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         die();
     }
     $action = $_GET['action'];
+    $barcode = $_GET['barcode'];
     switch ($action){
         case 'edit':
             $product->updateProducts($barcode,$productData);

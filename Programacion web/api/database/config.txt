@@ -3,5 +3,5 @@
     "user":"root",
     "password":"",
     "database":"bindev",
-    "port":"3306"
+    "port":"3307"
 }
