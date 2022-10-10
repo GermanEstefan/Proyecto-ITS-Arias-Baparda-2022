@@ -91,12 +91,9 @@ class ProductController {
         }
     public function getDisableProducts(){
         $products = ProductModel::getAllProductsDisable();
-        if(!$products){
-            echo $this->response->error203("No hay Productos en estado DESACTIVADO");
+            echo $this->response->successfully("Productos Obtenidos:", $products);
             die();
         }
-        echo json_encode($products); 
-    }
     public function getProductById($idProduct){
         $product = ProductModel::getProductById($idProduct);
         if(!$product){
@@ -170,11 +167,10 @@ class ProductController {
     //ELIMINAR
     public function disableProduct($barcode){
         $this->jwt->verifyTokenAndGetIdUserFromRequest();
-        //Valido que el talle exista
         //Valido que exista el producto
         $productExist = ProductModel::getProductByBarcode($barcode);
         if(!$productExist){
-            echo $this->response->error203("Esta intentando eliminar un producto que no existe");
+            echo $this->response->error203("Esta intentando deshabilitar un producto que no existe");
             die();
         }
         $result = ProductModel::disableProduct($barcode);
@@ -182,6 +178,21 @@ class ProductController {
             echo $this->response->error500();
             die();
         }
-        echo $this->response->successfully("Producto eliminado exitosamente");
+        echo $this->response->successfully("Producto deshabilitado exitosamente");
+    }
+    public function activeProduct($barcode){
+        $this->jwt->verifyTokenAndGetIdUserFromRequest();
+        //Valido que exista el producto
+        $productExist = ProductModel::getProductByBarcode($barcode);
+        if(!$productExist){
+            echo $this->response->error203("Esta intentando activar un producto que no existe");
+            die();
+        }
+        $result = ProductModel::activeProduct($barcode);
+        if(!$result){
+            echo $this->response->error500();
+            die();
+        }
+        echo $this->response->successfully("Producto activado exitosamente");
     }         
 }

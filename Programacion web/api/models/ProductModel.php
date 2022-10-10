@@ -118,6 +118,15 @@
             $conecction = new Connection();
             $query = "UPDATE product SET state = 0 WHERE id_product = $idProduct ";
             return $conecction->setData($query);
+        }public static function activeProduct($barcode){
+            $conecction = new Connection();
+            $query = "UPDATE product SET state = 1 WHERE barcode = $barcode ";
+            return $conecction->setData($query);
+        }
+        public static function activeLineOfProduct($idProduct){
+            $conecction = new Connection();
+            $query = "UPDATE product SET state = 1 WHERE id_product = $idProduct ";
+            return $conecction->setData($query);
         }
         //ALTA        
         public function save(){

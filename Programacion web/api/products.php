@@ -50,10 +50,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         case 'disable':
             $product->disableProduct($barcode);
             die();
+        case 'active':
+            $product->activeProduct($barcode);
+            die();
         default :
         http_response_code(400);
-        echo $response_code(400);
-        echo $response->error400("parametro URL invalido");
+        echo $response->error400("valor de accion invalido");
         die();
     }  
 }else {
