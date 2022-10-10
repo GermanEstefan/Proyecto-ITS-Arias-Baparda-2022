@@ -23,9 +23,9 @@
             parent::__construct();
         }
         //Valida que un prod sea unico sin pasarle su PK (barcode)
-        public static function identifyProduct($idProduct,$prodCategory,$prodDesign,$prodSize){
+        public static function identifyProduct($idProduct,$prodDesign,$prodSize){
             $conecction = new Connection();
-            $query = "SELECT * from product WHERE id_product = $idProduct and product_category = $prodCategory and  product_design = $prodDesign and product_size =$prodSize";
+            $query = "SELECT * from product WHERE id_product = $idProduct and  product_design = $prodDesign and product_size =$prodSize";
             return $conecction->getData($query)->fetch_assoc();
         }
         //CONSULTAS 
@@ -109,6 +109,11 @@
             $query = "UPDATE product SET id_product = '$idProduct', name = '$name', product_category = '$prodCategory', product_design = '$prodDesign', product_size = '$prodSize', stock = '$stock', price = '$price', description = '$description' WHERE barcode = '$barcode' ";
             return $conecction->setData($query);
         }
+        public static function updateProductLineAttributes($idProduct, $name,$prodCategory, $stock, $price, $description){
+            $conecction = new Connection();
+            $query = "UPDATE product SET id_product = $idProduct , name = '$name', product_category = $prodCategory, stock = $stock, price = $price, description = '$description' WHERE id_product = $idProduct ";
+            return $conecction->setData($query);
+        }            
         public static function disableProduct($barcode){
             $conecction = new Connection();
             $query = "UPDATE product SET state = 0 WHERE barcode = $barcode ";
@@ -118,7 +123,8 @@
             $conecction = new Connection();
             $query = "UPDATE product SET state = 0 WHERE id_product = $idProduct ";
             return $conecction->setData($query);
-        }public static function activeProduct($barcode){
+        }
+        public static function activeProduct($barcode){
             $conecction = new Connection();
             $query = "UPDATE product SET state = 1 WHERE barcode = $barcode ";
             return $conecction->setData($query);

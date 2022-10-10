@@ -33,32 +33,52 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
     $product->getProducts();
 }else if($_SERVER['REQUEST_METHOD'] === 'PATCH'){
-    if(!isset($_GET['barcode'])){
-        echo $response->error203("Error falta especificar codigo de barra");    
+    if(!isset($_GET['barcode']) && !isset($_GET['idProduct'])){
+        echo $response->error203("Error siemprefalta especificar tipo de atributo");    
         die();
     }
     if(!isset($_GET['action'])){
-        echo $response->error203("Error falta especificar accion a realizar");    
-        die();
+    echo $response->error203("Error falta especificar accion a realizar");    
+    die();
     }
+    if(isset($_GET['barcode']) && isset($_GET['action'])){
     $action = $_GET['action'];
     $barcode = $_GET['barcode'];
     switch ($action){
         case 'edit':
-            $product->updateProducts($barcode,$productData);
+            $product->updateProduct($barcode,$productData);
             die();        
-        case 'disable':
+            case 'disable':
             $product->disableProduct($barcode);
             die();
-        case 'active':
+            case 'active':
             $product->activeProduct($barcode);
             die();
-        default :
-        http_response_code(400);
-        echo $response->error400("valor de accion invalido");
-        die();
-    }  
-}else {
+            default :
+            http_response_code(400);
+            echo $response->error400("Accion no valida");
+            die();
+        }
+    }if(isset($_GET['idProduct']) && isset($_GET['action'])){
+        $action = $_GET['action'];
+        $idProduct = $_GET['idProduct'];
+        switch ($action){
+            case 'edit':
+                $product->updateLineOfProducts($idProduct,$productData);
+                die();        
+                case 'disable':
+                $product->disableLineOfProduct($idProduct);
+                die();
+                case 'active':
+                $product->activeLineOfProduct($idProduct);
+                die();
+                default :
+                http_response_code(400);
+                echo $response->error400("Accion no valida");
+                die();
+            }
+        }
+}else{
     echo $response->error203("Metodo no permitido");
 }
 ?>

@@ -64,7 +64,7 @@ class SizeController {
             echo $this->response->error203("El talle con el nombre $name no existe");
             die();
         }
-        echo json_encode($size);  
+        echo $this->response->successfully("Talle encontrado:", $size);  
     }
     public function getSizeId($idSize){
         $size = SizeModel::getSizeById($idSize);
@@ -72,7 +72,7 @@ class SizeController {
             echo $this->response->error203("El talle con id $idSize no existe");
             die();
         }
-        echo json_encode($size);  
+        echo $this->response->successfully("Talle encontrado:", $size);  
     }
     //ACTUALIZAR
     public function updateSize($idSize,$sizeData){

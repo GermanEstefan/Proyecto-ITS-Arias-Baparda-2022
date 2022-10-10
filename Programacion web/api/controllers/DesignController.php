@@ -65,7 +65,7 @@ class DesignController {
             echo $this->response->error203("El diseño con el nombre $name no existe");
             die();
         }
-        echo json_encode($design);  
+        echo $this->response->successfully("Diseño obtenido:",$design);  
     }
     public function getDesignId($idDesign){
         $design = DesignModel::getDesignById($idDesign);
@@ -73,7 +73,7 @@ class DesignController {
             echo $this->response->error203("El diseño con id $idDesign no existe");
             die();
         }
-        echo json_encode($design);  
+        echo $this->response->successfully("Diseño obtenido:",$design);  
     }
     //MODIFICACIONES
     public function updateDesign($idDesign,$designData){

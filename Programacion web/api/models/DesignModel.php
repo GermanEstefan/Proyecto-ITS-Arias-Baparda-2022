@@ -29,13 +29,13 @@
             return $conecction->getData($query)->fetch_all(MYSQLI_ASSOC);
         }
 
-        public static function updateDesign($idDesign,$name, $description ){
+        public static function updateDesign($idDesign,$name, $description){
             $conecction = new Connection();
             $query = "UPDATE design SET name = '$name', description = '$description' WHERE id_design = '$idDesign' ";
             return $conecction->setData($query);
         }
 
-        public static function updateDesignNotName($idDesign, $description, ){
+        public static function updateDesignNotName($idDesign, $description){
             $conecction = new Connection();
             $query = "UPDATE design SET description = '$description' WHERE id_design = '$idDesign' ";
             return $conecction->setData($query);

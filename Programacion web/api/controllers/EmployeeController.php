@@ -27,24 +27,25 @@ class EmployeeController{
 
     public function registerEmployee($userData)
     {
-
-        $bodyIsValid = $this->validateBodyOfRegisterEmployee($userData);
-        if (!$bodyIsValid) {
-            http_response_code(400);
-            echo $this->response->error400();
-            die();
-        }
         //Verificamos el token y si es valido, obtenemos el id de usuario.
         $idOfUser = $this->jwt->verifyTokenAndGetIdUserFromRequest();
-        $employee = EmployeeModel::getRoleOfEmployeeById($idOfUser);
-        
+        if(!$idOfUser){
+            echo $this->response->error401("no esta autorizado para relizar esta accion");
+            die();    
+        }
+        $employee = EmployeeModel::getRoleOfEmployeeById($idOfUser);        
         $rolOfEmployee = $employee['employee_role'];
         if(!($rolOfEmployee == 'JEFE')){
             http_response_code(401);
             echo $this->response->error401("Usted no esta autorizado para relizar esta accion");
             die();
         }
-       
+        $bodyIsValid = $this->validateBodyOfRegisterEmployee($userData);
+        if (!$bodyIsValid) {
+            http_response_code(400);
+            echo $this->response->error400();
+            die();
+        }
         $email = $userData['email'];
         $name = $userData['name'];
         $surname = $userData['surname'];

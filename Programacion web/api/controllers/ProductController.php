@@ -69,7 +69,7 @@ class ProductController {
             die();
         }
         //Valido que no exista el producto
-        $productExist = ProductModel::identifyProduct($idProduct,$prodCategory,$prodDesign,$prodSize);
+        $productExist = ProductModel::identifyProduct($idProduct,$prodDesign,$prodSize);
         if($productExist){
             echo $this->response->error203("Esta intentando ingresar un producto ya existente");
             die();
@@ -100,7 +100,7 @@ class ProductController {
             echo $this->response->error203("No existe producto con ID = $idProduct");
             die();
         }
-        echo json_encode($product);  
+        echo $this->response->successfully("Productos obtenidos",$product);  
     }
     public function getProductByBarcode($barcode){
         $product = ProductModel::getProductByBarcode($barcode);
@@ -108,10 +108,10 @@ class ProductController {
             echo $this->response->error203("No existe el producto con el codigo de barras $barcode");
             die();
         }
-        echo json_encode($product);  
+        echo $this->response->successfully("Producto obtenido",$product);
     }
     //MODIFICACIONES
-    public function updateProducts($barcode,$productData){
+    public function updateProduct($barcode,$productData){
         $this->jwt->verifyTokenAndGetIdUserFromRequest(); 
         $bodyIsValid = $this->validateBodyOfProduct($productData);
         if(!$bodyIsValid) {
@@ -134,7 +134,7 @@ class ProductController {
             die();
         }
         //Valido que solo quiera actualizar atributos del producto
-        $updateAttributes = ProductModel::identifyProduct($idProduct,$prodCategory,$prodDesign,$prodSize);
+        $updateAttributes = ProductModel::identifyProduct($idProduct,$prodDesign,$prodSize);
         if($updateAttributes){
             $result = ProductModel::updateAttributesOfProduct($barcode,$name,$stock,$price,$description);
             echo $this->response->successfully("Producto actualizado con exito");
@@ -163,6 +163,45 @@ class ProductController {
             echo $this->response->error500();
         }
         echo $this->response->successfully("Producto actualizado con exito");
+    }
+    public function updateLineOfProducts($idProd,$productData){
+        $this->jwt->verifyTokenAndGetIdUserFromRequest(); 
+        $bodyIsValid = $this->validateBodyOfProduct($productData);
+        if(!$bodyIsValid) {
+        echo $this->response->error400('Error en los datos enviados');
+        die();
+        }
+        $idProduct = $productData['idProduct'];
+        $name = $productData['name'];
+        $prodCategory = $productData['prodCategory'];
+        $stock = $productData['stock'];
+        $price = $productData['price'];
+        $description = $productData['description'];
+
+        //Valido que el prod exista
+        $updateLineAttributes = ProductModel::getProductById($idProd);
+        if(!$updateLineAttributes){
+            echo $this->response->error203("Esta intentando editar una linea de productos que no existe");
+            die();
+        }
+        //Valido que exista el IDprod al cual pretende actualizar, si no existiera estaria queriendo hacer un alta no EDIT
+        $productExist = ProductModel::getProductByBarcode($idProduct);
+        if(!$productExist){
+            echo $this->response->error203("Esta intentando referenciar una idProducto que no existe");
+            die();
+        }
+        //Valido que exista la categoria a actualizar
+        $categoryExist = CategoryModel::getCategoryById($prodCategory);
+        if(!$categoryExist){
+           echo $this->response->error203("Esta intentando ingresar una categoria que no existe");
+            die();
+        }   
+        $result = ProductModel::updateProductLineAttributes($idProduct,$name,$prodCategory,$stock,$price,$description);
+        if(!$result){
+            echo $this->response->error500();
+            die();
+        }
+        echo $this->response->successfully("Linea de Productos actualizada exitosamente");
     }
     //ELIMINAR
     public function disableProduct($barcode){
@@ -194,5 +233,35 @@ class ProductController {
             die();
         }
         echo $this->response->successfully("Producto activado exitosamente");
+    }
+    public function disableLineOfProduct($idProduct){
+        $this->jwt->verifyTokenAndGetIdUserFromRequest();
+        //Valido que exista el producto
+        $productExist = ProductModel::getProductById($idProduct);
+        if(!$productExist){
+            echo $this->response->error203("Esta intentando deshabilitar un linea de productos que no existe");
+            die();
+        }
+        $result = ProductModel::disableLineOfProduct($idProduct);
+        if(!$result){
+            echo $this->response->error500();
+            die();
+        }
+        echo $this->response->successfully("Linea de Productos deshabilitados exitosamente");
+    }
+    public function activeLineOfProduct($idProduct){
+        $this->jwt->verifyTokenAndGetIdUserFromRequest();
+        //Valido que exista el producto
+        $productExist = ProductModel::getProductById($idProduct);
+        if(!$productExist){
+            echo $this->response->error203("Esta intentando activar una linea de productos que no existe");
+            die();
+        }
+        $result = ProductModel::activeLineOfProduct($idProduct);
+        if(!$result){
+            echo $this->response->error500();
+            die();
+        }
+        echo $this->response->successfully("Linea de Productos activados exitosamente");
     }         
 }

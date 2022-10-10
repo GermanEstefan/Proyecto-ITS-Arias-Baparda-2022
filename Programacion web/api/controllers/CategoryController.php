@@ -66,7 +66,7 @@ class CategoryController {
             echo $this->response->error203("La categoria con el nombre $name no existe");
             die();
         }
-        echo json_encode($category);  
+        echo $this->response->successfully("Categoria obtenida:", $category); 
     }
     public function getCategoryId($idCategory){
         $category = CategoryModel::getCategoryById($idCategory);
@@ -74,7 +74,7 @@ class CategoryController {
             echo $this->response->error203("La categoria con el id $idCategory no existe");
             die();
         }
-        echo json_encode($category);  
+        echo $this->response->successfully("Categoria obtenida:", $category); 
     }
     //MODIFICACIONES
     public function updateCategory($idCategory,$categoryData){
@@ -131,7 +131,7 @@ class CategoryController {
             echo $this->response->error500();
             die();
         }
-        echo $this->response->successfully("Category eliminada exitosamente");
+        echo $this->response->successfully("Categoria eliminada exitosamente");
     }
 }
 

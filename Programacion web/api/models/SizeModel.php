@@ -35,7 +35,7 @@
             return $conecction->setData($query);
         }
 
-        public static function updateSizeNotName($idSize, $description, ){
+        public static function updateSizeNotName($idSize, $description){
             $conecction = new Connection();
             $query = "UPDATE size SET description = '$description' WHERE id_size = '$idSize' ";
             return $conecction->setData($query);
