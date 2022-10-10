@@ -78,6 +78,7 @@ class DesignController {
         }
         echo json_encode($design);  
     }
+    //MODIFICACIONES
     public function updateDesign($idDesign,$designData){
         $this->jwt->verifyTokenAndGetIdUserFromRequest(); 
         $bodyIsValid = $this->validateBodyOfDesign($designData);
@@ -94,14 +95,12 @@ class DesignController {
             echo $this->response->error203('El diseño indicado no es correcto');
             die();
         }
-
         $notChangeName = DesignModel::getDesignByName($nameDesign);
         if ($notChangeName){
             $result = DesignModel::updateDesignNotName($idDesign,$descriptionDesign);
             echo $this->response->successfully("Diseño actualizado con exito");
             die();
         }
-        
         $result = DesignModel::updateDesign($idDesign,$nameDesign,$descriptionDesign);
         if(!$result){
             echo $this->response->error500();
@@ -124,7 +123,6 @@ class DesignController {
             echo $this->response->error203("Error El diseño $idDesign esta siendo usado en un producto");
             die();
         }
-
         $result = DesignModel::deleteDesign($idDesign);
         if(!$result){
             echo $this->response->error500();
@@ -133,5 +131,4 @@ class DesignController {
         echo $this->response->successfully("Diseño eliminado correctamente");
     }
 }
-
 ?>

@@ -215,17 +215,17 @@ CREATE TABLE IF NOT EXISTS `bindev`.`product` (
   CONSTRAINT `FK_category_product`
     FOREIGN KEY (`product_category`)
     REFERENCES `bindev`.`category` (`id_category`)
-    ON DELETE RESTRICT
+    ON DELETE CASCADE
     ON UPDATE CASCADE,
   CONSTRAINT `FK_design_product`
     FOREIGN KEY (`product_design`)
     REFERENCES `bindev`.`design` (`id_design`)
-    ON DELETE RESTRICT
+    ON DELETE CASCADE
     ON UPDATE CASCADE,
   CONSTRAINT `FK_size_product`
     FOREIGN KEY (`product_size`)
     REFERENCES `bindev`.`size` (`id_size`)
-    ON DELETE RESTRICT
+    ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
 ALTER TABLE product
