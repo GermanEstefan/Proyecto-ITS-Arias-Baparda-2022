@@ -54,13 +54,10 @@ class DesignController {
     }
     //CONSULTAS
     public function getDesigns(){
-        $designs = DesignModel::getAllDesigns();
-        if(!$designs){
-            echo $this->response->error203("No hay Diseños");
-            die();
-        }
-        echo json_encode($designs);
-    }   
+        $design = DesignModel::getAllDesigns();
+        echo $this->response->successfully('Diseños obtenidos:',$design);
+        die();
+    }     
 
     public function getDesignName($name){
         $design = DesignModel::getDesignByName($name);

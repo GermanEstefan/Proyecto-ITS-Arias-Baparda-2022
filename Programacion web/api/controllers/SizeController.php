@@ -55,12 +55,9 @@ class SizeController {
     //CONSULTAS
     public function getSizes(){
         $sizes = SizeModel::getAllSizes();
-        if(!$sizes){
-            echo $this->response->error203("No hay Talles");
-            die();
+        echo $this->response->successfully("Talles Obtenidos:",$sizes);
+        die();
         }
-        echo json_encode($sizes);
-    }
     public function getSizeName($name){
         $size = SizeModel::getSizeByName($name);
         if(!$size){

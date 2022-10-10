@@ -86,12 +86,9 @@ class ProductController {
     //CONSULTAS
     public function getProducts(){
         $products = ProductModel::getAllProductsActive();
-        if(!$products){
-            echo $this->response->error203("No hay Productos");
+            echo $this->response->successfully("Productos obtenidos:", $products);
             die();
         }
-        echo json_encode($products); 
-    }
     public function getDisableProducts(){
         $products = ProductModel::getAllProductsDisable();
         if(!$products){
