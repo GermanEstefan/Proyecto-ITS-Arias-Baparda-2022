@@ -53,7 +53,7 @@
             and p.id_product = '$idProduct'";
             return $conecction->getData($query)->fetch_all(MYSQLI_ASSOC);
         }
-        public static function getAllProducts(){
+        public static function getAllProductsActive(){
             $conecction = new Connection();
             $query = "SELECT  p.barcode ,p.id_product,p.name, d.name as diseño,s.name as talle,p.price,p.stock,c.name as categoria,p.description,p.state from product p
             inner join category c
@@ -61,24 +61,37 @@
             inner join size s
             on p.product_category = c.id_category 
             and p.product_design = d.id_design 
-            and p.product_size = s.id_size";
+            and p.product_size = s.id_size
+            and p.state = 1";
             return $conecction->getData($query)->fetch_all(MYSQLI_ASSOC);
         }
-        //Sirve para que al momento de eliminar una categoria validemos si esta en uso
+        public static function getAllProductsDisable(){
+            $conecction = new Connection();
+            $query = "SELECT  p.barcode ,p.id_product,p.name, d.name as diseño,s.name as talle,p.price,p.stock,c.name as categoria,p.description,p.state from product p
+            inner join category c
+            inner join design d
+            inner join size s
+            on p.product_category = c.id_category 
+            and p.product_design = d.id_design 
+            and p.product_size = s.id_size
+            and p.state = 0";
+            return $conecction->getData($query)->fetch_all(MYSQLI_ASSOC);
+        }
+        //Sirve UNICAMENTE para que al momento de eliminar una categoria validemos si esta en uso
         public static function getProductsByIdCategory($idCategory){
             $conecction = new Connection();
             $query = "SELECT * from product 
             where product_category = '$idCategory'";
             return $conecction->getData($query)->fetch_all(MYSQLI_ASSOC);
         }
-        //Sirve para que al momento de eliminar un talle validemos si esta en uso
+        //Sirve UNICAMENTE para que al momento de eliminar un talle validemos si esta en uso
         public static function getProductsByIdSize($idSize){
             $conecction = new Connection();
             $query = "SELECT * FROM product 
             where product_size = '$idSize'";
             return $conecction->getData($query)->fetch_all(MYSQLI_ASSOC);
         }
-        //Sirve para que al momento de eliminar un diseño validemos si esta en uso
+        //Sirve UNICAMENTE para que al momento de eliminar un diseño validemos si esta en uso
         public static function getProductsByIdDesign($idDesign){
             $conecction = new Connection();
             $query = "SELECT * from product

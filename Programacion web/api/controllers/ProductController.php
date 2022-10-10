@@ -85,9 +85,17 @@ class ProductController {
     }
     //CONSULTAS
     public function getProducts(){
-        $products = ProductModel::getAllProducts();
+        $products = ProductModel::getAllProductsActive();
         if(!$products){
             echo $this->response->error203("No hay Productos");
+            die();
+        }
+        echo json_encode($products); 
+    }
+    public function getDisableProducts(){
+        $products = ProductModel::getAllProductsDisable();
+        if(!$products){
+            echo $this->response->error203("No hay Productos en estado DESACTIVADO");
             die();
         }
         echo json_encode($products); 
@@ -161,5 +169,22 @@ class ProductController {
             echo $this->response->error500();
         }
         echo $this->response->successfully("Producto actualizado con exito");
+    }
+    //ELIMINAR
+    public function disableProduct($barcode){
+        $this->jwt->verifyTokenAndGetIdUserFromRequest();
+        //Valido que el talle exista
+        //Valido que exista el producto
+        $productExist = ProductModel::getProductByBarcode($barcode);
+        if(!$productExist){
+            echo $this->response->error203("Esta intentando eliminar un producto que no existe");
+            die();
+        }
+        $result = ProductModel::disableProduct($barcode);
+        if(!$result){
+            echo $this->response->error500();
+            die();
+        }
+        echo $this->response->successfully("Producto eliminado exitosamente");
     }         
 }

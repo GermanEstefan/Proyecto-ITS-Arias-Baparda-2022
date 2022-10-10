@@ -29,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
     $size->getSizes();
 
-}else if($_SERVER['REQUEST_METHOD'] === 'PUT'){
+}else if($_SERVER['REQUEST_METHOD'] === 'PATCH'){
     //Editar talle
     if(!isset($_GET['idSize'])){
         echo $response->error203("Error falta Id");    

@@ -29,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
     $category->getCategorys();
 
-}else if($_SERVER['REQUEST_METHOD'] === 'PUT'){
+}else if($_SERVER['REQUEST_METHOD'] === 'PATCH'){
     if(!isset($_GET['idCategory'])){
         echo $response->error203("Error no se envio ID");    
     die();

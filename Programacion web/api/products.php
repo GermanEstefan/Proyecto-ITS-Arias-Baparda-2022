@@ -16,7 +16,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $product->saveProduct($productData);
 
 }else if($_SERVER['REQUEST_METHOD'] === 'GET'){
-
+    
+    if(isset($_GET['disable'])){
+        $product->getDisableProducts();
+        die();
+    }
     if(isset($_GET['barcode'])){
         $barcode = $_GET['barcode'];
         $product->getProductByBarcode($barcode);
@@ -28,15 +32,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         die();
     }
     $product->getProducts();
-}else if($_SERVER['REQUEST_METHOD'] === 'PUT'){
+}else if($_SERVER['REQUEST_METHOD'] === 'PATCH'){
     if(!isset($_GET['barcode'])){
         echo $response->error203("Error falta especificar codigo de barra");    
         die();
-    }    
-    $barcode = $_GET['barcode'];
-    $product->updateProducts($barcode,$productData);
-    die();
-
+    }
+    if(!isset($_GET['action'])){
+        echo $response->error203("Error falta especificar accion a realizar");    
+        die();
+    }
+    $action = $_GET['action'];
+    switch ($action){
+        case 'edit':
+            $product->updateProducts($barcode,$productData);
+            die();        
+        case 'disable':
+            $product->disableProduct($barcode);
+            die();
+        default :
+        http_response_code(400);
+        echo $response_code(400);
+        echo $response->error400("parametro URL invalido");
+        die();
+    }  
 }else {
     echo $response->error203("Metodo no permitido");
 }

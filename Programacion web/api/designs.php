@@ -28,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
     $design->getDesigns();
 
-}else if($_SERVER['REQUEST_METHOD'] === 'PUT'){
+}else if($_SERVER['REQUEST_METHOD'] === 'PATCH'){
     //Editar categoria
     if(isset($_GET['idDesign'])){
         $idDesign = $_GET['idDesign'];
