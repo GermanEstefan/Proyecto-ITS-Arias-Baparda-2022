@@ -3,6 +3,7 @@
 include_once('./helpers/Response.php');
 include_once("./helpers/Token.php");
 include_once("./models/CategoryModel.php");
+include_once("./models/ProductModel.php");
 
 class CategoryController {
 
@@ -23,7 +24,7 @@ class CategoryController {
         //aca tenemos que validar mas cosas como que tenga un largo especifico (se pueden enviar nombre de ctegoria con valor " ")
         return $categoryData;
     }
-    
+    //ALTA
     public function saveCategory($categoryData){
         /*
             En este metodo no precisamos el ID del usuario, lo unico que validamos es que tenga un token y sea valido. 
@@ -53,12 +54,15 @@ class CategoryController {
         }
         echo $this->response->successfully("Categoria dada de alta con exito");
     }
-
+    //CONSULTAS
     public function getCategorys(){
-        $cateogrysToJson = json_encode(CategoryModel::getAllCategorys()); 
-        echo $cateogrysToJson;
-    }
-
+        $categorys = CategoryModel::getAllCategorys();
+        if(!$categorys){
+            echo $this->response->error203("No hay Categorias");
+            die();
+        }
+        echo json_encode($categorys);
+    }    
     public function getCategoryName($name){
         $category = CategoryModel::getCategoryByName($name);
         if(!$category){
@@ -109,12 +113,19 @@ class CategoryController {
         }
         echo $this->response->successfully("Categoria actualizada con exito");
     }
-
+    //ELIMINAR
     public function deleteCategory($idCategory){
         $this->jwt->verifyTokenAndGetIdUserFromRequest();
+        //Valido que exista la categoria
         $existCategory = CategoryModel::getCategoryById($idCategory);
         if (!$existCategory){
             echo $this->response->error203('La categoria indicada no es correcta');
+            die();
+        }
+        //Valido que la categoria no se este usando por un producto
+        $prodUsaCategory = ProductModel::getProductsByIdCategory($idCategory);
+        if ($prodUsaCategory){
+            echo $this->response->error203("Error La categoria $idCategory esta siendo usado en un producto");
             die();
         }
 

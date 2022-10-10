@@ -3,6 +3,7 @@
 include_once('./helpers/Response.php');
 include_once("./helpers/Token.php");
 include_once("./models/DesignModel.php");
+include_once("./models/ProductModel.php");
 
 class DesignController {
 
@@ -22,7 +23,7 @@ class DesignController {
         //aca tenemos que validar mas cosas como que tenga un largo especifico (se pueden enviar nombre de ctegoria con valor " ")
         return $designData;
     }
-    
+    //ALTA
     public function saveDesign($designData){
         /*
             En este metodo no precisamos el ID del usuario, lo unico que validamos es que tenga un token y sea valido. 
@@ -51,11 +52,15 @@ class DesignController {
         }
         echo $this->response->successfully("Diseño creado con exito");
     }
-
+    //CONSULTAS
     public function getDesigns(){
-        $designsToJson = json_encode(DesignModel::getAllDesigns()); 
-        echo $designsToJson;
-    }
+        $designs = DesignModel::getAllDesigns();
+        if(!$designs){
+            echo $this->response->error203("No hay Diseños");
+            die();
+        }
+        echo json_encode($designs);
+    }   
 
     public function getDesignName($name){
         $design = DesignModel::getDesignByName($name);
@@ -104,12 +109,19 @@ class DesignController {
         }
         echo $this->response->successfully("Diseño actualizado con exito");
     }
-
+    //ELIMINAR
     public function deleteDesign($idDesign){
         $this->jwt->verifyTokenAndGetIdUserFromRequest();
+        //Valido que el diseño exista
         $existDesign = DesignModel::getDesignById($idDesign);
         if (!$existDesign){
             echo $this->response->error203('Diseño indicado no es correcto');
+            die();
+        }
+        //Valido que el diseño no se este usando por un producto
+        $prodUsaDesign = ProductModel::getProductsByIdDesign($idDesign);
+        if ($prodUsaDesign){
+            echo $this->response->error203("Error El diseño $idDesign esta siendo usado en un producto");
             die();
         }
 

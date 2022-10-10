@@ -28,7 +28,7 @@
             $query = "SELECT * from product WHERE id_product = $idProduct and product_category = $prodCategory and  product_design = $prodDesign and product_size =$prodSize";
             return $conecction->getData($query)->fetch_assoc();
         }
-
+        //CONSULTAS 
         public static function getProductByBarcode($barcode){
             $conecction = new Connection();
             $query = "SELECT  p.barcode ,p.id_product,p.name, d.name as color,s.name as talle,p.price,p.stock,c.name as categoria,p.description,p.state from product p
@@ -62,6 +62,24 @@
             on p.product_category = c.id_category 
             and p.product_design = d.id_design 
             and p.product_size = s.id_size";
+            return $conecction->getData($query)->fetch_all(MYSQLI_ASSOC);
+        }
+        public static function getProductsByIdCategory($idCategory){
+            $conecction = new Connection();
+            $query = "SELECT * from product 
+            where product_category = '$idCategory'";
+            return $conecction->getData($query)->fetch_all(MYSQLI_ASSOC);
+        }
+        public static function getProductsByIdSize($idSize){
+            $conecction = new Connection();
+            $query = "SELECT * FROM product 
+            where product_size = '$idSize'";
+            return $conecction->getData($query)->fetch_all(MYSQLI_ASSOC);
+        }
+        public static function getProductsByIdDesign($idDesign){
+            $conecction = new Connection();
+            $query = "SELECT * from product
+            where product_design = '$idDesign'";
             return $conecction->getData($query)->fetch_all(MYSQLI_ASSOC);
         }
         public static function updateProduct($id, $name, $description){

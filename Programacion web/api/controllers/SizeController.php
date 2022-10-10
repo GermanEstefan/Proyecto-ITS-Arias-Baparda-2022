@@ -3,6 +3,7 @@
 include_once('./helpers/Response.php');
 include_once("./helpers/Token.php");
 include_once("./models/SizeModel.php");
+include_once("./models/ProductModel.php");
 
 class SizeController {
 
@@ -22,7 +23,7 @@ class SizeController {
         //aca tenemos que validar mas cosas como que tenga un largo especifico (se pueden enviar nombre de ctegoria con valor " ")
         return $sizeData;
     }
-    
+    //ALTA
     public function saveSize($sizeData){
         /*
             En este metodo no precisamos el ID del usuario, lo unico que validamos es que tenga un token y sea valido. 
@@ -37,7 +38,7 @@ class SizeController {
         
         $name = $sizeData['name'];
         $description = $sizeData['description'];
-
+        //Valido que no exista el talle x el nombre (unique)
         $sizeExist = SizeModel::getSizeByName($name);
         if($sizeExist){
             echo $this->response->error203("el talle con el nombre $name ya existe");
@@ -51,12 +52,15 @@ class SizeController {
         }
         echo $this->response->successfully("Talle creado con exito");
     }
-
+    //CONSULTAS
     public function getSizes(){
-        $sizesToJson = json_encode(SizeModel::getAllSizes()); 
-        echo $sizesToJson;
+        $sizes = SizeModel::getAllSizes();
+        if(!$sizes){
+            echo $this->response->error203("No hay Talles");
+            die();
+        }
+        echo json_encode($sizes);
     }
-
     public function getSizeName($name){
         $size = SizeModel::getSizeByName($name);
         if(!$size){
@@ -73,6 +77,7 @@ class SizeController {
         }
         echo json_encode($size);  
     }
+    //ACTUALIZAR
     public function updateSize($idSize,$sizeData){
         $this->jwt->verifyTokenAndGetIdUserFromRequest(); 
         $bodyIsValid = $this->validateBodyOfSize($sizeData);
@@ -104,12 +109,19 @@ class SizeController {
         }
         echo $this->response->successfully("Talle actualizado con exito");
     }
-
+    //ELIMINAR
     public function deleteSize($idSize){
         $this->jwt->verifyTokenAndGetIdUserFromRequest();
+        //Valido que el talle exista
         $existSize = SizeModel::getSizeById($idSize);
         if (!$existSize){
             echo $this->response->error203('Talle indicado no es correcto');
+            die();
+        }
+        //Valido que el talle no se este usando por un producto
+        $prodUsaSize = ProductModel::getProductsByIdSize($idSize);
+        if ($prodUsaSize){
+            echo $this->response->error203("Error El talle $idSize esta siendo usado en un producto");
             die();
         }
 

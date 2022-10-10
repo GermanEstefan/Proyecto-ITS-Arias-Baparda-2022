@@ -27,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $product->getProductById($idProduct);
         die();
     }
-    $product->getAllProducts();
+    $product->getProducts();
 
 }else {
     echo $response->error200("Metodo no permitido");

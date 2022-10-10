@@ -29,7 +29,7 @@ class ProductController {
         ||  !isset($productData['description'])) return false;
     return $productData;
     }
-    
+    //ALTA
     public function saveProduct($productData){
         /*
             En este metodo no precisamos el ID del usuario, lo unico que validamos es que tenga un token y sea valido. 
@@ -41,7 +41,6 @@ class ProductController {
              echo $this->response->error400('Error en los datos enviados');
         die();
         }
-        
         $idProduct = $productData['idProduct'];
         $name = $productData['name'];
         $prodCategory = $productData['prodCategory'];
@@ -50,30 +49,35 @@ class ProductController {
         $stock = $productData['stock'];
         $price = $productData['price'];
         $description = $productData['description'];
+        
         //Valido que exista la categoria
         $categoryExist = CategoryModel::getCategoryById($prodCategory);
         if(!$categoryExist){
             echo $this->response->error203("Esta intentando ingresar una categoria que no existe");
             die();
         }
+        
         //Valido que exista el talle
         $sizeExist = SizeModel::getSizeById($prodSize);
         if(!$sizeExist){
             echo $this->response->error203("Esta intentando ingresar una talle que no existe");
             die();
         }
+        
         //Valido que exista el diseño
         $designExist = DesignModel::getDesignById($prodDesign);
         if(!$designExist){
             echo $this->response->error203("Esta intentando ingresar un diseño que no existe");
             die();
         }
+        
         //Valido que no exista el producto
         $productExist = ProductModel::identifyProduct($idProduct,$prodCategory,$prodDesign,$prodSize);
         if($productExist){
             echo $this->response->error203("Esta intentando ingresar un producto ya existente");
             die();
         }
+        
         $product = new ProductModel($idProduct,$name,$prodCategory,$prodDesign,$prodSize,$stock,$price,$description);
         $result = $product->save();
         if(!$result){
@@ -83,18 +87,18 @@ class ProductController {
         echo $this->response->successfully("Producto creado con exito");
     }
     //CONSULTAS
-    public function getAllProducts(){
-        $product = ProductModel::getAllProducts();
-        if(!$product){
-            echo $this->response->error203("No hay productos");
+    public function getProducts(){
+        $products = ProductModel::getAllProducts();
+        if(!$products){
+            echo $this->response->error203("No hay Productos");
             die();
         }
-        echo json_encode($product);  
+        echo json_encode($products); 
     }
     public function getProductById($idProduct){
         $product = ProductModel::getProductById($idProduct);
         if(!$product){
-            echo $this->response->error203("No existe producto con el identificado $idProduct");
+            echo $this->response->error203("No existe producto con ID = $idProduct");
             die();
         }
         echo json_encode($product);  
