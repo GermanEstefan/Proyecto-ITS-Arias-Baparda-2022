@@ -21,6 +21,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $product->getDisableProducts();
         die();
     }
+    if(isset($_GET['all'])){
+        $product->getAllProducts();
+        die();
+    }
     if(isset($_GET['barcode'])){
         $barcode = $_GET['barcode'];
         $product->getProductByBarcode($barcode);
@@ -34,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $product->getProducts();
 }else if($_SERVER['REQUEST_METHOD'] === 'PATCH'){
     if(!isset($_GET['barcode']) && !isset($_GET['idProduct'])){
-        echo $response->error203("Error siemprefalta especificar tipo de atributo");    
+        echo $response->error203("Error falta especificar tipo de atributo");    
         die();
     }
     if(!isset($_GET['action'])){

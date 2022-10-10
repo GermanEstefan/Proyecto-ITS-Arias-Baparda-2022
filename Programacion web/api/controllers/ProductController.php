@@ -29,6 +29,14 @@ class ProductController {
         ||  !isset($productData['description'])) return false;
     return $productData;
     }
+    private function validateBodyOfAtribute($productData){
+        if( !isset($productData['name']) 
+        ||  !isset($productData['prodCategory']) 
+        ||  !isset($productData['stock']) 
+        ||  !isset($productData['price']) 
+        ||  !isset($productData['description'])) return false;
+    return $productData;
+    }
     //ALTA
     public function saveProduct($productData){
         /*
@@ -84,6 +92,11 @@ class ProductController {
         echo $this->response->successfully("Producto creado con exito");
     }
     //CONSULTAS
+    public function getAllProducts(){
+        $products = ProductModel::getAllProducts();
+            echo $this->response->successfully("Todos los Productos:", $products);
+            die();
+        }
     public function getProducts(){
         $products = ProductModel::getAllProductsActive();
             echo $this->response->successfully("Productos obtenidos:", $products);
@@ -164,14 +177,13 @@ class ProductController {
         }
         echo $this->response->successfully("Producto actualizado con exito");
     }
-    public function updateLineOfProducts($idProd,$productData){
+    public function updateLineOfProducts($idProduct,$productData){
         $this->jwt->verifyTokenAndGetIdUserFromRequest(); 
-        $bodyIsValid = $this->validateBodyOfProduct($productData);
+        $bodyIsValid = $this->validateBodyOfAtribute($productData);
         if(!$bodyIsValid) {
         echo $this->response->error400('Error en los datos enviados');
         die();
         }
-        $idProduct = $productData['idProduct'];
         $name = $productData['name'];
         $prodCategory = $productData['prodCategory'];
         $stock = $productData['stock'];
@@ -179,15 +191,9 @@ class ProductController {
         $description = $productData['description'];
 
         //Valido que el prod exista
-        $updateLineAttributes = ProductModel::getProductById($idProd);
+        $updateLineAttributes = ProductModel::getProductById($idProduct);
         if(!$updateLineAttributes){
             echo $this->response->error203("Esta intentando editar una linea de productos que no existe");
-            die();
-        }
-        //Valido que exista el IDprod al cual pretende actualizar, si no existiera estaria queriendo hacer un alta no EDIT
-        $productExist = ProductModel::getProductByBarcode($idProduct);
-        if(!$productExist){
-            echo $this->response->error203("Esta intentando referenciar una idProducto que no existe");
             die();
         }
         //Valido que exista la categoria a actualizar

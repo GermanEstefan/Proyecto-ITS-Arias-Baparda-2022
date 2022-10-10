@@ -53,6 +53,17 @@
             and p.id_product = '$idProduct'";
             return $conecction->getData($query)->fetch_all(MYSQLI_ASSOC);
         }
+        public static function getAllProducts(){
+            $conecction = new Connection();
+            $query = "SELECT  p.barcode ,p.id_product,p.name, d.name as diseño,s.name as talle,p.price,p.stock,c.name as categoria,p.description,p.state from product p
+            inner join category c
+            inner join design d
+            inner join size s
+            on p.product_category = c.id_category 
+            and p.product_design = d.id_design 
+            and p.product_size = s.id_size";
+            return $conecction->getData($query)->fetch_all(MYSQLI_ASSOC);
+        }
         public static function getAllProductsActive(){
             $conecction = new Connection();
             $query = "SELECT  p.barcode ,p.id_product,p.name, d.name as diseño,s.name as talle,p.price,p.stock,c.name as categoria,p.description,p.state from product p
@@ -111,7 +122,7 @@
         }
         public static function updateProductLineAttributes($idProduct, $name,$prodCategory, $stock, $price, $description){
             $conecction = new Connection();
-            $query = "UPDATE product SET id_product = $idProduct , name = '$name', product_category = $prodCategory, stock = $stock, price = $price, description = '$description' WHERE id_product = $idProduct ";
+            $query = "UPDATE product SET name = '$name', product_category = $prodCategory, stock = $stock, price = $price, description = '$description' WHERE id_product = $idProduct ";
             return $conecction->setData($query);
         }            
         public static function disableProduct($barcode){
