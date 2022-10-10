@@ -34,17 +34,17 @@ class EmployeeController{
             echo $this->response->error400();
             die();
         }
-
         //Verificamos el token y si es valido, obtenemos el id de usuario.
         $idOfUser = $this->jwt->verifyTokenAndGetIdUserFromRequest();
         $employee = EmployeeModel::getRoleOfEmployeeById($idOfUser);
+        
         $rolOfEmployee = $employee['employee_role'];
         if(!($rolOfEmployee == 'JEFE')){
             http_response_code(401);
             echo $this->response->error401("Usted no esta autorizado para relizar esta accion");
             die();
         }
-
+       
         $email = $userData['email'];
         $name = $userData['name'];
         $surname = $userData['surname'];
@@ -66,9 +66,10 @@ class EmployeeController{
             echo $this->response->error200("Ya existe un empleado ingresado con el email: " . $employeeExistByEmail['email']);
             die();
         }
-
+        
         $newEmployee = new EmployeeModel($email, $name, $surname, $password, $rol, $ci, $phone, $address);
         $resultOfSave = $newEmployee->save();
+        
         if ($resultOfSave) {
             http_response_code(200);
             echo $this->response->successfully("Empleado dado de alta con exito");
