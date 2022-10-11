@@ -94,7 +94,7 @@ class ProductController {
     //CONSULTAS
     public function getAllProducts(){
         $products = ProductModel::getAllProducts();
-            echo $this->response->successfully("Todos los Productos:", $products);
+            echo $this->response->successfully("Todos los Productos del sistema:", $products);
             die();
         }
     public function getProducts(){
