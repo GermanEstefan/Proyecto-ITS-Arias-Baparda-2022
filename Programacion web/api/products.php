@@ -40,6 +40,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $product->getProductById($idProduct);
         die();
     }
+    if(isset($_GET['categoryName'])){
+        $nameCategory = $_GET['categoryName'];
+        $product->getProductsByNameCategory($nameCategory);
+        die();
+    }
+    if(isset($_GET['sizeName'])){
+        $nameSize = $_GET['sizeName'];
+        $product->getProductsByNamesize($nameSize);
+        die();
+    }
+    if(isset($_GET['designName'])){
+        $nameDesign = $_GET['designName'];
+        $product->getProductsByNameDesign($nameDesign);
+        die();
+    }
     $product->getProducts();
 }else if($_SERVER['REQUEST_METHOD'] === 'PATCH'){
     if(!isset($_GET['barcode']) && !isset($_GET['idProduct'])){
