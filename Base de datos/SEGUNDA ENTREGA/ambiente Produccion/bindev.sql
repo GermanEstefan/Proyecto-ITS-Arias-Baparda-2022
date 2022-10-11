@@ -211,7 +211,7 @@ CREATE TABLE IF NOT EXISTS `bindev`.`product` (
   `state` TINYINT default 1,
   PRIMARY KEY (`barcode`),
   constraint `CH_state_product` CHECK (`state`<=1 and `state`>=0),
-  constraint `UN_product` UNIQUE (`id_product`, `product_category`, `product_design`, `product_size`),
+  constraint `UN_product` UNIQUE (`id_product`, `product_design`, `product_size`),
   CONSTRAINT `FK_category_product`
     FOREIGN KEY (`product_category`)
     REFERENCES `bindev`.`category` (`id_category`)
@@ -436,6 +436,28 @@ END if;
 END if;
 end$$
 DELIMITER ;
+-- -----------------------------------------------------
+-- INSERT BASICOS PARA CONFIGURACION INICIAL DEL SISTEMA
+-- -----------------------------------------------------
+-- -----------------------------------------------------
+-- DEFINIMOS 3 USUARIOS GENERICOS PARA TENER EL MISMO INICIO DE SISTEMA 
+-- ----------------------------------------------------- 
+INSERT INTO `bindev`.`user` (`email`, `name`, `surname`, `address`, `phone`, `password`) VALUES ('master@seguridadcorporal.com', 'master', 'master', 'master', '22334455', 'master');
+INSERT INTO `bindev`.`user` (`email`, `name`, `surname`, `address`, `phone`, `password`) VALUES ('ventas@seguridadcorporal.com', 'vendedor', 'vendedor', 'vendedor', '22334455', 'vendedor');
+INSERT INTO `bindev`.`user` (`email`, `name`, `surname`, `address`, `phone`, `password`) VALUES ('compras@seguridadcorporal.com', 'comprador ', 'comprador', 'comprador', '22334455', 'comprador');
+INSERT INTO `bindev`.`role` (`name_role`, `description`) VALUES ('VENDEDOR', 'EL VENDEDOR');
+INSERT INTO `bindev`.`role` (`name_role`, `description`) VALUES ('COMPRADOR', 'EL COMPRADOR');
+INSERT INTO `bindev`.`role` (`name_role`, `description`) VALUES ('JEFE', 'EL JEFE');
+INSERT INTO `bindev`.`EMPLOYEE` (`ci`, `employee_user`, `employee_role`) VALUES ('123', '5000', 'JEFE');
+INSERT INTO `bindev`.`EMPLOYEE` (`ci`, `employee_user`, `employee_role`) VALUES ('1234', '5001', 'VENDEDOR');
+INSERT INTO `bindev`.`EMPLOYEE` (`ci`, `employee_user`, `employee_role`) VALUES ('12345', '5002', 'COMPRADOR');
+
+-- -----------------------------------------------------
+-- DEFINIMOS LOS ATRIBUTOS GENERICOS PARA PROMOCIONES. SIEMPRE VAN A SER EL TALLE DISEÑO Y CATEGORIA CON VALOR 1
+-- -----------------------------------------------------
+INSERT INTO `bindev`.`category` (`name`, `description`, `picture`) VALUES ('PROMOCIONES', 'CATEGORIA DESIGNADA PARA PROMOS','https://picsum.photos/200/300');
+INSERT INTO `bindev`.`design` (`name`, `description`) VALUES ('PROMOCIONES', 'DISEÑO DESIGNADO PARA PROMOS');
+INSERT INTO `bindev`.`size` (`name`, `description`) VALUES ('PROMOCIONES', 'TALLE DESIGNADO PARA PROMOS');
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
