@@ -25,6 +25,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $product->getAllProducts();
         die();
     }
+    if(isset($_GET['name'])){
+        $name = $_GET['name'];
+        $product->getProductByName($name);
+        die();
+    }
     if(isset($_GET['barcode'])){
         $barcode = $_GET['barcode'];
         $product->getProductByBarcode($barcode);

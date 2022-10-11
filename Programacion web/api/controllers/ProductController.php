@@ -102,6 +102,11 @@ class ProductController {
             echo $this->response->successfully("Productos obtenidos:", $products);
             die();
         }
+    public function getProductByName($name){
+        $products = ProductModel::getProductByName($name);
+            echo $this->response->successfully("Productos obtenidos:", $products);
+            die();
+        }    
     public function getDisableProducts(){
         $products = ProductModel::getAllProductsDisable();
             echo $this->response->successfully("Productos Obtenidos:", $products);
