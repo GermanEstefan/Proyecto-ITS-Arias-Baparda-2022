@@ -99,17 +99,12 @@ class ProductController {
         }
     public function getProducts(){
         $products = ProductModel::getAllProductsActive();
-            echo $this->response->successfully("Productos obtenidos:", $products);
+            echo $this->response->successfully("Productos ACTIVOS:", $products);
             die();
         }
-    public function getProductByName($name){
-        $products = ProductModel::getProductByName($name);
-            echo $this->response->successfully("Productos obtenidos:", $products);
-            die();
-        }    
     public function getDisableProducts(){
         $products = ProductModel::getAllProductsDisable();
-            echo $this->response->successfully("Productos Obtenidos:", $products);
+            echo $this->response->successfully("Productos INACTIVOS:", $products);
             die();
         }
     public function getProductById($idProduct){
@@ -127,6 +122,38 @@ class ProductController {
             die();
         }
         echo $this->response->successfully("Producto obtenido",$product);
+    }
+    public function getProductByName($name){
+        $product = ProductModel::getProductByName($name);
+        if(!$product){
+            echo $this->response->error203("No existen productos con el nombre $name");
+            die();
+        }
+        echo $this->response->successfully("Productos Obtenidos",$product);
+    }   
+    public function getProductsByNameDesign($nameDesign){
+        $product = ProductModel::getProductsByNameDesign($nameDesign);
+        if(!$product){
+            echo $this->response->error203("No hay productos para el diseño $nameDesign");
+            die();
+        }
+        echo $this->response->successfully("Productos Obtenidos",$product);
+    }
+    public function getProductsByNamesize($nameSize){
+        $product = ProductModel::getProductsByNameSize($nameSize);
+        if(!$product){
+            echo $this->response->error203("No hay productos para el talle $nameSize");
+            die();
+        }
+        echo $this->response->successfully("Productos Obtenidos",$product);
+    }
+    public function getProductsByNameCategory($nameCategory){
+        $product = ProductModel::getProductsByNameCategory($nameCategory);
+        if(!$product){
+            echo $this->response->error203("No hay productos para la categoria $nameCategory");
+            die();
+        }
+        echo $this->response->successfully("Productos Obtenidos",$product);
     }
     //MODIFICACIONES
     public function updateProduct($barcode,$productData){
