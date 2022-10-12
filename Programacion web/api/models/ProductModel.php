@@ -132,9 +132,9 @@
             $query = "UPDATE product SET id_product = '$idProduct', name = '$name', product_category = '$prodCategory', product_design = '$prodDesign', product_size = '$prodSize', stock = '$stock', price = '$price', description = '$description' WHERE barcode = '$barcode' ";
             return $conecction->setData($query);
         }
-        public static function updateProductLineAttributes($idProduct, $name,$prodCategory, $stock, $price, $description){
+        public static function updateProductLineAttributes($idProduct, $name,$prodCategory, $price, $description){
             $conecction = new Connection();
-            $query = "UPDATE product SET name = '$name', product_category = $prodCategory, stock = $stock, price = $price, description = '$description' WHERE id_product = $idProduct ";
+            $query = "UPDATE product SET name = '$name', product_category = $prodCategory, price = $price, description = '$description' WHERE id_product = $idProduct ";
             return $conecction->setData($query);
         }            
         public static function disableProduct($barcode){

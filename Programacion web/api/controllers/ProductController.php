@@ -37,7 +37,6 @@ class ProductController
         if (
             !isset($productData['name'])
             ||  !isset($productData['prodCategory'])
-            ||  !isset($productData['stock'])
             ||  !isset($productData['price'])
             ||  !isset($productData['description'])
         ) return false;
@@ -219,7 +218,6 @@ class ProductController
         }
         $name = $productData['name'];
         $prodCategory = $productData['prodCategory'];
-        $stock = $productData['stock'];
         $price = $productData['price'];
         $description = $productData['description'];
 
@@ -235,7 +233,7 @@ class ProductController
             echo $this->response->error203("Esta intentando ingresar una categoria que no existe");
             die();
         }
-        $result = ProductModel::updateProductLineAttributes($idProduct, $name, $prodCategory, $stock, $price, $description);
+        $result = ProductModel::updateProductLineAttributes($idProduct, $name, $prodCategory, $price, $description);
         if (!$result) {
             echo $this->response->error500();
             die();
