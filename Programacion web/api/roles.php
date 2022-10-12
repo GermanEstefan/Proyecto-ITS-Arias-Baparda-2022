@@ -36,12 +36,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
 }else if($_SERVER['REQUEST_METHOD'] === 'DELETE'){
 
-    if(!isset($_GET['idRole'])){
-        echo $response->error203("Error falta Id");    
-        die();
-    }
-    $idRole = $_GET['idRole'];
-    $role->deleteRole($idRole);
+    $nameRole = $_GET['nameRole'];
+    $role->deleteRole($nameRole);
     die();
 }else {
     echo $response->error203("Metodo no permitido");
