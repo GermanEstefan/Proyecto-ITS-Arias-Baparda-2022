@@ -23,6 +23,12 @@ class RoleController {
         //aca tenemos que validar mas cosas como que tenga un largo especifico (se pueden enviar nombre de ctegoria con valor " ")
         return $roleData;
     }
+    private function validateOnlyDescription($roleData){
+        if(!isset($roleData['description']))
+        return false;
+        //aca tenemos que validar mas cosas como que tenga un largo especifico (se pueden enviar nombre de ctegoria con valor " ")
+        return $roleData;
+    }
     //ALTA
     public function saveRole($roleData){
         /*
@@ -69,13 +75,12 @@ class RoleController {
     //ACTUALIZAR
     public function updateRole($nameRole,$roleData){
         $this->jwt->verifyTokenAndGetIdUserFromRequest(); 
-        $bodyIsValid = $this->validateBodyOfRole($roleData);
+        $bodyIsValid = $this->validateOnlyDescription($roleData);
         if(!$bodyIsValid) {
         echo $this->response->error400('Error en los datos enviados');
         die();
         }
 
-        $name = $roleData['name'];
         $descriptionRole = $roleData['description'];
                 
         $existRole = RoleModel::getRoleByName($nameRole);
@@ -84,12 +89,12 @@ class RoleController {
             die();
         }
         
-        $result = RoleModel::updateDescriptionRole($name,$descriptionRole);
+        $result = RoleModel::updateDescriptionRole($nameRole,$descriptionRole);
         if(!$result){
             echo $this->response->error500();
             die();
         }
-        echo $this->response->successfully("Descripcion delRol actualizado con exito");
+        echo $this->response->successfully("Descripcion del Rol actualizada con exito");
     }
     //ELIMINAR
     public function deleteRole($nameRole){
