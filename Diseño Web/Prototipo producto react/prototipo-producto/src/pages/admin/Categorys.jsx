@@ -26,7 +26,8 @@ const Categorys = () => {
         fetchApi('categorys.php', 'GET')
             .then(res => {
                 console.log(res)
-                setCategorys(res)
+                if(res.result.data.length === 0) return;
+                setCategorys(res.result.data)
             })
             .catch(error => {
                 console.error(error);
@@ -39,6 +40,7 @@ const Categorys = () => {
         e.preventDefault();
         setLoadingFlags({ ...loadingFlags, createCategory: true });
         try {
+            console.log(values)
             const resp = await fetchApi('categorys.php', 'POST', values);
             console.log(resp)
             if (resp.status === 'error') {
@@ -56,7 +58,17 @@ const Categorys = () => {
         } finally {
             setLoadingFlags({ ...loadingFlags, createCategory: false });
         }
+    }
 
+    const handleDeleteCategory = async (idCategory) => {
+        const confirm = window.confirm('¿Estas seguro que desas borrar la categoria?')
+        if(!confirm) return;
+        const resp = await fetchApi(`categorys.php?idCategory=${idCategory} `, 'DELETE');
+        if(resp.status === 'error'){
+            return alert(resp.result.error_msg)
+        }
+        const categorysFiltered = categorys.filter( category => category.id_category !== idCategory);
+        return setCategorys(categorysFiltered);
     }
 
 
@@ -122,7 +134,7 @@ const Categorys = () => {
                                                             <td>{category.id_category}</td>
                                                             <td>{category.name}</td>
                                                             <td>{category.description}</td>
-                                                            <td className="controls-table"><FontAwesomeIcon icon={faTrash} /></td>
+                                                            <td className="controls-table" onClick={() => handleDeleteCategory(category.id_category)} ><FontAwesomeIcon icon={faTrash} /></td>
                                                             <td className="controls-table" onClick={() => navigate(`/admin/generals/categorys/edit/${category.id_category}`)}><FontAwesomeIcon icon={faPencil} /></td>
                                                         </tr>
                                                     ))

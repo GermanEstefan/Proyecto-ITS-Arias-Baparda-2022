@@ -26,7 +26,7 @@ const EditSize = () => {
     useEffect(() => {
         fetchApi(`sizes.php?idSize=${idOfSize}`, 'GET')
             .then(res => {
-                console.log(res.result.data)
+                console.log(res)
                 setSizeValues({
                     name: res.result.data.name,
                     description: res.result.data.description
@@ -39,7 +39,7 @@ const EditSize = () => {
         e.preventDefault();
         setLoading(true);
         try {
-            const resp = await fetchApi(`sizes.php?idSize=${idOfSize}`, 'PUT', sizeValues);
+            const resp = await fetchApi(`sizes.php?idSize=${idOfSize}`, 'PATCH', sizeValues);
             console.log(resp);
             if (resp.status === 'error') {
                 setError({ showMessage: true, message: resp.result.error_msg, error: true });

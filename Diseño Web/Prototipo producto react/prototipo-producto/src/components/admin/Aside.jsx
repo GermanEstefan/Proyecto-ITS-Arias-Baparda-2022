@@ -75,7 +75,7 @@ const Aside = () => {
                             <li 
                                 onClick={() => navigate('/admin/generals/designs') }
                                 className={ (action === 'designs' && page === 'generals') ? 'selected' : '' }
-                            >Colores</li>
+                            >Diseños</li>
                         </ul>
                     }
                 </li>

@@ -26,7 +26,7 @@ const Design = () => {
         fetchApi('designs.php', 'GET')
             .then(res => {
                 console.log(res)
-                setDesigns(res)
+                setDesigns(res.result.data)
             })
             .catch(error => {
                 console.error(error);
@@ -35,7 +35,7 @@ const Design = () => {
             .finally(() => setLoadingFlags({ ...loadingFlags, fetchingDesigns: false }))
     }, [])
 
-    const handleCreateCategory = async (e) => {
+    const handleCreateDesign = async (e) => {
         e.preventDefault();
         setLoadingFlags({ ...loadingFlags, createDesign: true });
         try {
@@ -59,8 +59,16 @@ const Design = () => {
 
     }
 
-    const handleDeleteDesign = () => {
-        
+    const handleDeleteDesign = async (idDesign) => {
+        const confirm = window.confirm('¿Estas seguro que desas borrar el diseño?')
+        if(!confirm) return;
+        const resp = await fetchApi(`designs.php?idDesign=${idDesign} `, 'DELETE');
+        console.log(resp)
+        if(resp.status === 'error'){
+            return alert(resp.result.error_msg)
+        }
+        const designsFiltered = designs.filter( design => design.id_design !== idDesign);
+        return setDesigns(designsFiltered);
     }
 
 
@@ -74,7 +82,7 @@ const Design = () => {
                             <h1>Diseños</h1>
                             <div>
                                 <h2>Crear diseño</h2>
-                                <form onSubmit={handleCreateCategory} autoComplete="off">
+                                <form onSubmit={handleCreateDesign} autoComplete="off">
 
                                     <label htmlFor="">Nombre</label>
 
@@ -118,7 +126,7 @@ const Design = () => {
                                                     <th>Id</th>
                                                     <th>Nombre</th>
                                                     <th>Descripcion</th>
-                                                    <th>Controles</th>
+                                                    <th colSpan={2}>Controles</th>
                                                 </tr>
                                                 {
                                                     designs.map( design => (

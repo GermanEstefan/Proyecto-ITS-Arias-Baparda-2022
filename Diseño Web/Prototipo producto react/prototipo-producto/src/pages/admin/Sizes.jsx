@@ -25,8 +25,7 @@ const Sizes = () => {
         fetchApi('sizes.php', 'GET')
             .then(sizes => {
                 console.log(sizes);
-                if (!sizes) return;
-                setSizes(sizes);
+                setSizes(sizes.result.data);
             })
             .catch(err => console.error(err))
             .finally(() => setLoadingFlags({ ...loadingFlags, fetchingSizes: false }))
@@ -42,9 +41,9 @@ const Sizes = () => {
                 setError({ showMessage: true, message: resp.result.error_msg, error: true });
                 return setTimeout(() => setError(initStateLoading), 3000)
             }
-            const lastIdOfSize = parseInt(sizes[sizes.length - 1 ].id_size) + 1
+            const lastIdOfSize = parseInt(sizes[sizes.length - 1].id_size) + 1
             setError({ showMessage: true, message: resp.result.msg, error: false });
-            setSizes([ ...sizes, {name: values.name, description: values.description, id_size: lastIdOfSize }])
+            setSizes([...sizes, { name: values.name, description: values.description, id_size: lastIdOfSize }])
             resetForm();
             return setTimeout(() => setError(initStateLoading), 3000)
         } catch (error) {
@@ -58,19 +57,20 @@ const Sizes = () => {
 
     const handleDeleteSize = async (idSize) => {
         setLoadingFlags({ ...loadingFlags, deleteSize: true });
-        const confirm = window.confirm('¿Estas seguro que desas borrar la categoria?')
-        if(!confirm) return;
+        const confirm = window.confirm('¿Estas seguro que desas borrar el talle?')
+        if (!confirm) return;
         try {
             const resp = await fetchApi(`sizes.php?idSize=${idSize}`, 'DELETE');
             console.log(resp);
-            if(resp.status === 'successfully'){
-                const sizeFiltered = sizes.filter( size => size.id_size !== idSize);
-                setSizes(sizeFiltered);
+            if (resp.status === 'error') {
+                return alert(resp.result.error_msg);
             }
+            const sizeFiltered = sizes.filter(size => size.id_size !== idSize);
+            setSizes(sizeFiltered);
         } catch (error) {
             console.error(error);
         } finally {
-            setLoadingFlags({...loadingFlags, deleteSize: false});
+            setLoadingFlags({ ...loadingFlags, deleteSize: false });
         }
     }
 
@@ -118,7 +118,7 @@ const Sizes = () => {
                             <div>
                                 <h2>Lista de talles</h2>
                                 {
-                                    !sizes.length === 0 
+                                    !sizes.length === 0
                                         ? <span>No hay talles creadas</span>
                                         : <table className='table-template'>
                                             <tbody>
@@ -129,12 +129,12 @@ const Sizes = () => {
                                                     <th colSpan={2}>Controles</th>
                                                 </tr>
                                                 {
-                                                    sizes.map( size => (
+                                                    sizes.map(size => (
                                                         <tr key={size.id_size}>
                                                             <td>{size.id_size}</td>
                                                             <td>{size.name}</td>
                                                             <td>{size.description}</td>
-                                                            <td className="controls-table"  onClick={() => navigate(`/admin/generals/sizes/edit/${size.id_size}`)}><FontAwesomeIcon icon={faPencil} /></td>
+                                                            <td className="controls-table" onClick={() => navigate(`/admin/generals/sizes/edit/${size.id_size}`)}><FontAwesomeIcon icon={faPencil} /></td>
                                                             <td className="controls-table" onClick={() => handleDeleteSize(size.id_size)} ><FontAwesomeIcon icon={faTrash} /></td>
                                                         </tr>
                                                     ))
