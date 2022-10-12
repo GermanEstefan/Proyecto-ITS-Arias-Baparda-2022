@@ -23,7 +23,7 @@
             return $conecction->getData($query)->fetch_assoc();
         }
 
-        public static function getAllStatuss(){
+        public static function getAllStatus(){
             $conecction = new Connection();
             $query = "SELECT * from status ";
             return $conecction->getData($query)->fetch_all(MYSQLI_ASSOC);
