@@ -23,6 +23,11 @@
             $query = "SELECT e.employee_user,e.employee_role,e.state,u.email, u.name,u.surname,u.address,u.phone from employee e inner join user u on e.employee_user = u.id_user and e.employee_user = '$id'";
             return $conecction->getData($query)->fetch_assoc();
         }
+        public static function getEmployeesByRole($nameRole){
+            $conecction = new Connection();
+            $query = "SELECT e.employee_user as ID_EMPLEADO,e.employee_role AS ROL_ASIGNADO ,e.state AS ESTADO ,u.email, u.name AS NOMBRE,u.surname AS APELLIDO,u.address AS DIRECCION,u.phone AS TELEFONO from employee e inner join user u on e.employee_user = u.id_user and e.employee_role = '$nameRole'";
+            return $conecction->getData($query)->fetch_assoc();
+        }
 
         public static function getRoleOfEmployeeById($id){
             $conecction = new Connection();
