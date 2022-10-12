@@ -108,9 +108,7 @@ CREATE TABLE IF NOT EXISTS `bindev`.`delivery_time` (
   `id_delivery` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(150) NOT NULL,
   `description` VARCHAR(500) NOT NULL,
-  `state` TINYINT default 1,
-  PRIMARY KEY (`id_delivery`),
-  constraint `CH_state_delivery` CHECK (`state`<=1 and `state`>=0))
+  PRIMARY KEY (`id_delivery`))
 ENGINE = InnoDB;
 
 
