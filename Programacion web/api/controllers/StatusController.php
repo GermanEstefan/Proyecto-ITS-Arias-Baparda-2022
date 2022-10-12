@@ -15,18 +15,21 @@ class StatusController {
         $this->jwt = new Token();
     }
 
-    private function validateBodyOfDesign($statusData){
+    private function validateBodyOfStatus($statusData){
         if( !isset($statusData['name']) ||  !isset($statusData['description']) ) return false;
         return $statusData;
     }
-    
-    public function saveDesign($statusData){
+    private function validateDescripionOfUpdate($statusData){
+        if(!isset($statusData['description']) ) return false;
+        return $statusData;
+    }
+    public function saveStatus($statusData){
         /*
             En este metodo no precisamos el ID del usuario, lo unico que validamos es que tenga un token y sea valido. 
             Si no tiene token, no pasa de la funcion para abajo por que el metodo mismo le niega el acceso.
         */
         $this->jwt->verifyTokenAndGetIdUserFromRequest(); 
-        $bodyIsValid = $this->validateBodyOfDesign($statusData);
+        $bodyIsValid = $this->validateBodyOfStatus($statusData);
         if(!$bodyIsValid) echo $this->response->error400();
 
         $name = $statusData['name'];
@@ -45,13 +48,13 @@ class StatusController {
         }
         echo $this->response->successfully("Nuevo estado dado de alta con exito");
     }
-
-    public function getStatus(){
-        $designToJson = json_encode(StatusModel::getAllStatus()); 
-        echo $designToJson;
+    //consultas
+    public function getAllStatus(){
+        $statusToJson = json_encode(StatusModel::getAllStatus()); 
+        echo $statusToJson;
     }
 
-    public function getState($name){
+    public function getStatusByName($name){
         $state = StatusModel::getStatusByName($name);
         if(!$state){
             echo $this->response->error200("El estado con nombre $name no existe");
@@ -59,31 +62,33 @@ class StatusController {
         }
         echo json_encode($state);  
     }
+    public function getStatusById($idState){
+        $state = StatusModel::getStatusById($idState);
+        if(!$state){
+            echo $this->response->error200("No existe estado para id ingresado");
+            die();
+        }
+        echo json_encode($state);  
+    }
 
-    public function updateState($statusId, $statusData){
+    public function updateStatus($statusId, $statusData){
 
-        $bodyIsValid = $this->validateBodyOfDesign($statusData);
+        $bodyIsValid = $this->validateDescripionOfUpdate($statusData);
         if(!$bodyIsValid) echo $this->response->error400();
 
-        $nameStatus = $statusData['name'];
         $descriptionStatus = $statusData['description'];
 
         $existStatus = StatusModel::getStatusById($statusId);
         if (!$existStatus){
-            echo $this->response->error200('El id del diseño enviado no existe');
+            echo $this->response->error200('El id del estado no existe');
             die();
         }
 
-        $existName = StatusModel::getStatusByName($nameStatus);
-        if ($existName){
-            echo $this->response->error200('El nombre del estado ya existe');
-            die();
-        }
-        $result = StatusModel::updateStatus($statusId, $nameStatus, $descriptionStatus);
+        $result = StatusModel::updateDescriptionStatus($statusId, $descriptionStatus);
         if(!$result){
             echo $this->response->error500();
             die();
         }
-        echo $this->response->successfully("Diseño actualizado con exito");
+        echo $this->response->successfully("Descripcion del estado actualizado con exito");
     }
 }

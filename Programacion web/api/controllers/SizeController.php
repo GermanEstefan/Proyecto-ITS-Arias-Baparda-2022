@@ -116,8 +116,8 @@ class SizeController {
             die();
         }
         //Valido que el talle no se este usando por un producto
-        $prodUsaSize = ProductModel::getProductsByIdSize($idSize);
-        if ($prodUsaSize){
+        $prodUseSize = ProductModel::getProductsByIdSize($idSize);
+        if ($prodUseSize){
             echo $this->response->error203("Error El talle $idSize esta siendo usado en un producto");
             die();
         }

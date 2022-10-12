@@ -13,22 +13,27 @@ $statusData = json_decode($bodyOfRequest, 1); //Transforma el JSON en un array a
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     //Crear estado
-    $status->saveDesign($statusData);
+    $status->saveStatus($statusData);
 
 }else if($_SERVER['REQUEST_METHOD'] === 'GET'){
 
     if(isset($_GET['nameStatus'])){
         $nameStatus = $_GET['nameStatus'];
-        $status->getState($nameStatus);
+        $status->getStatusByName($nameStatus);
         die();
     }
-    $status->getStatus();
+    if(isset($_GET['idStatus'])){
+        $idStatus = $_GET['idStatus'];
+        $status->getStatusById($idStatus);
+        die();
+    }
+    $status->getAllStatus();
 
-}else if($_SERVER['REQUEST_METHOD'] === 'PUT'){
+}else if($_SERVER['REQUEST_METHOD'] === 'PATCH'){
     //Editar categoria
     if(isset($_GET['idStatus'])){
         $idStatus = $_GET['idStatus'];
-        $status->updateState($idStatus, $statusData);    
+        $status->updateStatus($idStatus, $statusData);    
         die();
     }
     
