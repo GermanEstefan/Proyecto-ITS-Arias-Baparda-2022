@@ -12,32 +12,27 @@ $statusData = json_decode($bodyOfRequest, 1); //Transforma el JSON en un array a
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-    //Crear talle
-    $status->saveStatus($statusData);
+    //Crear estado
+    $status->saveDesign($statusData);
 
 }else if($_SERVER['REQUEST_METHOD'] === 'GET'){
 
     if(isset($_GET['nameStatus'])){
         $nameStatus = $_GET['nameStatus'];
-        $status->getStatusName($nameStatus);
+        $status->getState($nameStatus);
         die();
     }
+    $status->getStatus();
+
+}else if($_SERVER['REQUEST_METHOD'] === 'PUT'){
+    //Editar categoria
     if(isset($_GET['idStatus'])){
         $idStatus = $_GET['idStatus'];
-        $status->getStatusId($idStatus);
+        $status->updateState($idStatus, $statusData);    
         die();
     }
-    $status->getAllStatus();
-
-}else if($_SERVER['REQUEST_METHOD'] === 'PATCH'){
-    //Editar talle
-    if(!isset($_GET['idStatus'])){
-        echo $response->error203("Error falta Id");    
-        die();
-    }    
-    $idStatus = $_GET['idStatus'];
-    $status->updateStatus($idStatus, $statusData);
-    die();
     
+}else {
+    echo $response->error200("Metodo no permitido");
 }
 ?>

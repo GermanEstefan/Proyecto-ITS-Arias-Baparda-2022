@@ -107,19 +107,6 @@
             where product_category = '$idCategory'";
             return $conecction->getData($query)->fetch_all(MYSQLI_ASSOC);
         }
-        public static function getProductsByNameCategory($nameCategory){
-            $conecction = new Connection();
-            $query = "SELECT  p.barcode ,p.id_product,p.name, d.name as diseño,s.name as talle,p.price,p.stock,c.name as categoria,p.description,p.state from product p
-            inner join category c
-            inner join design d
-            inner join size s
-            on p.product_category = c.id_category 
-            and p.product_design = d.id_design 
-            and p.product_size = s.id_size
-            and p.state = 1
-            and c.name = '$nameCategory'";
-            return $conecction->getData($query)->fetch_all(MYSQLI_ASSOC);
-        }
         //Sirve UNICAMENTE para que al momento de eliminar un talle validemos si esta en uso
         public static function getProductsByIdSize($idSize){
             $conecction = new Connection();
@@ -127,37 +114,11 @@
             where product_size = '$idSize'";
             return $conecction->getData($query)->fetch_all(MYSQLI_ASSOC);
         }
-        public static function getProductsByNameSize($nameSize){
-            $conecction = new Connection();
-            $query = "SELECT  p.barcode ,p.id_product,p.name, d.name as diseño,s.name as talle,p.price,p.stock,c.name as categoria,p.description,p.state from product p
-            inner join category c
-            inner join design d
-            inner join size s
-            on p.product_category = c.id_category 
-            and p.product_design = d.id_design 
-            and p.product_size = s.id_size
-            and p.state = 1
-            and s.name = '$nameSize'";
-            return $conecction->getData($query)->fetch_all(MYSQLI_ASSOC);
-        }
         //Sirve UNICAMENTE para que al momento de eliminar un diseño validemos si esta en uso
         public static function getProductsByIdDesign($idDesign){
             $conecction = new Connection();
             $query = "SELECT * from product
             where product_design = '$idDesign'";
-            return $conecction->getData($query)->fetch_all(MYSQLI_ASSOC);
-        }
-        public static function getProductsByNameDesign($nameDesign){
-            $conecction = new Connection();
-            $query = "SELECT  p.barcode ,p.id_product,p.name, d.name as diseño,s.name as talle,p.price,p.stock,c.name as categoria,p.description,p.state from product p
-            inner join category c
-            inner join design d
-            inner join size s
-            on p.product_category = c.id_category 
-            and p.product_design = d.id_design 
-            and p.product_size = s.id_size
-            and p.state = 1
-            and d.name = '$nameDesign'";
             return $conecction->getData($query)->fetch_all(MYSQLI_ASSOC);
         }
         //MODIFICACIONES
@@ -196,15 +157,23 @@
             $query = "UPDATE product SET state = 1 WHERE id_product = $idProduct ";
             return $conecction->setData($query);
         }
-        //ALTA        
-        public function save(){
-            $productInsert = "INSERT INTO product (id_product, name, product_category, product_design, product_size, stock, price, description) VALUES ('$this->idProduct','$this->name','$this->prodCategory','$this->prodDesign','$this->prodSize','$this->stock','$this->price', '$this->description')";
-            $result = parent::setData($productInsert);
-            if(!$result){
+       
+        public static function saveByTransacction($queries){
+            $conecction = new Connection();
+            $instanceMySql = $conecction->getInstance();
+            $instanceMySql->begin_transaction(MYSQLI_TRANS_START_READ_WRITE);
+            $result_transaccion = true;
+            foreach($queries as $key=>$query){
+                $resultInsert = $instanceMySql->query($query[$key]);
+                if (!$resultInsert) $result_transaccion = false;
+            }
+            if($result_transaccion){
+                $instanceMySql->commit();
+                return true;
+            }else{
+                $instanceMySql->rollback();
                 return false;
             }
-            return true;
-            
         }
     }
         
