@@ -195,7 +195,6 @@ class ProductController
             array_push($queries, $query);
             $index++;
         }
-        
         $result = ProductModel::ProductsOfPromoTransacction($queries);
         if (!$result) {
             echo $this->response->error500();
