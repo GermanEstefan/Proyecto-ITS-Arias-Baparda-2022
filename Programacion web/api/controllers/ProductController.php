@@ -42,6 +42,19 @@ class ProductController
         ) return false;
         return $productData;
     }
+    private function validateBodyOfPromo($productData)
+    {
+        if (
+            !isset($productData['idProduct'])
+            ||  !isset($productData['name'])
+            ||  !isset($productData['price'])
+            ||  !isset($productData['stock'])
+            ||  !isset($productData['description'])
+            ||  !isset($productData['contains'])
+        ) return false;
+
+        return $productData;
+    }
     //ALTA
     public function saveProduct($productData)
     {
@@ -110,6 +123,86 @@ class ProductController
         }
         echo $this->response->successfully("Producto creado con exito");
     }
+    public function savePromo($promoData)
+    {   
+        /*
+            En este metodo no precisamos el ID del usuario, lo unico que validamos es que tenga un token y sea valido. 
+            Si no tiene token, no pasa de la funcion para abajo por que el metodo mismo le niega el acceso.
+        */
+        $this->jwt->verifyTokenAndGetIdUserFromRequest();
+        $bodyIsValid = $this->validateBodyOfPromo($promoData);
+        if (!$bodyIsValid) {
+            echo $this->response->error400('Error en los datos enviados');
+            die();
+        }
+
+        $idProduct = $promoData['idProduct'];
+        $name = $promoData['name'];
+        $stock = $promoData['stock'];
+        $price = $promoData['price'];
+        $description = $promoData['description'];
+        $contains = $promoData['contains'];
+        $queries = array();
+        $index = 0;
+
+        //INSERCION DEL PRODUCTO PROMO Y OBTENCION DE SU BARCODE PARA isProduct
+        //Valido que no exista el producto que se quiere agregar como promo
+        $productPromoExist = ProductModel::getProductById($idProduct);
+        if ($productPromoExist) {
+            echo $this->response->error203("El promo $idProduct ya existe!");
+            die();
+        }
+
+            $createPromo = ProductModel::createPromo($idProduct,$name,$stock,$price,$description);
+            if(!$createPromo){
+                echo $this->response->error500();
+                die();
+            }
+            $isProduct = ProductModel::getBarcodeByIdProduct($idProduct);
+            if(!$isProduct){
+                echo $this->response->error203("no exite el producto $idProduct");
+                die();
+            }
+//agrego productos a promo
+        foreach ($contains as $contain) {
+            $haveProduct = $contain['haveProduct'];
+            $quantity = $contain['quantity'];
+
+            //Valido que exista el producto que se agrega a la promo
+            $productExist = ProductModel::getProductByBarcode($haveProduct);
+            if (!$productExist) {
+                echo $this->response->error203("El producto $haveProduct no existe");
+                die();
+            }
+            //Valido que IsProduct no sea igual a haveProduct
+            if ($isProduct == $haveProduct) {
+                echo $this->response->error203("El Producto $isProduct y $haveProduct son iguales");
+                die();
+            }
+            //Valido el estado del producto que se agrega a la promo
+            $state = ProductModel::getStateOfProduct($haveProduct);
+            if ($state == 0) {
+                echo $this->response->error203("El producto $haveProduct esta INACTIVO");
+                die();
+            }            
+            //Valido que cantidad a agregar no sea mayor a la cantidad disponible del producto
+            $stockExist = ProductModel::getStockProductByBarcode($haveProduct);
+            if ($quantity>$stockExist) {
+                echo $this->response->error203("No dispone de $quantity unidades para el producto $haveProduct");
+                die();
+            }//me marca que tengo problema aca pero no veo que este haciendo las validaciones de arriba por que no me da mensajes de error 
+            $query = array($index => "INSERT INTO promo (is_product, have_product, quantity) VALUES ($isProduct,$haveProduct, $quantity)");
+            array_push($queries, $query);
+            $index++;
+        }
+        
+        $result = ProductModel::ProductsOfPromoTransacction($queries);
+        if (!$result) {
+            echo $this->response->error500();
+            die();
+        }
+        echo $this->response->successfully("Promo creado con exito");
+    }
     //CONSULTAS
     //TODOS LOS PRODUCTOS INGRESADOS EN EL SISTEMA
     public function getAllProducts()
@@ -177,6 +270,25 @@ class ProductController
         }
         echo $this->response->successfully("Producto obtenido", $product);
     }
+    public function getStockByBarcode($barcode)
+    {
+        $quantity = ProductModel::getStockProductByBarcode($barcode);
+        if ($quantity<0) {
+            echo $this->response->error203("no dispone de disponible para $barcode");
+            die();
+        }
+        echo $this->response->successfully("Stock", $quantity);
+    }
+    public function getStateByBarcode($barcode)
+    {
+        $quantity = ProductModel::getStateOfProduct($barcode);
+        if ($quantity==0) {
+            echo $this->response->error203("El producto se encuentra INACTIVO");
+            die();
+        }
+        echo $this->response->successfully("El producto se encuentra ACTIVO");
+    }
+    
     //MODIFICACIONES
     public function updateProduct($barcode, $productData)
     {

@@ -11,10 +11,15 @@ $bodyOfRequest = file_get_contents('php://input'); //Obtiene el body de la reque
 $productData = json_decode($bodyOfRequest, 1); //Transforma el JSON en un array asosciativo.
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-
-    //Crear talle
-    $product->saveProduct($productData);
-
+    
+    if(isset($_GET['promo'])){
+        $product->savePromo($productData);
+        die();
+    }
+    if(isset($_GET['product'])){
+        $product->saveProduct($productData);
+        die();
+    }     
 }else if($_SERVER['REQUEST_METHOD'] === 'GET'){
     
     if(isset($_GET['disable'])){
@@ -41,7 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         die();
     }
     if(isset($_GET['sizeName'])){
-        $nameSize = $_GET['sizeName'];
+        $Size = $_GET['sizeName'];
         $product->getProductByNameSize($nameSize);
         die();
     }

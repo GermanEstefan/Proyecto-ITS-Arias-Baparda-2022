@@ -28,6 +28,18 @@
             $query = "SELECT * from product WHERE id_product = $idProduct and  product_design = $prodDesign and product_size =$prodSize";
             return $conecction->getData($query)->fetch_assoc();
         }
+        //Solo se usa para validar cantidad de unidades disponibles para agregar un producto a una promo
+        public static function getStockProductByBarcode($barcode){
+            $conecction = new Connection();
+            $query = "SELECT stock from product WHERE barcode = $barcode";
+            return $conecction->getData($query)->fetch_assoc();
+        }
+        //Solo se usa para obtener el barcode para un idProd PROMO. No sirve para Prod por que Prod tiene MODELOS
+        public static function getBarcodeByIdProduct($idProduct){
+            $conecction = new Connection();
+            $query = "SELECT barcode from product WHERE id_product = $idProduct";
+            return $conecction->getData($query);
+        }
         //CONSULTAS 
         public static function getProductByBarcode($barcode){
             $conecction = new Connection();
@@ -75,6 +87,11 @@
             and p.product_design = d.id_design 
             and p.product_size = s.id_size";
             return $conecction->getData($query)->fetch_all(MYSQLI_ASSOC);
+        }
+        public static function getStateOfProduct($barcode){
+            $conecction = new Connection();
+            $query = "SELECT state from product where barcode = $barcode";
+            return $conecction->getData($query)->fetch_assoc();
         }
         public static function getAllProductsActive(){
             $conecction = new Connection();
@@ -196,6 +213,15 @@
             $query = "UPDATE product SET state = 1 WHERE id_product = $idProduct ";
             return $conecction->setData($query);
         }
+        public static function createPromo($idProduct,$name, $stock,$price, $description){
+            $conecction = new Connection();
+            $createPromo = "INSERT INTO product (id_product, name, product_category, product_design, product_size, stock, price, description) VALUES ('$idProduct','$name',1,1,1,'$stock','$price', '$description')";
+            return $conecction->setData($createPromo);
+            if(!$createPromo){
+                return false;
+            }
+            return true;
+        }
         public static function saveByTransacction($queries){
         $conecction = new Connection();
         $instanceMySql = $conecction->getInstance();
@@ -213,6 +239,23 @@
                 return false;
             }
         }
+        public static function ProductsOfPromoTransacction($queries){
+            $conecction = new Connection();
+            $instanceMySql = $conecction->getInstance();
+            $instanceMySql->begin_transaction(MYSQLI_TRANS_START_READ_WRITE);
+            $result_transaccion = true;
+            foreach($queries as $key=>$query){
+            $resultInsert = $instanceMySql->query($query[$key]);
+                if (!$resultInsert) $result_transaccion = false;
+                }
+                if($result_transaccion){
+                    $instanceMySql->commit();
+                    return true;
+                }else{
+                    $instanceMySql->rollback();
+                    return false;
+                }
+            }
     }
         
 ?>
