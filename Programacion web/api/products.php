@@ -27,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
     if(isset($_GET['name'])){
         $name = $_GET['name'];
-        $product->getProductByName($name);
+        $product->getProductsByName($name);
         die();
     }
     if(isset($_GET['barcode'])){
@@ -38,6 +38,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if(isset($_GET['idProduct'])){
         $idProduct = $_GET['idProduct'];
         $product->getProductById($idProduct);
+        die();
+    }
+    if(isset($_GET['sizeName'])){
+        $nameSize = $_GET['sizeName'];
+        $product->getProductByNameSize($nameSize);
+        die();
+    }
+    if(isset($_GET['designName'])){
+        $nameDesign = $_GET['designName'];
+        $product->getProductByNameDesign($nameDesign);
+        die();
+    }
+    if(isset($_GET['categoryName'])){
+        $nameCategory = $_GET['categoryName'];
+        $product->getProductsByNameCategoy($nameCategory);
         die();
     }
     $product->getProducts();

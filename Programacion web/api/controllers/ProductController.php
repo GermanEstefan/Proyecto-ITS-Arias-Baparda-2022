@@ -111,28 +111,52 @@ class ProductController
         echo $this->response->successfully("Producto creado con exito");
     }
     //CONSULTAS
+    //TODOS LOS PRODUCTOS INGRESADOS EN EL SISTEMA
     public function getAllProducts()
     {
         $products = ProductModel::getAllProducts();
         echo $this->response->successfully("Todos los Productos del sistema:", $products);
         die();
     }
+    //PRODUCTOS ACTIVOS
     public function getProducts()
     {
         $products = ProductModel::getAllProductsActive();
         echo $this->response->successfully("Productos obtenidos:", $products);
         die();
     }
-    public function getProductByName($name)
-    {
-        $products = ProductModel::getProductByName($name);
-        echo $this->response->successfully("Productos obtenidos:", $products);
-        die();
-    }
+    //PRODUCTOS INACTIVOS
     public function getDisableProducts()
     {
         $products = ProductModel::getAllProductsDisable();
         echo $this->response->successfully("Productos Obtenidos:", $products);
+        die();
+    }
+    //PRODUCTOS PARA LA CATEGORIA DE NOMBRE:
+    public function getProductsByNameCategoy($nameCategory)
+    {  
+        $products = ProductModel::getProductsByNameCategory($nameCategory);
+        echo $this->response->successfully("Productos obtenidos:", $products);
+        die();
+    }
+    //PRODUCTOS PARA EL TALLE CON NOMBRE:
+    public function getProductByNameSize($nameSize)
+    {
+        $products = ProductModel::getProductByName($nameSize);
+        echo $this->response->successfully("Productos obtenidos:", $products);
+        die();
+    }
+    //PRODUCTOS PARA EL DISEÑO CON NOMBRE:
+    public function getProductByNameDesign($nameDesign)
+    {
+        $products = ProductModel::getProductsByNameDesign($nameDesign);
+        echo $this->response->successfully("Productos obtenidos:", $products);
+        die();
+    }
+    public function getProductsByName($name)
+    {
+        $products = ProductModel::getProductByName($name);
+        echo $this->response->successfully("Productos obtenidos:", $products);
         die();
     }
     public function getProductById($idProduct)
@@ -233,6 +257,7 @@ class ProductController
             echo $this->response->error203("Esta intentando ingresar una categoria que no existe");
             die();
         }
+        
         $result = ProductModel::updateProductLineAttributes($idProduct, $name, $prodCategory, $price, $description);
         if (!$result) {
             echo $this->response->error500();
