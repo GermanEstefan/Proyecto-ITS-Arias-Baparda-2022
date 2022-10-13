@@ -4,14 +4,15 @@ import Guantes from "../../assets/img/guantes.jpg";
 import Card from "./Card";
 
 const CategoriesList = () => {
-  const [categories, setcategories] = useState([]);
+  const [categories, setCategories] = useState([]);
 
   useEffect(() => {
     getCategories();  
   }, []);
 
   const getCategories = async () => {
-    setcategories(await fetchApi("categorys.php", "GET"));
+    const resp = await fetchApi("categorys.php", "GET")
+    setCategories(resp.result.data);
   };
 
   return (
