@@ -17,7 +17,7 @@ const ProductCard = ({ img, product, description, id }) => {
       isVisible={true}
     >
       {isMobile ? (
-        <Card img={img} title={product} />
+        <Card img={img} title={product} id={id}  />
       ) : (
         <div className="product-card">
           <img src={img} width="200px" alt="" />

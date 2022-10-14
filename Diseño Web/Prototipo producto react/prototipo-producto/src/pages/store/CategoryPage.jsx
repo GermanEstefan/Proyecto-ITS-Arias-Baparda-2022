@@ -4,150 +4,150 @@ import Guantes from "../../assets/img/guantes.jpg";
 import ContainerBase from "../../components/store/ContainerBase";
 import PageTitle from "../../components/store/PageTitle";
 import Pagination from "../../components/store/Pagination";
+import { fetchApi } from "../../API/api";
 import ProductCard from "../../components/store/ProductCard";
 
 const CategoryPage = () => {
-
   const { category } = useParams();
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(3);
+  const [productList, setProductList] = useState([]);
 
   useEffect(() => {
     window.scroll(0, 0);
+    getProductsByCategory();
   }, []);
 
+  const getProductsByCategory = async () => {
+    const resp = await fetchApi(`products.php?categoryName=${category}`, "GET");
+    console.log(resp);
+    setProductList(resp.result.data);
+  };
 
-  /*
-    Esta pantalla va a tener un endpoint que va a traer
-    todos los item en base al nombre de la categoria.
-    El valor "category" obtenido por parametros solo es para hacer
-    la request. 
-  */
-
-  const productsList = [
-    {
-      id: 1,
-      name: "tuki",
-      description:
-        "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quidem consequuntur animi aliquid nulla rem nostrum nesciunt voluptas ea quos quo cum, ratione non voluptatibus! Iure recusandae officiis nostrum quasi dolor.",
-    },
-    {
-      name: "flama",
-      description:
-        "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quidem consequuntur animi aliquid nulla rem nostrum nesciunt voluptas ea quos quo cum, ratione non voluptatibus! Iure recusandae officiis nostrum quasi dolor.",
-    },
-    {
-      name: "joya",
-      description:
-        "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quidem consequuntur animi aliquid nulla rem nostrum nesciunt voluptas ea quos quo cum, ratione non voluptatibus! Iure recusandae officiis nostrum quasi dolor.",
-    },
-    {
-      name: "fiera",
-      description:
-        "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quidem consequuntur animi aliquid nulla rem nostrum nesciunt voluptas ea quos quo cum, ratione non voluptatibus! Iure recusandae officiis nostrum quasi dolor.",
-    },
-    {
-      name: "godines",
-      description:
-        "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quidem consequuntur animi aliquid nulla rem nostrum nesciunt voluptas ea quos quo cum, ratione non voluptatibus! Iure recusandae officiis nostrum quasi dolor.",
-    },
-    {
-      name: "fructifero",
-      description:
-        "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quidem consequuntur animi aliquid nulla rem nostrum nesciunt voluptas ea quos quo cum, ratione non voluptatibus! Iure recusandae officiis nostrum quasi dolor.",
-    },
-    {
-      name: "ese lente > 🕶️",
-      description:
-        "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quidem consequuntur animi aliquid nulla rem nostrum nesciunt voluptas ea quos quo cum, ratione non voluptatibus! Iure recusandae officiis nostrum quasi dolor.",
-    },
-    {
-      name: "tuki",
-      description:
-        "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quidem consequuntur animi aliquid nulla rem nostrum nesciunt voluptas ea quos quo cum, ratione non voluptatibus! Iure recusandae officiis nostrum quasi dolor.",
-    },
-    {
-      name: "flama",
-      description:
-        "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quidem consequuntur animi aliquid nulla rem nostrum nesciunt voluptas ea quos quo cum, ratione non voluptatibus! Iure recusandae officiis nostrum quasi dolor.",
-    },
-    {
-      name: "joya",
-      description:
-        "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quidem consequuntur animi aliquid nulla rem nostrum nesciunt voluptas ea quos quo cum, ratione non voluptatibus! Iure recusandae officiis nostrum quasi dolor.",
-    },
-    {
-      name: "fiera",
-      description:
-        "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quidem consequuntur animi aliquid nulla rem nostrum nesciunt voluptas ea quos quo cum, ratione non voluptatibus! Iure recusandae officiis nostrum quasi dolor.",
-    },
-    {
-      name: "godines",
-      description:
-        "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quidem consequuntur animi aliquid nulla rem nostrum nesciunt voluptas ea quos quo cum, ratione non voluptatibus! Iure recusandae officiis nostrum quasi dolor.",
-    },
-    {
-      name: "fructifero",
-      description:
-        "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quidem consequuntur animi aliquid nulla rem nostrum nesciunt voluptas ea quos quo cum, ratione non voluptatibus! Iure recusandae officiis nostrum quasi dolor.",
-    },
-    {
-      name: "ese lente > 🕶️",
-      description:
-        "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quidem consequuntur animi aliquid nulla rem nostrum nesciunt voluptas ea quos quo cum, ratione non voluptatibus! Iure recusandae officiis nostrum quasi dolor.",
-    },
-    {
-      name: "tuki",
-      description:
-        "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quidem consequuntur animi aliquid nulla rem nostrum nesciunt voluptas ea quos quo cum, ratione non voluptatibus! Iure recusandae officiis nostrum quasi dolor.",
-    },
-    {
-      name: "flama",
-      description:
-        "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quidem consequuntur animi aliquid nulla rem nostrum nesciunt voluptas ea quos quo cum, ratione non voluptatibus! Iure recusandae officiis nostrum quasi dolor.",
-    },
-    {
-      name: "joya",
-      description:
-        "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quidem consequuntur animi aliquid nulla rem nostrum nesciunt voluptas ea quos quo cum, ratione non voluptatibus! Iure recusandae officiis nostrum quasi dolor.",
-    },
-    {
-      name: "fiera",
-      description:
-        "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quidem consequuntur animi aliquid nulla rem nostrum nesciunt voluptas ea quos quo cum, ratione non voluptatibus! Iure recusandae officiis nostrum quasi dolor.",
-    },
-    {
-      name: "godines",
-      description:
-        "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quidem consequuntur animi aliquid nulla rem nostrum nesciunt voluptas ea quos quo cum, ratione non voluptatibus! Iure recusandae officiis nostrum quasi dolor.",
-    },
-    {
-      name: "fructifero",
-      description:
-        "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quidem consequuntur animi aliquid nulla rem nostrum nesciunt voluptas ea quos quo cum, ratione non voluptatibus! Iure recusandae officiis nostrum quasi dolor.",
-    },
-    {
-      name: "ese lente > 🕶️",
-      description:
-        "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quidem consequuntur animi aliquid nulla rem nostrum nesciunt voluptas ea quos quo cum, ratione non voluptatibus! Iure recusandae officiis nostrum quasi dolor.",
-    },
-  ];
+  //   {
+  //     id: 1,
+  //     name: "tuki",
+  //     description:
+  //       "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quidem consequuntur animi aliquid nulla rem nostrum nesciunt voluptas ea quos quo cum, ratione non voluptatibus! Iure recusandae officiis nostrum quasi dolor.",
+  //   },
+  //   {
+  //     name: "flama",
+  //     description:
+  //       "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quidem consequuntur animi aliquid nulla rem nostrum nesciunt voluptas ea quos quo cum, ratione non voluptatibus! Iure recusandae officiis nostrum quasi dolor.",
+  //   },
+  //   {
+  //     name: "joya",
+  //     description:
+  //       "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quidem consequuntur animi aliquid nulla rem nostrum nesciunt voluptas ea quos quo cum, ratione non voluptatibus! Iure recusandae officiis nostrum quasi dolor.",
+  //   },
+  //   {
+  //     name: "fiera",
+  //     description:
+  //       "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quidem consequuntur animi aliquid nulla rem nostrum nesciunt voluptas ea quos quo cum, ratione non voluptatibus! Iure recusandae officiis nostrum quasi dolor.",
+  //   },
+  //   {
+  //     name: "godines",
+  //     description:
+  //       "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quidem consequuntur animi aliquid nulla rem nostrum nesciunt voluptas ea quos quo cum, ratione non voluptatibus! Iure recusandae officiis nostrum quasi dolor.",
+  //   },
+  //   {
+  //     name: "fructifero",
+  //     description:
+  //       "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quidem consequuntur animi aliquid nulla rem nostrum nesciunt voluptas ea quos quo cum, ratione non voluptatibus! Iure recusandae officiis nostrum quasi dolor.",
+  //   },
+  //   {
+  //     name: "ese lente > 🕶️",
+  //     description:
+  //       "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quidem consequuntur animi aliquid nulla rem nostrum nesciunt voluptas ea quos quo cum, ratione non voluptatibus! Iure recusandae officiis nostrum quasi dolor.",
+  //   },
+  //   {
+  //     name: "tuki",
+  //     description:
+  //       "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quidem consequuntur animi aliquid nulla rem nostrum nesciunt voluptas ea quos quo cum, ratione non voluptatibus! Iure recusandae officiis nostrum quasi dolor.",
+  //   },
+  //   {
+  //     name: "flama",
+  //     description:
+  //       "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quidem consequuntur animi aliquid nulla rem nostrum nesciunt voluptas ea quos quo cum, ratione non voluptatibus! Iure recusandae officiis nostrum quasi dolor.",
+  //   },
+  //   {
+  //     name: "joya",
+  //     description:
+  //       "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quidem consequuntur animi aliquid nulla rem nostrum nesciunt voluptas ea quos quo cum, ratione non voluptatibus! Iure recusandae officiis nostrum quasi dolor.",
+  //   },
+  //   {
+  //     name: "fiera",
+  //     description:
+  //       "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quidem consequuntur animi aliquid nulla rem nostrum nesciunt voluptas ea quos quo cum, ratione non voluptatibus! Iure recusandae officiis nostrum quasi dolor.",
+  //   },
+  //   {
+  //     name: "godines",
+  //     description:
+  //       "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quidem consequuntur animi aliquid nulla rem nostrum nesciunt voluptas ea quos quo cum, ratione non voluptatibus! Iure recusandae officiis nostrum quasi dolor.",
+  //   },
+  //   {
+  //     name: "fructifero",
+  //     description:
+  //       "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quidem consequuntur animi aliquid nulla rem nostrum nesciunt voluptas ea quos quo cum, ratione non voluptatibus! Iure recusandae officiis nostrum quasi dolor.",
+  //   },
+  //   {
+  //     name: "ese lente > 🕶️",
+  //     description:
+  //       "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quidem consequuntur animi aliquid nulla rem nostrum nesciunt voluptas ea quos quo cum, ratione non voluptatibus! Iure recusandae officiis nostrum quasi dolor.",
+  //   },
+  //   {
+  //     name: "tuki",
+  //     description:
+  //       "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quidem consequuntur animi aliquid nulla rem nostrum nesciunt voluptas ea quos quo cum, ratione non voluptatibus! Iure recusandae officiis nostrum quasi dolor.",
+  //   },
+  //   {
+  //     name: "flama",
+  //     description:
+  //       "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quidem consequuntur animi aliquid nulla rem nostrum nesciunt voluptas ea quos quo cum, ratione non voluptatibus! Iure recusandae officiis nostrum quasi dolor.",
+  //   },
+  //   {
+  //     name: "joya",
+  //     description:
+  //       "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quidem consequuntur animi aliquid nulla rem nostrum nesciunt voluptas ea quos quo cum, ratione non voluptatibus! Iure recusandae officiis nostrum quasi dolor.",
+  //   },
+  //   {
+  //     name: "fiera",
+  //     description:
+  //       "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quidem consequuntur animi aliquid nulla rem nostrum nesciunt voluptas ea quos quo cum, ratione non voluptatibus! Iure recusandae officiis nostrum quasi dolor.",
+  //   },
+  //   {
+  //     name: "godines",
+  //     description:
+  //       "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quidem consequuntur animi aliquid nulla rem nostrum nesciunt voluptas ea quos quo cum, ratione non voluptatibus! Iure recusandae officiis nostrum quasi dolor.",
+  //   },
+  //   {
+  //     name: "fructifero",
+  //     description:
+  //       "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quidem consequuntur animi aliquid nulla rem nostrum nesciunt voluptas ea quos quo cum, ratione non voluptatibus! Iure recusandae officiis nostrum quasi dolor.",
+  //   },
+  //   {
+  //     name: "ese lente > 🕶️",
+  //     description:
+  //       "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quidem consequuntur animi aliquid nulla rem nostrum nesciunt voluptas ea quos quo cum, ratione non voluptatibus! Iure recusandae officiis nostrum quasi dolor.",
+  //   },
+  // ];
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = productsList.slice(indexOfFirstItem, indexOfLastItem);
+  const currentItems = productList.slice(indexOfFirstItem, indexOfLastItem);
 
   const paginate = (number) => {
     setCurrentPage(currentPage + number);
   };
 
+  console.log(productList)
   return (
     <ContainerBase>
       <div className="main">
         <PageTitle title={category} isArrow={true} />
 
         <div className="card-container">
-          {currentItems.map((product, index) => {
+          {productList.map((product, index) => {
             return (
               <ProductCard
                 className="animate__animated animate__bounce"
@@ -155,17 +155,17 @@ const CategoryPage = () => {
                 description={product.description}
                 img={Guantes}
                 key={index}
-                id={product.id}
+                id={product.id_product}
               />
             );
           })}
+        </div>
           <Pagination
             currentPage={currentPage}
             itemsPerPage={itemsPerPage}
-            totalItems={productsList.length}
+            totalItems={productList.length}
             paginate={paginate}
           />
-        </div>
       </div>
     </ContainerBase>
   );

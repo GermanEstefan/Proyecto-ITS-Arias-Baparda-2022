@@ -4,30 +4,32 @@ import { useParams } from "react-router-dom";
 import Guantes from "../../assets/img/guantes.jpg";
 import PageTitle from "../../components/store/PageTitle";
 import ContainerBase from "../../components/store/ContainerBase";
+import { fetchApi } from "../../API/api";
 import { userStatusContext } from "../../App";
 const ProductPage = () => {
   const { userData } = useContext(userStatusContext);
   const { category, id } = useParams();
+
   const [cart, setCart] = useState(() => {
     const saved = localStorage.getItem("cart");
-  const initialValue = JSON.parse(saved);
-  return initialValue || [{}];
+    const initialValue = JSON.parse(saved);
+    return initialValue || [{}];
   });
+  const [product, setProduct] = useState({});
+
   useEffect(() => {
     window.scroll(0, 0);
+    getProductById();
   }, []);
 
-  // Usar el id con un endpoint para traer todos los datos del producto a mostrar
-
-  const productMock = {
-    name: "Su producto",
-    price: "10.500",
-    description:
-      "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Deleniti facilis labore modi quo sapiente expedita nesciunt quos deseruntnobis provident",
+  const getProductById = async () => {
+    const resp = await fetchApi(`products.php?idProduct=${id}`, "GET");
+    console.log(resp);
+    setProduct(resp.result.data[0]);
+    console.log(resp.result.data[0]);
   };
-  const handleAddToCart = () => {
-    console.log("add");
 
+  const handleAddToCart = () => {
     setCart([...cart, { id: new Date() }]);
     localStorage.setItem("cart", JSON.stringify(cart));
   };
@@ -36,7 +38,7 @@ const ProductPage = () => {
     <ContainerBase>
       <div className="productContainer">
         <PageTitle
-          title={productMock.name}
+          title={product.name}
           isArrow={true}
           arrowGoTo={`/category/${category}`}
         />
@@ -48,8 +50,8 @@ const ProductPage = () => {
           </div>
           <div className="productPage__description">
             <div className="productPage__description__body">
-              <p>{productMock.price}$</p>
-              <p>{productMock.description}</p>
+              <p>{product.price}$</p>
+              <p>{product.description}</p>
             </div>
             <div className="productPage__description__buttons">
               <button className="buyBtn" disabled={!userData.auth}>
@@ -57,7 +59,7 @@ const ProductPage = () => {
               </button>
               <button
                 className="addBtn"
-                disabled={userData.auth}
+                disabled={!userData.auth}
                 onClick={handleAddToCart}
               >
                 Agregar al carrito
