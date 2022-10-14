@@ -38,7 +38,7 @@
         public static function getBarcodeByIdProduct($idProduct){
             $conecction = new Connection();
             $query = "SELECT barcode from product WHERE id_product = $idProduct";
-            return $conecction->getData($query);
+            return $conecction->getData($query)->fetch_assoc();
         }
         //CONSULTAS 
         public static function getProductByBarcode($barcode){

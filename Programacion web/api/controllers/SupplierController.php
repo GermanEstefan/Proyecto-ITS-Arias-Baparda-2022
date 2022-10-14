@@ -1,192 +1,154 @@
 <?php
 
-use LDAP\Result;
-use Spipu\Html2Pdf\Tag\Html\Sup;
-
 include_once('./helpers/Response.php');
-include_once('./helpers/Token.php');
+include_once("./helpers/Token.php");
 include_once("./models/SupplierModel.php");
 
-class SupplierController
-{
+class SupplierController {
 
     private $response;
     private $jwt;
-
+    
     function __construct()
     {
         $this->response = new Response();
         $this->jwt = new Token();
     }
 
-    //validar 
-    private function validateBodyOfSupplier($supplierData)
-    {
-        if (
-            !isset($supplierData['rut'])
-            || !is_int($supplierData['rut'])
-            || !isset($supplierData['company'])
-            || !isset($supplierData['phone'])
-            || !is_int($supplierData['phone'])
-            || !isset($supplierData['address'])
-        ) return false;
-
+    private function validateBodyOfSupplier($supplierData){
+        if( !isset($supplierData['rut']) ||  !isset($supplierData['companyName']) ||  !isset($supplierData['address']) ||  !isset($supplierData['phone'])) return false;
         return $supplierData;
     }
 
-    //Alta de proveedor
     public function saveSupplier($supplierData){
-        $this->jwt->verifyTokenAndGetIdUserFromRequest();
+        /*
+            En este metodo no precisamos el ID del usuario, lo unico que validamos es que tenga un token y sea valido. 
+            Si no tiene token, no pasa de la funcion para abajo por que el metodo mismo le niega el acceso.
+        */
+        $this->jwt->verifyTokenAndGetIdUserFromRequest(); 
         $bodyIsValid = $this->validateBodyOfSupplier($supplierData);
-        if (!$bodyIsValid) {
-            echo $this->response->error400("Error en los datos enviados");
-            die();
-        }
-        $rut = $supplierData['rut'];
-        $company = $supplierData['company'];
-        $phone = $supplierData['phone'];
-        $address = $supplierData['address'];
+        if(!$bodyIsValid) echo $this->response->error400();
 
-        //Validamos que el rut y el nombre no exista en la DB || O que el proveedor exista pero este dado de baja
-        $rutExist = SupplierModel::getSupplierByRut($rut);
-        $supplierIsDisabled = SupplierModel::getDisabledSupplierByRut($rut);
-        if ($rutExist || $supplierIsDisabled) {
-            if ($supplierIsDisabled){
-                echo $this->response->error203("El proveedor que quiere ingresar ya existe en el sistema, fue dado de baja");
-                die();        
-            }
-            if ($rutExist){
-                echo $this->response->error203("El proveedor que quiere ingresar ya existe en el sistema");
-                die();
-            }
-        }
+        $rut = $supplierData['rut'];
+        $companyName = $supplierData['companyName'];
+        $address = $supplierData['address'];
+        $phone = $supplierData['phone'];
         
-        //insert del proveedor
-        $supplier = new SupplierModel($rut, $company, $address, $phone);
+        $supplierExist = SupplierModel::getSupplierByRut($rut);
+        if($supplierExist){
+            echo $this->response->error203("El $rut ya existe");
+            die();
+        }
+        $supplier = new SupplierModel($rut, $companyName, $address, $phone);
         $result = $supplier->save();
-        if (!$result){
-            echo $this->response->error500("No se pudo realizar el insert");
+        if(!$result){
+            echo $this->response->error500();
             die();
         }
-        echo $this->response->successfully("Proveedor ingresado con exito");
+        echo $this->response->successfully("Nuevo proveedor dado de alta con exito");
     }
-
-    //Habilitar un proveedor que halla sido dado de baja
-    public function enableSupplier($supplierData){
-        $this->jwt->verifyTokenAndGetIdUserFromRequest();
-        $bodyIsValid = $this->validateBodyOfSupplier($supplierData);
-        if (!$bodyIsValid){
-            echo $this->response->error400("Error al enviar los datos");
-            die();
-        }
-        $rut = $supplierData['rut'];
-
-        //validamos que el proveedor exista y este dado de baja
-        $supplierToEnable = SupplierModel::getDisabledSupplierByRut($rut);
-        if (!$supplierToEnable){
-            echo $this->response->error203("El proveedor a habilitar no existe");
-            die();
-        }
-
-        //Damos de baja el proveedor
-        $result = SupplierModel::enableSupplier($rut);
-        if (!$result){
-            echo $this->response->error400("No se pudo habilitar el proveedor");
-            die();
-        }
-        echo $this->response->successfully("Proveedor habilitado con exito");
+    //consultas
+    public function getAllSuppliers(){
+        $supplierToJson = json_encode(SupplierModel::getAllSuppliers()); 
+        echo $supplierToJson;
     }
-
-    //CONSULTAS
-    //todos los proveedores
-    public function getAllSuplliers(){
-        $suppliers = SupplierModel::getAllSuppliers();
-        echo $this->response->successfully("Todos los proveedores, $suppliers");
-        die();
+    public function getAllSuppliersActive(){
+        $supplierToJson = json_encode(SupplierModel::getAllSuppliersActive()); 
+        echo $supplierToJson;
     }
-
-    //proveedores activos
-    public function getActiveSuppliers(){
-        $suppliers = SupplierModel::getActiveSuppliers();
-        echo $this->response->successfully("Lista de proveedores activos, $suppliers");
-        die();
+    public function getAllSuppliersDisable(){
+        $supplierToJson = json_encode(SupplierModel::getAllSuppliersDisable()); 
+        echo $supplierToJson;
     }
-    
-    //proveedores dados de baja
-    public function getDisabledSuppliers(){
-        $suppliers = SupplierModel::getDisabledSuppliers();
-        echo $this->response->successfully("Lista de proveedores dados de baja, $suppliers");
-        die();
-    }
-
-    //buscar proveedor por rut
     public function getSupplierByRut($rut){
-        $suppliers = SupplierModel::getSupplierByRut($rut);
-        echo $this->response->successfully("Proveedor por numero de RUT, $suppliers");
-        die();
-    }
-
-    //buscar proveedor por nombre
-    public function getSupplierByName($company){
-        $suppliers = SupplierModel::getSupplierByName($company);
-        echo $this->response->successfully("Proveedor por nombre, $suppliers");
-        die();
-    }
-
-    //UPDATE
-    public function updateSupplier($supplierData){
-        $this->jwt->verifyTokenAndGetIdUserFromRequest();
-        $bodyIsValid = $this->validateBodyOfSupplier($supplierData);
-        if(!$bodyIsValid){
-            echo $this->response->error400("Error al enviar los datos");
+        $supplier = SupplierModel::getSupplierByRut($rut);
+        if(!$supplier){
+            echo $this->response->error203("El proveedor $rut no existe");
             die();
         }
+        echo json_encode($supplier);  
+    }
+
+    public function getSupplierByName($companyName){
+        $supplier = SupplierModel::getSupplierByName($companyName);
+        if(!$supplier){
+            echo $this->response->error203("El proveedor con nombre $companyName no existe");
+            die();
+        }
+        echo json_encode($supplier);  
+    }
+    public function getSupplierById($idState){
+        $supplier = SupplierModel::getSupplierById($idState);
+        if(!$supplier){
+            echo $this->response->error203("No existe proveedor para id ingresado");
+            die();
+        }
+        echo json_encode($supplier);  
+    }
+    //ACTUALIZAR
+    public function updateSupplier($supplierId, $supplierData){
+
+        $this->jwt->verifyTokenAndGetIdUserFromRequest(); 
+        $bodyIsValid = $this->validateBodyOfSupplier($supplierData);
+        if(!$bodyIsValid) {
+        echo $this->response->error400('Error en los datos enviados');
+        die();
+        }
+
         $rut = $supplierData['rut'];
-        $company = $supplierData['company'];
-        $phone = $supplierData['phone'];
+        $companyName = $supplierData['companyName'];
         $address = $supplierData['address'];
+        $phone = $supplierData['phone'];
 
-        //Validamos que el proveedor que se quiere modificar exista
-        $supplierToUpdate = SupplierModel::getSupplierByRut($rut);
-        if (!$supplierToUpdate){
-            echo $this->response->error203("El proveedor que quiere actualizar no existe en el sistema");
+        $existSupplier = SupplierModel::getSupplierById($supplierId);
+        if (!$existSupplier){
+            echo $this->response->error203('El id del proveedor no existe');
+            die();
+        }
+        $notChangeRut = SupplierModel::getSupplierByRut($rut);
+        if ($notChangeRut){
+            $result = SupplierModel::updateSupplierNotRut($supplierId,$companyName,$address,$phone);
+            echo $this->response->successfully("Proveedor actualziado con exito");
             die();
         }
 
-        //Actualizamos los datos
-        $result = SupplierModel::updateSupplier($rut, $company, $address, $phone);
-        if (!$result){
-            echo $this->response->error500("No se pudo actualizar el proveedor");
+        $result = SupplierModel::updateSupplier($supplierId,$rut,$companyName,$address,$phone);
+        if(!$result){
+            echo $this->response->error500();
             die();
         }
-        echo $this->response->successfully("Proveedor actualizado!");
+        echo $this->response->successfully("proveedor actualizado con exito");
     }
-
-    //Dar de baja un proveedor
-    public function disableSupplier($supplierData){
+    public function disableSupplier($supplierId)
+    {
         $this->jwt->verifyTokenAndGetIdUserFromRequest();
-        $bodyIsValid = $this->validateBodyOfSupplier($supplierData);
-        if (!$bodyIsValid){
-            echo $this->response->error400("Error al enviar los datos");
+        //Valido que exista el proveedor
+        $supplierExist = SupplierModel::getSupplierById($supplierId);
+        if (!$supplierExist) {
+            echo $this->response->error203("Esta intentando deshabilitar un proveedor que no existe");
             die();
         }
-        $rut = $supplierData['rut'];
-        $company = $supplierData['company'];
-
-        //validamos que el proveedor exista y este activo
-        $supplierToDisable = SupplierModel::getActiveSupplierByRut($rut);
-        if (!$supplierToDisable){
-            echo $this->response->error203("El proveedor que dar de baja no existe");
+        $result = SupplierModel::disableSupplier($supplierId);
+        if (!$result) {
+            echo $this->response->error500();
             die();
         }
-
-        //Damos de baja el proveedor
-        $result = SupplierModel::disableSupplier($rut);
-        if (!$result){
-            echo $this->response->error400("No se pudo dar de baja el proveedor");
+        echo $this->response->successfully("Proveedor deshabilitado exitosamente");
+    }
+    public function activeSupplier($supplierId)
+    {
+        $this->jwt->verifyTokenAndGetIdUserFromRequest();
+        //Valido que exista el proveedor
+        $supplierExist = SupplierModel::getSupplierById($supplierId);
+        if (!$supplierExist) {
+            echo $this->response->error203("Esta intentando activar un proveedor que no existe");
             die();
         }
-        echo $this->response->successfully("Proveedor dado de baja con exito");
+        $result = SupplierModel::disableSupplier($supplierId);
+        if (!$result) {
+            echo $this->response->error500();
+            die();
+        }
+        echo $this->response->successfully("Proveedor deshabilitado exitosamente");
     }
 }
-

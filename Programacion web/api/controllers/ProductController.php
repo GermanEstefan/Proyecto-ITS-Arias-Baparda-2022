@@ -9,7 +9,7 @@ include_once("./models/SizeModel.php");
 
 class ProductController
 {
-
+    private $deletePromo;
     private $response;
     private $jwt;
 
@@ -158,16 +158,20 @@ class ProductController
                 echo $this->response->error500();
                 die();
             }
-            $isProduct = ProductModel::getBarcodeByIdProduct($idProduct);
-            if(!$isProduct){
-                echo $this->response->error203("no exite el producto $idProduct");
+            $getBarcode = ProductModel::getBarcodeByIdProduct($idProduct);
+            if(!$getBarcode){
+                echo $this->response->error203("Hubo un problema");       
                 die();
             }
-//agrego productos a promo
-        foreach ($contains as $contain) {
+            //Obtengo el INT de la respuesta sql ARRAY
+            $isProduct = intval($getBarcode['barcode']);
+            
+            
+            //agrego productos a promo
+            foreach ($contains as $contain) {
             $haveProduct = $contain['haveProduct'];
             $quantity = $contain['quantity'];
-
+            
             //Valido que exista el producto que se agrega a la promo
             $productExist = ProductModel::getProductByBarcode($haveProduct);
             if (!$productExist) {
@@ -176,21 +180,22 @@ class ProductController
             }
             //Valido que IsProduct no sea igual a haveProduct
             if ($isProduct == $haveProduct) {
-                echo $this->response->error203("El Producto $isProduct y $haveProduct son iguales");
+                echo $this->response->error203("Error - Los Productos son iguales");
                 die();
             }
             //Valido el estado del producto que se agrega a la promo
             $state = ProductModel::getStateOfProduct($haveProduct);
-            if ($state == 0) {
+            if ($state["state"] == 0) {
                 echo $this->response->error203("El producto $haveProduct esta INACTIVO");
                 die();
             }            
             //Valido que cantidad a agregar no sea mayor a la cantidad disponible del producto
             $stockExist = ProductModel::getStockProductByBarcode($haveProduct);
-            if ($quantity>$stockExist) {
+            if ($quantity>$stockExist["stock"]) {
+                
                 echo $this->response->error203("No dispone de $quantity unidades para el producto $haveProduct");
                 die();
-            }//me marca que tengo problema aca pero no veo que este haciendo las validaciones de arriba por que no me da mensajes de error 
+            } 
             $query = array($index => "INSERT INTO promo (is_product, have_product, quantity) VALUES ($isProduct,$haveProduct, $quantity)");
             array_push($queries, $query);
             $index++;

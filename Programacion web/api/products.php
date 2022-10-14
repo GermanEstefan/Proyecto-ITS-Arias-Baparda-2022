@@ -9,11 +9,11 @@ $response = new Response(); //Esta instancia va a ser utilizado a lo largo del c
 $product = new ProductController();
 $bodyOfRequest = file_get_contents('php://input'); //Obtiene el body de la request sin procesar(JSON).
 $productData = json_decode($bodyOfRequest, 1); //Transforma el JSON en un array asosciativo.
-
+$promoData =  json_decode($bodyOfRequest, 1);
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     if(isset($_GET['promo'])){
-        $product->savePromo($productData);
+        $product->savePromo($promoData);
         die();
     }
     if(isset($_GET['product'])){
@@ -21,7 +21,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         die();
     }     
 }else if($_SERVER['REQUEST_METHOD'] === 'GET'){
-    
     if(isset($_GET['disable'])){
         $product->getDisableProducts();
         die();
