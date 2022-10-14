@@ -51,13 +51,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
     $idSupplier = $_GET['idSupplier'];
     switch ($action){
         case 'edit':
-            $product->updateidSupplier($idSupplier,$supplierData);
+            $supplier->updateSupplier($idSupplier,$supplierData);
             die();        
             case 'disable':
-            $product->disableidSupplier($idSupplier);
+            $supplier->disableSupplier($idSupplier);
             die();
             case 'active':
-            $product->activeSupplier($idSupplier);
+            $supplier->activeSupplier($idSupplier);
             die();
             default :
             http_response_code(400);

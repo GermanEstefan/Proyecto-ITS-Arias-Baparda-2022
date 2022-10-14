@@ -36,7 +36,7 @@ class SupplierController {
             echo $this->response->error400('Error en los datos enviados');
         die();
         }
-        
+
         $rut = $supplierData['rut'];
         $companyName = $supplierData['companyName'];
         $address = $supplierData['address'];
@@ -152,11 +152,11 @@ class SupplierController {
             echo $this->response->error203("Esta intentando activar un proveedor que no existe");
             die();
         }
-        $result = SupplierModel::disableSupplier($supplierId);
+        $result = SupplierModel::activeSupplier($supplierId);
         if (!$result) {
             echo $this->response->error500();
             die();
         }
-        echo $this->response->successfully("Proveedor deshabilitado exitosamente");
+        echo $this->response->successfully("Proveedor activado exitosamente");
     }
 }
