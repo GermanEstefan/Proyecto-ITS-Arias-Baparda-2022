@@ -16,24 +16,32 @@ class SupplierController {
     }
 
     private function validateBodyOfSupplier($supplierData){
-        if( !isset($supplierData['rut']) ||  !isset($supplierData['companyName']) ||  !isset($supplierData['address']) ||  !isset($supplierData['phone'])) return false;
+        if( !isset($supplierData['rut']) 
+        ||  !isset($supplierData['companyName']) 
+        ||  !isset($supplierData['address']) 
+        ||  !isset($supplierData['phone'])
+        ) return false;
+
         return $supplierData;
     }
-
-    public function saveSupplier($supplierData){
+    public function saveSupplier($supplierData)
+    {
         /*
             En este metodo no precisamos el ID del usuario, lo unico que validamos es que tenga un token y sea valido. 
             Si no tiene token, no pasa de la funcion para abajo por que el metodo mismo le niega el acceso.
         */
         $this->jwt->verifyTokenAndGetIdUserFromRequest(); 
         $bodyIsValid = $this->validateBodyOfSupplier($supplierData);
-        if(!$bodyIsValid) echo $this->response->error400();
-
+        if(!$bodyIsValid) {
+            echo $this->response->error400('Error en los datos enviados');
+        die();
+        }
+        
         $rut = $supplierData['rut'];
         $companyName = $supplierData['companyName'];
         $address = $supplierData['address'];
         $phone = $supplierData['phone'];
-        
+
         $supplierExist = SupplierModel::getSupplierByRut($rut);
         if($supplierExist){
             echo $this->response->error203("El $rut ya existe");

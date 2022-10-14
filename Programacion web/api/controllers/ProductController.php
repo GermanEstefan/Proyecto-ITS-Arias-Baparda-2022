@@ -9,7 +9,6 @@ include_once("./models/SizeModel.php");
 
 class ProductController
 {
-    private $deletePromo;
     private $response;
     private $jwt;
 

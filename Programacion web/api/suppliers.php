@@ -37,38 +37,34 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
     }
 
     if(isset($_GET['company'])){
-        $company = $_GET['company'];
+        $companyName = $_GET['company'];
         $supplier->getSupplierByName($companyName);
         die();
     }
 
 } else if ($_SERVER['REQUEST_METHOD'] === 'PATCH'){
-    if (!isset($_GET['idSupplier'])){
-        echo $response->error203("Error falta especificar el rut");
-        die();
-    }
-    if (!isset($_GET['action'])){
-        echo $response->error203("Error falto especificar accion a realizar");
+    if(!isset($_GET['idSupplier']) || !isset($_GET['action'])){
+        echo $response->error203("Error falta especificar atributos");    
         die();
     }
     $action = $_GET['action'];
     $idSupplier = $_GET['idSupplier'];
     switch ($action){
-        case 'update':
-            $supplier->updateSupplier($idSupplier,$supplierData);
+        case 'edit':
+            $product->updateidSupplier($idSupplier,$supplierData);
+            die();        
+            case 'disable':
+            $product->disableidSupplier($idSupplier);
             die();
-        case 'disable':
-            $supplier->disableSupplier($idSupplier);
+            case 'active':
+            $product->activeSupplier($idSupplier);
             die();
-        case 'enable':
-            $supplier->disableSupplier($idSupplier);
-            die();
-        default:
+            default :
             http_response_code(400);
             echo $response->error400("Accion no valida");
             die();
-    }
-} else {
+        }
+    } else {
     echo $response->error203("Metodo no permitido");
 }
 ?>

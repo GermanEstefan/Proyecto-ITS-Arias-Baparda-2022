@@ -11,13 +11,13 @@
             $this->rut = $rut;
             $this->name = $name;
             $this->address = $address;
-            $this->description = $phone;
+            $this->phone = $phone;
             parent::__construct();
         }
 
         public static function getSupplierByName($name){
             $conecction = new Connection();
-            $query = "SELECT * from supplier WHERE name='$name'";
+            $query = "SELECT * from supplier WHERE company_name ='$name'";
             return $conecction->getData($query)->fetch_all(MYSQLI_ASSOC);
         }
         public static function getSupplierByRut($rut){
