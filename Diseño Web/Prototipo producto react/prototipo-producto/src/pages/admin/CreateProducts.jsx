@@ -1,4 +1,4 @@
-import { faPlusCircle } from '@fortawesome/free-solid-svg-icons';
+import { faPlusCircle, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react'
 import { useEffect } from 'react';
@@ -21,11 +21,19 @@ const CreateProducts = () => {
         models: []
     }
 
-    const [valuesSliceProduct, handleValuesChangeOfSliceProduct] = useForm(initStateProductSlice);
+    const [valuesSliceProduct, handleValuesChangeOfSliceProduct, resetFormValuesProduct] = useForm(initStateProductSlice);
     const { idProduct, name, prodCategory, price, description } = valuesSliceProduct;
 
-    //const [models, setModels] = useState([{ prodDesign: '', prodSize: '', stock: '' }]);
-    const [amountLines, setAmountLines] = useState([{ prodDesign: '', prodSize: '', stock: '' }]);
+    const initStateAmountLines = [{ prodDesign: '', prodSize: '', stock: '' }];
+    const [amountLines, setAmountLines] = useState(initStateAmountLines);
+
+    const initStateLoading = {
+        showMessage: false,
+        message: '',
+        error: false
+    };
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(initStateLoading);
 
     useEffect(() => {
         const categorysPromise = fetchApi('categorys.php', 'GET');
@@ -48,7 +56,14 @@ const CreateProducts = () => {
     const handleAddLine = () => {
         setAmountLines([...amountLines, { prodDesign: '', prodSize: '', stock: '' }])
     }
-    const handleChangeValueOfLines = ({target}, i) => {
+
+    const handleDeleteLine = (i) => {
+        const arrayCopy = [...amountLines]
+        arrayCopy.splice(i, 1)
+        setAmountLines(arrayCopy)
+    }
+
+    const handleChangeValueOfLines = ({ target }, i) => {
         const arrayModificado = [...amountLines]
         amountLines[i][target.name] = target.value;
         setAmountLines(arrayModificado)
@@ -56,31 +71,45 @@ const CreateProducts = () => {
 
     const handleSubmitProduct = async (e) => {
         e.preventDefault();
-        const bodyOfRequest = {...valuesSliceProduct, models: amountLines } 
+        const bodyOfRequest = { ...valuesSliceProduct, models: amountLines }
+        setLoading(true);
         try {
             const resp = await fetchApi('products.php', 'POST', bodyOfRequest);
             console.log(resp)
+            if (resp.status === 'error') {
+                setError({ showMessage: true, message: resp.result.error_msg, error: true });
+                return setTimeout(() => setError(initStateLoading), 3000)
+            }
+            setError({ showMessage: true, message: resp.result.msg, error: false });
+            resetFormValuesProduct();
+            setAmountLines(initStateAmountLines);
+            return setTimeout(() => setError(initStateLoading), 3000)
         } catch (error) {
             console.error(error);
+        } finally {
+            setLoading(false)
         }
-        
-        
+
+
     }
 
     return (
         <ContainerBase>
             <section className='container_section create-product'>
+
                 <h1>Crear producto</h1>
                 <p>Completar todo los campos</p>
-                <div>
-                    <ul className='create-product_switch'>
-                        <li className='create-product_switch_product'>PRODUCTO</li>
-                        <li className='create-product_switch_promo'>PROMO</li>
+
+                <div className='create-product_container'>
+
+                    <ul>
+                        <li className='product' >PRODUCTO</li>
+                        <li className='promo' >PROMO</li>
                     </ul>
 
-                    <form className='create-product_product-form' onSubmit={handleSubmitProduct}>
+                    <form autoComplete='off' className='create-product_container_form-product' onSubmit={handleSubmitProduct}>
 
-                        <div className='create-product_product-form_row'>
+                        <div className='create-product_container_form-product_row'>
                             <div>
                                 <label htmlFor="">Id Producto</label>
                                 <input
@@ -89,6 +118,7 @@ const CreateProducts = () => {
                                     name='idProduct'
                                     onChange={handleValuesChangeOfSliceProduct}
                                     value={idProduct}
+                                    required
                                 />
                             </div>
                             <div>
@@ -99,11 +129,12 @@ const CreateProducts = () => {
                                     name='name'
                                     onChange={handleValuesChangeOfSliceProduct}
                                     value={name}
+                                    required
                                 />
                             </div>
                         </div>
 
-                        <div className='create-product_product-form_row'>
+                        <div className='create-product_container_form-product_row'>
                             <div>
                                 <label htmlFor="">Precio unitario</label>
                                 <input
@@ -112,6 +143,7 @@ const CreateProducts = () => {
                                     name='price'
                                     onChange={handleValuesChangeOfSliceProduct}
                                     value={price}
+                                    required
                                 />
                             </div>
                             <div>
@@ -121,6 +153,7 @@ const CreateProducts = () => {
                                     name='prodCategory'
                                     value={prodCategory}
                                     onChange={handleValuesChangeOfSliceProduct}
+                                    required
                                 >
                                     <option value="" selected disabled>Seleccione</option>
                                     {
@@ -137,45 +170,52 @@ const CreateProducts = () => {
                         </div>
 
                         <hr />
-                        <FontAwesomeIcon icon={faPlusCircle} onClick={handleAddLine} />
-                        {
-                            amountLines.map( (line, i) => (
-                                <div className='create-product_product-form_row-3'>
 
-                                <div >
-                                    <label htmlFor="">Talle</label>
-                                    <select className='select-form' name='prodSize' onChange={ (e) => handleChangeValueOfLines(e,i)} value={line.prodSize} >
-                                        <option value="" selected disabled>Seleccione</option>
-                                        {
-                                            sizes.map(size => (
-                                                <option key={size.id_size} value={size.id_size}>{size.name}</option>
-                                            ))
-                                        }
-                                    </select>
-                                </div>
-    
-                                <div>
-                                    <label htmlFor="">Diseño</label>
-                                    <select className='select-form' onChange={(e) => handleChangeValueOfLines(e,i)} name='prodDesign' value={line.prodDesign}>
-                                        <option value="" selected disabled>Seleccione</option>
-                                        {
-                                            designs.map(design => (
-                                                <option value={design.id_design} key={design.id_design}>{design.name}</option>
-                                            ))
-                                        }
-                                    </select>
-                                </div>
-    
-                                <div>
-                                    <label htmlFor="">Stock</label>
-                                    <input type="text" onChange={(e) => handleChangeValueOfLines(e,i)} className='input-form' name='stock' value={line.stock} />
-                                </div>
-    
-                            </div>
-                            ))
-                        }
 
-                        <div className='create-product_product-form_txtarea'>
+
+                        <div className='create-product_container_form-product_lines'>
+                            <FontAwesomeIcon className='create-product_container_form-product_lines_add' icon={faPlusCircle} onClick={handleAddLine} />
+                            {
+                                amountLines.map((line, i) => (
+                                    <div className='create-product_container_form-product_lines_row3'>
+
+                                        <div >
+                                            <label htmlFor="">Talle</label>
+                                            <select required className='select-form' name='prodSize' onChange={(e) => handleChangeValueOfLines(e, i)} value={line.prodSize} >
+                                                <option value="" selected disabled>Seleccione</option>
+                                                {
+                                                    sizes.map(size => (
+                                                        <option key={size.id_size} value={size.id_size}>{size.name}</option>
+                                                    ))
+                                                }
+                                            </select>
+                                        </div>
+
+                                        <div>
+                                            <label htmlFor="">Diseño</label>
+                                            <select required className='select-form' onChange={(e) => handleChangeValueOfLines(e, i)} name='prodDesign' value={line.prodDesign}>
+                                                <option value="" selected disabled>Seleccione</option>
+                                                {
+                                                    designs.map(design => (
+                                                        <option value={design.id_design} key={design.id_design}>{design.name}</option>
+                                                    ))
+                                                }
+                                            </select>
+                                        </div>
+
+                                        <div>
+                                            <label htmlFor="">Stock</label>
+                                            <input required type="text" onChange={(e) => handleChangeValueOfLines(e, i)} className='input-form' name='stock' value={line.stock} />
+                                        </div>
+
+                                        {(i != 0) && <FontAwesomeIcon onClick={() => handleDeleteLine(i)} icon={faXmark} />}
+
+                                    </div>
+                                ))
+                            }
+                        </div>
+
+                        <div className='create-product_container_form-product_txtarea'>
                             <label>Descripcion</label>
                             <textarea
                                 className='textarea-form'
@@ -186,7 +226,16 @@ const CreateProducts = () => {
                         </div>
 
 
-                        <button className='button-form' type='submit'>CONFIRMAR</button>
+                        <button
+                            className={`button-form ${loading && 'opacity'}`}
+                            disabled={loading}
+                            type="submit"
+                        >{loading ? 'CARGANDO...' : 'CREAR PRODUCTO'}</button>
+                        <br />
+                        {
+                            error.showMessage &&
+                            <span className={`${error.error ? 'warning-message' : 'successfully-message'} `} >{error.message}</span>
+                        }
 
                     </form>
                 </div>
