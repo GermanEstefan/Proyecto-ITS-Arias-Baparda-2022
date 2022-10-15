@@ -22,6 +22,7 @@ const CategoriesList = () => {
           <Card
             key={index}
             title={category.name}
+            to={category.name}
             slug={category.name}
             img={Guantes}
           />

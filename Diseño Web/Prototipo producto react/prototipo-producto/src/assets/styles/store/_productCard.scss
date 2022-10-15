@@ -1,6 +1,6 @@
 .product-card {
   max-width: 1100px;
-  min-width: 100%;
+  min-width: 700px;
   padding: 20px;
   display: flex;
   align-items: center;
@@ -9,11 +9,11 @@
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 
   img {
-    padding-bottom: 2em;
-    margin-bottom: 1em;
+    margin: 1.5em;
     left: 0;
   }
   .product-text-container {
+    width: 100%;
     h2 {
       padding: 0.5em;
       font-size: small;
@@ -23,9 +23,9 @@
       background-color: #bccddb;
     }
     p {
-      overflow-y: scroll;
+      overflow-y:hidden;
       max-height: 200px;
-      font-size:small;
+      font-size: small;
     }
     a {
       min-width: 180px;

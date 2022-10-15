@@ -1,11 +1,11 @@
 import React from "react";
 import { Link, useParams } from "react-router-dom";
 
-const Card = ({ img, title, id }) => {
+const Card = ({ img, title, to }) => {
   const { category } = useParams();
   return (
     <div className="card">
-      <Link to={`/category/${category}/${id}`}>
+      <Link to={`/category/${to}`}>
         <img src={img} alt="" />
         <div className="text-container">
           <h2>{title}</h2>

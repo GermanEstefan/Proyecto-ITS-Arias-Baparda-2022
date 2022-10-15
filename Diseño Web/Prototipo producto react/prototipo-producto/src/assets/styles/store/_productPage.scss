@@ -1,10 +1,10 @@
 .productContainer {
-    margin: 20vh auto auto auto ;
+  margin: 20vh auto auto auto;
   min-height: 80vh;
-  width: 75vw;
-  
+  width: 750px;
+
   .productPage {
-    
+    margin-bottom: 2em;
     display: flex;
     @media screen and (max-width: 800px) {
       flex-direction: column;
@@ -50,7 +50,7 @@
         .addBtn {
           background-color: $gray;
         }
-        p{
+        p {
           text-align: center;
         }
       }
