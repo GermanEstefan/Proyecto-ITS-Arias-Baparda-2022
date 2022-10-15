@@ -17,24 +17,6 @@
             margin: 0 0 40px 0;
             color: $orange;
         }
-        >div {
-            display: flex;
-            margin-bottom: 20px;
-            width: 100%;
-            justify-content: center;
-            align-items: center;
-            >div {
-                display: flex;
-                flex-direction: column;
-                width: 50%;
-                >label {
-                    margin-bottom: 5px;
-                    color: #121212;
-                    font-weight: bold;
-                }
-            }
-            > :first-child {margin-right: 25px;}
-        }
         button {
             margin-top: 20px;
             width: 100%;

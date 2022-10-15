@@ -57,9 +57,9 @@ const CreateUser = () => {
                
                 <form autoComplete="off" onSubmit={handleSubmit} >
                     <h1>Crear un nuevo empleado</h1>
-                    <div>
+                    <div className='form-row-two-columns-with-label'>
                         <div>
-                            <label htmlFor="name">Nombre</label>
+                            <label htmlFor="name" className='label-form'>Nombre</label>
                             <input
                                 id="name"
                                 type="text"
@@ -71,7 +71,7 @@ const CreateUser = () => {
                             />
                         </div>
                         <div>
-                            <label htmlFor="surname">Apellido</label>
+                            <label className='label-form' htmlFor="surname">Apellido</label>
                             <input
                                 id="surname"
                                 type="text"
@@ -83,9 +83,9 @@ const CreateUser = () => {
                             />
                         </div>
                     </div>
-                    <div>
+                    <div className='form-row-two-columns-with-label'>
                         <div>
-                            <label htmlFor="email" >Email</label>
+                            <label className='label-form' htmlFor="email" >Email</label>
                             <input
                                 id="email"
                                 type="email"
@@ -97,7 +97,7 @@ const CreateUser = () => {
                             />
                         </div>
                         <div>
-                            <label htmlFor="password" >Contraseña</label>
+                            <label className='label-form' htmlFor="password" >Contraseña</label>
                             <input
                                 id="password"
                                 type="password"
@@ -110,9 +110,9 @@ const CreateUser = () => {
                             />
                         </div>
                     </div>
-                    <div>
+                    <div className='form-row-two-columns-with-label'>
                         <div>
-                            <label htmlFor="address" >Direccion</label>
+                            <label className='label-form' htmlFor="address" >Direccion</label>
                             <input
                                 id="address"
                                 type="text"
@@ -124,7 +124,7 @@ const CreateUser = () => {
                             />
                         </div>
                         <div>
-                            <label htmlFor="phone">Telefono</label>
+                            <label className='label-form' htmlFor="phone">Telefono</label>
                             <input
                                 id="phone"
                                 type="text"
@@ -137,9 +137,9 @@ const CreateUser = () => {
                         </div>
                     </div>
 
-                    <div>
+                    <div className='form-row-two-columns-with-label'>
                         <div>
-                            <label htmlFor="">C.I</label>
+                            <label className='label-form' htmlFor="">C.I</label>
                             <input
                                 type="text"
                                 value={ci}
@@ -151,7 +151,7 @@ const CreateUser = () => {
                         </div>
 
                         <div>
-                            <label htmlFor="rol">Rol:</label>
+                            <label className='label-form' htmlFor="rol">Rol:</label>
                             <select
                                 id="rol"
                                 onChange={handleValuesChange}

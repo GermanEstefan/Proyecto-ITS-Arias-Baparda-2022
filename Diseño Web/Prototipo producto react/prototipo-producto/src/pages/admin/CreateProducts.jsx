@@ -3,12 +3,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react'
 import { useEffect } from 'react';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { fetchApi } from '../../API/api';
 import ContainerBase from '../../components/admin/ContainerBase';
 import { useForm } from '../../hooks/useForm';
 
 const CreateProducts = () => {
 
+    const navigate = useNavigate();
     const [valuesForm, setValuesForm] = useState({ categorys: [], sizes: [], designs: [] });
     const { categorys, sizes, designs } = valuesForm
 
@@ -97,21 +99,21 @@ const CreateProducts = () => {
         <ContainerBase>
             <section className='container_section create-product'>
 
-                <h1>Crear producto</h1>
-                <p>Completar todo los campos</p>
+                <h1 className='title-promo-product'>Crear producto</h1>
+                <p className='text-promo-product'>Completar todo los campos</p>
 
                 <div className='create-product_container'>
 
-                    <ul>
-                        <li className='product' >PRODUCTO</li>
-                        <li className='promo' >PROMO</li>
+                    <ul className="switch-form">
+                        <li className='product' onClick={() => navigate('/admin/products/create')} >PRODUCTO</li>
+                        <li className='promo' onClick={() => navigate('/admin/products-promo/create')} >PROMO</li>
                     </ul>
 
-                    <form autoComplete='off' className='create-product_container_form-product' onSubmit={handleSubmitProduct}>
+                    <form autoComplete='off' className='flex-column-center-xy' onSubmit={handleSubmitProduct}>
 
-                        <div className='create-product_container_form-product_row'>
+                        <div className='form-row-two-columns-with-label'>
                             <div>
-                                <label htmlFor="">Id Producto</label>
+                                <label htmlFor="" className='label-form'>Id Producto</label>
                                 <input
                                     className='input-form'
                                     type="text"
@@ -122,7 +124,7 @@ const CreateProducts = () => {
                                 />
                             </div>
                             <div>
-                                <label htmlFor="">Nombre</label>
+                                <label htmlFor="" className='label-form'>Nombre</label>
                                 <input
                                     type="text"
                                     className='input-form'
@@ -134,9 +136,9 @@ const CreateProducts = () => {
                             </div>
                         </div>
 
-                        <div className='create-product_container_form-product_row'>
+                        <div className='form-row-two-columns-with-label'>
                             <div>
-                                <label htmlFor="">Precio unitario</label>
+                                <label htmlFor="" className='label-form'>Precio unitario</label>
                                 <input
                                     type="text"
                                     className='input-form'
@@ -147,7 +149,7 @@ const CreateProducts = () => {
                                 />
                             </div>
                             <div>
-                                <label htmlFor="">Categoria</label>
+                                <label htmlFor="" className='label-form'>Categoria</label>
                                 <select
                                     className='select-form'
                                     name='prodCategory'
@@ -168,19 +170,15 @@ const CreateProducts = () => {
                             </div>
 
                         </div>
-
-                        <hr />
-
-
-
+                        
                         <div className='create-product_container_form-product_lines'>
-                            <FontAwesomeIcon className='create-product_container_form-product_lines_add' icon={faPlusCircle} onClick={handleAddLine} />
+                            <FontAwesomeIcon className='add-lines' icon={faPlusCircle} onClick={handleAddLine} />
                             {
                                 amountLines.map((line, i) => (
                                     <div className='create-product_container_form-product_lines_row3'>
 
                                         <div >
-                                            <label htmlFor="">Talle</label>
+                                            <label htmlFor="" className='label-form'>Talle</label>
                                             <select required className='select-form' name='prodSize' onChange={(e) => handleChangeValueOfLines(e, i)} value={line.prodSize} >
                                                 <option value="" selected disabled>Seleccione</option>
                                                 {
@@ -192,7 +190,7 @@ const CreateProducts = () => {
                                         </div>
 
                                         <div>
-                                            <label htmlFor="">Diseño</label>
+                                            <label htmlFor="" className='label-form'>Diseño</label>
                                             <select required className='select-form' onChange={(e) => handleChangeValueOfLines(e, i)} name='prodDesign' value={line.prodDesign}>
                                                 <option value="" selected disabled>Seleccione</option>
                                                 {
@@ -204,11 +202,11 @@ const CreateProducts = () => {
                                         </div>
 
                                         <div>
-                                            <label htmlFor="">Stock</label>
+                                            <label htmlFor="" className='label-form'>Stock</label>
                                             <input required type="text" onChange={(e) => handleChangeValueOfLines(e, i)} className='input-form' name='stock' value={line.stock} />
                                         </div>
 
-                                        {(i != 0) && <FontAwesomeIcon onClick={() => handleDeleteLine(i)} icon={faXmark} />}
+                                        {(i != 0) && <FontAwesomeIcon className='remove-lines' onClick={() => handleDeleteLine(i)} icon={faXmark} />}
 
                                     </div>
                                 ))
@@ -216,7 +214,7 @@ const CreateProducts = () => {
                         </div>
 
                         <div className='create-product_container_form-product_txtarea'>
-                            <label>Descripcion</label>
+                            <label className='label-form'>Descripcion</label>
                             <textarea
                                 className='textarea-form'
                                 value={description}

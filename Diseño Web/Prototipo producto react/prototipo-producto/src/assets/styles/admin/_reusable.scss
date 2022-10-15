@@ -65,7 +65,11 @@
         color: black;
     }
 }
-
+.label-form{
+    font-weight: bold;
+    font-size: 1.1rem;
+    margin-bottom: 5px;
+}
 .table-template{
     border-radius: 5px;
     th,td{
@@ -128,5 +132,17 @@
         span{
             margin-top: 20px;
         }
+    }
+}
+
+.form-row-two-columns-with-label{
+    display: flex;
+    margin: 20px 0;
+    width: 100%;
+    div {
+        display: flex;
+        flex-direction: column;
+        width: 50%;
+        margin-right: 15px;
     }
 }

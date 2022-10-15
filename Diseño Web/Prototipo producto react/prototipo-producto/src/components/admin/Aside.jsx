@@ -6,7 +6,7 @@ import {  useLocation, useNavigate } from "react-router-dom";
 
 const Aside = () => {
 
-    const visibilityInit = { users: false, generals: false, products: false, shipments: false }
+    const visibilityInit = { users: false, generals: false, products: false, "products-promo":false, shipments: false }
     const [visibility, setVisibility] = useState(visibilityInit);
     const [actualPageAndAction, setActualPageAndAction] = useState({action: '', page: ''});
     const {action, page} = actualPageAndAction;
@@ -18,6 +18,7 @@ const Aside = () => {
     useEffect(() => {
         const actualPathSplitted = location.pathname.split('/').slice(1);
         if(actualPathSplitted.length === 1) return;
+        console.log(actualPathSplitted[1])
         setVisibility({...visibilityInit, [actualPathSplitted[1]]:true })
         setActualPageAndAction({action : actualPathSplitted[2], page: actualPathSplitted[1] })
         //alert(actualPathSplitted)    
@@ -87,13 +88,13 @@ const Aside = () => {
                         <FontAwesomeIcon icon={faChevronDown} className="aside_menu_item_container_icon2"/>
                     </div>
                     {
-                        visibility.products
+                        (visibility.products || visibility["products-promo"])
                         &&
                         <ul>
                             <li 
                                 onClick={() => navigate('/admin/products/create') }
-                                className={ (action === 'create' && page === 'products') ? 'selected' : '' }
-                            >Añadir un nuevo producto</li>
+                                className={ (action === 'create' && page === 'products' || page === 'products-promo') ? 'selected' : '' }
+                            >Añadir un nuevo producto / promo</li>
 
                             <li 
                                 onClick={() => navigate('/admin/products/list') }
