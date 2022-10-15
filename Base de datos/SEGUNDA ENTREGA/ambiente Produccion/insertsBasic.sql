@@ -14,9 +14,7 @@ INSERT INTO `bindev`.`user` (`email`, `name`, `surname`, `address`, `phone`, `pa
 INSERT INTO `bindev`.`user` (`email`, `name`, `surname`, `address`, `phone`, `password`) VALUES ('Agonzalez@seguridadcorporal.com', 'Ana', 'Gonzalez', 'ADA', '123123321', 'agonzalez');
 INSERT INTO `bindev`.`user` (`email`, `name`, `surname`, `address`, `phone`, `password`) VALUES ('Nhernandez@seguridadcorporal.com', 'Nora', 'Hernandez', 'UTU', '123123123', 'nhernandez');
 INSERT INTO `bindev`.`user` (`email`, `name`, `surname`, `address`, `phone`, `password`) VALUES ('Bgates@seguridadcorporal.com', 'Bill', 'Gates', 'Estados Unidos', '1234567890000', 'bgates');
-INSERT INTO `bindev`.`role` (`name_role`, `description`) VALUES ('VENDEDOR', 'EL VENDEDOR');
-INSERT INTO `bindev`.`role` (`name_role`, `description`) VALUES ('COMPRADOR', 'EL COMPRADOR');
-INSERT INTO `bindev`.`role` (`name_role`, `description`) VALUES ('JEFE', 'EL JEFE');
+INSERT INTO `bindev`.`user` (`email`, `name`, `surname`, `address`, `phone`, `password`) VALUES ('Matias4371@gmail.com', 'Ignacio', 'Armand-ugón', 'Carlos A. López 4371', '123456789', '1234567');
 INSERT INTO `bindev`.`photos` (`name`, `description`) VALUES ('Remera roja', 'Foto de una remera');
 INSERT INTO `bindev`.`photos` (`name`, `description`) VALUES ('Remera azul', 'Foto de una remera');
 INSERT INTO `bindev`.`photos` (`name`, `description`) VALUES ('Remera verde', 'Foto de una remera');
@@ -28,7 +26,7 @@ INSERT INTO `bindev`.`photos` (`name`, `description`) VALUES ('Remera negra', 'F
 INSERT INTO `bindev`.`photos` (`name`, `description`) VALUES ('Categoria REMERAS', 'Foto de categoria');
 INSERT INTO `bindev`.`photos` (`name`, `description`) VALUES ('Categoria BUZOS', 'Foto de categoria');
 INSERT INTO `bindev`.`photos` (`name`, `description`) VALUES ('Categoria PANTALON', 'Foto de categoria');
-INSERT INTO `bindev`.`category` (`id_category`, `name`, `description`, `picture`) VALUES ('1', 'REMERAS', 'LAS MEJORES REMERAS','919');
+INSERT INTO `bindev`.`category` (`id_category`, `name`, `description`, `picture`) VALUES ('10', 'REMERAS', 'LAS MEJORES REMERAS','919');
 INSERT INTO `bindev`.`category` (`id_category`, `name`, `description`, `picture`) VALUES ('2', 'BUZOS', 'LOS MEJORES BUZOS','919');
 INSERT INTO `bindev`.`category` (`id_category`, `name`, `description`, `picture`) VALUES ('3', 'CHALECOS', 'LOS MEJORES CHALECOS','919');
 INSERT INTO `bindev`.`category` (`id_category`, `name`, `description`, `picture`) VALUES ('4', 'PANTALONES', 'LOS MEJORES PANTALONES','919');
@@ -41,7 +39,7 @@ INSERT INTO `bindev`.`category` (`id_category`, `name`, `description`, `picture`
 INSERT INTO `bindev`.`category` (`id_category`, `name`, `description`, `picture`) VALUES ('1001', 'PROMO PYME', 'PROMO PARA PEQUEÑAS EMPRESAS','');
 INSERT INTO `bindev`.`category` (`id_category`, `name`, `description`, `picture`) VALUES ('1002', 'PROMO MEDIUM', 'PROMO PARA EMPRESAS RECONOCIDAS','921');
 INSERT INTO `bindev`.`category` (`id_category`, `name`, `description`, `picture`) VALUES ('1003', 'BIG PROMO', 'PROMO PARA EMPRESAS LIDERES','');
-INSERT INTO `bindev`.`size` (`id_size`, `name`, `description`) VALUES ('1', 'XS', 'extra small');
+INSERT INTO `bindev`.`size` (`id_size`, `name`, `description`) VALUES ('10', 'XS', 'extra small');
 INSERT INTO `bindev`.`size` (`id_size`, `name`, `description`) VALUES ('2', 'S', 'small');
 INSERT INTO `bindev`.`size` (`id_size`, `name`, `description`) VALUES ('3', 'M', 'medium');
 INSERT INTO `bindev`.`size` (`id_size`, `name`, `description`) VALUES ('4', 'L', 'large');
@@ -112,4 +110,3 @@ INSERT INTO `bindev`.`employee` (`ci`, `employee_user`, `employee_role`, `state`
 INSERT INTO `bindev`.`employee` (`ci`, `employee_user`, `employee_role`, `state`) VALUES ('12345011', '5011', 'comprador', '1');
 INSERT INTO `bindev`.`employee` (`ci`, `employee_user`, `employee_role`, `state`) VALUES ('12345012', '5012', 'comprador', '0');
 INSERT INTO `bindev`.`employee` (`ci`, `employee_user`, `employee_role`, `state`) VALUES ('12345013', '5013', 'vendedor', '1');
-
