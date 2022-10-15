@@ -10,7 +10,7 @@ import ProductCard from "../../components/store/ProductCard";
 const CategoryPage = () => {
   const { category } = useParams();
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage, setItemsPerPage] = useState(3);
+  const [itemsPerPage, setItemsPerPage] = useState(1);
   const [productList, setProductList] = useState([]);
 
   useEffect(() => {
@@ -140,14 +140,18 @@ const CategoryPage = () => {
     setCurrentPage(currentPage + number);
   };
 
-  console.log(productList)
   return (
     <ContainerBase>
       <div className="main">
         <PageTitle title={category} isArrow={true} />
 
         <div className="card-container">
-          {productList.map((product, index) => {
+          {
+            productList.length === 0 && (
+              <p>No hay productos en esta categoría</p>
+            )
+          }
+          {currentItems.map((product, index) => {
             return (
               <ProductCard
                 className="animate__animated animate__bounce"
@@ -160,12 +164,13 @@ const CategoryPage = () => {
             );
           })}
         </div>
+        {productList.length !== 0 && 
           <Pagination
             currentPage={currentPage}
             itemsPerPage={itemsPerPage}
             totalItems={productList.length}
             paginate={paginate}
-          />
+          />}
       </div>
     </ContainerBase>
   );
