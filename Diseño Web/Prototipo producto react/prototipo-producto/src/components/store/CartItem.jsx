@@ -1,9 +1,22 @@
-import React from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Animated } from "react-animated-css";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const CartItem = ({ img, product, precio, id }) => {
+const CartItem = ({ img, product, precio, barcode, index}) => {
+  const [cart, setCart] = useState(() => {
+    const saved = localStorage.getItem("cart");
+    const initialValue = JSON.parse(saved);
+    return initialValue || [];
+  });
+
+  const handleDeleteItemFromCart = (e) => {
+    e.preventDefault();
+    console.log(cart);
+    console.log(index)
+    setCart(cart.filter(barcodeObj => barcodeObj.barcode !== barcode));
+    localStorage.setItem("cart", JSON.stringify(cart));
+  };
 
   return (
     <Animated
@@ -20,9 +33,12 @@ const CartItem = ({ img, product, precio, id }) => {
           <p>{precio}$</p>
         </div>
         <div className="CartItem__actions">
-          <input className="CartItem__actionsAmount" type="number" />
+          <input className="CartItem__actionsAmount" value={1} type="number" />
           <button>Pagar</button>
-          <button className="CartItem__actionsAmount">
+          <button
+            className="CartItem__actionsAmount"
+            onClick={(e) => handleDeleteItemFromCart(e)}
+          >
             <FontAwesomeIcon icon={faTrash} />
           </button>
         </div>

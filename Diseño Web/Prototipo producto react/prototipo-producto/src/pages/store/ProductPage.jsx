@@ -10,11 +10,7 @@ const ProductPage = () => {
   const { userData } = useContext(userStatusContext);
   const { category, id } = useParams();
 
-  const [cart, setCart] = useState(() => {
-    const saved = localStorage.getItem("cart");
-    const initialValue = JSON.parse(saved);
-    return initialValue || [{}];
-  });
+  const [cart, setCart] = useState( JSON.parse(localStorage.getItem("cart") || []) );
   const [product, setProduct] = useState({});
 
   useEffect(() => {
@@ -25,12 +21,12 @@ const ProductPage = () => {
   const getProductById = async () => {
     const resp = await fetchApi(`products.php?idProduct=${id}`, "GET");
     console.log(resp);
-    setProduct(resp.result.data[0]);
-    console.log(resp.result.data[0]);
+    setProduct(resp.result.data[0] ? resp.result.data[0] : {});
   };
 
   const handleAddToCart = () => {
-    setCart([...cart, { id: new Date() }]);
+    setCart([...cart, { barcode: product.barcode }]);
+    console.log('habdl')
     localStorage.setItem("cart", JSON.stringify(cart));
   };
 
@@ -59,13 +55,15 @@ const ProductPage = () => {
               </button>
               <button
                 className="addBtn"
-                disabled={!userData.auth}
+                // disabled={cart.find(
+                //   (barcode) => barcode.barcode == product.barcode
+                // )}
                 onClick={handleAddToCart}
               >
                 Agregar al carrito
               </button>
-              {!userData.auth && (
-                <p>Registrate e ingresa para comenzar a comprar</p>
+              {cart.find((barcode) => barcode.barcode === product.barcode) && (
+                <p>Este producto ya está en tu carrito</p>
               )}
             </div>
           </div>

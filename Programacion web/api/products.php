@@ -20,7 +20,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $product->saveProduct($productData);
         die();
     }     
-}else if($_SERVER['REQUEST_METHOD'] === 'GET'){
+}
+else if($_SERVER['REQUEST_METHOD'] === 'GET'){
+    //GETS FOR PROMOS
+    if(isset($_GET['idPromo'])){
+        $idProductOfPromo = $_GET['idPromo'];
+        $product->getAllProductsOfPromo($idProductOfPromo);
+        die();
+    }
+    if(isset($_GET['activePromo'])){
+        $product->getAllActivePromos();
+        die();
+    }
+    if(isset($_GET['disablePromo'])){
+        $product->getAllDisablePromos();
+        die();
+    }
+    //GETS FOR PRODUCTS
     if(isset($_GET['disable'])){
         $product->getDisableProducts();
         die();
@@ -41,9 +57,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
     if(isset($_GET['idProduct'])){
         $idProduct = $_GET['idProduct'];
-        $product->getProductById($idProduct);
+        $product->getModelsOfProduct($idProduct);
         die();
     }
+    if(isset($_GET['idProductBack'])){
+        $idProduct = $_GET['idProductBack'];
+        $product->getAllModelsOfProduct($idProduct);
+        die();
+    }
+    //GETS PROMO OF PRODUCTS BY STRONG ATTRIBUTES
     if(isset($_GET['sizeName'])){
         $Size = $_GET['sizeName'];
         $product->getProductByNameSize($nameSize);
@@ -59,7 +81,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $product->getProductsByNameCategoy($nameCategory);
         die();
     }
-    $product->getProducts();
+    $product->getActiveProducts();
+    
+        
 }else if($_SERVER['REQUEST_METHOD'] === 'PATCH'){
     if(!isset($_GET['barcode']) && !isset($_GET['idProduct'])){
         echo $response->error203("Error falta especificar tipo de atributo");    

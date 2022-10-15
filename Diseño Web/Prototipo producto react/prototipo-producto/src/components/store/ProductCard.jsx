@@ -5,7 +5,6 @@ import Card from "./Card";
 import { Animated } from "react-animated-css";
 
 const ProductCard = ({ img, product, description, id }) => {
-  
   const { category } = useParams();
   const isMobile = useMediaQuery({ query: "(max-width: 700px)" });
 
@@ -17,7 +16,7 @@ const ProductCard = ({ img, product, description, id }) => {
       isVisible={true}
     >
       {isMobile ? (
-        <Card img={img} title={product} id={id}  />
+        <Card img={img} title={product} to={`${product}/${id}`} />
       ) : (
         <div className="product-card">
           <img src={img} width="200px" alt="" />

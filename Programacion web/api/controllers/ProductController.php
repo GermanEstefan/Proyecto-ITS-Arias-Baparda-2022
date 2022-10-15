@@ -89,7 +89,6 @@ class ProductController
                 echo $this->response->error203("La categoria con el ID: $prodCategory no existe");
                 die();
             }
-
             //Valido que exista el diseño
             $designExist = DesignModel::getDesignById($prodDesign);
             if (!$designExist) {
@@ -207,7 +206,48 @@ class ProductController
         echo $this->response->successfully("Promo creado con exito");
     }
     //CONSULTAS
-    //TODOS LOS PRODUCTOS INGRESADOS EN EL SISTEMA
+
+    //Get consumido por parte del cliente 
+    public function getModelsOfProduct($idProduct)
+    {
+        $product = ProductModel::getActiveModelsOfProductById($idProduct);
+        if (!$product) {
+            echo $this->response->error203("No| existe producto con ID = $idProduct");
+            die();
+        }
+        //Data en comun
+        $name = $product[0]["name"];
+        $description = $product[0]["description"];
+        //Array de modelos
+        $models = array();
+        foreach($product as $modelOfProduct){
+            array_push( $models, array( "size" => $modelOfProduct['product_size'],"design" => $modelOfProduct['product_design'],"barcode" => $modelOfProduct["barcode"],"stock" => $modelOfProduct['stock'],"price" => $modelOfProduct["price"] ));
+        }
+        $response = array("name" => $name, "description" => $description, "models" => $models);
+
+        echo $this->response->successfully("Productos obtenidos", $response);
+    }
+    //Get consumido por parte de la empresa
+    public function getAllModelsOfProduct($idProduct)
+    {
+        $product = ProductModel::getAllModelsOfProductById($idProduct);
+        if (!$product) {
+            echo $this->response->error203("No existe producto con ID = $idProduct");
+            die();
+        }
+        //Data en comun
+        $name = $product[0]["name"];
+        $description = $product[0]["description"];
+        //Array de modelos
+        $models = array();
+        foreach($product as $modelOfProduct){
+            array_push( $models, array( "size" => $modelOfProduct['product_size'],"design" => $modelOfProduct['product_design'],"barcode" => $modelOfProduct["barcode"],"stock" => $modelOfProduct['stock'],"price" => $modelOfProduct["price"],"state" => $modelOfProduct["state"] ));
+        }
+        $response = array("name" => $name, "description" => $description, "models" => $models);
+
+        echo $this->response->successfully("Productos obtenidos", $response);
+    }
+    //TODOS LOS GETS DE PRODUCTOS
     public function getAllProducts()
     {
         $products = ProductModel::getAllProducts();
@@ -215,17 +255,32 @@ class ProductController
         die();
     }
     //PRODUCTOS ACTIVOS
-    public function getProducts()
+    public function getActiveProducts()
     {
         $products = ProductModel::getAllProductsActive();
         echo $this->response->successfully("Productos obtenidos:", $products);
         die();
     }
     //PRODUCTOS INACTIVOS
-    public function getDisableProducts()
-    {
+    public function getDisableProducts(){
         $products = ProductModel::getAllProductsDisable();
         echo $this->response->successfully("Productos Obtenidos:", $products);
+        die();
+    }
+    //TODOS LOS GETS DE PROMOS
+    public function getAllProductsOfPromo($idProduct){//CORREGIR
+        $products = ProductModel::getAllProductsOfPromoById($idProduct);
+        echo $this->response->successfully("Todos los productos de la promo:", $products);
+        die();
+    }
+    public function getAllDisablePromos(){
+        $products = ProductModel::getAllDisablePromos();
+        echo $this->response->successfully("Todos las promos incativas", $products);
+        die();
+    }
+    public function getAllActivePromos(){
+        $products = ProductModel::getAllActivePromos();
+        echo $this->response->successfully("Todos las promos activas:", $products);
         die();
     }
     //PRODUCTOS PARA LA CATEGORIA DE NOMBRE:
@@ -255,15 +310,7 @@ class ProductController
         echo $this->response->successfully("Productos obtenidos:", $products);
         die();
     }
-    public function getProductById($idProduct)
-    {
-        $product = ProductModel::getProductById($idProduct);
-        if (!$product) {
-            echo $this->response->error203("No existe producto con ID = $idProduct");
-            die();
-        }
-        echo $this->response->successfully("Productos obtenidos", $product);
-    }
+    
     public function getProductByBarcode($barcode)
     {
         $product = ProductModel::getProductByBarcode($barcode);

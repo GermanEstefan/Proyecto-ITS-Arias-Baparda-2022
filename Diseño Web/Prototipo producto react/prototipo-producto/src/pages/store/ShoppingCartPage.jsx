@@ -1,15 +1,23 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Guantes from "../../assets/img/guantes.jpg";
 import PageTitle from "../../components/store/PageTitle";
 import ContainerBase from "../../components/store/ContainerBase";
 import CartItem from "../../components/store/CartItem";
 import CartDetails from "../../components/store/CartDetails";
-
+import { fetchApi } from "../../API/api";
 
 const ShoppingCartPage = () => {
   useEffect(() => {
     window.scroll(0, 0);
   }, []);
+
+  const [cart, setCart] = useState(() => {
+    const saved = localStorage.getItem("cart");
+    const initialValue = JSON.parse(saved);
+    return initialValue || [];
+  });
+
+  //promise.ALL
 
   //Traemos la lista de productos del usuario
 
@@ -46,7 +54,9 @@ const ShoppingCartPage = () => {
     },
   ];
 
-  const total = productList.map(product => product.precio).reduce((a, b) => a + b)
+  const total = productList
+    .map((product) => product.precio)
+    .reduce((a, b) => a + b);
 
   return (
     <ContainerBase>
@@ -54,8 +64,13 @@ const ShoppingCartPage = () => {
         <PageTitle title={"Carrito"} isArrow={true} arrowGoTo={`/`} />
         <div className="cartPage">
           <CartDetails total={total} />
-          {productList.map((product) => (
-            <CartItem product={product.name} img={Guantes} precio={product.precio} />
+          {cart.map((product, index) => (
+            <CartItem
+              index={index}
+              product={product.barcode}
+              img={Guantes}
+              barcode={product.barcode}
+            />
           ))}
         </div>
       </div>

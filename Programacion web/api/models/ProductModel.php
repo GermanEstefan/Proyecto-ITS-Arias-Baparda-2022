@@ -53,6 +53,7 @@
             and p.barcode = '$barcode'";
             return $conecction->getData($query)->fetch_assoc();
         }
+        //SOLO SE UTILIZA PARA VALIDAR QUE EL PRODUCTO EXISTA
         public static function getProductById($idProduct){
             $conecction = new Connection();
             $query = "SELECT  p.barcode ,p.id_product,p.name, d.name as diseño,s.name as talle,p.price,p.stock,c.name as categoria,p.description,p.state from product p
@@ -62,7 +63,37 @@
             on p.product_category = c.id_category 
             and p.product_design = d.id_design 
             and p.product_size = s.id_size  
-            and p.id_product = '$idProduct'";
+            and p.idProduct = '$idProduct'";
+            return $conecction->getData($query)->fetch_assoc();
+        }
+        //Consulta para nacho prod y sus modelo por id 
+        public static function getActiveModelsOfProductById($idProduct){
+            $conecction = new Connection();
+            $query = "SELECT 
+            p.name,
+            p.description,
+            p.barcode,
+            p.product_design,
+            p.product_size, 
+            p.stock,
+            p.price
+            from product p 
+            where id_product = $idProduct and state = 1";
+            return $conecction->getData($query)->fetch_all(MYSQLI_ASSOC);
+        }
+        public static function getAllModelsOfProductById($idProduct){
+            $conecction = new Connection();
+            $query = "SELECT 
+            p.name,
+            p.description,
+            p.barcode,
+            p.product_design,
+            p.product_size, 
+            p.stock,
+            p.price,
+            p.state
+            from product p 
+            where id_product = $idProduct";
             return $conecction->getData($query)->fetch_all(MYSQLI_ASSOC);
         }
         public static function getProductByName($name){
@@ -75,6 +106,50 @@
             and p.product_design = d.id_design 
             and p.product_size = s.id_size  
             and p.name = '$name'";
+            return $conecction->getData($query)->fetch_all(MYSQLI_ASSOC);
+        }
+        public static function getAllProductsOfPromoById($idProduct){
+            $conecction = new Connection();
+            $query = "SELECT
+            pr.is_product as CodBarraPROMO,
+            p1.stock as stockPromo,
+            p1.name as namePromo,
+            pr.have_product as barcodeProd,
+            pr.quantity as Cantidad,
+            p3.id_product as ID,p3.name as Name_product,
+            s.name, c.name ,d.name
+            FROM promo pr, product p1, product p2 , product p3, design d, category c, size s
+            WHERE p1.barcode = pr.is_product 
+            and p2.barcode = pr.have_product 
+            and p1.id_product = $idProduct 
+            and pr.have_product = p3.barcode 
+            and c.id_category = p3.product_category 
+            and d.id_design = p3.product_design 
+            and s.id_size = p3.product_size";
+            return $conecction->getData($query)->fetch_all(MYSQLI_ASSOC);
+        }
+        public static function getAllActivePromos(){
+            $conecction = new Connection();
+            $query = "SELECT  p.barcode ,p.id_product,p.name, d.name as diseño,s.name as talle,p.price,p.stock,c.name as categoria,p.description,p.state from product p
+            inner join category c
+            inner join design d
+            inner join size s
+            on p.product_category = c.id_category 
+            and p.product_design = d.id_design 
+            and p.product_size = s.id_size
+            and p.state = 1";
+            return $conecction->getData($query)->fetch_all(MYSQLI_ASSOC);
+        }
+        public static function getAllDisablePromos(){
+            $conecction = new Connection();
+            $query = "SELECT  p.barcode ,p.id_product,p.name, d.name as diseño,s.name as talle,p.price,p.stock,c.name as categoria,p.description,p.state from product p
+            inner join category c
+            inner join design d
+            inner join size s
+            on p.product_category = c.id_category 
+            and p.product_design = d.id_design 
+            and p.product_size = s.id_size
+            and p.state = 1";
             return $conecction->getData($query)->fetch_all(MYSQLI_ASSOC);
         }
         public static function getAllProducts(){
