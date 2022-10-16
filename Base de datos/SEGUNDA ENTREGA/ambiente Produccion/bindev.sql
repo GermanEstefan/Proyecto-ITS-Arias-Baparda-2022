@@ -419,10 +419,12 @@ DROP TRIGGER IF EXISTS `bindev`.`ProdDispoParaPromo`;
 
 DELIMITER $$
 USE `bindev`$$
-CREATE DEFINER = CURRENT_USER TRIGGER `bindev`.`ProdDispoParaPromo` BEFORE INSERT ON `promo` FOR EACH ROW
-BEGIN
+CREATE DEFINER=`root`@`localhost` TRIGGER `bindev`.`ProdDispoParaPromo` BEFORE INSERT ON `promo` FOR EACH ROW
+BEGIN 
 declare stockTempo int;
-set stockTempo = (select stock from product where new.have_product = barcode)-new.quantity;
+declare cantUnidPromo int;
+set cantUnidPromo = (Select stock from product where new.is_product = barcode);
+set stockTempo = (select stock from product where new.have_product = barcode)-(new.quantity * cantUnidPromo);
 if (new.quantity <=0) then
 SIGNAL SQLSTATE '45002' SET message_text = 'CANTIDAD INCORRECTA';
 else
@@ -434,6 +436,7 @@ END if;
 END if;
 end$$
 DELIMITER ;
+
 -- -----------------------------------------------------
 -- INSERT BASICOS PARA CONFIGURACION INICIAL DEL SISTEMA
 -- -----------------------------------------------------
