@@ -10,18 +10,26 @@ $product = new ProductController();
 $bodyOfRequest = file_get_contents('php://input'); //Obtiene el body de la request sin procesar(JSON).
 $productData = json_decode($bodyOfRequest, 1); //Transforma el JSON en un array asosciativo.
 $promoData =  json_decode($bodyOfRequest, 1);
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+if ($_SERVER['REQUEST_METHOD'] === 'POST'){
+    if(!isset($_GET['type'])){
+        echo $response->error203("Error debe indicar un Type");    
+        die();
+        }
+        $type = $_GET['type'];
+        switch ($type){    
+                case 'promo':
+                $product->savePromo($promoData);
+                die();
+                case 'product':
+                $product->saveProduct($productData);
+                die();
+                default :
+                http_response_code(400);
+                echo $response->error400("Accion no valida");
+                die();
+        }
     
-    if(isset($_GET['promo'])){
-        $product->savePromo($promoData);
-        die();
-    }
-    if(isset($_GET['product'])){
-        $product->saveProduct($productData);
-        die();
-    }     
-}
-else if($_SERVER['REQUEST_METHOD'] === 'GET'){
+}else if($_SERVER['REQUEST_METHOD'] === 'GET'){
     if(isset($_GET['idPromo'])){            //Todos los productos de una promo
         $idProduct = $_GET['idPromo'];
         $product->getProductsOfPromo($idProduct);
@@ -91,7 +99,7 @@ else if($_SERVER['REQUEST_METHOD'] === 'GET'){
     
         
 }else if($_SERVER['REQUEST_METHOD'] === 'PATCH'){
-    if(!isset($_GET['barcode']) && !isset($_GET['idProduct'])){
+    if(!isset($_GET['barcode']) || !isset($_GET['idProduct'])){
         echo $response->error203("Error falta especificar tipo de atributo");    
         die();
     }
@@ -117,25 +125,35 @@ else if($_SERVER['REQUEST_METHOD'] === 'GET'){
             echo $response->error400("Accion no valida");
             die();
         }
-    }if(isset($_GET['idProduct']) && isset($_GET['action'])){
+    }
+    if(isset($_GET['idProduct']) && isset($_GET['action'])){
         $action = $_GET['action'];
         $idProduct = $_GET['idProduct'];
         switch ($action){
-            case 'edit':
-                $product->updateLineOfProducts($idProduct,$productData);
-                die();        
-                case 'disable':
-                $product->disableLineOfProduct($idProduct);
-                die();
+                case 'edit':
+                    $product->updateLineOfProducts($idProduct,$productData);
+                    die();
+                /*case 'editPromo':
+                    $product->updatePromo($idProduct,$productData);
+                    die();
+                case 'undoPromo':
+                    $product->undoPromo($idProduct,$productData);
+                    die();
+                case 'addToPromo':
+                    $product->addToPromo($idProduct,$productData);
+                    die();            
+                */case 'disable':
+                    $product->disableLineOfProduct($idProduct);
+                    die();
                 case 'active':
-                $product->activeLineOfProduct($idProduct);
-                die();
+                    $product->activeLineOfProduct($idProduct);
+                    die();
                 default :
-                http_response_code(400);
-                echo $response->error400("Accion no valida");
-                die();
+                    http_response_code(400);
+                    echo $response->error400("Accion no valida");
+                    die();
             }
-        }
+    }
 }else{
     echo $response->error203("Metodo no permitido");
 }

@@ -350,6 +350,11 @@
             $query = "UPDATE product SET name = '$name', stock = $stock, price = $price, description = '$description' WHERE barcode = $barcode ";
             return $conecction->setData($query);
         }
+        /*public static function updateAttributesOfPROMO($idProduct, $name, $price, $description){
+            $conecction = new Connection();
+            $query = "UPDATE product SET name = '$name', stock = $stock, price = $price, description = '$description' WHERE barcode = $barcode ";
+            return $conecction->setData($query);
+        }*/
         public static function updateModel($barcode,$name,$prodDesign,$prodSize,$stock,$description){
             $conecction = new Connection();
             $query = "UPDATE product SET name = '$name', product_design = '$prodDesign', product_size = '$prodSize', stock = '$stock', description = '$description' WHERE barcode = '$barcode' ";
@@ -380,15 +385,6 @@
             $query = "UPDATE product SET state = 1 WHERE id_product = $idProduct ";
             return $conecction->setData($query);
         }
-        public static function createPromo($idProduct,$name, $stock,$price, $description){
-            $conecction = new Connection();
-            $createPromo = "INSERT INTO product (id_product, name, product_category, product_design, product_size, stock, price, description) VALUES ('$idProduct','$name',1,1,1,'$stock','$price', '$description')";
-            return $conecction->setData($createPromo);
-            if(!$createPromo){
-                return false;
-            }
-            return true;
-        }
         public static function saveByTransacction($queries){
         $conecction = new Connection();
         $instanceMySql = $conecction->getInstance();
@@ -405,6 +401,15 @@
                 $instanceMySql->rollback();
                 return false;
             }
+        }
+        public static function createPromo($idProduct,$name, $stock,$price, $description){
+            $conecction = new Connection();
+            $createPromo = "INSERT INTO product (id_product, name, product_category, product_design, product_size, stock, price, description) VALUES ('$idProduct','$name',1,1,1,'$stock','$price', '$description')";
+            return $conecction->setData($createPromo);
+            if(!$createPromo){
+                return false;
+            }
+            return true;
         }
         public static function ProductsOfPromoTransacction($queries){
             $conecction = new Connection();

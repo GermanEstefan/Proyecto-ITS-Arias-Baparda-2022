@@ -55,8 +55,8 @@ class ProductController
         if (
             !isset($productData['idProduct'])
             ||  !isset($productData['name'])
-            ||  !isset($productData['price'])
             ||  !isset($productData['stock'])
+            ||  !isset($productData['price'])
             ||  !isset($productData['description'])
             ||  !isset($productData['contains'])
         ) return false;
@@ -137,7 +137,7 @@ class ProductController
             Si no tiene token, no pasa de la funcion para abajo por que el metodo mismo le niega el acceso.
         */
         $this->jwt->verifyTokenAndGetIdUserFromRequest();
-        $bodyIsValid = $this->validateBodyOfPromo($promoData);
+        $bodyIsValid = $this->validateBodyOfPromo($promoData);  //EL CUERPO DE LA PROMO ES DIFERENTE
         if (!$bodyIsValid) {
             echo $this->response->error400('Error en los datos enviados');
             die();
@@ -152,30 +152,31 @@ class ProductController
         $queries = array();
         $index = 0;
 
-        //INSERCION DEL PRODUCTO PROMO Y OBTENCION DE SU BARCODE PARA isProduct
-        //Valido que no exista el producto que se quiere agregar como promo
+        //SE DEBE INSERTAR EL PRODUCTO PARA OBTENER BARCODE
+        //Valido que no exista
         $productPromoExist = ProductModel::getBarcodeById($idProduct);
         if ($productPromoExist) {
-            echo $this->response->error203("El promo $idProduct ya existe!");
+            echo $this->response->error203("El producto $idProduct ya existe!");
             die();
         }
 
-            $createPromo = ProductModel::createPromo($idProduct,$name,$stock,$price,$description);
-            if(!$createPromo){
-                echo $this->response->error500();
-                die();
-            }
-            $getBarcode = ProductModel::getBarcodeOfPromoByIdProduct($idProduct);
-            if(!$getBarcode){
-                echo $this->response->error203("Hubo un problema");       
-                die();
-            }
-            //Obtengo el INT de la respuesta sql ARRAY
-            $isProduct = intval($getBarcode['barcode']);
+        $createPromo = ProductModel::createPromo($idProduct,$name,$stock,$price,$description);
+        if(!$createPromo){
+            echo $this->response->error500();
+            die();
+        }
+        //buscaba el barcode del idproduc (las promos no pueden tener modelos por eso barcode e idProd es una relacion 1a1)
+        $getBarcode = ProductModel::getBarcodeById($idProduct);
+        if(!$getBarcode){
+            echo $this->response->error203("No se en cuentra el codigo para $idProduct");       
+            die();
+        }
+        //Obtengo el INT de la respuesta sql ARRAY asociativo
+        $isProduct = intval($getBarcode['barcode']);
             
             
-            //agrego productos a promo
-            foreach ($contains as $contain) {
+        //agrego productos a promo
+        foreach ($contains as $contain) {
             $haveProduct = $contain['haveProduct'];
             $quantity = $contain['quantity'];
             
@@ -183,11 +184,6 @@ class ProductController
             $productExist = ProductModel::getProductByBarcode($haveProduct);
             if (!$productExist) {
                 echo $this->response->error203("El producto $haveProduct no existe");
-                die();
-            }
-            //Valido que IsProduct no sea igual a haveProduct
-            if ($isProduct == $haveProduct) {
-                echo $this->response->error203("Error - Los Productos son iguales");
                 die();
             }
             //Valido el estado del producto que se agrega a la promo
@@ -198,9 +194,9 @@ class ProductController
             }            
             //Valido que cantidad a agregar no sea mayor a la cantidad disponible del producto
             $stockExist = ProductModel::getStockProductByBarcode($haveProduct);
-            if ($quantity>$stockExist["stock"]) {
-                
-                echo $this->response->error203("No dispone de $quantity unidades para el producto $haveProduct");
+            //ACA A QUANTITY LO TENGO QUE RECIBIR YA MULTIPLICADO O HACER if (QUNATITY*STOCK > STOCKeXIST)
+            if (($quantity*$stock)>$stockExist["stock"]) {    
+                echo $this->response->error203("No dispone de tantas unidades en el producto $haveProduct");
                 die();
             } 
             $query = array($index => "INSERT INTO promo (is_product, have_product, quantity) VALUES ($isProduct,$haveProduct, $quantity)");
@@ -458,9 +454,8 @@ class ProductController
         }
         echo $this->response->successfully("Linea de Productos actualizada exitosamente");
     }
-    //ELIMINAR
-    public function disableModel($barcode)
-    {
+    //ELIMINAR LOGICO
+    public function disableModel($barcode){
         $this->jwt->verifyTokenAndGetIdUserFromRequest();
         //Valido que exista el producto
         $productExist = ProductModel::getProductByBarcode($barcode);
@@ -507,8 +502,7 @@ class ProductController
         }
         echo $this->response->successfully("Linea de productos deshabilitados exitosamente");
     }
-    public function activeLineOfProduct($idProduct)
-    {
+    public function activeLineOfProduct($idProduct){
         $this->jwt->verifyTokenAndGetIdUserFromRequest();
         //Valido que exista el producto
         $productExist = ProductModel::getBarcodeById($idProduct);
