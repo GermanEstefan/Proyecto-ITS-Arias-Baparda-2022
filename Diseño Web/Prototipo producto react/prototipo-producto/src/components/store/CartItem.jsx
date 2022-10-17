@@ -3,18 +3,14 @@ import { Animated } from "react-animated-css";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const CartItem = ({ img, product, precio, barcode, index}) => {
-  const [cart, setCart] = useState(() => {
-    const saved = localStorage.getItem("cart");
-    const initialValue = JSON.parse(saved);
-    return initialValue || [];
-  });
+const CartItem = ({ img, product, precio, barcode, index }) => {
+  const [cart, setCart] = useState(
+    JSON.parse(localStorage.getItem("cart") || [])
+  );
 
   const handleDeleteItemFromCart = (e) => {
     e.preventDefault();
-    console.log(cart);
-    console.log(index)
-    setCart(cart.filter(barcodeObj => barcodeObj.barcode !== barcode));
+    setCart(cart.filter((barcode) => barcode !== barcode));
     localStorage.setItem("cart", JSON.stringify(cart));
   };
 
@@ -29,7 +25,7 @@ const CartItem = ({ img, product, precio, barcode, index}) => {
         <img className="cartItem__img" src={img} width="100px" alt="" />
 
         <div className="cartItem__text">
-          <h2>{product}</h2>
+          <h2>{barcode}</h2>
           <p>{precio}$</p>
         </div>
         <div className="CartItem__actions">

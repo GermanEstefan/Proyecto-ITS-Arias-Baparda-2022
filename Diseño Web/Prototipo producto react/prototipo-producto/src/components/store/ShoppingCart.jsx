@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useMediaQuery } from "react-responsive";
@@ -9,18 +9,20 @@ const ShoppingCart = () => {
 
   const isMobile = useMediaQuery({ query: "(max-width: 800px)" });
 
-  const [cart] = useState(() => {
-    const saved = localStorage.getItem("cart");
-    const initialValue = JSON.parse(saved);
-    return initialValue || [];
-  });
+  const [cart, setCart] = useState(
+    JSON.parse(localStorage.getItem("cart") || [])
+  );
+  const [cartLength, setCartLength] = useState(cart.length);
 
+  useEffect(() => {
+    setCartLength(cart.length);
+  }, [cart]);
 
   return (
     <div
       className={isMobile ? "shopping-cart-mobile" : "shopping-cart-desktop"}
     >
-      <span>{cart.length || 0}</span> {/*Este numero va a ser dinamico*/}
+      <span>{cartLength || 0}</span>
       <FontAwesomeIcon
         icon={faShoppingCart}
         onClick={() => navigate("/shoppingCart")}

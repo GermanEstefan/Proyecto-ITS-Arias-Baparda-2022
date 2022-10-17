@@ -11,11 +11,9 @@ const ShoppingCartPage = () => {
     window.scroll(0, 0);
   }, []);
 
-  const [cart, setCart] = useState(() => {
-    const saved = localStorage.getItem("cart");
-    const initialValue = JSON.parse(saved);
-    return initialValue || [];
-  });
+  const [cart, setCart] = useState(
+    JSON.parse(localStorage.getItem("cart") || [])
+  );
 
   //promise.ALL
 
@@ -64,12 +62,12 @@ const ShoppingCartPage = () => {
         <PageTitle title={"Carrito"} isArrow={true} arrowGoTo={`/`} />
         <div className="cartPage">
           <CartDetails total={total} />
-          {cart.map((product, index) => (
+          {cart.map((barcode, index) => (
             <CartItem
               index={index}
-              product={product.barcode}
+              product={barcode}
               img={Guantes}
-              barcode={product.barcode}
+              barcode={barcode}
             />
           ))}
         </div>
