@@ -441,24 +441,39 @@ DELIMITER ;
 -- INSERT BASICOS PARA CONFIGURACION INICIAL DEL SISTEMA
 -- -----------------------------------------------------
 -- -----------------------------------------------------
--- DEFINIMOS 3 USUARIOS GENERICOS PARA TENER EL MISMO INICIO DE SISTEMA 
+-- USUARIOS PARA TENER INGRESAR AL SISTEMA 
 -- ----------------------------------------------------- 
 INSERT INTO `bindev`.`user` (`email`, `name`, `surname`, `address`, `phone`, `password`) VALUES ('master@seguridadcorporal.com', 'master', 'master', 'master', '22334455', 'master');
 INSERT INTO `bindev`.`user` (`email`, `name`, `surname`, `address`, `phone`, `password`) VALUES ('ventas@seguridadcorporal.com', 'vendedor', 'vendedor', 'vendedor', '22334455', 'vendedor');
 INSERT INTO `bindev`.`user` (`email`, `name`, `surname`, `address`, `phone`, `password`) VALUES ('compras@seguridadcorporal.com', 'comprador ', 'comprador', 'comprador', '22334455', 'comprador');
-INSERT INTO `bindev`.`role` (`name_role`, `description`) VALUES ('VENDEDOR', 'EL VENDEDOR');
-INSERT INTO `bindev`.`role` (`name_role`, `description`) VALUES ('COMPRADOR', 'EL COMPRADOR');
-INSERT INTO `bindev`.`role` (`name_role`, `description`) VALUES ('JEFE', 'EL JEFE');
+INSERT INTO `bindev`.`role` (`name_role`, `description`) VALUES ('VENDEDOR', 'Personal de ventas');
+INSERT INTO `bindev`.`role` (`name_role`, `description`) VALUES ('COMPRADOR', 'Personal de compras');
+INSERT INTO `bindev`.`role` (`name_role`, `description`) VALUES ('JEFE', 'Cargo de FEJE');
+INSERT INTO `bindev`.`role` (`name_role`, `description`) VALUES ('SISTEMA', 'RESPUESTA AUTOMATICA DEL SISTEMA');
+INSERT INTO `bindev`.`EMPLOYEE` (`ci`, `employee_user`, `employee_role`) VALUES ('123', '5000', 'JEFE');
 INSERT INTO `bindev`.`EMPLOYEE` (`ci`, `employee_user`, `employee_role`) VALUES ('123', '5000', 'JEFE');
 INSERT INTO `bindev`.`EMPLOYEE` (`ci`, `employee_user`, `employee_role`) VALUES ('1234', '5001', 'VENDEDOR');
 INSERT INTO `bindev`.`EMPLOYEE` (`ci`, `employee_user`, `employee_role`) VALUES ('12345', '5002', 'COMPRADOR');
 
 -- -----------------------------------------------------
--- DEFINIMOS LOS ATRIBUTOS GENERICOS PARA PROMOCIONES. SIEMPRE VAN A SER EL TALLE DISEÑO Y CATEGORIA CON VALOR 1
+-- ATRIBUTOS BASICOS DEL SISTEMA
 -- -----------------------------------------------------
 INSERT INTO `bindev`.`category` (`name`, `description`, `picture`) VALUES ('PROMOCIONES', 'CATEGORIA DESIGNADA PARA PROMOS','https://picsum.photos/200/300');
 INSERT INTO `bindev`.`design` (`name`, `description`) VALUES ('PROMOCIONES', 'DISEÑO DESIGNADO PARA PROMOS');
 INSERT INTO `bindev`.`size` (`name`, `description`) VALUES ('PROMOCIONES', 'TALLE DESIGNADO PARA PROMOS');
+INSERT INTO `bindev`.`status` (`name`, `description`) VALUES ('Respuesta Automatica', 'Respuesta automatica del sistema');
+INSERT INTO `bindev`.`status` (`name`, `description`) VALUES ('Venta Ingresada', 'Creacion de una nueva venta');
+INSERT INTO `bindev`.`status` (`name`, `description`) VALUES ('Pendinte de cobro', 'Estado pendiente de cobro, la venta aun no fue confirmada pero su mercaderia se encuentra reservada');
+INSERT INTO `bindev`.`status` (`name`, `description`) VALUES ('Venta confirmada', 'Venta confirmada, dinero capturado, la mercaderia tiene dueño');
+INSERT INTO `bindev`.`status` (`name`, `description`) VALUES ('En transporte', 'Venta en calle, en viaje a la direccion ingresada en la venta');
+INSERT INTO `bindev`.`status` (`name`, `description`) VALUES ('Entregada', 'Entrega de la venta confirmada');
+INSERT INTO `bindev`.`status` (`name`, `description`) VALUES ('Pick UP', 'Levanta en el local');
+INSERT INTO `bindev`.`status` (`name`, `description`) VALUES ('Cancelada', 'La venta fue cancelada');
+-- -----------------------------------------------------
+-- DATOS BASICOS PARA PRUEBAS
+-- -----------------------------------------------------
+
+
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
