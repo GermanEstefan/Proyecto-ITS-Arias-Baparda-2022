@@ -367,6 +367,38 @@ CREATE TABLE IF NOT EXISTS `bindev`.`promo` (
     ON DELETE RESTRICT
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
+-- -----------------------------------------------------
+-- Table `bindev`.`productHistory`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `bindev`.`productHistory` (
+  `lineNumber` INT NOT NULL AUTO_INCREMENT,
+  `idOfProduct` INT NOT NULL,
+  `nameOfProduct` VARCHAR(500) NOT NULL,
+  `oldStock` INT NOT NULL,
+  `newStock` INT NOT NULL,
+  `oldPrice` DECIMAL(10,2) NOT NULL,
+  `newPrice` DECIMAL(10,2) NOT NULL,
+  `dateOfEdit` date,
+  PRIMARY KEY (`lineNumber`));
+ALTER TABLE productHistory
+AUTO_INCREMENT = 1000;
+-- -----------------------------------------------------
+-- Table `bindev`.`employeeHistory`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `bindev`.`employeeHistory` (
+  `lineNumber` INT NOT NULL AUTO_INCREMENT,
+  `idEmployee` INT NOT NULL,
+  `ciEmployee` INT NOT NULL,
+  `nameOfEmployee` VARCHAR(500) NOT NULL,
+  `oldRole` VARCHAR(500) NOT NULL,
+  `newRole` VARCHAR(500) NOT NULL,
+  `oldstate` TINYINT NOT NULL,
+  `newstate` TINYINT NOT NULL,
+  `dateOfEdit` date,
+  PRIMARY KEY (`lineNumber`));
+ALTER TABLE productHistory
+AUTO_INCREMENT = 2000;
+
 
 DROP TRIGGER IF EXISTS `bindev`.`sale_detail_VALIDATION`;
 DELIMITER $$
@@ -419,10 +451,12 @@ DROP TRIGGER IF EXISTS `bindev`.`ProdDispoParaPromo`;
 
 DELIMITER $$
 USE `bindev`$$
-CREATE DEFINER = CURRENT_USER TRIGGER `bindev`.`ProdDispoParaPromo` BEFORE INSERT ON `promo` FOR EACH ROW
-BEGIN
+CREATE DEFINER=`root`@`localhost` TRIGGER `bindev`.`ProdDispoParaPromo` BEFORE INSERT ON `promo` FOR EACH ROW
+BEGIN 
 declare stockTempo int;
-set stockTempo = (select stock from product where new.have_product = barcode)-new.quantity;
+declare cantUnidPromo int;
+set cantUnidPromo = (Select stock from product where new.is_product = barcode);
+set stockTempo = (select stock from product where new.have_product = barcode)-(new.quantity * cantUnidPromo);
 if (new.quantity <=0) then
 SIGNAL SQLSTATE '45002' SET message_text = 'CANTIDAD INCORRECTA';
 else
@@ -434,30 +468,52 @@ END if;
 END if;
 end$$
 DELIMITER ;
+
 -- -----------------------------------------------------
 -- INSERT BASICOS PARA CONFIGURACION INICIAL DEL SISTEMA
 -- -----------------------------------------------------
 -- -----------------------------------------------------
--- DEFINIMOS 3 USUARIOS GENERICOS PARA TENER EL MISMO INICIO DE SISTEMA 
+-- USUARIOS PARA TENER INGRESAR AL SISTEMA 
 -- ----------------------------------------------------- 
 INSERT INTO `bindev`.`user` (`email`, `name`, `surname`, `address`, `phone`, `password`) VALUES ('master@seguridadcorporal.com', 'master', 'master', 'master', '22334455', 'master');
 INSERT INTO `bindev`.`user` (`email`, `name`, `surname`, `address`, `phone`, `password`) VALUES ('ventas@seguridadcorporal.com', 'vendedor', 'vendedor', 'vendedor', '22334455', 'vendedor');
 INSERT INTO `bindev`.`user` (`email`, `name`, `surname`, `address`, `phone`, `password`) VALUES ('compras@seguridadcorporal.com', 'comprador ', 'comprador', 'comprador', '22334455', 'comprador');
-INSERT INTO `bindev`.`role` (`name_role`, `description`) VALUES ('VENDEDOR', 'EL VENDEDOR');
-INSERT INTO `bindev`.`role` (`name_role`, `description`) VALUES ('COMPRADOR', 'EL COMPRADOR');
-INSERT INTO `bindev`.`role` (`name_role`, `description`) VALUES ('JEFE', 'EL JEFE');
+INSERT INTO `bindev`.`role` (`name_role`, `description`) VALUES ('VENDEDOR', 'Personal de ventas');
+INSERT INTO `bindev`.`role` (`name_role`, `description`) VALUES ('COMPRADOR', 'Personal de compras');
+INSERT INTO `bindev`.`role` (`name_role`, `description`) VALUES ('JEFE', 'Cargo de FEJE');
+INSERT INTO `bindev`.`role` (`name_role`, `description`) VALUES ('SISTEMA', 'RESPUESTA AUTOMATICA DEL SISTEMA');
+INSERT INTO `bindev`.`EMPLOYEE` (`ci`, `employee_user`, `employee_role`) VALUES ('123', '5000', 'JEFE');
 INSERT INTO `bindev`.`EMPLOYEE` (`ci`, `employee_user`, `employee_role`) VALUES ('123', '5000', 'JEFE');
 INSERT INTO `bindev`.`EMPLOYEE` (`ci`, `employee_user`, `employee_role`) VALUES ('1234', '5001', 'VENDEDOR');
 INSERT INTO `bindev`.`EMPLOYEE` (`ci`, `employee_user`, `employee_role`) VALUES ('12345', '5002', 'COMPRADOR');
 
 -- -----------------------------------------------------
--- DEFINIMOS LOS ATRIBUTOS GENERICOS PARA PROMOCIONES. SIEMPRE VAN A SER EL TALLE DISEÑO Y CATEGORIA CON VALOR 1
+-- ATRIBUTOS BASICOS DEL SISTEMA
 -- -----------------------------------------------------
 INSERT INTO `bindev`.`category` (`name`, `description`, `picture`) VALUES ('PROMOCIONES', 'CATEGORIA DESIGNADA PARA PROMOS','https://picsum.photos/200/300');
 INSERT INTO `bindev`.`design` (`name`, `description`) VALUES ('PROMOCIONES', 'DISEÑO DESIGNADO PARA PROMOS');
 INSERT INTO `bindev`.`size` (`name`, `description`) VALUES ('PROMOCIONES', 'TALLE DESIGNADO PARA PROMOS');
+INSERT INTO `bindev`.`status` (`name`, `description`) VALUES ('Respuesta Automatica', 'Respuesta automatica del sistema');
+INSERT INTO `bindev`.`status` (`name`, `description`) VALUES ('Venta Ingresada', 'Creacion de una nueva venta');
+INSERT INTO `bindev`.`status` (`name`, `description`) VALUES ('Pendinte de cobro', 'Estado pendiente de cobro, la venta aun no fue confirmada pero su mercaderia se encuentra reservada');
+INSERT INTO `bindev`.`status` (`name`, `description`) VALUES ('Venta confirmada', 'Venta confirmada, dinero capturado, la mercaderia tiene dueño');
+INSERT INTO `bindev`.`status` (`name`, `description`) VALUES ('En transporte', 'Venta en calle, en viaje a la direccion ingresada en la venta');
+INSERT INTO `bindev`.`status` (`name`, `description`) VALUES ('Entregada', 'Entrega de la venta confirmada');
+INSERT INTO `bindev`.`status` (`name`, `description`) VALUES ('Pick UP', 'Levanta en el local');
+INSERT INTO `bindev`.`status` (`name`, `description`) VALUES ('Cancelada', 'La venta fue cancelada');
+-- -----------------------------------------------------
+-- DATOS BASICOS PARA PRUEBAS
+-- -----------------------------------------------------
+INSERT INTO `bindev`.`category` (`name`, `description`, `picture`) VALUES ('Remeras', 'CATEGORIA DESIGNADA PARA REMERAS','https://ibb.co/v33K0sM');
+INSERT INTO `bindev`.`category` (`name`, `description`, `picture`) VALUES ('Chalecos', 'CATEGORIA DESIGNADA PARA CHALECOS','https://ibb.co/KjCKRtt');
+INSERT INTO `bindev`.`category` (`name`, `description`, `picture`) VALUES ('Pantalones', 'CATEGORIA DESIGNADA PARA PANTALONES','https://ibb.co/GH5XL99');
+INSERT INTO `bindev`.`category` (`name`, `description`, `picture`) VALUES ('Guantes', 'CATEGORIA DESIGNADA PARA GUANTES','https://ibb.co/g4MtTv7');
+INSERT INTO `bindev`.`category` (`name`, `description`, `picture`) VALUES ('Cascos', 'CATEGORIA DESIGNADA PARA CASCOS','https://ibb.co/GF8P8xj');
+INSERT INTO `bindev`.`category` (`name`, `description`, `picture`) VALUES ('Zapatos', 'CATEGORIA DESIGNADA PARA ZAPATOS','https://ibb.co/GCtYNdW');
+
+
+
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
-

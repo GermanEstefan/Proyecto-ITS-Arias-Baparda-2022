@@ -9,54 +9,35 @@ import { fetchApi } from "../../API/api";
 const ShoppingCartPage = () => {
   useEffect(() => {
     window.scroll(0, 0);
+    getProductsListByBarcode();
   }, []);
 
-  const [cart, setCart] = useState(() => {
-    const saved = localStorage.getItem("cart");
-    const initialValue = JSON.parse(saved);
-    return initialValue || [];
-  });
+  const [cart, setCart] = useState(
+    JSON.parse(localStorage.getItem("cart") || [])
+  );
 
-  //promise.ALL
+  const [total, setTotal] = useState(0);
 
-  //Traemos la lista de productos del usuario
+  const [productsList, setProductsList] = useState([]);
 
-  const productList = [
-    {
-      name: "tuki",
-      precio: 100,
-      description:
-        "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quidem consequuntur animi aliquid nulla rem nostrum nesciunt voluptas ea quos quo cum, ratione non voluptatibus! Iure recusandae officiis nostrum quasi dolor.",
-    },
-    {
-      name: "flama",
-      precio: 100,
-      description:
-        "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quidem consequuntur animi aliquid nulla rem nostrum nesciunt voluptas ea quos quo cum, ratione non voluptatibus! Iure recusandae officiis nostrum quasi dolor.",
-    },
-    {
-      name: "joya",
-      precio: 100,
-      description:
-        "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quidem consequuntur animi aliquid nulla rem nostrum nesciunt voluptas ea quos quo cum, ratione non voluptatibus! Iure recusandae officiis nostrum quasi dolor.",
-    },
-    {
-      name: "fiera",
-      precio: 100,
-      description:
-        "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quidem consequuntur animi aliquid nulla rem nostrum nesciunt voluptas ea quos quo cum, ratione non voluptatibus! Iure recusandae officiis nostrum quasi dolor.",
-    },
-    {
-      name: "godines",
-      precio: 100,
-      description:
-        "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quidem consequuntur animi aliquid nulla rem nostrum nesciunt voluptas ea quos quo cum, ratione non voluptatibus! Iure recusandae officiis nostrum quasi dolor.",
-    },
-  ];
+  const getProductsListByBarcode = async () => {
+    const promises = [];
+    cart.map(({barcode}) => {
+      promises.push(fetchApi(`products.php?barcode=${barcode}`, "GET"));
+    });
+    const responses = Promise.all(promises);
 
-  const total = productList
-    .map((product) => product.precio)
-    .reduce((a, b) => a + b);
+    const products = await responses;
+    const productsData = products.map((product) => product.result.data);
+    setTotal(
+      productsData
+        .map((product) => product.price)
+        .reduce((a, b) => parseInt(a) + parseInt(b))
+    );
+    setProductsList(productsData);
+  };
+
+  //Implementar que en el carrito también se guarde la cantidad de productos que hay
 
   return (
     <ContainerBase>
@@ -64,12 +45,12 @@ const ShoppingCartPage = () => {
         <PageTitle title={"Carrito"} isArrow={true} arrowGoTo={`/`} />
         <div className="cartPage">
           <CartDetails total={total} />
-          {cart.map((product, index) => (
+          {productsList.map((product, index) => (
             <CartItem
-              index={index}
-              product={product.barcode}
+              key={index}
               img={Guantes}
-              barcode={product.barcode}
+              name={product.name}
+              price={product.price}
             />
           ))}
         </div>
