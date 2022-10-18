@@ -367,6 +367,38 @@ CREATE TABLE IF NOT EXISTS `bindev`.`promo` (
     ON DELETE RESTRICT
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
+-- -----------------------------------------------------
+-- Table `bindev`.`productHistory`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `bindev`.`productHistory` (
+  `lineNumber` INT NOT NULL AUTO_INCREMENT,
+  `idOfProduct` INT NOT NULL,
+  `nameOfProduct` VARCHAR(500) NOT NULL,
+  `oldStock` INT NOT NULL,
+  `newStock` INT NOT NULL,
+  `oldPrice` DECIMAL(10,2) NOT NULL,
+  `newPrice` DECIMAL(10,2) NOT NULL,
+  `dateOfEdit` date,
+  PRIMARY KEY (`lineNumber`));
+ALTER TABLE productHistory
+AUTO_INCREMENT = 1000;
+-- -----------------------------------------------------
+-- Table `bindev`.`employeeHistory`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `bindev`.`employeeHistory` (
+  `lineNumber` INT NOT NULL AUTO_INCREMENT,
+  `idEmployee` INT NOT NULL,
+  `ciEmployee` INT NOT NULL,
+  `nameOfEmployee` VARCHAR(500) NOT NULL,
+  `oldRole` VARCHAR(500) NOT NULL,
+  `newRole` VARCHAR(500) NOT NULL,
+  `oldstate` TINYINT NOT NULL,
+  `newstate` TINYINT NOT NULL,
+  `dateOfEdit` date,
+  PRIMARY KEY (`lineNumber`));
+ALTER TABLE productHistory
+AUTO_INCREMENT = 2000;
+
 
 DROP TRIGGER IF EXISTS `bindev`.`sale_detail_VALIDATION`;
 DELIMITER $$
@@ -472,10 +504,16 @@ INSERT INTO `bindev`.`status` (`name`, `description`) VALUES ('Cancelada', 'La v
 -- -----------------------------------------------------
 -- DATOS BASICOS PARA PRUEBAS
 -- -----------------------------------------------------
+INSERT INTO `bindev`.`category` (`name`, `description`, `picture`) VALUES ('Remeras', 'CATEGORIA DESIGNADA PARA REMERAS','https://ibb.co/v33K0sM');
+INSERT INTO `bindev`.`category` (`name`, `description`, `picture`) VALUES ('Chalecos', 'CATEGORIA DESIGNADA PARA CHALECOS','https://ibb.co/KjCKRtt');
+INSERT INTO `bindev`.`category` (`name`, `description`, `picture`) VALUES ('Pantalones', 'CATEGORIA DESIGNADA PARA PANTALONES','https://ibb.co/GH5XL99');
+INSERT INTO `bindev`.`category` (`name`, `description`, `picture`) VALUES ('Guantes', 'CATEGORIA DESIGNADA PARA GUANTES','https://ibb.co/g4MtTv7');
+INSERT INTO `bindev`.`category` (`name`, `description`, `picture`) VALUES ('Cascos', 'CATEGORIA DESIGNADA PARA CASCOS','https://ibb.co/GF8P8xj');
+INSERT INTO `bindev`.`category` (`name`, `description`, `picture`) VALUES ('Zapatos', 'CATEGORIA DESIGNADA PARA ZAPATOS','https://ibb.co/GCtYNdW');
+
 
 
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
-
