@@ -50,18 +50,29 @@ class ProductController
         ) return false;
         return $productData;
     }
-    private function validateBodyOfPromo($productData)
+    private function validateBodyOfPromo($promoData)
     {
         if (
-            !isset($productData['idProduct'])
-            ||  !isset($productData['name'])
-            ||  !isset($productData['stock'])
-            ||  !isset($productData['price'])
-            ||  !isset($productData['description'])
-            ||  !isset($productData['contains'])
+            !isset($promoData['idProduct'])
+            ||  !isset($promoData['name'])
+            ||  !isset($promoData['stock'])
+            ||  !isset($promoData['price'])
+            ||  !isset($promoData['description'])
+            ||  !isset($promoData['contains'])
         ) return false;
 
-        return $productData;
+        return $promoData;
+    }
+    private function validateBodyOfUpdatePromo($promoData)
+    {
+        if (
+            !isset($promoData['name'])
+            ||  !isset($promoData['stock'])
+            ||  !isset($promoData['price'])
+            ||  !isset($promoData['description'])
+        ) return false;
+
+        return $promoData;
     }
     //ALTA
     public function saveProduct($productData)
@@ -253,6 +264,12 @@ class ProductController
     {
         $products = ProductModel::getAllProducts();
         echo $this->response->successfully("Todos los Productos del sistema:", $products);
+        die();
+    }
+    public function getAllPromos()
+    {
+        $products = ProductModel::getAllPromos();
+        echo $this->response->successfully("Todas las Promos:", $products);
         die();
     }
     //PRODUCTOS ACTIVOS
@@ -453,6 +470,55 @@ class ProductController
             die();
         }
         echo $this->response->successfully("Linea de Productos actualizada exitosamente");
+    }
+    public function updatePromo($idProduct, $promoData)
+    {
+        $this->jwt->verifyTokenAndGetIdUserFromRequest();
+        $bodyIsValid = $this->validateBodyOfUpdatePromo($promoData);
+        if (!$bodyIsValid) {
+            echo $this->response->error400('Error en los datos enviados');
+            die();
+        }
+        $name = $promoData['name'];
+        $stock = $promoData['stock'];
+        $price = $promoData['price'];
+        $description = $promoData['description'];
+
+        //Valido que el prod exista
+        $promoExist = ProductModel::getBarcodeById($idProduct);
+        if (!$promoExist) {
+            echo $this->response->error203("Esta intentando editar una promo que no existe");
+                die();
+        }
+        $barcodePromo = $promoExist['barcode'];
+        $getStock= ProductModel::getStockProductByBarcode($barcodePromo);
+        $stockNow = intval($getStock['stock']);
+        $increse = $stock - $stockNow;
+        //valido que cuente con stock para actualizar 
+        $stockOfProductsByPromo = ProductModel::productsAndQuantityAsPromo($idProduct);
+        foreach ($stockOfProductsByPromo as $prodAndStock) {
+            $barcode = $prodAndStock['have_product'];
+            $units = $prodAndStock['quantity'];
+            $unitsNecesary = $units * $increse;
+            intval($unitsNecesary);
+            $validateStock = ProductModel::checkStock($barcode,$unitsNecesary);
+            if (!$validateStock){
+                echo $this->response->error203("No dispone de $unitsNecesary en el producto $barcode para actualizar la promo");
+                die();
+            }
+            $editStock = ProductModel::UpdateStockProductsOfPromo($barcode,$unitsNecesary);
+            if(!$editStock){
+                echo $this->response->error203("Error actualizando stock de productos de la promo");
+                die();
+            }
+            $units = 0;
+        }
+        $result = ProductModel::updatePromo($idProduct, $name, $stock, $price, $description);
+        if (!$result) {
+            echo $this->response->error500();
+            die();
+        }
+        echo $this->response->successfully("Promo actualizada exitosamente");
     }
     //ELIMINAR LOGICO
     public function disableModel($barcode){

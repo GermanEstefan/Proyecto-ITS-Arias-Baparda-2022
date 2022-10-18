@@ -84,11 +84,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
         $search = $_GET['search'];
         switch ($search){    
                 case 'disable':
-                $product->getDisableProducts();
-                die();
+                    $product->getDisableProducts();
+                    die();
                 case 'all':
-                $product->getAllProducts();
-                die();
+                    $product->getAllProducts();
+                    die();
+                case 'allPromos':
+                    $product->getAllPromos();
+                    die();
                 default :
                 http_response_code(400);
                 echo $response->error400("Accion no valida");
@@ -99,18 +102,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
     
         
 }else if($_SERVER['REQUEST_METHOD'] === 'PATCH'){
-    if(!isset($_GET['barcode']) || !isset($_GET['idProduct'])){
-        echo $response->error203("Error falta especificar tipo de atributo");    
-        die();
-    }
-    if(!isset($_GET['action'])){
-    echo $response->error203("Error falta especificar accion a realizar");    
-    die();
-    }
-    if(isset($_GET['barcode']) && isset($_GET['action'])){
-    $action = $_GET['action'];
+
+    if(isset($_GET['barcode']) && isset($_GET['actionMin'])){
+    $actionMin = $_GET['actionMin'];
     $barcode = $_GET['barcode'];
-    switch ($action){
+    switch ($actionMin){
         case 'edit':
             $product->updateModel($barcode,$productData);
             die();        
@@ -126,23 +122,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
             die();
         }
     }
-    if(isset($_GET['idProduct']) && isset($_GET['action'])){
-        $action = $_GET['action'];
+    if(isset($_GET['idProduct']) && isset($_GET['actionMax'])){
+        $actionMax = $_GET['actionMax'];
         $idProduct = $_GET['idProduct'];
-        switch ($action){
+        switch ($actionMax){
                 case 'edit':
                     $product->updateLineOfProducts($idProduct,$productData);
                     die();
-                /*case 'editPromo':
-                    $product->updatePromo($idProduct,$productData);
+                case 'editPromo':
+                    $product->updatePromo($idProduct,$promoData);
                     die();
-                case 'undoPromo':
-                    $product->undoPromo($idProduct,$productData);
+                /*case 'undoPromo':
+                    $product->undoPromo($idProduct,$promoData);
                     die();
                 case 'addToPromo':
-                    $product->addToPromo($idProduct,$productData);
-                    die();            
-                */case 'disable':
+                    $product->addToPromo($idProduct,$promoData);
+                    die();*/            
+                case 'disable':
                     $product->disableLineOfProduct($idProduct);
                     die();
                 case 'active':

@@ -23,6 +23,24 @@
             parent::__construct();
         }
         //VALIDACION Solo sirve para validar que el producto exista pasandole un ID
+        public static function productsAndQuantityAsPromo($idProduct){
+            $conecction = new Connection();
+            $query = "SELECT have_product, quantity
+            FROM promo pr,product p
+            WHERE p.id_product = $idProduct
+            AND p.barcode = pr.is_product";
+            return $conecction->getData($query)->fetch_all(MYSQLI_ASSOC);
+        }
+        public static function checkStock($barcode,$unitsNecesary){
+            $conecction = new Connection();
+            $query = "SELECT stock 
+            FROM product p
+            WHERE p.barcode = $barcode
+            AND p.stock >= $unitsNecesary";
+            return $conecction->getData($query)->fetch_assoc();
+        }
+        
+        //VALIDACION Solo sirve para validar que la promo exista pasandole un ID
         public static function getBarcodeById($idProduct){
             $conecction = new Connection();
             $query = "SELECT barcode FROM product WHERE id_product = '$idProduct' limit 1";
@@ -224,6 +242,24 @@
             AND p1.state = 0" ;
             return $conecction->getData($query)->fetch_all(MYSQLI_ASSOC);
         }
+        public static function getAllPromos(){
+            $conecction = new Connection();
+             $query = "SELECT
+             pr.is_product as CodBarraPROMO,
+             p1.name as namePromo,
+             p1.stock as stockPromo,
+             pr.have_product as barcodeProd,
+             pr.quantity,
+             p2.id_product as ID,p2.name as Name_product,
+             s.name as size,
+             d.name as design
+             FROM promo pr, product p1, product p2 , design d, size s
+             WHERE p1.barcode = pr.is_product 
+             AND p2.barcode = pr.have_product 
+             AND d.id_design = p2.product_design 
+             AND s.id_size = p2.product_size" ;
+             return $conecction->getData($query)->fetch_all(MYSQLI_ASSOC);
+         }
         public static function getAllProducts(){
             $conecction = new Connection();
             $query = "SELECT 
@@ -350,11 +386,16 @@
             $query = "UPDATE product SET name = '$name', stock = $stock, price = $price, description = '$description' WHERE barcode = $barcode ";
             return $conecction->setData($query);
         }
-        /*public static function updateAttributesOfPROMO($idProduct, $name, $price, $description){
+        public static function UpdateStockProductsOfPromo($barcode, $unitsNecesary){
             $conecction = new Connection();
-            $query = "UPDATE product SET name = '$name', stock = $stock, price = $price, description = '$description' WHERE barcode = $barcode ";
+            $query = "UPDATE product SET stock = stock - $unitsNecesary WHERE barcode = $barcode ";
             return $conecction->setData($query);
-        }*/
+        }
+        public static function updatePromo($idProduct, $name, $stock, $price, $description){
+            $conecction = new Connection();
+            $query = "UPDATE product SET name = '$name', stock = $stock, price = $price, description = '$description' WHERE id_product = $idProduct ";
+            return $conecction->setData($query);
+        }
         public static function updateModel($barcode,$name,$prodDesign,$prodSize,$stock,$description){
             $conecction = new Connection();
             $query = "UPDATE product SET name = '$name', product_design = '$prodDesign', product_size = '$prodSize', stock = '$stock', description = '$description' WHERE barcode = '$barcode' ";
