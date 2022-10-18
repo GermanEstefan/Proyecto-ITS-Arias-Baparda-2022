@@ -60,7 +60,7 @@ const CreatePromotion = () => {
         const bodyOfRequest = { ...promoGeneralValues, contains: containsPromo }
         setLoading(true);
         try {
-            const resp = await fetchApi('promo.php?promo', 'POST', bodyOfRequest);
+            const resp = await fetchApi('products.php?promo', 'POST', bodyOfRequest);
             console.log(resp)
             if (resp.status === 'error') {
                 setError({ showMessage: true, message: resp.result.error_msg, error: true });
