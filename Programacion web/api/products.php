@@ -131,13 +131,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
                     die();
                 case 'editPromo':
                     $product->updatePromo($idProduct,$promoData);
-                    die();
-                /*case 'undoPromo':
-                    $product->undoPromo($idProduct,$promoData);
-                    die();
-                case 'addToPromo':
-                    $product->addToPromo($idProduct,$promoData);
-                    die();*/            
+                    die();            
                 case 'disable':
                     $product->disableLineOfProduct($idProduct);
                     die();

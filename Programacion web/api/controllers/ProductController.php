@@ -68,10 +68,13 @@ class ProductController
         if (
             !isset($promoData['name'])
             ||  !isset($promoData['stock'])
-            ||  !isset($promoData['price'])
+            ||  !isset($promoData['price']) 
             ||  !isset($promoData['description'])
         ) return false;
-
+        $validStock = $promoData['stock'];
+        if($validStock<0){
+            return false;
+        }
         return $promoData;
     }
     //ALTA
@@ -471,8 +474,7 @@ class ProductController
         }
         echo $this->response->successfully("Linea de Productos actualizada exitosamente");
     }
-    public function updatePromo($idProduct, $promoData)
-    {
+    public function updatePromo($idProduct, $promoData){
         $this->jwt->verifyTokenAndGetIdUserFromRequest();
         $bodyIsValid = $this->validateBodyOfUpdatePromo($promoData);
         if (!$bodyIsValid) {
@@ -483,7 +485,7 @@ class ProductController
         $stock = $promoData['stock'];
         $price = $promoData['price'];
         $description = $promoData['description'];
-
+        
         //Valido que el prod exista
         $promoExist = ProductModel::getBarcodeById($idProduct);
         if (!$promoExist) {
@@ -494,32 +496,61 @@ class ProductController
         $getStock= ProductModel::getStockProductByBarcode($barcodePromo);
         $stockNow = intval($getStock['stock']);
         $increse = $stock - $stockNow;
-        //valido que cuente con stock para actualizar 
-        $stockOfProductsByPromo = ProductModel::productsAndQuantityAsPromo($idProduct);
-        foreach ($stockOfProductsByPromo as $prodAndStock) {
-            $barcode = $prodAndStock['have_product'];
-            $units = $prodAndStock['quantity'];
-            $unitsNecesary = $units * $increse;
-            intval($unitsNecesary);
-            $validateStock = ProductModel::checkStock($barcode,$unitsNecesary);
-            if (!$validateStock){
-                echo $this->response->error203("No dispone de $unitsNecesary en el producto $barcode para actualizar la promo");
+        intval($increse);
+
+        if($increse<0){
+
+            $decrease=$increse * -1;
+            intval($decrease);
+            $stockOfProductsByPromo = ProductModel::productsAndQuantityAsPromo($idProduct);
+            foreach ($stockOfProductsByPromo as $prodAndStock) {
+                $barcode = $prodAndStock['have_product'];
+                $units = $prodAndStock['quantity'];    
+                $addUnits = $units * $decrease;
+                intval($addUnits);
+                $addToStock = ProductModel::UpdateMoreStockProductsOfPromo($barcode,$addUnits);
+                if(!$addToStock){
+                    echo $this->response->error203("Hubo un problema actualizando el stock de los productos");
+                    die();
+                }
+                $units = 0;    
+            }
+            $result = ProductModel::updatePromo($idProduct, $name, $stock, $price, $description);
+            if (!$result) {
+                echo $this->response->error500();
                 die();
             }
-            $editStock = ProductModel::UpdateStockProductsOfPromo($barcode,$unitsNecesary);
-            if(!$editStock){
-                echo $this->response->error203("Error actualizando stock de productos de la promo");
+            echo $this->response->successfully("Deshizo $decrease Unidades de Promo exitosamente");
+        }    
+        if($increse>=0){
+            $stockOfProductsByPromo = ProductModel::productsAndQuantityAsPromo($idProduct);
+            foreach ($stockOfProductsByPromo as $prodAndStock) {
+                $barcode = $prodAndStock['have_product'];
+                $units = $prodAndStock['quantity'];
+                $unitsNecesary = $units * $increse;
+                intval($unitsNecesary);
+                $validateStock = ProductModel::checkStock($barcode,$unitsNecesary);
+                if (!$validateStock){
+                    echo $this->response->error203("No dispone de $unitsNecesary en el producto $barcode para actualizar la promo");
+                    die();
+                }
+                $editStock = ProductModel::UpdateStockProductsOfPromo($barcode,$unitsNecesary);
+                if(!$editStock){
+                    echo $this->response->error203("Hubo un problema actualizando el stock de los productos");
                 die();
+                }
+                $units = 0;
             }
-            $units = 0;
-        }
-        $result = ProductModel::updatePromo($idProduct, $name, $stock, $price, $description);
-        if (!$result) {
-            echo $this->response->error500();
-            die();
-        }
+            $result = ProductModel::updatePromo($idProduct, $name, $stock, $price, $description);
+                if (!$result) {
+                    echo $this->response->error500();
+                die();
+                }
         echo $this->response->successfully("Promo actualizada exitosamente");
+        }
     }
+    
+
     //ELIMINAR LOGICO
     public function disableModel($barcode){
         $this->jwt->verifyTokenAndGetIdUserFromRequest();

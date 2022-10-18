@@ -391,6 +391,11 @@
             $query = "UPDATE product SET stock = stock - $unitsNecesary WHERE barcode = $barcode ";
             return $conecction->setData($query);
         }
+        public static function UpdateMoreStockProductsOfPromo($barcode, $addUnits){
+            $conecction = new Connection();
+            $query = "UPDATE product SET stock = stock + $addUnits WHERE barcode = $barcode ";
+            return $conecction->setData($query);
+        }
         public static function updatePromo($idProduct, $name, $stock, $price, $description){
             $conecction = new Connection();
             $query = "UPDATE product SET name = '$name', stock = $stock, price = $price, description = '$description' WHERE id_product = $idProduct ";
