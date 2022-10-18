@@ -29,17 +29,12 @@ const ProductPage = () => {
   }, [product]);
 
   const handleAddToCart = () => {
-    const list = cart;
-    list.push(product.barcode);
-    setCart(list);
+    setCart([...cart, { barcode: product.barcode, amount: 1 }]);
     localStorage.setItem("cart", JSON.stringify(cart));
-    setIsAddedToCart(true);
   };
   const handleDeleteItemFromCart = () => {
     setCart(cart.splice(-1));
     setIsAddedToCart(false);
-    // setCart(cart.filter((barcode) => barcode !== barcode));
-    // localStorage.setItem("cart", JSON.stringify(cart));
   };
 
   const getProductById = async () => {

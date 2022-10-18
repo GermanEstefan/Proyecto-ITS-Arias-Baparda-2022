@@ -14,9 +14,9 @@ const ShoppingCart = () => {
   );
   const [cartLength, setCartLength] = useState(cart.length);
 
-  useEffect(() => {
-    setCartLength(cart.length);
-  }, [cart]);
+    useEffect(() => {
+      setCartLength(cart.length);
+    }, [cart]);
 
   return (
     <div
