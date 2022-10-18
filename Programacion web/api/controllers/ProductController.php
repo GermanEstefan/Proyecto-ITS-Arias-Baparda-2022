@@ -27,7 +27,14 @@ class ProductController
             ||  !isset($productData['description'])
             ||  !isset($productData['models'])
         ) return false;
-
+        $validStock = $productData['price'];
+        if($validStock<0){
+            return false;
+        }$validId = $productData['idProduct'];
+        if($validId<0){
+            return false;
+        }
+        
         return $productData;
     }
     private function validateBodyOfUpdateModel($productData){
@@ -37,6 +44,10 @@ class ProductController
             ||  !isset($productData['stock'])
             ||  !isset($productData['description'])
         ) return false;
+        $validStock = $productData['stock'];
+        if($validStock<0){
+            return false;
+        }
 
         return $productData;
     }
@@ -48,6 +59,10 @@ class ProductController
             ||  !isset($productData['price'])
             ||  !isset($productData['description'])
         ) return false;
+        $validStock = $productData['price'];
+        if($validStock<0){
+            return false;
+        }
         return $productData;
     }
     private function validateBodyOfPromo($promoData)
@@ -60,7 +75,18 @@ class ProductController
             ||  !isset($promoData['description'])
             ||  !isset($promoData['contains'])
         ) return false;
-
+        $validId = $promoData['idProduct'];
+        if($validId<0){
+            return false;
+        }
+        $validStock = $promoData['stock'];
+        if($validStock<0){
+            return false;
+        }
+        $validPrice = $promoData['price'];
+        if($validPrice<0){
+            return false;
+        }
         return $promoData;
     }
     private function validateBodyOfUpdatePromo($promoData)
@@ -73,6 +99,10 @@ class ProductController
         ) return false;
         $validStock = $promoData['stock'];
         if($validStock<0){
+            return false;
+        }
+        $validPrice = $promoData['price'];
+        if($validPrice<0){
             return false;
         }
         return $promoData;
@@ -97,7 +127,10 @@ class ProductController
         $price = $productData['price'];
         $description = $productData['description'];
         $models = $productData['models'];
-
+        if($price<0){
+            echo $this->response->error203("El precio $price es incorrecto");
+            die();
+        }
         $queries = array();
         $index = 0;
 
@@ -105,7 +138,10 @@ class ProductController
             $prodDesign = $model['prodDesign'];
             $prodSize = $model['prodSize'];
             $stock = $model['stock'];
-
+            if($stock<0){
+                echo $this->response->error203("El stock $stock es incorrecto");
+                die();
+            }
             //Valido que exista la categoria
             $categoryExist = CategoryModel::getCategoryById($prodCategory);
             if (!$categoryExist) {
@@ -118,14 +154,12 @@ class ProductController
                 echo $this->response->error203("El diseño con el ID: $prodDesign no existe");
                 die();
             }
-
             //Valido que exista el talle
             $sizeExist = SizeModel::getSizeById($prodSize);
             if (!$sizeExist) {
                 echo $this->response->error203("El talle con el ID: $prodSize no existe");
                 die();
             }
-
             //Valido que no exista el producto
             $productExist = ProductModel::identifyProduct($idProduct, $prodDesign, $prodSize);
             if ($productExist) {
@@ -165,7 +199,14 @@ class ProductController
         $contains = $promoData['contains'];
         $queries = array();
         $index = 0;
-
+        if($stock<0){
+            echo $this->response->error203("El stock $stock es incorrecto");
+            die();
+        }
+        if($price<0){
+            echo $this->response->error203("El precio $price es incorrecto");
+            die();
+        }
         //SE DEBE INSERTAR EL PRODUCTO PARA OBTENER BARCODE
         //Valido que no exista
         $productPromoExist = ProductModel::getBarcodeById($idProduct);
