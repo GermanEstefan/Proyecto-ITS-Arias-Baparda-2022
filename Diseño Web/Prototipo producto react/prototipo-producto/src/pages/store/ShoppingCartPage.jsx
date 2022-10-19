@@ -11,7 +11,6 @@ const ShoppingCartPage = () => {
     window.scroll(0, 0);
     getProductsListByBarcode();
   }, []);
-
   const [cart, setCart] = useState(
     JSON.parse(localStorage.getItem("cart") || [])
   );
@@ -22,20 +21,26 @@ const ShoppingCartPage = () => {
 
   const getProductsListByBarcode = async () => {
     const promises = [];
-    cart.map(({barcode}) => {
+    cart.map(({ barcode }) => {
       promises.push(fetchApi(`products.php?barcode=${barcode}`, "GET"));
     });
     const responses = Promise.all(promises);
-
     const products = await responses;
+
     const productsData = products.map((product) => product.result.data);
+
+    // Agregamos la cantidad de productos que tiene cada producto en el carrito a el objeto data
+    cart.map(({ amount }, index) => (productsData[index]["amount"] = amount));
+
     setTotal(
       productsData
-        .map((product) => product.price)
+        .map((product) => product.price * product.amount)
         .reduce((a, b) => parseInt(a) + parseInt(b))
     );
     setProductsList(productsData);
   };
+
+
 
   //Implementar que en el carrito también se guarde la cantidad de productos que hay
 
@@ -49,8 +54,10 @@ const ShoppingCartPage = () => {
             <CartItem
               key={index}
               img={Guantes}
+              barcode={product.barcode}
               name={product.name}
               price={product.price}
+              amount={product.amount}
             />
           ))}
         </div>

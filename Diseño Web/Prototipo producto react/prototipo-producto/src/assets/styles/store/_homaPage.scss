@@ -1,116 +1,118 @@
-.loading{
-    margin-top: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    width: 100vw;
-    span{
-        color: $orange;
-        font-size: 2rem;
-        margin-bottom: 20px;
-    }
+.loading {
+  margin-top: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100vw;
+  span {
+    color: $orange;
+    font-size: 2rem;
+    margin-bottom: 20px;
+  }
 }
 .home-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 0;
+  .home-page__banner {
+    width: 100vw;
+    height: 100vh;
+    background-image: url("./assets/img/Banner.jpg");
+    background-position: top;
+    background-size: cover;
+
+    background-attachment: fixed;
     display: flex;
-    flex-direction: column;
     align-items: center;
-    margin-top: 0;
-    .home-page__banner {
-        width: 100vw;
-        height: 100vh;
-        background-image: url('./assets/img/Banner.jpg');
-        background-position: top;
-        background-size: cover;
-        background-attachment: fixed;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        @media (max-width: 800px) {
-            justify-content: center;
-            background-position: -150px 0px;
-        }
-        .home-page__banner__info{
-            position: absolute;
-            right: 250px;
-            text-align: right;
-            border-radius: 20px;
-            padding: 30px 20px;
-            @media (max-width: 1200px) {
-                margin-right: 0;
-                width: 100%;
-                border-radius: 0;
-                position: initial;
-                right: initial;
-                background-color: rgba(0, 0, 0, 0.589);
-                text-align: center;
-            }
-            h1{
-                color: #fff;
-            }
-            p{
-                font-size: 1.3rem;
-                font-weight: bold;
-                color: #fff;
-                background-color: rgba(0, 0, 0, 0.589);
-                padding: 5px;
-                @media (max-width: 1200px) {
-                    background-color: initial;
-                }
-            }
-            button{
-                padding: 10px 100px;
-                border: none;
-                font-size: 1.2rem;
-                background-color: $orange;
-                font-weight: bold;
-                border-radius: 5px;
-                cursor: pointer;
-                color: #fff;
-                transition: background .5s;
-                &:hover{
-                    background-color: #f5990fc2;
-                }
-            }
-        }
-        .home-page__banner__contact{
-            position: absolute;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            bottom: 20px;
-            strong{
-                margin-bottom: 15px;
-                font-size: 1.7rem;
-                font-weight: normal;
-            }
-            div{
-                display: flex;
-                img{
-                    width: 40px;
-                    margin-right: 50px;
-                    transition: transform .5s;
-                    cursor: pointer;
-                    &:hover{
-                        transform: scale(1.3);
-                    }
-                }
-                :last-child{
-                    margin-right: 0;
-                }
-            }
-        }
+    justify-content: center;
+    @media (max-width: 800px) {
+      justify-content: center;
+      background-position: -150px 0px;
     }
-    .home-page__title {
-        background: linear-gradient(15deg, $gray 70%, $orange);
-        font-weight: 200;
-        padding: 30px 0;
-        margin-top: 70px;
+    .home-page__banner__info {
+      right: 250px;
+      text-align: right;
+      border-radius: 20px;
+      color: #fff;
+      padding: 20px 20px;
+      @media (max-width: 1200px) {
+        margin-right: 0;
         width: 100%;
+        border-radius: 0;
+        position: initial;
+        right: initial;
+        background-color: rgba(0, 0, 0, 0.589);
         text-align: center;
-        @media screen and (max-width: 800px){
-            margin-top: 50px;
+      }
+      h1 {
+        color: #fff;
+      }
+      p {
+        font-size: 1.3rem;
+        font-weight: bold;
+
+        background-color: rgba(0, 0, 0, 0.589);
+        padding: 5px;
+        @media (max-width: 1200px) {
+          background-color: initial;
         }
+      }
+      button {
+        padding: 10px 100px;
+        border: none;
+        font-size: 1.2rem;
+        background-color: $orange;
+        font-weight: bold;
+        border-radius: 5px;
+        cursor: pointer;
+        color: #fff;
+        transition: background 0.5s;
+        &:hover {
+          background-color: #f5990fc2;
+        }
+      }
     }
+    .home-page__banner__contact {
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      bottom: 0px;
+      strong {
+        margin-bottom: 15px;
+        font-size: 1.7rem;
+        font-weight: normal;
+      }
+      div {
+        display: flex;
+        img {
+          width: 40px;
+          margin-right: 50px;
+          transition: transform 0.5s;
+          cursor: pointer;
+          &:hover {
+            transform: scale(1.3);
+          }
+        }
+        :last-child {
+          margin-right: 0;
+        }
+      }
+    }
+  }
+  .home-page__title {
+    background: linear-gradient(15deg, $gray 70%, $orange);
+    font-weight: 200;
+    padding: 30px 0;
+    margin-top: 70px;
+    width: 100%;
+    text-align: center;
+    @media screen and (max-width: 800px) {
+      margin-top: 50px;
+    }
+  }
 }

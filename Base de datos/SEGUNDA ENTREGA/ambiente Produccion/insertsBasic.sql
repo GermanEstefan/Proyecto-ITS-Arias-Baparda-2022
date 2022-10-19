@@ -26,19 +26,28 @@ INSERT INTO `bindev`.`photos` (`name`, `description`) VALUES ('Remera negra', 'F
 INSERT INTO `bindev`.`photos` (`name`, `description`) VALUES ('Categoria REMERAS', 'Foto de categoria');
 INSERT INTO `bindev`.`photos` (`name`, `description`) VALUES ('Categoria BUZOS', 'Foto de categoria');
 INSERT INTO `bindev`.`photos` (`name`, `description`) VALUES ('Categoria PANTALON', 'Foto de categoria');
+INSERT INTO `bindev`.`category` (`id_category`, `name`, `description`, `picture`) VALUES ('20', 'BUZOS', 'LOS MEJORES BUZOS','919');
+INSERT INTO `bindev`.`category` (`id_category`, `name`, `description`, `picture`) VALUES ('30', 'CHALECOS', 'LOS MEJORES CHALECOS','919');
+INSERT INTO `bindev`.`category` (`id_category`, `name`, `description`, `picture`) VALUES ('40', 'PANTALONES', 'LOS MEJORES PANTALONES','919');
+INSERT INTO `bindev`.`category` (`id_category`, `name`, `description`, `picture`) VALUES ('50', 'CASCOS ', 'LOS MEJORES CASCOS','');
+INSERT INTO `bindev`.`category` (`id_category`, `name`, `description`, `picture`) VALUES ('60', 'GUANTES', 'LOS MEJORES GUANTES','919');
+INSERT INTO `bindev`.`category` (`id_category`, `name`, `description`, `picture`) VALUES ('70', 'ZAPATOS', 'LOS MEJORES ZAPATOS','');
+INSERT INTO `bindev`.`category` (`id_category`, `name`, `description`, `picture`) VALUES ('80', 'LENTES', 'LOS MEJORES LENTES DE PROTECCION','919');
+INSERT INTO `bindev`.`category` (`id_category`, `name`, `description`, `picture`) VALUES ('90', 'GENERICA', 'CATEGORIA GENERICA','921');
 INSERT INTO `bindev`.`category` (`id_category`, `name`, `description`, `picture`) VALUES ('10', 'REMERAS', 'LAS MEJORES REMERAS','919');
-INSERT INTO `bindev`.`category` (`id_category`, `name`, `description`, `picture`) VALUES ('2', 'BUZOS', 'LOS MEJORES BUZOS','919');
-INSERT INTO `bindev`.`category` (`id_category`, `name`, `description`, `picture`) VALUES ('3', 'CHALECOS', 'LOS MEJORES CHALECOS','919');
-INSERT INTO `bindev`.`category` (`id_category`, `name`, `description`, `picture`) VALUES ('4', 'PANTALONES', 'LOS MEJORES PANTALONES','919');
-INSERT INTO `bindev`.`category` (`id_category`, `name`, `description`, `picture`) VALUES ('5', 'CASCOS ', 'LOS MEJORES CASCOS','');
-INSERT INTO `bindev`.`category` (`id_category`, `name`, `description`, `picture`) VALUES ('6', 'GUANTES', 'LOS MEJORES GUANTES','919');
-INSERT INTO `bindev`.`category` (`id_category`, `name`, `description`, `picture`) VALUES ('7', 'ZAPATOS', 'LOS MEJORES ZAPATOS','');
-INSERT INTO `bindev`.`category` (`id_category`, `name`, `description`, `picture`) VALUES ('8', 'LENTES', 'LOS MEJORES LENTES DE PROTECCION','919');
-INSERT INTO `bindev`.`category` (`id_category`, `name`, `description`, `picture`) VALUES ('9', 'GENERICA', 'CATEGORIA GENERICA','921');
-INSERT INTO `bindev`.`category` (`id_category`, `name`, `description`, `picture`) VALUES ('1000', 'PROMO BASICA', 'PROMO GENERICA','921');
-INSERT INTO `bindev`.`category` (`id_category`, `name`, `description`, `picture`) VALUES ('1001', 'PROMO PYME', 'PROMO PARA PEQUEÑAS EMPRESAS','');
-INSERT INTO `bindev`.`category` (`id_category`, `name`, `description`, `picture`) VALUES ('1002', 'PROMO MEDIUM', 'PROMO PARA EMPRESAS RECONOCIDAS','921');
-INSERT INTO `bindev`.`category` (`id_category`, `name`, `description`, `picture`) VALUES ('1003', 'BIG PROMO', 'PROMO PARA EMPRESAS LIDERES','');
+INSERT INTO `bindev`.`category` (`id_category`, `name`, `description`, `picture`) VALUES ('11', 'PROMO BASICA', 'PROMO GENERICA','921');
+INSERT INTO `bindev`.`category` (`id_category`, `name`, `description`, `picture`) VALUES ('12', 'PROMO PYME', 'PROMO PARA PEQUEÑAS EMPRESAS','');
+INSERT INTO `bindev`.`category` (`id_category`, `name`, `description`, `picture`) VALUES ('13', 'PROMO MEDIUM', 'PROMO PARA EMPRESAS RECONOCIDAS','921');
+INSERT INTO `bindev`.`category` (`id_category`, `name`, `description`, `picture`) VALUES ('14', 'BIG PROMO', 'PROMO PARA EMPRESAS LIDERES','');
+INSERT INTO `bindev`.`design` (`id_design`, `name`, `description`) VALUES ('1000', 'COLOR','BLANCO');
+INSERT INTO `bindev`.`design` (`id_design`, `name`, `description`) VALUES ('9000','NEGRO', 'COLOR NEGRO');
+INSERT INTO `bindev`.`design` (`id_design`, `name`, `description`) VALUES ('2000','GRIS', 'COLOR GRIS');
+INSERT INTO `bindev`.`design` (`id_design`, `name`, `description`) VALUES ('3000','VERDE', 'COLOR VERDE');
+INSERT INTO `bindev`.`design` (`id_design`, `name`, `description`) VALUES ('4000','AMARILLO', 'COLOR AMARILLO');
+INSERT INTO `bindev`.`design` (`id_design`, `name`, `description`) VALUES ('5000','ANARANJADO', 'COLOR ANARANJADO');
+INSERT INTO `bindev`.`design` (`id_design`, `name`, `description`) VALUES ('6000','ROJO', 'COLOR ROJO');
+INSERT INTO `bindev`.`design` (`id_design`, `name`, `description`) VALUES ('7000','GENERICO', 'CATEGORIA COLOR GENERICA');
+INSERT INTO `bindev`.`design` (`id_design`, `name`, `description`) VALUES ('8000','PROMO', 'PROMO');
 INSERT INTO `bindev`.`size` (`id_size`, `name`, `description`) VALUES ('10', 'XS', 'extra small');
 INSERT INTO `bindev`.`size` (`id_size`, `name`, `description`) VALUES ('2', 'S', 'small');
 INSERT INTO `bindev`.`size` (`id_size`, `name`, `description`) VALUES ('3', 'M', 'medium');
@@ -60,36 +69,36 @@ INSERT INTO `bindev`.`size` (`id_size`, `name`, `description`) VALUES ('1000', '
 INSERT INTO `bindev`.`size` (`id_size`, `name`, `description`) VALUES ('1001', 'PROMO PYMES', 'PROMO PEQUEÑAS EMPRESAS');
 INSERT INTO `bindev`.`size` (`id_size`, `name`, `description`) VALUES ('1002', 'PROMO MEDIUM', 'PROMO PARA EMPRESAS EN GRAL');
 INSERT INTO `bindev`.`size` (`id_size`, `name`, `description`) VALUES ('1003', 'PROMO BIG ', 'PROMO PARA GRANDES EMPRESAS');
-INSERT INTO `bindev`.`design` (`name`, `description`) VALUES ('BLANCO', 'COLOR BLANCO');
-INSERT INTO `bindev`.`design` (`name`, `description`) VALUES ('NEGRO', 'COLOR NEGRO');
-INSERT INTO `bindev`.`design` (`name`, `description`) VALUES ('GRIS', 'COLOR GRIS');
-INSERT INTO `bindev`.`design` (`name`, `description`) VALUES ('VERDE', 'COLOR VERDE');
-INSERT INTO `bindev`.`design` (`name`, `description`) VALUES ('AMARILLO', 'COLOR AMARILLO');
-INSERT INTO `bindev`.`design` (`name`, `description`) VALUES ('ANARANJADO', 'COLOR ANARANJADO');
-INSERT INTO `bindev`.`design` (`name`, `description`) VALUES ('ROJO', 'COLOR ROJO');
-INSERT INTO `bindev`.`design` (`name`, `description`) VALUES ('GENERICO', 'CATEGORIA COLOR GENERICA');
-INSERT INTO `bindev`.`design` (`name`, `description`) VALUES ('PROMO', 'PROMO');
-INSERT INTO `bindev`.`PRODUCT` (`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`) VALUES ('1000', 'PROMO CUIDADOS', '1000', '1000', '1000', '2', '700', 'PROMO DE CALIDAD');
-INSERT INTO `bindev`.`PRODUCT` (`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`) VALUES ('1001', 'PROMO MANOS A LA OBRA', '1000', '1000', '1000', '10', '750', 'RPOMO DE CALIDAD');
-INSERT INTO `bindev`.`PRODUCT` (`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`) VALUES ('1002', 'PROMO PYMES', '1001', '1000', '1001', '10', '1000', 'PROMO DE CALIDAD');
-INSERT INTO `bindev`.`PRODUCT` (`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`) VALUES ('1003', 'PROMOS PARA TODOS', '1002', '1000', '1002', '0', '1500', 'PROMO DE CALIDAD');
-INSERT INTO `bindev`.`PRODUCT` (`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`) VALUES ('1004', 'BIG PROMO BIG', '1003', '1000', '1003', '1', '3000', 'BIG PROMO DE CALIDAD');
-INSERT INTO `bindev`.`PRODUCT` (`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`) VALUES ('2000', 'REMERA CLASICA TALLE S COLOR ROJO', '1', '6', '2', '200', '380', 'REMERA DE CALIDAD');
-INSERT INTO `bindev`.`PRODUCT` (`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`) VALUES ('2000', 'REMERA CLASICA TALLE M COLOR ROJO', '1', '6', '3', '99', '380', 'REMERA DE CALIDAD');
-INSERT INTO `bindev`.`PRODUCT` (`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`) VALUES ('2000', 'REMERA CLASICA TALLE L COLOR ROJO', '1', '6', '4', '100', '380', 'REMERA DE CALIDAD');
-INSERT INTO `bindev`.`PRODUCT` (`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`) VALUES ('2000', 'REMERA CLASICA TALLE S COLOR NEGRA', '1', '1', '2', '101', '380', 'REMERA DE CALIDAD');
-INSERT INTO `bindev`.`PRODUCT` (`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`) VALUES ('2000', 'REMERA CLASICA TALLE M COLOR NEGRA', '1', '1', '3', '0', '380', 'REMERA DE CALIDAD');
-INSERT INTO `bindev`.`PRODUCT` (`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`) VALUES ('2000', 'REMERA CLASICA TALLE XL COLOR BLANCA', '1', '0', '5', '5', '380', 'REMERA DE CALIDAD');
-INSERT INTO `bindev`.`PRODUCT` (`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`) VALUES ('2001', 'REMERA PREMIUM TALLE S COLOR ROJO', '1', '6', '2', '300', '450', 'LA MEJOR REMERA DEL MERCADO');
-INSERT INTO `bindev`.`PRODUCT` (`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`) VALUES ('3000', 'PANTALON CLASICO TALLE S COLOR GRIS', '4', '2', '2', '20', '1200', 'PANTALONES DE CALIDAD');
-INSERT INTO `bindev`.`PRODUCT` (`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`) VALUES ('3000', 'PANTALON CLASICO TALLE M COLOR GRIS', '4', '2', '3', '70', '1200', 'PANTALONES DE CALIDAD');
-INSERT INTO `bindev`.`PRODUCT` (`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`) VALUES ('3000', 'PANTALON CLASICO TALLE L COLOR GRIS', '4', '2', '4', '71', '1200', 'PANTALONES DE CALIDAD');
-INSERT INTO `bindev`.`PRODUCT` (`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`) VALUES ('4000', 'ZAPATOS TALLE 39', '7', '7', '39', '21', '3000', 'ZAPATOS DE CONSTRUCCION DE CALIDAD');
-INSERT INTO `bindev`.`PRODUCT` (`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`) VALUES ('4000', 'ZAPATOS TALLE 40', '7', '7', '40', '0', '3000', 'ZAPATOS DE CONSTRUCCION DE CALIDAD');
-INSERT INTO `bindev`.`PRODUCT` (`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`) VALUES ('4000', 'ZAPATOS TALLE 41', '7', '7', '41', '23', '3000', 'ZAPATOS DE CONSTRUCCION DE CALIDAD');
-INSERT INTO `bindev`.`PRODUCT` (`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`) VALUES ('4001', 'ZAPATOS TALLE 44', '7', '7', '44', '46', '3000', 'ZAPATOS DE CONSTRUCCION DE CALIDAD');
-INSERT INTO `bindev`.`PRODUCT` (`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`) VALUES ('5000', 'CASCO GRANDE', '5', '4', '9', '120', '1000', 'LA MEJORES CASCOS DEL MERCADO');
-INSERT INTO `bindev`.`PRODUCT` (`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`) VALUES ('5000', 'CASCO CHICO', '5', '4', '7', '150', '1000', 'LA MEJORES CASCOS DEL MERCADO');
+INSERT INTO `bindev`.`PRODUCT` (`barcode`,`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`) VALUES ('21', '1000', 'PROMO CUIDADOS', '10','1000', '2',  '2', '700', 'PROMO DE CALIDAD');
+INSERT INTO `bindev`.`PRODUCT` (`barcode`,`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`) VALUES ('20','1001', 'PROMO MANOS A LA OBRA', '3', '1000', '1000', '10', '750', 'PROMO DE CALIDAD');
+INSERT INTO `bindev`.`PRODUCT` (`barcode`,`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`) VALUES ('19','1002', 'PROMO PYMES', '3', '1000', '1000', '10', '1000', 'PROMO DE CALIDAD');
+INSERT INTO `bindev`.`PRODUCT` (`barcode`,`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`) VALUES ('18','1003', 'PROMOS PARA TODOS', '4','1000', '1000',  '0', '1500', 'PROMO DE CALIDAD');
+INSERT INTO `bindev`.`PRODUCT` (`barcode`,`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`) VALUES ('17','1004', 'BIG PROMO BIG', '5', '2000','1000',  '1', '3000', 'BIG PROMO DE CALIDAD');
+INSERT INTO `bindev`.`PRODUCT` (`barcode`,`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`) VALUES ('16','2000', 'REMERA CLASICA', '2', '2000','2',  '200', '380', 'Remera de calidad 100% algodón con diversos diseños y talles para elegir.');
+INSERT INTO `bindev`.`PRODUCT` (`barcode`,`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`) VALUES ('15','2000', 'REMERA CLASICA', '2', '2000', '6', '99', '380', 'Remera de calidad 100% algodón con diversos diseños y talles para elegir. Perfecta para disfrutar este verano');
+INSERT INTO `bindev`.`PRODUCT` (`barcode`,`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`) VALUES ('14','2000', 'REMERA CLASICA', '2', '3000', '6', '100', '380', 'Remera de calidad 100% algodón con diversos diseños y talles para elegir. Perfecta para disfrutar este verano');
+INSERT INTO `bindev`.`PRODUCT` (`barcode`,`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`) VALUES ('13','2000', 'REMERA CLASICA', '2', '2000','4',  '101', '380', 'Remera de calidad 100% algodón con diversos diseños y talles para elegir. Perfecta para disfrutar este verano');
+INSERT INTO `bindev`.`PRODUCT` (`barcode`,`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`) VALUES ('12','2000', 'REMERA CLASICA', '3','3000',  '4', '0', '380', 'Remera de calidad 100% algodón con diversos diseños y talles para elegir. Perfecta para disfrutar este verano');
+INSERT INTO `bindev`.`PRODUCT` (`barcode`,`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`) VALUES ('11','2000', 'REMERA CLASICA', '5', '5000','2',  '5', '380', 'Remera de calidad 100% algodón con diversos diseños y talles para elegir. Perfecta para disfrutar este verano');
+INSERT INTO `bindev`.`PRODUCT` (`barcode`,`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`) VALUES ('10','2001', 'REMERA PREMIUM', '2','2000', '6',  '300', '450', 'Remera de calidad 100% algodón con diversos diseños y talles para elegir. Perfecta para disfrutar este verano');
+INSERT INTO `bindev`.`PRODUCT` (`barcode`,`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`) VALUES ('9','3000', 'PANTALON CLASICO ', '4', '2000','2',  '20', '1200', 'Pantalon de calidad fiel y duradero, con diversos diseños y talles para elegir. Perfecta para tareas arduas e integridad de partes privadas');
+INSERT INTO `bindev`.`PRODUCT` (`barcode`,`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`) VALUES ('8','3000', 'PANTALON CLASICO', '4', '3000','2',  '70', '1200', 'Pantalon de calidad fiel y duradero, con diversos diseños y talles para elegir. Perfecta para tareas arduas e integridad de partes privadas');
+INSERT INTO `bindev`.`PRODUCT` (`barcode`,`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`) VALUES ('7','3000', 'PANTALON CLASICO', '4', '4000','2',  '71', '1200', 'Pantalon de calidad fiel y duradero, con diversos diseños y talles para elegir. Perfecta para tareas arduas e integridad de partes privadas');
+INSERT INTO `bindev`.`PRODUCT` (`barcode`,`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`) VALUES ('6','4000', 'ZAPATOS DE CONSTRUCCIÓN', '7','4000', '7', '21', '3000', 'Zapatos para la construcción de alta calidad. La
+suela de goma y material 100%
+cuero mide aproximadamente 6.75 pulgadas desde el arco. Punta de metal.'
+);
+INSERT INTO `bindev`.`PRODUCT` (`barcode`,`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`) VALUES ('5','4000', 'ZAPATOS', '7', '7000', '40', '0', '3000',  'Zapatos para la construcción de alta calidad. La
+suela de goma y material 100%
+cuero mide aproximadamente 6.75 pulgadas desde el arco. Punta de metal.');
+INSERT INTO `bindev`.`PRODUCT` (`barcode`,`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`) VALUES ('4','4000', 'ZAPATOS', '7','3000', '7',  '23', '3000',  'Zapatos para la construcción de alta calidad. La
+suela de goma y material 100%
+cuero mide aproximadamente 6.75 pulgadas desde el arco. Punta de metal.');
+INSERT INTO `bindev`.`PRODUCT` (`barcode`,`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`) VALUES ('3','4001', 'ZAPATOS', '7', '4000','7',  '46', '3000',  'Zapatos para la construcción de alta calidad. La
+suela de goma y material 100%
+cuero mide aproximadamente 6.75 pulgadas desde el arco. Punta de metal.');
+INSERT INTO `bindev`.`PRODUCT` (`barcode`,`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`) VALUES ('2','5000', 'CASCO GRANDE', '5','9000', '4',  '120', '1000', 'Nuestros cascos están homologados y cumplen con la reglamentación Diseñado para proteger la cabeza del impacto de objetos que caen libremente Diseño modular que permite el montaje de productos de protección facial, auditiva, ocular y soldadura. Fabricado en polietileno, se distingue por su moderno diseño y excelente terminación');
+INSERT INTO `bindev`.`PRODUCT` (`barcode`,`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`) VALUES ( '1','5000', 'CASCO CHICO', '5', '7000','4',  '150', '1000', 'Nuestros cascos están homologados y cumplen con la reglamentación Diseñado para proteger la cabeza del impacto de objetos que caen libremente Diseño modular que permite el montaje de productos de protección facial, auditiva, ocular y soldadura. Fabricado en polietileno, se distingue por su moderno diseño y excelente terminación');
 INSERT INTO `bindev`.`delivery_time` (`id_delivery`, `name`, `description`) VALUES ('1', 'Matutino', 'L a V De 8 a 11 AM');
 INSERT INTO `bindev`.`delivery_time` (`id_delivery`, `name`, `description`) VALUES ('2', 'Medio Dia', 'L a V De 13 a 16 HS');
 INSERT INTO `bindev`.`delivery_time` (`id_delivery`, `name`, `description`) VALUES ('3', 'Tarde', 'L a V De 17 a 20 HS');
@@ -100,13 +109,17 @@ INSERT INTO `bindev`.`supplier` (`rut`, `company_name`, `address`, `phone` ) VAL
 INSERT INTO `bindev`.`supplier` (`rut`, `company_name`, `address`, `phone` ) VALUES ('211222344412','VICAS','WWW.VICAS.COM.UY','EL NUM DE CARLOS 22334455');
 INSERT INTO `bindev`.`supplier` (`rut`, `company_name`, `address`, `phone` ) VALUES ('222573323342','QARIMPORT','MALDONADO 123','22334455');
 INSERT INTO `bindev`.`supplier` (`rut`, `company_name`, `address`, `phone` ) VALUES ('214898752423','MUNDO TRABAJO','FLORIDA - CALLE 7 AL 3440','32243344');
-INSERT INTO `bindev`.`status` (`id_status`,`name`, `description`) VALUES ('1', 'PENDIENTE', 'COMPRA EN ESTADO PENDIENTE DE PAGO');
-INSERT INTO `bindev`.`status` (`id_status`,`name`, `description`) VALUES ('2', 'CONFIRMADO', 'COMPRA EN ESTADO CONFIRMADO DE PAGO');
-INSERT INTO `bindev`.`status` (`id_status`,`name`, `description`) VALUES ('3', 'EN VIAJE', 'COMPRA EN ESTADO EN VIAJE A DESTINO');
-INSERT INTO `bindev`.`status` (`id_status`,`name`, `description`) VALUES ('4', 'CONFIRMADA', 'COMPRA CONFIRMADA Y ENTREGADA AL CLIENTE');
-INSERT INTO `bindev`.`status` (`id_status`,`name`, `description`) VALUES ('5', 'PICK-UP', 'COMPRA PARA LEVANTAR EN LOCAL');
-INSERT INTO `bindev`.`status` (`id_status`,`name`, `description`) VALUES ('6', 'CANCELADA', 'COMPRA EN ESTADO CANCELADA');
+INSERT INTO `bindev`.`status` (`id_status`,`name`, `description`) VALUES ('10', 'PENDIENTE', 'COMPRA EN ESTADO PENDIENTE DE PAGO');
+INSERT INTO `bindev`.`status` (`id_status`,`name`, `description`) VALUES ('20', 'CONFIRMADO', 'COMPRA EN ESTADO CONFIRMADO DE PAGO');
+INSERT INTO `bindev`.`status` (`id_status`,`name`, `description`) VALUES ('30', 'EN VIAJE', 'COMPRA EN ESTADO EN VIAJE A DESTINO');
+INSERT INTO `bindev`.`status` (`id_status`,`name`, `description`) VALUES ('40', 'CONFIRMADA', 'COMPRA CONFIRMADA Y ENTREGADA AL CLIENTE');
+INSERT INTO `bindev`.`status` (`id_status`,`name`, `description`) VALUES ('50', 'PICK-UP', 'COMPRA PARA LEVANTAR EN LOCAL');
+INSERT INTO `bindev`.`status` (`id_status`,`name`, `description`) VALUES ('60', 'CANCELADA', 'COMPRA EN ESTADO CANCELADA');
 INSERT INTO `bindev`.`employee` (`ci`, `employee_user`, `employee_role`, `state`) VALUES ('12345010', '5010', 'jefe', '1');
 INSERT INTO `bindev`.`employee` (`ci`, `employee_user`, `employee_role`, `state`) VALUES ('12345011', '5011', 'comprador', '1');
 INSERT INTO `bindev`.`employee` (`ci`, `employee_user`, `employee_role`, `state`) VALUES ('12345012', '5012', 'comprador', '0');
 INSERT INTO `bindev`.`employee` (`ci`, `employee_user`, `employee_role`, `state`) VALUES ('12345013', '5013', 'vendedor', '1');
+
+
+
+
