@@ -2,14 +2,14 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  margin: 100px 0;
+  margin: 10px 0;
   padding: 30px;
   @media screen and (max-width: 800px){
     margin: 50px 0;
   }
 
   .card {
-    max-width: 280px;
+    max-width: 230px;
     min-width: 200px;
     height: auto;
     padding: 1em;
@@ -17,7 +17,7 @@
     cursor: pointer;
     transition: transform .5s;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-    margin: 10px 50px 10px 0;
+    margin: 15px 10px 10px 10px;
     @media screen and (max-width: 800px){
       margin: 10px 0 10px 0;
     }

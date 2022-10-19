@@ -223,7 +223,7 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  margin: 100px 0;
+  margin: 10px 0;
   padding: 30px;
 }
 @media screen and (max-width: 800px) {
@@ -232,7 +232,7 @@
   }
 }
 .card-container .card {
-  max-width: 280px;
+  max-width: 230px;
   min-width: 200px;
   height: auto;
   padding: 1em;
@@ -240,7 +240,7 @@
   cursor: pointer;
   transition: transform 0.5s;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-  margin: 10px 50px 10px 0;
+  margin: 15px 10px 10px 10px;
 }
 @media screen and (max-width: 800px) {
   .card-container .card {
@@ -335,7 +335,6 @@
 
 .product-card {
   max-width: 1100px;
-  min-width: 700px;
   padding: 20px;
   display: flex;
   align-items: center;
@@ -598,11 +597,11 @@
   }
 }
 .home-page .home-page__banner .home-page__banner__info {
-  position: absolute;
   right: 250px;
   text-align: right;
   border-radius: 20px;
-  padding: 30px 20px;
+  color: #fff;
+  padding: 20px 20px;
 }
 @media (max-width: 1200px) {
   .home-page .home-page__banner .home-page__banner__info {
@@ -621,7 +620,6 @@
 .home-page .home-page__banner .home-page__banner__info p {
   font-size: 1.3rem;
   font-weight: bold;
-  color: #fff;
   background-color: rgba(0, 0, 0, 0.589);
   padding: 5px;
 }
@@ -649,7 +647,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  bottom: 20px;
+  bottom: 0px;
 }
 .home-page .home-page__banner .home-page__banner__contact strong {
   margin-bottom: 15px;
@@ -765,7 +763,7 @@
 .productContainer {
   margin: 20vh auto auto auto;
   min-height: 80vh;
-  width: 750px;
+  max-width: 750px;
 }
 .productContainer .productPage {
   margin-bottom: 2em;
@@ -799,10 +797,24 @@
     width: 100%;
   }
 }
+.productContainer .productPage .productPage__description .productPage__description__body {
+  margin-left: 15px;
+}
+.productContainer .productPage .productPage__description .productPage__description__buttons {
+  display: flex;
+  flex-direction: column;
+}
 .productContainer .productPage .productPage__description .productPage__description__buttons .select {
   margin: 5px;
   width: 45%;
   display: inline-block;
+}
+@media screen and (max-width: 800px) {
+  .productContainer .productPage .productPage__description .productPage__description__buttons .select {
+    width: 55%;
+    margin: 10px auto;
+    display: block;
+  }
 }
 .productContainer .productPage .productPage__description .productPage__description__buttons button {
   border: none;
