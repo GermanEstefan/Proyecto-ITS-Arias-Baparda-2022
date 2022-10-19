@@ -930,6 +930,7 @@
 
 .table-template {
   border-radius: 5px;
+  position: relative;
 }
 .table-template th, .table-template td {
   border-radius: 5px;
@@ -946,6 +947,45 @@
   color: #f5990f;
   font-size: 1.3rem;
   cursor: pointer;
+}
+
+.row-selectable {
+  cursor: pointer;
+  transition: 0.3s;
+}
+.row-selectable:hover {
+  transform: scale(0.98);
+}
+
+.row-header-child {
+  position: relative;
+  left: 70px;
+}
+.row-header-child th {
+  font-size: 1rem;
+  padding: 3px 0;
+  background-color: transparent;
+  border-radius: 0;
+}
+
+.row-child {
+  position: relative;
+  left: 70px;
+}
+.row-child td {
+  font-size: 0.9rem;
+  background-color: transparent;
+}
+
+.controls-row-child {
+  font-size: 1.2rem !important;
+  transition: 0.3s;
+  padding: 0;
+  width: 50px;
+  cursor: pointer;
+}
+.controls-row-child:hover {
+  color: #333333;
 }
 
 .flex-column-center-xy {
@@ -1353,6 +1393,14 @@
   position: relative;
   margin: 30px auto;
   padding: 10px 50px;
+}
+
+.list-products h1 {
+  text-align: center;
+  margin: 50px 0;
+}
+.list-products table {
+  margin: auto;
 }
 
 body {
