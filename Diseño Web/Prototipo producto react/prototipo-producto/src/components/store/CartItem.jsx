@@ -1,11 +1,11 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import { Animated } from "react-animated-css";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { fetchApi } from "../../API/api";
 import Guantes from "../../assets/img/guantes.jpg";
 
-const CartItem = ({ barcode, img, name, price, onChangeAmount, value }) => {
+const CartItem = ({ barcode, img, name, price, amount }) => {
   const [cart, setCart] = useState(
     JSON.parse(localStorage.getItem("cart") || [])
   );
@@ -27,6 +27,18 @@ const CartItem = ({ barcode, img, name, price, onChangeAmount, value }) => {
     setProduct(resp.result.data);
   };
 
+  const updateProductAmount = (e) => {
+    e.preventDefault();
+    const cartWithNewAmount = cart.map((product) => {
+      if (product.barcode === barcode) {
+        return { barcode: barcode, amount: e.target.value };
+      } else {
+        return product;
+      }
+    });
+    localStorage.setItem("cart", JSON.stringify(cartWithNewAmount));
+    console.log(cartWithNewAmount);
+  };
   return (
     <Animated
       animationIn="fadeInLeft"
@@ -44,8 +56,10 @@ const CartItem = ({ barcode, img, name, price, onChangeAmount, value }) => {
         <div className="CartItem__actions">
           <input
             className="CartItem__actionsAmount"
-            value={value}
+            defaultValue={amount}
             type="number"
+            onChange={updateProductAmount}
+            min={1}
           />
           <button>Pagar</button>
           <button
