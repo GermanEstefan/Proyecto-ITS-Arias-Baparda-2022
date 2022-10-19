@@ -54,6 +54,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
         $product->getProductByBarcode($barcode);
         die();
     }
+    if(isset($_GET['barcodeAll'])){            //Obtener producto por codigo de barra este o no ACTIVOS
+        $barcode = $_GET['barcodeAll'];        
+        $product->getAllProductByBarcode($barcode);
+        die();
+    }
     if(isset($_GET['name'])){               //obtner productos por name 
         $name = $_GET['name'];
         $product->getProductByName($name);
@@ -88,6 +93,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
                     die();
                 case 'all':
                     $product->getAllProducts();
+                    die();
+                case 'total':
+                    $product->getTotalProducts();
                     die();
                 case 'allPromos':
                     $product->getAllPromos();

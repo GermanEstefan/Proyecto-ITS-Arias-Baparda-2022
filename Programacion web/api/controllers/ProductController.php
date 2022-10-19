@@ -323,6 +323,12 @@ class ProductController
         echo $this->response->successfully("Productos obtenidos:", $products);
         die();
     }
+    public function getTotalProducts()
+    {
+        $products = ProductModel::getTotalProducts();
+        echo $this->response->successfully("Productos obtenidos:", $products);
+        die();
+    }
     //PRODUCTOS INACTIVOS
     public function getDisableProducts(){
         $products = ProductModel::getAllProductsDisable();
@@ -408,9 +414,16 @@ class ProductController
         echo $this->response->successfully("Productos obtenidos:", $products);
         die();
     }
-    public function getProductByBarcode($barcode)
-    {
+    public function getProductByBarcode($barcode){
         $product = ProductModel::getProductByBarcode($barcode);
+        if (!$product) {
+            echo $this->response->error203("No existe el producto con el codigo de barras $barcode");
+            die();
+        }
+        echo $this->response->successfully("Producto obtenido", $product);
+    }
+    public function getAllProductByBarcode($barcode){
+        $product = ProductModel::getAllProductByBarcode($barcode);
         if (!$product) {
             echo $this->response->error203("No existe el producto con el codigo de barras $barcode");
             die();

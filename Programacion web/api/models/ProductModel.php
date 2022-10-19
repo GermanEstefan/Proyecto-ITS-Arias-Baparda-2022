@@ -80,7 +80,31 @@
             return $conecction->getData($query)->fetch_all(MYSQLI_ASSOC);
         }
         //CONSULTAS 
+        //para nacho
         public static function getProductByBarcode($barcode){
+            $conecction = new Connection();
+            $query = "SELECT p.barcode,
+            p.id_product,
+            p.name, 
+            d.name as design,
+            s.name as size,
+            p.price,
+            p.stock,
+            c.name as category,
+            p.description,
+            p.state 
+            FROM product p
+            INNER JOIN category c
+            INNER JOIN design d
+            INNER JOIN size s
+            on p.product_category = c.id_category 
+            AND p.product_design = d.id_design 
+            AND p.product_size = s.id_size  
+            AND p.barcode = '$barcode'
+            AND p.state = 1";
+            return $conecction->getData($query)->fetch_assoc();
+        }
+        public static function getAllProductByBarcode($barcode){
             $conecction = new Connection();
             $query = "SELECT p.barcode,
             p.id_product,
@@ -299,6 +323,19 @@
             from product p
             where p.state = 1
             and p.product_category != 1";
+            return $conecction->getData($query)->fetch_all(MYSQLI_ASSOC);
+        }
+        public static function getTotalProducts(){
+            $conecction = new Connection();
+            $query = "SELECT distinct
+            p.id_product,
+            p.name,
+            p.price,
+            c.name as category,
+            p.description,
+            p.state 
+            FROM product p, category c
+            WHERE p.product_category = c.id_category";
             return $conecction->getData($query)->fetch_all(MYSQLI_ASSOC);
         }
         public static function getAllProductsDisable(){
