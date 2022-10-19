@@ -197,8 +197,7 @@ class ProductController
         $price = $promoData['price'];
         $description = $promoData['description'];
         $contains = $promoData['contains'];
-        $queries = array();
-        $index = 0;
+        
         if($stock<0){
             echo $this->response->error203("El stock $stock es incorrecto");
             die();
@@ -215,52 +214,9 @@ class ProductController
             die();
         }
 
-        $createPromo = ProductModel::createPromo($idProduct,$name,$stock,$price,$description);
+        $createPromo = ProductModel::createPromo($idProduct,$name,$stock,$price,$description,$contains);
         if(!$createPromo){
-            echo $this->response->error500();
-            die();
-        }
-        //buscaba el barcode del idproduc (las promos no pueden tener modelos por eso barcode e idProd es una relacion 1a1)
-        $getBarcode = ProductModel::getBarcodeById($idProduct);
-        if(!$getBarcode){
-            echo $this->response->error203("No se en cuentra el codigo para $idProduct");       
-            die();
-        }
-        //Obtengo el INT de la respuesta sql ARRAY asociativo
-        $isProduct = intval($getBarcode['barcode']);
-            
-            
-        //agrego productos a promo
-        foreach ($contains as $contain) {
-            $haveProduct = $contain['haveProduct'];
-            $quantity = $contain['quantity'];
-            
-            //Valido que exista el producto que se agrega a la promo
-            $productExist = ProductModel::getProductByBarcode($haveProduct);
-            if (!$productExist) {
-                echo $this->response->error203("El producto $haveProduct no existe");
-                die();
-            }
-            //Valido el estado del producto que se agrega a la promo
-            $state = ProductModel::getStateOfProduct($haveProduct);
-            if ($state["state"] == 0) {
-                echo $this->response->error203("El producto $haveProduct esta INACTIVO");
-                die();
-            }            
-            //Valido que cantidad a agregar no sea mayor a la cantidad disponible del producto
-            $stockExist = ProductModel::getStockProductByBarcode($haveProduct);
-            //ACA A QUANTITY LO TENGO QUE RECIBIR YA MULTIPLICADO O HACER if (QUNATITY*STOCK > STOCKeXIST)
-            if (($quantity*$stock)>$stockExist["stock"]) {    
-                echo $this->response->error203("No dispone de tantas unidades en el producto $haveProduct");
-                die();
-            } 
-            $query = array($index => "INSERT INTO promo (is_product, have_product, quantity) VALUES ($isProduct,$haveProduct, $quantity)");
-            array_push($queries, $query);
-            $index++;
-        }
-        $result = ProductModel::ProductsOfPromoTransacction($queries);
-        if (!$result) {
-            echo $this->response->error500();
+            echo $this->response->error203("No se puede crear la promo. revise los valores" );
             die();
         }
         echo $this->response->successfully("Promo creado con exito");

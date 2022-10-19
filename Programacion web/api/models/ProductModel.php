@@ -485,32 +485,48 @@
                 return false;
             }
         }
-        public static function createPromo($idProduct,$name, $stock,$price, $description){
-            $conecction = new Connection();
-            $createPromo = "INSERT INTO product (id_product, name, product_category, product_design, product_size, stock, price, description) VALUES ('$idProduct','$name',1,1,1,'$stock','$price', '$description')";
-            return $conecction->setData($createPromo);
-            if(!$createPromo){
-                return false;
-            }
-            return true;
-        }
-        public static function ProductsOfPromoTransacction($queries){
+        public static function createPromo($idProduct,$name, $stock,$price, $description,$contains){
             $conecction = new Connection();
             $instanceMySql = $conecction->getInstance();
             $instanceMySql->begin_transaction(MYSQLI_TRANS_START_READ_WRITE);
             $result_transaccion = true;
-            foreach($queries as $key=>$query){
-            $resultInsert = $instanceMySql->query($query[$key]);
-                if (!$resultInsert) $result_transaccion = false;
-                }
-                if($result_transaccion){
-                    $instanceMySql->commit();
-                    return true;
-                }else{
-                    $instanceMySql->rollback();
-                    return false;
-                }
+            $createPromo = "INSERT INTO product (id_product, name, product_category, product_design, product_size, stock, price, description) VALUES ('$idProduct','$name',1,1,1,'$stock','$price', '$description')";
+            $resultCreatePromo = $instanceMySql->query($createPromo);
+            if(!$resultCreatePromo)  $result_transaccion = false;
+            $isProduct = $instanceMySql->insert_id;
+            $queries = array();
+            $index = 0;
+            //FOREACH DE VALIDACIONES
+            foreach ($contains as $contain) {
+            $haveProduct = $contain['haveProduct'];
+            $quantity = $contain['quantity'];
+            
+            //Valido que exista el producto que se agrega a la promo
+            $productExist = ProductModel::getProductByBarcode($haveProduct);
+            if (!$productExist) $result_transaccion = false;
+            //Valido el estado del producto que se agrega a la promo
+            $state = ProductModel::getStateOfProduct($haveProduct);
+            if ($state["state"] == 0) $result_transaccion = false;
+            //Valido que cantidad a agregar no sea mayor a la cantidad disponible del producto
+            $stockExist = ProductModel::getStockProductByBarcode($haveProduct);
+            if (($quantity*$stock)>$stockExist["stock"]) $result_transaccion = false;
+            $query = array($index => "INSERT INTO promo (is_product, have_product, quantity) VALUES ($isProduct,$haveProduct, $quantity)");
+            array_push($queries, $query);
+            $index++;
+        }
+        //FOREACH PARA CREAR LAS QUERYS
+        foreach($queries as $key=>$query){
+        $resultInsertQuerys = $instanceMySql->query($query[$key]);
+            if (!$resultInsertQuerys) $result_transaccion = false;
             }
+            if($result_transaccion){
+                $instanceMySql->commit();
+                return true;
+            }else{
+                $instanceMySql->rollback();
+                return false;
+            }
+        }
     }
         
 ?>
