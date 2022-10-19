@@ -11,9 +11,11 @@ const ShoppingCartPage = () => {
     window.scroll(0, 0);
     getProductsListByBarcode();
   }, []);
-  const [cart, setCart] = useState(
-    JSON.parse(localStorage.getItem("cart") || [])
-  );
+  const [cart, setCart] = useState(() => {
+    const saved = localStorage.getItem("cart");
+    const initialValue = JSON.parse(saved);
+    return initialValue || [{}];
+  });
 
   const [total, setTotal] = useState(0);
 
@@ -40,8 +42,6 @@ const ShoppingCartPage = () => {
     setProductsList(productsData);
   };
 
-
-
   //Implementar que en el carrito también se guarde la cantidad de productos que hay
 
   return (
@@ -60,6 +60,9 @@ const ShoppingCartPage = () => {
               amount={product.amount}
             />
           ))}
+          {productsList.length === 0 && (
+            <span className="center">No tienes productos en tu carrito</span>
+          )}
         </div>
       </div>
     </ContainerBase>

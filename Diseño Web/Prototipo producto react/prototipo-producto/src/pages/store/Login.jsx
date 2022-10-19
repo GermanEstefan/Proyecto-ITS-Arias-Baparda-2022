@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import Imagen from "../../assets/img/Obreros.jpg";
@@ -17,6 +17,10 @@ const Login = () => {
 
   const [values, handleValuesChange] = useForm({ email: "", password: "" });
   const [errorStatusForm, setErrorStatusForm] = useState({ email: true, password: true });
+
+  useEffect(() => {
+    window.scroll(0, 0);
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();

@@ -7,11 +7,11 @@ const CategoriesList = () => {
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
-    getCategories();  
+    getCategories();
   }, []);
 
   const getCategories = async () => {
-    const resp = await fetchApi("categorys.php", "GET")
+    const resp = await fetchApi("categorys.php", "GET");
     setCategories(resp.result.data);
   };
 
@@ -28,6 +28,8 @@ const CategoriesList = () => {
           />
         );
       })}
+
+      {categories.length === 0 && <p>No pudimos cargar ninguna categoría</p>}
     </div>
   );
 };

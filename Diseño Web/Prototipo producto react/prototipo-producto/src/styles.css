@@ -223,7 +223,7 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  margin: 10px 0;
+  margin: 11px 0;
   padding: 30px;
 }
 @media screen and (max-width: 800px) {
@@ -597,7 +597,6 @@
   }
 }
 .home-page .home-page__banner .home-page__banner__info {
-  right: 250px;
   text-align: right;
   border-radius: 20px;
   color: #fff;
@@ -763,7 +762,7 @@
 .productContainer {
   margin: 20vh auto auto auto;
   min-height: 80vh;
-  max-width: 750px;
+  max-width: 800px;
 }
 .productContainer .productPage {
   margin-bottom: 2em;

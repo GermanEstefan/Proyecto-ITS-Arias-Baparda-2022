@@ -6,9 +6,11 @@ import { fetchApi } from "../../API/api";
 import Guantes from "../../assets/img/guantes.jpg";
 
 const CartItem = ({ barcode, img, name, price, amount }) => {
-  const [cart, setCart] = useState(
-    JSON.parse(localStorage.getItem("cart") || [])
-  );
+  const [cart, setCart] = useState(() => {
+    const saved = localStorage.getItem("cart");
+    const initialValue = JSON.parse(saved);
+    return initialValue || [{}];
+  });
 
   const [product, setProduct] = useState({});
 
