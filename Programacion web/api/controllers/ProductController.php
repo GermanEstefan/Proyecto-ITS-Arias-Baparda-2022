@@ -173,7 +173,7 @@ class ProductController
         
         $result = ProductModel::saveByTransacction($queries);
         if (!$result) {
-            echo $this->response->error500();
+            echo $this->response->error203("No se puede crear el produco. REVISE LOS VALORES");
             die();
         }
         echo $this->response->successfully("Producto creado con exito");
