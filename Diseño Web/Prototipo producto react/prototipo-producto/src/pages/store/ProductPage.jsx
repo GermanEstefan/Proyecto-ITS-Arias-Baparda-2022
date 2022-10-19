@@ -10,9 +10,11 @@ import Select from "react-select";
 const ProductPage = () => {
   const { userData } = useContext(userStatusContext);
   const { category, id } = useParams();
-  const [cart, setCart] = useState(
-    JSON.parse(localStorage.getItem("cart") || [])
-  );
+  const [cart, setCart] = useState(() => {
+    const saved = localStorage.getItem("cart");
+    const initialValue = JSON.parse(saved);
+    return initialValue || [{}];
+  });
   const [product, setProduct] = useState({});
   const [productName, setproductName] = useState("");
   const [productDescription, setproductDescription] = useState("");

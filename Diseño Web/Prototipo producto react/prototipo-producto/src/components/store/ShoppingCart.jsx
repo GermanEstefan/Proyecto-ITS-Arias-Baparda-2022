@@ -9,9 +9,11 @@ const ShoppingCart = () => {
 
   const isMobile = useMediaQuery({ query: "(max-width: 800px)" });
 
-  const [cart, setCart] = useState(
-    JSON.parse(localStorage.getItem("cart") || [])
-  );
+  const [cart, setCart] = useState(() => {
+    const saved = localStorage.getItem("cart");
+    const initialValue = JSON.parse(saved);
+    return initialValue || [{}];
+  });
   const [cartLength, setCartLength] = useState(cart.length);
 
     useEffect(() => {
