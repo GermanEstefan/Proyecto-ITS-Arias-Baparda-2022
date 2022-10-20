@@ -27,14 +27,7 @@ class ProductController
             ||  !isset($productData['description'])
             ||  !isset($productData['models'])
         ) return false;
-        $validStock = $productData['price'];
-        if($validStock<0){
-            return false;
-        }$validId = $productData['idProduct'];
-        if($validId<0){
-            return false;
-        }
-        
+             
         return $productData;
     }
     private function validateBodyOfUpdateModel($productData){
@@ -44,11 +37,7 @@ class ProductController
             ||  !isset($productData['stock'])
             ||  !isset($productData['description'])
         ) return false;
-        $validStock = $productData['stock'];
-        if($validStock<0){
-            return false;
-        }
-
+        
         return $productData;
     }
     private function validateBodyOfAtribute($productData)
@@ -59,10 +48,6 @@ class ProductController
             ||  !isset($productData['price'])
             ||  !isset($productData['description'])
         ) return false;
-        $validStock = $productData['price'];
-        if($validStock<0){
-            return false;
-        }
         return $productData;
     }
     private function validateBodyOfPromo($promoData)
@@ -75,18 +60,7 @@ class ProductController
             ||  !isset($promoData['description'])
             ||  !isset($promoData['contains'])
         ) return false;
-        $validId = $promoData['idProduct'];
-        if($validId<0){
-            return false;
-        }
-        $validStock = $promoData['stock'];
-        if($validStock<0){
-            return false;
-        }
-        $validPrice = $promoData['price'];
-        if($validPrice<0){
-            return false;
-        }
+        
         return $promoData;
     }
     private function validateBodyOfUpdatePromo($promoData)
@@ -97,14 +71,7 @@ class ProductController
             ||  !isset($promoData['price']) 
             ||  !isset($promoData['description'])
         ) return false;
-        $validStock = $promoData['stock'];
-        if($validStock<0){
-            return false;
-        }
-        $validPrice = $promoData['price'];
-        if($validPrice<0){
-            return false;
-        }
+        
         return $promoData;
     }
     //ALTA
@@ -131,6 +98,10 @@ class ProductController
             echo $this->response->error203("El precio $price es incorrecto");
             die();
         }
+        if($prodCategory == 1){
+            echo $this->response->error203("Un producto no puede tener categoria $prodCategory");
+            die();
+        }
         $queries = array();
         $index = 0;
 
@@ -150,16 +121,24 @@ class ProductController
             }
             //Valido que exista el diseño
             $designExist = DesignModel::getDesignById($prodDesign);
+            $analyzeDesign = $designExist['id_design'];
             if (!$designExist) {
                 echo $this->response->error203("El diseño con el ID: $prodDesign no existe");
+                die();
+            }elseif($analyzeDesign == 1){
+                echo $this->response->error203("Un producto no puede tener el diseño $prodDesign por que no es Promo");
                 die();
             }
             //Valido que exista el talle
             $sizeExist = SizeModel::getSizeById($prodSize);
+            $analyzeSize = $sizeExist['id_size'];
             if (!$sizeExist) {
                 echo $this->response->error203("El talle con el ID: $prodSize no existe");
                 die();
-            }
+            }elseif($analyzeSize == 1){
+                echo $this->response->error203("Un producto no puede tener el talle $prodSize por que no es Promo");
+                die();
+            } 
             //Valido que no exista el producto
             $productExist = ProductModel::identifyProduct($idProduct, $prodDesign, $prodSize);
             if ($productExist) {
@@ -206,14 +185,12 @@ class ProductController
             echo $this->response->error203("El precio $price es incorrecto");
             die();
         }
-        //SE DEBE INSERTAR EL PRODUCTO PARA OBTENER BARCODE
         //Valido que no exista
         $productPromoExist = ProductModel::getBarcodeById($idProduct);
         if ($productPromoExist) {
             echo $this->response->error203("El producto $idProduct ya existe!");
             die();
         }
-
         $createPromo = ProductModel::createPromo($idProduct,$name,$stock,$price,$description,$contains);
         if(!$createPromo){
             echo $this->response->error203("No se puede crear la promo. revise los valores" );
@@ -419,7 +396,10 @@ class ProductController
         $prodSize = $productData['prodSize'];
         $stock = $productData['stock'];
         $description = $productData['description'];
-
+        if($stock<0){
+            echo $this->response->error203("El stock $stock es incorrecto");
+            die();
+        }
         //Valido que exista el producto
         $productExist = ProductModel::getProductByBarcode($barcode);
         if (!$productExist) {
@@ -463,7 +443,10 @@ class ProductController
         $prodCategory = $productData['prodCategory'];
         $price = $productData['price'];
         $description = $productData['description'];
-
+        if($price<0){
+            echo $this->response->error203("El precio $price es incorrecto");
+            die();
+        }
         //Valido que el prod exista
         $updateLineAttributes = ProductModel::getBarcodeById($idProduct);
         if (!$updateLineAttributes) {
@@ -495,7 +478,14 @@ class ProductController
         $stock = $promoData['stock'];
         $price = $promoData['price'];
         $description = $promoData['description'];
-        
+        if($stock<0){
+            echo $this->response->error203("El stock $stock es incorrecto");
+            die();
+        }
+        if($price<0){
+            echo $this->response->error203("El precio $price es incorrecto");
+            die();
+        }
         //Valido que el prod exista
         $promoExist = ProductModel::getBarcodeById($idProduct);
         if (!$promoExist) {

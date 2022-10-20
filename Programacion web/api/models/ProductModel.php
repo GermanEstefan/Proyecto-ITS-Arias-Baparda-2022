@@ -1,4 +1,5 @@
 <?php
+    include_once('./helpers/Response.php');
     require_once("./database/Connection.php");
     class ProductModel extends Connection {
 
@@ -423,12 +424,12 @@
             $query = "UPDATE product SET name = '$name', stock = $stock, price = $price, description = '$description' WHERE barcode = $barcode ";
             return $conecction->setData($query);
         }
-        public static function UpdateStockProductsOfPromo($barcode, $unitsNecesary){
+        public static function updateStockProductsOfPromo($barcode, $unitsNecesary){
             $conecction = new Connection();
             $query = "UPDATE product SET stock = stock - $unitsNecesary WHERE barcode = $barcode ";
             return $conecction->setData($query);
         }
-        public static function UpdateMoreStockProductsOfPromo($barcode, $addUnits){
+        public static function updateMoreStockProductsOfPromo($barcode, $addUnits){
             $conecction = new Connection();
             $query = "UPDATE product SET stock = stock + $addUnits WHERE barcode = $barcode ";
             return $conecction->setData($query);
@@ -487,6 +488,7 @@
         }
         public static function createPromo($idProduct,$name, $stock,$price, $description,$contains){
             $conecction = new Connection();
+            $response = new Response();
             $instanceMySql = $conecction->getInstance();
             $instanceMySql->begin_transaction(MYSQLI_TRANS_START_READ_WRITE);
             $result_transaccion = true;
@@ -503,30 +505,43 @@
             
             //Valido que exista el producto que se agrega a la promo
             $productExist = ProductModel::getProductByBarcode($haveProduct);
-            if (!$productExist) $result_transaccion = false;
+            if (!$productExist) {
+                echo ($response->error203("No existe el producto $haveProduct"));
+                $instanceMySql->rollback();
+                die();   
+            }    
             //Valido el estado del producto que se agrega a la promo
             $state = ProductModel::getStateOfProduct($haveProduct);
-            if ($state["state"] == 0) $result_transaccion = false;
+            if ($state["state"] == 0) {
+                echo ($response->error203("El producto $haveProduct no se encuentra activo"));
+                $instanceMySql->rollback();
+                die();
+                }
             //Valido que cantidad a agregar no sea mayor a la cantidad disponible del producto
             $stockExist = ProductModel::getStockProductByBarcode($haveProduct);
-            if (($quantity*$stock)>$stockExist["stock"]) $result_transaccion = false;
+            if (($quantity*$stock)>$stockExist["stock"]){
+                echo ($response->error203("No dispone de tantas unidades para $haveProduct"));
+                $instanceMySql->rollback();
+                die();   
+                }
+            }
             $query = array($index => "INSERT INTO promo (is_product, have_product, quantity) VALUES ($isProduct,$haveProduct, $quantity)");
             array_push($queries, $query);
             $index++;
-        }
-        //FOREACH PARA CREAR LAS QUERYS
-        foreach($queries as $key=>$query){
-        $resultInsertQuerys = $instanceMySql->query($query[$key]);
-            if (!$resultInsertQuerys) $result_transaccion = false;
-            }
-            if($result_transaccion){
-                $instanceMySql->commit();
-                return true;
-            }else{
-                $instanceMySql->rollback();
-                return false;
-            }
-        }
+        
+            //FOREACH PARA CREAR LAS QUERYS
+            foreach($queries as $key=>$query){
+            $resultInsertQuerys = $instanceMySql->query($query[$key]);
+                if (!$resultInsertQuerys) $result_transaccion = false;
+                }
+                if($result_transaccion){
+                    $instanceMySql->commit();
+                    return true;
+                }else{
+                    $instanceMySql->rollback();
+                    return false;
+                }
+             }
     }
         
 ?>

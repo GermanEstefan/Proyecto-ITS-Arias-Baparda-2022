@@ -469,6 +469,31 @@ END if;
 end$$
 DELIMITER ;
 
+DROP TRIGGER IF EXISTS `bindev`.`InsertDatetimeSupply`;
+DELIMITER $$
+USE `bindev`$$
+CREATE DEFINER=`root`@`localhost` TRIGGER `bindev`.`AutomaticDate` BEFORE INSERT ON `supply` FOR EACH ROW
+BEGIN 
+	SET NEW.date = NOW();
+END$$
+DELIMITER ;
+DROP TRIGGER IF EXISTS `bindev`.`InsertDatetimeSale`;
+DELIMITER $$
+USE `bindev`$$
+CREATE DEFINER=`root`@`localhost` TRIGGER `bindev`.`AutomaticDateSale` BEFORE INSERT ON `sale` FOR EACH ROW
+BEGIN 
+	SET NEW.date = NOW();
+END$$
+DELIMITER ;
+DROP TRIGGER IF EXISTS `bindev`.`InsertDatetimeReport`;
+DELIMITER $$
+USE `bindev`$$
+CREATE DEFINER=`root`@`localhost` TRIGGER `bindev`.`AutomaticDateReport` BEFORE INSERT ON `report` FOR EACH ROW
+BEGIN 
+	SET NEW.date = NOW();
+END$$
+DELIMITER ;
+
 -- -----------------------------------------------------
 -- INSERT BASICOS PARA CONFIGURACION INICIAL DEL SISTEMA
 -- -----------------------------------------------------
@@ -482,7 +507,6 @@ INSERT INTO `bindev`.`role` (`name_role`, `description`) VALUES ('VENDEDOR', 'Pe
 INSERT INTO `bindev`.`role` (`name_role`, `description`) VALUES ('COMPRADOR', 'Personal de compras');
 INSERT INTO `bindev`.`role` (`name_role`, `description`) VALUES ('JEFE', 'Cargo de FEJE');
 INSERT INTO `bindev`.`role` (`name_role`, `description`) VALUES ('SISTEMA', 'RESPUESTA AUTOMATICA DEL SISTEMA');
-INSERT INTO `bindev`.`EMPLOYEE` (`ci`, `employee_user`, `employee_role`) VALUES ('123', '5000', 'JEFE');
 INSERT INTO `bindev`.`EMPLOYEE` (`ci`, `employee_user`, `employee_role`) VALUES ('123', '5000', 'JEFE');
 INSERT INTO `bindev`.`EMPLOYEE` (`ci`, `employee_user`, `employee_role`) VALUES ('1234', '5001', 'VENDEDOR');
 INSERT INTO `bindev`.`EMPLOYEE` (`ci`, `employee_user`, `employee_role`) VALUES ('12345', '5002', 'COMPRADOR');
@@ -504,12 +528,12 @@ INSERT INTO `bindev`.`status` (`name`, `description`) VALUES ('Cancelada', 'La v
 -- -----------------------------------------------------
 -- DATOS BASICOS PARA PRUEBAS
 -- -----------------------------------------------------
-INSERT INTO `bindev`.`category` (`name`, `description`, `picture`) VALUES ('Remeras', 'CATEGORIA DESIGNADA PARA REMERAS','https://ibb.co/v33K0sM');
-INSERT INTO `bindev`.`category` (`name`, `description`, `picture`) VALUES ('Chalecos', 'CATEGORIA DESIGNADA PARA CHALECOS','https://ibb.co/KjCKRtt');
-INSERT INTO `bindev`.`category` (`name`, `description`, `picture`) VALUES ('Pantalones', 'CATEGORIA DESIGNADA PARA PANTALONES','https://ibb.co/GH5XL99');
-INSERT INTO `bindev`.`category` (`name`, `description`, `picture`) VALUES ('Guantes', 'CATEGORIA DESIGNADA PARA GUANTES','https://ibb.co/g4MtTv7');
-INSERT INTO `bindev`.`category` (`name`, `description`, `picture`) VALUES ('Cascos', 'CATEGORIA DESIGNADA PARA CASCOS','https://ibb.co/GF8P8xj');
-INSERT INTO `bindev`.`category` (`name`, `description`, `picture`) VALUES ('Zapatos', 'CATEGORIA DESIGNADA PARA ZAPATOS','https://ibb.co/GCtYNdW');
+INSERT INTO `bindev`.`category` (`name`, `description`, `picture`) VALUES ('Remeras', 'CATEGORIA DESIGNADA PARA REMERAS','https://i.ibb.co/Stt9FQZ/camiseta-de-manga-corta-1.png');
+INSERT INTO `bindev`.`category` (`name`, `description`, `picture`) VALUES ('Chalecos', 'CATEGORIA DESIGNADA PARA CHALECOS','https://i.ibb.co/JRX30YY/casco-5.png');
+INSERT INTO `bindev`.`category` (`name`, `description`, `picture`) VALUES ('Pantalones', 'CATEGORIA DESIGNADA PARA PANTALONES','https://i.ibb.co/TWgZS11/pantalones-2.png');
+INSERT INTO `bindev`.`category` (`name`, `description`, `picture`) VALUES ('Guantes', 'CATEGORIA DESIGNADA PARA GUANTES','https://i.ibb.co/jJv3MV5/guantes.png');
+INSERT INTO `bindev`.`category` (`name`, `description`, `picture`) VALUES ('Cascos', 'CATEGORIA DESIGNADA PARA CASCOS','https://i.ibb.co/6NTsTn5/sombrero.png');
+INSERT INTO `bindev`.`category` (`name`, `description`, `picture`) VALUES ('Zapatos', 'CATEGORIA DESIGNADA PARA ZAPATOS','https://i.ibb.co/44Yv3F8/cadena-de-bloques.png');
 
 
 
