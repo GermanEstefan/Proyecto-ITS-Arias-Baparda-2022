@@ -90,7 +90,7 @@ const ProductPage = () => {
               <p>{productDescription}</p>
             </div>
             <div className="productPage__description__buttons">
-              <div>
+              {!sizesList[0] === 'PROMOCIONES' && <div>
               <Select
                 options={getOptions(designsList)}
                 placeholder={"Diseño..."}
@@ -101,7 +101,7 @@ const ProductPage = () => {
                 placeholder="Talle..."
                 className="select"
               />
-              </div>
+              </div>}
               <button className="buyBtn" disabled={!userData.auth}>
                 Comprar
               </button>

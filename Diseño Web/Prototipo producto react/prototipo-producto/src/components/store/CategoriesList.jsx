@@ -24,7 +24,7 @@ const CategoriesList = () => {
             title={category.name}
             to={category.name}
             slug={category.name}
-            img={Guantes}
+            img={category.picture}
           />
         );
       })}
