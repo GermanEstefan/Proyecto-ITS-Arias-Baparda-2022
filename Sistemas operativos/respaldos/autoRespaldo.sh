@@ -5,7 +5,7 @@ DATABASE="bindev"
 USER="master"
 PASSWORD="1234"
 RESPALDOS="/home/master/respaldos"
-SERVIDOR="respaldo@192.168.1.2:/home/respaldo"
+SERVIDOR="respaldo@192.168.1.2:/home/respaldo/respaldos"
 
 echo "Ejecutando el script de respaldo de la base de datos"
 logger -p local1.info "Backup de la BD automatico iniciado"
@@ -14,11 +14,11 @@ mysqldump -u $USER -p$PASSWORD $DATABASE >> $RESPALDOS/$DATABASE".sql"
 if [ $? -eq 0 ]
 then
 	logger -p local1.info "dump realizado"
-	tar -zcvf $RESPALDOS/$(date +%d-%m-%y-%H-%M)_respaldo.tar.gz $RESPALDOS/$DATABASE".sql"
+	tar -zcvf $RESPALDOS/$(date +%d-%m-%y-%R)_respaldo.tar.gz $RESPALDOS/$DATABASE".sql"
 	if [ $? -eq 0 ]
 	then
 		rm $RESPALDOS/$DATABASE".sql"
-		rsync -ahvzP -e "ssh -p 2244" $RESPALDOS/ $SERVIDOR
+		rsync --remove-source-files -ahvzP -e "ssh -p 2244" $RESPALDOS/ $SERVIDOR
 		if [ $? -eq 0 ]
 		then
 			echo "Backup realizado"

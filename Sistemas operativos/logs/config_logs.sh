@@ -1,4 +1,4 @@
-#!bin/bash
+#!/bin/bash 
 
 #archivos de configuracion
 cat /etc/my.cnf > /var/log/customlogs/mariadb.config.log
@@ -11,7 +11,7 @@ cat /etc/rsyncd.conf > /var/log/customlogs/rsync.conf.log
 rpm -qa > /var/log/customlogs/paquetesInstalados.log
 
 #actualizaciones
-yum history > /var/log/customlogs/yumHistorial.log
+sudo yum history > /var/log/customlogs/yumHistorial.log
 
 #usuarios y grupos
 cat /etc/passwd > /var/log/customlogs/usuarios.log

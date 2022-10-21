@@ -32,7 +32,7 @@ while [ "$opt" != 0 ]
 		if [ $? -eq 0 ]
 		then
 			logger -p local1.info "Se ha exportado la DB con exito"
-			tar -zcvf ./"$(date +'%d-%m-%y')_hora_$(date +'%R')_respaldo.tar.gz" $RESPALDOS/$DATABASE".sql" 
+			tar -zcvf ./"$(date +'%d-%m-%y')_hora_$(date +'%R')_respaldo_manual.tar.gz" $RESPALDOS/$DATABASE".sql" 
 			if [ $? -eq 0 ]
 			then
 				logger -p local1.info "Se ha llevado a cabo la compresion del archivo"
@@ -127,8 +127,8 @@ while [ "$opt" != 0 ]
 		fi
 		;;
 		0)
-		echo "Bye"
 		logger -p local1.info "Salida del menu de respaldos de la base de datos"
+		clear
 		;;
 		*)
 		clear
