@@ -1,4 +1,4 @@
-import React, { createContext } from "react";
+import React, { createContext, useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import Register from "./pages/store/Register";
 import CategoryPage from "./pages/store/CategoryPage";
@@ -26,50 +26,73 @@ import EditDesign from "./pages/admin/EditDesign";
 import CreatePromotion from "./pages/admin/CreatePromotion";
 
 export const userStatusContext = createContext({});
+export const cartContext = createContext([]);
 
 const App = () => {
-
   const { userData, setUserData, isChecking } = useAuth({
     name: null,
     surname: null,
     email: null,
     address: null,
     phone: null,
-    auth: false
+    auth: false,
   });
+  const [cart, setCartState] = useState(() => {
+    const saved = localStorage.getItem("cart");
+    const initialValue = JSON.parse(saved);
+    return initialValue || [];
+  });
+  console.log(cart)
+  const setCart = (newCart) => {
+    setCartState(newCart);
+    console.log(newCart)
+    localStorage.setItem("cart", JSON.stringify(newCart));
+  };
 
-  return (
-    isChecking
-      ?
-      <Loading />
-      :
-      <userStatusContext.Provider value={{ userData, setUserData }}>
+  return isChecking ? (
+    <Loading />
+  ) : (
+    <userStatusContext.Provider value={{ userData, setUserData }}>
+      <cartContext.Provider value={{ cart, setCart }}>
         <Routes>
-          <Route path="/" element={ <Home />} />
+          <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/shoppingCart" element={<ShoppingCartPage />} />
           <Route path="/category/:category" element={<CategoryPage />} />
           <Route path="/category/:category/:id" element={<ProductPage />} />
-          <Route path="/panel-user" element={<UserPanel/>} />
-          <Route path="/admin/login" element={<LoginAdm/>} />
-          <Route path="/admin" element={ <ContainerBase/> } />
-          <Route path="/admin/users/create" element={ <CreateUser/> } />
-          <Route path="/admin/users/list" element={ <ListUsers/> } />
-          <Route path="/admin/generals/categorys" element={ <Categorys /> } />
-          <Route path="/admin/generals/categorys/edit/:idOfCategory" element={ <EditCategory /> } />
-          <Route path="/admin/generals/sizes" element={ <Sizes/> } />
-          <Route path="/admin/generals/sizes/edit/:idOfSize" element={ <EditSize/> } />
-          <Route path="/admin/generals/designs" element={ <Design/> } />
-          <Route path="/admin/generals/designs/edit/:idOfDesign" element={ <EditDesign/> } />
-          <Route path="/admin/products/create" element={ <CreateProducts/> } />
-          <Route path="/admin/products-promo/create" element={ <CreatePromotion/> } />
-          <Route path="/admin/products/list" element={ <ListProducts/> } />
-          <Route path="/admin/shipments/list" element={ <ListShipments/> } />
+          <Route path="/panel-user" element={<UserPanel />} />
+          <Route path="/admin/login" element={<LoginAdm />} />
+          <Route path="/admin" element={<ContainerBase />} />
+          <Route path="/admin/users/create" element={<CreateUser />} />
+          <Route path="/admin/users/list" element={<ListUsers />} />
+          <Route path="/admin/generals/categorys" element={<Categorys />} />
+          <Route
+            path="/admin/generals/categorys/edit/:idOfCategory"
+            element={<EditCategory />}
+          />
+          <Route path="/admin/generals/sizes" element={<Sizes />} />
+          <Route
+            path="/admin/generals/sizes/edit/:idOfSize"
+            element={<EditSize />}
+          />
+          <Route path="/admin/generals/designs" element={<Design />} />
+          <Route
+            path="/admin/generals/designs/edit/:idOfDesign"
+            element={<EditDesign />}
+          />
+          <Route path="/admin/products/create" element={<CreateProducts />} />
+          <Route
+            path="/admin/products-promo/create"
+            element={<CreatePromotion />}
+          />
+          <Route path="/admin/products/list" element={<ListProducts />} />
+          <Route path="/admin/shipments/list" element={<ListShipments />} />
         </Routes>
-      </userStatusContext.Provider>
+      </cartContext.Provider>
+    </userStatusContext.Provider>
   );
-}
+};
 
 export default App;

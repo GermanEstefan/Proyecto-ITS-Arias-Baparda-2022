@@ -1,24 +1,21 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useMediaQuery } from "react-responsive";
 import { useNavigate } from "react-router-dom";
+import { cartContext } from "../../App";
 
 const ShoppingCart = () => {
   const navigate = useNavigate();
 
   const isMobile = useMediaQuery({ query: "(max-width: 800px)" });
 
-  const [cart, setCart] = useState(() => {
-    const saved = localStorage.getItem("cart");
-    const initialValue = JSON.parse(saved);
-    return initialValue || [{}];
-  });
-  const [cartLength, setCartLength] = useState(cart.length);
+  const { cart, setCart } = useContext(cartContext);
 
-    useEffect(() => {
-      setCartLength(cart.length);
-    }, [cart]);
+  const [cartLength, setCartLength] = useState(cart.length);
+  useEffect(() => {
+    setCartLength(cart.length);
+  }, [cart]);
 
   return (
     <div

@@ -5,16 +5,12 @@ import Guantes from "../../assets/img/guantes.jpg";
 import PageTitle from "../../components/store/PageTitle";
 import ContainerBase from "../../components/store/ContainerBase";
 import { fetchApi } from "../../API/api";
-import { userStatusContext } from "../../App";
+import { cartContext, userStatusContext } from "../../App";
 import Select from "react-select";
 const ProductPage = () => {
   const { userData } = useContext(userStatusContext);
   const { category, id } = useParams();
-  const [cart, setCart] = useState(() => {
-    const saved = localStorage.getItem("cart");
-    const initialValue = JSON.parse(saved);
-    return initialValue || [{}];
-  });
+  const { cart, setCart } = useContext(cartContext);
   const [product, setProduct] = useState({});
   const [productName, setproductName] = useState("");
   const [productDescription, setproductDescription] = useState("");
@@ -26,22 +22,25 @@ const ProductPage = () => {
     window.scroll(0, 0);
     getProductById();
   }, []);
-  useEffect(() => {
-    setCart(cart.filter((_barcode) => _barcode !== product.barcode));
-  }, [product]);
+
+  // useEffect(() => {
+  //   setCart(cart.filter(({barcode}) => barcode !== product.barcode));
+  // }, [product]);
 
   const handleAddToCart = () => {
     setCart([...cart, { barcode: product.barcode, amount: 1 }]);
-    localStorage.setItem("cart", JSON.stringify(cart));
+    setIsAddedToCart(true);
   };
   const handleDeleteItemFromCart = () => {
-    setCart(cart.splice(-1));
+    const newCart = cart;
+    newCart.pop();
+    console.log(newCart)
+    setCart(newCart);
     setIsAddedToCart(false);
   };
 
   const getProductById = async () => {
     const resp = await fetchApi(`products.php?idProduct=${id}`, "GET");
-    console.log(resp);
     setProduct(resp.result.data.models[0] ? resp.result.data.models[0] : {});
     setproductName(resp.result.data.name);
     setproductDescription(resp.result.data.description);
@@ -90,18 +89,20 @@ const ProductPage = () => {
               <p>{productDescription}</p>
             </div>
             <div className="productPage__description__buttons">
-              {!sizesList[0] === 'PROMOCIONES' && <div>
-              <Select
-                options={getOptions(designsList)}
-                placeholder={"Diseño..."}
-                className="select"
-              />
-              <Select
-                options={getOptions(sizesList)}
-                placeholder="Talle..."
-                className="select"
-              />
-              </div>}
+              {!sizesList[0] === "PROMOCIONES" && (
+                <div>
+                  <Select
+                    options={getOptions(designsList)}
+                    placeholder={"Diseño..."}
+                    className="select"
+                  />
+                  <Select
+                    options={getOptions(sizesList)}
+                    placeholder="Talle..."
+                    className="select"
+                  />
+                </div>
+              )}
               <button className="buyBtn" disabled={!userData.auth}>
                 Comprar
               </button>

@@ -5,21 +5,22 @@ import ContainerBase from "../../components/store/ContainerBase";
 import CartItem from "../../components/store/CartItem";
 import CartDetails from "../../components/store/CartDetails";
 import { fetchApi } from "../../API/api";
+import { useContext } from "react";
+import { cartContext } from "../../App";
 
 const ShoppingCartPage = () => {
-  useEffect(() => {
-    window.scroll(0, 0);
-    getProductsListByBarcode();
-  }, []);
-  const [cart, setCart] = useState(() => {
-    const saved = localStorage.getItem("cart");
-    const initialValue = JSON.parse(saved);
-    return initialValue || [{}];
-  });
+  const { cart } = useContext(cartContext);
 
   const [total, setTotal] = useState(0);
 
   const [productsList, setProductsList] = useState([]);
+  useEffect(() => {
+    window.scroll(0, 0);
+    getProductsListByBarcode();
+  }, []);
+  useEffect(() => {
+    setTotalPrice();
+  }, [productsList]);
 
   const getProductsListByBarcode = async () => {
     const promises = [];
@@ -34,12 +35,18 @@ const ShoppingCartPage = () => {
     // Agregamos la cantidad de productos que tiene cada producto en el carrito a el objeto data
     cart.map(({ amount }, index) => (productsData[index]["amount"] = amount));
 
-    setTotal(
-      productsData
-        .map((product) => product.price * product.amount)
-        .reduce((a, b) => parseInt(a) + parseInt(b))
-    );
     setProductsList(productsData);
+    setTotalPrice();
+  };
+
+  const setTotalPrice = () => {
+    setTotal(
+      productsList.length > 0 &&
+        productsList
+          .map((product) => product.price * product.amount)
+          .reduce((a, b) => parseInt(a) + parseInt(b))
+    );
+    console.log(total);
   };
 
   //Implementar que en el carrito también se guarde la cantidad de productos que hay
@@ -49,7 +56,7 @@ const ShoppingCartPage = () => {
       <div className="productContainer">
         <PageTitle title={"Carrito"} isArrow={true} arrowGoTo={`/`} />
         <div className="cartPage">
-          <CartDetails total={total} />
+          <CartDetails total={total || 0} />
           {productsList.map((product, index) => (
             <CartItem
               key={index}
@@ -58,6 +65,7 @@ const ShoppingCartPage = () => {
               name={product.name}
               price={product.price}
               amount={product.amount}
+              setTotalPrice={setTotalPrice}
             />
           ))}
           {productsList.length === 0 && (

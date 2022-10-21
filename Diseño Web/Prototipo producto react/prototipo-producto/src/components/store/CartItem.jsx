@@ -4,13 +4,11 @@ import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { fetchApi } from "../../API/api";
 import Guantes from "../../assets/img/guantes.jpg";
+import { useContext } from "react";
+import { cartContext } from "../../App";
 
-const CartItem = ({ barcode, img, name, price, amount }) => {
-  const [cart, setCart] = useState(() => {
-    const saved = localStorage.getItem("cart");
-    const initialValue = JSON.parse(saved);
-    return initialValue || [{}];
-  });
+const CartItem = ({ barcode, img, name, price, amount, setTotalPrice }) => {
+  const { cart, setCart } = useContext(cartContext);
 
   const [product, setProduct] = useState({});
 
@@ -38,8 +36,8 @@ const CartItem = ({ barcode, img, name, price, amount }) => {
         return product;
       }
     });
-    localStorage.setItem("cart", JSON.stringify(cartWithNewAmount));
-    console.log(cartWithNewAmount);
+    setCart(cartWithNewAmount);
+    setTotalPrice()
   };
   return (
     <Animated
@@ -63,7 +61,6 @@ const CartItem = ({ barcode, img, name, price, amount }) => {
             onChange={updateProductAmount}
             min={1}
           />
-          <button>Pagar</button>
           <button
             className="CartItem__actionsAmount"
             onClick={(e) => handleDeleteItemFromCart(e)}
