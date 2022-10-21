@@ -111,22 +111,6 @@ CREATE TABLE IF NOT EXISTS `bindev`.`delivery_time` (
   PRIMARY KEY (`id_delivery`))
 ENGINE = InnoDB;
 
-
--- -----------------------------------------------------
--- Table `bindev`.`photos`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `bindev`.`photos` (
-  `id_photo` INT NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(150) NOT NULL,
-  `description` VARCHAR(500) NOT NULL,
-  `state` TINYINT default 1,
-  PRIMARY KEY (`id_photo`),
-constraint `CH_state` CHECK (`state`<=1 and `state`>=0))
-ENGINE = InnoDB;
-
-
-
-
 -- -----------------------------------------------------
 -- Table `bindev`.`employee`
 -- -----------------------------------------------------
@@ -229,25 +213,6 @@ CREATE TABLE IF NOT EXISTS `bindev`.`product` (
 ENGINE = InnoDB;
 ALTER TABLE product
 AUTO_INCREMENT = 12312300;
-
--- -----------------------------------------------------
--- Table `bindev`.`galery`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `bindev`.`galery` (
-  `product_galery` INT NOT NULL,
-  `photo_galery` INT NOT NULL,
-  PRIMARY KEY (`product_galery`, `photo_galery`),
-	CONSTRAINT `FK_product_galery`
-    FOREIGN KEY (`product_galery`)
-    REFERENCES `bindev`.`product` (`barcode`)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE,
-  CONSTRAINT `FK_photo_product`
-    FOREIGN KEY (`photo_galery`)
-    REFERENCES `bindev`.`photos` (`id_photo`)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE)
-ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
@@ -525,7 +490,7 @@ INSERT INTO `bindev`.`role` (`name_role`, `description`) VALUES ('SYSTEM', 'RESP
 INSERT INTO `bindev`.`role` (`name_role`, `description`) VALUES ('VENDEDOR', 'Personal de ventas');
 INSERT INTO `bindev`.`role` (`name_role`, `description`) VALUES ('COMPRADOR', 'Personal de compras');
 INSERT INTO `bindev`.`role` (`name_role`, `description`) VALUES ('JEFE', 'Cargo de FEJE');
-INSERT INTO `bindev`.`EMPLOYEE` (`ci`, `employee_user`, `employee_role`) VALUES ('1', '500o', 'SYSTEM');
+INSERT INTO `bindev`.`EMPLOYEE` (`ci`, `employee_user`, `employee_role`) VALUES ('1', '5000', 'SYSTEM');
 INSERT INTO `bindev`.`EMPLOYEE` (`ci`, `employee_user`, `employee_role`) VALUES ('123', '5001', 'JEFE');
 INSERT INTO `bindev`.`EMPLOYEE` (`ci`, `employee_user`, `employee_role`) VALUES ('1234', '5002', 'VENDEDOR');
 INSERT INTO `bindev`.`EMPLOYEE` (`ci`, `employee_user`, `employee_role`) VALUES ('12345', '5003', 'COMPRADOR');
@@ -536,7 +501,7 @@ INSERT INTO `bindev`.`EMPLOYEE` (`ci`, `employee_user`, `employee_role`) VALUES 
 -- -----------------------------------------------------
 INSERT INTO `bindev`.`category` (`name`, `description`, `picture`) VALUES ('PROMOCIONES', 'CATEGORIA DESIGNADA PARA PROMOS','https://picsum.photos/200/300');
 INSERT INTO `bindev`.`design` (`name`, `description`) VALUES ('PROMOCIONES', 'DISEÑO DESIGNADO PARA PROMOS');
-INSERT INTO `bindev`.`size` (`name`, `description`) VALUES ('PROMOCIONES', 'TALLE DESIGNADO PARA PROMOS');
+INSERT INTO `bindev`.`size` (`name`, `description`) VALUES ('PROMOCIONES', 'TALLE DESIGNADO PARA LA PROMO');
 INSERT INTO `bindev`.`status` (`name`, `description`) VALUES ('Respuesta Automatica', 'Respuesta automatica del sistema');
 INSERT INTO `bindev`.`status` (`name`, `description`) VALUES ('Venta Ingresada', 'Creacion de una nueva venta');
 INSERT INTO `bindev`.`status` (`name`, `description`) VALUES ('Pendinte de cobro', 'Estado pendiente de cobro, la venta aun no fue confirmada pero su mercaderia se encuentra reservada');
@@ -554,6 +519,34 @@ INSERT INTO `bindev`.`category` (`name`, `description`, `picture`) VALUES ('Pant
 INSERT INTO `bindev`.`category` (`name`, `description`, `picture`) VALUES ('Guantes', 'CATEGORIA DESIGNADA PARA GUANTES','https://i.ibb.co/jJv3MV5/guantes.png');
 INSERT INTO `bindev`.`category` (`name`, `description`, `picture`) VALUES ('Cascos', 'CATEGORIA DESIGNADA PARA CASCOS','https://i.ibb.co/6NTsTn5/sombrero.png');
 INSERT INTO `bindev`.`category` (`name`, `description`, `picture`) VALUES ('Zapatos', 'CATEGORIA DESIGNADA PARA ZAPATOS','https://i.ibb.co/44Yv3F8/cadena-de-bloques.png');
+INSERT INTO `bindev`.`design` (`name`, `description`) VALUES ('BLANCO', 'COLOR BLANCO');
+INSERT INTO `bindev`.`design` (`name`, `description`) VALUES ('NEGRO', 'COLOR NEGRO');
+INSERT INTO `bindev`.`design` (`name`, `description`) VALUES ('ROJO', 'COLOR ROJO');
+INSERT INTO `bindev`.`design` (`name`, `description`) VALUES ('VERDE', 'COLOR VERDE');
+INSERT INTO `bindev`.`design` (`name`, `description`) VALUES ('AZUL', 'COLOR AZUL');
+INSERT INTO `bindev`.`design` (`name`, `description`) VALUES ('NARANJA', 'COLOR NARANJA');
+INSERT INTO `bindev`.`design` (`name`, `description`) VALUES ('AMARILLO', 'COLOR AMARILLO');
+INSERT INTO `bindev`.`size` (`name`, `description`) VALUES ('XS', 'DESCRIPCION DEL TALLE');
+INSERT INTO `bindev`.`size` (`name`, `description`) VALUES ('S', 'DESCRIPCION DEL TALLE');
+INSERT INTO `bindev`.`size` (`name`, `description`) VALUES ('M', 'DESCRIPCION DEL TALLE');
+INSERT INTO `bindev`.`size` (`name`, `description`) VALUES ('L', 'DESCRIPCION DEL TALLE');
+INSERT INTO `bindev`.`size` (`name`, `description`) VALUES ('XL', 'DESCRIPCION DEL TALLE');
+INSERT INTO `bindev`.`size` (`name`, `description`) VALUES ('XXL', 'DESCRIPCION DEL TALLE');
+INSERT INTO `bindev`.`size` (`name`, `description`) VALUES ('TALLE 36', 'DESCRIPCION DEL TALLE');
+INSERT INTO `bindev`.`size` (`name`, `description`) VALUES ('TALLE 37', 'DESCRIPCION DEL TALLE');
+INSERT INTO `bindev`.`size` (`name`, `description`) VALUES ('TALLE 38', 'DESCRIPCION DEL TALLE');
+INSERT INTO `bindev`.`size` (`name`, `description`) VALUES ('TALLE 39', 'DESCRIPCION DEL TALLE');
+INSERT INTO `bindev`.`size` (`name`, `description`) VALUES ('TALLE 40', 'DESCRIPCION DEL TALLE');
+INSERT INTO `bindev`.`size` (`name`, `description`) VALUES ('TALLE 41', 'DESCRIPCION DEL TALLE');
+INSERT INTO `bindev`.`size` (`name`, `description`) VALUES ('TALLE 42', 'DESCRIPCION DEL TALLE');
+INSERT INTO `bindev`.`size` (`name`, `description`) VALUES ('TALLE 43', 'DESCRIPCION DEL TALLE');
+INSERT INTO `bindev`.`size` (`name`, `description`) VALUES ('TALLE 44', 'DESCRIPCION DEL TALLE');
+INSERT INTO `bindev`.`PRODUCT` (`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`, `picture`) VALUES ('11', 'REMERA Clasica', '2', '2', '2', '30', '500', 'Descripcion del producto','https://i.ibb.co/mRpFg8R/8negro.jpg & https://i.ibb.co/9bKNc4d/remera2.jpg & https://i.ibb.co/9bKNc4d/remera2.jpg');
+INSERT INTO `bindev`.`PRODUCT` (`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`, `picture`) VALUES ('11', 'REMERA Clasica', '2', '3', '2', '8', '500', 'Descripcion del producto','https://i.ibb.co/mRpFg8R/8negro.jpg & https://i.ibb.co/9bKNc4d/remera2.jpg & https://i.ibb.co/9bKNc4d/remera2.jpg');
+INSERT INTO `bindev`.`PRODUCT` (`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`, `picture`) VALUES ('11', 'REMERA Clasica', '2', '3', '3', '11', '500', 'Descripcion del producto','https://i.ibb.co/mRpFg8R/8negro.jpg & https://i.ibb.co/9bKNc4d/remera2.jpg & https://i.ibb.co/9bKNc4d/remera2.jpg');
+INSERT INTO `bindev`.`PRODUCT` (`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`, `picture`) VALUES ('11', 'REMERA Clasica', '2', '3', '4', '0', '500', 'Descripcion del producto','https://i.ibb.co/mRpFg8R/8negro.jpg & https://i.ibb.co/9bKNc4d/remera2.jpg & https://i.ibb.co/9bKNc4d/remera2.jpg');
+INSERT INTO `bindev`.`PRODUCT` (`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`, `picture`) VALUES ('11', 'REMERA Clasica', '2', '2', '4', '21', '500', 'Descripcion del producto','https://i.ibb.co/mRpFg8R/8negro.jpg & https://i.ibb.co/9bKNc4d/remera2.jpg & https://i.ibb.co/9bKNc4d/remera2.jpg');
+
 
 
 
