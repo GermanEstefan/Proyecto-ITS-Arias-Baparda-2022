@@ -22,7 +22,11 @@
             $query = "SELECT * from delivery_time WHERE id_delivery='$idDelivery'";
             return $conecction->getData($query)->fetch_assoc();
         }
-
+        public static function validateDelivery($name){
+            $conecction = new Connection();
+            $query = "SELECT * from delivery_time WHERE name='$name'";
+            return $conecction->getData($query)->fetch_assoc();
+        }
         public static function getAllDeliverys(){
             $conecction = new Connection();
             $query = "SELECT * from delivery_time ";

@@ -1,17 +1,18 @@
 <?php
+    require_once("./helpers/Response.php");
     require_once("./database/Connection.php");
-    require_once("./database/ProductModel.php");
-    require_once("./database/EmployeeModel.php");
     class SaleModel extends Connection {
 
         private $address;
         private $client;
         private $delivery;
+        private $payment;
 
-        function __construct($address,$client,$delivery){
+        function __construct($address,$client,$delivery,$payment){
             $this->name = $address;
             $this->description = $client;
             $this->description = $delivery;
+            $this->description = $payment;
             parent::__construct();
         }
         //CONSULTAS
@@ -73,45 +74,43 @@
             return $conecction->getData($query)->fetch_assoc();
         }
                 
-        public function saveSale($address, $client, $delivery, $productsForSale){
-            $conecction = new Connection();
+        public function saveSale($address, $client, $delivery,$payment,$productsForSale){
             $response = new Response();
-            $instanceMySql = $conecction->getInstance();
+            $instanceMySql = $this->conecction->getInstance();
             $instanceMySql->begin_transaction(MYSQLI_TRANS_START_READ_WRITE);
             $result_transaccion = true;
-            $saleInsert = "INSERT INTO sale (address, client, sale_delivery) VALUES ('$this->address', '$this->client','$this->delivery' )";
+            $saleInsert = "INSERT INTO sale (address, client, sale_delivery, payment) VALUES ('$address', '$client','$delivery', $payment)";
             $resultCreateSale = $instanceMySql->query($saleInsert);
             if(!$resultCreateSale)  $result_transaccion = false;
             $idSale = $instanceMySql->insert_id;
-            
             //INICIO SALE_DETAIL Array de productos
             $queries = array();
             $index = 0;
             //FOREACH DE VALIDACIONES
             foreach ($productsForSale as $product) {
-                $saleProduct = $product['saleProduct'];
+                $barcode = $product['barcode'];
                 $quantity = $product['quantity'];
             //Validaciones
-            $productExist = ProductModel::getProductByBarcode($saleProduct);
+            $productExist = ProductModel::getProductByBarcode($barcode);
             if (!$productExist) {
-                echo ($response->error203("No existe el producto $saleProduct"));
+                echo ($response->error203("No existe el producto $barcode"));
                 $instanceMySql->rollback();
                 die();   
             }    
-            $state = ProductModel::getStateOfProduct($saleProduct);
+            $state = ProductModel::getStateOfProduct($barcode);
             if ($state["state"] == 0) {
-                echo ($response->error203("El producto $saleProduct no se encuentra activo"));
+                echo ($response->error203("El producto $barcode no se encuentra activo"));
                 $instanceMySql->rollback();
                 die();
                 }
-            $stockExist = ProductModel::getStockProductByBarcode($saleProduct);
+            $stockExist = ProductModel::getStockProductByBarcode($barcode);
             if (($quantity)>$stockExist["stock"]){
-                echo ($response->error203("No dispone de tantas unidades para $saleProduct"));
+                echo ($response->error203("No dispone de tantas unidades para $barcode"));
                 $instanceMySql->rollback();
                 die();   
                 }
             }
-            $query = array($index => "INSERT INTO sale_detail (id_sale, product_sale, quantity) VALUES ($idSale,$saleProduct, $quantity)");
+            $query = array($index => "INSERT INTO sale_detail (id_sale, product_sale, quantity) VALUES ($idSale,$barcode, $quantity)");
             array_push($queries, $query);
             $index++;
             foreach($queries as $key=>$query){

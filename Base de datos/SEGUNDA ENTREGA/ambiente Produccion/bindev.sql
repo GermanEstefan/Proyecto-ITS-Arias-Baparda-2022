@@ -503,7 +503,6 @@ INSERT INTO `bindev`.`category` (`name`, `description`, `picture`) VALUES ('PROM
 INSERT INTO `bindev`.`design` (`name`, `description`) VALUES ('PROMOCIONES', 'DISEÑO DESIGNADO PARA PROMOS');
 INSERT INTO `bindev`.`size` (`name`, `description`) VALUES ('PROMOCIONES', 'TALLE DESIGNADO PARA LA PROMO');
 INSERT INTO `bindev`.`status` (`name`, `description`) VALUES ('Respuesta Automatica', 'Respuesta automatica del sistema');
-INSERT INTO `bindev`.`status` (`name`, `description`) VALUES ('Venta Ingresada', 'Creacion de una nueva venta');
 INSERT INTO `bindev`.`status` (`name`, `description`) VALUES ('Pendinte de cobro', 'Estado pendiente de cobro, la venta aun no fue confirmada pero su mercaderia se encuentra reservada');
 INSERT INTO `bindev`.`status` (`name`, `description`) VALUES ('Venta confirmada', 'Venta confirmada, dinero capturado, la mercaderia tiene dueño');
 INSERT INTO `bindev`.`status` (`name`, `description`) VALUES ('En transporte', 'Venta en calle, en viaje a la direccion ingresada en la venta');

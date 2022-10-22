@@ -109,8 +109,10 @@
             $conecction = new Connection();
             $query = "SELECT p.barcode,
             p.id_product,
-            p.name, 
+            p.name,
+            p.product_design as idDesign, 
             d.name as design,
+            p.product_size as idSize,
             s.name as size,
             p.price,
             p.stock,
@@ -477,7 +479,7 @@
         foreach($queries as $key=>$query){
         $resultInsert = $instanceMySql->query($query[$key]);
             if (!$resultInsert) $result_transaccion = false;
-            }
+            }   
             if($result_transaccion){
                 $instanceMySql->commit();
                 return true;
@@ -504,7 +506,7 @@
             $quantity = $contain['quantity'];
             
             //Valido que exista el producto que se agrega a la promo
-            $productExist = ProductModel::getProductByBarcode($haveProduct);
+            $productExist = ProductModel::getAllProductByBarcode($haveProduct);
             if (!$productExist) {
                 echo ($response->error203("No existe el producto $haveProduct"));
                 $instanceMySql->rollback();

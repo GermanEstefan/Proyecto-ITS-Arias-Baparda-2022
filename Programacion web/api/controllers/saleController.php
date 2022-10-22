@@ -3,6 +3,8 @@
 include_once('./helpers/Response.php');
 include_once("./helpers/Token.php");
 include_once("./models/SaleModel.php");
+include_once("./models/DeliveryModel.php");
+include_once("./models/UserModel.php");
 
 class SaleController {
 
@@ -19,6 +21,7 @@ class SaleController {
         if( !isset($saleData['address']) 
         ||  !isset($saleData['client'])
         ||  !isset($saleData['delivery'])
+        ||  !isset($saleData['payment'])
         ||  !isset($saleData['products']))
         return false;
         return $saleData;
@@ -35,17 +38,20 @@ class SaleController {
         $address = $saleData['address'];
         $client = $saleData['client'];
         $delivery = $saleData['delivery'];
+        $payment = $saleData['payment'];
         $productsForSale = $saleData ['products'];
         $mailExist = UserModel::validEmailForSale($client);
         if (!$mailExist) {
             echo $this->response->error203("El mail no existe");
+            die();
         }
         $analyzeMail = $mailExist["state"];
         if($analyzeMail == 0){
             echo $this->response->error203("El usuario se encuentra inactivo");
             die();
         }
-        $saleCreate = new SaleModel($address, $client, $delivery, $productsForSale);
+        
+        $saleCreate = new SaleModel($address, $client, $delivery,$payment, $productsForSale);
         if(!$saleCreate){
             echo $this->response->error500();
             die();
