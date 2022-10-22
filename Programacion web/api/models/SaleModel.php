@@ -1,6 +1,7 @@
 <?php
     require_once("./helpers/Response.php");
     require_once("./database/Connection.php");
+    require_once("./database/ProductModel.php");
     class SaleModel extends Connection {
 
         private $address;
@@ -93,8 +94,6 @@
                 $quantity = $product['quantity'];
                 //Validaciones
             $productExist = ProductModel::getAllProductByBarcode($barcode);
-            var_dump($productExist);
-            die();
             if (!$productExist) {
                 echo ($response->error203("No existe el producto $barcode"));
                 $instanceMySql->rollback();

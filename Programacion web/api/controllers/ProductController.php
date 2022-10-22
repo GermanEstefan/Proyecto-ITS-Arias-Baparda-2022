@@ -551,7 +551,7 @@ class ProductController
     public function disableModel($barcode){
         $this->jwt->verifyTokenAndGetIdUserFromRequest();
         //Valido que exista el producto
-        $productExist = ProductModel::getProductByBarcode($barcode);
+        $productExist = ProductModel::getAllProductByBarcode($barcode);
         if (!$productExist) {
             echo $this->response->error203("Esta intentando deshabilitar un modelo que no existe");
             die();
