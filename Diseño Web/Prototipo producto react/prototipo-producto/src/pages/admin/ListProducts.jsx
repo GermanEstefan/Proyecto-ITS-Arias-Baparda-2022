@@ -1,4 +1,4 @@
-import { faPencil, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faCheck, faPencil, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { Fragment, useEffect } from 'react'
 import { useState } from 'react';
@@ -14,7 +14,7 @@ const ListProducts = () => {
     const [loadingFlags, setLoadingFlags] = useState({ fetchingUsers: true });
 
     useEffect(() => {
-        fetchApi('products.php', 'GET')
+        fetchApi('products.php?search=total', 'GET')
             .then(resp => {
                 console.log(resp)
                 setProducts(resp.result.data)
@@ -27,8 +27,45 @@ const ListProducts = () => {
     }, [])
 
     const handleGetModelsOfProduct = async (idProduct) => {
-        const resp = await fetchApi(`products.php?idProduct=${idProduct}`)
+        const resp = await fetchApi(`products.php?idProductAll=${idProduct}`)
+        console.log(resp)
         setModelsOfProduct({ idProduct, models: resp.result.data.models })
+    }
+
+    const handleDisableModel = async (barcode, i) => {
+        try {
+            const resp = await fetchApi(`products.php?barcode=${barcode}&actionMin=disable`, 'PATCH');
+            console.log(resp)
+            if(resp.status === 'successfully'){
+                const modelsMapped = modelsOfProduct.models.map( model => {
+                    if(model.barcode === barcode){
+                        model.state = 0;
+                    }
+                    return model;
+                })
+                setModelsOfProduct(modelsMapped);
+            }
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+    const handleEnableModel = async (barcode, i) => {
+        try {
+            const resp = await fetchApi(`products.php?barcode=${barcode}&actionMin=active`, 'PATCH');
+            console.log(resp)
+            if(resp.status === 'successfully'){
+                const modelsMapped = modelsOfProduct.models.map( model => {
+                    if(model.barcode === barcode){
+                        model.state = 1;
+                    }
+                    return model;
+                })
+                setModelsOfProduct(modelsMapped);
+            }
+        } catch (error) {
+            console.error(error);
+        }
     }
 
     return (
@@ -47,7 +84,6 @@ const ListProducts = () => {
                                         <th>Descripcion</th>
                                         <th>Categoria</th>
                                         <th>Precio unitario</th>
-                                        <th>Estado del producto</th>
                                         <th colSpan={2}>Controles</th>
                                     </tr>
                                     {
@@ -59,7 +95,6 @@ const ListProducts = () => {
                                                     <td>{product.description}</td>
                                                     <td>{product.category || 'categoria'}</td>
                                                     <td>{product.price}</td>
-                                                    <td>{product.state}</td>
                                                     <td className="controls-table" onClick={() => alert('editar producto')} ><FontAwesomeIcon icon={faPencil} /></td>
                                                     <td className="controls-table" onClick={() => alert('eliminar producto')}><FontAwesomeIcon icon={faTrash} /></td>
                                                 </tr>
@@ -71,6 +106,7 @@ const ListProducts = () => {
                                                             <th>Talle</th>
                                                             <th>Diseño</th>
                                                             <th>Stock</th>
+                                                            <th>Estado</th>
                                                             <th colSpan={2}>Controles</th>
                                                         </tr>
                                                         {
@@ -80,7 +116,12 @@ const ListProducts = () => {
                                                                     <td>{model.size}</td>
                                                                     <td>{model.design}</td>
                                                                     <td>{model.stock} </td>
-                                                                    <td className="controls-row-child"> <FontAwesomeIcon icon={faTrash} /> </td>
+                                                                    <td>{model.state}</td>
+                                                                    {
+                                                                        model.state === "1"
+                                                                        ? <td className="controls-row-child" onClick={ () => handleDisableModel(model.barcode)} > <FontAwesomeIcon icon={faTrash} /> </td>
+                                                                        : <td className="controls-row-child" onClick={ () => handleEnableModel(model.barcode)} > <FontAwesomeIcon icon={faCheck} /> </td>
+                                                                    }
                                                                     <td className="controls-row-child" onClick={() => navigate(`/admin/products/edit-model/${model.barcode}`)}> <FontAwesomeIcon icon={faPencil} /> </td>
                                                                 </tr>
                                                             ))

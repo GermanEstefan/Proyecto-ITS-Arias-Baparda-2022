@@ -1,0 +1,26 @@
+.edit-model{
+    form{
+        width: 50vw;
+        max-width: 350px;
+        h2{text-align: center;}
+        > div {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+        }
+        label{
+            font-weight: bold;
+            margin-bottom: 3px;
+        }
+        input,select{
+            margin-bottom: 20px;
+        }
+        button{
+            width: 100%;
+        }
+        span{
+            margin-top: 20px;
+        }
+    }
+    
+}
