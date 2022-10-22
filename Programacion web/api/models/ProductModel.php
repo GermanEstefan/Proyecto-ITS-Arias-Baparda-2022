@@ -439,9 +439,9 @@
             $query = "UPDATE product SET name = '$name', stock = $stock, price = $price, description = '$description' WHERE id_product = $idProduct ";
             return $conecction->setData($query);
         }
-        public static function updateModel($barcode,$name,$prodDesign,$prodSize,$stock,$description){
+        public static function updateModel($barcode,$prodDesign,$prodSize,$stock){
             $conecction = new Connection();
-            $query = "UPDATE product SET name = '$name', product_design = '$prodDesign', product_size = '$prodSize', stock = '$stock', description = '$description' WHERE barcode = '$barcode' ";
+            $query = "UPDATE product SET product_design = '$prodDesign', product_size = '$prodSize', stock = '$stock' WHERE barcode = '$barcode' ";
             return $conecction->setData($query);
         }
         public static function updateProductLineAttributes($idProduct, $name,$prodCategory, $price, $description){

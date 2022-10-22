@@ -1,4 +1,4 @@
-import React, { createContext } from "react";
+import React, { createContext, useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import Register from "./pages/store/Register";
 import CategoryPage from "./pages/store/CategoryPage";
@@ -27,26 +27,36 @@ import CreatePromotion from "./pages/admin/CreatePromotion";
 import EditModelProduct from "./pages/admin/EditModelProduct";
 
 export const userStatusContext = createContext({});
+export const cartContext = createContext([]);
 
 const App = () => {
-
   const { userData, setUserData, isChecking } = useAuth({
     name: null,
     surname: null,
     email: null,
     address: null,
     phone: null,
-    auth: false
+    auth: false,
   });
+  const [cart, setCartState] = useState(() => {
+    const saved = localStorage.getItem("cart");
+    const initialValue = JSON.parse(saved);
+    return initialValue || [];
+  });
+  console.log(cart)
+  const setCart = (newCart) => {
+    setCartState(newCart);
+    console.log(newCart)
+    localStorage.setItem("cart", JSON.stringify(newCart));
+  };
 
-  return (
-    isChecking
-      ?
-      <Loading />
-      :
-      <userStatusContext.Provider value={{ userData, setUserData }}>
+  return isChecking ? (
+    <Loading />
+  ) : (
+    <userStatusContext.Provider value={{ userData, setUserData }}>
+      <cartContext.Provider value={{ cart, setCart }}>
         <Routes>
-          <Route path="/" element={ <Home />} />
+          <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/contact" element={<Contact />} />
@@ -67,11 +77,11 @@ const App = () => {
           <Route path="/admin/products/create" element={ <CreateProducts/> } />
           <Route path="/admin/products-promo/create" element={ <CreatePromotion/> } />
           <Route path="/admin/products/list" element={ <ListProducts/> } />
-          <Route path="/admin/products/edit-model/:barcode" element={ <EditModelProduct/> } />
           <Route path="/admin/shipments/list" element={ <ListShipments/> } />
         </Routes>
-      </userStatusContext.Provider>
+      </cartContext.Provider>
+    </userStatusContext.Provider>
   );
-}
+};
 
 export default App;

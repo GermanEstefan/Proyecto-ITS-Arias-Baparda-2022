@@ -25,6 +25,11 @@
             $query = "SELECT * from user WHERE email='$email'";
             return $conecction->getData($query)->fetch_assoc();
         }
+        public static function validEmailForSale($email){
+            $conecction = new Connection();
+            $query = "SELECT state from user WHERE email = '$email'";
+            return $conecction->getData($query)->fetch_assoc();
+        }
 
         public static function getUserById($id){
             $conecction = new Connection();

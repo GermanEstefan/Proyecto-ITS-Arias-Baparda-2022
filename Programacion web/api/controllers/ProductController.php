@@ -31,11 +31,9 @@ class ProductController
         return $productData;
     }
     private function validateBodyOfUpdateModel($productData){
-        if (!isset($productData['name'])
-            ||  !isset($productData['prodDesign'])
+        if (!isset($productData['prodDesign'])
             ||  !isset($productData['prodSize'])
             ||  !isset($productData['stock'])
-            ||  !isset($productData['description'])
         ) return false;
         
         return $productData;
@@ -391,17 +389,15 @@ class ProductController
             echo $this->response->error400('Error en los datos enviados');
             die();
         }
-        $name = $productData['name'];
         $prodDesign = $productData['prodDesign'];
         $prodSize = $productData['prodSize'];
         $stock = $productData['stock'];
-        $description = $productData['description'];
         if($stock<0){
             echo $this->response->error203("El stock $stock es incorrecto");
             die();
         }
         //Valido que exista el producto
-        $productExist = ProductModel::getProductByBarcode($barcode);
+        $productExist = ProductModel::getAllProductByBarcode($barcode);
         if (!$productExist) {
             echo $this->response->error203("Esta intentando modificar un modelo que no existe");
             die();
@@ -409,7 +405,7 @@ class ProductController
         //Valido que solo quiera actualizar atributos del producto
         $updateAttributes = ProductModel::identifyModel($barcode,$prodDesign, $prodSize);
         if ($updateAttributes) {
-            $result = ProductModel::updateModel($barcode, $name,$prodDesign,$prodSize, $stock, $description);
+            $result = ProductModel::updateModel($barcode,$prodDesign,$prodSize, $stock);
             echo $this->response->successfully("Modelo actualizado con exito");
             die();
         }
@@ -425,7 +421,7 @@ class ProductController
             echo $this->response->error203("Esta intentando ingresar una talle que no existe");
             die();
         }
-        $result = ProductModel::updateModel($barcode, $name,$prodDesign, $prodSize, $stock, $description);
+        $result = ProductModel::updateModel($barcode,$prodDesign, $prodSize, $stock);
         if (!$result) {
             echo $this->response->error500();
         }
@@ -571,7 +567,7 @@ class ProductController
     {
         $this->jwt->verifyTokenAndGetIdUserFromRequest();
         //Valido que exista el producto
-        $productExist = ProductModel::getProductByBarcode($barcode);
+        $productExist = ProductModel::getAllProductByBarcode($barcode);
         if (!$productExist) {
             echo $this->response->error203("Esta intentando activar un modelo que no existe");
             die();
