@@ -1438,6 +1438,15 @@
   margin-top: 20px;
 }
 
+.supplier form > div {
+  display: flex;
+  flex-direction: column;
+}
+.supplier form > div label {
+  font-weight: bold;
+  margin-bottom: 3px;
+}
+
 body {
   overflow-x: hidden;
   font-family: "Open Sans", sans-serif;

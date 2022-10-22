@@ -24,7 +24,7 @@ const ListProducts = () => {
                 console.log(err);
             })
             .finally(() => setLoadingFlags({ fetchingUsers: false }))
-    }, [])
+    }, [modelsOfProduct])
 
     const handleGetModelsOfProduct = async (idProduct) => {
         const resp = await fetchApi(`products.php?idProductAll=${idProduct}`)
