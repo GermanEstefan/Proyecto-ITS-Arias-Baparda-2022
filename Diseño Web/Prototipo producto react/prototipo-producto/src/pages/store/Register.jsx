@@ -29,7 +29,7 @@ const Register = () => {
   const [values, handleValuesChange] = useForm(initialValues);
   const [errorStatusForm, setErrorStatusForm] = useState({
     email: true,
-    name: true,
+    nameCurrent: true,
     surname: true,
     password: true
   });

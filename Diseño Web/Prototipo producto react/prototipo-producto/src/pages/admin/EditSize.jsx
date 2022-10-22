@@ -7,7 +7,7 @@ import ContainerBase from "../../components/admin/ContainerBase";
 const EditSize = () => {
 
     const { idOfSize } = useParams();
-    const [sizeValues, setSizeValues] = useState({ name: 'Cargando...', description: 'Cargando...' })
+    const [sizeValues, setSizeValues] = useState({ nameCurrent: 'Cargando...', description: 'Cargando...' })
     const { name, description } = sizeValues;
     const handleChangeInputs = ({ target }) => {
         setSizeValues({
@@ -28,7 +28,7 @@ const EditSize = () => {
             .then(res => {
                 console.log(res)
                 setSizeValues({
-                    name: res.result.data.name,
+                    nameCurrent: res.result.data.name,
                     description: res.result.data.description
                 })
             })

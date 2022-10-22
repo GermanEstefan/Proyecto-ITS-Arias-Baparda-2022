@@ -175,7 +175,7 @@ const CreateProducts = () => {
                             <FontAwesomeIcon className='add-lines' icon={faPlusCircle} onClick={handleAddLine} />
                             {
                                 amountLines.map((line, i) => (
-                                    <div className='create-product_container_form-product_lines_row3'>
+                                    <div className='create-product_container_form-product_lines_row3' key={i}>
 
                                         <div >
                                             <label htmlFor="" className='label-form'>Talle</label>

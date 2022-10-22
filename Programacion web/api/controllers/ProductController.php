@@ -567,7 +567,7 @@ class ProductController
     {
         $this->jwt->verifyTokenAndGetIdUserFromRequest();
         //Valido que exista el producto
-        $productExist = ProductModel::getProductByBarcode($barcode);
+        $productExist = ProductModel::getAllProductByBarcode($barcode);
         if (!$productExist) {
             echo $this->response->error203("Esta intentando activar un modelo que no existe");
             die();
