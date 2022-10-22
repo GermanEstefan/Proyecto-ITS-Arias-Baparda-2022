@@ -229,7 +229,7 @@ class ProductController
         //Array de modelos
         $models = array();
         foreach($product as $modelOfProduct){
-            array_push( $models, array( "size" => $modelOfProduct['size'],"design" => $modelOfProduct['design'],"barcode" => $modelOfProduct["barcode"],"stock" => $modelOfProduct['stock'],"price" => $modelOfProduct["price"],"state" => $modelOfProduct["state"] ));
+            array_push( $models, array( "size" => $modelOfProduct['size'],"design" => $modelOfProduct['design'],"barcode" => $modelOfProduct["barcode"],"stock" => $modelOfProduct['stock'],"price" => $modelOfProduct["price"],"state" => $modelOfProduct["state"],"picture" => $modelOfProduct["picture"] ));
         }
         $response = array("name" => $name, "description" => $description, "models" => $models);
 
