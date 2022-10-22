@@ -2,11 +2,13 @@ import { faPencil, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { Fragment, useEffect } from 'react'
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { fetchApi } from '../../API/api';
 import ContainerBase from '../../components/admin/ContainerBase';
 
 const ListProducts = () => {
 
+    const navigate = useNavigate();
     const [products, setProducts] = useState([]);
     const [modelsOfProduct, setModelsOfProduct] = useState({ idProduct: null, models: [] });
     const [loadingFlags, setLoadingFlags] = useState({ fetchingUsers: true });
@@ -79,7 +81,7 @@ const ListProducts = () => {
                                                                     <td>{model.design}</td>
                                                                     <td>{model.stock} </td>
                                                                     <td className="controls-row-child"> <FontAwesomeIcon icon={faTrash} /> </td>
-                                                                    <td className="controls-row-child"> <FontAwesomeIcon icon={faPencil} /> </td>
+                                                                    <td className="controls-row-child" onClick={() => navigate(`/admin/products/edit-model/${model.barcode}`)}> <FontAwesomeIcon icon={faPencil} /> </td>
                                                                 </tr>
                                                             ))
                                                         }

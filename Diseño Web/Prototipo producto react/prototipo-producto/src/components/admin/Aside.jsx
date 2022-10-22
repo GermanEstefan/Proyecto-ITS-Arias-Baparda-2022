@@ -93,7 +93,7 @@ const Aside = () => {
                         <ul>
                             <li 
                                 onClick={() => navigate('/admin/products/create') }
-                                className={ (action === 'create' && page === 'products' || page === 'products-promo') ? 'selected' : '' }
+                                className={ ( action === 'create' && (page === 'products' || page === 'products-promo') ) ? 'selected' : '' }
                             >Añadir un nuevo producto / promo</li>
 
                             <li 

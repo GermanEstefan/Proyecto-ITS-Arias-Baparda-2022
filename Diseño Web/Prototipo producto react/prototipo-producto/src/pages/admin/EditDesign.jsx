@@ -7,7 +7,7 @@ import ContainerBase from "../../components/admin/ContainerBase";
 const EditDesign = () => {
 
     const { idOfDesign } = useParams();
-    const [designValues, setDesignValues] = useState({ name: 'Cargando...', description: 'Cargando...' })
+    const [designValues, setDesignValues] = useState({ nameCurrent: 'Cargando...', description: 'Cargando...' })
     const { name, description } = designValues;
     const handleChangeInputs = ({ target }) => {
         setDesignValues({
@@ -28,7 +28,7 @@ const EditDesign = () => {
             .then(res => {
                 console.log(res)
                 setDesignValues({
-                    name: res.name,
+                    nameCurrent: res.name,
                     description: res.description
                 })
             })

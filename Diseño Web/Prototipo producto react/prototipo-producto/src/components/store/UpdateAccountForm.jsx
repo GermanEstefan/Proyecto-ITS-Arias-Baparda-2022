@@ -19,7 +19,7 @@ const UpdateAccountForm = () => {
         phone: userData.phone || ''
     });
 
-    const [errorStatusForm, setErrorStatusForm] = useState({ name: false, surname: false })
+    const [errorStatusForm, setErrorStatusForm] = useState({ nameCurrent: false, surname: false })
 
     const handleSubmit = async (e) => {
         e.preventDefault();

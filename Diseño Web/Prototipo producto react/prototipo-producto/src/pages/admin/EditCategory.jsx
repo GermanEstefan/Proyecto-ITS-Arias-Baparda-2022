@@ -7,7 +7,7 @@ import ContainerBase from "../../components/admin/ContainerBase";
 const EditCategory = () => {
 
     const { idOfCategory } = useParams();
-    const [categoryValues, setCategoryValues] = useState({ name: 'Cargando...', description: 'Cargando...' })
+    const [categoryValues, setCategoryValues] = useState({ nameCurrent: 'Cargando...', description: 'Cargando...' })
     const { name, description } = categoryValues;
     const handleChangeInputs = ({ target }) => {
         setCategoryValues({
@@ -28,7 +28,7 @@ const EditCategory = () => {
             .then(res => {
                 console.log(res)
                 setCategoryValues({
-                    name: res.result.data[0].name,
+                    nameCurrent: res.result.data[0].name,
                     description: res.result.data[0].description
                 })
             })
