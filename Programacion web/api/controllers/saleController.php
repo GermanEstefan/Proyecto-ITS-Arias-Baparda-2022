@@ -50,9 +50,12 @@ class SaleController {
             echo $this->response->error203("El usuario se encuentra inactivo");
             die();
         }
+        $identifyClient = SaleModel::getInfoCustomerByEmail($client);
+        $idClient = ($identifyClient["id_user"]);
         
-        $saleCreate = new SaleModel($address, $client, $delivery,$payment, $productsForSale);
-        if(!$saleCreate){
+        $saleCreate = new SaleModel($address, $idClient, $delivery,$payment, $productsForSale);
+        $result= $saleCreate->saveSale($productsForSale);
+        if(!$result){
             echo $this->response->error500();
             die();
         }

@@ -93,7 +93,8 @@
             p.stock,
             c.name as category,
             p.description,
-            p.state 
+            p.state, 
+            p.picture 
             FROM product p
             INNER JOIN category c
             INNER JOIN design d
@@ -153,7 +154,8 @@
             s.name as size,
             p.price,
             p.stock,
-            p.description 
+            p.description,
+            p.picture 
             from product p
             INNER JOIN design d
             INNER JOIN size s
@@ -335,8 +337,7 @@
             p.name,
             p.price,
             c.name as category,
-            p.description,
-            p.state 
+            p.description 
             FROM product p, category c
             WHERE p.product_category = c.id_category";
             return $conecction->getData($query)->fetch_all(MYSQLI_ASSOC);
@@ -364,7 +365,8 @@
             p.id_product,
             p.name,
             p.price,
-            p.description
+            p.description,
+            p.picture
             FROM product p
             INNER JOIN category c
             on p.product_category = c.id_category 

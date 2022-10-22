@@ -4,13 +4,13 @@
     class SaleModel extends Connection {
 
         private $address;
-        private $client;
+        private $idClient;
         private $delivery;
         private $payment;
 
-        function __construct($address,$client,$delivery,$payment){
+        function __construct($address,$idClient,$delivery,$payment){
             $this->name = $address;
-            $this->description = $client;
+            $this->description = $idClient;
             $this->description = $delivery;
             $this->description = $payment;
             parent::__construct();
@@ -52,7 +52,7 @@
             $query = "SELECT SUM(total) from sale";
             return $conecction->getData($query)->fetch_assoc();
         }
-        public static function GetInfoCustomerByEmail($mailClient){
+        public static function getInfoCustomerByEmail($mailClient){
             $conecction = new Connection();
             $query = "SELECT u.id_user,
             c.company_name AS 'Razon Social',
@@ -65,7 +65,7 @@
             AND u.email = '$mailClient'";
             return $conecction->getData($query)->fetch_assoc();
         }
-        public static function GetIdCustomerByEmail($mailClient){
+        public static function getIdCustomerByEmail($mailClient){
             $conecction = new Connection();
             $query = "SELECT u.id_user
             FROM user u, customer c
@@ -74,12 +74,13 @@
             return $conecction->getData($query)->fetch_assoc();
         }
                 
-        public function saveSale($address, $client, $delivery,$payment,$productsForSale){
+        public function saveSale($productsForSale){
             $response = new Response();
-            $instanceMySql = $this->conecction->getInstance();
+            $conecction = new Connection();
+            $instanceMySql = $conecction->getInstance();
             $instanceMySql->begin_transaction(MYSQLI_TRANS_START_READ_WRITE);
             $result_transaccion = true;
-            $saleInsert = "INSERT INTO sale (address, client, sale_delivery, payment) VALUES ('$address', '$client','$delivery', $payment)";
+            $saleInsert = "INSERT INTO sale (address, user_purchase, sale_delivery, payment) VALUES ('$this->address', '$this->idClient','$this->delivery', $this->payment)";
             $resultCreateSale = $instanceMySql->query($saleInsert);
             if(!$resultCreateSale)  $result_transaccion = false;
             $idSale = $instanceMySql->insert_id;
@@ -90,8 +91,10 @@
             foreach ($productsForSale as $product) {
                 $barcode = $product['barcode'];
                 $quantity = $product['quantity'];
-            //Validaciones
-            $productExist = ProductModel::getProductByBarcode($barcode);
+                //Validaciones
+            $productExist = ProductModel::getAllProductByBarcode($barcode);
+            var_dump($productExist);
+            die();
             if (!$productExist) {
                 echo ($response->error203("No existe el producto $barcode"));
                 $instanceMySql->rollback();
