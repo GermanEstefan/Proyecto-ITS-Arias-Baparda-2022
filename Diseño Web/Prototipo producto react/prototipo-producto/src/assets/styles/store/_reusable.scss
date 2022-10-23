@@ -95,7 +95,6 @@
 .input-wrapper {
   position: relative;
   text-align: center;
-  margin-bottom: 10px;
   .input-wrapper__input {
     display: block;
     font-family: inherit;
@@ -171,8 +170,7 @@
   }
 }
 
-
 .displayNone {
   height: 0;
-  transition: height .5s ease;
+  transition: height 0.5s ease;
 }

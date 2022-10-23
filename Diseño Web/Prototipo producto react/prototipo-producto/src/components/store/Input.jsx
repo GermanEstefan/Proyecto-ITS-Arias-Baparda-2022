@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const Input = ({ validateFunction, setErrorStatusForm, ...args }) => {
+const Input = ({ validateFunction, setErrorStatusForm , ...args }) => {
   const [errorState, setErrorState] = useState({ error: false, message: null });
 
   const validateInput = (e) => {

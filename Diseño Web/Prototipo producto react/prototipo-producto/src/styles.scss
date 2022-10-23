@@ -1,10 +1,10 @@
-
 $orange: #f5990f;
+$dark-orange: #e18e11;
 $transparent_orange: #f5990f7c;
 $gray: #bccddb;
 $dark_gray: #9ba6af;
 $black: #121212;
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap");
 @import "./assets/styles/store/reusable";
 @import "./assets/styles/store/footer";
 @import "./assets/styles/store/categoryList";
@@ -25,31 +25,34 @@ $black: #121212;
 @import "./assets/styles/admin/listUsers";
 @import "./assets/styles/admin/createProductPromo";
 @import "./assets/styles/admin/listProducts";
-
-body{
-  overflow-x: hidden;
-  font-family: 'Open Sans', sans-serif;
+html {
+  scroll-behavior: smooth;
 }
-.main-client{
+body {
+  overflow-x: hidden;
+  font-family: "Open Sans", sans-serif;
+}
+.main-client {
   margin-top: 10vh;
   min-height: 100vh;
 }
-ul{
+ul {
   padding: 0;
   margin: 0;
   list-style: none;
 }
-a{
+a {
   text-decoration: none;
   color: inherit;
 }
-input, textarea{
+input,
+textarea {
   border: none;
-  border: 1px solid black;
+
   border-radius: 3px;
   padding: 5px;
   resize: none;
-  &:focus{
+  &:focus {
     outline: none;
   }
 }
@@ -95,7 +98,7 @@ input, textarea{
   background-color: black;
   left: 50%;
   bottom: -5px;
-  transition: all 0.2s ease-in-out;
+  transition: all 0.1s ease-in-out;
 }
 
 .underline_animated:hover::after {

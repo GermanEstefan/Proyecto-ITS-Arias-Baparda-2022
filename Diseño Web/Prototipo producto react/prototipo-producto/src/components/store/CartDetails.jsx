@@ -1,12 +1,13 @@
 import React from "react";
 
-const CartDetails = ({ total }) => {
+const CartDetails = ({ total, onClick }) => {
 
   return (
     <>
       <div className="cartItem">
         <div className="cartItem__text">
-          <p>Total: {total}$</p>
+          <span className="total">Total: {total}$</span>
+          <button className="buyBtn" onClick={onClick}>Confirmar compra</button>
         </div>
       </div>
     </>

@@ -28,7 +28,7 @@ const ProductPage = () => {
   // }, [product]);
 
   const handleAddToCart = () => {
-    setCart([...cart, { barcode: product.barcode, amount: 1 }]);
+    setCart([...cart, { barcode: product.barcode, quantity: 1 }]);
     setIsAddedToCart(true);
   };
   const handleDeleteItemFromCart = () => {
@@ -42,6 +42,7 @@ const ProductPage = () => {
   const getProductById = async () => {
     const resp = await fetchApi(`products.php?idProduct=${id}`, "GET");
     setProduct(resp.result.data.models[0] ? resp.result.data.models[0] : {});
+    console.log(resp.result.data)
     setproductName(resp.result.data.name);
     setproductDescription(resp.result.data.description);
     getDesignsList(resp.result.data.models);

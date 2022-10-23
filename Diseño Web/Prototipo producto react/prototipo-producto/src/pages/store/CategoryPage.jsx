@@ -22,6 +22,7 @@ const CategoryPage = () => {
     const resp = await fetchApi(`products.php?categoryName=${category}`, "GET");
     console.log(resp);
     setProductList(resp.result.data);
+    console.log(resp.result.data)
   };
 
   //   {

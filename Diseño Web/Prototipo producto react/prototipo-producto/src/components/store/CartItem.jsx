@@ -7,7 +7,7 @@ import Guantes from "../../assets/img/guantes.jpg";
 import { useContext } from "react";
 import { cartContext } from "../../App";
 
-const CartItem = ({ barcode, img, name, price, amount, setTotalPrice }) => {
+const CartItem = ({ barcode, img, name, price, quantity, setTotalPrice }) => {
   const { cart, setCart } = useContext(cartContext);
 
   const [product, setProduct] = useState({});
@@ -27,17 +27,17 @@ const CartItem = ({ barcode, img, name, price, amount, setTotalPrice }) => {
     setProduct(resp.result.data);
   };
 
-  const updateProductAmount = (e) => {
+  const updateProductQuantity = (e) => {
     e.preventDefault();
-    const cartWithNewAmount = cart.map((product) => {
+    const cartWithNewQuantity = cart.map((product) => {
       if (product.barcode === barcode) {
-        return { barcode: barcode, amount: e.target.value };
+        return { barcode: barcode, quantity: e.target.value };
       } else {
         return product;
       }
     });
-    setCart(cartWithNewAmount);
-    setTotalPrice()
+    setCart(cartWithNewQuantity);
+    setTotalPrice();
   };
   return (
     <Animated
@@ -50,19 +50,19 @@ const CartItem = ({ barcode, img, name, price, amount, setTotalPrice }) => {
         <img className="cartItem__img" src={img} width="100px" alt="" />
 
         <div className="cartItem__text">
-          <h2>{name}</h2>
-          <p>{price}$</p>
+          <h3>{name}</h3>
+          <p>{price * quantity}$</p>
         </div>
         <div className="CartItem__actions">
           <input
-            className="CartItem__actionsAmount"
-            defaultValue={amount}
+            className="CartItem__actionsQuantity"
+            defaultValue={quantity}
             type="number"
-            onChange={updateProductAmount}
+            onChange={updateProductQuantity}
             min={1}
           />
           <button
-            className="CartItem__actionsAmount"
+            className="CartItem__actionsQuantity"
             onClick={(e) => handleDeleteItemFromCart(e)}
           >
             <FontAwesomeIcon icon={faTrash} />

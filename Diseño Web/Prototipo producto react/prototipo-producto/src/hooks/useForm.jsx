@@ -28,6 +28,7 @@ export const useForm = (initState) => {
         ...values,
         [target.name]: target.value,
       });
+      console.log(values)
     }
   };
 
