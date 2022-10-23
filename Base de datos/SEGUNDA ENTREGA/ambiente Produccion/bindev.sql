@@ -190,7 +190,7 @@ CREATE TABLE IF NOT EXISTS `bindev`.`product` (
   `stock` INT NOT NULL,
   `price` DECIMAL(10,2) NOT NULL,
   `description` VARCHAR(500) NOT NULL,
-  `picture` VARCHAR(1000) NOT NULL,
+  `picture` VARCHAR(1000) NULL,
   `state` TINYINT default 1,
   PRIMARY KEY (`barcode`),
   constraint `CH_state_product` CHECK (`state`<=1 and `state`>=0),
@@ -545,7 +545,50 @@ INSERT INTO `bindev`.`PRODUCT` (`id_product`, `name`, `product_category`, `produ
 INSERT INTO `bindev`.`PRODUCT` (`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`, `picture`) VALUES ('11', 'REMERA Clasica', '2', '3', '3', '11', '500', 'Descripcion del producto','https://i.ibb.co/mRpFg8R/8negro.jpg & https://i.ibb.co/9bKNc4d/remera2.jpg & https://i.ibb.co/9bKNc4d/remera2.jpg');
 INSERT INTO `bindev`.`PRODUCT` (`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`, `picture`) VALUES ('11', 'REMERA Clasica', '2', '3', '4', '0', '500', 'Descripcion del producto','https://i.ibb.co/mRpFg8R/8negro.jpg & https://i.ibb.co/9bKNc4d/remera2.jpg & https://i.ibb.co/9bKNc4d/remera2.jpg');
 INSERT INTO `bindev`.`PRODUCT` (`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`, `picture`) VALUES ('11', 'REMERA Clasica', '2', '2', '4', '21', '500', 'Descripcion del producto','https://i.ibb.co/mRpFg8R/8negro.jpg & https://i.ibb.co/9bKNc4d/remera2.jpg & https://i.ibb.co/9bKNc4d/remera2.jpg');
-
+INSERT INTO `bindev`.`product` (`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`) VALUES ('12', 'REMERA CALIDAD', '2', '4', '4', '3', '800', 'Descripcion del producto');
+INSERT INTO `bindev`.`product` (`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`) VALUES ('12', 'REMERA CALIDAD', '2', '4', '5', '3', '800', 'Descripcion del producto');
+INSERT INTO `bindev`.`product` (`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`) VALUES ('12', 'REMERA CALIDAD', '2', '4', '6', '3', '800', 'Descripcion del producto');
+INSERT INTO `bindev`.`product` (`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`) VALUES ('12', 'REMERA CALIDAD', '2', '4', '7', '3', '800', 'Descripcion del producto');
+INSERT INTO `bindev`.`product` (`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`) VALUES ('12', 'REMERA CALIDAD', '2', '5', '4', '3', '800', 'Descripcion del producto');
+INSERT INTO `bindev`.`product` (`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`) VALUES ('12', 'REMERA CALIDAD', '2', '5', '5', '3', '800', 'Descripcion del producto');
+INSERT INTO `bindev`.`product` (`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`) VALUES ('12', 'REMERA CALIDAD', '2', '5', '7', '3', '800', 'Descripcion del producto');
+INSERT INTO `bindev`.`product` (`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`) VALUES ('12', 'REMERA CALIDAD', '2', '6', '3', '3', '800', 'Descripcion del producto');
+INSERT INTO `bindev`.`product` (`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`) VALUES ('12', 'REMERA CALIDAD', '2', '6', '4', '3', '800', 'Descripcion del producto');
+INSERT INTO `bindev`.`product` (`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`) VALUES ('13', 'PANTALON Clasico', '4', '7', '4', '19', '1400', 'Descripcion del producto');
+INSERT INTO `bindev`.`product` (`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`) VALUES ('13', 'PANTALON Clasico', '4', '7', '5', '22', '1400', 'Descripcion del producto');
+INSERT INTO `bindev`.`product` (`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`) VALUES ('13', 'PANTALON Clasico', '4', '7', '6', '40', '1400', 'Descripcion del producto');
+INSERT INTO `bindev`.`product` (`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`) VALUES ('13', 'PANTALON Clasico', '4', '7', '7', '18', '1400', 'Descripcion del producto');
+INSERT INTO `bindev`.`product` (`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`) VALUES ('13', 'PANTALON Clasico', '4', '3', '4', '21', '1400', 'Descripcion del producto');
+INSERT INTO `bindev`.`product` (`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`) VALUES ('13', 'PANTALON Clasico', '4', '3', '5', '12', '1400', 'Descripcion del producto');
+INSERT INTO `bindev`.`product` (`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`) VALUES ('13', 'PANTALON Clasico', '4', '3', '6', '1', '1400', 'Descripcion del producto');
+INSERT INTO `bindev`.`product` (`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`) VALUES ('14', 'PANTALON alta calidad', '4', '7', '4', '22', '2000', 'Descripcion del producto');
+INSERT INTO `bindev`.`product` (`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`) VALUES ('14', 'PANTALON alta calidad', '4', '7', '5', '81', '2000', 'Descripcion del producto');
+INSERT INTO `bindev`.`product` (`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`) VALUES ('14', 'PANTALON alta calidad', '4', '7', '6', '41', '2000', 'Descripcion del producto');
+INSERT INTO `bindev`.`product` (`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`) VALUES ('14', 'PANTALON alta calidad', '4', '7', '7', '9', '2000', 'Descripcion del producto');
+INSERT INTO `bindev`.`product` (`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`) VALUES ('14', 'PANTALON alta calidad', '4', '3', '3', '20', '2000', 'Descripcion del producto');
+INSERT INTO `bindev`.`product` (`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`) VALUES ('14', 'PANTALON alta calidad', '4', '3', '6', '0', '2000', 'Descripcion del producto');
+INSERT INTO `bindev`.`product` (`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`) VALUES ('14', 'PANTALON alta calidad', '4', '3', '7', '12', '2000', 'Descripcion del producto');
+INSERT INTO `bindev`.`product` (`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`) VALUES ('17', 'CASCO clasico', '6', '8', '3', '100', '1200', 'Descripcion del producto');
+INSERT INTO `bindev`.`product` (`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`) VALUES ('17', 'CASCO clasico', '6', '8', '4', '40', '1200', 'Descripcion del producto');
+INSERT INTO `bindev`.`product` (`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`) VALUES ('17', 'CASCO clasico', '6', '8', '5', '70', '1200', 'Descripcion del producto');
+INSERT INTO `bindev`.`product` (`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`) VALUES ('17', 'CASCO clasico', '6', '8', '6', '80', '1200', 'Descripcion del producto');
+INSERT INTO `bindev`.`product` (`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`) VALUES ('18', 'ZAPATOS clasicos', '7', '3', '8', '300', '2200', 'Descripcion del producto');
+INSERT INTO `bindev`.`product` (`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`) VALUES ('18', 'ZAPATOS clasicos', '7', '3', '9', '1300', '2200', 'Descripcion del producto');
+INSERT INTO `bindev`.`product` (`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`) VALUES ('18', 'ZAPATOS clasicos', '7', '3', '10', '890', '2200', 'Descripcion del producto');
+INSERT INTO `bindev`.`product` (`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`) VALUES ('18', 'ZAPATOS clasicos', '7', '3', '11', '464', '2200', 'Descripcion del producto');
+INSERT INTO `bindev`.`product` (`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`) VALUES ('18', 'ZAPATOS clasicos', '7', '3', '12', '921', '2200', 'Descripcion del producto');
+INSERT INTO `bindev`.`product` (`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`) VALUES ('18', 'ZAPATOS clasicos', '7', '3', '13', '376', '2200', 'Descripcion del producto');
+INSERT INTO `bindev`.`product` (`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`) VALUES ('18', 'ZAPATOS clasicos', '7', '3', '14', '20', '2200', 'Descripcion del producto');
+INSERT INTO `bindev`.`product` (`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`) VALUES ('18', 'ZAPATOS clasicos', '7', '3', '15', '80', '2200', 'Descripcion del producto');
+INSERT INTO `bindev`.`product` (`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`) VALUES ('18', 'ZAPATOS clasicos', '7', '3', '16', '3', '2200', 'Descripcion del producto');
+INSERT INTO `bindev`.`product` (`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`) VALUES ('19', 'GUANTES clasico', '5', '8', '2', '41', '450', 'Descripcion del producto');
+INSERT INTO `bindev`.`product` (`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`) VALUES ('19', 'GUANTES clasico', '5', '8', '3', '612', '450', 'Descripcion del producto');
+INSERT INTO `bindev`.`product` (`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`) VALUES ('19', 'GUANTES clasico', '5', '8', '4', '90', '450', 'Descripcion del producto');
+INSERT INTO `bindev`.`product` (`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`) VALUES ('19', 'GUANTES clasico', '5', '8', '5', '9', '450', 'Descripcion del producto');
+INSERT INTO `bindev`.`product` (`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`) VALUES ('19', 'GUANTES clasico', '5', '7', '2', '225', '450', 'Descripcion del producto');
+INSERT INTO `bindev`.`product` (`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`) VALUES ('19', 'GUANTES clasico', '5', '7', '3', '570', '450', 'Descripcion del producto');
+INSERT INTO `bindev`.`product` (`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`) VALUES ('19', 'GUANTES clasico', '5', '7', '4', '0', '450', 'Descripcion del producto');
+INSERT INTO `bindev`.`product` (`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`) VALUES ('19', 'GUANTES clasico', '5', '7', '5', '9', '450', 'Descripcion del producto');
 
 
 
