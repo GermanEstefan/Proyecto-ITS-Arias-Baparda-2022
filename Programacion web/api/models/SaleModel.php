@@ -139,11 +139,12 @@
                 die();
             }
         }
+        $payment = $this->payment;
             //ALTA EN REPORTES
-            if($this->payment == 0){
+            if($payment == 0){
             //el pago es en efectivo, queda pendiente de confirmacion
-            $firstReportForSale = "INSERT INTO report (sale_report, status_report, employee_report, comment) VALUES ($idSale, '$this->payment', 1, 'Nuevo Pedido - Respuesta automatica')";
-            $generateReportForSale = $instanceMySql->query($firstReportForSale);
+            $firstReportForSalePending = "INSERT INTO report (sale_report, status_report, employee_report, comment) VALUES ($idSale, 2, 1, 'Respuesta automatica')";
+            $generateReportForSale = $instanceMySql->query($firstReportForSalePending);
             if(!$generateReportForSale) $result_transaccion = false;
             if($result_transaccion){
                     $instanceMySql->commit();
@@ -153,10 +154,10 @@
                     return false;
                 }
             }
-            if($this->payment == 1){
+            if($payment == 1){
                 //el pago ya fue confirmado por algun medio electronico, queda Confirmado
-                $firstReportForSale = "INSERT INTO report (sale_report, status_report, employee_report, comment) VALUES ($idSale, '$this->payment', 1, 'NUEVO VENTA - Respuesta automatica')";
-                $generateReportForSale = $instanceMySql->query($firstReportForSale);
+                $firstReportForSaleConfirmed = "INSERT INTO report (sale_report, status_report, employee_report, comment) VALUES ($idSale, 3, 1, 'Respuesta automatica')";
+                $generateReportForSale = $instanceMySql->query($firstReportForSaleConfirmed);
                 if(!$generateReportForSale) $result_transaccion = false;
                 if($result_transaccion){
                         $instanceMySql->commit();
