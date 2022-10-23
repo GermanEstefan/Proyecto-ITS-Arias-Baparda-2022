@@ -557,15 +557,24 @@
                 echo ($response->error203("El producto $haveProduct no se encuentra activo"));
                 $instanceMySql->rollback();
                 die();
-                }
+            }
             //Valido que cantidad a agregar no sea mayor a la cantidad disponible del producto
             $stockExist = ProductModel::getStockProductByBarcode($haveProduct);
             if (($quantity*$stock)>$stockExist["stock"]){
                 echo ($response->error203("No dispone de tantas unidades para $haveProduct"));
                 $instanceMySql->rollback();
                 die();   
-                }
             }
+            $unitsToSubtract = ($quantity*$stock);
+            
+            $decreaseStock = ProductModel::updateStockProductsOfPromo($haveProduct,$unitsToSubtract);
+            if(!$decreaseStock){
+            echo ($response->error203("Hubo un problema al descontar las unidades de $haveProduct"));
+            $instanceMySql->rollback();
+            die();   
+            }
+        
+        }
             $query = array($index => "INSERT INTO promo (is_product, have_product, quantity) VALUES ($isProduct,$haveProduct, $quantity)");
             array_push($queries, $query);
             $index++;
