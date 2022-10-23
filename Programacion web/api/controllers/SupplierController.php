@@ -57,16 +57,16 @@ class SupplierController {
     }
     //consultas
     public function getAllSuppliers(){
-        $supplierToJson = json_encode(SupplierModel::getAllSuppliers()); 
-        echo $supplierToJson;
+        $supplier = SupplierModel::getAllSuppliers(); 
+        echo $this->response->successfully("Proveedores del sistema:", $supplier);
     }
     public function getAllSuppliersActive(){
-        $supplierToJson = json_encode(SupplierModel::getAllSuppliersActive()); 
-        echo $supplierToJson;
+        $supplier = SupplierModel::getAllSuppliersActive(); 
+        echo $this->response->successfully("Proveedores Activos:", $supplier);
     }
     public function getAllSuppliersDisable(){
-        $supplierToJson = json_encode(SupplierModel::getAllSuppliersDisable()); 
-        echo $supplierToJson;
+        $supplier = SupplierModel::getAllSuppliersDisable(); 
+        echo $this->response->successfully("Proveedores Inactivos:", $supplier);
     }
     public function getSupplierByRut($rut){
         $supplier = SupplierModel::getSupplierByRut($rut);
@@ -74,7 +74,7 @@ class SupplierController {
             echo $this->response->error203("El proveedor $rut no existe");
             die();
         }
-        echo json_encode($supplier);  
+        echo $this->response->successfully("Proveedor con rutN°:$rut", $supplier);  
     }
 
     public function getSupplierByName($companyName){
@@ -83,15 +83,15 @@ class SupplierController {
             echo $this->response->error203("El proveedor con nombre $companyName no existe");
             die();
         }
-        echo json_encode($supplier);  
+        echo $this->response->successfully("Proveedor con nombre:$companyName", $supplier);
     }
-    public function getSupplierById($idState){
-        $supplier = SupplierModel::getSupplierById($idState);
+    public function getSupplierById($idSupplier){
+        $supplier = SupplierModel::getSupplierById($idSupplier);
         if(!$supplier){
-            echo $this->response->error203("No existe proveedor para id ingresado");
+            echo $this->response->error203("No existe proveedor con id $idSupplier");
             die();
         }
-        echo json_encode($supplier);  
+        echo $this->response->successfully("Proveedor con idN°:$idSupplier", $supplier);
     }
     //ACTUALIZAR
     public function updateSupplier($supplierId, $supplierData){
@@ -116,7 +116,7 @@ class SupplierController {
         $notChangeRut = SupplierModel::getSupplierByRut($rut);
         if ($notChangeRut){
             $result = SupplierModel::updateSupplierNotRut($supplierId,$companyName,$address,$phone);
-            echo $this->response->successfully("Proveedor actualziado con exito");
+            echo $this->response->successfully("Informacion del proveedor actualizada con exito");
             die();
         }
 
@@ -125,7 +125,7 @@ class SupplierController {
             echo $this->response->error500();
             die();
         }
-        echo $this->response->successfully("proveedor actualizado con exito");
+        echo $this->response->successfully("Proveedor actualizado con exito");
     }
     public function disableSupplier($supplierId)
     {
