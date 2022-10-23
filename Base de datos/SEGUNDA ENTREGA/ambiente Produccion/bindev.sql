@@ -429,28 +429,6 @@ insert customer set customer_user = new.id_user;
 END$$
 DELIMITER ;
 
-DROP TRIGGER IF EXISTS `bindev`.`ProdDispoParaPromo`;
-
-DELIMITER $$
-USE `bindev`$$
-CREATE DEFINER=`root`@`localhost` TRIGGER `bindev`.`ProdDispoParaPromo` BEFORE INSERT ON `promo` FOR EACH ROW
-BEGIN 
-declare stockTempo int;
-declare cantUnidPromo int;
-set cantUnidPromo = (Select stock from product where new.is_product = barcode);
-set stockTempo = (select stock from product where new.have_product = barcode)-(new.quantity * cantUnidPromo);
-if (new.quantity <=0) then
-SIGNAL SQLSTATE '45002' SET message_text = 'CANTIDAD INCORRECTA';
-else
-if (stockTempo >=0) then 
-update product set stock = stockTempo where barcode = new.have_product;
-else
-SIGNAL SQLSTATE '45001' SET message_text = 'NO HAY STOCK DEL PRODUCTO PARA AGREGAR AL PRODUCTO';
-END if;
-END if;
-end$$
-DELIMITER ;
-
 DROP TRIGGER IF EXISTS `bindev`.`InsertDatetimeSupply`;
 DELIMITER $$
 USE `bindev`$$
