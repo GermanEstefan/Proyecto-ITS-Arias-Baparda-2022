@@ -258,7 +258,7 @@ CREATE TABLE IF NOT EXISTS `bindev`.`sale` (
   CONSTRAINT `FK_delivery_sale`
     FOREIGN KEY (`sale_delivery`)
     REFERENCES `bindev`.`delivery_time` (`id_delivery`)
-    ON DELETE RESTRICT
+    ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
 ALTER TABLE sale
@@ -273,8 +273,7 @@ CREATE TABLE IF NOT EXISTS `bindev`.`report` (
   `employee_report` INT NOT NULL,
   `date` DATETIME NOT NULL ,
   `comment` VARCHAR(500) NULL,
-  PRIMARY KEY (`sale_report`, `status_report`),
-  CONSTRAINT `UN_report_sale` UNIQUE (`sale_report`, `status_report`, `date`),
+  PRIMARY KEY (`sale_report`,`status_report`,`date`),
   CONSTRAINT `FK_sale_report`
     FOREIGN KEY (`sale_report`)
     REFERENCES `bindev`.`sale` (`id_sale`)
@@ -334,72 +333,19 @@ CREATE TABLE IF NOT EXISTS `bindev`.`promo` (
     ON DELETE RESTRICT
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
--- -----------------------------------------------------
--- Table `bindev`.`productHistory`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `bindev`.`productHistory` (
-  `lineNumber` INT NOT NULL AUTO_INCREMENT,
-  `idOfProduct` INT NOT NULL,
-  `nameOfProduct` VARCHAR(500) NOT NULL,
-  `oldStock` INT NOT NULL,
-  `newStock` INT NOT NULL,
-  `oldPrice` DECIMAL(10,2) NOT NULL,
-  `newPrice` DECIMAL(10,2) NOT NULL,
-  `dateOfEdit` date,
-  PRIMARY KEY (`lineNumber`));
-ALTER TABLE productHistory
-AUTO_INCREMENT = 1000;
--- -----------------------------------------------------
--- Table `bindev`.`employeeHistory`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `bindev`.`employeeHistory` (
-  `lineNumber` INT NOT NULL AUTO_INCREMENT,
-  `idEmployee` INT NOT NULL,
-  `ciEmployee` INT NOT NULL,
-  `nameOfEmployee` VARCHAR(500) NOT NULL,
-  `oldRole` VARCHAR(500) NOT NULL,
-  `newRole` VARCHAR(500) NOT NULL,
-  `oldstate` TINYINT NOT NULL,
-  `newstate` TINYINT NOT NULL,
-  `dateOfEdit` date,
-  PRIMARY KEY (`lineNumber`));
-ALTER TABLE productHistory
-AUTO_INCREMENT = 2000;
--- -----------------------------------------------------
--- Table `bindev`.`saleHistory`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `bindev`.`saleHistory` (
-  `lineNumber` INT NOT NULL AUTO_INCREMENT,
-  `idEmployee` INT NOT NULL,
-  `ciEmployee` INT NOT NULL,
-  `nameOfEmployee` VARCHAR(500) NOT NULL,
-  `oldRole` VARCHAR(500) NOT NULL,
-  `newRole` VARCHAR(500) NOT NULL,
-  `oldstate` TINYINT NOT NULL,
-  `newstate` TINYINT NOT NULL,
-  `dateOfEdit` date,
-  PRIMARY KEY (`lineNumber`));
-ALTER TABLE productHistory
-AUTO_INCREMENT = 2000;
 
-DROP TRIGGER IF EXISTS `bindev`.`sale_detail_VALIDATION`;
+DROP TRIGGER IF EXISTS `bindev`.`supply_detail_AMOUNT_TOTAL_AUTO`;
 DELIMITER $$
 USE `bindev`$$
-CREATE DEFINER = CURRENT_USER TRIGGER `bindev`.`sale_detail_VALIDATION` BEFORE INSERT ON `sale_detail` FOR EACH ROW
+CREATE DEFINER=`root`@`localhost` TRIGGER `bindev`.`setTotalEnSale` BEFORE INSERT ON `sale_detail` FOR EACH ROW
 BEGIN
-declare stockTemp int;
-declare totalParc decimal(10,2);
-set stockTemp = (select stock from product where new.product_sale = barcode)-new.quantity;
-if (stockTemp >=0) then 
-update product set stock = stockTemp where barcode = new.product_sale;
+declare totalParc decimal(10,2); 
 set totalParc = new.quantity * (select price from product where new.product_sale = barcode);
 set new.total = totalParc;
-update sale set total = ((total + new.total) * 1.22) where id_sale = new.sale_id;
-else
-SIGNAL SQLSTATE '45000' SET message_text = 'NO HAY STOCK SUFICIENTE PARA REALIZAR LA OPERACION';
-END if;
+update sale set total = (total + new.total) where id_sale = new.sale_id;
 END$$
 DELIMITER ;
+
 
 DROP TRIGGER IF EXISTS `bindev`.`supply_detail_AMOUNT_TOTAL_AUTO`;
 DELIMITER $$
@@ -407,7 +353,7 @@ USE `bindev`$$
 CREATE DEFINER = CURRENT_USER TRIGGER `bindev`.`supply_detail_AMOUNT_TOTAL_AUTO` BEFORE INSERT ON `supply_detail` FOR EACH ROW
 BEGIN
 set new.amount_total = new.cost_unit * new.quantity;
-update supply set total = ((total + new.amount_total) * 1.22) where id_supply = new.supply_id;
+update supply set total = (total + new.amount_total) where id_supply = new.supply_id;
 END$$
 DELIMITER ;
 
@@ -453,6 +399,14 @@ BEGIN
 	SET NEW.date = NOW();
 END$$
 DELIMITER ;
+DROP TRIGGER IF EXISTS `bindev`.`UpdateDatetimeReport`;
+DELIMITER $$
+USE `bindev`$$
+CREATE DEFINER=`root`@`localhost` TRIGGER `bindev`.`AutomaticUpdateDateReport` BEFORE UPDATE ON `report` FOR EACH ROW
+BEGIN 
+	SET NEW.date = NOW();
+END$$
+DELIMITER ;
 
 -- -----------------------------------------------------
 -- INSERT BASICOS PARA CONFIGURACION INICIAL DEL SISTEMA
@@ -487,6 +441,11 @@ INSERT INTO `bindev`.`status` (`name`, `description`) VALUES ('En transporte', '
 INSERT INTO `bindev`.`status` (`name`, `description`) VALUES ('Entregada', 'Entrega de la venta confirmada');
 INSERT INTO `bindev`.`status` (`name`, `description`) VALUES ('Pick UP', 'Levanta en el local');
 INSERT INTO `bindev`.`status` (`name`, `description`) VALUES ('Cancelada', 'La venta fue cancelada');
+INSERT INTO `bindev`.`delivery_time` (`name`, `description`) VALUES ('Lun a Vie de 8:00 a 13:00', 'Horario 1 abarca desde la apertura hasta la hora de descanso');
+INSERT INTO `bindev`.`delivery_time` (`name`, `description`) VALUES ('Lun a Vie de 14:00 a 19:00', 'Horario 2 abarca desde el descanso hasta la hora de cierre');
+INSERT INTO `bindev`.`delivery_time` (`name`, `description`) VALUES ('Sabados de 8:00 a 15:00', 'Horario 3 abarca desde la apertura del dia Sabado');
+INSERT INTO `bindev`.`delivery_time` (`name`, `description`) VALUES ('Domingos de 8:00 a 12:00', 'Horario 4 abarca desde la apertura del dia Domingo');
+
 -- -----------------------------------------------------
 -- DATOS BASICOS PARA PRUEBAS
 -- -----------------------------------------------------
@@ -567,8 +526,6 @@ INSERT INTO `bindev`.`product` (`id_product`, `name`, `product_category`, `produ
 INSERT INTO `bindev`.`product` (`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`) VALUES ('19', 'GUANTES clasico', '5', '7', '3', '570', '450', 'Descripcion del producto');
 INSERT INTO `bindev`.`product` (`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`) VALUES ('19', 'GUANTES clasico', '5', '7', '4', '0', '450', 'Descripcion del producto');
 INSERT INTO `bindev`.`product` (`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`) VALUES ('19', 'GUANTES clasico', '5', '7', '5', '9', '450', 'Descripcion del producto');
-
-
 
 
 SET SQL_MODE=@OLD_SQL_MODE;

@@ -32,7 +32,16 @@
             $query = "SELECT * from delivery_time ";
             return $conecction->getData($query)->fetch_all(MYSQLI_ASSOC);
         }
-
+        public static function getLocalHours(){
+            $conecction = new Connection();
+            $query = "SELECT * from delivery_time WHERE id_delivery < 5";
+            return $conecction->getData($query)->fetch_all(MYSQLI_ASSOC);
+        }
+        public static function getDeliveryHours(){
+            $conecction = new Connection();
+            $query = "SELECT * from delivery_time WHERE id_delivery > 4";
+            return $conecction->getData($query)->fetch_all(MYSQLI_ASSOC);
+        }
         public static function updateDelivery($idDelivery,$name, $description ){
             $conecction = new Connection();
             $query = "UPDATE delivery_time SET name = '$name', description = '$description' WHERE id_delivery = '$idDelivery' ";

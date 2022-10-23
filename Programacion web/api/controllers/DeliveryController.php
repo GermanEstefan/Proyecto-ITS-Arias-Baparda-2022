@@ -55,9 +55,19 @@ class DeliveryController {
     //CONSULTAS
     public function getDeliverys(){
         $deliverys = DeliveryModel::getAllDeliverys();
-        echo $this->response->successfully("Horarios de entrega Obtenidos:",$deliverys);
+        echo $this->response->successfully("Todos los horarios de entrega:",$deliverys);
         die();
         }
+    public function getLocalHours(){
+        $deliverys = DeliveryModel::getLocalHours();
+        echo $this->response->successfully("Horarios del Local:",$deliverys);
+        die();
+        }
+    public function getDeliveryHours(){
+        $deliverys = DeliveryModel::getDeliveryHours();
+        echo $this->response->successfully("Horarios de envio:",$deliverys);
+        die();
+        }    
     public function getDeliveryName($name){
         $delivery = DeliveryModel::getDeliveryByName($name);
         if(!$delivery){

@@ -27,7 +27,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $delivery->getDeliveryId($idDelivery);
         die();
     }
-    $delivery->getDeliverys();
+    if(isset($_GET['local'])){
+        $delivery->getLocalHours();
+        die();
+    }
+    if(isset($_GET['delivery'])){
+        $delivery->getDeliveryHours();
+        die();
+    }
+    if(isset($_GET['allDelivery'])){
+        $delivery->getDeliverys();
+        die();
+    }
+    echo $response->error203("Error en la URL");
+    
 
 }else if($_SERVER['REQUEST_METHOD'] === 'PATCH'){
     //Editar talle
