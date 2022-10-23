@@ -1,7 +1,7 @@
 <?php
     require_once("./helpers/Response.php");
     require_once("./database/Connection.php");
-    require_once("./database/ProductModel.php");
+    require_once("./ProductModel.php");
     class SaleModel extends Connection {
 
         private $address;

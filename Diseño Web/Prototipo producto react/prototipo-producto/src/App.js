@@ -25,6 +25,9 @@ import EditSize from "./pages/admin/EditSize";
 import EditDesign from "./pages/admin/EditDesign";
 import CreatePromotion from "./pages/admin/CreatePromotion";
 import EditModelProduct from "./pages/admin/EditModelProduct";
+import EditProducts from "./pages/admin/EditProduct";
+import Supplier from "./pages/admin/Supplier";
+import EditSupplier from "./pages/admin/EditSupplier";
 
 export const userStatusContext = createContext({});
 export const cartContext = createContext([]);
@@ -74,8 +77,13 @@ const App = () => {
           <Route path="/admin/generals/sizes/edit/:idOfSize" element={ <EditSize/> } />
           <Route path="/admin/generals/designs" element={ <Design/> } />
           <Route path="/admin/generals/designs/edit/:idOfDesign" element={ <EditDesign/> } />
+          <Route path="/admin/generals/supplier" element={ <Supplier/> } />
+          <Route path="/admin/generals/supplier/edit/:rut" element={ <EditSupplier/> } />
           <Route path="/admin/products/create" element={ <CreateProducts/> } />
           <Route path="/admin/products-promo/create" element={ <CreatePromotion/> } />
+          <Route path="/admin/products/edit-model/:barcode" element={ <EditModelProduct/> } />
+          <Route path="/admin/products/edit-product/:idProduct" element={ <EditProducts/> } />
+          <Route path="/admin/shipments/list" element={ <ListShipments/> } />
           <Route path="/admin/products/list" element={ <ListProducts/> } />
           <Route path="/admin/shipments/list" element={ <ListShipments/> } />
         </Routes>

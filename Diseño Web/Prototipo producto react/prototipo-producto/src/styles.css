@@ -969,7 +969,6 @@
 
 .row-header-child {
   position: relative;
-  left: 70px;
 }
 .row-header-child th {
   font-size: 1rem;
@@ -980,7 +979,6 @@
 
 .row-child {
   position: relative;
-  left: 70px;
 }
 .row-child td {
   font-size: 0.9rem;
@@ -1460,8 +1458,44 @@
   margin: auto;
 }
 
-html {
-  scroll-behavior: smooth;
+.edit-model form {
+  width: 50vw;
+  max-width: 350px;
+}
+.edit-model form h2 {
+  text-align: center;
+}
+.edit-model form > div {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.edit-model form label {
+  font-weight: bold;
+  margin-bottom: 3px;
+}
+.edit-model form input, .edit-model form select {
+  margin-bottom: 20px;
+}
+.edit-model form button {
+  width: 100%;
+}
+.edit-model form span {
+  margin-top: 20px;
+}
+
+.supplier form > div {
+  display: flex;
+  flex-direction: column;
+}
+.supplier form > div label {
+  font-weight: bold;
+  margin-bottom: 3px;
+}
+
+body {
+  overflow-x: hidden;
+  font-family: "Open Sans", sans-serif;
 }
 
 body {

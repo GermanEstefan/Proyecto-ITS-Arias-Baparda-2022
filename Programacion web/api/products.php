@@ -30,84 +30,103 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
         }
     
 }else if($_SERVER['REQUEST_METHOD'] === 'GET'){
-    if(isset($_GET['idPromo'])){            //Todos los productos de una promo
-        $idProduct = $_GET['idPromo'];
-        $product->getProductsOfPromo($idProduct);
-        die();
-    }
-    if(isset($_GET['idProduct'])){          //Todos lod modelos ACTIVOS de un producto
-        $idProduct = $_GET['idProduct'];
-        $product->getModelsOfProduct($idProduct);
-        die();
-    }if(isset($_GET['idPromoAll'])){            //Todos los productos de una promo
-        $idProduct = $_GET['idPromoAll'];
-        $product->getAllProductsOfPromo($idProduct);
-        die();
-    }
-    if(isset($_GET['idProductAll'])){       //Todos los modelos de un producto, esten o no activos 
-        $idProduct = $_GET['idProductAll'];
-        $product->getAllModelsOfProduct($idProduct);
-        die();
-    }
-    if(isset($_GET['barcode'])){            //Obtener producto por codigo de barra este o no ACTIVOS
-        $barcode = $_GET['barcode'];        
-        $product->getProductByBarcode($barcode);
-        die();
-    }
-    if(isset($_GET['barcodeAll'])){            //Obtener producto por codigo de barra este o no ACTIVOS
-        $barcode = $_GET['barcodeAll'];        
-        $product->getAllProductByBarcode($barcode);
-        die();
-    }
-    if(isset($_GET['name'])){               //obtner productos por name 
+    
+    //CLIENTE
+    //1-obtener productos ACTIVOS por name
+    if(isset($_GET['name'])){ 
         $name = $_GET['name'];
         $product->getProductByName($name);
         die();
     }
-    if(isset($_GET['nameAll'])){               //obtner productos por name 
-        $name = $_GET['nameAll'];
-        $product->getAllProductByName($name);
-        die();
-    }
-    if(isset($_GET['categoryName'])){       //Todos los productos ACTIVOS para el talle de nombre indicado
+    //2-todos los productos ACTIVOS para una categoria
+    if(isset($_GET['categoryName'])){
         $nameCategory = $_GET['categoryName'];
         $product->getProductByNameCategoy($nameCategory);
         die();
     }
-    /*if(isset($_GET['sizeName'])){           //Todos los productos ACTIVOS para el talle de nombre indicado
-        $Size = $_GET['sizeName'];
-        $product->getProductByNameSize($nameSize);
+    //3-todos los modelos ACTIVOS para un producto
+    if(isset($_GET['modelsOfProduct'])){
+        $idProduct = $_GET['modelsOfProduct'];
+        $product->getModelsOfProduct($idProduct);
         die();
     }
-    if(isset($_GET['designName'])){         //Todos los productos ACTIVOS para el talle de nombre indicado
-        $nameDesign = $_GET['designName'];
-        $product->getProductByNameDesign($nameDesign);
+    //4-todos los productos ACTIVOS
+    if(isset($_GET['products'])){
+        $product->getActiveProducts();
         die();
-    }*/
-    
-    if(isset($_GET['search'])){
-        $search = $_GET['search'];
-        switch ($search){    
-                case 'disable':
-                    $product->getDisableProducts();
+    }
+    //5-todos los productos de una promo ACITVA
+    if(isset($_GET['productsOfPromo'])){
+        $idProduct = $_GET['productsOfPromo'];
+        $product->getProductsOfPromo($idProduct);
+        die();
+    }
+    //6-Conusltar producto por barcode
+    if(isset($_GET['barcode'])){
+        $barcode = $_GET['barcode'];        
+        $product->getProductByBarcode($barcode);
+        die();
+    }
+    //7 Obtener todas las promos activas
+    if(isset($_GET['promos'])){
+        $product->getActivePromos();
+        die();
+    }
+
+
+    //BACKOFFICE
+    //A-obtener CUALQUIER producto por name (incluye promos)
+    if(isset($_GET['BOname'])){ 
+        $name = $_GET['BOname'];
+        $product->getProductByNameBO($name);
+        die();
+    }
+    //B- Obtener CUALQUIER producto por barcode (incluye promos)
+    if(isset($_GET['BObarcode'])){
+        $barcode = $_GET['BObarcode'];        
+        $product->getProductByBarcodeBO($barcode);
+        die();
+    }
+    //C- Obtener TODOS los modelos para un producto
+    if(isset($_GET['BOmodelsOfProduct'])){  
+        $idProduct = $_GET['BOmodelsOfProduct'];
+        $product->getModelsOfProductBO($idProduct);
+        die();
+    }
+    //D- Obtener todas las promos
+    if(isset($_GET['BOPromos'])){   
+        $product->getPromosBO();
+        die();
+    }
+    //E - Obtener todos los productos
+    if(isset($_GET['BOProducts'])){   
+        $product->getProductsBO();
+        die();
+    }
+    //G- Obtener TODOS los productos para un promo
+    if(isset($_GET['BOproductsOfPromo'])){  
+        $idProduct = $_GET['BOproductsOfPromo'];
+        $product->getProductsOfProductBO($idProduct);
+        die();
+    }
+    if(isset($_GET['BOfilter'])){
+        $filter = $_GET['BOfilter'];
+        switch ($filter){
+                case 'productsDisable':
+                    $product->productsDisableBO();
                     die();
-                case 'all':
-                    $product->getAllProducts();
-                    die();
-                case 'total':
-                    $product->getTotalProducts();
-                    die();
-                case 'allPromos':
-                    $product->getAllPromos();
-                    die();
+                case 'promosDisable':
+                    $product->promosDisableBO();
+                    die();            
                 default :
-                http_response_code(400);
-                echo $response->error400("Accion no valida");
-                die();
+                    http_response_code(400);
+                    echo $response->error400("Filtro aplicado no valido");
+                    die();
             }
-        }
-    $product->getActiveProducts();
-    
+    }
+
+
+echo $response->error203("Accion no valida"); 
         
 }else if($_SERVER['REQUEST_METHOD'] === 'PATCH'){
 
@@ -124,7 +143,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
             case 'active':
             $product->activeModel($barcode);
             die();
-            default :
+            default:
             http_response_code(400);
             echo $response->error400("Accion no valida");
             die();

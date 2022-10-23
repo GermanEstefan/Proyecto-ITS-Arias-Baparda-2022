@@ -77,6 +77,11 @@ const Aside = () => {
                                 onClick={() => navigate('/admin/generals/designs') }
                                 className={ (action === 'designs' && page === 'generals') ? 'selected' : '' }
                             >Diseños</li>
+
+                            <li 
+                                onClick={() => navigate('/admin/generals/supplier') }
+                                className={ (action === 'supplier' && page === 'generals') ? 'selected' : '' }
+                            >Proveedores</li>
                         </ul>
                     }
                 </li>
@@ -99,7 +104,7 @@ const Aside = () => {
                             <li 
                                 onClick={() => navigate('/admin/products/list') }
                                 className={ (action === 'list' && page === 'products') ? 'selected' : '' }
-                            >Listar productos</li>
+                            >Listar productos / promociones</li>
                         </ul>
                     }
                 </li>

@@ -16,38 +16,69 @@ const EditModelProduct = () => {
         })
     }
     const [selectValues, setSelectValues] = useState({ sizes: [], designs: [] });
+    const initStateLoading = {
+        showMessage: false,
+        message: '',
+        error: false
+    };
+    const [error, setError] = useState(initStateLoading);
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
-        const productPromise = fetchApi(`products.php?barcode=${barcode}`, 'GET');
+        const productPromise = fetchApi(`products.php?barcodeAll=${barcode}`, 'GET');
         const sizesPromise = fetchApi('sizes.php', 'GET');
         const designsPromise = fetchApi('designs.php', 'GET');
         Promise.all([productPromise, sizesPromise, designsPromise])
             .then(([product, sizes, designs]) => {
-                const { design, stock, size, name } = product.result.data;
-                console.log(product.result)
-                setValues({ stock: stock, prodDesign: design, prodSize: size, nameCurrent: name })
+                const { idDesign, stock, idSize, name } = product.result.data;
+                setValues({ 
+                    stock: stock, 
+                    prodDesign: idDesign, 
+                    prodSize: idSize, 
+                    nameCurrent: name 
+                })
                 setSelectValues({ sizes: sizes.result.data, designs: designs.result.data });
             })
     }, [])
 
+    const handleEdit = async (e) => {
+        e.preventDefault();
+        setLoading(true);
+        try {
+            const resp = await fetchApi(`products.php?barcode=${barcode}&actionMin=edit`, 'PATCH', values);
+            console.log(resp);
+            if (resp.status === 'error') {
+                setError({ showMessage: true, message: resp.result.error_msg, error: true });
+                return setTimeout(() => setError(initStateLoading), 3000)
+            }
+            setError({ showMessage: true, message: resp.result.msg, error: false });
+            return setTimeout(() => setError(initStateLoading), 3000)
+        } catch (error) {
+            console.error(error);
+        } finally {
+            setLoading(false);
+        }
+    } 
+
     return (
         <ContainerBase>
-            <section>
-                <form action="">
-
+            <section className='container_section edit-model flex-column-center-xy'>
+                <form onSubmit={handleEdit} autoComplete="off" className="flex-column-center-xy" >
+                    <h2>Editar modelo</h2>
                     <div>
-                        <label>Name</label>
+                        <label>Name:</label>
                         <input
                             type="text"
                             name="name"
                             onChange={handleChangeInputs}
                             value={nameCurrent}
                             readOnly
+                            className='select-form opacity'
                         />
                     </div>
 
                     <div >
-                        <label htmlFor="" className='label-form'>Talle</label>
+                        <label htmlFor="" className='label-form'>Talle:</label>
                         <select
                             required
                             className='select-form'
@@ -64,7 +95,7 @@ const EditModelProduct = () => {
                     </div>
 
                     <div>
-                        <label htmlFor="" className='label-form'>Diseño</label>
+                        <label htmlFor="" className='label-form'>Diseño:</label>
                         <select
                             required
                             className='select-form'
@@ -81,9 +112,18 @@ const EditModelProduct = () => {
                     </div>
 
                     <div>
-                        <label htmlFor="" className='label-form'>Stock</label>
+                        <label htmlFor="" className='label-form'>Stock:</label>
                         <input required type="text" onChange={handleChangeInputs} className='input-form' name='stock' value={stock} />
                     </div>
+
+                    <button
+                        className={`button-form ${loading && 'opacity'}`}
+                        disabled={loading}
+                    >{loading ? 'Cargando...' : 'EDITAR TALLE'}</button>
+                    {
+                        error.showMessage &&
+                        <span className={`${error.error ? 'warning-message' : 'successfully-message'} `} >{error.message}</span>
+                    }
                 </form>
             </section>
         </ContainerBase>

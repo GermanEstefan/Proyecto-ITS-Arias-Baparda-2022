@@ -25,8 +25,12 @@ $black: #121212;
 @import "./assets/styles/admin/listUsers";
 @import "./assets/styles/admin/createProductPromo";
 @import "./assets/styles/admin/listProducts";
-html {
-  scroll-behavior: smooth;
+@import "./assets/styles/admin/editModel";
+@import "./assets/styles/admin/supplier";
+
+body{
+  overflow-x: hidden;
+  font-family: 'Open Sans', sans-serif;
 }
 body {
   overflow-x: hidden;

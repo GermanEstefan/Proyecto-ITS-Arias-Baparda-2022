@@ -50,13 +50,13 @@
 
         public static function updateSupplier($idSupplier,$rut,$name,$address, $phone){
             $conecction = new Connection();
-            $query = "UPDATE supplier SET rut = '$rut', company_name = '$name',address = '$address',phone = '$phone', WHERE id_supplier = '$idSupplier' ";
+            $query = "UPDATE supplier SET rut = '$rut', company_name = '$name',address = '$address',phone = '$phone'WHERE id_supplier = '$idSupplier' ";
             return $conecction->setData($query);
         }
 
         public static function updateSupplierNotRut($idSupplier,$name,$address, $phone){
             $conecction = new Connection();
-            $query = "UPDATE supplier SET company_name = '$name',address = '$address',phone = '$phone', WHERE id_supplier = '$idSupplier' ";
+            $query = "UPDATE supplier SET company_name = '$name',address = '$address',phone = '$phone' WHERE id_supplier = '$idSupplier' ";
             return $conecction->setData($query);
         }
 

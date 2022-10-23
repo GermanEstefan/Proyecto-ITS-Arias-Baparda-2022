@@ -1,0 +1,12 @@
+.supplier{
+    form{
+        >div{
+            display: flex;
+            flex-direction: column;
+            label{
+                font-weight: bold;
+                margin-bottom: 3px;
+            }
+        }
+    }
+}
