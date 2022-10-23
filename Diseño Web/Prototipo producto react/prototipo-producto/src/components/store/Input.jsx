@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const Input = ({ validateFunction, setErrorStatusForm , ...args }) => {
+const Input = ({ validateFunction, setErrorStatusForm, ...args }) => {
   const [errorState, setErrorState] = useState({ error: false, message: null });
 
   const validateInput = (e) => {
@@ -8,11 +8,13 @@ const Input = ({ validateFunction, setErrorStatusForm , ...args }) => {
 
     if (validateFunction) {
       if (isValid.error) {
+        console.log("error " + e.target.name);
         setErrorState({ error: true, message: isValid.message });
         setErrorStatusForm((prevState) => {
           return { ...prevState, [e.target.name]: true };
         });
       } else {
+        console.log("bien " + e.target.name);
         setErrorState({ error: false, message: null });
         setErrorStatusForm((prevState) => {
           return { ...prevState, [e.target.name]: false };

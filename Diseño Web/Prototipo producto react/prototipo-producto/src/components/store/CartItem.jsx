@@ -7,7 +7,7 @@ import Guantes from "../../assets/img/guantes.jpg";
 import { useContext } from "react";
 import { cartContext } from "../../App";
 
-const CartItem = ({ barcode, img, name, price, quantity, setTotalPrice }) => {
+const CartItem = ({ barcode, img, name, price, quantity, setTotalPrice, size, design }) => {
   const { cart, setCart } = useContext(cartContext);
 
   const [product, setProduct] = useState({});
@@ -50,8 +50,12 @@ const CartItem = ({ barcode, img, name, price, quantity, setTotalPrice }) => {
         <img className="cartItem__img" src={img} width="100px" alt="" />
 
         <div className="cartItem__text">
+          <div>
           <h3>{name}</h3>
+          <span>Talle: {size} Color: {design} </span>
+          </div>
           <p>{price * quantity}$</p>
+          
         </div>
         <div className="CartItem__actions">
           <input

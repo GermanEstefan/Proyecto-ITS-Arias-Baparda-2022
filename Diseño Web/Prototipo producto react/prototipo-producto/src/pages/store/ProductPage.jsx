@@ -7,6 +7,7 @@ import ContainerBase from "../../components/store/ContainerBase";
 import { fetchApi } from "../../API/api";
 import { cartContext, userStatusContext } from "../../App";
 import Select from "react-select";
+import { Carousel } from "react-responsive-carousel";
 const ProductPage = () => {
   const { userData } = useContext(userStatusContext);
   const { category, id } = useParams();
@@ -17,9 +18,17 @@ const ProductPage = () => {
   const [designsList, setDesignsList] = useState([]);
   const [sizesList, setSizesList] = useState([]);
   const [isAddedToCart, setIsAddedToCart] = useState(false);
+  const [allModels, setAllModels] = useState([]);
+  const [pictureLinks, setPictureLinks] = useState([]);
 
+  console.log(pictureLinks);
   useEffect(() => {
     window.scroll(0, 0);
+    setPictureLinks(
+      "https://i.ibb.co/mRpFg8R/8negro.jpg & https://i.ibb.co/9bKNc4d/remera2.jpg & https://i.ibb.co/9bKNc4d/remera2.jpg".split(
+        "&"
+      )
+    );
     getProductById();
   }, []);
 
@@ -34,15 +43,16 @@ const ProductPage = () => {
   const handleDeleteItemFromCart = () => {
     const newCart = cart;
     newCart.pop();
-    console.log(newCart)
+    console.log(newCart);
     setCart(newCart);
     setIsAddedToCart(false);
   };
 
   const getProductById = async () => {
-    const resp = await fetchApi(`products.php?idProduct=${id}`, "GET");
+    const resp = await fetchApi(`products.php?modelsOfProduct=${id}`, "GET");
     setProduct(resp.result.data.models[0] ? resp.result.data.models[0] : {});
-    console.log(resp.result.data)
+    console.log(resp);
+    setAllModels(resp.result.data.models);
     setproductName(resp.result.data.name);
     setproductDescription(resp.result.data.description);
     getDesignsList(resp.result.data.models);
@@ -70,6 +80,18 @@ const ProductPage = () => {
     return options;
   };
 
+  const handleChangeSize = (size) => {
+    const modelsWithSize = allModels.filter((model) => model.size === size);
+    setProduct(modelsWithSize[0]);
+  };
+
+  const handleChangeDesign = (design) => {
+    const modelsWithDesign = allModels.filter(
+      (model) => model.design === design
+    );
+    setProduct(modelsWithDesign[0]);
+  };
+
   return (
     <ContainerBase>
       <div className="productContainer">
@@ -81,7 +103,10 @@ const ProductPage = () => {
         <div className="productPage">
           <div className="productPage__img">
             <div>
-              <img width={"300px"} src={Guantes} alt="Imagen del producto" />
+              {/* Hace carousel */}
+              <img src={pictureLinks[0]} width="200" />
+              <img src={pictureLinks[1]} width="200" />
+              <img src={pictureLinks[2]} width="200" />
             </div>
           </div>
           <div className="productPage__description">
@@ -90,20 +115,22 @@ const ProductPage = () => {
               <p>{productDescription}</p>
             </div>
             <div className="productPage__description__buttons">
-              {!sizesList[0] === "PROMOCIONES" && (
-                <div>
-                  <Select
-                    options={getOptions(designsList)}
-                    placeholder={"Diseño..."}
-                    className="select"
-                  />
-                  <Select
-                    options={getOptions(sizesList)}
-                    placeholder="Talle..."
-                    className="select"
-                  />
-                </div>
-              )}
+              {/* {!sizesList[0] === "PROMOCIONES" && ( */}
+              <div>
+                <Select
+                  options={getOptions(designsList)}
+                  placeholder={"Diseño..."}
+                  className="select"
+                  onChange={(e) => handleChangeDesign(e.value)}
+                />
+                <Select
+                  options={getOptions(sizesList)}
+                  placeholder="Talle..."
+                  className="select"
+                  onChange={(e) => handleChangeSize(e.value)}
+                />
+              </div>
+              {/* )} */}
               <button className="buyBtn" disabled={!userData.auth}>
                 Comprar
               </button>

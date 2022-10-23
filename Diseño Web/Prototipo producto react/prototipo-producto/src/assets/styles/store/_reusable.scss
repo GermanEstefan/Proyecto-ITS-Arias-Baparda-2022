@@ -1,7 +1,6 @@
 /*Formularios(Registro, login, contacto)*/
 .form-container {
-  width: 70vw;
-  min-width: 800px;
+  min-width: 900px;
   height: 600px;
   display: flex;
   justify-content: center;
@@ -9,7 +8,7 @@
   align-items: center;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   border-radius: 10px;
-  margin: 15em auto;
+  margin: 13em auto;
 
   @media (max-width: 800px) {
     flex-direction: column;
@@ -36,7 +35,7 @@
 
   form {
     padding: 20px;
-    width: 50%;
+    width: 60%;
     background-color: #fff;
     display: flex;
     flex-direction: column;
@@ -52,7 +51,9 @@
       text-align: center;
     }
 
-    a {
+    a,
+    span,
+    p {
       text-align: center;
     }
 

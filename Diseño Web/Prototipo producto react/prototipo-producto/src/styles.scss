@@ -28,6 +28,10 @@ $black: #121212;
 @import "./assets/styles/admin/editModel";
 @import "./assets/styles/admin/supplier";
 
+
+html {
+  scroll-behavior: smooth;
+}
 body{
   overflow-x: hidden;
   font-family: 'Open Sans', sans-serif;

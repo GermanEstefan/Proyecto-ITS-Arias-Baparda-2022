@@ -1,7 +1,7 @@
 .cartContainer {
   margin: 20vh auto auto auto;
   min-height: 80vh;
-  max-width: 800px;
+  max-width: 900px;
   .cartPage {
     min-height: 100vh;
     .cartItem {
@@ -48,23 +48,14 @@
     }
   }
   .cartBuyForm {
-    padding-top: 10vh;
-    min-height: 100vh;
+    min-height: 80vh;
+    display: flex;
     form {
       display: flex;
       align-items: center;
+      flex-direction: column;
       
-      .select {
-        margin: 5px;
-        min-width: 150px;
-        max-width: 300px;
-        @media screen and (max-width: 800px) {
-          width: 55%;
-          margin: 10px auto;
-          display: block;
-        }
-        display: inline-block;
-      }
+     
     }
   }
 }

@@ -31,11 +31,12 @@ const Register = () => {
     email: true,
     nameCurrent: true,
     surname: true,
-    password: true
+    password: true,
   });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log(errorStatusForm);
     if (Object.values(errorStatusForm).includes(true)) {
       return Swal.fire({
         icon: "error",
@@ -130,39 +131,39 @@ const Register = () => {
               name="type"
               id="type"
               type={"checkbox"}
-              value={values.type === 'COMPANY'}
+              value={values.type === "COMPANY"}
               onChange={handleValuesChange}
               setErrorStatusForm={setErrorStatusForm}
             />
             Empresa
           </label>
-          {(values.type === "COMPANY") && 
-         <Animated
-         animationIn="fadeInDown"
-         animationOut="fadeOutUp"
-         animationInDuration={500}
-         isVisible={true}
-       >
-          <Input
-            name="nRut"
-            id="nRut"
-            value={values.nRut}
-            placeholder="nRut"
-            onChange={handleValuesChange}
-            setErrorStatusForm={setErrorStatusForm}
-            validateFunction={isEmpty}
-          />
-          <Input
-            name="company"
-            id="company"
-            value={values.company}
-            placeholder="Empresa"
-            onChange={handleValuesChange}
-            setErrorStatusForm={setErrorStatusForm}
-            validateFunction={isEmpty}
-          />
-          </Animated>
-          }
+          {values.type === "COMPANY" && (
+            <Animated
+              animationIn="fadeInDown"
+              animationOut="fadeOutUp"
+              animationInDuration={500}
+              isVisible={true}
+            >
+              <Input
+                name="nRut"
+                id="nRut"
+                value={values.nRut}
+                placeholder="nRut"
+                onChange={handleValuesChange}
+                setErrorStatusForm={setErrorStatusForm}
+                validateFunction={isEmpty}
+              />
+              <Input
+                name="company"
+                id="company"
+                value={values.company}
+                placeholder="Empresa"
+                onChange={handleValuesChange}
+                setErrorStatusForm={setErrorStatusForm}
+                validateFunction={isEmpty}
+              />
+            </Animated>
+          )}
           <button className="submit-button" type="submit">
             Registrarse
           </button>

@@ -7,8 +7,9 @@ import CartDetails from "../../components/store/CartDetails";
 import { fetchApi } from "../../API/api";
 import { useContext } from "react";
 import { cartContext, userStatusContext } from "../../App";
-import { useForm } from "../../hooks/useForm";
+
 import Input from "../../components/store/Input";
+import Imagen from "../../assets/img/Obreros.jpg";
 import Select from "react-select";
 
 const ShoppingCartPage = () => {
@@ -20,7 +21,7 @@ const ShoppingCartPage = () => {
   const buyForm = useRef();
   const [values, setValues] = useState({
     email: userData.email,
-    address: "",
+    address: userData.address,
     deliveryType: 0,
     paymentMenthod: 0,
   });
@@ -39,7 +40,6 @@ const ShoppingCartPage = () => {
       ...values,
       deliveryType: value,
     });
-    console.log(values);
   };
   const setPaymentMethod = (value) => {
     setValues({
@@ -69,7 +69,7 @@ const ShoppingCartPage = () => {
     cart.map(
       ({ quantity }, index) => (productsData[index]["quantity"] = quantity)
     );
-
+    console.log(productsData)
     setProductsList(productsData);
     setTotalPrice();
   };
@@ -87,7 +87,7 @@ const ShoppingCartPage = () => {
   const goToCartBuyForm = () => {
     buyForm.current.scrollIntoView();
   };
-  //Implementar que en el carrito también se guarde la cantidad de productos que hay
+
   const deliveryTypes = [
     { value: 0, label: "08:00 - 12:00" },
     { value: 1, label: "12:00 - 16:00" },
@@ -100,8 +100,8 @@ const ShoppingCartPage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(values);
   };
+  console.log(productsList);
   return (
     <ContainerBase>
       <div className="cartContainer">
@@ -117,26 +117,32 @@ const ShoppingCartPage = () => {
               price={product.price}
               quantity={product.quantity}
               setTotalPrice={setTotalPrice}
+              size={product.size}
+              design={product.design}
             />
           ))}
           {productsList.length === 0 && (
             <span className="center">No tienes productos en tu carrito</span>
           )}
         </div>
-        <div ref={buyForm} className="cartBuyForm">
-          <h1>Confirma tu compra</h1>
+        <div ref={buyForm} className="form-container">
+          <img className="form-img" src={Imagen} alt="Imagen" />
           <form onSubmit={handleSubmit}>
+            <h1>Confirma tu compra</h1>
+            <span>Dirección de envío</span>
+            {/* Dirección actual
+                Dirección alternativa
+                Retiro en local */}
             <Input
               name="address"
               id="address"
               value={values.address}
-              defaultValue={userData.address}
               placeholder="Dirección"
               onChange={(e) => setAddress(e.target.value)}
               setErrorStatusForm={setErrorStatusForm}
               className={"formInput"}
             />
-
+            {/* Los rangos horarios van a venir por endpoint */}
             <Select
               name="deliveryType"
               id="deliveryType"
