@@ -62,11 +62,14 @@
             r.sale_report AS idSale,
             s.name AS nameStatus,
             r.employee_report AS docEmployee,
+            concat_ws(' ', u.name , u.surname) AS employeeName,
             date_format(r.date, '%d/%m/%Y %T') AS lastUpdate,
             r.comment AS lastComment
-            FROM report r , status s
+            FROM report r , status s, employee e, user u
             WHERE r.status_report = s.id_status
-            AND s.name LIKE '$status'";
+            AND s.name LIKE '$status'
+            AND r.employee_report = e.ci
+            AND e.employee_user = u.id_user";
             return $conecction->getData($query)->fetch_all(MYSQLI_ASSOC);
         }
         public static function getCustomerAddressToSuggest($email){
@@ -84,11 +87,11 @@
             rh.Type AS 'typeReg',
             s.name AS status,
             rh.employee_report AS employeeDoc,
-            concat_ws(u.name,' ', u.surname) AS employeeName,
+            concat_ws(' ', u.name , u.surname) AS employeeName,
             date_format(rh.date, '%d/%m/%Y %T') AS date,
             rh.comment AS comment
             FROM reportHistory rh, status s,employee e, user u
-            WHERE sale_report = 700000
+            WHERE sale_report = $idSale
             AND rh.status_report = s.id_status
             AND rh.employee_report = e.ci
             AND e.employee_user = u.id_user

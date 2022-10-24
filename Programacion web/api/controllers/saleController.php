@@ -141,7 +141,7 @@ class SaleController {
         //Data de cada venta en ese estado
         $sales = array();
         foreach($sale as $salesInState){
-        array_push( $sales, array( "idSale" => $salesInState['idSale'],"docEmployee" => $salesInState['docEmployee'],"lastUpdate" => $salesInState['lastUpdate'],"lastComment" => $salesInState['lastComment']));
+        array_push( $sales, array( "idSale" => $salesInState['idSale'],"docEmployee" => $salesInState['docEmployee'],"employeeName" => $salesInState['employeeName'],"lastUpdate" => $salesInState['lastUpdate'],"lastComment" => $salesInState['lastComment']));
         }
         $response = array("nameStatus" => $name, "sales" => $sales);
         echo $this->response->successfully("Ventas en estado $status:", $response);  
