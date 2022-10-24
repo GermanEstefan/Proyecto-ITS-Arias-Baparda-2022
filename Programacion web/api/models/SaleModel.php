@@ -17,9 +17,27 @@
             parent::__construct();
         }
         //CONSULTAS
-        public static function getSaleById($id){
+        public static function getSaleById($idSale){
             $conecction = new Connection();
-            $query = "SELECT * from sale WHERE id_sale='$id'";
+            $query = "SELECT
+            s.id_sale,
+            date_format(s.date, '%d/%m/%Y %T') AS saleDate,
+            st.name AS statusActual,
+            s.address,
+            d.name AS delivery,
+            c.company_name AS razonSocial,
+            c.rut_nr AS rut,
+            u.name AS name,
+            u.surname AS lastname,
+            s.payment,
+            s.total
+            FROM sale s, customer c, user u,report r, status st, delivery_time d
+            WHERE s.id_sale = '$idSale'
+            AND c.customer_user = s.user_purchase
+            AND u.id_user = s.user_purchase
+            AND s.id_sale = r.sale_report
+            AND r.status_report = st.id_status
+            AND s.sale_delivery = d.id_delivery";
             return $conecction->getData($query)->fetch_assoc();
         }
         public static function getAllSales(){

@@ -62,6 +62,33 @@ class SaleController {
         echo $this->response->successfully("Su pedido fue realizado con exito");
     }
     //CONSULTAS
+    public function getSaleId($idSale){
+        $sale = SaleModel::getSaleById($idSale);
+        if(!$sale){
+            echo $this->response->error203("No se encuentra venta con id $idSale");
+            die();
+        }
+        //Data en comun
+        $id = $sale["id_sale"];
+        $saleDate = $sale["saleDate"];
+        $statusActual = $sale["statusActual"];
+        //Datos de direccion
+        $packOff = array();
+        array_push( $packOff, array( "address" => $sale['address'],"delivery" => $sale['delivery']));
+
+        $infoCustomer = array();
+        $isBusiness = ["razonSocial"];
+        if(!$isBusiness){
+            array_push( $infoCustomer, array( "name" => $sale['name'],"lastname" => $sale['lastname']));    
+        }
+        array_push( $infoCustomer, array( "razonSocial" => $sale['razonSocial'],"rut" => $sale['rut'],"name" => $sale['name'],"lastname" => $sale['lastname']));
+        
+        $infoPayment = array();
+        array_push( $infoPayment, array( "payment" => $sale['payment'],"total" => $sale['total']));
+        
+        $response = array("id" => $id,"saleDate" => $saleDate, "statusActual" => $statusActual, "packOff" => $packOff, "infoCustomer" => $infoCustomer, "infoPayment" => $infoPayment);
+        echo $this->response->successfully("Venta encontrada:", $response);  
+    }
     
     //ACTUALIZAR
    

@@ -17,18 +17,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 }else if($_SERVER['REQUEST_METHOD'] === 'GET'){
 
-    if(isset($_GET['nameSale'])){
-        $nameSale = $_GET['nameSale'];
-        $sale->getSaleByName($nameSale);
-        die();
-    }
     if(isset($_GET['idSale'])){
         $idSale = $_GET['idSale'];
-        $sale->getSaleById($idSale);
+        $sale->getSaleId($idSale);
         die();
     }
-    $sale->getAllSale();
-
 }else if($_SERVER['REQUEST_METHOD'] === 'PATCH'){
     //Editar categoria
     if(isset($_GET['idSale'])){
