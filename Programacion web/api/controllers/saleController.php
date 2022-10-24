@@ -123,6 +123,22 @@ class SaleController {
         $response = array("nameStatus" => $name, "sales" => $sales);
         echo $this->response->successfully("Ventas en estado $status:", $response);  
     }
+    public function getAddresToCustomer($email){
+        
+        $mailExist = UserModel::getUserByEmail($email);
+        if(!$mailExist){
+            echo $this->response->error203("No se encuentra usuario para el correo $email");
+            die();
+        }        
+        $sale = SaleModel::getCustomerAddressToSuggest($email);
+        $suggestAddress = $sale['address'];
+        if(!$suggestAddress){
+            echo $this->response->error203("No hay direccion para sugerir");
+            die();
+        }
+        
+        echo $this->response->successfully("Direccion sugerida: $suggestAddress");  
+    }
     
     //ACTUALIZAR
    

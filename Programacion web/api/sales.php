@@ -32,6 +32,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $sale->getSaleByStatus($status);
         die();
     }
+    if(isset($_GET['suggestAddress'])){
+        $email = $_GET['suggestAddress'];
+        $sale->getAddresToCustomer($email);
+        die();
+    }
     
 }else if($_SERVER['REQUEST_METHOD'] === 'PATCH'){
     //Editar categoria
