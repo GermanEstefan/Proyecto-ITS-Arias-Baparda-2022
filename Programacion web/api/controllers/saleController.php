@@ -77,12 +77,14 @@ class SaleController {
         array_push( $packOff, array( "address" => $sale['address'],"delivery" => $sale['delivery']));
 
         $infoCustomer = array();
-        $isBusiness = ["razonSocial"];
+        $isBusiness = $sale["razonSocial"];
         if(!$isBusiness){
-            array_push( $infoCustomer, array( "name" => $sale['name'],"lastname" => $sale['lastname']));    
+            //no es empresa, mando datos de consumidor final
+            array_push( $infoCustomer, array("idUser" => $sale['idUser'], "name" => $sale['name'],"lastname" => $sale['lastname']));    
+        }else{
+        //Es empresa mando data de representante legal
+        array_push( $infoCustomer, array( "idUser" => $sale['idUser'],"razonSocial" => $sale['razonSocial'],"rut" => $sale['rut'],"name" => $sale['name'],"lastname" => $sale['lastname']));
         }
-        array_push( $infoCustomer, array( "razonSocial" => $sale['razonSocial'],"rut" => $sale['rut'],"name" => $sale['name'],"lastname" => $sale['lastname']));
-        
         $infoPayment = array();
         array_push( $infoPayment, array( "payment" => $sale['payment'],"total" => $sale['total']));
         
@@ -95,7 +97,15 @@ class SaleController {
             echo $this->response->error203("No se encuentra venta con id $idSale");
             die();
         }
-        echo $this->response->successfully("Detalle de la venta:", $sale);  
+        //Data en comun
+        $saleID = $sale[0]['sale_id'];
+        $totalSale = $sale[0]['totalSale'];
+        $details = array();
+        foreach($sale as $detail){
+        array_push( $details, array( "barcode" => $detail['barcode'],"product" => $detail['product'],"quantity" => $detail['quantity'],"total" => $detail['total']));
+        }
+        $response = array("saleID" => $saleID,"totalSale" =>$totalSale, "details" => $details);
+        echo $this->response->successfully("Detalle de ventas para ID:$idSale", $response);  
     }
     public function getSaleByStatus($status){
         $sale = SaleModel::getSalesByStatus($status);
@@ -104,12 +114,13 @@ class SaleController {
             die();
         }
         //Data en comun
-        $name = $sale["nameStatus"];
-        //Datos de direccion
+        $name = $sale[0]['nameStatus'];
+        //Data de cada venta en ese estado
         $sales = array();
-        array_push( $sales, array( "idSale" => $sale['idSale'],"DocEmployee" => $sale['DocEmployee'],"lastUpdate" => $sale['lastUpdate'],"lastComment" => $sale['lastCommnet']));
-        
-        $response = array("status" => $name, "sales" => $sales);
+        foreach($sale as $salesInState){
+        array_push( $sales, array( "idSale" => $salesInState['idSale'],"docEmployee" => $salesInState['docEmployee'],"lastUpdate" => $salesInState['lastUpdate'],"lastComment" => $salesInState['lastComment']));
+        }
+        $response = array("nameStatus" => $name, "sales" => $sales);
         echo $this->response->successfully("Ventas en estado $status:", $response);  
     }
     

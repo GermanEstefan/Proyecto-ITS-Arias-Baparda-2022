@@ -25,6 +25,7 @@
             st.name AS statusActual,
             s.address,
             d.name AS delivery,
+            s.user_purchase AS idUser,
             c.company_name AS razonSocial,
             c.rut_nr AS rut,
             u.name AS name,
@@ -43,25 +44,29 @@
         public static function getDetailSaleById($idSale){
             $conecction = new Connection();
             $query = "SELECT 
+            sd.sale_id,
             p.name as product,
-            st.product_sale as barcode, 
-            st.quantity,
-            st.total
-            FROM sale_detail st, product p 
+            sd.product_sale as barcode, 
+            sd.quantity,
+            sd.total,
+            s.total AS totalSale
+            FROM sale_detail sd, product p, sale s 
             WHERE sale_id = '$idSale'
-            AND st.product_sale = p.barcode";
-            return $conecction->getData($query)->fetch_assoc();
+            AND sd.product_sale = p.barcode
+            AND sd.sale_id = s.id_sale";
+            return $conecction->getData($query)->fetch_all(MYSQLI_ASSOC);
         }
         public static function getSalesByStatus($status){
             $conecction = new Connection();
             $query = "SELECT 
             r.sale_report AS idSale,
             s.name AS nameStatus,
-            r.employee_report AS 'DocEmployee',
-            r.date AS lastUpdate,
+            r.employee_report AS docEmployee,
+            date_format(r.date, '%d/%m/%Y %T') AS lastUpdate,
             r.comment AS lastComment
             FROM report r , status s
-            WHERE s.name LIKE '%$status%'";
+            WHERE r.status_report = s.id_status
+            AND s.name LIKE '$status'";
             return $conecction->getData($query)->fetch_all(MYSQLI_ASSOC);
         }
 
