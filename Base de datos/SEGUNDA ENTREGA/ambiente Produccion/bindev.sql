@@ -273,7 +273,7 @@ CREATE TABLE IF NOT EXISTS `bindev`.`report` (
   `employee_report` INT NOT NULL,
   `date` DATETIME NOT NULL ,
   `comment` VARCHAR(500) NULL,
-  PRIMARY KEY (`sale_report`,`status_report`,`date`),
+  PRIMARY KEY (`sale_report`),
   CONSTRAINT `FK_sale_report`
     FOREIGN KEY (`sale_report`)
     REFERENCES `bindev`.`sale` (`id_sale`)
@@ -334,6 +334,22 @@ CREATE TABLE IF NOT EXISTS `bindev`.`promo` (
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
+-- -----------------------------------------------------
+-- Table `bindev`.`reportHistory`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `bindev`.`reportHistory` (
+  `idReg` INT NOT NULL AUTO_INCREMENT,
+  `Type` VARCHAR(200) NOT NULL,
+  `sale_report` INT NOT NULL,
+  `status_report` INT NOT NULL,
+  `employee_report` INT NOT NULL,
+  `date` DATETIME NOT NULL ,
+  `comment` VARCHAR(500) NULL,
+  PRIMARY KEY (`idReg`))
+ENGINE = InnoDB;
+ALTER TABLE reportHistory
+AUTO_INCREMENT=10;
+
 DROP TRIGGER IF EXISTS `bindev`.`supply_detail_AMOUNT_TOTAL_AUTO`;
 DELIMITER $$
 USE `bindev`$$
@@ -391,22 +407,30 @@ BEGIN
 	SET NEW.date = NOW();
 END$$
 DELIMITER ;
-DROP TRIGGER IF EXISTS `bindev`.`InsertDatetimeReport`;
+
+DROP TRIGGER IF EXISTS `bindev`.`InsertRegHistoryByUpdate`;
+
+DELIMITER $$
+USE `bindev`$$
+CREATE DEFINER=`root`@`localhost` TRIGGER `bindev`.`InsertRegHistoryByUpdate` BEFORE UPDATE ON `report` FOR EACH ROW
+BEGIN
+SET NEW.date = NOW();
+INSERT INTO reporthistory ( `Type`,`sale_report`,`status_report`,`employee_report`,`date`,`comment`)
+VALUES ('UpdateLog',NEW.sale_report,NEW.status_report,NEW.employee_report,NEW.date,NEW.comment);
+END$$
+DELIMITER ;
+DROP TRIGGER IF EXISTS `bindev`.`AutomaticDateReport`;
+
 DELIMITER $$
 USE `bindev`$$
 CREATE DEFINER=`root`@`localhost` TRIGGER `bindev`.`AutomaticDateReport` BEFORE INSERT ON `report` FOR EACH ROW
 BEGIN 
 	SET NEW.date = NOW();
+INSERT INTO reporthistory ( `Type`,`sale_report`,`status_report`,`employee_report`,`date`,`comment`)
+VALUES ('OpenReg',NEW.sale_report,NEW.status_report,NEW.employee_report,NEW.date,NEW.comment);
 END$$
 DELIMITER ;
-DROP TRIGGER IF EXISTS `bindev`.`UpdateDatetimeReport`;
-DELIMITER $$
-USE `bindev`$$
-CREATE DEFINER=`root`@`localhost` TRIGGER `bindev`.`AutomaticUpdateDateReport` BEFORE UPDATE ON `report` FOR EACH ROW
-BEGIN 
-	SET NEW.date = NOW();
-END$$
-DELIMITER ;
+
 
 -- -----------------------------------------------------
 -- INSERT BASICOS PARA CONFIGURACION INICIAL DEL SISTEMA
