@@ -1,8 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap");
 /*Formularios(Registro, login, contacto)*/
 .form-container {
-  width: 70vw;
-  min-width: 800px;
+  min-width: 900px;
   height: 600px;
   display: flex;
   justify-content: center;
@@ -10,7 +9,7 @@
   align-items: center;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   border-radius: 10px;
-  margin: 15em auto;
+  margin: 13em auto;
 }
 @media (max-width: 800px) {
   .form-container {
@@ -38,7 +37,7 @@
 }
 .form-container form {
   padding: 20px;
-  width: 50%;
+  width: 60%;
   background-color: #fff;
   display: flex;
   flex-direction: column;
@@ -54,7 +53,9 @@
   width: 100%;
   text-align: center;
 }
-.form-container form a {
+.form-container form a,
+.form-container form span,
+.form-container form p {
   text-align: center;
 }
 .form-container form input[type=text],
@@ -224,6 +225,7 @@
   justify-content: center;
   margin: 11px 0;
   padding: 30px;
+  width: 80%;
 }
 @media screen and (max-width: 800px) {
   .card-container {
@@ -270,7 +272,7 @@
 
 .main {
   margin-top: 11em;
-  max-width: 850px;
+  max-width: 900px;
   margin-left: auto;
   margin-right: auto;
 }
@@ -280,7 +282,7 @@
   }
 }
 .main .card-container {
-  max-width: 850px;
+  max-width: 900px;
   margin: 4em auto;
 }
 @media (max-width: 900px) {
@@ -333,7 +335,7 @@
 }
 
 .product-card {
-  width: 850px;
+  width: 900px;
   padding: 20px;
   display: flex;
   align-items: center;
@@ -942,7 +944,8 @@
   border-radius: 5px;
   position: relative;
 }
-.table-template th, .table-template td {
+.table-template th,
+.table-template td {
   border-radius: 5px;
   background-color: #f2f2f2;
   padding: 8px;
@@ -983,6 +986,19 @@
 .row-child td {
   font-size: 0.9rem;
   background-color: transparent;
+}
+
+.select {
+  margin: 5px auto;
+  min-width: 200px;
+  max-width: 300px;
+}
+@media screen and (max-width: 800px) {
+  .select {
+    width: 55%;
+    margin: 10px auto;
+    display: block;
+  }
 }
 
 .controls-row-child {
@@ -1056,7 +1072,7 @@
 .cartContainer {
   margin: 20vh auto auto auto;
   min-height: 80vh;
-  max-width: 800px;
+  max-width: 900px;
 }
 .cartContainer .cartPage {
   min-height: 100vh;
@@ -1104,25 +1120,13 @@
   width: 50px;
 }
 .cartContainer .cartBuyForm {
-  padding-top: 10vh;
-  min-height: 100vh;
+  min-height: 80vh;
+  display: flex;
 }
 .cartContainer .cartBuyForm form {
   display: flex;
   align-items: center;
-}
-.cartContainer .cartBuyForm form .select {
-  margin: 5px;
-  min-width: 150px;
-  max-width: 300px;
-  display: inline-block;
-}
-@media screen and (max-width: 800px) {
-  .cartContainer .cartBuyForm form .select {
-    width: 55%;
-    margin: 10px auto;
-    display: block;
-  }
+  flex-direction: column;
 }
 
 .login-page-adm {
@@ -1491,6 +1495,10 @@
 .supplier form > div label {
   font-weight: bold;
   margin-bottom: 3px;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
