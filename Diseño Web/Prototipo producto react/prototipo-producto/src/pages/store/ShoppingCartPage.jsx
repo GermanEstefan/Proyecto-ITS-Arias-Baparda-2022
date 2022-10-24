@@ -15,7 +15,6 @@ import Select from "react-select";
 const ShoppingCartPage = () => {
   const { cart } = useContext(cartContext);
   const { userData } = useContext(userStatusContext);
-  console.log(userData);
 
   const [total, setTotal] = useState(0);
   const buyForm = useRef();
@@ -25,9 +24,23 @@ const ShoppingCartPage = () => {
     deliveryType: 0,
     paymentMenthod: 0,
   });
+  const [isAddressDisable, setIsAddressDisable] = useState(false);
   const [errorStatusForm, setErrorStatusForm] = useState({});
 
   const [productsList, setProductsList] = useState([]);
+  const [storeHours, setStoreHours] = useState([]);
+  const [deliveryHours, setDeliveryHours] = useState([]);
+  const [isShipping, setIsShipping] = useState(true);
+
+  useEffect(() => {
+    window.scroll(0, 0);
+    getProductsListByBarcode();
+    getStoreHour();
+    getDeliveryHour();
+  }, []);
+  useEffect(() => {
+    setTotalPrice();
+  }, [productsList]);
 
   const setAddress = (value) => {
     setValues({
@@ -48,14 +61,6 @@ const ShoppingCartPage = () => {
     });
   };
 
-  useEffect(() => {
-    window.scroll(0, 0);
-    getProductsListByBarcode();
-  }, []);
-  useEffect(() => {
-    setTotalPrice();
-  }, [productsList]);
-
   const getProductsListByBarcode = async () => {
     const promises = [];
     cart.map(({ barcode }) => {
@@ -69,19 +74,35 @@ const ShoppingCartPage = () => {
     cart.map(
       ({ quantity }, index) => (productsData[index]["quantity"] = quantity)
     );
-    console.log(productsData)
+
     setProductsList(productsData);
     setTotalPrice();
   };
 
+  const getStoreHour = async () => {
+    const resp = await fetchApi("Deliverys.php?local", "GET");
+
+    setStoreHours(
+      resp.result.data.map((hourFromBack, index) => ({
+        value: index,
+        label: hourFromBack.name,
+      }))
+    );
+  };
+
+  const getDeliveryHour = async () => {
+    const resp = await fetchApi("Deliverys.php?delivery", "GET");
+    setDeliveryHours(resp.result.data);
+  };
   const setTotalPrice = () => {
     setTotal(
-      productsList.length > 0 &&
-        productsList
-          .map((product) => product.price * product.quantity)
+      cart.length > 0 &&
+        cart
+          .map(
+            (product) => parseInt(product.price) * parseInt(product.quantity)
+          )
           .reduce((a, b) => parseInt(a) + parseInt(b))
     );
-    console.log(total);
   };
 
   const goToCartBuyForm = () => {
@@ -101,7 +122,25 @@ const ShoppingCartPage = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
   };
-  console.log(productsList);
+
+  const handleRadioChange = (value) => {
+    if (value === "Dirección actual") {
+      setAddress(userData.address);
+      setIsAddressDisable(true);
+      setIsShipping(true);
+    }
+    if (value === "Dirección alternativa") {
+      setIsAddressDisable(false);
+      setAddress("");
+      setIsShipping(true);
+    }
+    if (value === "Retiro en local") {
+      setAddress("");
+      setIsAddressDisable(true);
+      setIsShipping(false);
+    }
+  };
+
   return (
     <ContainerBase>
       <div className="cartContainer">
@@ -129,29 +168,64 @@ const ShoppingCartPage = () => {
           <img className="form-img" src={Imagen} alt="Imagen" />
           <form onSubmit={handleSubmit}>
             <h1>Confirma tu compra</h1>
-            <span>Dirección de envío</span>
-            {/* Dirección actual
-                Dirección alternativa
-                Retiro en local */}
-            <Input
-              name="address"
-              id="address"
-              value={values.address}
-              placeholder="Dirección"
-              onChange={(e) => setAddress(e.target.value)}
-              setErrorStatusForm={setErrorStatusForm}
-              className={"formInput"}
-            />
+            <div className="radioSection">
+              <strong>Dirección de envío</strong>
+              <div
+                className="radioGroup"
+                onChange={(e) => handleRadioChange(e.target.value)}
+              >
+                <label>
+                  <input
+                    type="radio"
+                    value={"Dirección actual"}
+                    name="addressRadio"
+                    id=""
+                  />{" "}
+                  Dirección actual
+                </label>
+                <label>
+                  <input
+                    type="radio"
+                    value={"Dirección alternativa"}
+                    name="addressRadio"
+                    id=""
+                  />{" "}
+                  Dirección alternativa
+                </label>
+                <label>
+                  <input
+                    type="radio"
+                    value={"Retiro en local"}
+                    name="addressRadio"
+                    id=""
+                  />{" "}
+                  Retiro en local
+                </label>
+              </div>
+              <Input
+                name="address"
+                id="address"
+                value={values.address}
+                placeholder="Dirección"
+                onChange={(e) => setAddress(e.target.value)}
+                setErrorStatusForm={setErrorStatusForm}
+                className={"formInput"}
+                disabled={isAddressDisable}
+              />
+            </div>
             {/* Los rangos horarios van a venir por endpoint */}
+            <span className="mt-5">
+              {isShipping ? "Horarios de envío" : "Horarios del local"}
+            </span>
             <Select
               name="deliveryType"
               id="deliveryType"
               className="select"
               onChange={(e) => setDeliveryType(e.value)}
-              options={deliveryTypes}
+              options={isShipping ? deliveryTypes : storeHours}
               placeholder={"Horario"}
             />
-
+            <span className="mt-5">{"Metodo de pago"}</span>
             <Select
               name="paymentMenthod"
               id="paymentMenthod"

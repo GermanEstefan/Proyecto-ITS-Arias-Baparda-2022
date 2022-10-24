@@ -3,14 +3,23 @@ import { Animated } from "react-animated-css";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { fetchApi } from "../../API/api";
-import Guantes from "../../assets/img/guantes.jpg";
 import { useContext } from "react";
 import { cartContext } from "../../App";
 
-const CartItem = ({ barcode, img, name, price, quantity, setTotalPrice, size, design }) => {
+const CartItem = ({
+  barcode,
+  img,
+  name,
+  price,
+  quantity,
+  setTotalPrice,
+  size,
+  design,
+}) => {
   const { cart, setCart } = useContext(cartContext);
 
   const [product, setProduct] = useState({});
+  const [productTotalPrice, setProductTotalPrice] = useState(price)
 
   useEffect(() => {
     getProductByBarcode();
@@ -31,11 +40,16 @@ const CartItem = ({ barcode, img, name, price, quantity, setTotalPrice, size, de
     e.preventDefault();
     const cartWithNewQuantity = cart.map((product) => {
       if (product.barcode === barcode) {
-        return { barcode: barcode, quantity: e.target.value };
+        return {
+          barcode: barcode,
+          quantity: e.target.value,
+          price: product.price,
+        };
       } else {
         return product;
       }
     });
+    setProductTotalPrice(price * e.target.value)
     setCart(cartWithNewQuantity);
     setTotalPrice();
   };
@@ -51,11 +65,12 @@ const CartItem = ({ barcode, img, name, price, quantity, setTotalPrice, size, de
 
         <div className="cartItem__text">
           <div>
-          <h3>{name}</h3>
-          <span>Talle: {size} Color: {design} </span>
+            <h3>{name}</h3>
+            <span>
+              Talle: {size} Color: {design}{" "}
+            </span>
           </div>
-          <p>{price * quantity}$</p>
-          
+          <p>{productTotalPrice}$</p>
         </div>
         <div className="CartItem__actions">
           <input

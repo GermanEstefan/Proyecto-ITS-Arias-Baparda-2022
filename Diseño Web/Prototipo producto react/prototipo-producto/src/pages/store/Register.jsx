@@ -89,6 +89,7 @@ const Register = () => {
         <img className={"form-img"} src={Imagen} alt="Imagen" />
         <form onSubmit={handleSubmit} autoComplete="off">
           <h1>Registrate para comenzar tu experiencia</h1>
+          {/* Solucionar bug de campo 'name' dando error en errorStatusForm. */}
           <Input
             name="name"
             id="name"

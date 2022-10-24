@@ -1,13 +1,11 @@
 import React, { useState, useEffect, useContext } from "react";
 
 import { useParams } from "react-router-dom";
-import Guantes from "../../assets/img/guantes.jpg";
 import PageTitle from "../../components/store/PageTitle";
 import ContainerBase from "../../components/store/ContainerBase";
 import { fetchApi } from "../../API/api";
 import { cartContext, userStatusContext } from "../../App";
 import Select from "react-select";
-import { Carousel } from "react-responsive-carousel";
 const ProductPage = () => {
   const { userData } = useContext(userStatusContext);
   const { category, id } = useParams();
@@ -21,7 +19,6 @@ const ProductPage = () => {
   const [allModels, setAllModels] = useState([]);
   const [pictureLinks, setPictureLinks] = useState([]);
 
-  console.log(pictureLinks);
   useEffect(() => {
     window.scroll(0, 0);
     setPictureLinks(
@@ -37,13 +34,16 @@ const ProductPage = () => {
   // }, [product]);
 
   const handleAddToCart = () => {
-    setCart([...cart, { barcode: product.barcode, quantity: 1 }]);
+    setCart([
+      ...cart,
+      { barcode: product.barcode, quantity: 1, price: product.price },
+    ]);
+
     setIsAddedToCart(true);
   };
   const handleDeleteItemFromCart = () => {
     const newCart = cart;
     newCart.pop();
-    console.log(newCart);
     setCart(newCart);
     setIsAddedToCart(false);
   };
@@ -51,7 +51,6 @@ const ProductPage = () => {
   const getProductById = async () => {
     const resp = await fetchApi(`products.php?modelsOfProduct=${id}`, "GET");
     setProduct(resp.result.data.models[0] ? resp.result.data.models[0] : {});
-    console.log(resp);
     setAllModels(resp.result.data.models);
     setproductName(resp.result.data.name);
     setproductDescription(resp.result.data.description);
@@ -82,6 +81,7 @@ const ProductPage = () => {
 
   const handleChangeSize = (size) => {
     const modelsWithSize = allModels.filter((model) => model.size === size);
+    setIsAddedToCart(false);
     setProduct(modelsWithSize[0]);
   };
 
@@ -89,6 +89,7 @@ const ProductPage = () => {
     const modelsWithDesign = allModels.filter(
       (model) => model.design === design
     );
+    setIsAddedToCart(false);
     setProduct(modelsWithDesign[0]);
   };
 
@@ -103,7 +104,7 @@ const ProductPage = () => {
         <div className="productPage">
           <div className="productPage__img">
             <div>
-              {/* Hace carousel */}
+              {/* Hacer carousel */}
               <img src={pictureLinks[0]} width="200" />
               <img src={pictureLinks[1]} width="200" />
               <img src={pictureLinks[2]} width="200" />

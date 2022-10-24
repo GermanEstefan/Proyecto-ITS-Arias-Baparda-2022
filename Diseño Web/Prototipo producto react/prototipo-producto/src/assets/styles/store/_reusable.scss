@@ -18,6 +18,27 @@
     width: 90vw;
     margin: 7em auto;
   }
+  .mt-5 {
+    margin-top: 5px;
+  }
+  .radioSection {
+    border: 5px rgb(211, 211, 211) solid;
+    padding: 10px;
+    border-radius: 5px;
+    width: 60%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    .radioGroup {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      input {
+        margin-top: 5px;
+      }
+    }
+  }
 
   img {
     width: 50%;

@@ -28,13 +28,12 @@ $black: #121212;
 @import "./assets/styles/admin/editModel";
 @import "./assets/styles/admin/supplier";
 
-
 html {
   scroll-behavior: smooth;
 }
-body{
+body {
   overflow-x: hidden;
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Open Sans", sans-serif;
 }
 body {
   overflow-x: hidden;
@@ -55,8 +54,7 @@ a {
 }
 input,
 textarea {
-  border: none;
-
+  border: 2px $dark_gray solid;
   border-radius: 3px;
   padding: 5px;
   resize: none;

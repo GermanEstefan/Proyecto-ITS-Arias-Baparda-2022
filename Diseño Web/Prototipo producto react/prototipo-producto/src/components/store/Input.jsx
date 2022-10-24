@@ -33,7 +33,7 @@ const Input = ({ validateFunction, setErrorStatusForm, ...args }) => {
         style={
           errorState.error
             ? { border: "1px solid red" }
-            : { border: "2px solid black" }
+            : { border: "2px $gray black" }
         }
         {...args}
       />
