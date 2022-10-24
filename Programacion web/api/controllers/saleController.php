@@ -89,6 +89,29 @@ class SaleController {
         $response = array("id" => $id,"saleDate" => $saleDate, "statusActual" => $statusActual, "packOff" => $packOff, "infoCustomer" => $infoCustomer, "infoPayment" => $infoPayment);
         echo $this->response->successfully("Venta encontrada:", $response);  
     }
+    public function getDetailForSale($idSale){
+        $sale = SaleModel::getDetailSaleById($idSale);
+        if(!$sale){
+            echo $this->response->error203("No se encuentra venta con id $idSale");
+            die();
+        }
+        echo $this->response->successfully("Detalle de la venta:", $sale);  
+    }
+    public function getSaleByStatus($status){
+        $sale = SaleModel::getSalesByStatus($status);
+        if(!$sale){
+            echo $this->response->error203("No existen ventas para $status");
+            die();
+        }
+        //Data en comun
+        $name = $sale["nameStatus"];
+        //Datos de direccion
+        $sales = array();
+        array_push( $sales, array( "idSale" => $sale['idSale'],"DocEmployee" => $sale['DocEmployee'],"lastUpdate" => $sale['lastUpdate'],"lastComment" => $sale['lastCommnet']));
+        
+        $response = array("status" => $name, "sales" => $sales);
+        echo $this->response->successfully("Ventas en estado $status:", $response);  
+    }
     
     //ACTUALIZAR
    

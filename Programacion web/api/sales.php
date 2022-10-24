@@ -22,6 +22,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $sale->getSaleId($idSale);
         die();
     }
+    if(isset($_GET['saleDetail'])){
+        $idSale = $_GET['saleDetail'];
+        $sale->getDetailForSale($idSale);
+        die();
+    }
+    if(isset($_GET['status'])){
+        $status = $_GET['status'];
+        $sale->getSaleByStatus($status);
+        die();
+    }
+    
 }else if($_SERVER['REQUEST_METHOD'] === 'PATCH'){
     //Editar categoria
     if(isset($_GET['idSale'])){

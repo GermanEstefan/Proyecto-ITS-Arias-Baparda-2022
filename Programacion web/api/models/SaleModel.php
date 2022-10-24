@@ -40,6 +40,55 @@
             AND s.sale_delivery = d.id_delivery";
             return $conecction->getData($query)->fetch_assoc();
         }
+        public static function getDetailSaleById($idSale){
+            $conecction = new Connection();
+            $query = "SELECT 
+            p.name as product,
+            st.product_sale as barcode, 
+            st.quantity,
+            st.total
+            FROM sale_detail st, product p 
+            WHERE sale_id = '$idSale'
+            AND st.product_sale = p.barcode";
+            return $conecction->getData($query)->fetch_assoc();
+        }
+        public static function getSalesByStatus($status){
+            $conecction = new Connection();
+            $query = "SELECT 
+            r.sale_report AS idSale,
+            s.name AS nameStatus,
+            r.employee_report AS 'DocEmployee',
+            r.date AS lastUpdate,
+            r.comment AS lastComment
+            FROM report r , status s
+            WHERE s.name LIKE '%$status%'";
+            return $conecction->getData($query)->fetch_all(MYSQLI_ASSOC);
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         public static function getAllSales(){
             $conecction = new Connection();
             $query = "SELECT * from sale";
