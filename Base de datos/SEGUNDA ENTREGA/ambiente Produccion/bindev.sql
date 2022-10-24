@@ -459,12 +459,12 @@ INSERT INTO `bindev`.`category` (`name`, `description`, `picture`) VALUES ('PROM
 INSERT INTO `bindev`.`design` (`name`, `description`) VALUES ('PROMOCIONES', 'DISEÑO DESIGNADO PARA PROMOS');
 INSERT INTO `bindev`.`size` (`name`, `description`) VALUES ('PROMOCIONES', 'TALLE DESIGNADO PARA LA PROMO');
 INSERT INTO `bindev`.`status` (`name`, `description`) VALUES ('Respuesta Automatica', 'Respuesta automatica del sistema');
-INSERT INTO `bindev`.`status` (`name`, `description`) VALUES ('Pendinte de cobro', 'Estado pendiente de cobro, la venta aun no fue confirmada pero su mercaderia se encuentra reservada');
-INSERT INTO `bindev`.`status` (`name`, `description`) VALUES ('Venta confirmada', 'Venta confirmada, dinero capturado, la mercaderia tiene dueño');
-INSERT INTO `bindev`.`status` (`name`, `description`) VALUES ('En transporte', 'Venta en calle, en viaje a la direccion ingresada en la venta');
-INSERT INTO `bindev`.`status` (`name`, `description`) VALUES ('Entregada', 'Entrega de la venta confirmada');
-INSERT INTO `bindev`.`status` (`name`, `description`) VALUES ('Pick UP', 'Levanta en el local');
-INSERT INTO `bindev`.`status` (`name`, `description`) VALUES ('Cancelada', 'La venta fue cancelada');
+INSERT INTO `bindev`.`status` (`name`, `description`) VALUES ('PENDIENTE', 'Estado pendiente de cobro, la venta aun no fue confirmada pero su mercaderia se encuentra reservada');
+INSERT INTO `bindev`.`status` (`name`, `description`) VALUES ('CONFIRMADO', 'Venta confirmada, dinero capturado, la mercaderia tiene dueño');
+INSERT INTO `bindev`.`status` (`name`, `description`) VALUES ('EN VIAJE', 'Venta en calle, en viaje a la direccion ingresada en la venta');
+INSERT INTO `bindev`.`status` (`name`, `description`) VALUES ('ENTREGADO', 'Entrega de la venta confirmada');
+INSERT INTO `bindev`.`status` (`name`, `description`) VALUES ('PICK-UP', 'Levanta en el local');
+INSERT INTO `bindev`.`status` (`name`, `description`) VALUES ('CANCELADA', 'La venta fue cancelada');
 INSERT INTO `bindev`.`delivery_time` (`name`, `description`) VALUES ('Lun a Vie de 8:00 a 13:00', 'Horario 1 abarca desde la apertura hasta la hora de descanso');
 INSERT INTO `bindev`.`delivery_time` (`name`, `description`) VALUES ('Lun a Vie de 14:00 a 19:00', 'Horario 2 abarca desde el descanso hasta la hora de cierre');
 INSERT INTO `bindev`.`delivery_time` (`name`, `description`) VALUES ('Sabados de 8:00 a 15:00', 'Horario 3 abarca desde la apertura del dia Sabado');
