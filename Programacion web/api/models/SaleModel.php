@@ -69,6 +69,14 @@
             AND s.name LIKE '$status'";
             return $conecction->getData($query)->fetch_all(MYSQLI_ASSOC);
         }
+        public static function getCustomerAddressToSuggest($email){
+            $conecction = new Connection();
+            $query = "SELECT u.address
+            FROM user u
+            WHERE u.email = '$email'";
+            return $conecction->getData($query)->fetch_assoc();
+        }
+
 
 
 
