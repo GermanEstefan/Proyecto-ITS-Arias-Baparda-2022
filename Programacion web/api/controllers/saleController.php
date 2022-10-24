@@ -5,7 +5,8 @@ include_once("./helpers/Token.php");
 include_once("./models/SaleModel.php");
 include_once("./models/DeliveryModel.php");
 include_once("./models/UserModel.php");
-
+include_once("./models/EmployeeModel.php");
+include_once("./models/StatusModel.php");
 class SaleController {
 
     private $response;
@@ -23,6 +24,13 @@ class SaleController {
         ||  !isset($saleData['delivery'])
         ||  !isset($saleData['payment'])
         ||  !isset($saleData['products']))
+        return false;
+        return $saleData;
+    }
+    private function validateBodyOfReport($saleData){
+        if(!isset($saleData['employeeDoc'])
+        ||  !isset($saleData['status'])
+        ||  !isset($saleData['comment']))
         return false;
         return $saleData;
     }
@@ -141,8 +149,45 @@ class SaleController {
     }
     
     //ACTUALIZAR
-   
+    public function updateReport($idSale,$saleData){
+        $this->jwt->verifyTokenAndGetIdUserFromRequest(); 
+        $bodyIsValid = $this->validateBodyOfReport($saleData);
+        if(!$bodyIsValid){
+             echo $this->response->error400('No se puede actualizar - Revise informacion');
+            die();
+        }
+        $status = $saleData['status'];
+        $employeeDoc = $saleData['employeeDoc'];
+        $comment = $saleData['comment'];
 
+        $saleExist = SaleModel::getSaleById($idSale);
+        if(!$saleExist){
+            echo $this->response->error203("Esta intentando editar una venta que no existe");
+            die();
+        }
+        $employeeExist = EmployeeModel::getEmployeeByCi($employeeDoc);
+        if(!$employeeExist){
+            echo $this->response->error203("No existe empleado con documento $employeeDoc");
+            die();
+        }
+        $statusExist = StatusModel::getStatusById($status);
+        if(!$statusExist){
+            echo $this->response->error203("No existe el estado $status");
+            die();
+        }
+        $result = SaleModel::updateReportOfSale($idSale,$status,$employeeDoc,$comment);
+        if(!$result){
+            echo $this->response->error500();
+            die();
+        }
+        echo $this->response->successfully("Reporte de venta $idSale actualizado con exito");
+    }
+        
+        
+        
+        
+        
+        
     //ELIMINAR
 }
 

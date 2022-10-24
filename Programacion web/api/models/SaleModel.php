@@ -77,7 +77,16 @@
             return $conecction->getData($query)->fetch_assoc();
         }
 
-
+        //update
+        public static function updateReportOfSale($idSale,$status,$employeeDoc,$comment){
+            $conecction = new Connection();
+            $query = "UPDATE report 
+            SET status_report = $status,
+            employee_report = $employeeDoc,
+            comment = '$comment'
+            WHERE sale_report = $idSale";
+            return $conecction->setData($query);
+        }
 
 
 

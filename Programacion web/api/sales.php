@@ -38,11 +38,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         die();
     }
     
+    
 }else if($_SERVER['REQUEST_METHOD'] === 'PATCH'){
     //Editar categoria
-    if(isset($_GET['idSale'])){
-        $idSale = $_GET['idSale'];
-        $sale->updateSale($idSale, $saleData);    
+    if(isset($_GET['actualizeSale'])){
+        $idSale = $_GET['actualizeSale'];
+        $sale->updateReport($idSale,$saleData);
         die();
     }
     
