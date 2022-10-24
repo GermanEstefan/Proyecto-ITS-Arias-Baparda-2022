@@ -37,6 +37,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $sale->getAddresToCustomer($email);
         die();
     }
+    if(isset($_GET['reportHistory'])){
+        $idSale = $_GET['reportHistory'];
+        $sale->getReportHistory($idSale);
+        die();
+    }
     
     
 }else if($_SERVER['REQUEST_METHOD'] === 'PATCH'){

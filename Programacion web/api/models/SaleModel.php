@@ -76,6 +76,25 @@
             WHERE u.email = '$email'";
             return $conecction->getData($query)->fetch_assoc();
         }
+        public static function getReportHistoryBySale($idSale){
+            $conecction = new Connection();
+            $query = "SELECT
+            rh.sale_report as saleID,
+            rh.idReg AS 'regNr',
+            rh.Type AS 'typeReg',
+            s.name AS status,
+            rh.employee_report AS employeeDoc,
+            concat_ws(u.name,' ', u.surname) AS employeeName,
+            date_format(rh.date, '%d/%m/%Y %T') AS date,
+            rh.comment AS comment
+            FROM reportHistory rh, status s,employee e, user u
+            WHERE sale_report = 700000
+            AND rh.status_report = s.id_status
+            AND rh.employee_report = e.ci
+            AND e.employee_user = u.id_user
+            ORDER BY Date desc";
+            return $conecction->getData($query)->fetch_ALL(MYSQLI_ASSOC);
+        }
 
         //update
         public static function updateReportOfSale($idSale,$status,$employeeDoc,$comment){

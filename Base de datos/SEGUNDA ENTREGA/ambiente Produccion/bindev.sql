@@ -438,14 +438,14 @@ DELIMITER ;
 -- -----------------------------------------------------
 -- USUARIOS PARA TENER INGRESAR AL SISTEMA 
 -- ----------------------------------------------------- 
-INSERT INTO `bindev`.`user` (`email`, `name`, `surname`, `address`, `phone`, `password`) VALUES ('system@seguridadcorporal.com', 'System', 'System', 'System', '0','--,.r.ad');
-INSERT INTO `bindev`.`user` (`email`, `name`, `surname`, `address`, `phone`, `password`) VALUES ('master@seguridadcorporal.com', 'master', 'master', 'master', '22334455', 'master');
-INSERT INTO `bindev`.`user` (`email`, `name`, `surname`, `address`, `phone`, `password`) VALUES ('ventas@seguridadcorporal.com', 'vendedor', 'vendedor', 'vendedor', '22334455', 'vendedor');
-INSERT INTO `bindev`.`user` (`email`, `name`, `surname`, `address`, `phone`, `password`) VALUES ('compras@seguridadcorporal.com', 'comprador ', 'comprador', 'comprador', '22334455', 'comprador');
+INSERT INTO `bindev`.`user` (`email`, `name`, `surname`, `address`, `phone`, `password`) VALUES ('system@seguridadcorporal.com', 'System', 'Response', 'Null', '0','--,.r.ad');
+INSERT INTO `bindev`.`user` (`email`, `name`, `surname`, `address`, `phone`, `password`) VALUES ('master@seguridadcorporal.com', 'master', 'master', 'Address master', '22334455', 'master');
+INSERT INTO `bindev`.`user` (`email`, `name`, `surname`, `address`, `phone`, `password`) VALUES ('ventas@seguridadcorporal.com', 'vendedor', 'vendedor', 'Address vendedor', '22334455', 'vendedor');
+INSERT INTO `bindev`.`user` (`email`, `name`, `surname`, `address`, `phone`, `password`) VALUES ('compras@seguridadcorporal.com', 'comprador ', 'comprador', 'Address comprador', '22334455', 'comprador');
 INSERT INTO `bindev`.`role` (`name_role`, `description`) VALUES ('SYSTEM', 'RESPUESTA AUTOMATICA DEL SISTEMA');
 INSERT INTO `bindev`.`role` (`name_role`, `description`) VALUES ('VENDEDOR', 'Personal de ventas');
 INSERT INTO `bindev`.`role` (`name_role`, `description`) VALUES ('COMPRADOR', 'Personal de compras');
-INSERT INTO `bindev`.`role` (`name_role`, `description`) VALUES ('JEFE', 'Cargo de FEJE');
+INSERT INTO `bindev`.`role` (`name_role`, `description`) VALUES ('JEFE', 'Cargo de JEFE');
 INSERT INTO `bindev`.`EMPLOYEE` (`ci`, `employee_user`, `employee_role`) VALUES ('1', '5000', 'SYSTEM');
 INSERT INTO `bindev`.`EMPLOYEE` (`ci`, `employee_user`, `employee_role`) VALUES ('123', '5001', 'JEFE');
 INSERT INTO `bindev`.`EMPLOYEE` (`ci`, `employee_user`, `employee_role`) VALUES ('1234', '5002', 'VENDEDOR');
@@ -458,7 +458,7 @@ INSERT INTO `bindev`.`EMPLOYEE` (`ci`, `employee_user`, `employee_role`) VALUES 
 INSERT INTO `bindev`.`category` (`name`, `description`, `picture`) VALUES ('PROMOCIONES', 'CATEGORIA DESIGNADA PARA PROMOS','https://picsum.photos/200/300');
 INSERT INTO `bindev`.`design` (`name`, `description`) VALUES ('PROMOCIONES', 'DISEÑO DESIGNADO PARA PROMOS');
 INSERT INTO `bindev`.`size` (`name`, `description`) VALUES ('PROMOCIONES', 'TALLE DESIGNADO PARA LA PROMO');
-INSERT INTO `bindev`.`status` (`name`, `description`) VALUES ('Respuesta Automatica', 'Respuesta automatica del sistema');
+INSERT INTO `bindev`.`status` (`name`, `description`) VALUES ('RESPUESTA AUTOMATICA DEL SISTEMA', 'Respuesta automatica del sistema');
 INSERT INTO `bindev`.`status` (`name`, `description`) VALUES ('PENDIENTE', 'Estado pendiente de cobro, la venta aun no fue confirmada pero su mercaderia se encuentra reservada');
 INSERT INTO `bindev`.`status` (`name`, `description`) VALUES ('CONFIRMADO', 'Venta confirmada, dinero capturado, la mercaderia tiene dueño');
 INSERT INTO `bindev`.`status` (`name`, `description`) VALUES ('EN VIAJE', 'Venta en calle, en viaje a la direccion ingresada en la venta');
@@ -551,6 +551,15 @@ INSERT INTO `bindev`.`product` (`id_product`, `name`, `product_category`, `produ
 INSERT INTO `bindev`.`product` (`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`) VALUES ('19', 'GUANTES clasico', '5', '7', '4', '0', '450', 'Descripcion del producto');
 INSERT INTO `bindev`.`product` (`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`) VALUES ('19', 'GUANTES clasico', '5', '7', '5', '9', '450', 'Descripcion del producto');
 
+INSERT INTO `bindev`.`user` (`email`, `name`, `surname`, `address`, `phone`, `password`) VALUES ('nicolas@gmail.com', 'Nicolas', 'Alvarez', 'Casa de nico', '998877','Nicolas');
+INSERT INTO `bindev`.`user` (`email`, `name`, `surname`, `address`, `phone`, `password`) VALUES ('Matias4371@gmail.com', 'Nacho', 'Arman-Duon', 'Casa de Nacho', '998877','Nacho');
+INSERT INTO `bindev`.`user` (`email`, `name`, `surname`, `address`, `phone`, `password`) VALUES ('fabricioRivera@gmail.com', 'Fabricio', 'Rivera', 'Casa de Fabri', '998877','Fabricio');
+INSERT INTO `bindev`.`user` (`email`, `name`, `surname`, `address`, `phone`, `password`) VALUES ('german.estefan81@gmail.com', 'German', 'Estefan', 'Casa de German', '998877','German');
+INSERT INTO `bindev`.`user` (`email`, `name`, `surname`, `address`, `phone`, `password`) VALUES ('lauraacuna@gmail.com', 'Laura', 'Acuña', 'Laboratorio 1', '','DisenoWeb');
+INSERT INTO `bindev`.`user` (`email`, `name`, `surname`, `address`, `phone`, `password`) VALUES ('LeoCarambula@gmail.com', 'Leonardo', 'Carambula', 'Laboratorio 2', '998877','ProgramacionWeb');
+INSERT INTO `bindev`.`user` (`email`, `name`, `surname`, `address`, `phone`, `password`) VALUES ('chrisBarrios1@gmail.com', 'Christian', 'Barrios', 'Laboratorio 3', '998877','SistemasOperativos');
+INSERT INTO `bindev`.`user` (`email`, `name`, `surname`, `address`, `phone`, `password`) VALUES ('LuisSuarez@gmail.com', 'Luis', 'Suarez', 'Nacional', '9','LuisSuarez');
+INSERT INTO `bindev`.`user` (`email`, `name`, `surname`, `address`, `phone`, `password`) VALUES ('TonyPacheco@gmail.com', 'Tony', 'Pacheco', 'Penadoy', '7','TonyPacheco');
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;

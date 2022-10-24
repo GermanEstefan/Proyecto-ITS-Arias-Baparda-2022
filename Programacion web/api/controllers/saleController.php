@@ -115,6 +115,21 @@ class SaleController {
         $response = array("saleID" => $saleID,"totalSale" =>$totalSale, "details" => $details);
         echo $this->response->successfully("Detalle de ventas para ID:$idSale", $response);  
     }
+    public function getReportHistory($idSale){
+        $sale = SaleModel::getReportHistoryBySale($idSale);
+        if(!$sale){
+            echo $this->response->error203("No se encuentra reporte para la venta:$idSale");
+            die();
+        }
+        //Data en comun
+        $saleID = $sale[0]['saleID'];
+        $history = array();
+        foreach($sale as $register){
+        array_push( $history, array( "regNr" => $register['regNr'],"typereg" => $register['typeReg'],"status" => $register['status'],"employeeDoc" => $register['employeeDoc'],"employeeName" => $register['employeeName'],"date" => $register['date'],"comment" => $register['comment'],));
+        }
+        $response = array("saleID" => $saleID,"history" => $history);
+        echo $this->response->successfully("Historial para la Venta:$idSale", $response);  
+    }
     public function getSaleByStatus($status){
         $sale = SaleModel::getSalesByStatus($status);
         if(!$sale){
