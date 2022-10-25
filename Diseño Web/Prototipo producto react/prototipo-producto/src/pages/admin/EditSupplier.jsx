@@ -54,7 +54,7 @@ const EditSupplier = () => {
     useEffect(() => {
         fetchApi(`suppliers.php?rut=${rutParams}`, 'GET')
             .then(res => {
-                const values = res;
+                const values = res.result.data;
                 console.log(res)
                 setSupplierValues({
                     rut: values.rut,

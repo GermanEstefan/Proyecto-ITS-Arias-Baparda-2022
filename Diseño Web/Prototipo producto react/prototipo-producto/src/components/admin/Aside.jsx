@@ -105,6 +105,10 @@ const Aside = () => {
                                 onClick={() => navigate('/admin/products/list') }
                                 className={ (action === 'list' && page === 'products') ? 'selected' : '' }
                             >Listar productos / promociones</li>
+                            <li
+                                  onClick={() => navigate('/admin/products/buy') }
+                                  className={ (action === 'buy' && page === 'products') ? 'selected' : '' }
+                            >Compra</li>
                         </ul>
                     }
                 </li>

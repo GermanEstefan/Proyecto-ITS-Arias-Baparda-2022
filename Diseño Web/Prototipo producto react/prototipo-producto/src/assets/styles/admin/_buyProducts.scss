@@ -1,0 +1,74 @@
+.buy-products{
+    h2{
+        margin: 30px 0;
+    }
+    form{
+        label{
+            font-weight: bold;
+        }
+        width: 50vw;
+        max-width: 600px;
+        .supplier-line{
+            margin-bottom: 20px;
+            label{
+                margin-right: 10px;
+            }
+        }
+        .buy-product-line{
+            position: relative;
+            .add-line-buy-product{
+                position: absolute;
+                right: -20px;
+                top: 45px;
+                font-size: 1.8rem;
+                color: $orange;
+                cursor: pointer;
+                transition: .3s;
+                &:hover {color: darken($color: $orange, $amount: 20);}
+            }
+            .buy-product-line_item{
+                display: flex;
+                position: relative;
+                margin: 20px 0;
+                > select, input{
+                    width: auto;
+                }
+                .remove-line-buy-product{
+                    position: absolute;
+                    right: -15px;
+                    font-size: 1.8rem;
+                    top: 26px;
+                    color: red;
+                    cursor: pointer;
+                transition: .3s;
+                &:hover {color: darken($color: red, $amount: 20);}
+                }
+                > div{
+                    width: 100%;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    margin-right: 20px;
+                }
+            }
+        }
+        .txtarea-buy-product{
+            margin: 20px 0;
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+            width: 100%;
+            label{
+                margin-bottom: 5px;
+            }
+            textarea{
+                height: 150px;
+            }
+        }
+
+        button{
+            width: 100%;
+        }
+
+    }
+}

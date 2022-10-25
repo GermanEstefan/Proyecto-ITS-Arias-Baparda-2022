@@ -82,8 +82,7 @@ const Supplier = () => {
     useEffect(() => {
         fetchApi('suppliers.php?all', 'GET')
             .then(res => {
-                console.log(res)
-                setSuppliers(res)
+                setSuppliers(res.result.data)
             })
             .catch(err => console.error(err))
             .finally(() => setLoadingFlags({ ...loadingFlags, fetchingSuppliers: false }))

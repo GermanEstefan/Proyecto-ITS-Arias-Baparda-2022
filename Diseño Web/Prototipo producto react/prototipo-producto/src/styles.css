@@ -21,6 +21,27 @@
     margin: 7em auto;
   }
 }
+.form-container .mt-5 {
+  margin-top: 5px;
+}
+.form-container .radioSection {
+  border: 5px rgb(211, 211, 211) solid;
+  padding: 10px;
+  border-radius: 5px;
+  width: 60%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.form-container .radioSection .radioGroup {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.form-container .radioSection .radioGroup input {
+  margin-top: 5px;
+}
 .form-container img {
   width: 50%;
   height: 100%;
@@ -1497,6 +1518,81 @@
   margin-bottom: 3px;
 }
 
+.buy-products h2 {
+  margin: 30px 0;
+}
+.buy-products form {
+  width: 50vw;
+  max-width: 600px;
+}
+.buy-products form label {
+  font-weight: bold;
+}
+.buy-products form .supplier-line {
+  margin-bottom: 20px;
+}
+.buy-products form .supplier-line label {
+  margin-right: 10px;
+}
+.buy-products form .buy-product-line {
+  position: relative;
+}
+.buy-products form .buy-product-line .add-line-buy-product {
+  position: absolute;
+  right: -20px;
+  top: 45px;
+  font-size: 1.8rem;
+  color: #f5990f;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.buy-products form .buy-product-line .add-line-buy-product:hover {
+  color: #985e06;
+}
+.buy-products form .buy-product-line .buy-product-line_item {
+  display: flex;
+  position: relative;
+  margin: 20px 0;
+}
+.buy-products form .buy-product-line .buy-product-line_item > select, .buy-products form .buy-product-line .buy-product-line_item input {
+  width: auto;
+}
+.buy-products form .buy-product-line .buy-product-line_item .remove-line-buy-product {
+  position: absolute;
+  right: -15px;
+  font-size: 1.8rem;
+  top: 26px;
+  color: red;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.buy-products form .buy-product-line .buy-product-line_item .remove-line-buy-product:hover {
+  color: #990000;
+}
+.buy-products form .buy-product-line .buy-product-line_item > div {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-right: 20px;
+}
+.buy-products form .txtarea-buy-product {
+  margin: 20px 0;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  width: 100%;
+}
+.buy-products form .txtarea-buy-product label {
+  margin-bottom: 5px;
+}
+.buy-products form .txtarea-buy-product textarea {
+  height: 150px;
+}
+.buy-products form button {
+  width: 100%;
+}
+
 html {
   scroll-behavior: smooth;
 }
@@ -1529,7 +1625,7 @@ a {
 
 input,
 textarea {
-  border: none;
+  border: 2px #9ba6af solid;
   border-radius: 3px;
   padding: 5px;
   resize: none;
