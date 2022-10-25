@@ -366,8 +366,7 @@
             p.name,
             p.price,
             c.name AS categoryName,
-            p.description,
-            p.state 
+            p.description 
             from product p, category c
             WHERE p.product_category = c.id_category
             AND p.product_category != 1";
