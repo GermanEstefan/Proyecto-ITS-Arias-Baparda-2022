@@ -47,10 +47,9 @@ const App = () => {
     const initialValue = JSON.parse(saved);
     return initialValue || [];
   });
-  console.log(cart)
+  console.log(cart);
   const setCart = (newCart) => {
     setCartState(newCart);
-    console.log(newCart)
     localStorage.setItem("cart", JSON.stringify(newCart));
   };
 
@@ -67,27 +66,48 @@ const App = () => {
           <Route path="/shoppingCart" element={<ShoppingCartPage />} />
           <Route path="/category/:category" element={<CategoryPage />} />
           <Route path="/category/:category/:id" element={<ProductPage />} />
-          <Route path="/panel-user" element={<UserPanel/>} />
-          <Route path="/admin/login" element={<LoginAdm/>} />
-          <Route path="/admin" element={ <ContainerBase/> } />
-          <Route path="/admin/users/create" element={ <CreateUser/> } />
-          <Route path="/admin/users/list" element={ <ListUsers/> } />
-          <Route path="/admin/generals/categorys" element={ <Categorys /> } />
-          <Route path="/admin/generals/categorys/edit/:idOfCategory" element={ <EditCategory /> } />
-          <Route path="/admin/generals/sizes" element={ <Sizes/> } />
-          <Route path="/admin/generals/sizes/edit/:idOfSize" element={ <EditSize/> } />
-          <Route path="/admin/generals/designs" element={ <Design/> } />
-          <Route path="/admin/generals/designs/edit/:idOfDesign" element={ <EditDesign/> } />
-          <Route path="/admin/generals/supplier" element={ <Supplier/> } />
-          <Route path="/admin/generals/supplier/edit/:rut" element={ <EditSupplier/> } />
-          <Route path="/admin/products/create" element={ <CreateProducts/> } />
-          <Route path="/admin/products-promo/create" element={ <CreatePromotion/> } />
-          <Route path="/admin/products/edit-model/:barcode" element={ <EditModelProduct/> } />
-          <Route path="/admin/products/edit-product/:idProduct" element={ <EditProducts/> } />
-          <Route path="/admin/products/buy" element={ <BuyProducts/> } />
-          <Route path="/admin/shipments/list" element={ <ListShipments/> } />
-          <Route path="/admin/products/list" element={ <ListProducts/> } />
-          <Route path="/admin/shipments/list" element={ <ListShipments/> } />
+          <Route path="/panel-user" element={<UserPanel />} />
+          <Route path="/admin/login" element={<LoginAdm />} />
+          <Route path="/admin" element={<ContainerBase />} />
+          <Route path="/admin/users/create" element={<CreateUser />} />
+          <Route path="/admin/users/list" element={<ListUsers />} />
+          <Route path="/admin/generals/categorys" element={<Categorys />} />
+          <Route
+            path="/admin/generals/categorys/edit/:idOfCategory"
+            element={<EditCategory />}
+          />
+          <Route path="/admin/generals/sizes" element={<Sizes />} />
+          <Route
+            path="/admin/generals/sizes/edit/:idOfSize"
+            element={<EditSize />}
+          />
+          <Route path="/admin/generals/designs" element={<Design />} />
+          <Route
+            path="/admin/generals/designs/edit/:idOfDesign"
+            element={<EditDesign />}
+          />
+          <Route path="/admin/generals/supplier" element={<Supplier />} />
+          <Route
+            path="/admin/generals/supplier/edit/:rut"
+            element={<EditSupplier />}
+          />
+          <Route path="/admin/products/create" element={<CreateProducts />} />
+          <Route
+            path="/admin/products-promo/create"
+            element={<CreatePromotion />}
+          />
+          <Route
+            path="/admin/products/edit-model/:barcode"
+            element={<EditModelProduct />}
+          />
+          <Route
+            path="/admin/products/edit-product/:idProduct"
+            element={<EditProducts />}
+          />
+          <Route path="/admin/products/buy" element={<BuyProducts />} />
+          <Route path="/admin/shipments/list" element={<ListShipments />} />
+          <Route path="/admin/products/list" element={<ListProducts />} />
+          <Route path="/admin/shipments/list" element={<ListShipments />} />
         </Routes>
       </cartContext.Provider>
     </userStatusContext.Provider>

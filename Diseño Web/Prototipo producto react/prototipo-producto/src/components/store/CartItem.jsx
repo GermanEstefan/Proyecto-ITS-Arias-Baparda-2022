@@ -19,7 +19,7 @@ const CartItem = ({
   const { cart, setCart } = useContext(cartContext);
 
   const [product, setProduct] = useState({});
-  const [productTotalPrice, setProductTotalPrice] = useState(price)
+  const [productTotalPrice, setProductTotalPrice] = useState(price);
 
   useEffect(() => {
     getProductByBarcode();
@@ -38,18 +38,20 @@ const CartItem = ({
 
   const updateProductQuantity = (e) => {
     e.preventDefault();
+    console.log(e.target.value)
     const cartWithNewQuantity = cart.map((product) => {
       if (product.barcode === barcode) {
         return {
           barcode: barcode,
-          quantity: e.target.value,
+          quantity: parseInt(e.target.value),
           price: product.price,
         };
       } else {
         return product;
       }
     });
-    setProductTotalPrice(price * e.target.value)
+    setProductTotalPrice(price * parseInt(e.target.value));
+    console.log(cartWithNewQuantity)
     setCart(cartWithNewQuantity);
     setTotalPrice();
   };
@@ -67,7 +69,7 @@ const CartItem = ({
           <div>
             <h3>{name}</h3>
             <span>
-              Talle: {size} Color: {design}{" "}
+              Talle: {size} Color: {design}
             </span>
           </div>
           <p>{productTotalPrice}$</p>

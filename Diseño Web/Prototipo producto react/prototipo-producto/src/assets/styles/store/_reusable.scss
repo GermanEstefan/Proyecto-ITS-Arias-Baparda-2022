@@ -34,8 +34,14 @@
       display: flex;
       flex-direction: column;
       align-items: flex-start;
-      input {
+      input{
+        @media (max-width: 600px) {
+          margin: 5px;
+        }
+      }
+      .formInput {
         margin-top: 5px;
+        width: 90%;
       }
     }
   }

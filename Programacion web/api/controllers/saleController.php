@@ -152,9 +152,10 @@ class SaleController {
             echo $this->response->error203("No se encuentran ventas para el dia $day");
             die();
         }
+        $balances = 0;
         $sales = array();
         foreach($sale as $salesInDay){
-            $balances =+ $salesInDay["total"];
+            $balances += $salesInDay["total"];
             $isBusiness = $salesInDay["companyName"];
             if(!$isBusiness){
             array_push( $sales, array( "ID" => $salesInDay['ID'],"date" => $salesInDay['date'],"address" => $salesInDay['address'],"clientID" => $salesInDay['clientID'],"clientInfo" => $salesInDay['clientInfo'],"delivery" => $salesInDay['delivery'],"payment" => $salesInDay['payment'],"total" => $salesInDay['total']));
