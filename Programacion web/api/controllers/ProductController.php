@@ -352,6 +352,11 @@ class ProductController
         echo $this->response->successfully("Promos en estado INACTIVO:", $products);
         die();
     }
+    public function getOnlyProducts(){
+        $products = ProductModel::getOnlyProducts();
+        echo $this->response->successfully("Listado de Todos los productos:", $products);
+        die();
+    }
 
 
 ////////////////////////////////OTROS GETS///////////////////////////////////////////////////////////////

@@ -72,6 +72,26 @@
             AND e.employee_user = u.id_user";
             return $conecction->getData($query)->fetch_all(MYSQLI_ASSOC);
         }
+        public static function getAllSalesByDay($day){
+            $conecction = new Connection();
+            $query = "SELECT
+            s.id_sale as ID,
+            s.date,
+            s.address,
+            s.user_purchase as clientID,
+            c.company_name AS companyName,
+            c.rut_nr AS companyRut,
+            concat_ws(' ', u.name , u.surname) AS clientInfo,
+            d.name as delivery,
+            s.payment,
+            s.total
+            FROM sale s, delivery_time d, user u, customer c  
+            WHERE DATE like '2022%'
+            AND s.user_purchase = u.id_user
+            AND s.user_purchase = c.customer_user
+            AND s.sale_delivery = d.id_delivery";
+            return $conecction->getData($query)->fetch_all(MYSQLI_ASSOC);
+        }
         public static function getCustomerAddressToSuggest($email){
             $conecction = new Connection();
             $query = "SELECT u.address

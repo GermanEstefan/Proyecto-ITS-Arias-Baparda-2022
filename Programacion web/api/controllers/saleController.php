@@ -146,6 +146,28 @@ class SaleController {
         $response = array("nameStatus" => $name, "sales" => $sales);
         echo $this->response->successfully("Ventas en estado $status:", $response);  
     }
+    public function getAllSalesForDay($day){
+        $sale = SaleModel::getAllSalesByDay($day);
+        if(!$sale){
+            echo $this->response->error203("No se encuentran ventas para el dia $day");
+            die();
+        }
+        $sales = array();
+        foreach($sale as $salesInDay){
+            $balances =+ $salesInDay["total"];
+            $isBusiness = $salesInDay["companyName"];
+            if(!$isBusiness){
+            array_push( $sales, array( "ID" => $salesInDay['ID'],"date" => $salesInDay['date'],"address" => $salesInDay['address'],"clientID" => $salesInDay['clientID'],"clientInfo" => $salesInDay['clientInfo'],"delivery" => $salesInDay['delivery'],"payment" => $salesInDay['payment'],"total" => $salesInDay['total']));
+        }else{
+            array_push( $sales, array( "ID" => $salesInDay['ID'],"date" => $salesInDay['date'],"address" => $salesInDay['address'],"clientID" => $salesInDay['clientID'],"companyName" => $salesInDay['companyName'],"companyRut" => $salesInDay['companyRut'],"clientInfo" => $salesInDay['clientInfo'],"delivery" => $salesInDay['delivery'],"payment" => $salesInDay['payment'],"total" => $salesInDay['total']));
+        }
+        
+    }
+        $totalSales = (count($sales));    
+        $response = array("TotalSale" =>$totalSales,"balance"=>$balances, "sales" => $sales);
+        echo $this->response->successfully("$totalSales Ventas obtenidas para la fecha:$day", $response);  
+    
+    }
     public function getAddresToCustomer($email){
         
         $mailExist = UserModel::getUserByEmail($email);

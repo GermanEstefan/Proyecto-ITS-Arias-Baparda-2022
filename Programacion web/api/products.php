@@ -124,6 +124,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
                     die();
             }
     }
+    if(isset($_GET['BOonlyProducts'])){
+        $product->getOnlyProducts();
+        die();
+    }
 
 
 echo $response->error203("Accion no valida"); 
