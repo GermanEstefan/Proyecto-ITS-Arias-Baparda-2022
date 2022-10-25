@@ -53,5 +53,5 @@ FROM sale s, delivery_time d, user u, customer c
 WHERE DATE like '2022%'
 AND s.user_purchase = u.id_user
 AND s.user_purchase = c.customer_user
-AND s.sale_delivery = d.id_delivery'
+AND s.sale_delivery = d.id_delivery
 7.	Listar por cliente el total de compras y la suma gastada. 

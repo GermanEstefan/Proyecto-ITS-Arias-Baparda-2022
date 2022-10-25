@@ -106,6 +106,27 @@
             AND s.sale_delivery = d.id_delivery";
             return $conecction->getData($query)->fetch_all(MYSQLI_ASSOC);
         }
+        /*public static function getAllSalesByRange($fromDay,$untilDay){
+            $conecction = new Connection();
+            $query = "SELECT
+            s.id_sale as ID,
+            s.date,
+            s.address,
+            s.user_purchase as clientID,
+            c.company_name AS companyName,
+            c.rut_nr AS companyRut,
+            concat_ws(' ', u.name , u.surname) AS clientInfo,
+            d.name as delivery,
+            s.payment,
+            s.total
+            FROM sale s, delivery_time d, user u, customer c  
+            WHERE DATE like '$fromDay%'>=  
+            AND s.user_purchase = u.id_user
+            AND s.user_purchase = c.customer_user
+            AND s.sale_delivery = d.id_delivery";
+            return $conecction->getData($query)->fetch_all(MYSQLI_ASSOC);
+        }
+        */
         public static function getCustomerAddressToSuggest($email){
             $conecction = new Connection();
             $query = "SELECT u.address
@@ -148,6 +169,24 @@
             ORDER BY rh.idReg desc";
             return $conecction->getData($query)->fetch_ALL(MYSQLI_ASSOC);
         }
+        public static function getSalesByIdDelivery($idDelivery){
+            $conecction = new Connection();
+            $query = "SELECT 
+            d.name AS delivery,
+            s.id_sale AS saleID,
+            date_format(s.date, '%d/%m/%Y %T') AS saleDate,
+            date_format(r.date, '%d/%m/%Y %T') AS lastUpdate,
+            concat_ws(' ', u.name , u.surname) AS client,
+            s.address,
+            u.phone
+            FROM sale s, status st, delivery_time d,user u, report r
+            WHERE sale_delivery = $idDelivery
+            AND st.name = 'confirmado'
+            AND s.sale_delivery = d.id_delivery
+            AND s.id_sale = r.sale_report
+            AND s.user_purchase = u.id_user ";
+            return $conecction->getData($query)->fetch_all(MYSQLI_ASSOC);
+        }
 
         //update
         public static function updateReportOfSale($idSale,$status,$employeeDoc,$comment){
@@ -182,7 +221,7 @@
 
 
 
-
+//ESTO NO ESTA CHEQUEADO NI CONTEMPLADO
         public static function getAllSales(){
             $conecction = new Connection();
             $query = "SELECT * from sale";
@@ -194,21 +233,12 @@
             $query = "SELECT * from sale WHERE date LIKE '$date%'";
             return $conecction->getData($query)->fetch_all(MYSQLI_ASSOC);
         }
-        public static function getSalesByDate($date){
-            $conecction = new Connection();
-            $query = "SELECT * from sale where date = '$date'";
-            return $conecction->getData($query)->fetch_all(MYSQLI_ASSOC);
-        }
         public static function getSalesByClient($client){
             $conecction = new Connection();
             $query = "SELECT * from sale WHERE mail = $client";
             return $conecction->getData($query)->fetch_all(MYSQLI_ASSOC);
         }
-        public static function getSalesByDelivery($delivery){
-            $conecction = new Connection();
-            $query = "SELECT * from sale where sale_delivery = $delivery";
-            return $conecction->getData($query)->fetch_all(MYSQLI_ASSOC);
-        }
+        
         public static function GetTotalSalesIncome(){
             $conecction = new Connection();
             $query = "SELECT SUM(total) from sale";

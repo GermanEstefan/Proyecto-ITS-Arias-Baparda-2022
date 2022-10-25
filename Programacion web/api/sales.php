@@ -16,48 +16,68 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $sale->saveSale($saleData);
 
 }else if($_SERVER['REQUEST_METHOD'] === 'GET'){
-
+    //OBTENER VENTA POR ID
     if(isset($_GET['idSale'])){
         $idSale = $_GET['idSale'];
         $sale->getSaleId($idSale);
         die();
     }
+    //OBTENER EL DETALLE DE LAS VENTAS
     if(isset($_GET['saleDetail'])){
         $idSale = $_GET['saleDetail'];
         $sale->getDetailForSale($idSale);
         die();
     }
+    //OBTENER VENTAAS QUE SE ENCUENTREN EN DETERMINADO ESTADO 
     if(isset($_GET['status'])){
         $status = $_GET['status'];
         $sale->getSaleByStatus($status);
         die();
     }
+    //OBTENER LA DIRECCION DEL CLIENTE PARA SUGERIRLA (NACHO)
     if(isset($_GET['suggestAddress'])){
         $email = $_GET['suggestAddress'];
         $sale->getAddresToCustomer($email);
         die();
     }
+    //OBTENER EL HISTORIAL DE REPORTES PARA UNA VENTA
     if(isset($_GET['reportHistory'])){
         $idSale = $_GET['reportHistory'];
         $sale->getReportHistory($idSale);
         die();
     }
+    //OBTENER VENTAS PARA UNA FECHA "DATE%" 
     if(isset($_GET['salesForDay'])){
         $day = $_GET['salesForDay'];
         $sale->getAllSalesForDay($day);
         die();
     }
+    /*
+    if(isset($_GET['from'])& isset($_GET['until'])){
+        $fromDay = $_GET['from'];
+        $untilDay = $_GET['until'];
+        $sale->getSalesForRange($fromDay,$untilDay);
+        die();
+    }
+    */
+    //OBTENER TODAS LAS VENTAS PARA UN CLIENTE (NACHO)
     if(isset($_GET['salesClient'])){
         $email = $_GET['salesClient'];
         $sale->getSalesForUser($email);
         die();
     }
+    //OBTENER EL HISTORIAL DE REPORTES PARA UNA VENTA (NACHO)
     if(isset($_GET['History'])){
         $idSale = $_GET['History'];
         $sale->getReportHistoryByClient($idSale);
         die();
     }
-    
+    //OBTENER TODAS LAS VENTAS QUE TENGASN DETERMINADO RANGO HORARIO 
+    if(isset($_GET['deliveryTime'])){
+        $idDelivery = $_GET['deliveryTime'];
+        $sale->getSalesByDelivery($idDelivery);
+        die();
+    }
     
 }else if($_SERVER['REQUEST_METHOD'] === 'PATCH'){
     //Editar categoria

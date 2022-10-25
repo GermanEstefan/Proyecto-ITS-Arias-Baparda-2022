@@ -218,6 +218,31 @@ class SaleController {
         echo $this->response->successfully("$totalSales Ventas obtenidas para la fecha:$day", $response);  
     
     }
+    /*
+    public function getSalesForRange($fromDay,$untilDay){
+        $sale = SaleModel::getAllSalesByRange($fromDay,$untilDay);
+        if(!$sale){
+            echo $this->response->error203("No se encuentran ventas para el dia $day");
+            die();
+        }
+        $balances = 0;
+        $sales = array();
+        foreach($sale as $salesInDay){
+            $balances += $salesInDay["total"];
+            $isBusiness = $salesInDay["companyName"];
+            if(!$isBusiness){
+            array_push( $sales, array( "ID" => $salesInDay['ID'],"date" => $salesInDay['date'],"address" => $salesInDay['address'],"clientID" => $salesInDay['clientID'],"clientInfo" => $salesInDay['clientInfo'],"delivery" => $salesInDay['delivery'],"payment" => $salesInDay['payment'],"total" => $salesInDay['total']));
+        }else{
+            array_push( $sales, array( "ID" => $salesInDay['ID'],"date" => $salesInDay['date'],"address" => $salesInDay['address'],"clientID" => $salesInDay['clientID'],"companyName" => $salesInDay['companyName'],"companyRut" => $salesInDay['companyRut'],"clientInfo" => $salesInDay['clientInfo'],"delivery" => $salesInDay['delivery'],"payment" => $salesInDay['payment'],"total" => $salesInDay['total']));
+        }
+        
+    }
+        $totalSales = (count($sales));    
+        $response = array("TotalSale" =>$totalSales,"balance"=>$balances, "sales" => $sales);
+        echo $this->response->successfully("$totalSales Ventas obtenidas para la fecha:$day", $response);  
+    
+    }
+    */
     public function getAddresToCustomer($email){
         
         $mailExist = UserModel::getUserByEmail($email);
@@ -233,6 +258,28 @@ class SaleController {
         }
         
         echo $this->response->successfully("Direccion sugerida: $suggestAddress");  
+    }
+    public function getSalesByDelivery($idDelivery){
+        
+        $deliveryExist = DeliveryModel::getDeliveryById($idDelivery);
+        if (!$deliveryExist) {
+            echo $this->response->error203("El Horario indicado no es correcto");
+            die();
+        }
+        $sale = SaleModel::getSalesByIdDelivery($idDelivery);
+        if(!$sale){
+            echo $this->response->error203("No se encuentran ventas para el horario indicado");
+            die();
+        }
+        //Data en comun
+        $delivery = $sale[0]['delivery'];
+        $sales = array();
+        foreach($sale as $individualSale){
+        array_push( $sales, array( "saleID" => $individualSale['saleID'],"saleDate" => $individualSale['saleDate'],"lastUpdate" => $individualSale['lastUpdate'],"client" => $individualSale['client'],"address" => $individualSale['address'],"phone" => $individualSale['phone'],));
+        }
+        $totalSales = (count($sales));
+        $response = array("delivery" => $delivery,"sales" => $sales);
+        echo $this->response->successfully("$totalSales Ventas para entregar en el horario $delivery", $response);  
     }
     
     //ACTUALIZAR
