@@ -72,6 +72,20 @@
             AND e.employee_user = u.id_user";
             return $conecction->getData($query)->fetch_all(MYSQLI_ASSOC);
         }
+        public static function getSalesForUserID($idClient){
+            $conecction = new Connection();
+            $query = "SELECT 
+            s.id_sale as ID,
+            date_format(s.date, '%d/%m/%Y %H:%mHs') as date, 
+            s.total,
+            st.name as status   
+            from sale s, status st, report r 
+            where s.user_purchase = 5012
+            AND st.id_status = r.status_report
+            AND r.sale_report = s.id_sale
+            order by id desc";
+            return $conecction->getData($query)->fetch_all(MYSQLI_ASSOC);
+        }
         public static function getAllSalesByDay($day){
             $conecction = new Connection();
             $query = "SELECT
@@ -116,6 +130,22 @@
             AND rh.employee_report = e.ci
             AND e.employee_user = u.id_user
             ORDER BY Date desc";
+            return $conecction->getData($query)->fetch_ALL(MYSQLI_ASSOC);
+        }
+        public static function getReportHistoryForClient($idSale){
+            $conecction = new Connection();
+            $query = "SELECT
+            rh.sale_report as ID,
+            s.name AS status,
+            u.name AS personalName,
+            date_format(rh.date, '%d/%m/%Y %T') AS date,
+            rh.comment AS comment
+            FROM reportHistory rh, status s,employee e, user u
+            WHERE sale_report = $idSale
+            AND rh.status_report = s.id_status
+            AND rh.employee_report = e.ci
+            AND e.employee_user = u.id_user
+            ORDER BY rh.idReg desc";
             return $conecction->getData($query)->fetch_ALL(MYSQLI_ASSOC);
         }
 
@@ -274,7 +304,7 @@
             //ALTA EN REPORTES
             if($payment == 0){
             //el pago es en efectivo, queda pendiente de confirmacion
-            $firstReportForSalePending = "INSERT INTO report (sale_report, status_report, employee_report, comment) VALUES ($idSale, 2, 1, 'Respuesta automatica')";
+            $firstReportForSalePending = "INSERT INTO report (sale_report, status_report, employee_report, comment) VALUES ($idSale, 2, 1, 'Respuesta Automatica: Pedido pendiente de pago')";
             $generateReportForSale = $instanceMySql->query($firstReportForSalePending);
             if(!$generateReportForSale) $result_transaccion = false;
             if($result_transaccion){
@@ -287,7 +317,7 @@
             }
             if($payment == 1){
                 //el pago ya fue confirmado por algun medio electronico, queda Confirmado
-                $firstReportForSaleConfirmed = "INSERT INTO report (sale_report, status_report, employee_report, comment) VALUES ($idSale, 3, 1, 'Respuesta automatica')";
+                $firstReportForSaleConfirmed = "INSERT INTO report (sale_report, status_report, employee_report, comment) VALUES ($idSale, 3, 1, 'Respuesta Automatica: Venta Confirmada')";
                 $generateReportForSale = $instanceMySql->query($firstReportForSaleConfirmed);
                 if(!$generateReportForSale) $result_transaccion = false;
                 if($result_transaccion){

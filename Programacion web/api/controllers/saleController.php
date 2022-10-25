@@ -125,10 +125,25 @@ class SaleController {
         $saleID = $sale[0]['saleID'];
         $history = array();
         foreach($sale as $register){
-        array_push( $history, array( "regNr" => $register['regNr'],"typereg" => $register['typeReg'],"status" => $register['status'],"employeeDoc" => $register['employeeDoc'],"employeeName" => $register['employeeName'],"date" => $register['date'],"comment" => $register['comment'],));
+        array_push( $history, array( "regNr" => $register['regNr'],"typereg" => $register['typeReg'],"status" => $register['status'],"employeeDoc" => $register['employeeDoc'],"employeeName" => $register['employeeName'],"date" => $register['date'],"comment" => $register['comment']));
         }
         $response = array("saleID" => $saleID,"history" => $history);
         echo $this->response->successfully("Historial para la Venta:$idSale", $response);  
+    }
+    public function getReportHistoryByClient($idSale){
+        $sale = SaleModel::getReportHistoryForClient($idSale);
+        if(!$sale){
+            echo $this->response->error203("No se encuentra reporte para la venta:$idSale");
+            die();
+        }
+        //Data en comun
+        $ID = $sale[0]['ID'];
+        $history = array();
+        foreach($sale as $register){
+        array_push( $history, array( "status" => $register['status'],"personalName" => $register['personalName'],"date" => $register['date'],"comment" => $register['comment']));
+        }
+        $response = array("ID" => $ID,"history" => $history);
+        echo $this->response->successfully("Historial de la Venta:$idSale", $response);  
     }
     public function getSaleByStatus($status){
         $sale = SaleModel::getSalesByStatus($status);
@@ -145,6 +160,32 @@ class SaleController {
         }
         $response = array("nameStatus" => $name, "sales" => $sales);
         echo $this->response->successfully("Ventas en estado $status:", $response);  
+    }
+    public function getSalesForUser($email){
+        $mailExist = UserModel::validEmailForSale($email);
+        if (!$mailExist) {
+            echo $this->response->error203("El mail no existe");
+            die();
+        }
+        $analyzeMail = $mailExist["state"];
+        if($analyzeMail == 0){
+            echo $this->response->error203("El usuario se encuentra inactivo");
+            die();
+        }
+        $identifyClient = SaleModel::getInfoCustomerByEmail($email);
+        $idClient = ($identifyClient["id_user"]);
+
+        $sale = SaleModel::getSalesForUserID($idClient);
+        if(!$sale){
+            echo $this->response->error203("Aun no compro nada");
+            die();
+        }
+        $sales = array();
+        foreach($sale as $salesHistory){
+        array_push( $sales, array( "ID" => $salesHistory['ID'],"date" => $salesHistory['date'],"status" => $salesHistory['status'],"total" => $salesHistory['total']));
+        }
+        $response = array("sales" => $sales);
+        echo $this->response->successfully("Historial de ventas", $response);  
     }
     public function getAllSalesForDay($day){
         $sale = SaleModel::getAllSalesByDay($day);

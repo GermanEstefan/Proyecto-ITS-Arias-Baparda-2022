@@ -47,6 +47,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $sale->getAllSalesForDay($day);
         die();
     }
+    if(isset($_GET['salesClient'])){
+        $email = $_GET['salesClient'];
+        $sale->getSalesForUser($email);
+        die();
+    }
+    if(isset($_GET['History'])){
+        $idSale = $_GET['History'];
+        $sale->getReportHistoryByClient($idSale);
+        die();
+    }
     
     
 }else if($_SERVER['REQUEST_METHOD'] === 'PATCH'){
