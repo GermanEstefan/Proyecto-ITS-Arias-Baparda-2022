@@ -35,7 +35,7 @@ const Supplier = () => {
                 return setTimeout(() => setError(initStateLoading), 3000)
             }
             const lastIdOfSupplier = parseInt(suppliers[suppliers.length - 1 ].id_supplier) + 1
-            setSuppliers([...suppliers, {rut: values.rut, company_name: values.companyName, address: values.address, phone: values.phone, id_supplier: lastIdOfSupplier }])
+            setSuppliers([...suppliers, {rut: values.rut, company_name: values.companyName, address: values.address, phone: values.phone, id_supplier: lastIdOfSupplier, state : '1' }])
             setError({ showMessage: true, message: resp.result.msg, error: false });
             resetForm();
             return setTimeout(() => setError(initStateLoading), 3000)
@@ -65,6 +65,8 @@ const Supplier = () => {
     }
 
     const handleEnableSupply = async (idSupplier) => {
+        const confirm = window.confirm('¿Estas seguro que desas activar el proveedor?')
+        if(!confirm) return;
         const resp = await fetchApi(`suppliers.php?idSupplier=${idSupplier}&action=active`, 'PATCH');
         console.log(resp)
         if(resp.status === 'error'){
@@ -86,7 +88,7 @@ const Supplier = () => {
             })
             .catch(err => console.error(err))
             .finally(() => setLoadingFlags({ ...loadingFlags, fetchingSuppliers: false }))
-    }, [])
+    }, [suppliers])
 
 
     return (

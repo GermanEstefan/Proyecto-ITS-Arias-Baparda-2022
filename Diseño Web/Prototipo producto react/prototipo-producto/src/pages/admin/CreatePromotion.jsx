@@ -14,7 +14,7 @@ const CreatePromotion = () => {
     const [products, setProducts] = useState([]);
 
     useEffect(() => {
-        fetchApi('products.php', 'GET')
+        fetchApi('products.php?BOProducts', 'GET')
             .then(res => {
                 console.log(res)
                 setProducts(res.result.data)
@@ -60,7 +60,7 @@ const CreatePromotion = () => {
         const bodyOfRequest = { ...promoGeneralValues, contains: containsPromo }
         setLoading(true);
         try {
-            const resp = await fetchApi('products.php?promo', 'POST', bodyOfRequest);
+            const resp = await fetchApi('products.php?type=promo', 'POST', bodyOfRequest);
             console.log(resp)
             if (resp.status === 'error') {
                 setError({ showMessage: true, message: resp.result.error_msg, error: true });
@@ -158,7 +158,7 @@ const CreatePromotion = () => {
                                                 <option value="" selected disabled>Seleccione</option>
                                                 {
                                                     products.map(product => (
-                                                        <option key={product.barcode} value={product.barcode}> {`${product.name} - ${product.diseño} - ${product.talle}`} </option>
+                                                        <option key={product.barcode} value={product.barcode}> {`${product.name} - ${product.design} - ${product.size}`} </option>
                                                     ))
                                                 }
                                             </select>

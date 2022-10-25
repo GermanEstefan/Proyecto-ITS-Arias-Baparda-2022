@@ -1482,6 +1482,10 @@
 .list-products table {
   margin: auto;
 }
+.list-products .table-container {
+  text-align: center;
+  margin-bottom: 50px;
+}
 
 .edit-model form {
   width: 50vw;

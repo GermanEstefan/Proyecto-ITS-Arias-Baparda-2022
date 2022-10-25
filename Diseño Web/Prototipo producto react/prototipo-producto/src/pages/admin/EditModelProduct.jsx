@@ -25,7 +25,7 @@ const EditModelProduct = () => {
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
-        const productPromise = fetchApi(`products.php?barcodeAll=${barcode}`, 'GET');
+        const productPromise = fetchApi(`products.php?BObarcode=${barcode}`, 'GET');
         const sizesPromise = fetchApi('sizes.php', 'GET');
         const designsPromise = fetchApi('designs.php', 'GET');
         Promise.all([productPromise, sizesPromise, designsPromise])
