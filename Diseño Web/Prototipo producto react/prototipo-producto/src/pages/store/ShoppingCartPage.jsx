@@ -21,8 +21,8 @@ const ShoppingCartPage = () => {
   const [values, setValues] = useState({
     email: userData.email,
     address: userData.address,
-    deliveryType: 0,
-    paymentMenthod: 0,
+    deliveryTime: null,
+    paymentMenthod: null,
   });
   const [isAddressDisable, setIsAddressDisable] = useState(false);
   const [errorStatusForm, setErrorStatusForm] = useState({});
@@ -48,10 +48,10 @@ const ShoppingCartPage = () => {
       address: value,
     });
   };
-  const setDeliveryType = (value) => {
+  const setDeliveryTime = (value) => {
     setValues({
       ...values,
-      deliveryType: value,
+      deliveryTime: value,
     });
   };
   const setPaymentMethod = (value) => {
@@ -70,6 +70,7 @@ const ShoppingCartPage = () => {
     const products = await responses;
 
     const productsData = products.map((product) => product.result.data);
+
     // Agregamos la cantidad de productos que tiene cada producto en el carrito a el objeto data
     cart.map(
       ({ quantity }, index) => (productsData[index]["quantity"] = quantity)
@@ -81,10 +82,15 @@ const ShoppingCartPage = () => {
 
   const getStoreHour = async () => {
     const resp = await fetchApi("Deliverys.php?local", "GET");
-
+    console.log(
+      resp.result.data.map((hourFromBack) => ({
+        value: hourFromBack.id_delivery,
+        label: hourFromBack.name,
+      }))
+    );
     setStoreHours(
-      resp.result.data.map((hourFromBack, index) => ({
-        value: index,
+      resp.result.data.map((hourFromBack) => ({
+        value: hourFromBack.id_delivery,
         label: hourFromBack.name,
       }))
     );
@@ -109,18 +115,30 @@ const ShoppingCartPage = () => {
     buyForm.current.scrollIntoView();
   };
 
-  const deliveryTypes = [
-    { value: 0, label: "08:00 - 12:00" },
-    { value: 1, label: "12:00 - 16:00" },
-    { value: 2, label: "16:00 - 20:00" },
+  const deliveryTimes = [
+    { value: 1, label: "08:00 - 12:00" },
+    { value: 2, label: "12:00 - 16:00" },
+    { value: 3, label: "16:00 - 20:00" },
   ];
   const paymentMethods = [
     { value: 0, label: "Efectivo" },
     { value: 1, label: "Online" },
   ];
 
-  const handleSubmit = (e) => {
+  const handleConfirmPurchase = (e) => {
     e.preventDefault();
+    const purchaseData = {
+      address: values.address,
+      client: userData.email,
+      delivery: values.deliveryTime,
+      payment: values.paymentMenthod,
+      products: cart.map((product) => ({
+        barcode: product.barcode,
+        quantity: product.quantity,
+      })),
+    };
+
+    fetchApi("sales.php", "POST", purchaseData);
   };
 
   const handleRadioChange = (value) => {
@@ -135,7 +153,7 @@ const ShoppingCartPage = () => {
       setIsShipping(true);
     }
     if (value === "Retiro en local") {
-      setAddress("");
+      setAddress("Retiro en local");
       setIsAddressDisable(true);
       setIsShipping(false);
     }
@@ -150,7 +168,7 @@ const ShoppingCartPage = () => {
           {productsList.map((product, index) => (
             <CartItem
               key={index}
-              img={Guantes}
+              img={product.picture.split("&")[0]}
               barcode={product.barcode}
               name={product.name}
               price={product.price}
@@ -166,7 +184,7 @@ const ShoppingCartPage = () => {
         </div>
         <div ref={buyForm} className="form-container">
           <img className="form-img" src={Imagen} alt="Imagen" />
-          <form onSubmit={handleSubmit}>
+          <form>
             <h1>Confirma tu compra</h1>
             <div className="radioSection">
               <strong>Dirección de envío</strong>
@@ -218,12 +236,13 @@ const ShoppingCartPage = () => {
               {isShipping ? "Horarios de envío" : "Horarios del local"}
             </span>
             <Select
-              name="deliveryType"
-              id="deliveryType"
+              name="deliveryTime"
+              id="deliveryTime"
               className="select"
-              onChange={(e) => setDeliveryType(e.value)}
-              options={isShipping ? deliveryTypes : storeHours}
+              onChange={(e) => setDeliveryTime(e.value)}
+              options={isShipping ? deliveryTimes : storeHours}
               placeholder={"Horario"}
+              // defaultValue={isShipping ? deliveryTimes[0] : storeHours[0]}
             />
             <span className="mt-5">{"Metodo de pago"}</span>
             <Select
@@ -234,7 +253,12 @@ const ShoppingCartPage = () => {
               options={paymentMethods}
               placeholder={"Metodo de pago"}
             />
-            <button className="submit-button" type="submit">
+            <button
+              className="submit-button"
+              onClick={(e) => handleConfirmPurchase(e)}
+              type="submit"
+              disabled={values.address === "" || values.deliveryTime === null || values.paymentMenthod === null}
+            >
               Confirmar
             </button>
           </form>
