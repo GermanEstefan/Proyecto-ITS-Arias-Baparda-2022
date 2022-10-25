@@ -359,6 +359,19 @@
             AND p1.state = 0";
             return $conecction->getData($query)->fetch_all(MYSQLI_ASSOC);
         }
+        public static function getOnlyProducts(){
+            $conecction = new Connection();
+            $query = "SELECT distinct
+            p.id_product,
+            p.name,
+            p.price,
+            c.name AS categoryName,
+            p.description 
+            from product p, category c
+            WHERE p.product_category = c.id_category
+            AND p.product_category != 1";
+            return $conecction->getData($query)->fetch_all(MYSQLI_ASSOC);
+        }
 
 //////////////////////////////OTROS GETS///////////////////////////////////////////////////////
         //Se deberia llamar obtener barcode pasandole la condicion UNIQUE (id Prod , id design , idsize)

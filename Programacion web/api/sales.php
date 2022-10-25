@@ -42,6 +42,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $sale->getReportHistory($idSale);
         die();
     }
+    if(isset($_GET['salesForDay'])){
+        $day = $_GET['salesForDay'];
+        $sale->getAllSalesForDay($day);
+        die();
+    }
     
     
 }else if($_SERVER['REQUEST_METHOD'] === 'PATCH'){
