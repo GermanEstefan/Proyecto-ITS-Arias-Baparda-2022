@@ -80,7 +80,7 @@
             s.total,
             st.name as status   
             from sale s, status st, report r 
-            where s.user_purchase = 5012
+            where s.user_purchase = '$idClient'
             AND st.id_status = r.status_report
             AND r.sale_report = s.id_sale
             order by id desc";
@@ -100,7 +100,7 @@
             s.payment,
             s.total
             FROM sale s, delivery_time d, user u, customer c  
-            WHERE DATE like '2022%'
+            WHERE DATE like '$day%'
             AND s.user_purchase = u.id_user
             AND s.user_purchase = c.customer_user
             AND s.sale_delivery = d.id_delivery";
@@ -201,7 +201,7 @@
         }
         public static function getSalesByClient($client){
             $conecction = new Connection();
-            $query = "SELECT * from sale WHERE mail = $";
+            $query = "SELECT * from sale WHERE mail = $client";
             return $conecction->getData($query)->fetch_all(MYSQLI_ASSOC);
         }
         public static function getSalesByDelivery($delivery){

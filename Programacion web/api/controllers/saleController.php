@@ -48,6 +48,12 @@ class SaleController {
         $delivery = $saleData['delivery'];
         $payment = $saleData['payment'];
         $productsForSale = $saleData ['products'];
+        
+        $deliveryExist = DeliveryModel::getDeliveryById($delivery);
+        if (!$deliveryExist) {
+            echo $this->response->error203("El Horario indicado no es correcto");
+            die();
+        }
         $mailExist = UserModel::validEmailForSale($client);
         if (!$mailExist) {
             echo $this->response->error203("El mail no existe");
@@ -138,11 +144,12 @@ class SaleController {
         }
         //Data en comun
         $ID = $sale[0]['ID'];
+        $actualStatus = $sale[0]['status'];
         $history = array();
         foreach($sale as $register){
         array_push( $history, array( "status" => $register['status'],"personalName" => $register['personalName'],"date" => $register['date'],"comment" => $register['comment']));
         }
-        $response = array("ID" => $ID,"history" => $history);
+        $response = array("ID" => $ID,"actualStatus" => $actualStatus,"history" => $history);
         echo $this->response->successfully("Historial de la Venta:$idSale", $response);  
     }
     public function getSaleByStatus($status){
@@ -158,7 +165,8 @@ class SaleController {
         foreach($sale as $salesInState){
         array_push( $sales, array( "idSale" => $salesInState['idSale'],"docEmployee" => $salesInState['docEmployee'],"employeeName" => $salesInState['employeeName'],"lastUpdate" => $salesInState['lastUpdate'],"lastComment" => $salesInState['lastComment']));
         }
-        $response = array("nameStatus" => $name, "sales" => $sales);
+        $totalSales = (count($sales));
+        $response = array("nameStatus" => $name,"totalSales" => $totalSales, "sales" => $sales);
         echo $this->response->successfully("Ventas en estado $status:", $response);  
     }
     public function getSalesForUser($email){

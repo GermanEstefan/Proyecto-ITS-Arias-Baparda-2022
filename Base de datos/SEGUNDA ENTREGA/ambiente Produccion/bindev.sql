@@ -350,6 +350,29 @@ ENGINE = InnoDB;
 ALTER TABLE reportHistory
 AUTO_INCREMENT=10;
 
+-- -----------------------------------------------------
+-- Table `bindev`.`puntuation`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `bindev`.`puntuation` (
+  `idClient` INT NOT NULL,
+  `barcode` INT NOT NULL,
+  `date` INT NOT NULL,
+  `stars` INT NOT NULL,
+  `comment` VARCHAR(500) NOT NULL,
+  PRIMARY KEY (`idClient`,`barcode`),
+CONSTRAINT `FK_client_user`
+    FOREIGN KEY (`idClient`)
+    REFERENCES `bindev`.`user` (`id_user`)
+    ON DELETE RESTRICT
+    ON UPDATE RESTRICT,
+CONSTRAINT `FK_barcode_product`
+    FOREIGN KEY (`barcode`)
+    REFERENCES `bindev`.`product` (`barcode`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
+ENGINE = InnoDB;
+
+
 DROP TRIGGER IF EXISTS `bindev`.`supply_detail_AMOUNT_TOTAL_AUTO`;
 DELIMITER $$
 USE `bindev`$$
