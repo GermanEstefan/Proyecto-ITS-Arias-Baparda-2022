@@ -1,5 +1,5 @@
 <?php
-include_once('./controllers/SupplyController.php');
+include('./controllers/SupplyController.php');
 header('Content-Type: application/json'); 
 header('Access-Control-Allow-Origin: *'); 
 header("Access-Control-Allow-Headers: *");
@@ -10,41 +10,30 @@ $supply = new SupplyController();
 $bodyOfRequest = file_get_contents('php://input'); //Obtiene el body de la request sin procesar(JSON).
 $supplyData = json_decode($bodyOfRequest, 1); //Transforma el JSON en un array asosciativo.
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST'){
-    //crear registro de compra
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
     $supply->saveSupply($supplyData);
-} else if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-    if(isset($_GET['all'])){
-        $supply->getAllSupply();
+
+}else if($_SERVER['REQUEST_METHOD'] === 'GET'){
+    //OBTENER COMPRA POR ID
+    if(isset($_GET['idSupply'])){
+        $idSupply = $_GET['idSupply'];
+        $supply->getSupplyId($idSupply);
         die();
     }
-    if(isset($_GET['allWithDetail'])){
-        $supply->getAllSupplyWithDetail();
+    //OBTENER EL DETALLE DE LAS VENTAS
+    if(isset($_GET['supplyDetail'])){
+        $idSupply = $_GET['supplyDetail'];
+        $supply->getDetailForSupply($idSupply);
         die();
     }
-    if(isset($_GET['byDetailId'])){
-        $id = $_GET['byDetailId'];
-        $supply->getDetailById($id);
+    //OBTENER VENTAS PARA UNA FECHA "DATE%" 
+    if(isset($_GET['supplysForDay'])){
+        $day = $_GET['supplysForDay'];
+        $supply->getAllSupplysForDay($day);
         die();
-    }
-    if(isset($_GET['id'])){
-        $id = $_GET['id'];
-        $supply->getSupplyById($id);
-        die();
-    }
-    if(isset($_GET['employeeId'])){
-        $id = $_GET['employeeId'];
-        $supply->getSupplyMadeByEmployee($id);
-        die();
-    }
-    if(isset($_GET['productId'])){
-        $id = $_GET['productId'];
-        $supply->getSupplyByProductId($id);
-        die();
-    }
-    if(isset($_GET['supplierId'])){
-        $id = $_GET['supplierId'];
-        $supply->getSupplyBySupplierId($id);
-        die();
-    }
+    }   
+}else {
+    echo $response->error200("Metodo no permitido");
 }
+?>

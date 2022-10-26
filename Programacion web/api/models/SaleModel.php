@@ -90,7 +90,7 @@
             $conecction = new Connection();
             $query = "SELECT
             s.id_sale as ID,
-            s.date,
+            date_format(s.date, '%d/%m/%Y %T') as date,
             s.address,
             s.user_purchase as clientID,
             c.company_name AS companyName,

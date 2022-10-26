@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS `bindev`.`category` (
   `id_category` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(100) NOT NULL,
   `description` VARCHAR(500) NOT NULL,
-  `picture` varchar(500) NULL,
+  `picture` LONGBLOB NULL,
   PRIMARY KEY (`id_category`),
   constraint `category_UNIQUE` UNIQUE  (`name`))
 ENGINE = InnoDB;
@@ -190,7 +190,7 @@ CREATE TABLE IF NOT EXISTS `bindev`.`product` (
   `stock` INT NOT NULL,
   `price` DECIMAL(10,2) NOT NULL,
   `description` VARCHAR(500) NOT NULL,
-  `picture` VARCHAR(1000) NULL,
+  `picture` LONGBLOB NULL,
   `state` TINYINT default 1,
   PRIMARY KEY (`barcode`),
   constraint `CH_state_product` CHECK (`state`<=1 and `state`>=0),
@@ -396,14 +396,6 @@ update supply set total = (total + new.amount_total) where id_supply = new.suppl
 END$$
 DELIMITER ;
 
-DROP TRIGGER IF EXISTS `bindev`.`supply_detail_Actualiza_stock`;
-DELIMITER $$
-USE `bindev`$$
-CREATE DEFINER = CURRENT_USER TRIGGER `bindev`.`supply_detail_Actualiza_stock` AFTER INSERT ON `supply_detail` FOR EACH ROW
-BEGIN
-update product set stock = stock + new.quantity where barcode = new.barcode_id; 
-END$$
-DELIMITER ;
 
 DROP TRIGGER IF EXISTS `bindev`.`Auto_insertado`;
 DELIMITER $$
@@ -478,7 +470,7 @@ INSERT INTO `bindev`.`EMPLOYEE` (`ci`, `employee_user`, `employee_role`) VALUES 
 -- -----------------------------------------------------
 -- ATRIBUTOS BASICOS DEL SISTEMA
 -- -----------------------------------------------------
-INSERT INTO `bindev`.`category` (`name`, `description`, `picture`) VALUES ('PROMOCIONES', 'CATEGORIA DESIGNADA PARA PROMOS','https://picsum.photos/200/300');
+INSERT INTO `bindev`.`category` (`name`, `description`) VALUES ('PROMOCIONES', 'CATEGORIA DESIGNADA PARA PROMOS');
 INSERT INTO `bindev`.`design` (`name`, `description`) VALUES ('PROMOCIONES', 'DISEÑO DESIGNADO PARA PROMOS');
 INSERT INTO `bindev`.`size` (`name`, `description`) VALUES ('PROMOCIONES', 'TALLE DESIGNADO PARA LA PROMO');
 INSERT INTO `bindev`.`status` (`name`, `description`) VALUES ('RESPUESTA AUTOMATICA DEL SISTEMA', 'Respuesta automatica del sistema');
@@ -496,12 +488,12 @@ INSERT INTO `bindev`.`delivery_time` (`name`, `description`) VALUES ('Domingos d
 -- -----------------------------------------------------
 -- DATOS BASICOS PARA PRUEBAS
 -- -----------------------------------------------------
-INSERT INTO `bindev`.`category` (`name`, `description`, `picture`) VALUES ('Remeras', 'CATEGORIA DESIGNADA PARA REMERAS','https://i.ibb.co/Stt9FQZ/camiseta-de-manga-corta-1.png');
-INSERT INTO `bindev`.`category` (`name`, `description`, `picture`) VALUES ('Chalecos', 'CATEGORIA DESIGNADA PARA CHALECOS','https://i.ibb.co/JRX30YY/casco-5.png');
-INSERT INTO `bindev`.`category` (`name`, `description`, `picture`) VALUES ('Pantalones', 'CATEGORIA DESIGNADA PARA PANTALONES','https://i.ibb.co/TWgZS11/pantalones-2.png');
-INSERT INTO `bindev`.`category` (`name`, `description`, `picture`) VALUES ('Guantes', 'CATEGORIA DESIGNADA PARA GUANTES','https://i.ibb.co/jJv3MV5/guantes.png');
-INSERT INTO `bindev`.`category` (`name`, `description`, `picture`) VALUES ('Cascos', 'CATEGORIA DESIGNADA PARA CASCOS','https://i.ibb.co/6NTsTn5/sombrero.png');
-INSERT INTO `bindev`.`category` (`name`, `description`, `picture`) VALUES ('Zapatos', 'CATEGORIA DESIGNADA PARA ZAPATOS','https://i.ibb.co/44Yv3F8/cadena-de-bloques.png');
+INSERT INTO `bindev`.`category` (`name`, `description`) VALUES ('Remeras', 'CATEGORIA DESIGNADA PARA REMERAS');
+INSERT INTO `bindev`.`category` (`name`, `description`) VALUES ('Chalecos', 'CATEGORIA DESIGNADA PARA CHALECOS');
+INSERT INTO `bindev`.`category` (`name`, `description`) VALUES ('Pantalones', 'CATEGORIA DESIGNADA PARA PANTALONES');
+INSERT INTO `bindev`.`category` (`name`, `description`) VALUES ('Guantes', 'CATEGORIA DESIGNADA PARA GUANTES');
+INSERT INTO `bindev`.`category` (`name`, `description`) VALUES ('Cascos', 'CATEGORIA DESIGNADA PARA CASCOS');
+INSERT INTO `bindev`.`category` (`name`, `description`) VALUES ('Zapatos', 'CATEGORIA DESIGNADA PARA ZAPATOS');
 INSERT INTO `bindev`.`design` (`name`, `description`) VALUES ('BLANCO', 'COLOR BLANCO');
 INSERT INTO `bindev`.`design` (`name`, `description`) VALUES ('NEGRO', 'COLOR NEGRO');
 INSERT INTO `bindev`.`design` (`name`, `description`) VALUES ('ROJO', 'COLOR ROJO');
@@ -524,11 +516,11 @@ INSERT INTO `bindev`.`size` (`name`, `description`) VALUES ('TALLE 41', 'DESCRIP
 INSERT INTO `bindev`.`size` (`name`, `description`) VALUES ('TALLE 42', 'DESCRIPCION DEL TALLE');
 INSERT INTO `bindev`.`size` (`name`, `description`) VALUES ('TALLE 43', 'DESCRIPCION DEL TALLE');
 INSERT INTO `bindev`.`size` (`name`, `description`) VALUES ('TALLE 44', 'DESCRIPCION DEL TALLE');
-INSERT INTO `bindev`.`PRODUCT` (`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`, `picture`) VALUES ('11', 'REMERA Clasica', '2', '2', '2', '30', '500', 'Descripcion del producto','https://i.ibb.co/mRpFg8R/8negro.jpg & https://i.ibb.co/9bKNc4d/remera2.jpg & https://i.ibb.co/9bKNc4d/remera2.jpg');
-INSERT INTO `bindev`.`PRODUCT` (`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`, `picture`) VALUES ('11', 'REMERA Clasica', '2', '3', '2', '8', '500', 'Descripcion del producto','https://i.ibb.co/mRpFg8R/8negro.jpg & https://i.ibb.co/9bKNc4d/remera2.jpg & https://i.ibb.co/9bKNc4d/remera2.jpg');
-INSERT INTO `bindev`.`PRODUCT` (`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`, `picture`) VALUES ('11', 'REMERA Clasica', '2', '3', '3', '11', '500', 'Descripcion del producto','https://i.ibb.co/mRpFg8R/8negro.jpg & https://i.ibb.co/9bKNc4d/remera2.jpg & https://i.ibb.co/9bKNc4d/remera2.jpg');
-INSERT INTO `bindev`.`PRODUCT` (`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`, `picture`) VALUES ('11', 'REMERA Clasica', '2', '3', '4', '0', '500', 'Descripcion del producto','https://i.ibb.co/mRpFg8R/8negro.jpg & https://i.ibb.co/9bKNc4d/remera2.jpg & https://i.ibb.co/9bKNc4d/remera2.jpg');
-INSERT INTO `bindev`.`PRODUCT` (`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`, `picture`) VALUES ('11', 'REMERA Clasica', '2', '2', '4', '21', '500', 'Descripcion del producto','https://i.ibb.co/mRpFg8R/8negro.jpg & https://i.ibb.co/9bKNc4d/remera2.jpg & https://i.ibb.co/9bKNc4d/remera2.jpg');
+INSERT INTO `bindev`.`PRODUCT` (`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`) VALUES ('11', 'REMERA Clasica', '2', '2', '2', '30', '500', 'Descripcion del producto');
+INSERT INTO `bindev`.`PRODUCT` (`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`) VALUES ('11', 'REMERA Clasica', '2', '3', '2', '8', '500', 'Descripcion del producto');
+INSERT INTO `bindev`.`PRODUCT` (`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`) VALUES ('11', 'REMERA Clasica', '2', '3', '3', '11', '500', 'Descripcion del producto');
+INSERT INTO `bindev`.`PRODUCT` (`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`) VALUES ('11', 'REMERA Clasica', '2', '3', '4', '0', '500', 'Descripcion del producto');
+INSERT INTO `bindev`.`PRODUCT` (`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`) VALUES ('11', 'REMERA Clasica', '2', '2', '4', '21', '500', 'Descripcion del producto');
 INSERT INTO `bindev`.`product` (`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`) VALUES ('12', 'REMERA CALIDAD', '2', '4', '4', '3', '800', 'Descripcion del producto');
 INSERT INTO `bindev`.`product` (`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`) VALUES ('12', 'REMERA CALIDAD', '2', '4', '5', '3', '800', 'Descripcion del producto');
 INSERT INTO `bindev`.`product` (`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`) VALUES ('12', 'REMERA CALIDAD', '2', '4', '6', '3', '800', 'Descripcion del producto');
@@ -582,7 +574,13 @@ INSERT INTO `bindev`.`user` (`email`, `name`, `surname`, `address`, `phone`, `pa
 INSERT INTO `bindev`.`user` (`email`, `name`, `surname`, `address`, `phone`, `password`) VALUES ('LeoCarambula@gmail.com', 'Leonardo', 'Carambula', 'Laboratorio 2', '998877','ProgramacionWeb');
 INSERT INTO `bindev`.`user` (`email`, `name`, `surname`, `address`, `phone`, `password`) VALUES ('chrisBarrios1@gmail.com', 'Christian', 'Barrios', 'Laboratorio 3', '998877','SistemasOperativos');
 INSERT INTO `bindev`.`user` (`email`, `name`, `surname`, `address`, `phone`, `password`) VALUES ('LuisSuarez@gmail.com', 'Luis', 'Suarez', 'Nacional', '9','LuisSuarez');
-INSERT INTO `bindev`.`user` (`email`, `name`, `surname`, `address`, `phone`, `password`) VALUES ('TonyPacheco@gmail.com', 'Tony', 'Pacheco', 'Penadoy', '7','TonyPacheco');
+INSERT INTO `bindev`.`user` (`email`, `name`, `surname`, `address`, `phone`, `password`) VALUES ('TonyPacheco@gmail.com', 'Tony', 'Pacheco', 'Penarol', '7','TonyPacheco');
+
+INSERT INTO `bindev`.`supplier` (`rut`, `company_name`, `address`, `phone`) VALUES ('211003420017', 'Montevideo Uniformes', 'Dr. Salvador Ferrer Serra 2172', '24015020 - 29000000');
+INSERT INTO `bindev`.`supplier` (`rut`, `company_name`, `address`, `phone`) VALUES ('211003420016', 'fupi SRL', 'Av. Uruguay 1124', '29011024');
+INSERT INTO `bindev`.`supplier` (`rut`, `company_name`, `address`, `phone`) VALUES ('211003420015', 'Vicas SRL', ' Río Negro 1566', '29023624');
+INSERT INTO `bindev`.`supplier` (`rut`, `company_name`, `address`, `phone`) VALUES ('211003420014', 'Garimport', 'Vilardebó 2133', '22095620 - Cajas 098748234');
+INSERT INTO `bindev`.`supplier` (`rut`, `company_name`, `address`, `phone`) VALUES ('211003420013', 'Mundo Trabajo', 'Justicia 2233', '22010377 hablar con Carlos');
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;

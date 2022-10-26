@@ -47,6 +47,11 @@
             $query = "SELECT * from supplier where state = 0";
             return $conecction->getData($query)->fetch_all(MYSQLI_ASSOC);
         }
+        public static function checkStatusSupplier($idSupplier){
+            $conecction = new Connection();
+            $query = "SELECT * from supplier where id_supplier = $idSupplier AND state = 1";
+            return $conecction->getData($query)->fetch_assoc();
+        }
 
         public static function updateSupplier($idSupplier,$rut,$name,$address, $phone){
             $conecction = new Connection();

@@ -12,7 +12,6 @@ $saleData = json_decode($bodyOfRequest, 1); //Transforma el JSON en un array aso
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-    //Crear estado
     $sale->saveSale($saleData);
 
 }else if($_SERVER['REQUEST_METHOD'] === 'GET'){

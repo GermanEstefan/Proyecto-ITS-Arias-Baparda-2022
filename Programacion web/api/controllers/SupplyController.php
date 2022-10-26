@@ -1,231 +1,124 @@
 <?php
 
 include_once('./helpers/Response.php');
-include_once('./helpers/Token.php');
+include_once("./helpers/Token.php");
 include_once("./models/SupplyModel.php");
-include_once("./models/SupplyDetailModel.php");
 include_once("./models/SupplierModel.php");
-include_once("./models/ProductModel.php");
+include_once("./models/DeliveryModel.php");
+include_once("./models/UserModel.php");
 include_once("./models/EmployeeModel.php");
+include_once("./models/StatusModel.php");
+class SupplyController {
 
-class SupplyController
-{
     private $response;
     private $jwt;
-
+    
     function __construct()
     {
         $this->response = new Response();
         $this->jwt = new Token();
     }
 
-    //Validar los campos generales
-    private function validateBodyOfSupply($supplyData)
-    {
-        if (
-            !isset($supplyData['supplier_id'])
-            || !isset($supplyData['employee_id'])
-            || !isset($supplyData['comment'])
-        ) return false;
+    
+    private function validateBodyOfSupply($supplyData){
+        if(!isset($supplyData['idSupplier'])
+        ||  !isset($supplyData['employee_ci'])
+        ||  !isset($supplyData['comment'])
+        ||  !isset($supplyData['products']))
+        return false;
         return $supplyData;
     }
-
-    private function validateBodyOfDetail($supplyData)
-    {
-        if (!isset($supplyData['products'])) return false;
-        return $supplyData;
-    }
-
-    private function validateExistingSupplier($supplyData)
-    {
-        $id = $supplyData['supplier_id'];
-        $supplier = SupplierModel::activeSupplier($id);
-        if (!$supplier) {
-            return false;
-        }
-        return true;
-    }
-
-    private function validateEmployee($supplyData)
-    {
-        $id = $supplyData['employee_id'];
-        $employee = EmployeeModel::getEmployeeById($id);
-        if (!$employee) {
-            return false;
-        }
-        return true;
-    }
-
-    private function validateProduct($barcode)
-    {
-        $product = ProductModel::getStateOfProduct($barcode);
-        if (!$product) {
-            return false;
-        }
-        return true;
-    }
-
-    //Ingresar registro de compra a proveedor (supply)
-    public function saveSupply($supplyData)
-    {
-        $this->jwt->verifyTokenAndGetIdUserFromRequest();
-        $bodySupplyValid = $this->validateBodyOfSupply($supplyData);
-        $supplierIsValid = $this->validateExistingSupplier($supplyData);
-        $employeeValid = $this->validateEmployee($supplyData);
-        $bodyDetailValid = $this->validateBodyOfDetail($supplyData);
-
-        //validamos los datos del supply
-        if ((!$bodySupplyValid) || (!$supplierIsValid) || (!$employeeValid)) {
-            echo $this->response->error203("Error al querer ingresar el supply");
+    //ALTA
+    public function saveSupply($supplyData){
+        $this->jwt->verifyTokenAndGetIdUserFromRequest(); 
+        $bodyIsValid = $this->validateBodyOfSupply($supplyData);
+        if(!$bodyIsValid){
+            echo $this->response->error400('La informacion recibida es incorrecta');
             die();
         }
-        $supplierId = $supplyData['supplier_id'];
-        $employeeId = $supplyData['employee_id'];
+
+        $idSupplier = $supplyData['idSupplier'];
+        $employee_ci = $supplyData['employee_ci'];
         $comment = $supplyData['comment'];
-
-        if (!$bodyDetailValid) {
-            echo $this->response->error203("Error al querer ingresar el detalle");
+        $productsForSupply = $supplyData ['products'];
+        
+        $supplierExist = SupplierModel::getSupplierById($idSupplier);
+        if (!$supplierExist) {
+            echo $this->response->error203("El Proveedor indicado no es correcto");
             die();
         }
-        $detailItems = $supplyData['products'];
-
-        //validamos los datos que iran en el detalle
-        foreach ($detailItems as $product) {
-            $productValid = $this->validateProduct($product['barcode']);
-            if (!$productValid) {
-                echo $this->response->error203("Algun producto ingresado no es valido");
-                die();
-            }
-        }
-
-        //validar que no se repita el mismo codigo de barras
-        $barcodes = array();
-        foreach ($detailItems as $product) {
-            array_push($barcodes, $product['barcode']);
-        }
-        if (count(array_unique($barcodes)) < count($barcodes)) {
-            echo $this->response->error203("El producto esta repetido");
+        $supplierIsActive = SupplierModel::checkStatusSupplier($idSupplier);
+        if (!$supplierIsActive) {
+            echo $this->response->error203("El proveedor se encuentra INACTIVO");
             die();
         }
-        //Ingresamos los datos generales del supply
-        $supply = new SupplyModel($supplierId, $employeeId, $comment);
-        $result = $supply->save();
-        if (!$result) {
-            echo $this->response->error203("error al insertar");
-            die();
-        }
-        echo $this->response->successfully("supply ingresado");
 
-        //Obtenemos el ultimo ID ingresado
-        $lastID = SupplyModel::getLastID()[0];
-
-        //Inicializamos el array de los productos que iran en el detalle
-        $queries = array();
-        $index = 0;
-
-        //Ingresamos los datos del detalle
-        foreach ($detailItems as $product) {
-            $productValid = $this->validateProduct($product['barcode']);
-            if (!$productValid) {
-                echo $this->response->error203("Error, el producto no es valido");
-                $delete = SupplyModel::deleteLastInsertSupply($lastID);
-                if (!$delete) {
-                    echo $this->response->error203("Error al borrar el ultimo registro incompleto");
-                }
-                echo $this->response->error203("hubo un error en los datos del detalle, se borrara el ultimo registro incompleto");
-                die();
-            }
-            $barcode = $product['barcode'];
-            $quantity = $product['quantity'];
-            $costo = $product['costo'];
-
-            $query = array($index => "INSERT INTO supply_detail (supply_id, barcode_id, quantity, cost_unit) VALUES ('$lastID', '$barcode', '$quantity', '$costo')");
-            array_push($queries, $query);
-            $index++;
-        }
-
-        $result = SupplyModel::saveByTransacction($queries);
-        if (!$result) {
+        $supplyCreate = new SupplyModel($idSupplier,$employee_ci,$comment);
+        $result= $supplyCreate->saveSupply($productsForSupply);
+        if(!$result){
             echo $this->response->error500();
             die();
         }
-        echo $this->response->successfully("Detalle del supply ingresado");
+        echo $this->response->successfully("Su aprovisionamiento fue realizado con exito");
     }
 
     //CONSULTAS
-    //todos los registros de compras
-    public function getAllSupply()
-    {
-        $supply = SupplyModel::getAllSupply();
-        echo $this->response->successfully("Registros del sistema: ", $supply);
-        die();
-    }
-
-    //todos los registros con detalle
-    public function getAllSupplyWithDetail()
-    {
-        $supply = SupplyModel::getAllSupplyWithDetail();
-        echo $this->response->successfully("Registros del sistema: ", $supply);
-        die();
-    }
-
-    //detalle por id de supply
-    public function getDetailById($id)
-    {
-        $supply = SupplyModel::getDetailById($id);
-        if (!$supply) {
-            echo $this->response->error400("No hay registro disponible");
+    public function getSupplyId($idSupply){
+        $supply = SupplyModel::getSupplyById($idSupply);
+        if(!$supply){
+            echo $this->response->error203("No se encuentra compra para el id $idSupply");
             die();
         }
-        echo $this->response->successfully("Registros del sistema: ", $supply);
-        die();
+        //Data en comun
+        $idSupply = $supply["idSupply"];
+        $date = $supply["date"];
+        $total = $supply["total"];
+        //Datos del proveedor
+        $infoSupplier = array();
+        array_push( $infoSupplier, array( "idSupplier" => $supply["idSupplier"],"name" => $supply['name'],"rut" => $supply['rut']));
+        
+        $infoResponsible = array();
+        array_push( $infoResponsible, array( "employeeDoc" => $supply['employeeDoc'],"employeeName" => $supply['employeeName'],"comment" => $supply['comment']));
+        
+        $response = array("idSupply" => $idSupply,"date" => $date, "total" => $total, "infoSupplier" => $infoSupplier, "infoResponsible" => $infoResponsible);
+        echo $this->response->successfully("Compra encontrada:", $response);  
     }
-
-    //registros con detalle por ID
-    public function getSupplyById($id)
-    {
-        $supply = SupplyModel::getSupplyById($id);
-        if (!$supply) {
-            echo $this->response->error400("No hay registro disponible");
+    public function getDetailForSupply($idSupply){
+        $supply = SupplyModel::getSupplyDetailById($idSupply);
+        if(!$supply){
+            echo $this->response->error203("No se encuentra compra con id $idSupply");
             die();
         }
-        echo $this->response->successfully("Registro: ", $supply);
-        die();
+        //Data en comun
+        $idSupply = $supply[0]['idSupply'];
+        $totalSupply = $supply[0]['totalSupply'];
+        $details = array();
+        foreach($supply as $detail){
+        array_push( $details, array( "barcode" => $detail['barcode'],"nameProduct" => $detail['nameProduct'],"quantity" => $detail['quantity'],"costUnit" => $detail['costUnit'],"costTotal" => $detail['costTotal']));
+        }
+        $response = array("idSupply" => $idSupply,"totalSupply" =>$totalSupply, "details" => $details);
+        echo $this->response->successfully("Detalle de compras para :$idSupply", $response);  
     }
-
-    //registros por empleado
-    public function getSupplyMadeByEmployee($id)
-    {
-        $supply = SupplyModel::getSupplyMadeByEmployee($id);
-        if (!$supply) {
-            echo $this->response->error400("No hay registro disponible");
+    public function getAllSupplysForDay($day){
+        $supply = SupplyModel::getAllSupplysByDay($day);
+        if(!$supply){
+            echo $this->response->error203("No se encuentran compras para la fecha $day");
             die();
         }
-        echo $this->response->successfully("Registro: ", $supply);
-        die();
+        $totalSpent = 0;
+        $supplys = array();
+        foreach($supply as $supplysInDay){
+            $negativeBalance = ($supplysInDay["totalSupply"])*-1; 
+            $totalSpent += $negativeBalance;           
+            array_push( $supplys, array( "idSupply" => $supplysInDay['idSupply'],"date" => $supplysInDay['date'],"idEmployee" => $supplysInDay['idEmployee'],"ciEmployee" => $supplysInDay['ciEmployee'],"employeeName" => $supplysInDay['employeeName'],"totalSupply" => $supplysInDay['totalSupply']));
+
+        }
+        $totalSupplys = (count($supplys));    
+        $response = array("TotalSupply" =>$totalSupplys,"totalSpent"=>$totalSpent, "supplys" => $supplys);
+        echo $this->response->successfully("$totalSupplys Compras obtenidas para la fecha:$day", $response);  
+     
     }
 
-    //Registro por producto
-    public function getSupplyByProductId($id)
-    {
-        $supply = SupplyModel::getSupplyByProductId($id);
-        if (!$supply) {
-            echo $this->response->error400("No hay registro disponible");
-            die();
-        }
-        echo $this->response->successfully("Registro: ", $supply);
-        die();
-    }
-
-    //Registro por proveedor
-    public function getSupplyBySupplierId($id)
-    {
-        $supply = SupplyModel::getSupplyBySupplierId($id);
-        if (!$supply) {
-            echo $this->response->error400("No hay registro disponible");
-            die();
-        }
-        echo $this->response->successfully("Registro: ", $supply);
-        die();
-    }
 }
+
+?>

@@ -1,5 +1,7 @@
 <?php
 require_once("./database/Connection.php");
+require_once("./database/Connection.php");
+require_once("./models/ProductModel.php");
 class SupplyModel extends Connection
 {
 
@@ -15,139 +17,115 @@ class SupplyModel extends Connection
         parent::__construct();
     }
 
-    //verficia que el producto exista y este activo
-    public static function getProductActive($id)
+    
+    //CONSULTAS
+    public static function getSupplyById($idSupply)
     {
         $conecction = new Connection();
-        $query = "SELECT barcode, state FROM product WHERE barcode = $id AND state = '1'";
+        $query = "SELECT 
+        s.id_supply AS idSupply,
+        date_format(s.date, '%d/%m/%Y %T') AS date,
+        s.supplier_id AS idSupplier,
+        sp.company_name AS name,
+        sp.rut AS rut,
+        s.employee_ci AS employeeDoc,
+        concat_ws(' ', u.name , u.surname) AS employeeName,
+        s.comment,
+        s.total
+        FROM supply s, supplier sp, employee e, user u
+        WHERE s.id_supply = $idSupply
+        AND sp.id_supplier = s.supplier_id
+        AND s.employee_ci = e.ci
+        AND e.employee_user = u.id_user";
         return $conecction->getData($query)->fetch_assoc();
     }
-
-    //verifica que halla stock del producto por id
-    public static function getStock($id)
-    {
+    public static function getSupplyDetailById($idSupply){
         $conecction = new Connection();
-        $query = "SELECT barcode, stock FROM product WHERE barcode = $id AND stock > '0'";
-        return $conecction->getData($query)->fetch_assoc();
-    }
-
-    //sacar ultimo ID Ingresado
-    public static function getLastID()
-    {
-        $conecction = new Connection();
-        $query = "SELECT id_supply FROM supply ORDER BY id_supply DESC LIMIT 1";
-        return $conecction->getData($query)->fetch_array();
-    }
-
-    //sacar todos los supply
-    public static function getAllSupply()
-    {
-        $conecction = new Connection();
-        $query = "SELECT * FROM supply";
+        $query = "SELECT 
+        sd.supply_id AS idSupply,
+        sd.barcode_id AS barcode,
+        p.name AS nameProduct,
+        sd.quantity AS quantity,
+        sd.cost_unit AS costUnit,
+        sd.amount_total AS costTotal,
+        s.total AS totalSupply
+        FROM supply_detail sd, product p, supply s 
+        WHERE supply_id = $idSupply
+        AND p.barcode = sd.barcode_id
+        AND s.id_supply = sd.supply_id";
         return $conecction->getData($query)->fetch_all(MYSQLI_ASSOC);
     }
-
-    //sacar todos los supply con sus respectivos detalles
-    public static function getAllSupplyWithDetail()
-    {
+    public static function getAllSupplysByDay($day){
         $conecction = new Connection();
-        $query = "SELECT * FROM supply s
-                  INNER JOIN supply_detail sd on s.id_supply = sd.supply_id";
+        $query = "SELECT 
+        s.id_supply AS idSupply,
+        date_format(s.date, '%d/%m/%Y %T') as date,
+        e.employee_user AS idEmployee,
+        s.employee_ci AS ciEmployee,
+        concat_ws(' ', u.name , u.surname) AS employeeName, 
+        s.total AS totalSupply
+        FROM supply s, employee e, user u
+        WHERE s.date LIKE '$day%'
+        AND e.ci = s.employee_ci
+        AND e.employee_user = u.id_user";
         return $conecction->getData($query)->fetch_all(MYSQLI_ASSOC);
     }
-
-    //sacar detalle por id de supply
-    public static function getDetailById($id)
-    {
-        $conecction = new Connection();
-        $query = "SELECT * FROM supply_detail WHERE supply_id = $id";
-        return $conecction->getData($query)->fetch_all(MYSQLI_ASSOC);
-    }
-
-    //Sacar supply por fecha mayor a.. 
-    public static function getSupplyFromDate($date)
-    {
-        $conecction = new Connection();
-        $query = "SELECT * FROM supply WHERE date >= '$date'";
-        return $conecction->getData($query)->fetch_all();
-    }
-
-    //sacar supply por empleado
-    public static function getSupplyMadeByEmployee($employee_id)
-    {
-        $conecction = new Connection();
-        $query = "SELECT * FROM supply WHERE employee_ci = $employee_id";
-        return $conecction->getData($query)->fetch_all(MYSQLI_ASSOC);
-    }
-
-    //sacar supply por id
-    public static function getSupplyById($id)
-    {
-        $conecction = new Connection();
-        $query = "SELECT * FROM supply WHERE id_supply = $id";
-        return $conecction->getData($query)->fetch_assoc();
-    }
-
-    //sacar registro por id de producto
-    public static function getSupplyByProductId($id)
-    {
-        $conecction = new Connection();
-        $query = "SELECT * FROM supply s
-                  INNER JOIN supply_detail sd on sd.supply_id = s.id_supply 
-                  AND sd.barcode_id = $id";
-        return $conecction->getData($query)->fetch_all(MYSQLI_ASSOC);
-    }
-
-    //sacar registro por id de proveedor
-    public static function getSupplyBySupplierId($id)
-    {
-        $conecction = new Connection();
-        $query = "SELECT * FROM supply s
-                  INNER JOIN supply_detail sd on sd.supply_id = s.id_supply 
-                  AND s.supplier_id = $id";
-        return $conecction->getData($query)->fetch_all(MYSQLI_ASSOC);
-    }
-
-    //ingresar un registro de supply
-    public function save()
-    {
-        $conecction = new Connection();
-        $query = "INSERT INTO supply (date, supplier_id, employee_ci, comment) VALUES (CURDATE(), $this->supplier_id, $this->employee_ci, '$this->comment');";
-        $result = $conecction->setData($query);
-        if (!$result) {
-            return false;
-        }
-        return true;
-    }
-
-    //ingresar el detalle
-    public static function saveByTransacction($queries)
-    {
+    //crear compra
+    public function saveSupply($productsForSupply){
+        $response = new Response();
         $conecction = new Connection();
         $instanceMySql = $conecction->getInstance();
         $instanceMySql->begin_transaction(MYSQLI_TRANS_START_READ_WRITE);
         $result_transaccion = true;
-        foreach ($queries as $key => $query) {
-            $resultInsert = $instanceMySql->query($query[$key]);
-            if (!$resultInsert) $result_transaccion = false;
+        $supplyInsert = "INSERT INTO supply (supplier_id, employee_ci, comment) VALUES ('$this->supplier_id', '$this->employee_ci','$this->comment')";
+        $resultCreateSupply = $instanceMySql->query($supplyInsert);
+        if(!$resultCreateSupply)  $result_transaccion = false;
+        $idSupply = $instanceMySql->insert_id;
+        //INICIO SALE_DETAIL Array de productos
+        $queries = array();
+        $index = 0;
+        //FOREACH DE VALIDACIONES
+        foreach ($productsForSupply as $product) {
+            $barcode = $product['barcode'];
+            $quantity = $product['quantity'];
+            $cost_unit = $product['cost_unit'];
+
+            $productExist = ProductModel::getProductByBarcodeBO($barcode);
+            if (!$productExist) {
+                echo ($response->error203("No existe el producto $barcode"));
+                $instanceMySql->rollback();
+                die();   
+            }
+            if($quantity<1){
+                echo ($response->error203("Error en las unidades indicadas para el producto $barcode"));
+                $instanceMySql->rollback();
+                die();
+            }            
+            $increaseStock = ProductModel::updateMoreStockProductsOfPromo($barcode,$quantity);
+            if(!$increaseStock){
+                echo ($response->error203("Hubo un problema al agregar las unidades de $barcode"));
+                $instanceMySql->rollback();
+                die();   
+            }
+            $query = array($index => "INSERT INTO supply_detail (supply_id, barcode_id, quantity, cost_unit) VALUES ($idSupply,$barcode, $quantity, $cost_unit)");
+            array_push($queries, $query);
+            $index++;
         }
-        if ($result_transaccion) {
+   
+        foreach($queries as $key=>$query){
+            $resultInsertQuerys = $instanceMySql->query($query[$key]);
+            if (!$resultInsertQuerys){
+                echo ($response->error203("Hubo un error para el detalle de compra. Contacte al soporte tecnico"));
+                $instanceMySql->rollback();
+                die();
+            }
+        }
+        if($result_transaccion){
             $instanceMySql->commit();
             return true;
-        } else {
+        }else{
             $instanceMySql->rollback();
             return false;
         }
-    }
-
-    //borrar ultimo ingreso en caso de error en el detalle
-    public static function deleteLastInsertSupply($id){
-        $conecction = new Connection();
-        $query = "DELETE FROM supply WHERE id_supply = $id";
-        $result = $conecction->setData($query);
-        if (!$result) {
-            return false;
-        }
-        return true;
     }
 }
