@@ -13,6 +13,7 @@
     "boostrap": "^2.0.0",
     "react": "^18.2.0",
     "react-animated-css": "^1.2.1",
+    "react-collapse": "^5.1.1",
     "react-dom": "^18.2.0",
     "react-responsive": "^9.0.0-beta.10",
     "react-responsive-carousel": "^3.2.23",

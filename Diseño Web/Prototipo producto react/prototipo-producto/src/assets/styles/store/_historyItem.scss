@@ -1,0 +1,42 @@
+.historyItem {
+  display: flex;
+  justify-content: space-between;
+  width: 600px;
+  padding: 5px 15px;
+  border: 3px rgb(211, 211, 211) solid;
+  align-items: center;
+  span {
+    margin-right: 10px;
+  }
+  @media (max-width: 800px) {
+    width: 100%;
+  }
+}
+
+.historyItem:hover {
+  background-color: rgba(220, 220, 220, 0.203);
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.historyCollapse {
+  width: 600px;
+  padding: 5px 15px;
+  background-color: rgba(235, 235, 235, 0.582);
+  @media (max-width: 800px) {
+    width: 100%;
+  }
+  .collapseSale {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px auto;
+    span {
+      margin-right: 10px;
+    }
+  }
+}
+
+.ReactCollapse--collapse {
+  transition: height 100ms;
+}
