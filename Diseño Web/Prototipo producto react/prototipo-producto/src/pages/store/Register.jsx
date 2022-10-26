@@ -10,6 +10,7 @@ import Input from "../../components/store/Input";
 import { fetchApi } from "../../API/api";
 import ContainerBase from "../../components/store/ContainerBase";
 import { Animated } from "react-animated-css";
+import NoPhoto from "../../assets/img/no-photo.png";
 
 const Register = () => {
   const { setUserData } = useContext(userStatusContext);
@@ -86,7 +87,7 @@ const Register = () => {
   return (
     <ContainerBase>
       <div className="form-container">
-        <img className={"form-img"} src={Imagen} alt="Imagen" />
+        <img className={"form-img"} src={Imagen ? Imagen: NoPhoto} alt="Imagen" />
         <form onSubmit={handleSubmit} autoComplete="off">
           <h1>Registrate para comenzar tu experiencia</h1>
           {/* Solucionar bug de campo 'name' dando error en errorStatusForm. */}

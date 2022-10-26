@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import Guantes from "../../assets/img/guantes.jpg";
+import NoPhoto from "../../assets/img/no-photo.png";
 import ContainerBase from "../../components/store/ContainerBase";
 import PageTitle from "../../components/store/PageTitle";
 import Pagination from "../../components/store/Pagination";
@@ -12,19 +12,17 @@ const CategoryPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(3);
   const [productList, setProductList] = useState([]);
-  const [pictureLinks, setPictureLinks] = useState([])
+  const [pictureLinks, setPictureLinks] = useState([]);
   useEffect(() => {
     window.scroll(0, 0);
     getProductsByCategory();
   }, []);
 
-  
-
   const getProductsByCategory = async () => {
     const resp = await fetchApi(`products.php?categoryName=${category}`, "GET");
 
     setProductList(resp.result.data);
-    setPictureLinks(resp.result.data)
+    setPictureLinks(resp.result.data);
     console.log(resp.result.data);
   };
 
@@ -159,7 +157,7 @@ const CategoryPage = () => {
                 className="animate__animated animate__bounce"
                 product={product.name}
                 description={product.description}
-                img={product.picture ? product.picture.split('&')[0] : Guantes }
+                img={product.picture ? product.picture.split("&")[0] : NoPhoto}
                 key={index}
                 id={product.id_product}
               />

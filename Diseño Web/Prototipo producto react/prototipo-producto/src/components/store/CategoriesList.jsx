@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { fetchApi } from "../../API/api";
-import Guantes from "../../assets/img/guantes.jpg";
+import NoPhoto from "../../assets/img/no-photo.png";
 import Card from "./Card";
 
 const CategoriesList = () => {
@@ -24,7 +24,7 @@ const CategoriesList = () => {
             title={category.name}
             to={category.name}
             slug={category.name}
-            img={category.picture}
+            img={category.picture ? category.picture : NoPhoto}
           />
         );
       })}

@@ -1,5 +1,9 @@
 .footer {
-  background-color: $orange;
+  background: linear-gradient(
+    190deg,
+    rgba(245, 153, 15, 0.5041725308287377) 0%,
+    rgba(245, 153, 15, 1) 30%
+  );
   padding: 20px 0;
   @media (max-width: 600px) {
     flex-direction: column-reverse;
@@ -29,12 +33,14 @@
       text-align: center;
     }
     li {
+      color: white;
       display: inline-block;
+      font-size: larger;
     }
   }
 
   .img-container {
-    img {
+    a {
       @media (max-width: 600px) {
         margin: auto;
         padding: 1em;

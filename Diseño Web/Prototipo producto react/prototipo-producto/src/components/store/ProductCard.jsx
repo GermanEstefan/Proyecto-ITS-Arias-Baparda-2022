@@ -3,6 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
 import Card from "./Card";
 import { Animated } from "react-animated-css";
+import NoPhoto from "../../assets/img/no-photo.png";
 
 const ProductCard = ({ img, product, description, id }) => {
   const { category } = useParams();
@@ -19,7 +20,7 @@ const ProductCard = ({ img, product, description, id }) => {
         <Card img={img} title={product} to={`${product}/${id}`} />
       ) : (
         <div className="product-card">
-          <img src={img} width="200px" alt="" />
+          <img src={img? img : NoPhoto} width="200px" alt="" />
 
           <div className="product-text-container">
             <h2>{product}</h2>

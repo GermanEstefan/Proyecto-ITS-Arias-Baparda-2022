@@ -9,6 +9,7 @@ import { useForm } from "../../hooks/useForm";
 import Input from "../../components/store/Input";
 import { fetchApi } from "../../API/api";
 import ContainerBase from "../../components/store/ContainerBase";
+import NoPhoto from "../../assets/img/no-photo.png";
 
 const Login = () => {
 
@@ -63,7 +64,7 @@ const Login = () => {
     <ContainerBase>
       <main className="login-page main-client">
         <div className="form-container">
-          <img className={"form-img"} src={Imagen} alt="Imagen"></img>
+          <img className={"form-img"} src={Imagen ? Imagen : NoPhoto} alt="Imagen"></img>
           <form onSubmit={handleSubmit} autoComplete="off">
             <h1>Bienvenido, por favor ingresa tus datos</h1>
             <Input

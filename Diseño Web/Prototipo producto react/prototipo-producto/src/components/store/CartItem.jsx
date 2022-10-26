@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { fetchApi } from "../../API/api";
 import { useContext } from "react";
 import { cartContext } from "../../App";
+import NoPhoto from "../../assets/img/no-photo.png";
 
 const CartItem = ({
   barcode,
@@ -38,7 +39,7 @@ const CartItem = ({
 
   const updateProductQuantity = (e) => {
     e.preventDefault();
-    console.log(e.target.value)
+    console.log(e.target.value);
     const cartWithNewQuantity = cart.map((product) => {
       if (product.barcode === barcode) {
         return {
@@ -51,7 +52,7 @@ const CartItem = ({
       }
     });
     setProductTotalPrice(price * parseInt(e.target.value));
-    console.log(cartWithNewQuantity)
+    console.log(cartWithNewQuantity);
     setCart(cartWithNewQuantity);
     setTotalPrice();
   };
@@ -63,7 +64,12 @@ const CartItem = ({
       isVisible={true}
     >
       <div className="cartItem">
-        <img className="cartItem__img" src={img} width="100px" alt="" />
+        <img
+          className="cartItem__img"
+          src={img ? img : NoPhoto}
+          width="100px"
+          alt=""
+        />
 
         <div className="cartItem__text">
           <div>

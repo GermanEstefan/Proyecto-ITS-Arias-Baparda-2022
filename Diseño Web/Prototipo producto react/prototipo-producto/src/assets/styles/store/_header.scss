@@ -1,4 +1,3 @@
-
 .header-store {
   display: flex;
   justify-content: center;
@@ -11,49 +10,55 @@
   z-index: 1;
   padding: 12px 0 2px 0;
 
-  .header-store__logo{
+  .header-store__logo {
     width: 60vw;
     max-width: 300px;
     position: absolute;
     left: 20px;
   }
 
-  .header-store__hamb{
+  .header-store__hamb {
     font-size: 2rem;
     color: $orange;
     right: 20px;
     position: absolute;
   }
 
-  .header-store__search{
+  .header-store__search {
+    display: flex;
     position: relative;
     display: flex;
     align-items: center;
     width: 40vw;
     max-width: 400px;
-    @media (max-width: 1200px) {
+    @media (max-width: 1100px) {
       display: none;
     }
-    svg{
-      position: absolute;
-      left: 10px;
-      color: $orange;
-      font-size: 1.5rem;
+    div {
+      svg {
+        position: absolute;
+        left: 10px;
+        color: $orange;
+        font-size: 1.5rem;
+      }
+      input {
+        padding-left: 50px;
+        border: 1px solid $orange;
+        background-color: #f2f2f2;
+        width: 200px;
+      }
     }
-    input{
-      width: inherit;
-      padding-left: 50px;
-      border: 1px solid $orange;
-      background-color: #f2f2f2;
+    ul {
+      width: 200px;
     }
   }
 
-  .header-store__nav-desktop{
+  .header-store__nav-desktop {
     position: absolute;
     right: 20px;
   }
 
-  .header-store__nav-desktop > ul{
+  .header-store__nav-desktop > ul {
     display: flex;
     align-items: center;
     a {
@@ -61,34 +66,34 @@
       cursor: pointer;
       margin-right: 40px;
       font-size: 1.4rem;
-      &::after{
-        content: '';
+      &::after {
+        content: "";
         height: 2px;
         width: 0;
         background-color: $orange;
         position: absolute;
         bottom: -10px;
         left: 0;
-        transition: .5s;
+        transition: 0.5s;
       }
-      &:hover::after{
+      &:hover::after {
         width: 100%;
       }
     }
-    svg{
+    svg {
       font-size: 2rem;
       color: $orange;
       cursor: pointer;
       margin-right: 20px;
-      transition: color .5s;
-      &:hover{
+      transition: color 0.5s;
+      &:hover {
         color: $transparent_orange;
       }
     }
   }
 }
 
-.nav-mobile-store{
+.nav-mobile-store {
   background-color: #f2f2f2;
   width: 60vw;
   max-width: 280px;
@@ -97,11 +102,11 @@
   right: 0;
   top: 0;
   z-index: 2;
-  box-shadow: 1px 2px 13px 3px rgba(0,0,0,0.23) inset;
-  -webkit-box-shadow: 1px 2px 13px 3px rgba(0,0,0,0.23) inset;
-  -moz-box-shadow: 1px 2px 13px 3px rgba(0,0,0,0.23) inset;
-  animation: openMenu .5s ease-in;
-  strong{
+  box-shadow: 1px 2px 13px 3px rgba(0, 0, 0, 0.23) inset;
+  -webkit-box-shadow: 1px 2px 13px 3px rgba(0, 0, 0, 0.23) inset;
+  -moz-box-shadow: 1px 2px 13px 3px rgba(0, 0, 0, 0.23) inset;
+  animation: openMenu 0.3s ease-in;
+  strong {
     font-size: 1.2rem;
     position: absolute;
     left: 20px;
@@ -109,48 +114,48 @@
     color: $orange;
     font-weight: normal;
   }
-  ul{
+  ul {
     display: flex;
     flex-direction: column;
     align-items: flex-end;
     justify-content: center;
     height: 100%;
     width: 100%;
-    li{
+    li {
       margin-bottom: 50px;
       margin-right: 20px;
       font-size: 1.6rem;
       font-weight: lighter;
     }
   }
-  img{
+  img {
     position: absolute;
     bottom: 20px;
     right: 0;
     width: 60vw;
-    max-width:200px;
+    max-width: 200px;
   }
 }
 
-.close-menu{
-  animation: closeMenu .5s ease-out;
+.close-menu {
+  animation: closeMenu 0.3s ease-out;
   right: -60vw;
 }
 
-@keyframes openMenu{
-  from{
+@keyframes openMenu {
+  from {
     right: -60vw;
   }
-  to{
+  to {
     right: 0;
   }
 }
 
-@keyframes closeMenu{
-  from{
+@keyframes closeMenu {
+  from {
     right: 0;
   }
-  to{
+  to {
     right: -60vw;
   }
 }

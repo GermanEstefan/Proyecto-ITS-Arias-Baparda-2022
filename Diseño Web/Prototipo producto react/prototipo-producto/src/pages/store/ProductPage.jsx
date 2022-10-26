@@ -6,6 +6,7 @@ import ContainerBase from "../../components/store/ContainerBase";
 import { fetchApi } from "../../API/api";
 import { cartContext, userStatusContext } from "../../App";
 import Select from "react-select";
+import NoPhoto from "../../assets/img/no-photo.png";
 const ProductPage = () => {
   const { userData } = useContext(userStatusContext);
   const { category, id } = useParams();

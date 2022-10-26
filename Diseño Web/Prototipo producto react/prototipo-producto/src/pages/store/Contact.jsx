@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import Imagen from "../../assets/img/Obreros.jpg";
 import Swal from "sweetalert2";
 import ContainerBase from "../../components/store/ContainerBase";
+import NoPhoto from "../../assets/img/no-photo.png";
 
 const Contact = () => {
 
@@ -21,7 +22,7 @@ const Contact = () => {
   return (
     <ContainerBase>
       <main className="form-container main-client">
-        <img className="form-img" src={Imagen} alt="Imagen"></img>
+        <img className="form-img" src={Imagen? Imagen : NoPhoto} alt="Imagen"/>
         <form className="form" onSubmit={handleSubmit} autoComplete="off">
           <h1>Envianos tu mensaje</h1>
           <input

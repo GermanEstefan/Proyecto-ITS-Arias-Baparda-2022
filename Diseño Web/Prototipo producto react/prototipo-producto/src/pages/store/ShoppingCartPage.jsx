@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
-import Guantes from "../../assets/img/guantes.jpg";
+import NoPhoto from "../../assets/img/no-photo.png";
 import PageTitle from "../../components/store/PageTitle";
 import ContainerBase from "../../components/store/ContainerBase";
 import CartItem from "../../components/store/CartItem";
@@ -168,7 +168,7 @@ const ShoppingCartPage = () => {
           {productsList.map((product, index) => (
             <CartItem
               key={index}
-              img={product.picture.split("&")[0]}
+              img={product.picture ? product.picture.split("&")[0] : NoPhoto}
               barcode={product.barcode}
               name={product.name}
               price={product.price}
@@ -183,7 +183,7 @@ const ShoppingCartPage = () => {
           )}
         </div>
         <div ref={buyForm} className="form-container">
-          <img className="form-img" src={Imagen} alt="Imagen" />
+          <img className="form-img" src={Imagen ? Imagen : NoPhoto} alt="Imagen" />
           <form>
             <h1>Confirma tu compra</h1>
             <div className="radioSection">
@@ -257,7 +257,11 @@ const ShoppingCartPage = () => {
               className="submit-button"
               onClick={(e) => handleConfirmPurchase(e)}
               type="submit"
-              disabled={values.address === "" || values.deliveryTime === null || values.paymentMenthod === null}
+              disabled={
+                values.address === "" ||
+                values.deliveryTime === null ||
+                values.paymentMenthod === null
+              }
             >
               Confirmar
             </button>
