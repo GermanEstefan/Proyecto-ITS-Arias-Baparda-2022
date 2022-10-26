@@ -25,6 +25,7 @@ class ProductController
             ||  !isset($productData['prodCategory'])
             ||  !isset($productData['price'])
             ||  !isset($productData['description'])
+            ||  !isset($productData['picture'])
             ||  !isset($productData['models'])
         ) return false;
              
@@ -363,9 +364,7 @@ class ProductController
         echo $this->response->successfully("Promo sugerida:", $suggest);
         die();
     }
-
-
-////////////////////////////////OTROS GETS///////////////////////////////////////////////////////////////
+    
     
     //PRODUCTOS PARA EL TALLE CON NOMBRE:
     public function getProductByNameSize($nameSize)
@@ -474,6 +473,7 @@ class ProductController
         $prodCategory = $productData['prodCategory'];
         $price = $productData['price'];
         $description = $productData['description'];
+        $picture = $productData['picture'];
         if($price<0){
             echo $this->response->error203("El precio $price es incorrecto");
             die();
@@ -496,7 +496,7 @@ class ProductController
             die();
         }
         
-        $result = ProductModel::updateProductLineAttributes($idProduct, $name, $prodCategory, $price, $description);
+        $result = ProductModel::updateProductLineAttributes($idProduct, $name, $prodCategory, $price, $description, $picture);
         if (!$result) {
             echo $this->response->error500();
             die();
@@ -513,6 +513,7 @@ class ProductController
         $name = $promoData['name'];
         $stock = $promoData['stock'];
         $price = $promoData['price'];
+        $picture = $promoData['picture'];
         $description = $promoData['description'];
         if($stock<0){
             echo $this->response->error203("El stock $stock es incorrecto");
@@ -548,7 +549,7 @@ class ProductController
                 }
                 $units = 0;    
             }
-            $result = ProductModel::updatePromo($idProduct, $name, $stock, $price, $description);
+            $result = ProductModel::updatePromo($idProduct, $name, $stock, $price, $description, $picture);
             if (!$result) {
                 echo $this->response->error500();
                 die();
@@ -573,7 +574,7 @@ class ProductController
                 }
                 $units = 0;
             }
-            $result = ProductModel::updatePromo($idProduct, $name, $stock, $price, $description);
+            $result = ProductModel::updatePromo($idProduct, $name, $stock, $price, $description,$picture);
                 if (!$result) {
                     echo $this->response->error500();
                 die();
