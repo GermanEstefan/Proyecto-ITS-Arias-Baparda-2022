@@ -483,9 +483,9 @@
         
         
         //MODIFICACIONES
-        public static function updateAttributesOfProduct($barcode, $name, $stock, $price, $description){
+        public static function updateAttributesOfProduct($barcode, $name, $stock, $price, $description, $picture){
             $conecction = new Connection();
-            $query = "UPDATE product SET name = '$name', stock = $stock, price = $price, description = '$description' WHERE barcode = $barcode ";
+            $query = "UPDATE product SET name = '$name', stock = $stock, price = $price, description = '$description', picture = $picture WHERE barcode = $barcode ";
             return $conecction->setData($query);
         }
         public static function updateStockProductsOfPromo($barcode, $unitsNecesary){
@@ -550,13 +550,13 @@
                 return false;
             }
         }
-        public static function createPromo($idProduct,$name, $stock,$price, $description,$contains){
+        public static function createPromo($idProduct,$name, $stock,$price, $description,$picture,$contains){
             $conecction = new Connection();
             $response = new Response();
             $instanceMySql = $conecction->getInstance();
             $instanceMySql->begin_transaction(MYSQLI_TRANS_START_READ_WRITE);
             $result_transaccion = true;
-            $createPromo = "INSERT INTO product (id_product, name, product_category, product_design, product_size, stock, price, description) VALUES ('$idProduct','$name',1,1,1,'$stock','$price', '$description')";
+            $createPromo = "INSERT INTO product (id_product, name, product_category, product_design, product_size, stock, price, description,picture) VALUES ('$idProduct','$name',1,1,1,'$stock','$price', '$description', $picture)";
             $resultCreatePromo = $instanceMySql->query($createPromo);
             if(!$resultCreatePromo)  $result_transaccion = false;
             $isProduct = $instanceMySql->insert_id;

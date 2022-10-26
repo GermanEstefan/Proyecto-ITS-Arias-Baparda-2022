@@ -57,6 +57,7 @@ class ProductController
             ||  !isset($promoData['stock'])
             ||  !isset($promoData['price'])
             ||  !isset($promoData['description'])
+            ||  !isset($promoData['picture'])
             ||  !isset($promoData['contains'])
         ) return false;
         
@@ -92,6 +93,7 @@ class ProductController
         $prodCategory = $productData['prodCategory'];
         $price = $productData['price'];
         $description = $productData['description'];
+        $picture = $productData['picture'];
         $models = $productData['models'];
         if($price<0){
             echo $this->response->error203("El precio $price es incorrecto");
@@ -144,7 +146,7 @@ class ProductController
                 echo $this->response->error203("Esta intentando ingresar un producto ya existente");
                 die();
             }
-            $query = array($index => "INSERT INTO product (id_product, name, product_category, product_design, product_size, stock, price, description) VALUES ('$idProduct','$name','$prodCategory','$prodDesign','$prodSize','$stock','$price', '$description')");
+            $query = array($index => "INSERT INTO product (id_product, name, product_category, product_design, product_size, stock, price, description, picture) VALUES ('$idProduct','$name','$prodCategory','$prodDesign','$prodSize','$stock','$price', '$description', $picture)");
             array_push($queries, $query);
             $index++;
         }
@@ -174,6 +176,7 @@ class ProductController
         $stock = $promoData['stock'];
         $price = $promoData['price'];
         $description = $promoData['description'];
+        $picture = $promoData['picture'];
         $contains = $promoData['contains'];
         
         if($stock<0){
@@ -190,7 +193,7 @@ class ProductController
             echo $this->response->error203("El producto $idProduct ya existe!");
             die();
         }
-        $createPromo = ProductModel::createPromo($idProduct,$name,$stock,$price,$description,$contains);
+        $createPromo = ProductModel::createPromo($idProduct,$name,$stock,$price,$description,$picture,$contains);
         if(!$createPromo){
             echo $this->response->error203("No se puede crear la promo. revise los valores" );
             die();
@@ -364,7 +367,7 @@ class ProductController
         echo $this->response->successfully("Promo sugerida:", $suggest);
         die();
     }
-    
+
     
     //PRODUCTOS PARA EL TALLE CON NOMBRE:
     public function getProductByNameSize($nameSize)
