@@ -498,9 +498,9 @@
             $query = "UPDATE product SET stock = stock + $addUnits WHERE barcode = $barcode ";
             return $conecction->setData($query);
         }
-        public static function updatePromo($idProduct, $name, $stock, $price, $description){
+        public static function updatePromo($idProduct, $name, $stock, $price, $description, $picture){
             $conecction = new Connection();
-            $query = "UPDATE product SET name = '$name', stock = $stock, price = $price, description = '$description' WHERE id_product = $idProduct ";
+            $query = "UPDATE product SET name = '$name', stock = $stock, price = $price, description = '$description', picture = $picture WHERE id_product = $idProduct ";
             return $conecction->setData($query);
         }
         public static function updateModel($barcode,$prodDesign,$prodSize,$stock){
@@ -508,9 +508,9 @@
             $query = "UPDATE product SET product_design = '$prodDesign', product_size = '$prodSize', stock = '$stock' WHERE barcode = '$barcode' ";
             return $conecction->setData($query);
         }
-        public static function updateProductLineAttributes($idProduct, $name,$prodCategory, $price, $description){
+        public static function updateProductLineAttributes($idProduct, $name,$prodCategory, $price, $description, $picture){
             $conecction = new Connection();
-            $query = "UPDATE product SET name = '$name', product_category = $prodCategory, price = $price, description = '$description' WHERE id_product = $idProduct ";
+            $query = "UPDATE product SET name = '$name', product_category = $prodCategory, price = $price, description = '$description', picture = $picture WHERE id_product = $idProduct ";
             return $conecction->setData($query);
         }            
         public static function disableModel($barcode){
