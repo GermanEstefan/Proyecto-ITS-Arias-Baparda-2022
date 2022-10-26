@@ -35,9 +35,9 @@ AND s.name LIKE 'PENDIENTE'
 AND r.employee_report = e.ci
 AND e.employee_user = u.id_user
 4.	Listar los 50 clientes que más compras han realizado.
-
+select count(id_sale),u.email from sale s, user u where u.id_user = s.user_purchase group by user_purchase order by count(id_sale) desc limit 50
 5.	Listar los 20 productos más vendidos.
-
+select count(sale_id),product_sale, p.name from sale_detail sd, product p  where p.barcode = sd.product_sale group by product_sale order by count(sale_id) desc limit 20
 6.	Listar la cantidad de ventas realizadas por día.
 SELECT
 s.id_sale as ID,
@@ -55,3 +55,4 @@ AND s.user_purchase = u.id_user
 AND s.user_purchase = c.customer_user
 AND s.sale_delivery = d.id_delivery
 7.	Listar por cliente el total de compras y la suma gastada. 
+select sum(TOTAL) AS TOTAL_GASTADO,count(id_sale) as TOTAL_COMPRAS,u.email from sale s, user u where u.id_user = s.user_purchase and s.user_purchase = 5004
