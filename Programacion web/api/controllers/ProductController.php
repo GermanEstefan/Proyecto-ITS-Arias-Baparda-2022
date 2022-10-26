@@ -357,6 +357,12 @@ class ProductController
         echo $this->response->successfully("Listado de Todos los productos:", $products);
         die();
     }
+    public function getSuggestIdPromoBO(){
+        $products = ProductModel::getSuggestIdByPromos();
+        $suggest = $products["id_product"]+1;
+        echo $this->response->successfully("Promo sugerida:", $suggest);
+        die();
+    }
 
 
 ////////////////////////////////OTROS GETS///////////////////////////////////////////////////////////////
@@ -484,6 +490,11 @@ class ProductController
             echo $this->response->error203("Esta intentando ingresar una categoria que no existe");
             die();
         }
+        //Valido que no ingrese a categoria promo
+        if ($prodCategory == 1) {
+            echo $this->response->error203("Esta intentando ingresar un producto en la categoria PROMO");
+            die();
+        }
         
         $result = ProductModel::updateProductLineAttributes($idProduct, $name, $prodCategory, $price, $description);
         if (!$result) {
@@ -519,20 +530,17 @@ class ProductController
         }
         $barcodePromo = $promoExist['barcode'];
         $getStock= ProductModel::getStockProductByBarcode($barcodePromo);
-        $stockNow = intval($getStock['stock']);
-        $increse = $stock - $stockNow;
-        intval($increse);
+        $stockNow = $getStock['stock'];
+        $diference = $stock - $stockNow;
 
-        if($increse<0){
+        if($diference<0){
 
-            $decrease=$increse * -1;
-            intval($decrease);
+            //promo descrese, agregar stock a productos
             $stockOfProductsByPromo = ProductModel::productsAndQuantityAsPromo($idProduct);
             foreach ($stockOfProductsByPromo as $prodAndStock) {
                 $barcode = $prodAndStock['have_product'];
                 $units = $prodAndStock['quantity'];    
-                $addUnits = $units * $decrease;
-                intval($addUnits);
+                $addUnits = ($units * $diference)*-1;
                 $addToStock = ProductModel::UpdateMoreStockProductsOfPromo($barcode,$addUnits);
                 if(!$addToStock){
                     echo $this->response->error203("Hubo un problema actualizando el stock de los productos");
@@ -545,15 +553,14 @@ class ProductController
                 echo $this->response->error500();
                 die();
             }
-            echo $this->response->successfully("Deshizo $decrease Unidades de Promo exitosamente");
+            echo $this->response->successfully("Deshizo $diference Unidades de Promo exitosamente");
         }    
-        if($increse>=0){
+        if($diference>=0){
             $stockOfProductsByPromo = ProductModel::productsAndQuantityAsPromo($idProduct);
             foreach ($stockOfProductsByPromo as $prodAndStock) {
                 $barcode = $prodAndStock['have_product'];
                 $units = $prodAndStock['quantity'];
-                $unitsNecesary = $units * $increse;
-                intval($unitsNecesary);
+                $unitsNecesary = $units * $diference;
                 $validateStock = ProductModel::checkStock($barcode,$unitsNecesary);
                 if (!$validateStock){
                     echo $this->response->error203("No dispone de $unitsNecesary en el producto $barcode para actualizar la promo");

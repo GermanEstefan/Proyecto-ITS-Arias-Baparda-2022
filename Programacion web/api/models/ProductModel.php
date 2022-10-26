@@ -372,6 +372,16 @@
             AND p.product_category != 1";
             return $conecction->getData($query)->fetch_all(MYSQLI_ASSOC);
         }
+        public static function getSuggestIdByPromos(){
+            $conecction = new Connection();
+            $query = "SELECT
+            p.id_product
+            FROM product p
+            WHERE p.product_category = 1
+            ORDER BY id_product desc
+            LIMIT 1";
+            return $conecction->getData($query)->fetch_assoc();
+        }
 
 //////////////////////////////OTROS GETS///////////////////////////////////////////////////////
         //Se deberia llamar obtener barcode pasandole la condicion UNIQUE (id Prod , id design , idsize)
@@ -586,11 +596,11 @@
             $instanceMySql->rollback();
             die();   
             }
-        
-        }
             $query = array($index => "INSERT INTO promo (is_product, have_product, quantity) VALUES ($isProduct,$haveProduct, $quantity)");
             array_push($queries, $query);
             $index++;
+        }
+            
         
             //FOREACH PARA CREAR LAS QUERYS
             foreach($queries as $key=>$query){

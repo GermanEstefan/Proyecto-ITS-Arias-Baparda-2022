@@ -109,6 +109,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
         $product->getProductsOfProductBO($idProduct);
         die();
     }
+    //G- Sugerir idProd para promo
+    if(isset($_GET['BOsuggestID'])){  
+        $product->getSuggestIdPromoBO();
+        die();
+    }
     if(isset($_GET['BOfilter'])){
         $filter = $_GET['BOfilter'];
         switch ($filter){
