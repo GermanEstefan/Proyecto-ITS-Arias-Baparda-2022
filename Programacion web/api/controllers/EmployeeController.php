@@ -121,7 +121,8 @@ class EmployeeController{
             "email" => $userInDatabase['email'],
             "name" => $userInDatabase['name'],
             "surname" => $userInDatabase['surname'],
-            "rol" => $employeeRol
+            "rol" => $employeeRol,
+            "ci" => $ci
         );
         echo $this->response->successfully("Autenticacion realizada con exito", $bodyResponse);
         die();

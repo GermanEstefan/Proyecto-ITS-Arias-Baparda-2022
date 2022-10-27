@@ -3,6 +3,7 @@ require_once "vendor/autoload.php";
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 require_once('./helpers/Response.php');
+require_once('./models/EmployeeModel.php');
 
 class Token {
 
@@ -21,7 +22,7 @@ class Token {
         return $jwt;
     }
 
-    public function verifyToken($token){
+    private function verifyToken($token){
         $response = new Response();
         try {
             return JWT::decode($token, new Key($this->secretPass, 'HS256'));
@@ -41,6 +42,16 @@ class Token {
         }
         $idOfUser = $this->verifyToken(getallheaders()['access-token'])->data->idUser;
         return $idOfUser;
+    }
+
+    public function verifyTokenAndValidateEmployeeUser(){
+        $idOfUser = $this->verifyTokenAndGetIdUserFromRequest();
+        $employee = EmployeeModel::getEmployeeById($idOfUser);
+        if(!$employee){
+            return false;
+        }else{
+            return $employee['employee_role'];
+        }
     }
 
 }

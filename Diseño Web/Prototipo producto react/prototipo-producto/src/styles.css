@@ -756,8 +756,6 @@
 .user-panel-page section {
   padding: 30px;
   width: 80%;
-  display: flex;
-  justify-content: center;
 }
 @media (max-width: 800px) {
   .user-panel-page section {
@@ -768,12 +766,12 @@
 .user-panel-page section form {
   width: 90vw;
   max-width: 350px;
-  display: flex;
-  flex-direction: column;
+  margin: 0 auto;
 }
 @media (max-width: 800px) {
   .user-panel-page section form {
     margin: 20px 0;
+    margin: 0 auto;
   }
 }
 .user-panel-page section form span {
@@ -1184,6 +1182,53 @@
   display: flex;
   align-items: center;
   flex-direction: column;
+}
+
+.historyItem {
+  display: flex;
+  justify-content: space-between;
+  width: 600px;
+  padding: 5px 15px;
+  border: 3px rgb(211, 211, 211) solid;
+  align-items: center;
+}
+.historyItem span {
+  margin-right: 10px;
+}
+@media (max-width: 800px) {
+  .historyItem {
+    width: 100%;
+  }
+}
+
+.historyItem:hover {
+  background-color: rgba(220, 220, 220, 0.203);
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.historyCollapse {
+  width: 600px;
+  padding: 5px 15px;
+  background-color: rgba(235, 235, 235, 0.582);
+}
+@media (max-width: 800px) {
+  .historyCollapse {
+    width: 100%;
+  }
+}
+.historyCollapse .collapseSale {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 10px auto;
+}
+.historyCollapse .collapseSale span {
+  margin-right: 10px;
+}
+
+.ReactCollapse--collapse {
+  transition: height 100ms;
 }
 
 .login-page-adm {

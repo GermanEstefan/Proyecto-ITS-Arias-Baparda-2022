@@ -32,7 +32,8 @@ if($_SERVER['REQUEST_METHOD'] === 'GET'){
             "surname" => $userData['surname'],
             "phone" => $userData['phone'],
             "address" => $userData['address'],
-            "rol" => $employeeData['employee_role']
+            "rol" => $employeeData['employee_role'],
+            "ci" => $employeeData['ci']
         );
         http_response_code(200);
         echo $response->successfully("Token valido", $bodyResponse);

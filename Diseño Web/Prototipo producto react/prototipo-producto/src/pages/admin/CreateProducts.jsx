@@ -92,6 +92,7 @@ const CreateProducts = () => {
             image.value = '';
             return setTimeout(() => setError(initStateLoading), 3000)
         } catch (error) {
+            console.log('entro')
             console.error(error);
         } finally {
             setLoading(false)

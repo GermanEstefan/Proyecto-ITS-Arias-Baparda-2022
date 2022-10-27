@@ -11,10 +11,7 @@ export const fetchApi = async (endpoint, method, data) => {
     },
     body: JSON.stringify(data),
   });
-  const respToJson = await resp.json();
-  if (respToJson.status === "successfully") {
-    return respToJson;
-  }
+  return await resp.json();
 };
 
 export const verifyAuth = async () => {
