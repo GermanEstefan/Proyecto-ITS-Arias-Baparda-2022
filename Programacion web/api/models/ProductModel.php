@@ -143,7 +143,8 @@
             p.name,
             p.price,
             p.description,
-            p.state 
+            p.state,
+            p.picture
             from product p
             where p.state = 1
             AND p.product_category != 1";
@@ -263,8 +264,7 @@
             p.product_category as category,
             p.stock,
             p.description,
-            p.state,
-            p.picture
+            p.state
             from product p
             INNER JOIN design d
             INNER JOIN size s
