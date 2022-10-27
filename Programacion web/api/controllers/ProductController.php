@@ -46,6 +46,7 @@ class ProductController
             ||  !isset($productData['prodCategory'])
             ||  !isset($productData['price'])
             ||  !isset($productData['description'])
+            ||  !isset($productData['picture'])
         ) return false;
         return $productData;
     }
