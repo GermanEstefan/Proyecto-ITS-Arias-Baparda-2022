@@ -88,7 +88,7 @@ const Supplier = () => {
             })
             .catch(err => console.error(err))
             .finally(() => setLoadingFlags({ ...loadingFlags, fetchingSuppliers: false }))
-    }, [suppliers])
+    }, [])
 
 
     return (
