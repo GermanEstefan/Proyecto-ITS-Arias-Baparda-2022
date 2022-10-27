@@ -556,7 +556,7 @@
             $instanceMySql = $conecction->getInstance();
             $instanceMySql->begin_transaction(MYSQLI_TRANS_START_READ_WRITE);
             $result_transaccion = true;
-            $createPromo = "INSERT INTO product (id_product, name, product_category, product_design, product_size, stock, price, description,picture) VALUES ('$idProduct','$name',1,1,1,'$stock','$price', '$description', $picture)";
+            $createPromo = "INSERT INTO product (id_product, name, product_category, product_design, product_size, stock, price, description, picture) VALUES ('$idProduct','$name',1,1,1,'$stock','$price', '$description', '$picture')";
             $resultCreatePromo = $instanceMySql->query($createPromo);
             if(!$resultCreatePromo)  $result_transaccion = false;
             $isProduct = $instanceMySql->insert_id;
