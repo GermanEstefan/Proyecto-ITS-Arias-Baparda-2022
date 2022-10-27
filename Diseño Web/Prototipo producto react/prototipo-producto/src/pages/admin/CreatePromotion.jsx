@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom"
 import { fetchApi } from "../../API/api"
 import ContainerBase from "../../components/admin/ContainerBase"
 import { useForm } from "../../hooks/useForm"
+import imgToBase64 from '../../helpers/imgToBase64';
 
 const CreatePromotion = () => {
 
@@ -57,8 +58,11 @@ const CreatePromotion = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const bodyOfRequest = { ...promoGeneralValues, contains: containsPromo }
+        const image = document.getElementById('promo-image');
+        const imageToBase64 = await imgToBase64(image.files[0]);
+        const bodyOfRequest = { ...promoGeneralValues, contains: containsPromo, picture: imageToBase64 }
         setLoading(true);
+        console.log(bodyOfRequest)
         try {
             const resp = await fetchApi('products.php?type=promo', 'POST', bodyOfRequest);
             console.log(resp)
@@ -68,6 +72,7 @@ const CreatePromotion = () => {
             }
             setError({ showMessage: true, message: resp.result.msg, error: false });
             resetValues();
+            image.value = '';
             setContainsPromo(initStateContainsPromo);
             return setTimeout(() => setError(initStateLoading), 3000)
         } catch (error) {
@@ -140,6 +145,11 @@ const CreatePromotion = () => {
                                     required
                                 />
                             </div>
+                        </div>
+
+                        <div className='input-img-container'>
+                            <label className="label-form">Imagen </label>
+                            <input type="file" id="promo-image" />
                         </div>
 
                         <div className='promo-models-container'>

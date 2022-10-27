@@ -6,6 +6,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { fetchApi } from '../../API/api';
 import ContainerBase from '../../components/admin/ContainerBase';
+import imgToBase64 from '../../helpers/imgToBase64';
 import { useForm } from '../../hooks/useForm';
 
 const CreateProducts = () => {
@@ -73,10 +74,13 @@ const CreateProducts = () => {
 
     const handleSubmitProduct = async (e) => {
         e.preventDefault();
-        const bodyOfRequest = { ...valuesSliceProduct, models: amountLines }
+        const image = document.getElementById('image-product');
+        const imageToBase64 = await imgToBase64(image.files[0]);
+        const bodyOfRequest = { ...valuesSliceProduct, models: amountLines, picture: imageToBase64 }
         setLoading(true);
+        console.log(bodyOfRequest)
         try {
-            const resp = await fetchApi('products.php', 'POST', bodyOfRequest);
+            const resp = await fetchApi('products.php?type=product', 'POST', bodyOfRequest);
             console.log(resp)
             if (resp.status === 'error') {
                 setError({ showMessage: true, message: resp.result.error_msg, error: true });
@@ -85,6 +89,7 @@ const CreateProducts = () => {
             setError({ showMessage: true, message: resp.result.msg, error: false });
             resetFormValuesProduct();
             setAmountLines(initStateAmountLines);
+            image.value = '';
             return setTimeout(() => setError(initStateLoading), 3000)
         } catch (error) {
             console.error(error);
@@ -168,9 +173,13 @@ const CreateProducts = () => {
                                     }
                                 </select>
                             </div>
-
                         </div>
-                        
+
+                        <div className='flex-column-center-xy input-img-container'>
+                            <label className='label-form'>Imagen:</label>
+                            <input type="file" id='image-product' required />
+                        </div>
+
                         <div className='create-product_container_form-product_lines'>
                             <FontAwesomeIcon className='add-lines' icon={faPlusCircle} onClick={handleAddLine} />
                             {

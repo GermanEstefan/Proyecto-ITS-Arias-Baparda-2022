@@ -6,6 +6,7 @@ import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { fetchApi } from '../../API/api';
 import ContainerBase from '../../components/admin/ContainerBase';
+import imgToBase64 from '../../helpers/imgToBase64';
 import { useForm } from '../../hooks/useForm';
 
 const Categorys = () => {
@@ -39,9 +40,12 @@ const Categorys = () => {
     const handleCreateCategory = async (e) => {
         e.preventDefault();
         setLoadingFlags({ ...loadingFlags, createCategory: true });
+        const image = document.getElementById('image-category');
+        const imageToBase64 = await imgToBase64(image.files[0]);
+        const bodyOfRequest = {...values, picture:imageToBase64};
         try {
-            console.log(values)
-            const resp = await fetchApi('categorys.php', 'POST', values);
+            console.log(bodyOfRequest)
+            const resp = await fetchApi('categorys.php', 'POST', bodyOfRequest);
             console.log(resp)
             if (resp.status === 'error') {
                 setError({ showMessage: true, message: resp.result.error_msg, error: true });
@@ -51,6 +55,7 @@ const Categorys = () => {
             setError({ showMessage: true, message: resp.result.msg, error: false });
             setCategorys([ ...categorys, {name: values.name, description: values.description, id_category: lastIdOfCategory }])
             resetForm();
+            image.value = '';
             return setTimeout(() => setError(initStateLoading), 3000)
         } catch (error) {
             alert('Internal error');
@@ -104,6 +109,10 @@ const Categorys = () => {
                                         name='description'
                                         onChange={handleValuesChange}
                                     />
+
+                                    <label htmlFor="">Imagen</label>
+                                    <input type="file" id='image-category' />
+
                                     <button
                                         className={`button-form ${loadingFlags.createCategory && 'opacity'}`}
                                         disabled={loadingFlags.createCategory}
