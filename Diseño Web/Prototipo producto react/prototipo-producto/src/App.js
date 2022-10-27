@@ -47,7 +47,6 @@ const App = () => {
     const initialValue = JSON.parse(saved);
     return initialValue || [];
   });
-  console.log(cart);
   const setCart = (newCart) => {
     setCartState(newCart);
     localStorage.setItem("cart", JSON.stringify(newCart));

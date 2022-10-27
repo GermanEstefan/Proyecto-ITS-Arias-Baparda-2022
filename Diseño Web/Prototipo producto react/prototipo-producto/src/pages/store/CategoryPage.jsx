@@ -23,7 +23,7 @@ const CategoryPage = () => {
 
     setProductList(resp.result.data);
     setPictureLinks(resp.result.data);
-    console.log(resp.result.data);
+    console.log(resp);
   };
 
   //   {

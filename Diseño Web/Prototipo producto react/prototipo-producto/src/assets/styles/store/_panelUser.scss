@@ -34,8 +34,6 @@
     section{
         padding: 30px;
         width: 80%;
-        display: flex;
-        justify-content: center;
         @media (max-width: 800px) {
           width: 100%;
           padding: 0;
@@ -43,10 +41,10 @@
         form{
             width: 90vw;
             max-width: 350px;
-            display: flex;
-            flex-direction: column;
+            margin: 0 auto;
             @media (max-width: 800px) {
                 margin: 20px 0;
+                margin: 0 auto;
             }
             span{
                 margin: 5px 0 15px 0;

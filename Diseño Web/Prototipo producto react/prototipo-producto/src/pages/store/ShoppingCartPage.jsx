@@ -13,7 +13,7 @@ import Imagen from "../../assets/img/Obreros.jpg";
 import Select from "react-select";
 
 const ShoppingCartPage = () => {
-  const { cart } = useContext(cartContext);
+  const { cart, setCart } = useContext(cartContext);
   const { userData } = useContext(userStatusContext);
 
   const [total, setTotal] = useState(0);
@@ -82,12 +82,6 @@ const ShoppingCartPage = () => {
 
   const getStoreHour = async () => {
     const resp = await fetchApi("Deliverys.php?local", "GET");
-    console.log(
-      resp.result.data.map((hourFromBack) => ({
-        value: hourFromBack.id_delivery,
-        label: hourFromBack.name,
-      }))
-    );
     setStoreHours(
       resp.result.data.map((hourFromBack) => ({
         value: hourFromBack.id_delivery,
@@ -137,7 +131,8 @@ const ShoppingCartPage = () => {
         quantity: product.quantity,
       })),
     };
-
+    setCart([])
+    console.log(purchaseData)
     fetchApi("sales.php", "POST", purchaseData);
   };
 
@@ -183,7 +178,11 @@ const ShoppingCartPage = () => {
           )}
         </div>
         <div ref={buyForm} className="form-container">
-          <img className="form-img" src={Imagen ? Imagen : NoPhoto} alt="Imagen" />
+          <img
+            className="form-img"
+            src={Imagen ? Imagen : NoPhoto}
+            alt="Imagen"
+          />
           <form>
             <h1>Confirma tu compra</h1>
             <div className="radioSection">

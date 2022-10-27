@@ -483,9 +483,9 @@
         
         
         //MODIFICACIONES
-        public static function updateAttributesOfProduct($barcode, $name, $stock, $price, $description){
+        public static function updateAttributesOfProduct($barcode, $name, $stock, $price, $description, $picture){
             $conecction = new Connection();
-            $query = "UPDATE product SET name = '$name', stock = $stock, price = $price, description = '$description' WHERE barcode = $barcode ";
+            $query = "UPDATE product SET name = '$name', stock = $stock, price = $price, description = '$description', picture = $picture WHERE barcode = $barcode ";
             return $conecction->setData($query);
         }
         public static function updateStockProductsOfPromo($barcode, $unitsNecesary){
@@ -498,9 +498,9 @@
             $query = "UPDATE product SET stock = stock + $addUnits WHERE barcode = $barcode ";
             return $conecction->setData($query);
         }
-        public static function updatePromo($idProduct, $name, $stock, $price, $description){
+        public static function updatePromo($idProduct, $name, $stock, $price, $description, $picture){
             $conecction = new Connection();
-            $query = "UPDATE product SET name = '$name', stock = $stock, price = $price, description = '$description' WHERE id_product = $idProduct ";
+            $query = "UPDATE product SET name = '$name', stock = $stock, price = $price, description = '$description', picture = $picture WHERE id_product = $idProduct ";
             return $conecction->setData($query);
         }
         public static function updateModel($barcode,$prodDesign,$prodSize,$stock){
@@ -508,9 +508,9 @@
             $query = "UPDATE product SET product_design = '$prodDesign', product_size = '$prodSize', stock = '$stock' WHERE barcode = '$barcode' ";
             return $conecction->setData($query);
         }
-        public static function updateProductLineAttributes($idProduct, $name,$prodCategory, $price, $description){
+        public static function updateProductLineAttributes($idProduct, $name,$prodCategory, $price, $description, $picture){
             $conecction = new Connection();
-            $query = "UPDATE product SET name = '$name', product_category = $prodCategory, price = $price, description = '$description' WHERE id_product = $idProduct ";
+            $query = "UPDATE product SET name = '$name', product_category = $prodCategory, price = $price, description = '$description', picture = $picture WHERE id_product = $idProduct ";
             return $conecction->setData($query);
         }            
         public static function disableModel($barcode){
@@ -550,13 +550,13 @@
                 return false;
             }
         }
-        public static function createPromo($idProduct,$name, $stock,$price, $description,$contains){
+        public static function createPromo($idProduct,$name, $stock,$price, $description,$picture,$contains){
             $conecction = new Connection();
             $response = new Response();
             $instanceMySql = $conecction->getInstance();
             $instanceMySql->begin_transaction(MYSQLI_TRANS_START_READ_WRITE);
             $result_transaccion = true;
-            $createPromo = "INSERT INTO product (id_product, name, product_category, product_design, product_size, stock, price, description) VALUES ('$idProduct','$name',1,1,1,'$stock','$price', '$description')";
+            $createPromo = "INSERT INTO product (id_product, name, product_category, product_design, product_size, stock, price, description,picture) VALUES ('$idProduct','$name',1,1,1,'$stock','$price', '$description', $picture)";
             $resultCreatePromo = $instanceMySql->query($createPromo);
             if(!$resultCreatePromo)  $result_transaccion = false;
             $isProduct = $instanceMySql->insert_id;
