@@ -71,6 +71,7 @@ class ProductController
             ||  !isset($promoData['stock'])
             ||  !isset($promoData['price']) 
             ||  !isset($promoData['description'])
+            ||  !isset($promoData['picture'])
         ) return false;
         
         return $promoData;
