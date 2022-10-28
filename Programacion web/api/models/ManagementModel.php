@@ -10,34 +10,26 @@
             FROM SALE s, supply sp";
             return $conecction->getData($query)->fetch_assoc();
         }
-
-        public static function getAllManagement(){
+        public static function getBestClients($limit){
             $conecction = new Connection();
-            $query = "SELECT * from management";
-            return $conecction->getData($query)->fetch_assoc();
+            $query = "SELECT 
+            u.id_user AS idClient,
+            concat_ws(' ', u.name , u.surname) AS clientInfo,
+            c.company_name AS companyName,
+            c.rut_nr AS companyRut,
+            u.email AS mailClient,
+            sum(s.total) AS spentMoney,
+            count(id_sale) AS totalSales
+            FROM sale s, user u, customer c 
+            WHERE u.id_user = s.user_purchase 
+            AND u.id_user = c.customer_user
+            GROUP BY user_purchase 
+            ORDER BY count(s.total) DESC 
+            LIMIT $limit";
+            return $conecction->getData($query)->fetch_all(MYSQLI_ASSOC);
         }
 
-        public static function updateManagement($id, $name, $description){
-            $conecction = new Connection();
-            $query = "UPDATE management SET name = '$name', description = '$description' WHERE id_photo = '$id' ";
-            return $conecction->setData($query);
-        }
-
-        public static function DisableManagement($id){
-            $conecction = new Connection();
-            $query = "UPDATE management SET state = 0 WHERE id_photo = $id ";
-            return $conecction->setData($query);
         
-        }        
-        public function save(){
-            $ManagementInsert = "INSERT INTO management (name, description) VALUES ('$this->name', '$this->description' )";
-            $result = $this->connection->setData($ManagementInsert);
-            if($result){
-                return $this->connection->getLastIdInserted();
-            }else{
-                return false;
-            }
-        }
     }
         
 ?>

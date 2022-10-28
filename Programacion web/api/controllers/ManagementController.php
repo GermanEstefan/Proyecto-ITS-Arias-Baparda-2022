@@ -5,6 +5,7 @@ include_once("./helpers/Token.php");
 include_once("./models/ManagementModel.php");
 include_once("./models/SaleModel.php");
 include_once("./models/SupplyModel.php");
+include_once("./models/ManagementModel.php");
 
 class ManagementController {
 
@@ -29,75 +30,33 @@ class ManagementController {
     //consultas
     public function getBalances(){
         $management = ManagementModel::getBalances(); 
-        echo $this->response->successfully("Balance de saldos:", $management);
+        $balance = array();
+        $totalSale = $management['totalSale'];
+        $totalSupply = $management['totalSupply']*-1;
+        $diference = ($totalSale + $totalSupply);
+        array_push( $balance, array( "TotalSale" => $totalSale,"TotalSupply" => $totalSupply,"Diference" => $diference)); 
+        echo $this->response->successfully("Balance de saldos:",$balance);
+    }
+    //consultas
+    public function getBestClients($limit){
+        if($limit<0){     
+            echo $this->response->error203("El limite $limit no es correcto");
+            die();
+
+        }
+        $management = ManagementModel::getBestClients($limit);
+        $clients= array();
+        foreach($management as $client){
+            $isBusiness = $client["companyName"];
+            //REVISAR ACA
+            if(!$isBusiness){
+            array_push( $clients, array("idClient" => $client['idClient'],"clientInfo" => $client['clientInfo'],"mailClient" => $client['mailClient'],"spentMoney" => $client['spentMoney'],"totalSales" => $client['totalSales']));    
+        }else{
+            array_push( $clients, array("idClient" => $client['idClient'],"clientName" => $client['clientName'],"comapnyRut" => $client['companyRut'],"mailClient" => $client['mailClient'],"spentMoney" => $client['spentMoney'],"totalSales" => $client['totalSales']));    
+            }
+        }
+        $response = array("clients"=>$clients);
+        echo $this->response->successfully("Los mejores $limit clientes", $response);
     }
 
-    
-    
-    //ACTUALIZAR
-    public function updateManagement($managementId, $managementData){
-
-        $this->jwt->verifyTokenAndGetIdUserFromRequest(); 
-        $bodyIsValid = $this->validateBodyOfManagement($managementData);
-        if(!$bodyIsValid) {
-        echo $this->response->error400('Error en los datos enviados');
-        die();
-        }
-
-        $rut = $managementData['rut'];
-        $companyName = $managementData['companyName'];
-        $address = $managementData['address'];
-        $phone = $managementData['phone'];
-
-        $existManagement = ManagementModel::getManagementById($managementId);
-        if (!$existManagement){
-            echo $this->response->error203('El id del proveedor no existe');
-            die();
-        }
-        $notChangeRut = ManagementModel::getManagementByRut($rut);
-        if ($notChangeRut){
-            $result = ManagementModel::updateManagementNotRut($managementId,$companyName,$address,$phone);
-            echo $this->response->successfully("Informacion del proveedor actualizada con exito");
-            die();
-        }
-
-        $result = ManagementModel::updateManagement($managementId,$rut,$companyName,$address,$phone);
-        if(!$result){
-            echo $this->response->error500();
-            die();
-        }
-        echo $this->response->successfully("Proveedor actualizado con exito");
-    }
-    public function disableManagement($managementId)
-    {
-        $this->jwt->verifyTokenAndGetIdUserFromRequest();
-        //Valido que exista el proveedor
-        $managementExist = ManagementModel::getManagementById($managementId);
-        if (!$managementExist) {
-            echo $this->response->error203("Esta intentando deshabilitar un proveedor que no existe");
-            die();
-        }
-        $result = ManagementModel::disableManagement($managementId);
-        if (!$result) {
-            echo $this->response->error500();
-            die();
-        }
-        echo $this->response->successfully("Proveedor deshabilitado exitosamente");
-    }
-    public function activeManagement($managementId)
-    {
-        $this->jwt->verifyTokenAndGetIdUserFromRequest();
-        //Valido que exista el proveedor
-        $managementExist = ManagementModel::getManagementById($managementId);
-        if (!$managementExist) {
-            echo $this->response->error203("Esta intentando activar un proveedor que no existe");
-            die();
-        }
-        $result = ManagementModel::activeManagement($managementId);
-        if (!$result) {
-            echo $this->response->error500();
-            die();
-        }
-        echo $this->response->successfully("Proveedor activado exitosamente");
-    }
 }
