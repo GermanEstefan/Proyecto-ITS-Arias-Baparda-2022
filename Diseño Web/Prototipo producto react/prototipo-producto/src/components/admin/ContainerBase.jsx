@@ -11,6 +11,10 @@ const ContainerBase = ({ children }) => {
     const { name, surname, rol } = userData;
 
     return (
+        !(rol)
+        ?
+        <h1>Permiso denegado</h1>
+        :
         <>
             <header className="header-admin">
                 <div className="header-admin_config">

@@ -15,7 +15,6 @@ const useAuth = (initialState) => {
               setIsChecking(false);
               return;
             }
-            console.log(res)
             setUserData({
               name: res.result.data.name,
               surname: res.result.data.surname,

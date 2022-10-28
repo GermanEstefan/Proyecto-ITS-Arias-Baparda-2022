@@ -1,18 +1,20 @@
 
 import { faPlusCircle, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { useState } from "react";
 import { fetchApi } from "../../API/api";
+import { userStatusContext } from "../../App";
 import ContainerBase from "../../components/admin/ContainerBase";
 import { useForm } from "../../hooks/useForm";
 
 const BuyProducts = () => {
 
+    const {ci} = useContext(userStatusContext).userData;
     const [suppliers, setSuppliers] = useState([]);
     const [products, setProducts] = useState([]);
     const initStateBuyProductsGeneralValues = {
-        supplier_id: '',
+        idSupplier: '',
         comment: '',
         products: []
     }
@@ -31,16 +33,16 @@ const BuyProducts = () => {
         const supplierPromise = fetchApi('suppliers.php?all', 'GET');
         const productsPromise = fetchApi('products.php?BOProducts', 'GET');
         Promise.all([supplierPromise, productsPromise])
-            .then(([suppliers, productsPromise]) => {
+            .then(([suppliers, productss]) => {
                 setSuppliers(suppliers.result.data);
-                console.log(suppliers.result.data)
-                setProducts(productsPromise.result.data)
+                console.log(productss)
+                setProducts(productss.result.data)
             })
     }, [])
 
-    const initStateProductsToBuy = [{ barcode: '', quantity: '', costo: '' }];
+    const initStateProductsToBuy = [{ barcode: '', quantity: '', cost_unit: '' }];
     const [productsToBuy, setProductsToBuy] = useState(initStateProductsToBuy);
-    const handleAddNewProductToBuy = () => setProductsToBuy([...productsToBuy,{ barcode: '', quantity: '', costo: '' }]);
+    const handleAddNewProductToBuy = () => setProductsToBuy([...productsToBuy,{ barcode: '', quantity: '', cost_unit: '' }]);
     const handleDeleteProductToBuy = (i) => {
         const arrayCopy = [...productsToBuy]
         arrayCopy.splice(i, 1)
@@ -54,10 +56,11 @@ const BuyProducts = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const bodyOfRequest = { ...buyProductsGeneralValues, products: productsToBuy }
+        const bodyOfRequest = { ...buyProductsGeneralValues, products: productsToBuy, employee_ci: ci }
         setLoading(true);
         try {
             const resp = await fetchApi('supply.php', 'POST', bodyOfRequest);
+            console.log(bodyOfRequest)
             console.log(resp)
             if (resp.status === 'error') {
                 setError({ showMessage: true, message: resp.result.error_msg, error: true });
@@ -90,7 +93,7 @@ const BuyProducts = () => {
                             className="select-form"
                             value={supplier_id}
                             onChange={handleValuesChange}
-                            name='supplier_id'
+                            name='idSupplier'
                         >
                             {
                                 suppliers.map(({ id_supplier, company_name }) => (
@@ -119,7 +122,7 @@ const BuyProducts = () => {
                                             <option value="" selected disabled>Seleccione</option>
                                             {
                                                 products.map(product => (
-                                                    <option key={product.barcode} value={product.barcode}> {`${product.name} - ${product.diseño} - ${product.talle}`} </option>
+                                                    <option key={product.barcode} value={product.barcode}> {`${product.name} - ${product.design} - ${product.size}`} </option>
                                                 ))
                                             }
                                         </select>
@@ -133,7 +136,7 @@ const BuyProducts = () => {
                                     <div>
 
                                         <label htmlFor="" className='label-form'>Costo</label>
-                                        <input type="text" className='input-form' name="costo" value={product.costo} onChange={(e) => handleChangeProductToBuy(e, i)} />
+                                        <input type="text" className='input-form' name="cost_unit" value={product.costo} onChange={(e) => handleChangeProductToBuy(e, i)} />
                                     </div>
                                     {(i !== 0) && <FontAwesomeIcon onClick={() => handleDeleteProductToBuy(i)} icon={faXmark} className="remove-line-buy-product" />}
                                 </div>

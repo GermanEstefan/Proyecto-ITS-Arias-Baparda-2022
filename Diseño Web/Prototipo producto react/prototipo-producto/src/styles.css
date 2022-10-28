@@ -1082,11 +1082,14 @@
 .generals-layout-edit form h2 {
   text-align: center;
 }
-.generals-layout-edit form input {
+.generals-layout-edit form input, .generals-layout-edit form textarea, .generals-layout-edit form select {
   margin-bottom: 25px;
 }
 .generals-layout-edit form span {
   margin-top: 20px;
+}
+.generals-layout-edit form textarea {
+  height: 100px;
 }
 
 .form-row-two-columns-with-label {
@@ -1267,6 +1270,7 @@
   font-size: 1.2rem;
   position: fixed;
   box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+  z-index: 1;
 }
 .header-admin .header-admin_config {
   display: flex;
@@ -1296,6 +1300,7 @@
   display: flex;
 }
 .container-admin aside {
+  z-index: 2;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   background-color: #121212;
   color: #fff;
@@ -1565,6 +1570,8 @@
 }
 .list-products table {
   margin: auto;
+  width: 60vw;
+  max-width: 1000px;
 }
 .list-products .table-container {
   text-align: center;

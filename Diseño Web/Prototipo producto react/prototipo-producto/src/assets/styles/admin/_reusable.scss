@@ -178,11 +178,14 @@
     max-width: 350px;
     width: 50vw;
     margin-bottom: 50px;
-    input {
+    input,textarea,select {
       margin-bottom: 25px;
     }
     span {
       margin-top: 20px;
+    }
+    textarea{
+      height: 100px;
     }
   }
 }
