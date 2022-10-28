@@ -103,12 +103,16 @@ const Aside = () => {
 
                             <li 
                                 onClick={() => navigate('/admin/products/list') }
-                                className={ (action === 'list' && page === 'products') ? 'selected' : '' }
+                                className={ (action === 'list' || action === 'edit-product' && page === 'products') ? 'selected' : '' }
                             >Listar productos / promociones</li>
                             <li
                                   onClick={() => navigate('/admin/products/buy') }
                                   className={ (action === 'buy' && page === 'products') ? 'selected' : '' }
                             >Compra</li>
+                             <li
+                                  onClick={() => navigate('/admin/products/buy-list') }
+                                  className={ (action === 'buy-list' && page === 'products') ? 'selected' : '' }
+                            >Ver compras</li>
                         </ul>
                     }
                 </li>

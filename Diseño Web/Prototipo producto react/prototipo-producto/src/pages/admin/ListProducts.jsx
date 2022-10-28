@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { Fragment, useEffect } from 'react'
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 import { fetchApi } from '../../API/api';
 import ContainerBase from '../../components/admin/ContainerBase';
 
@@ -51,6 +52,12 @@ const ListProducts = () => {
                     return model;
                 })
                 setModelsOfProduct(modelsMapped);
+                Swal.fire({
+                    icon: "success",
+                    text: "Producto desabilitado con exito",
+                    timer: 2000,
+                    showConfirmButton: false,
+                });
             }
         } catch (error) {
             console.error(error);
@@ -69,6 +76,12 @@ const ListProducts = () => {
                     return model;
                 })
                 setModelsOfProduct(modelsMapped);
+                Swal.fire({
+                    icon: "success",
+                    text: "Producto habilitado con exito",
+                    timer: 2000,
+                    showConfirmButton: false,
+                });
             }
         } catch (error) {
             console.error(error);
@@ -111,7 +124,7 @@ const ListProducts = () => {
                                                         <td>{product.description}</td>
                                                         <td>{product.categoryName}</td>
                                                         <td>{product.price}</td>
-                                                        <td className="controls-table" onClick={() => alert('editar producto')} ><FontAwesomeIcon icon={faPencil} /></td>
+                                                        <td className="controls-table" onClick={() => navigate(`/admin/products/edit-product/${product.id_product}`)} ><FontAwesomeIcon icon={faPencil} /></td>
                                                         <td className="controls-table" onClick={() => alert('eliminar producto')}><FontAwesomeIcon icon={faTrash} /></td>
                                                     </tr>
                                                     {

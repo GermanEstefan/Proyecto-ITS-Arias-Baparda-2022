@@ -29,6 +29,7 @@ import EditProducts from "./pages/admin/EditProduct";
 import Supplier from "./pages/admin/Supplier";
 import EditSupplier from "./pages/admin/EditSupplier";
 import BuyProducts from "./pages/admin/BuyProducts";
+import ListBuys from "./pages/admin/ListBuys";
 
 export const userStatusContext = createContext({});
 export const cartContext = createContext([]);
@@ -71,39 +72,19 @@ const App = () => {
           <Route path="/admin/users/create" element={<CreateUser />} />
           <Route path="/admin/users/list" element={<ListUsers />} />
           <Route path="/admin/generals/categorys" element={<Categorys />} />
-          <Route
-            path="/admin/generals/categorys/edit/:idOfCategory"
-            element={<EditCategory />}
-          />
+          <Route path="/admin/generals/categorys/edit/:idOfCategory" element={<EditCategory />} />
           <Route path="/admin/generals/sizes" element={<Sizes />} />
-          <Route
-            path="/admin/generals/sizes/edit/:idOfSize"
-            element={<EditSize />}
-          />
+          <Route path="/admin/generals/sizes/edit/:idOfSize" element={<EditSize />} />
           <Route path="/admin/generals/designs" element={<Design />} />
-          <Route
-            path="/admin/generals/designs/edit/:idOfDesign"
-            element={<EditDesign />}
-          />
+          <Route path="/admin/generals/designs/edit/:idOfDesign" element={<EditDesign />}/>
           <Route path="/admin/generals/supplier" element={<Supplier />} />
-          <Route
-            path="/admin/generals/supplier/edit/:rut"
-            element={<EditSupplier />}
-          />
+          <Route path="/admin/generals/supplier/edit/:rut" element={<EditSupplier />}/>
           <Route path="/admin/products/create" element={<CreateProducts />} />
-          <Route
-            path="/admin/products-promo/create"
-            element={<CreatePromotion />}
-          />
-          <Route
-            path="/admin/products/edit-model/:barcode"
-            element={<EditModelProduct />}
-          />
-          <Route
-            path="/admin/products/edit-product/:idProduct"
-            element={<EditProducts />}
-          />
+          <Route path="/admin/products-promo/create" element={<CreatePromotion />}/>
+          <Route path="/admin/products/edit-model/:barcode" element={<EditModelProduct />} />
+          <Route path="/admin/products/edit-product/:idProduct" element={<EditProducts />}/>
           <Route path="/admin/products/buy" element={<BuyProducts />} />
+          <Route path="/admin/products/buy-list" element={<ListBuys />} />
           <Route path="/admin/shipments/list" element={<ListShipments />} />
           <Route path="/admin/products/list" element={<ListProducts />} />
           <Route path="/admin/shipments/list" element={<ListShipments />} />

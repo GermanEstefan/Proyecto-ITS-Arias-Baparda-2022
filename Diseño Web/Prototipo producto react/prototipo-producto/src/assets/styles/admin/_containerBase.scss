@@ -9,6 +9,7 @@
     font-size: 1.2rem;
     position: fixed;
     box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+    z-index: 1;
     .header-admin_config{
         display: flex;
         align-items: center;
@@ -37,6 +38,7 @@
 .container-admin {
     display: flex;
     aside {
+        z-index: 2;
         box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
         background-color: $black;
         color: #fff;
