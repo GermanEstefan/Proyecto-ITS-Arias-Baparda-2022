@@ -70,6 +70,23 @@ class SupplyModel extends Connection
         AND e.employee_user = u.id_user";
         return $conecction->getData($query)->fetch_all(MYSQLI_ASSOC);
     }
+    public static function getAllSupplys(){
+        $conecction = new Connection();
+        $query = "SELECT 
+        s.id_supply AS idSupply,
+        date_format(s.date, '%d/%m/%Y %T') AS date,
+        s.supplier_id AS idSupplier,
+        sp.company_name AS supplierName,
+        e.employee_user AS idEmployee,
+        s.employee_ci AS ciEmployee,
+        concat_ws(' ', u.name , u.surname) AS employeeName, 
+        s.total AS totalSupply
+        FROM supply s, employee e, user u, supplier sp 
+        where e.ci = s.employee_ci
+        AND e.employee_user = u.id_user
+        AND sp.id_supplier = s.supplier_id";
+        return $conecction->getData($query)->fetch_all(MYSQLI_ASSOC);
+    }
     //crear compra
     public function saveSupply($productsForSupply){
         $response = new Response();

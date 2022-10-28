@@ -118,6 +118,22 @@ class SupplyController {
         echo $this->response->successfully("$totalSupplys Compras obtenidas para la fecha:$day", $response);  
      
     }
+    public function getAllSupplys(){
+        $supply = SupplyModel::getAllSupplys();
+        
+        $totalSpent = 0;
+        $supplys = array();
+        foreach($supply as $supplysInDay){
+            $negativeBalance = ($supplysInDay["totalSupply"])*-1; 
+            $totalSpent += $negativeBalance;           
+            array_push( $supplys, array( "idSupply" => $supplysInDay['idSupply'],"date" => $supplysInDay['date'],"idEmployee" => $supplysInDay['idEmployee'],"ciEmployee" => $supplysInDay['ciEmployee'],"employeeName" => $supplysInDay['employeeName'],"totalSupply" => $supplysInDay['totalSupply']));
+
+        }
+        $totalSupplys = (count($supplys));    
+        $response = array("TotalSupply" =>$totalSupplys,"totalSpent"=>$totalSpent, "supplys" => $supplys);
+        echo $this->response->successfully("$totalSupplys Compras obtenidas para la fecha:", $response);  
+     
+    }
 
 }
 
