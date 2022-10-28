@@ -10,19 +10,10 @@ $supply = new SupplyController();
 $bodyOfRequest = file_get_contents('php://input'); //Obtiene el body de la request sin procesar(JSON).
 $supplyData = json_decode($bodyOfRequest, 1); //Transforma el JSON en un array asosciativo.
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-
-    $supply->saveSupply($supplyData);
-
-}else if($_SERVER['REQUEST_METHOD'] === 'GET'){
+if($_SERVER['REQUEST_METHOD'] === 'GET'){
     //OBTENER COMPRA POR ID
-    if(isset($_GET['idSupply'])){
-        $idSupply = $_GET['idSupply'];
-        $supply->getSupplyId($idSupply);
-        die();
-    }
-    if(isset($_GET['AllSupply'])){
-        $supply->getAllSupplys();
+    if(isset($_GET['balance'])){
+        $supply->getBalances();
         die();
     }
     //OBTENER EL DETALLE DE LAS VENTAS

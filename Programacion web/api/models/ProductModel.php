@@ -264,6 +264,7 @@
             p.product_category as category,
             p.stock,
             p.description,
+            p.picture,
             p.state
             from product p
             INNER JOIN design d

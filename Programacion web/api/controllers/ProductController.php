@@ -304,12 +304,13 @@ class ProductController
         $description = $product[0]["description"];
         $price = $product[0]["price"];
         $category = $product[0]["category"];
+        $picture = $product[0]["picture"];
         //Array de modelos
         $models = array();
         foreach($product as $modelOfProduct){
             array_push( $models, array( "size" => $modelOfProduct['size'],"design" => $modelOfProduct['design'],"barcode" => $modelOfProduct["barcode"],"stock" => $modelOfProduct['stock'],"state" => $modelOfProduct['state'] ));
         }
-        $response = array("id" => $id,"name" => $name, "description" => $description,"price" => $price,"category" => $category, "models" => $models);
+        $response = array("id" => $id,"name" => $name, "description" => $description,"price" => $price,"category" => $category,"picture" => $picture, "models" => $models);
 
         echo $this->response->successfully("TODOS los modelos para $name", $response);
     }
