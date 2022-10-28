@@ -511,7 +511,7 @@
         }
         public static function updateProductLineAttributes($idProduct, $name,$prodCategory, $price, $description, $picture){
             $conecction = new Connection();
-            $query = "UPDATE product SET name = '$name', product_category = $prodCategory, price = $price, description = '$description', picture = $picture WHERE id_product = $idProduct ";
+            $query = "UPDATE product SET name = '$name', product_category = $prodCategory, price = $price, description = '$description', picture = '$picture' WHERE id_product = $idProduct";
             return $conecction->setData($query);
         }            
         public static function disableModel($barcode){

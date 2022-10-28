@@ -2,9 +2,12 @@
     require_once("./database/Connection.php");
     class ManagementModel extends Connection {
 
-        public static function getManagementByname($name){
+        public static function getBalances(){
             $conecction = new Connection();
-            $query = "SELECT * from management WHERE name='$name'";
+            $query = "SELECT 
+            SUM(s.TOTAL) AS totalSale,
+            SUM(sp.total) AS totalSupply
+            FROM SALE s, supply sp";
             return $conecction->getData($query)->fetch_assoc();
         }
 
