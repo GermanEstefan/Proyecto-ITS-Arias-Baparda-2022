@@ -40,7 +40,6 @@ const EditDesign = () => {
         setLoading(true);
         try {
             const resp = await fetchApi(`designs.php?idDesign=${idOfDesign}`, 'PATCH', designValues);
-            
             if (resp.status === 'error') {
                 setError({ showMessage: true, message: resp.result.error_msg, error: true });
                 return setTimeout(() => setError(initStateLoading), 3000)

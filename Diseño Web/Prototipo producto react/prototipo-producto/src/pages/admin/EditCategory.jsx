@@ -3,11 +3,12 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { fetchApi } from "../../API/api";
 import ContainerBase from "../../components/admin/ContainerBase";
+import imgToBase64 from "../../helpers/imgToBase64";
 
 const EditCategory = () => {
 
     const { idOfCategory } = useParams();
-    const [categoryValues, setCategoryValues] = useState({ nameCurrent: 'Cargando...', description: 'Cargando...' })
+    const [categoryValues, setCategoryValues] = useState({ name: '', description: '', picture: '' })
     const { name, description } = categoryValues;
     const handleChangeInputs = ({ target }) => {
         setCategoryValues({
@@ -24,12 +25,14 @@ const EditCategory = () => {
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
-        fetchApi(`categorys.php?idSize=${idOfCategory}`, 'GET')
+        fetchApi(`categorys.php?idCategory=${idOfCategory}`, 'GET')
             .then(res => {
                 console.log(res)
+                const categoryData = res.result.data
                 setCategoryValues({
-                    nameCurrent: res.result.data[0].name,
-                    description: res.result.data[0].description
+                    name: categoryData.name,
+                    description: categoryData.description,
+                    picture: categoryData.picture
                 })
             })
             .catch(err => console.error(err))
@@ -38,10 +41,14 @@ const EditCategory = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
+        let bodyOfRequest = {...categoryValues};
+        const imgProdEdit = document.getElementById('img-cat-edit');
         try {
-            const categoryPhotoHardcoded = 'sadasd';
-            const bodyOfReq = {...categoryValues, picture: categoryPhotoHardcoded}
-            const resp = await fetchApi(`categorys.php?idCategory=${idOfCategory}`, 'PATCH', bodyOfReq);
+            if(imgProdEdit.value){
+                const base64Img = await imgToBase64(imgProdEdit.files[0]);
+                bodyOfRequest = {...categoryValues, picture: base64Img};       
+            } 
+            const resp = await fetchApi(`categorys.php?idCategory=${idOfCategory}`, 'PATCH', bodyOfRequest);
             console.log(resp);
             if (resp.status === 'error') {
                 setError({ showMessage: true, message: resp.result.error_msg, error: true });
@@ -62,7 +69,7 @@ const EditCategory = () => {
             <section className='container_section flex-column-center-xy generals-layout-edit'>
                 <form onSubmit={handleSubmit} autoComplete="off" >
                     <h2>Editar categoria</h2>
-                    <label htmlFor="">Nombre</label>
+                    <label className="label-form">Nombre</label>
                     <input
                         type="text"
                         className='input-form'
@@ -72,7 +79,7 @@ const EditCategory = () => {
                         onChange={handleChangeInputs}
                     />
 
-                    <label htmlFor="">Descripcion</label>
+                    <label className="label-form">Descripcion</label>
                     <input
                         type="text"
                         className='input-form'
@@ -81,7 +88,10 @@ const EditCategory = () => {
                         name='description'
                         onChange={handleChangeInputs}
                     />
-
+                    <label className="label-form">Imagen</label>
+                    <input type="file" id="img-cat-edit" />
+                    <img src={categoryValues.picture} alt={'img'} />
+                    <br />
                     <button
                         className={`button-form ${loading && 'opacity'}`}
                         disabled={loading}

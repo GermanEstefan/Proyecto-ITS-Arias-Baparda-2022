@@ -113,8 +113,9 @@ const EditProducts = () => {
 
                     <label className="label-form">Imagen</label>
                     <input type="file" id="img-prod-edit" />
+                    <br />
                     <img src={values.picture} alt="img" />
-
+                    <br />
                     <label className="label-form">Descripcion</label>
                     <textarea
                         onChange={handleChangeInputs}
@@ -131,7 +132,6 @@ const EditProducts = () => {
                         error.showMessage &&
                         <span className={`${error.error ? 'warning-message' : 'successfully-message'} `} >{error.message}</span>
                     }
-
                 </form>
             </section>
         </ContainerBase>
