@@ -31,7 +31,7 @@ date_format(r.date, '%d/%m/%Y %T') AS lastUpdate,
 r.comment AS lastComment
 FROM report r , status s, employee e, user u
 WHERE r.status_report = s.id_status
-AND s.name LIKE 'PENDIENTE'
+AND s.name = 'PENDIENTE'
 AND r.employee_report = e.ci
 AND e.employee_user = u.id_user
 4.	Listar los 50 clientes que más compras han realizado.

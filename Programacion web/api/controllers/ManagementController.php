@@ -37,7 +37,6 @@ class ManagementController {
         array_push( $balance, array( "TotalSale" => $totalSale,"TotalSupply" => $totalSupply,"Diference" => $diference)); 
         echo $this->response->successfully("Balance de saldos:",$balance);
     }
-    //consultas
     public function getBestClients($limit){
         if($limit<0){     
             echo $this->response->error203("El limite $limit no es correcto");
@@ -48,7 +47,6 @@ class ManagementController {
         $clients= array();
         foreach($management as $client){
             $isBusiness = $client["companyName"];
-            //REVISAR ACA
             if(!$isBusiness){
             array_push( $clients, array("idClient" => $client['idClient'],"clientInfo" => $client['clientInfo'],"mailClient" => $client['mailClient'],"spentMoney" => $client['spentMoney'],"totalSales" => $client['totalSales']));    
         }else{
@@ -57,6 +55,19 @@ class ManagementController {
         }
         $response = array("clients"=>$clients);
         echo $this->response->successfully("Los mejores $limit clientes", $response);
+    }
+    public function getBestProducts($limit){
+        if($limit<0){     
+            echo $this->response->error203("El limite $limit no es correcto");
+            die();
+
+        }
+        $management = ManagementModel::getBestProducts($limit);
+        $products= array();
+        foreach($management as $product){
+            array_push( $products, array("totalSales" => $product['totalSales'],"totalRaised" => $product['totalRaised'],"barcode" => $product['barcode'],"product" => $product['product']));    
+        }
+        echo $this->response->successfully("Los $limit productos mas vendidos", $products);
     }
 
 }

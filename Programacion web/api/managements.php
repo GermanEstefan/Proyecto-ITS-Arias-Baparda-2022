@@ -11,15 +11,21 @@ $bodyOfRequest = file_get_contents('php://input'); //Obtiene el body de la reque
 $managmenData = json_decode($bodyOfRequest, 1); //Transforma el JSON en un array asosciativo.
 
 if($_SERVER['REQUEST_METHOD'] === 'GET'){
-    //OBTENER COMPRA POR ID
+    //OBTENER BALANCE DE LA EMPRESA (PERDIDAS - GANANCIAS)
     if(isset($_GET['balance'])){
         $managment->getBalances();
         die();
     }
-    //OBTENER COMPRA POR ID
-    if(isset($_GET['bestclients'])){
-        $limit = $_GET['bestclients'];
+    //OBTENER LOS MEJORES CLIENTES (SEGUN CANTIDAD DE COMPRAS)
+    if(isset($_GET['bestClients'])){
+        $limit = $_GET['bestClients'];
         $managment->getBestClients($limit);
+        die();
+    }
+    //OBTENER LOS PRODUCTOS MAS VENDIDOS 
+    if(isset($_GET['bestProducts'])){
+        $limit = $_GET['bestProducts'];
+        $managment->getBestProducts($limit);
         die();
     }
    

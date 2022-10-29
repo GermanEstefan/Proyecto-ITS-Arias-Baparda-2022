@@ -28,6 +28,22 @@
             LIMIT $limit";
             return $conecction->getData($query)->fetch_all(MYSQLI_ASSOC);
         }
+        public static function getBestProducts($limit){
+            $conecction = new Connection();
+            $query = "SELECT 
+            sum(sd.quantity) AS totalSales,
+            sum(sd.total) AS totalRaised,
+            p.barcode,
+            concat_ws(' ', p.name , d.name, s.name) AS product
+            FROM sale_detail sd, product p, design d, size s 
+            WHERE p.barcode = sd.product_sale
+            AND p.product_size = s.id_size
+            AND p.product_design = d.id_design
+            GROUP BY (sd.product_sale)
+            ORDER BY totalSales desc
+            LIMIT $limit";
+            return $conecction->getData($query)->fetch_all(MYSQLI_ASSOC);
+        }
 
         
     }
