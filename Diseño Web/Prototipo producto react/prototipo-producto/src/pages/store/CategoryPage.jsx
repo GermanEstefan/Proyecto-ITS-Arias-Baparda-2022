@@ -12,7 +12,6 @@ const CategoryPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(3);
   const [productList, setProductList] = useState([]);
-  const [pictureLinks, setPictureLinks] = useState([]);
   useEffect(() => {
     window.scroll(0, 0);
     getProductsByCategory();
@@ -22,8 +21,6 @@ const CategoryPage = () => {
     const resp = await fetchApi(`products.php?categoryName=${category}`, "GET");
 
     setProductList(resp.result.data);
-    setPictureLinks(resp.result.data);
-    console.log(resp);
   };
 
   //   {
@@ -145,7 +142,7 @@ const CategoryPage = () => {
   return (
     <ContainerBase>
       <div className="main">
-        <PageTitle title={category} isArrow={true} />
+        <PageTitle title={category} isArrow={true} arrowGoTo={'/'} />
 
         <div className="card-container">
           {productList.length === 0 && (
@@ -157,14 +154,14 @@ const CategoryPage = () => {
                 className="animate__animated animate__bounce"
                 product={product.name}
                 description={product.description}
-                img={product.picture ? product.picture.split("&")[0] : NoPhoto}
+                img={product.picture ? product.picture : NoPhoto}
                 key={index}
                 id={product.id_product}
               />
             );
           })}
         </div>
-        {productList.length !== 0 && (
+        {productList.length > itemsPerPage && (
           <Pagination
             currentPage={currentPage}
             itemsPerPage={itemsPerPage}

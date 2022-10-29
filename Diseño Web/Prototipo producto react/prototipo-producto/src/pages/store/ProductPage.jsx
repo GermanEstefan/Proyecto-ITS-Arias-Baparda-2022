@@ -7,7 +7,9 @@ import { fetchApi } from "../../API/api";
 import { cartContext, userStatusContext } from "../../App";
 import Select from "react-select";
 import NoPhoto from "../../assets/img/no-photo.png";
+import { useNavigate } from "react-router-dom";
 const ProductPage = () => {
+  const navigate = useNavigate()
   const { userData } = useContext(userStatusContext);
   const { category, id } = useParams();
   const { cart, setCart } = useContext(cartContext);
@@ -18,21 +20,11 @@ const ProductPage = () => {
   const [sizesList, setSizesList] = useState([]);
   const [isAddedToCart, setIsAddedToCart] = useState(false);
   const [allModels, setAllModels] = useState([]);
-  const [pictureLinks, setPictureLinks] = useState([]);
-
+  const [img, setImg] = useState("");
   useEffect(() => {
     window.scroll(0, 0);
-    setPictureLinks(
-      "https://i.ibb.co/mRpFg8R/8negro.jpg & https://i.ibb.co/9bKNc4d/remera2.jpg & https://i.ibb.co/9bKNc4d/remera2.jpg".split(
-        "&"
-      )
-    );
     getProductById();
   }, []);
-
-  // useEffect(() => {
-  //   setCart(cart.filter(({barcode}) => barcode !== product.barcode));
-  // }, [product]);
 
   const handleAddToCart = () => {
     setCart([
@@ -53,6 +45,7 @@ const ProductPage = () => {
     const resp = await fetchApi(`products.php?modelsOfProduct=${id}`, "GET");
     setProduct(resp.result.data.models[0] ? resp.result.data.models[0] : {});
     setAllModels(resp.result.data.models);
+    setImg(resp.result.data.picture);
     setproductName(resp.result.data.name);
     setproductDescription(resp.result.data.description);
     getDesignsList(resp.result.data.models);
@@ -105,10 +98,7 @@ const ProductPage = () => {
         <div className="productPage">
           <div className="productPage__img">
             <div>
-              {/* Hacer carousel */}
-              <img src={pictureLinks[0]} width="200" />
-              <img src={pictureLinks[1]} width="200" />
-              <img src={pictureLinks[2]} width="200" />
+              <img src={img || NoPhoto} width="200" />
             </div>
           </div>
           <div className="productPage__description">
@@ -133,7 +123,10 @@ const ProductPage = () => {
                 />
               </div>
               {/* )} */}
-              <button className="buyBtn" disabled={!userData.auth}>
+              <button className="buyBtn" disabled={!userData.auth} onClick={() => {
+                handleAddToCart()
+                navigate("/shoppingCart")
+              }} >
                 Comprar
               </button>
               <button

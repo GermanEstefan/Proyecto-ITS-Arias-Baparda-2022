@@ -12,7 +12,18 @@
     table{
         margin: auto;
         width: 60vw;
+<<<<<<< HEAD
         max-width: 900px;
         table-layout: fixed;
+=======
+        max-width: 1000px;
+        td {
+            text-align: justify;
+        }
+    }
+    .table-container{
+        text-align: center;
+        margin-bottom: 50px;
+>>>>>>> 5a6d20f736d5c6118cfa10e2013087f0235a6a16
     }
 }

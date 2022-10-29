@@ -16,7 +16,12 @@ const SalesHistory = () => {
       `sales.php?salesClient=${userData.email}`,
       "GET"
     );
-    resp && setSales(resp.result.data.sales);
+    if(resp.result.error_msg === 'Aun no compro nada'){
+      setSales([])
+    }
+    if(resp.status === 'successfully'){
+      setSales(resp.result.data)
+    }
   };
 
   return (
