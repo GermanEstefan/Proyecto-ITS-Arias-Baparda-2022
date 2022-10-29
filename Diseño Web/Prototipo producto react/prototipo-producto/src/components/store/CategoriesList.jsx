@@ -12,9 +12,10 @@ const CategoriesList = () => {
 
   const getCategories = async () => {
     const resp = await fetchApi("categorys.php", "GET");
+    console.log(resp.result.data)
     setCategories(resp.result.data);
   };
-
+  
   return (
     <div className="card-container">
       {categories.map((category, index) => {

@@ -9,19 +9,20 @@ import { useContext } from "react";
 import { cartContext, userStatusContext } from "../../App";
 
 import Input from "../../components/store/Input";
-import Imagen from "../../assets/img/Obreros.jpg";
+import Purchase from "../../assets/img/purchase.jpg";
 import Select from "react-select";
+import { useNavigate } from "react-router-dom";
 
 const ShoppingCartPage = () => {
   const { cart, setCart } = useContext(cartContext);
   const { userData } = useContext(userStatusContext);
-
+  const navigate = useNavigate()
   const [total, setTotal] = useState(0);
   const buyForm = useRef();
   const [values, setValues] = useState({
     email: userData.email,
     address: userData.address,
-    deliveryTime: null,
+    deliveryTime: 1,
     paymentMenthod: null,
   });
   const [isAddressDisable, setIsAddressDisable] = useState(false);
@@ -35,8 +36,8 @@ const ShoppingCartPage = () => {
   useEffect(() => {
     window.scroll(0, 0);
     getProductsListByBarcode();
-    getStoreHour();
-    getDeliveryHour();
+    getDeliveryHours();
+    getStoreHours();
   }, []);
   useEffect(() => {
     setTotalPrice();
@@ -80,20 +81,28 @@ const ShoppingCartPage = () => {
     setTotalPrice();
   };
 
-  const getStoreHour = async () => {
+  const getStoreHours = async () => {
     const resp = await fetchApi("Deliverys.php?local", "GET");
+    console.log(resp);
     setStoreHours(
       resp.result.data.map((hourFromBack) => ({
-        value: hourFromBack.id_delivery,
+        value: hourFromBack.id_local,
         label: hourFromBack.name,
       }))
     );
   };
-
-  const getDeliveryHour = async () => {
-    const resp = await fetchApi("Deliverys.php?delivery", "GET");
-    setDeliveryHours(resp.result.data);
+  const getDeliveryHours = async () => {
+    // POR AHORA EL BACK NO TRAE DATOS
+    // const resp = await fetchApi("Deliverys.php?delivery", "GET");
+    // console.log(resp);
+    // setDeliveryHours(
+    //   resp.result.data.map((hourFromBack) => ({
+    //     value: hourFromBack.id_delivery,
+    //     label: hourFromBack.name,
+    //   }))
+    // );
   };
+
   const setTotalPrice = () => {
     setTotal(
       cart.length > 0 &&
@@ -109,11 +118,6 @@ const ShoppingCartPage = () => {
     buyForm.current.scrollIntoView();
   };
 
-  const deliveryTimes = [
-    { value: 1, label: "08:00 - 12:00" },
-    { value: 2, label: "12:00 - 16:00" },
-    { value: 3, label: "16:00 - 20:00" },
-  ];
   const paymentMethods = [
     { value: 0, label: "Efectivo" },
     { value: 1, label: "Online" },
@@ -131,8 +135,8 @@ const ShoppingCartPage = () => {
         quantity: product.quantity,
       })),
     };
-    setCart([])
-    console.log(purchaseData)
+    setCart([]);
+    console.log(purchaseData);
     fetchApi("sales.php", "POST", purchaseData);
   };
 
@@ -157,13 +161,13 @@ const ShoppingCartPage = () => {
   return (
     <ContainerBase>
       <div className="cartContainer">
-        <PageTitle title={"Carrito"} isArrow={true} arrowGoTo={`/`} />
+        <PageTitle title={"Carrito"} isArrow={true} goBack />
         <div className="cartPage">
           <CartDetails total={total || 0} onClick={goToCartBuyForm} />
           {productsList.map((product, index) => (
             <CartItem
               key={index}
-              img={product.picture ? product.picture.split("&")[0] : NoPhoto}
+              img={product.picture ? product.picture : NoPhoto}
               barcode={product.barcode}
               name={product.name}
               price={product.price}
@@ -178,11 +182,7 @@ const ShoppingCartPage = () => {
           )}
         </div>
         <div ref={buyForm} className="form-container">
-          <img
-            className="form-img"
-            src={Imagen ? Imagen : NoPhoto}
-            alt="Imagen"
-          />
+          <img className="form-img" src={Purchase} alt="Imagen" />
           <form>
             <h1>Confirma tu compra</h1>
             <div className="radioSection">
@@ -230,7 +230,6 @@ const ShoppingCartPage = () => {
                 disabled={isAddressDisable}
               />
             </div>
-            {/* Los rangos horarios van a venir por endpoint */}
             <span className="mt-5">
               {isShipping ? "Horarios de envío" : "Horarios del local"}
             </span>
@@ -239,7 +238,7 @@ const ShoppingCartPage = () => {
               id="deliveryTime"
               className="select"
               onChange={(e) => setDeliveryTime(e.value)}
-              options={isShipping ? deliveryTimes : storeHours}
+              options={isShipping ? deliveryHours : storeHours}
               placeholder={"Horario"}
               // defaultValue={isShipping ? deliveryTimes[0] : storeHours[0]}
             />
@@ -258,7 +257,7 @@ const ShoppingCartPage = () => {
               type="submit"
               disabled={
                 values.address === "" ||
-                values.deliveryTime === null ||
+                // values.deliveryTime === null ||
                 values.paymentMenthod === null
               }
             >

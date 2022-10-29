@@ -47,7 +47,7 @@ const Home = () => {
           )}
         </section>
         <h1 className="home-page__title" ref={productsView}>
-          Categorias
+          Categorías
         </h1>
         <CategoriesList />
       </main>

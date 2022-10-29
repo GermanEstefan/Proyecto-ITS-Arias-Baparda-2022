@@ -34,9 +34,6 @@ const UserPanel = () => {
             <li onClick={() => handleChangeView("buyHistory")}>
               Historial de compras
             </li>
-            <li onClick={() => handleChangeView("payMethods")}>
-              Metodos de pago
-            </li>
             <li onClick={() => handleChangeView("disabledAccount")}>
               Desactivar cuenta
             </li>
@@ -50,8 +47,6 @@ const UserPanel = () => {
             <UpdatePasswordForm />
           ) : view === "buyHistory" ? (
             <SalesHistory />
-          ) : view === "payMethods" ? (
-            <h1>Metodos de pago</h1>
           ) : view === "disabledAccount" ? (
             <h1>Desactivar cuenta</h1>
           ) : null}

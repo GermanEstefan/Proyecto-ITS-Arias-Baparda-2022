@@ -1,7 +1,8 @@
 .productContainer {
   margin: 20vh auto auto auto;
   min-height: 80vh;
-  max-width: 800px;
+  
+  max-width: 900px;
 
   .productPage {
     margin-bottom: 2em;
@@ -31,6 +32,9 @@
 
       .productPage__description__body {
         margin-left: 15px;
+        p {
+          text-align: justify;
+        }
       }
 
       .productPage__description__buttons {
