@@ -335,6 +335,9 @@ class ProductController
         $barcodePromo = $product[0]["barcodePromo"];
         $namePromo = $product[0]["namePromo"];
         $stockPromo = $product[0]["stockPromo"];        
+        $pricePromo = $product[0]["pricePromo"];        
+        $descriptionPromo = $product[0]["descriptionPromo"];        
+        $picturePromo = $product[0]["picturePromo"];        
         $state = $product[0]["state"];        
         //Array de productos en promo
         $products = array();
@@ -346,7 +349,7 @@ class ProductController
             "design" => $prodInPromo['design'],
             "size" => $prodInPromo['size']));
         }
-        $response = array("barcodePromo" => $barcodePromo, "namePromo" => $namePromo,"stockPromo" => $stockPromo,"state" => $state,"products" => $products);
+        $response = array("barcodePromo" => $barcodePromo, "namePromo" => $namePromo,"stockPromo" => $stockPromo,"pricePromo" => $pricePromo,"descriptionPromo" => $descriptionPromo,"picturePromo" => $picturePromo,"state" => $state,"products" => $products);
 
         echo $this->response->successfully("Productos que integran la Promo: $namePromo", $response);
     }
