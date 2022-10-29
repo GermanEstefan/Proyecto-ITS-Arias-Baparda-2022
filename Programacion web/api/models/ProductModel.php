@@ -504,7 +504,7 @@
         }
         public static function updatePromo($idProduct, $name, $stock, $price, $description, $picture){
             $conecction = new Connection();
-            $query = "UPDATE product SET name = '$name', stock = $stock, price = $price, description = '$description', picture = $picture WHERE id_product = '$idProduct' ";
+            $query = "UPDATE product SET name = '$name', stock = $stock, price = $price, description = '$description', picture = '$picture' WHERE id_product = $idProduct ";
             return $conecction->setData($query);
         }
         public static function updateModel($barcode,$prodDesign,$prodSize,$stock){
