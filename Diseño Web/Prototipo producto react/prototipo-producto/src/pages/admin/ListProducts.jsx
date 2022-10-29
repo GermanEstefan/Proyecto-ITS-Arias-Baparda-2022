@@ -103,34 +103,33 @@ const ListProducts = () => {
                         : <>
                             <h1 className='title-page'>Productos y promociones</h1>
 
-                            <div className='table-container'>
-                                <h2>Productos</h2>
-                                <table className='table-template'>
-                                    <tbody>
-                                        <tr>
-                                            <th>Id del producto</th>
-                                            <th>Nombre</th>
-                                            <th>Descripcion</th>
-                                            <th>Categoria</th>
-                                            <th>Precio unitario</th>
-                                            <th colSpan={2}>Controles</th>
-                                        </tr>
-                                        {
-                                            products.map(product => (
-                                                <Fragment key={product.id_product}>
-                                                    <tr className='row-selectable' onClick={() => handleGetModelsOfProduct(product.id_product)} >
-                                                        <td>{product.id_product}</td>
-                                                        <td>{product.name}</td>
-                                                        <td>{product.description}</td>
-                                                        <td>{product.categoryName}</td>
-                                                        <td>{product.price}</td>
-                                                        <td className="controls-table" onClick={() => navigate(`/admin/products/edit-product/${product.id_product}`)} ><FontAwesomeIcon icon={faPencil} /></td>
-                                                        <td className="controls-table" onClick={() => alert('eliminar producto')}><FontAwesomeIcon icon={faTrash} /></td>
-                                                    </tr>
-                                                    {
-                                                        (modelsOfProduct.idProduct === product.id_product) &&
-                                                        <>
-                                                            <tr className='row-header-child'>
+                            <table className='table-template'>
+                                <caption>Productos</caption>
+                                <tbody>
+                                    <tr>
+                                        <th>Id del producto</th>
+                                        <th>Nombre</th>
+                                        <th>Descripcion</th>
+                                        <th>Categoria</th>
+                                        <th>Precio unitario</th>
+                                        <th>Controles</th>
+                                    </tr>
+                                    {
+                                        products.map(product => (
+                                            <Fragment key={product.id_product} >
+                                                <tr className='row-selectable' onClick={() => handleGetModelsOfProduct(product.id_product)} >
+                                                    <td>{product.id_product}</td>
+                                                    <td>{product.name}</td>
+                                                    <td>{product.description}</td>
+                                                    <td>{product.categoryName}</td>
+                                                    <td>{product.price}</td>
+                                                    <td className="controls-table" onClick={() => navigate(`/admin/products/edit-product/${product.id_product}`)} ><FontAwesomeIcon icon={faPencil} /></td>
+                                                </tr>
+                                                {
+                                                    (modelsOfProduct.idProduct === product.id_product) &&
+                                                    <table className='child-table'>
+                                                        <tbody>
+                                                            <tr className='child-table_row-header'>
                                                                 <th>Codigo de barras</th>
                                                                 <th>Talle</th>
                                                                 <th>Diseño</th>
@@ -140,7 +139,7 @@ const ListProducts = () => {
                                                             </tr>
                                                             {
                                                                 modelsOfProduct.models.map(model => (
-                                                                    <tr key={model.barcode} className='row-child'>
+                                                                    <tr key={model.barcode} className='child-table_row'>
                                                                         <td>{model.barcode}</td>
                                                                         <td>{model.size}</td>
                                                                         <td>{model.design}</td>
@@ -148,86 +147,76 @@ const ListProducts = () => {
                                                                         <td>{model.state}</td>
                                                                         {
                                                                             model.state === "1"
-                                                                                ? <td className="controls-row-child" onClick={() => handleDisableModel(model.barcode)} > <FontAwesomeIcon icon={faTrash} /> </td>
-                                                                                : <td className="controls-row-child" onClick={() => handleEnableModel(model.barcode)} > <FontAwesomeIcon icon={faCheck} /> </td>
+                                                                                ? <td className="controls-row-child warning-control" onClick={() => handleDisableModel(model.barcode)} > <FontAwesomeIcon icon={faTrash} /> </td>
+                                                                                : <td className="controls-row-child successfully-control" onClick={() => handleEnableModel(model.barcode)} > <FontAwesomeIcon icon={faCheck} /> </td>
                                                                         }
                                                                         <td className="controls-row-child" onClick={() => navigate(`/admin/products/edit-model/${model.barcode}`)}> <FontAwesomeIcon icon={faPencil} /> </td>
                                                                     </tr>
                                                                 ))
                                                             }
+                                                        </tbody>
+                                                    </table>
+                                                }
+                                            </Fragment>
+                                        ))
+                                    }
+                                </tbody>
+                            </table>
 
-                                                        </>
-                                                    }
-                                                </Fragment>
-                                            ))
-                                        }
-                                    </tbody>
-                                </table>
-                            </div>
-
-                            <div className='table-container'>
-                                <h2>Promociones</h2>
-                                <table className='table-template'>
-                                    <tbody>
-                                        <tr>
-                                            <th>Id de la promo</th>
-                                            <th>Nombre</th>
-                                            <th>Descripcion</th>
-                                            <th>Precio</th>
-                                            <th>Estado</th>
-                                            <th colSpan={2}>Controles</th>
-                                        </tr>
-                                        {
-                                            promos.map(promo => (
-                                                <Fragment key={promo.id_product}>
-                                                    <tr className='row-selectable' onClick={() => handleGetProductsOfPromo(promo.id_product)} >
-                                                        <td>{promo.id_product}</td>
-                                                        <td>{promo.name}</td>
-                                                        <td>{promo.description}</td>
-                                                        <td>{promo.price}</td>
-                                                        <td>{promo.state}</td>
-                                                        <td className="controls-table" onClick={() => alert('editar producto')} ><FontAwesomeIcon icon={faPencil} /></td>
-                                                        <td className="controls-table" onClick={() => alert('eliminar producto')}><FontAwesomeIcon icon={faTrash} /></td>
-                                                    </tr>
-                                                    {
-                                                        (productOfPromos.idPromo === promo.id_product) &&
-                                                        <>
-                                                            <tr className='row-header-child'>
-                                                                <th>Codigo de barras</th>
-                                                                <th>Cantidad</th>
-                                                                <th>Id producto</th>
+                            <table className='table-template'>
+                                <caption>Promociones</caption>
+                                <tbody>
+                                    <tr>
+                                        <th>Id de la promo</th>
+                                        <th>Nombre</th>
+                                        <th>Descripcion</th>
+                                        <th>Precio</th>
+                                        <th>Estado</th>
+                                        <th colSpan={2}>Controles</th>
+                                    </tr>
+                                    {
+                                        promos.map(promo => (
+                                            <Fragment key={promo.id_product}>
+                                                <tr className='row-selectable' onClick={() => handleGetProductsOfPromo(promo.id_product)} >
+                                                    <td>{promo.id_product}</td>
+                                                    <td>{promo.name}</td>
+                                                    <td>{promo.description}</td>
+                                                    <td>{promo.price}</td>
+                                                    <td>{promo.state}</td>
+                                                    <td className="controls-table" onClick={() => navigate(`/admin/products/edit-promo/${promo.id_product}`)} ><FontAwesomeIcon icon={faPencil} /></td>
+                                                    <td className="controls-table" onClick={() => alert('eliminar producto')}><FontAwesomeIcon icon={faTrash} /></td>
+                                                </tr>
+                                                {
+                                                    (productOfPromos.idPromo === promo.id_product) &&
+                                                    <table className='child-table'>
+                                                        <tbody>
+                                                            <tr className='child-table_row-header'>
+                                                                <th>Codigo de barras del producto</th>
                                                                 <th>Nombre</th>
+                                                                <th>Cantidad</th>
                                                                 <th>Diseño</th>
                                                                 <th>Talle</th>
-                                                                <th colSpan={2}>Controles</th>
                                                             </tr>
                                                             {
-                                                                productOfPromos.productsPromo.map(product => (
-                                                                    <tr key={product.barcodeProd} className='row-child'>
-                                                                        <td>{product.barcodeProd}</td>
-                                                                        <td>{product.quantity}</td>
-                                                                        <td>{product.idProduct}</td>
-                                                                        <td>{product.name} </td>
-                                                                        <td>{product.design}</td>
-                                                                        <td>{product.size}</td>
-                                                                        {
-                                                                            product.state === "1"
-                                                                                ? <td className="controls-row-child" onClick={() => handleDisableModel(product.barcode)} > <FontAwesomeIcon icon={faTrash} /> </td>
-                                                                                : <td className="controls-row-child" onClick={() => handleEnableModel(product.barcode)} > <FontAwesomeIcon icon={faCheck} /> </td>
-                                                                        }
-                                                                        <td className="controls-row-child" onClick={() => navigate(`/admin/products/edit-model/${product.barcode}`)}> <FontAwesomeIcon icon={faPencil} /> </td>
+                                                                productOfPromos.productsPromo.map(promo => (
+                                                                    <tr key={promo.barcodeProd} className='child-table_row'>
+                                                                        <td>{promo.barcodeProd}</td>
+                                                                        <td>{promo.name}</td>
+                                                                        <td>{promo.quantity}</td>
+                                                                        <td>{promo.design} </td>
+                                                                        <td>{promo.size}</td>
                                                                     </tr>
                                                                 ))
                                                             }
+                                                        </tbody>
+                                                    </table>
+                                                }
+                                            </Fragment>
+                                        ))
+                                    }
+                                </tbody>
+                            </table>
 
-                                                        </>
-                                                    }
-                                                </Fragment>
-                                            ))
-                                        }
-                                    </tbody>
-                                </table>
-                            </div>
                         </>
                 }
 

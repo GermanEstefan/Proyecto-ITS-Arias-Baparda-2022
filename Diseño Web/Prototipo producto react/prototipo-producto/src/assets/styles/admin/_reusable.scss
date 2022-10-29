@@ -1,6 +1,8 @@
 .container_section {
-  width: 100%;
+  width: 80%;
   min-height: 100vh;
+  right: 0;
+  position: absolute;
 }
 .opacity {
   opacity: 0.5;
@@ -68,11 +70,16 @@
 .label-form {
   font-weight: bold;
   font-size: 1.1rem;
-  margin-bottom: 5px;
 }
 .table-template {
   border-radius: 5px;
   position: relative;
+  margin-bottom: 50px;
+  caption{
+    font-size: 1.4rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
   th,
   td {
     border-radius: 5px;
@@ -95,28 +102,34 @@
 .row-selectable {
   cursor: pointer;
   transition: 0.3s;
-  &:hover {
-    transform: scale(0.98);
+  &:hover {transform: scale(0.98);}
+}
+
+.child-table{
+  background-color: #dfdfdf;
+  padding: 20px 0;
+  border-radius: 5px;
+  .child-table_row-header{
+    width: 100%;
+    th {
+      font-size: 1rem;
+      padding: 3px 0;
+      background-color: transparent;
+      border-radius: 5px;
+      color: black;
+      font-weight: bold;
+      font-size: 1.1rem;
+    }
+  }
+  .child-table_row {
+    td {
+      font-size: 0.9rem;
+      background-color: transparent;
+      border-radius: 5px;
+    }
   }
 }
 
-.row-header-child {
-  position: relative;
-  th {
-    font-size: 1rem;
-    padding: 3px 0;
-    background-color: transparent;
-    border-radius: 0;
-  }
-}
-
-.row-child {
-  position: relative;
-  td {
-    font-size: 0.9rem;
-    background-color: transparent;
-  }
-}
 .select {
   margin: 5px auto;
   min-width: 200px;
@@ -131,7 +144,6 @@
   font-size: 1.2rem !important;
   transition: 0.3s;
   padding: 0;
-  width: 50px;
   cursor: pointer;
   &:hover {
     color: lighten($color: black, $amount: 20);
@@ -199,5 +211,23 @@
     flex-direction: column;
     width: 50%;
     margin-right: 15px;
+  }
+}
+
+.warning-control{
+  color: rgb(209, 27, 27);
+  transition: color .3s;
+  font-size: 1.2rem;
+  &:hover{
+    color: lighten($color: rgb(209, 27, 27), $amount: 20);
+  }
+}
+
+.successfully-control{
+  color: rgb(58, 182, 42);
+  transition: color .3s;
+  font-size: 1.2rem;
+  &:hover{
+    color: lighten($color: rgb(58, 182, 42), $amount: 20);
   }
 }

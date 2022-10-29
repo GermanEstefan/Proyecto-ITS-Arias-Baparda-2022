@@ -43,14 +43,14 @@
         background-color: $black;
         color: #fff;
         min-height: 100vh;
-        padding: 0 40px;
-        position: relative;
+        padding: 0 2%;
+        position: fixed;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        width: 50vw;
-        max-width: 250px;
+        width: 15% - 2%;
+        min-width: 200px;
         > img {
             position: absolute;
             top: 20px;

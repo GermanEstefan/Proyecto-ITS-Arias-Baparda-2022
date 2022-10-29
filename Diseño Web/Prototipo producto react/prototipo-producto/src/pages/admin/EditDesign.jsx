@@ -7,7 +7,7 @@ import ContainerBase from "../../components/admin/ContainerBase";
 const EditDesign = () => {
 
     const { idOfDesign } = useParams();
-    const [designValues, setDesignValues] = useState({ nameCurrent: 'Cargando...', description: 'Cargando...' })
+    const [designValues, setDesignValues] = useState({ name: 'Cargando...', description: 'Cargando...' })
     const { name, description } = designValues;
     const handleChangeInputs = ({ target }) => {
         setDesignValues({
@@ -27,9 +27,10 @@ const EditDesign = () => {
         fetchApi(`designs.php?idDesign=${idOfDesign}`)
             .then(res => {
                 console.log(res)
+                const designData = res.result.data;
                 setDesignValues({
-                    nameCurrent: res.name,
-                    description: res.description
+                    name: designData.name,
+                    description: designData.description
                 })
             })
             .catch(err => console.error(err))

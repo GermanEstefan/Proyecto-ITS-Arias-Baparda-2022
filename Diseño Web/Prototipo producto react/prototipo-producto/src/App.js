@@ -30,6 +30,7 @@ import Supplier from "./pages/admin/Supplier";
 import EditSupplier from "./pages/admin/EditSupplier";
 import BuyProducts from "./pages/admin/BuyProducts";
 import ListBuys from "./pages/admin/ListBuys";
+import EditPromo from "./pages/admin/EditPromo";
 
 export const userStatusContext = createContext({});
 export const cartContext = createContext([]);
@@ -83,6 +84,7 @@ const App = () => {
           <Route path="/admin/products-promo/create" element={<CreatePromotion />}/>
           <Route path="/admin/products/edit-model/:barcode" element={<EditModelProduct />} />
           <Route path="/admin/products/edit-product/:idProduct" element={<EditProducts />}/>
+          <Route path="/admin/products/edit-promo/:idPromo" element={<EditPromo />}/>
           <Route path="/admin/products/buy" element={<BuyProducts />} />
           <Route path="/admin/products/buy-list" element={<ListBuys />} />
           <Route path="/admin/shipments/list" element={<ListShipments />} />

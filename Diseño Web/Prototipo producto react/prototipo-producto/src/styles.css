@@ -891,8 +891,10 @@
 }
 
 .container_section {
-  width: 100%;
+  width: 80%;
   min-height: 100vh;
+  right: 0;
+  position: absolute;
 }
 
 .opacity {
@@ -969,12 +971,17 @@
 .label-form {
   font-weight: bold;
   font-size: 1.1rem;
-  margin-bottom: 5px;
 }
 
 .table-template {
   border-radius: 5px;
   position: relative;
+  margin-bottom: 50px;
+}
+.table-template caption {
+  font-size: 1.4rem;
+  font-weight: bold;
+  margin-bottom: 10px;
 }
 .table-template th,
 .table-template td {
@@ -1002,22 +1009,27 @@
   transform: scale(0.98);
 }
 
-.row-header-child {
-  position: relative;
+.child-table {
+  background-color: #dfdfdf;
+  padding: 20px 0;
+  border-radius: 5px;
 }
-.row-header-child th {
+.child-table .child-table_row-header {
+  width: 100%;
+}
+.child-table .child-table_row-header th {
   font-size: 1rem;
   padding: 3px 0;
   background-color: transparent;
-  border-radius: 0;
+  border-radius: 5px;
+  color: black;
+  font-weight: bold;
+  font-size: 1.1rem;
 }
-
-.row-child {
-  position: relative;
-}
-.row-child td {
+.child-table .child-table_row td {
   font-size: 0.9rem;
   background-color: transparent;
+  border-radius: 5px;
 }
 
 .select {
@@ -1037,7 +1049,6 @@
   font-size: 1.2rem !important;
   transition: 0.3s;
   padding: 0;
-  width: 50px;
   cursor: pointer;
 }
 .controls-row-child:hover {
@@ -1102,6 +1113,24 @@
   flex-direction: column;
   width: 50%;
   margin-right: 15px;
+}
+
+.warning-control {
+  color: rgb(209, 27, 27);
+  transition: color 0.3s;
+  font-size: 1.2rem;
+}
+.warning-control:hover {
+  color: #eb6767;
+}
+
+.successfully-control {
+  color: rgb(58, 182, 42);
+  transition: color 0.3s;
+  font-size: 1.2rem;
+}
+.successfully-control:hover {
+  color: #77dd6a;
 }
 
 .cartContainer {
@@ -1305,14 +1334,14 @@
   background-color: #121212;
   color: #fff;
   min-height: 100vh;
-  padding: 0 40px;
-  position: relative;
+  padding: 0 2%;
+  position: fixed;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 50vw;
-  max-width: 250px;
+  width: 13%;
+  min-width: 200px;
 }
 .container-admin aside > img {
   position: absolute;
@@ -1568,14 +1597,17 @@
   text-align: center;
   margin: 50px 0;
 }
+.list-products h2 {
+  text-align: center;
+}
+.list-products .table-template {
+  margin-bottom: 50px;
+}
 .list-products table {
   margin: auto;
   width: 60vw;
-  max-width: 1000px;
-}
-.list-products .table-container {
-  text-align: center;
-  margin-bottom: 50px;
+  max-width: 900px;
+  table-layout: fixed;
 }
 
 .edit-model form {

@@ -130,6 +130,8 @@ const Sizes = () => {
                                                 </tr>
                                                 {
                                                     sizes.map(size => (
+                                                        !(size.id_size === '1')
+                                                        &&
                                                         <tr key={size.id_size}>
                                                             <td>{size.id_size}</td>
                                                             <td>{size.name}</td>

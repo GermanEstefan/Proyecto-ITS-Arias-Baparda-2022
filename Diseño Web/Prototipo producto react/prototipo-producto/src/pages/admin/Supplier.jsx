@@ -57,7 +57,7 @@ const Supplier = () => {
         }
         const suppliersFiltered = suppliers.filter( supplier => {
             if(supplier.id_supplier === idSupplier){
-                supplier.state = 0;
+                supplier.state = '0';
             }
             return supplier
         });
@@ -74,7 +74,7 @@ const Supplier = () => {
         }
         const suppliersFiltered = suppliers.filter( supplier => {
             if(supplier.id_supplier === idSupplier){
-                supplier.state = 1;
+                supplier.state = '1';
             }
             return supplier
         });

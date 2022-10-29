@@ -44,8 +44,9 @@ const EditCategory = () => {
         let bodyOfRequest = {...categoryValues};
         const imgProdEdit = document.getElementById('img-cat-edit');
         try {
+            let base64Img;
             if(imgProdEdit.value){
-                const base64Img = await imgToBase64(imgProdEdit.files[0]);
+                base64Img = await imgToBase64(imgProdEdit.files[0]);
                 bodyOfRequest = {...categoryValues, picture: base64Img};       
             } 
             const resp = await fetchApi(`categorys.php?idCategory=${idOfCategory}`, 'PATCH', bodyOfRequest);
@@ -54,6 +55,7 @@ const EditCategory = () => {
                 setError({ showMessage: true, message: resp.result.error_msg, error: true });
                 return setTimeout(() => setError(initStateLoading), 3000)
             }
+            setCategoryValues({...categoryValues, picture: base64Img});
             setError({ showMessage: true, message: resp.result.msg, error: false });
             return setTimeout(() => setError(initStateLoading), 3000)
         } catch (error) {

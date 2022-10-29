@@ -7,7 +7,7 @@ import ContainerBase from "../../components/admin/ContainerBase";
 const EditSize = () => {
 
     const { idOfSize } = useParams();
-    const [sizeValues, setSizeValues] = useState({ nameCurrent: 'Cargando...', description: 'Cargando...' })
+    const [sizeValues, setSizeValues] = useState({ name: 'Cargando...', description: 'Cargando...' })
     const { name, description } = sizeValues;
     const handleChangeInputs = ({ target }) => {
         setSizeValues({
@@ -27,9 +27,10 @@ const EditSize = () => {
         fetchApi(`sizes.php?idSize=${idOfSize}`, 'GET')
             .then(res => {
                 console.log(res)
+                const sizeData = res.result.data;
                 setSizeValues({
-                    nameCurrent: res.result.data.name,
-                    description: res.result.data.description
+                    name: sizeData.name,
+                    description: sizeData.description
                 })
             })
             .catch(err => console.error(err))

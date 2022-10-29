@@ -168,7 +168,7 @@ const CreatePromotion = () => {
                                                 <option value="" selected disabled>Seleccione</option>
                                                 {
                                                     products.map(product => (
-                                                        <option key={product.barcode} value={product.barcode}> {`${product.name} - ${product.design} - ${product.size}`} </option>
+                                                        <option key={product.barcode} value={product.barcode}> {`${product.name} - ${product.design} - ${product.size} - ${product.barcode} `} </option>
                                                     ))
                                                 }
                                             </select>

@@ -45,7 +45,7 @@ const Design = () => {
                 setError({ showMessage: true, message: resp.result.error_msg, error: true });
                 return setTimeout(() => setError(initStateLoading), 3000)
             }
-            const lastIdOfCategory = parseInt(designs[designs.length - 1 ].designs) + 1
+            const lastIdOfCategory = parseInt(designs[designs.length - 1 ].id_design) + 1
             setError({ showMessage: true, message: resp.result.msg, error: false });
             setDesigns([ ...designs, {name: values.name, description: values.description, id_design: lastIdOfCategory }])
             resetForm();
@@ -130,6 +130,8 @@ const Design = () => {
                                                 </tr>
                                                 {
                                                     designs.map( design => (
+                                                        !(design.id_design === '1')
+                                                        &&
                                                         <tr key={design.id_design}>
                                                             <td>{design.id_design}</td>
                                                             <td>{design.name}</td>
