@@ -25,7 +25,7 @@ const EditPromo = () => {
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
-        fetchApi(`products.php??BOproductsOfPromo=${idPromo}}`)
+        fetchApi(`products.php?BOproductsOfPromo=${idPromo}}`)
             .then(res => {
                 const productData = res.result.data;
                 console.log(productData)
@@ -34,7 +34,8 @@ const EditPromo = () => {
                     stock: productData.stockPromo,
                     price: productData.pricePromo,
                     description: productData.descriptionPromo,
-                    state: productData.state
+                    state: productData.state,
+                    picture: productData.picturePromo
                 })
             })
             .catch(err => console.error(err))
@@ -52,6 +53,7 @@ const EditPromo = () => {
             }
             const resp = await fetchApi(`products.php?idProduct=${idPromo}&actionMax=editPromo`, 'PATCH', bodyOfRequest);
             console.log(resp);
+            console.log(bodyOfRequest);
             if (resp.status === 'error') {
                 setError({ showMessage: true, message: resp.result.error_msg, error: true });
                 return setTimeout(() => setError(initStateLoading), 3000)
@@ -98,11 +100,6 @@ const EditPromo = () => {
                         className="input-form"
                     />
 
-                    <label className="label-form">Imagen</label>
-                    <input type="file" id="img-promo-edit" />
-                    <br />
-                    <img src={values.picture} alt="img" />
-                    <br />
                     <label className="label-form">Stock</label>
                     <input
                         type="text"
@@ -112,6 +109,12 @@ const EditPromo = () => {
                         className="input-form"
                     />
 
+                    <label className="label-form">Imagen</label>
+                    <input type="file" id="img-promo-edit" />
+                    <br />
+                    <img src={picture} alt="img" />
+                    <br />
+                 
                     <label className="label-form">Descripcion</label>
                     <textarea
                         onChange={handleChangeInputs}
