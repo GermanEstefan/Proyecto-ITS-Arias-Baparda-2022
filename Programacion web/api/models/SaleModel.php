@@ -106,27 +106,7 @@
             AND s.sale_delivery = d.id_delivery";
             return $conecction->getData($query)->fetch_all(MYSQLI_ASSOC);
         }
-        /*public static function getAllSalesByRange($fromDay,$untilDay){
-            $conecction = new Connection();
-            $query = "SELECT
-            s.id_sale as ID,
-            s.date,
-            s.address,
-            s.user_purchase as clientID,
-            c.company_name AS companyName,
-            c.rut_nr AS companyRut,
-            concat_ws(' ', u.name , u.surname) AS clientInfo,
-            d.name as delivery,
-            s.payment,
-            s.total
-            FROM sale s, delivery_time d, user u, customer c  
-            WHERE DATE like '$fromDay%'>=  
-            AND s.user_purchase = u.id_user
-            AND s.user_purchase = c.customer_user
-            AND s.sale_delivery = d.id_delivery";
-            return $conecction->getData($query)->fetch_all(MYSQLI_ASSOC);
-        }
-        */
+    
         public static function getCustomerAddressToSuggest($email){
             $conecction = new Connection();
             $query = "SELECT u.address
@@ -257,6 +237,17 @@
             AND u.email = '$mailClient'";
             return $conecction->getData($query)->fetch_assoc();
         }
+        public static function getInfoClientForMail($idClient){
+            $conecction = new Connection();
+            $query = "SELECT u.email,
+            c.company_name AS 'company',
+            u.name as 'Nombre',
+            u.surname as 'Apellido'
+            FROM user u, customer c
+            WHERE c.customer_user = u.id_user
+            AND u.id_user = 5004";
+            return $conecction->getData($query)->fetch_assoc();
+        }
         public static function getIdCustomerByEmail($mailClient){
             $conecction = new Connection();
             $query = "SELECT u.id_user
@@ -276,6 +267,16 @@
             $resultCreateSale = $instanceMySql->query($saleInsert);
             if(!$resultCreateSale)  $result_transaccion = false;
             $idSale = $instanceMySql->insert_id;
+            //aca
+            $getInfoClientToMail = SaleModel::getInfoClientForMail('$this->idClient');
+            $clientMail = $getInfoClientToMail["email"];
+            $clientBussines = $getInfoClientToMail["company"];
+            $clientName = $getInfoClientToMail["Nombre"];
+            if (!$clientBussines){
+                mail($clientMail,"Nueva compra","Gracias por tu compra! $clientName Podras ver el estado actual de tu pedido en tu perfil");
+            }else{
+                mail($clientMail,"Nueva compra","Gracias por tu compra! $clientBussines Podras ver el estado actual de tu pedido en tu perfil");
+            }
             
             //INICIO SALE_DETAIL Array de productos
             $queries = array();

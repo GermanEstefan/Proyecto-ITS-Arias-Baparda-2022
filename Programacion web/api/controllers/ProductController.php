@@ -225,12 +225,13 @@ class ProductController
         //Data en comun
         $name = $product[0]["name"];
         $description = $product[0]["description"];
+        $picture = $product[0]["picture"];
         //Array de modelos
         $models = array();
         foreach($product as $modelOfProduct){
             array_push( $models, array( "size" => $modelOfProduct['size'],"design" => $modelOfProduct['design'],"barcode" => $modelOfProduct["barcode"],"stock" => $modelOfProduct['stock'],"price" => $modelOfProduct["price"] ));
         }
-        $response = array("name" => $name, "description" => $description, "models" => $models);
+        $response = array("name" => $name, "description" => $description, "picture" => $picture, "models" => $models);
 
         echo $this->response->successfully("Lista de modelos para $name", $response);
     }
