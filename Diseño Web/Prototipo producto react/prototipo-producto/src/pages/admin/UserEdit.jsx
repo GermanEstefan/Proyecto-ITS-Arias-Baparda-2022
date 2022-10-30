@@ -60,10 +60,12 @@ const UserEdit = () => {
     }
 
     useEffect(() => {
-        fetchApi(`${idUser}`,'GET')
+        fetchApi(`auth-employees.php?idEmployee=${idUser}`,'GET')
             .then(res => {
+                console.log(res)
                 const userData = res.result.data;
-                setUserValues({})
+                setUserValues({
+                })
             })
             .catch(err => console.error(err))
     },[])
