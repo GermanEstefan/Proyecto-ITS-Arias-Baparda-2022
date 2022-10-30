@@ -59,7 +59,7 @@ const UpdateAccountForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="">
+    <form onSubmit={handleSubmit} className="animate__animated animate__bounce">
       <h2>Datos personales</h2>
 
       <label htmlFor="">Email:</label>

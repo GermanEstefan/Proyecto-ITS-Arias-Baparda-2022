@@ -21,7 +21,7 @@ const UserPanel = () => {
 
   return (
     <ContainerBase>
-      <main className="user-panel-page main-client">
+      <main className="user-panel-page">
         <aside>
           <h1>Configuracion</h1>
           <ul>
@@ -40,7 +40,7 @@ const UserPanel = () => {
             <li onClick={handleLogout}>Cerrar sesion</li>
           </ul>
         </aside>
-        <section>
+        <section className="animate__animated animate__bounce">
           {view === "personalInformation" ? (
             <UpdateAccountForm />
           ) : view === "changePassword" ? (

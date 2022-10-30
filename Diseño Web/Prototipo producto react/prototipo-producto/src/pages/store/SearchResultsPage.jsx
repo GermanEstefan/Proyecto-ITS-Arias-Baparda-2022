@@ -23,7 +23,7 @@ const SearchResultsPage = () => {
   }, [data]);
   const getProductsBySearchInput = async () => {
     const resp = await fetchApi(`products.php?name=${data}`, "GET");
-    console.log("data:" + data);
+    console.log(resp);
     setProductList(resp.result.data);
   };
 
@@ -51,6 +51,7 @@ const SearchResultsPage = () => {
                 img={product.picture ? product.picture : NoPhoto}
                 key={index}
                 id={product.id_product}
+                categoryFromProps={product.category}
               />
             );
           })}

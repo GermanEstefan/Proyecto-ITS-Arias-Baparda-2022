@@ -1,3 +1,5 @@
+/** @format */
+
 import React, { useEffect, useState } from "react";
 import { fetchApi } from "../../API/api";
 import NoPhoto from "../../assets/img/no-photo.png";
@@ -12,10 +14,10 @@ const CategoriesList = () => {
 
   const getCategories = async () => {
     const resp = await fetchApi("categorys.php", "GET");
-    console.log(resp.result.data)
+
     setCategories(resp.result.data);
   };
-  
+
   return (
     <div className="card-container">
       {categories.map((category, index) => {

@@ -122,6 +122,7 @@ const ProductPage = () => {
                   placeholder="Talle..."
                   className="select"
                   onChange={(e) => handleChangeSize(e.value)}
+                  
                 />
               </div>
               <div className="buttonsFlexContainer">
@@ -134,7 +135,6 @@ const ProductPage = () => {
                       setQuantitySelected(e.target.value);
                       setIsEnoughStock(quantitySelected <= parseInt(product.stock));
                     }}
-                    
                     min={1}
                     defaultValue={1}
                   />
