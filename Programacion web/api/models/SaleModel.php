@@ -268,7 +268,7 @@
             if(!$resultCreateSale)  $result_transaccion = false;
             $idSale = $instanceMySql->insert_id;
             //aca
-            $getInfoClientToMail = SaleModel::getInfoClientForMail('$this->idClient');
+            $getInfoClientToMail = SaleModel::getInfoClientForMail($this->idClient);
             $clientMail = $getInfoClientToMail["email"];
             $clientBussines = $getInfoClientToMail["company"];
             $clientName = $getInfoClientToMail["Nombre"];

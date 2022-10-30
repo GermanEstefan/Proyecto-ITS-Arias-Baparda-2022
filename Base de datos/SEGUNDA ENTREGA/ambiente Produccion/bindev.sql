@@ -565,7 +565,7 @@ INSERT INTO `bindev`.`product` (`id_product`, `name`, `product_category`, `produ
 INSERT INTO `bindev`.`product` (`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`) VALUES ('19', 'GUANTES clasico', '5', '7', '3', '570', '450', 'Descripcion del producto');
 INSERT INTO `bindev`.`product` (`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`) VALUES ('19', 'GUANTES clasico', '5', '7', '4', '0', '450', 'Descripcion del producto');
 INSERT INTO `bindev`.`product` (`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`) VALUES ('19', 'GUANTES clasico', '5', '7', '5', '9', '450', 'Descripcion del producto');
-INSERT INTO `bindev`.`product` (`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`) VALUES ('1000', 'PROMO 0', '1', '1', '1', '0', '0', 'promoHardcodeada');
+INSERT INTO `bindev`.`product` (`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`,`picture`,`state`) VALUES ('1000', 'PROMO 0', '1', '1', '1', '0', '0', 'promoHardcodeada',NULL,'0');
 
 INSERT INTO `bindev`.`user` (`email`, `name`, `surname`, `address`, `phone`, `password`) VALUES ('nicolas@gmail.com', 'Nicolas', 'Alvarez', 'Casa de nico', '998877','Nicolas');
 INSERT INTO `bindev`.`user` (`email`, `name`, `surname`, `address`, `phone`, `password`) VALUES ('Matias4371@gmail.com', 'Nacho', 'Arman-Duon', 'Casa de Nacho', '998877','Nacho');
