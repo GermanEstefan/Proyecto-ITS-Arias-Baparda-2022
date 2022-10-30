@@ -92,17 +92,16 @@ class SupplyController {
         //Data en comun
         $idSupply = $supply[0]['idSupply'];
         $totalSupply = $supply[0]['totalSupply'];
-        $infoSupplier = array();
-        array_push( $infoSupplier, array( "idSupplier" => $supply[0]["idSupplier"],"name" => $supply[0]['name'],"rut" => $supply[0]['rut']));
         
-        $infoResponsible = array();
-        array_push( $infoResponsible, array( "employeeDoc" =>$supply[0]['employeeDoc'],"employeeName" => $supply[0]['employeeName'],"comment" => $supply[0]['comment']));
+        $infoSupplier = array("idSupplier" => $supply[0]["idSupplier"],"name" => $supply[0]['name'],"rut" => $supply[0]['rut']);
+        
+        $infoResponsible = array("employeeDoc" =>$supply[0]['employeeDoc'],"employeeName" => $supply[0]['employeeName'],"comment" => $supply[0]['comment']);
 
         $details = array();
         foreach($supply as $detail){
         array_push( $details, array( "barcode" => $detail['barcode'],"nameProduct" => $detail['nameProduct'],"quantity" => $detail['quantity'],"costUnit" => $detail['costUnit'],"costTotal" => $detail['costTotal']));
         }
-        $response = array("idSupply" => $idSupply,"totalSupply" =>$totalSupply, "details" => $details);
+        $response = array("idSupply" => $idSupply,"totalSupply" =>$totalSupply,"infoSupplier" =>$infoSupplier,"infoResponsible" =>$infoResponsible, "details" => $details);
         echo $this->response->successfully("Detalle de compras para :$idSupply", $response);  
     }
     public function getAllSupplysForDay($day){

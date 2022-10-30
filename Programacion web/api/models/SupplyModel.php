@@ -48,11 +48,20 @@ class SupplyModel extends Connection
         sd.quantity AS quantity,
         sd.cost_unit AS costUnit,
         sd.amount_total AS costTotal,
+        s.supplier_id AS idSupplier,
+        sp.company_name AS name,
+        sp.rut AS rut,
+        s.employee_ci AS employeeDoc,
+        concat_ws(' ', u.name , u.surname) AS employeeName,
+        s.comment,
         s.total AS totalSupply
-        FROM supply_detail sd, product p, supply s 
-        WHERE supply_id = $idSupply
+        FROM supply_detail sd, product p, supply s, supplier sp, employee e, user u 
+        WHERE supply_id = 300000
         AND p.barcode = sd.barcode_id
-        AND s.id_supply = sd.supply_id";
+        AND s.id_supply = sd.supply_id
+        AND s.supplier_id = sp.id_supplier
+        AND s.employee_ci = e.ci
+        AND e.employee_user = u.id_user";
         return $conecction->getData($query)->fetch_all(MYSQLI_ASSOC);
     }
     public static function getAllSupplysByDay($day){
