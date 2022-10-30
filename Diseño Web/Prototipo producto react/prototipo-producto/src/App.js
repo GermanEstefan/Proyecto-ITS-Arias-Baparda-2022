@@ -11,8 +11,7 @@ import useAuth from "./hooks/useAuth";
 import UserPanel from "./pages/store/UserPanel";
 import LoginAdm from "./pages/admin/LoginAdm";
 import ContainerBase from "./components/admin/ContainerBase";
-import CreateUser from "./pages/admin/CreateUser";
-import ListUsers from "./pages/admin/ListUsers";
+import UserManagment from "./pages/admin/UserManagment";
 import ListProducts from "./pages/admin/ListProducts";
 import CreateProducts from "./pages/admin/CreateProducts";
 import ListShipments from "./pages/admin/ListShipments";
@@ -32,6 +31,7 @@ import BuyProducts from "./pages/admin/BuyProducts";
 import ListBuys from "./pages/admin/ListBuys";
 import EditPromo from "./pages/admin/EditPromo";
 import DetailBuys from "./pages/admin/DetailsBuy";
+import UserEdit from "./pages/admin/UserEdit";
 
 export const userStatusContext = createContext({});
 export const cartContext = createContext([]);
@@ -71,8 +71,8 @@ const App = () => {
           <Route path="/panel-user" element={<UserPanel />} />
           <Route path="/admin/login" element={<LoginAdm />} />
           <Route path="/admin" element={<ContainerBase />} />
-          <Route path="/admin/users/create" element={<CreateUser />} />
-          <Route path="/admin/users/list" element={<ListUsers />} />
+          <Route path="/admin/users/managment" element={<UserManagment />} />
+          <Route path="/admin/users/edit/:idUser" element={<UserEdit />} />
           <Route path="/admin/generals/categorys" element={<Categorys />} />
           <Route path="/admin/generals/categorys/edit/:idOfCategory" element={<EditCategory />} />
           <Route path="/admin/generals/sizes" element={<Sizes />} />

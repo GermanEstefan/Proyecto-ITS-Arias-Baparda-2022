@@ -61,7 +61,7 @@ const EditSize = () => {
             <section className='container_section generals-layout flex-column-center-xy'>
                 <form onSubmit={handleSubmit} autoComplete="off" >
                     <h2>Editar talle</h2>
-                    <label htmlFor="">Nombre</label>
+                    <label>Nombre</label>
                     <input
                         type="text"
                         className='input-form'

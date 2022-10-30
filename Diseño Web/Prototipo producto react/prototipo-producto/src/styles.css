@@ -1034,6 +1034,10 @@
   color: #f5990f;
   font-size: 1.3rem;
   cursor: pointer;
+  transition: color 0.3s;
+}
+.table-template .controls-table:hover {
+  color: #f9c371;
 }
 
 .row-selectable {
@@ -1154,6 +1158,7 @@
   color: rgb(209, 27, 27);
   transition: color 0.3s;
   font-size: 1.2rem;
+  cursor: pointer;
 }
 .warning-control:hover {
   color: #eb6767;
@@ -1349,7 +1354,7 @@
   transition: 0.3s;
 }
 .header-admin .header-admin_config > svg:hover {
-  color: #5f5f5f;
+  color: red;
 }
 .header-admin .header-admin_config > div {
   display: flex;
@@ -1358,6 +1363,29 @@
 }
 .header-admin .header-admin_config > div span {
   margin-bottom: 3px;
+}
+
+.select-any-opt div {
+  background-color: #f2f2f2;
+  padding: 20px 50px 50px 50px;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+.select-any-opt h1 {
+  margin-bottom: 0;
+}
+.select-any-opt h2 {
+  margin-bottom: 0;
+}
+.select-any-opt p {
+  font-size: 1.3rem;
+  font-weight: bold;
+  max-width: 400px;
+  text-align: center;
+}
+.select-any-opt svg {
+  font-size: 4rem;
+  color: #f5990f;
 }
 
 .container-admin {
@@ -1427,13 +1455,16 @@
   color: #f5990f;
 }
 
-.create-user {
+.list-users {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
-.create-user form {
+.list-users h1 {
+  margin-top: 50px;
+}
+.list-users form {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1443,31 +1474,31 @@
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   width: 50vw;
   max-width: 550px;
+  margin: 50px 0;
 }
-.create-user form > h1 {
-  margin: 0 0 40px 0;
-  color: #f5990f;
+.list-users form h2 {
+  margin-top: 0;
 }
-.create-user form button {
+.list-users form button {
   margin-top: 20px;
   width: 100%;
 }
-.create-user form > span {
+.list-users form > span {
   margin-top: 20px;
-}
-
-.list-users {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-.list-users > h1 {
-  color: #f5990f;
 }
 .list-users table {
   width: 50vw;
   max-width: 700px;
+}
+
+.edit-user-admin form {
+  width: 50vw;
+  max-width: 500px;
+}
+.edit-user-admin form button {
+  width: 100%;
+  margin-top: 30px;
+  margin-right: 10px;
 }
 
 .create-product {

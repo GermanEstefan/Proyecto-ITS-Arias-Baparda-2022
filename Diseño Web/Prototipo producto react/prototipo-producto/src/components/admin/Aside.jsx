@@ -39,14 +39,9 @@ const Aside = () => {
                         &&
                         <ul>
                             <li 
-                                onClick={() => navigate('/admin/users/create') }
-                                className={ (action === 'create' && page === 'users') ? 'selected' : '' } 
-                            >Crear un nuevo usuario</li>
-
-                            <li 
-                                onClick={() => navigate('/admin/users/list') }
-                                className={ (action === 'list' && page === 'users') ? 'selected' : '' }
-                            >Listar usuarios</li>
+                                onClick={() => navigate('/admin/users/managment') }
+                                className={ (page === 'users') ? 'selected' : '' } 
+                            >Gestionar usuarios</li>
 
                         </ul>
                     }
