@@ -56,7 +56,7 @@ class SupplyModel extends Connection
         s.comment,
         s.total AS totalSupply
         FROM supply_detail sd, product p, supply s, supplier sp, employee e, user u 
-        WHERE supply_id = 300000
+        WHERE supply_id = $idSupply
         AND p.barcode = sd.barcode_id
         AND s.id_supply = sd.supply_id
         AND s.supplier_id = sp.id_supplier
