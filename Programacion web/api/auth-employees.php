@@ -10,12 +10,12 @@ header("Access-Control-Allow-Methods: *");
 
 $response = new Response(); //Esta instancia va a ser utilizado a lo largo del controlador para las respuestas.
 $employeeController = new EmployeeController(); 
+$bodyOfRequest = file_get_contents('php://input'); //Obtiene el body de la request sin procesar(JSON).
+$userData = json_decode($bodyOfRequest, 1); //Transforma el JSON en un array asosciativo.
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-    $bodyOfRequest = file_get_contents('php://input'); //Obtiene el body de la request sin procesar(JSON).
-    $userData = json_decode($bodyOfRequest, 1); //Transforma el JSON en un array asosciativo.
-
+    
     if (!isset($_GET['url'])) {
         echo $response->error400();
         die();
@@ -54,13 +54,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $idEmployee = $_GET['idEmployee'];
         switch ($action){
             case 'edit':
-                $employeeController->updateModel($idEmployee,$EmployeeData);
+                $employeeController->updateEmployee($idEmployee,$userData);
                 die();        
                 case 'disable':
-                $employeeController->disableModel($idEmployee);
+                $employeeController->disableEmployee($idEmployee);
                 die();
                 case 'active':
-                $employeeController->activeModel($idEmployee);
+                $employeeController->activeEmployee($idEmployee);
                 die();
                 default:
                 http_response_code(400);

@@ -178,20 +178,19 @@ class EmployeeController{
 
     //edit
     public function updateEmployee($idEmployee,$userData){
-        $this->jwt->verifyTokenAndGetIdUserFromRequest();
-        $employeeExist = EmployeeModel::getEmployeeById($idEmployee);
-        if(!$employeeExist){
-            echo $this->response->error203("El empleado no existe");
-            die(); 
-        }
-        //valido que sea jefe
-        $employee = EmployeeModel::getRoleOfEmployeeById($idEmployee);
-        $rolOfEmployee = $employee["employee_role"];
-        if(!($rolOfEmployee == 'JEFE')){
-            http_response_code(401);
-            echo $this->response->error401("Usted no esta autorizado para relizar esta accion");
-            die();
-        }
+       //Verificamos el token y si es valido, obtenemos el id de usuario.
+       $idOfUser = $this->jwt->verifyTokenAndGetIdUserFromRequest();
+       if(!$idOfUser){
+           echo $this->response->error401("no esta autorizado para relizar esta accion");
+           die();    
+       }
+       $employee = EmployeeModel::getRoleOfEmployeeById($idOfUser);        
+       $rolOfEmployee = $employee['employee_role'];
+       if(!($rolOfEmployee == 'JEFE')){
+           http_response_code(401);
+           echo $this->response->error401("Usted no esta autorizado para relizar esta accion");
+           die();
+       }
         $bodyIsValid = $this->validateBodyOfUpdateEmployee($userData);
         if (!$bodyIsValid) {
             http_response_code(400);
@@ -224,5 +223,52 @@ class EmployeeController{
         echo $this->response->successfully("Empleado actualziado con exito");
     }
     
+
+    //edit
+    public function activeEmployee($idEmployee){
+        //Verificamos el token y si es valido, obtenemos el id de usuario.
+        $idOfUser = $this->jwt->verifyTokenAndGetIdUserFromRequest();
+        if(!$idOfUser){
+            echo $this->response->error401("no esta autorizado para relizar esta accion");
+            die();    
+        }
+        $employee = EmployeeModel::getRoleOfEmployeeById($idOfUser);        
+        $rolOfEmployee = $employee['employee_role'];
+        if(!($rolOfEmployee == 'JEFE')){
+            http_response_code(401);
+            echo $this->response->error401("Usted no esta autorizado para relizar esta accion");
+            die();
+        }
+ 
+        $activeEmployee = EmployeeModel::activeEmployee($idEmployee);
+        if(!$activeEmployee){
+             echo $this->response->error203("No se puede activar el empleado $idEmployee");
+             die();
+         }
+         echo $this->response->successfully("El empleado $idEmployee fue activado con exito");
+    }
+    //edit
+    public function disableEmployee($idEmployee){
+        //Verificamos el token y si es valido, obtenemos el id de usuario.
+        $idOfUser = $this->jwt->verifyTokenAndGetIdUserFromRequest();
+        if(!$idOfUser){
+            echo $this->response->error401("no esta autorizado para relizar esta accion");
+            die();    
+        }
+        $employee = EmployeeModel::getRoleOfEmployeeById($idOfUser);        
+        $rolOfEmployee = $employee['employee_role'];
+        if(!($rolOfEmployee == 'JEFE')){
+            http_response_code(401);
+            echo $this->response->error401("Usted no esta autorizado para relizar esta accion");
+            die();
+        }
+ 
+        $disableEmployee = EmployeeModel::disableEmployee($idEmployee);
+        if(!$disableEmployee){
+             echo $this->response->error203("No se puede desactivar al funcionario el empleado $idEmployee");
+             die();
+         }
+         echo $this->response->successfully("El empleado $idEmployee fue desactivado con exito");
+    }
 
 }

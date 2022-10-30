@@ -76,14 +76,13 @@
         //transa para updatear
         public static function updateEmployee($idEmployee,$nameEmployee,$surnameEmployee,$passwordEmployee,$rolEmployee,$phoneEmployee,$addressEmployee){
             $conecction = new Connection;
-            $response = new Response();
             $instanceMySql = $conecction->getInstance();
             $instanceMySql->begin_transaction(MYSQLI_TRANS_START_READ_WRITE);
             $result_transaccion = true;
-            $userUpdate = "UPDATE user(name = '$nameEmployee', surname = '$surnameEmployee', password = '$passwordEmployee', phone = '$phoneEmployee', address = '$addressEmployee' WHERE id_user = $idEmployee)";
+            $userUpdate = "UPDATE user SET name = '$nameEmployee', surname = '$surnameEmployee', password = '$passwordEmployee', phone = '$phoneEmployee', address = '$addressEmployee' WHERE id_user = $idEmployee";
             $resultUserUpdate = $instanceMySql->query($userUpdate);
             if(!$resultUserUpdate)  $result_transaccion = false;
-            $employeeUpdate = "UPDATE employee SET employee_role = '$rolEmployee' WHERE employee_user = $idEmployee)";
+            $employeeUpdate = "UPDATE employee SET employee_role = '$rolEmployee' WHERE employee_user = $idEmployee";
             $resultEmployeeUpdate = $instanceMySql->query($employeeUpdate);
             if(!$resultEmployeeUpdate) $result_transaccion = false;
             if($result_transaccion){
@@ -93,6 +92,16 @@
                 $instanceMySql->rollback();
                 return false;
             }
+        }
+        public static function disableEmployee($idEmployee){
+            $conecction = new Connection;
+            $query = "UPDATE employee SET state = 0 WHERE employee_user = $idEmployee";
+            return $conecction->setData($query);
+        }
+        public static function activeEmployee($idEmployee){
+            $conecction = new Connection;
+            $query = "UPDATE employee SET state = 1 WHERE employee_user = $idEmployee";
+            return $conecction->setData($query);
         }
 
     }
