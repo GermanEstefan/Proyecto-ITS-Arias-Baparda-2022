@@ -30,6 +30,9 @@ const SalesHistory = () => {
       {sales.map((sale, index) => (
         <HistoryItem key={index} sale={sale} />
       ))}
+      {
+        sales.length === 0 && <p style={{marginLeft: '15px'}}>Aún no has realizado  ninguna compra</p>
+      }
     </>
   );
 };
