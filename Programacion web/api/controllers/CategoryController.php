@@ -98,7 +98,7 @@ class CategoryController {
         $notChangeName = CategoryModel::getCategoryByName($nameCategory);
         if ($notChangeName){
             $result = CategoryModel::updateCategoryNotName($idCategory,$descriptionCategory,$pictureCategory);
-            echo $this->response->successfully("Categoria actualizada con exitossss");
+            echo $this->response->successfully("Categoria actualizada con exitos");
             die();
         }
 
