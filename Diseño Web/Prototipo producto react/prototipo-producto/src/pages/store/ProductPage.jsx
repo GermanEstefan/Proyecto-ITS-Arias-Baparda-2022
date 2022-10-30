@@ -1,3 +1,5 @@
+/** @format */
+
 import React, { useState, useEffect, useContext } from "react";
 
 import { useParams } from "react-router-dom";
@@ -9,7 +11,7 @@ import Select from "react-select";
 import NoPhoto from "../../assets/img/no-photo.png";
 import { useNavigate } from "react-router-dom";
 const ProductPage = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const { userData } = useContext(userStatusContext);
   const { category, id } = useParams();
   const { cart, setCart } = useContext(cartContext);
@@ -21,16 +23,20 @@ const ProductPage = () => {
   const [isAddedToCart, setIsAddedToCart] = useState(false);
   const [allModels, setAllModels] = useState([]);
   const [img, setImg] = useState("");
+  const [quantitySelected, setQuantitySelected] = useState(1);
+  const [isEnoughStock, setIsEnoughStock] = useState(true);
+
   useEffect(() => {
     window.scroll(0, 0);
     getProductById();
   }, []);
+  useEffect(() => {
+    setIsEnoughStock(quantitySelected <= parseInt(product.stock));
+  }, [product, quantitySelected]);
 
+  console.log(product);
   const handleAddToCart = () => {
-    setCart([
-      ...cart,
-      { barcode: product.barcode, quantity: 1, price: product.price },
-    ]);
+    setCart([...cart, { barcode: product.barcode, quantity: quantitySelected, price: product.price }]);
 
     setIsAddedToCart(true);
   };
@@ -80,9 +86,7 @@ const ProductPage = () => {
   };
 
   const handleChangeDesign = (design) => {
-    const modelsWithDesign = allModels.filter(
-      (model) => model.design === design
-    );
+    const modelsWithDesign = allModels.filter((model) => model.design === design);
     setIsAddedToCart(false);
     setProduct(modelsWithDesign[0]);
   };
@@ -90,11 +94,7 @@ const ProductPage = () => {
   return (
     <ContainerBase>
       <div className="productContainer">
-        <PageTitle
-          title={productName}
-          isArrow={true}
-          arrowGoTo={`/category/${category}`}
-        />
+        <PageTitle title={productName} isArrow={true} arrowGoTo={`/category/${category}`} />
         <div className="productPage">
           <div className="productPage__img">
             <div>
@@ -107,8 +107,7 @@ const ProductPage = () => {
               <p>{productDescription}</p>
             </div>
             <div className="productPage__description__buttons">
-              {/* {!sizesList[0] === "PROMOCIONES" && ( */}
-              <div>
+              <div className="selectsContainer">
                 <Select
                   options={getOptions(designsList)}
                   placeholder={"Diseño..."}
@@ -122,33 +121,47 @@ const ProductPage = () => {
                   onChange={(e) => handleChangeSize(e.value)}
                 />
               </div>
-              {/* )} */}
-              <button className="buyBtn" disabled={!userData.auth} onClick={() => {
-                handleAddToCart()
-                navigate("/shoppingCart")
-              }} >
-                Comprar
-              </button>
-              <button
-                className="addBtn"
-                disabled={isAddedToCart}
-                onClick={handleAddToCart}
-              >
-                Agregar al carrito
-              </button>
-              {isAddedToCart && (
-                <>
-                  <button className="addBtn" onClick={handleDeleteItemFromCart}>
-                    Cancelar
+              <div className="buttonsFlexContainer">
+                <div className="quantityInputContainer">
+                  <span>Cantidad:</span>
+
+                  <input
+                    type="number"
+                    onChange={(e) => {
+                      setQuantitySelected(e.target.value);
+                      setIsEnoughStock(quantitySelected <= parseInt(product.stock));
+                    }}
+                    max={product.stock}
+                  />
+                </div>
+                <div className="buyAndAddToCartContainer">
+                  <button
+                    className="buyBtn"
+                    disabled={!userData.auth || !isEnoughStock}
+                    onClick={() => {
+                      handleAddToCart();
+                      navigate("/shoppingCart");
+                    }}
+                  >
+                    Comprar
                   </button>
-                  <p>Este producto ya está en tu carrito</p>
-                </>
-              )}
-              {!userData.auth && (
-                <>
-                  <p>Registrate e ingresa para comenzar a comprar</p>
-                </>
-              )}
+                  <button
+                    className="addBtn"
+                    disabled={isAddedToCart || !isEnoughStock}
+                    onClick={handleAddToCart}
+                  >
+                    Agregar al carrito
+                  </button>
+                  {isAddedToCart && (
+                    <button className="addBtn" onClick={handleDeleteItemFromCart}>
+                      Cancelar
+                    </button>
+                  )}
+                </div>
+              </div>
+              {isAddedToCart && <p>Este producto ya está en tu carrito</p>}
+              {!userData.auth && <p>Registrate e ingresa para comenzar a comprar</p>}
+              {!isEnoughStock && <p>Maximo disponible: {product.stock}</p>}
             </div>
           </div>
         </div>

@@ -16,6 +16,7 @@ export const HistoryItem = ({ sale }) => {
   };
   const getSaleProducts = async () => {
     const resp = await fetchApi(`sales.php?saleDetail=${sale.ID}`, "GET");
+    console.log(resp.result.data.details)
     resp && setSaleProducts(resp.result.data.details);
   };
   return (

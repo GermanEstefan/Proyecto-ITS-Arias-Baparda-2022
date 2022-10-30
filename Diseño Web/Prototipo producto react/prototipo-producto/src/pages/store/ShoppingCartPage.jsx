@@ -16,7 +16,7 @@ import { useNavigate } from "react-router-dom";
 const ShoppingCartPage = () => {
   const { cart, setCart } = useContext(cartContext);
   const { userData } = useContext(userStatusContext);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [total, setTotal] = useState(0);
   const buyForm = useRef();
   const [values, setValues] = useState({
@@ -92,15 +92,14 @@ const ShoppingCartPage = () => {
     );
   };
   const getDeliveryHours = async () => {
-    // POR AHORA EL BACK NO TRAE DATOS
-    // const resp = await fetchApi("Deliverys.php?delivery", "GET");
-    // console.log(resp);
-    // setDeliveryHours(
-    //   resp.result.data.map((hourFromBack) => ({
-    //     value: hourFromBack.id_delivery,
-    //     label: hourFromBack.name,
-    //   }))
-    // );
+    const resp = await fetchApi("Deliverys.php?delivery", "GET");
+    console.log(resp);
+    setDeliveryHours(
+      resp.result.data.map((hourFromBack) => ({
+        value: hourFromBack.id_delivery,
+        label: hourFromBack.name,
+      }))
+    );
   };
 
   const setTotalPrice = () => {
