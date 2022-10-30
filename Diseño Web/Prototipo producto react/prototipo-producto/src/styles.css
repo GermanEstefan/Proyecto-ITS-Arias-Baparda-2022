@@ -796,6 +796,7 @@
   margin-bottom: 8px;
 }
 
+/** @format */
 .productContainer {
   margin: 20vh auto auto auto;
   min-height: 80vh;
@@ -843,31 +844,59 @@
   display: flex;
   flex-direction: column;
 }
-.productContainer .productPage .productPage__description .productPage__description__buttons .select {
-  margin: 5px;
-  width: 45%;
-  display: inline-block;
+.productContainer .productPage .productPage__description .productPage__description__buttons .buttonsFlexContainer {
+  display: flex;
+  justify-content: space-between;
 }
 @media screen and (max-width: 800px) {
-  .productContainer .productPage .productPage__description .productPage__description__buttons .select {
-    width: 55%;
-    margin: 10px auto;
-    display: block;
+  .productContainer .productPage .productPage__description .productPage__description__buttons .buttonsFlexContainer {
+    flex-direction: column;
   }
 }
-.productContainer .productPage .productPage__description .productPage__description__buttons button {
+.productContainer .productPage .productPage__description .productPage__description__buttons .buttonsFlexContainer .quantityInputContainer {
+  display: flex;
+  align-items: flex-start;
+  margin-top: 26px;
+  justify-content: space-evenly;
+}
+.productContainer .productPage .productPage__description .productPage__description__buttons .buttonsFlexContainer .quantityInputContainer input {
+  width: 30%;
+}
+.productContainer .productPage .productPage__description .productPage__description__buttons .buttonsFlexContainer .quantityInputContainer span {
+  margin-top: 5px;
+  text-align: center;
+}
+.productContainer .productPage .productPage__description .productPage__description__buttons .buttonsFlexContainer .buyAndAddToCartContainer {
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  width: 50%;
+}
+.productContainer .productPage .productPage__description .productPage__description__buttons .buttonsFlexContainer .buyAndAddToCartContainer button {
   border: none;
   padding: 8px;
   cursor: pointer;
-  display: block;
-  width: 50%;
+  width: 100%;
   margin: 5px auto;
 }
-.productContainer .productPage .productPage__description .productPage__description__buttons .buyBtn {
+.productContainer .productPage .productPage__description .productPage__description__buttons .buttonsFlexContainer .buyAndAddToCartContainer .buyBtn {
   background-color: #f5990f;
 }
-.productContainer .productPage .productPage__description .productPage__description__buttons .addBtn {
+.productContainer .productPage .productPage__description .productPage__description__buttons .buttonsFlexContainer .buyAndAddToCartContainer .addBtn {
   background-color: #bccddb;
+}
+.productContainer .productPage .productPage__description .productPage__description__buttons .selectsContainer {
+  display: flex;
+  justify-content: space-between;
+}
+@media screen and (max-width: 800px) {
+  .productContainer .productPage .productPage__description .productPage__description__buttons .selectsContainer {
+    flex-direction: column;
+  }
+}
+.productContainer .productPage .productPage__description .productPage__description__buttons .selectsContainer .select {
+  width: 49%;
+  display: inline-block;
 }
 .productContainer .productPage .productPage__description .productPage__description__buttons p {
   text-align: center;

@@ -1,7 +1,9 @@
+/** @format */
+
 .productContainer {
   margin: 20vh auto auto auto;
   min-height: 80vh;
-  
+
   max-width: 900px;
 
   .productPage {
@@ -11,7 +13,7 @@
       flex-direction: column;
       align-items: center;
     }
-  
+
     .productPage__img {
       margin-top: 4em;
       width: 40%;
@@ -40,30 +42,57 @@
       .productPage__description__buttons {
         display: flex;
         flex-direction: column;
-        .select {
-          margin: 5px;
-          width: 45%;
-          @media screen and (max-width: 800px) {
-            width: 55%;
-            margin: 10px auto;
-            display: block;
-          }
-          display: inline-block;
-        }
-        button {
-          border: none;
-          padding: 8px;
-          cursor: pointer;
-          display: block;
-          width: 50%;
-          margin: 5px auto;
-        }
-        .buyBtn {
-          background-color: $orange;
-        }
 
-        .addBtn {
-          background-color: $gray;
+        .buttonsFlexContainer {
+          display: flex;
+          justify-content: space-between;
+          @media screen and (max-width: 800px) {
+            flex-direction: column;
+          }
+          .quantityInputContainer {
+            display: flex;
+            align-items: flex-start;
+            margin-top: 26px;
+            justify-content: space-evenly;
+            input {
+              width: 30%;
+            }
+            span {
+              margin-top: 5px;
+              text-align: center;
+            }
+          }
+          .buyAndAddToCartContainer {
+            display: flex;
+            flex-direction: column;
+            align-self: center;
+            width: 50%;
+            button {
+              border: none;
+              padding: 8px;
+              cursor: pointer;
+              width: 100%;
+              margin: 5px auto;
+            }
+            .buyBtn {
+              background-color: $orange;
+            }
+
+            .addBtn {
+              background-color: $gray;
+            }
+          }
+        }
+        .selectsContainer {
+          display: flex;
+          justify-content: space-between;
+          @media screen and (max-width: 800px) {
+            flex-direction: column;
+          }
+          .select {
+            width: 49%;
+            display: inline-block;
+          }
         }
         p {
           text-align: center;

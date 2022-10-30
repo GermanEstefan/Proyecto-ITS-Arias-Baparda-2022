@@ -21,6 +21,7 @@ const SalesHistory = () => {
       setSales([]);
     }
     if (resp.status === "successfully") {
+      console.log(resp.result.data.sales)
       setSales(resp.result.data.sales);
     }
   };
