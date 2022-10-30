@@ -44,7 +44,7 @@ class SupplyModel extends Connection
         $query = "SELECT 
         sd.supply_id AS idSupply,
         sd.barcode_id AS barcode,
-        p.name AS nameProduct,
+        concat_ws(' ', p.name , d.name, sz.name) AS nameProduct,
         sd.quantity AS quantity,
         sd.cost_unit AS costUnit,
         sd.amount_total AS costTotal,
@@ -55,12 +55,14 @@ class SupplyModel extends Connection
         concat_ws(' ', u.name , u.surname) AS employeeName,
         s.comment,
         s.total AS totalSupply
-        FROM supply_detail sd, product p, supply s, supplier sp, employee e, user u 
+        FROM supply_detail sd, product p, supply s, supplier sp, employee e, user u, design d, size sz 
         WHERE supply_id = $idSupply
         AND p.barcode = sd.barcode_id
         AND s.id_supply = sd.supply_id
         AND s.supplier_id = sp.id_supplier
         AND s.employee_ci = e.ci
+        AND p.product_design = d.id_design
+        AND p.product_size = sz.id_size
         AND e.employee_user = u.id_user";
         return $conecction->getData($query)->fetch_all(MYSQLI_ASSOC);
     }
