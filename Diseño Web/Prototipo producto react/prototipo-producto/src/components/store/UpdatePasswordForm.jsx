@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { isEmpty } from "../../helpers/validateForms";
 import { useForm } from "../../hooks/useForm";
 import Swal from "sweetalert2";
@@ -17,6 +17,9 @@ const UpdatePasswordForm = () => {
     newPassword: false,
     newPassword2: false,
   });
+  useEffect(() => {
+    window.scroll(0, 0);
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -53,7 +56,7 @@ const UpdatePasswordForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} >
+    <form onSubmit={handleSubmit}>
       <h2>Cambiar contraseña</h2>
 
       <div>
