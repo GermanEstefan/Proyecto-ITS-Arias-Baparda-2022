@@ -20,7 +20,19 @@
 
         public static function getEmployeeById($id){
             $conecction = new Connection();
-            $query = "SELECT e.employee_user,e.employee_role,e.ci,e.state,u.email, u.name,u.surname,u.address,u.phone from employee e inner join user u on e.employee_user = u.id_user and e.employee_user = '$id'";
+            $query = "SELECT 
+            e.employee_user,
+            e.employee_role,
+            e.ci,
+            e.state,
+            u.email, 
+            u.name,
+            u.surname,
+            u.address,
+            u.phone 
+            from 
+            employee e 
+            inner join user u on e.employee_user = u.id_user and e.employee_user = '$id'";
             return $conecction->getData($query)->fetch_assoc();
         }
         public static function getEmployeesByRole($nameRole){

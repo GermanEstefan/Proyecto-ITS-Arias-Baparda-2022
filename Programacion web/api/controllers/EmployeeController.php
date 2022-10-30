@@ -140,9 +140,28 @@ class EmployeeController{
         $employees = EmployeeModel::getEmployees();
         echo json_encode($employees); 
     }
-
-    public function deleteEmployee($idOfEmployee){
-        //En proceso...
+    public function getInfoByidEmployee($idEmployee){
+        $this->jwt->verifyTokenAndGetIdUserFromRequest();
+        $employeeExist = EmployeeModel::getEmployeeById($idEmployee);
+        if(!$employeeExist){
+            echo $this->response->error203("El empleado no existe");
+            die(); 
+        }
+        $employee = EmployeeModel::getRoleOfEmployeeById($idEmployee);
+        $rolOfEmployee = $employee["employee_role"];
+        if(!($rolOfEmployee == 'JEFE')){
+            http_response_code(401);
+            echo $this->response->error401("Usted no esta autorizado para relizar esta accion");
+            die();
+        }
+        $dataEmployee = EmployeeModel::getEmployeeById($idEmployee);
+        if(!$dataEmployee){
+            echo $this->response->error500();
+            die();
+        }
+        echo $this->response->successfully("Informacion obtenida", $dataEmployee);
+     
     }
+    
 
 }
