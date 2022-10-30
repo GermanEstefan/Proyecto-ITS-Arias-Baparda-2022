@@ -116,7 +116,7 @@ class SaleController {
         $totalSale = $sale[0]['totalSale'];
         $details = array();
         foreach($sale as $detail){
-        array_push( $details, array( "barcode" => $detail['barcode'],"product" => $detail['product'],"quantity" => $detail['quantity'],"total" => $detail['total']));
+        array_push( $details, array( "barcode" => $detail['barcode'],"product" => $detail['product'],"size" => $detail['size'],"design" => $detail['design'],"quantity" => $detail['quantity'],"total" => $detail['total']));
         }
         $response = array("saleID" => $saleID,"totalSale" =>$totalSale, "details" => $details);
         echo $this->response->successfully("Detalle de ventas para ID:$idSale", $response);  

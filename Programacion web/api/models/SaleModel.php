@@ -47,13 +47,17 @@
             sd.sale_id,
             p.name as product,
             sd.product_sale as barcode, 
+            sz.name as size, 
+            d.name as design, 
             sd.quantity,
             sd.total,
             s.total AS totalSale
-            FROM sale_detail sd, product p, sale s 
+            FROM sale_detail sd, product p, sale s, design d, size sz 
             WHERE sale_id = '$idSale'
             AND sd.product_sale = p.barcode
-            AND sd.sale_id = s.id_sale";
+            AND sd.sale_id = s.id_sale
+            AND sz.id_size = p.product_size
+            AND d.id_design = p.product_design";
             return $conecction->getData($query)->fetch_all(MYSQLI_ASSOC);
         }
         public static function getSalesByStatus($status){
