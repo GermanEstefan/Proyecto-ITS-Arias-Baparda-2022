@@ -90,10 +90,12 @@
             p.id_product,
             p.name,
             p.price,
+            c.name,
             p.description,
             p.picture
             from product p
             where p.name LIKE'%$name%'
+            AND p.product_category = c.id_category
             AND p.product_category != 1
             AND p.state = 1";
             return $conecction->getData($query)->fetch_all(MYSQLI_ASSOC);

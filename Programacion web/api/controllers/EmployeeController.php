@@ -5,6 +5,7 @@ include_once('./helpers/Response.php');
 include_once("./helpers/Token.php");
 include_once("./models/EmployeeModel.php");
 include_once("./models/UserModel.php");
+include_once("./models/RoleModel.php");
 
 class EmployeeController{
 
@@ -19,6 +20,18 @@ class EmployeeController{
     public function validateBodyOfRegisterEmployee($userData){
         $bodyOfRequest = UserController::validateBodyOfRegisterUser($userData);
         if (!$bodyOfRequest || !isset($userData['rol']) || !isset($userData['ci']) ||  !isset($userData['address']) || !isset($userData['phone']) ) {
+            return false;
+        } else {
+            return $userData;
+        }
+    }
+    public function validateBodyOfUpdateEmployee($userData){
+        if (!isset($userData['rol'])
+        || !isset($userData['name']) 
+        || !isset($userData['surname']) 
+        || !isset($userData['password']) 
+        || !isset($userData['phone']) 
+        || !isset($userData['phone'])){
             return false;
         } else {
             return $userData;
@@ -161,6 +174,54 @@ class EmployeeController{
         }
         echo $this->response->successfully("Informacion obtenida", $dataEmployee);
      
+    }
+
+    //edit
+    public function updateEmployee($idEmployee,$userData){
+        $this->jwt->verifyTokenAndGetIdUserFromRequest();
+        $employeeExist = EmployeeModel::getEmployeeById($idEmployee);
+        if(!$employeeExist){
+            echo $this->response->error203("El empleado no existe");
+            die(); 
+        }
+        //valido que sea jefe
+        $employee = EmployeeModel::getRoleOfEmployeeById($idEmployee);
+        $rolOfEmployee = $employee["employee_role"];
+        if(!($rolOfEmployee == 'JEFE')){
+            http_response_code(401);
+            echo $this->response->error401("Usted no esta autorizado para relizar esta accion");
+            die();
+        }
+        $bodyIsValid = $this->validateBodyOfUpdateEmployee($userData);
+        if (!$bodyIsValid) {
+            http_response_code(400);
+            echo $this->response->error400();
+            die();
+        }
+        
+        $nameEmployee = $userData['name'];
+        $surnameEmployee = $userData['surname'];
+        $passwordEmployee = $userData['password'];
+        $rolEmployee = $userData['rol'];
+        $phoneEmployee = $userData['phone'];
+        $addressEmployee = $userData['address'];
+
+        if (!(strlen($passwordEmployee) > 5)){
+        echo $this->response->error203("La contraseña ingresada es muy corta");
+        die();
+        }
+        $validateRole = RoleModel::getRoleByName($rolEmployee);
+        if(!$validateRole){
+            echo $this->response->error203("El rol ingresado NO existe");
+            die();
+        }
+
+        $updateEmployee = EmployeeModel::updateEmployee($idEmployee,$nameEmployee,$surnameEmployee,$passwordEmployee,$rolEmployee,$phoneEmployee,$addressEmployee);
+        if(!$updateEmployee){
+            echo $this->response->error500();
+            die();
+        }
+        echo $this->response->successfully("Empleado actualziado con exito");
     }
     
 

@@ -46,6 +46,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $employeeController->getEmployees();
     die();
 
+} else if($_SERVER['REQUEST_METHOD'] === 'PATCH'){
+    
+    
+    if(isset($_GET['idEmployee']) && isset($_GET['action'])){
+        $action = $_GET['action'];
+        $idEmployee = $_GET['idEmployee'];
+        switch ($action){
+            case 'edit':
+                $employeeController->updateModel($idEmployee,$EmployeeData);
+                die();        
+                case 'disable':
+                $employeeController->disableModel($idEmployee);
+                die();
+                case 'active':
+                $employeeController->activeModel($idEmployee);
+                die();
+                default:
+                http_response_code(400);
+                echo $response->error400("Accion no valida");
+                die();
+            }
+        }
 
 
 }else{
