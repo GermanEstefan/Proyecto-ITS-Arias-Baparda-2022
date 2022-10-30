@@ -9,6 +9,7 @@ const SalesHistory = () => {
   const [sales, setSales] = useState([]);
   useEffect(() => {
     getSalesHistory();
+    window.scroll(0, 0);
   }, []);
 
   const getSalesHistory = async () => {
@@ -16,23 +17,24 @@ const SalesHistory = () => {
       `sales.php?salesClient=${userData.email}`,
       "GET"
     );
-    if(resp.result.error_msg === 'Aun no compro nada'){
-      setSales([])
+    if (resp.status === "error") {
+      setSales([]);
     }
-    if(resp.status === 'successfully'){
-      setSales(resp.result.data)
+    if (resp.status === "successfully") {
+      setSales(resp.result.data.sales);
     }
   };
 
   return (
     <>
-      <h1 style={{marginLeft: '15px'}}>Historial de compras</h1>
-      {sales.map((sale, index) => (
-        <HistoryItem key={index} sale={sale} />
-      ))}
-      {
-        sales.length === 0 && <p style={{marginLeft: '15px'}}>Aún no has realizado  ninguna compra</p>
-      }
+      <h1 style={{ marginLeft: "15px" }}>Historial de compras</h1>
+      {sales.length > 0 &&
+        sales.map((sale, index) => <HistoryItem key={index} sale={sale} />)}
+      {sales.length === 0 && (
+        <p style={{ marginLeft: "15px" }}>
+          Aún no has realizado ninguna compra
+        </p>
+      )}
     </>
   );
 };
