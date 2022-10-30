@@ -1,0 +1,44 @@
+.detail-buys{
+    h1{
+        margin: 50px 0 0 0;
+    }
+    p{
+        font-size: 1.2rem;
+        font-weight: bold;
+        margin-bottom: 30px;
+    }
+    .detail-buys_info-container{
+        background-color: #f2f2f2;
+        padding: 20px 40px 40px 40px;
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+        width: 50vw;
+        max-width: 600px;
+        > div {
+            padding-bottom: 20px;
+            border-bottom: 2px solid $orange;
+            > h2{
+                text-align: center;
+            }
+            > h3{
+                border-bottom: 1px solid $orange;
+                text-align: center;
+                padding-bottom: 5px;
+                width: 70%;
+                margin: auto;
+                margin-bottom: 20px;
+            }
+            > ul {
+                > li {
+                    margin-bottom: 10px;
+                    font-size: 1.1rem;
+                    > strong {
+                        margin-right: 5px;
+                    }
+                }
+            }
+        }
+        > :last-child{
+            border-bottom: none;
+        }
+    }
+}

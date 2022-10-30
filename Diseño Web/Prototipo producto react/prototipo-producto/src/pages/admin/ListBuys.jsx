@@ -36,7 +36,7 @@ const ListBuys = () => {
                             <th>Fecha</th>
                             <th>CI empleado</th>
                             <th>Proveedor</th>
-                            <th>Total compras</th>
+                            <th>Total de la compra</th>
                             <th>Controles</th>
                         </tr>
                         {
@@ -47,7 +47,7 @@ const ListBuys = () => {
                                     <td>{`${supply.ciEmployee}`}</td>
                                     <td>{supply.nameSupplier}</td>
                                     <td>{supply.totalSupply}</td>
-                                    <td className="table-control-text" onClick={() => navigate(`/admin/products/edit-product/${supply.id_product}`)}> <span>Ver detalle</span> </td>
+                                    <td className="table-control-text" onClick={() => navigate(`/admin/products/buy-details/${supply.idSupply}`)}> <span>Ver detalle</span> </td>
                                 </tr>
                             ))
                         }
