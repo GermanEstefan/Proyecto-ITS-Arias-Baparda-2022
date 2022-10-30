@@ -1,0 +1,24 @@
+.list-buys{
+    h1{font-size: 1.7rem;}
+    .list-buys_general-info{
+        display: flex;
+        flex-direction: column;
+        font-size: 1.2rem;
+        > :first-child{
+            margin-bottom: 10px;
+        }
+        margin-bottom: 50px;
+    }
+    .table-control-text{
+        > span {
+            color: blue;
+            cursor: pointer;
+            transition: color .3s;
+            font-weight: bold;
+            font-size: 1.1rem;
+            &:hover{
+                color: rgb(0, 0, 122);
+            }
+        }
+    }
+}

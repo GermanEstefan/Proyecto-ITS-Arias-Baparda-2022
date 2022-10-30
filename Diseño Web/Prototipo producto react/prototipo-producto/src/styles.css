@@ -1726,6 +1726,29 @@
   width: 100%;
 }
 
+.list-buys h1 {
+  font-size: 1.7rem;
+}
+.list-buys .list-buys_general-info {
+  display: flex;
+  flex-direction: column;
+  font-size: 1.2rem;
+  margin-bottom: 50px;
+}
+.list-buys .list-buys_general-info > :first-child {
+  margin-bottom: 10px;
+}
+.list-buys .table-control-text > span {
+  color: blue;
+  cursor: pointer;
+  transition: color 0.3s;
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+.list-buys .table-control-text > span:hover {
+  color: rgb(0, 0, 122);
+}
+
 html {
   scroll-behavior: smooth;
 }
