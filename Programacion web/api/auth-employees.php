@@ -36,8 +36,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
 } else if($_SERVER['REQUEST_METHOD'] === 'GET'){
+    
+    if(isset($_GET['idEmployee'])){
+        $idEmployee = $_GET['idEmployee'];
+        $employeeController->getInfoByidEmployee($idEmployee);
+        die();
+    }
+    
     $employeeController->getEmployees();
     die();
+
+
+
 }else{
     //Metodo no permitido.
     echo $response->error405();

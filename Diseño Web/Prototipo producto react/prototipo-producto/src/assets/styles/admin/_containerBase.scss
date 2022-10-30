@@ -21,7 +21,7 @@
             cursor: pointer;
             transition: .3s;
             &:hover{
-                color: lighten($color: $black, $amount: 30%);
+                color: red;
             }
         }
         >div{
@@ -32,6 +32,31 @@
                 margin-bottom: 3px;
             }
         }
+    }
+}
+
+.select-any-opt{
+    div{
+        background-color: #f2f2f2;
+        padding: 20px 50px 50px 50px;
+        border-radius: 10px;
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    }
+    h1{
+        margin-bottom: 0;
+    }
+    h2{
+        margin-bottom: 0;
+    }
+    p{
+        font-size: 1.3rem;
+        font-weight: bold;
+        max-width: 400px;
+        text-align: center;
+    }
+    svg{
+        font-size: 4rem;
+        color: $orange;
     }
 }
 

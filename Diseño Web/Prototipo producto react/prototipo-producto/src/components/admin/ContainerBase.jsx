@@ -1,14 +1,32 @@
-import { faGear } from "@fortawesome/free-solid-svg-icons";
+import { faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import { userStatusContext } from "../../App";
 import { capitalizeString } from "../../helpers/capitalizeString";
+import SelectAnyOptionScreen from "../../pages/admin/SelectAnyOptionScreen";
 import Aside from "./Aside";
 
 const ContainerBase = ({ children }) => {
 
-    const { userData } = useContext(userStatusContext);
+    const navigate = useNavigate();
+    const { userData, setUserData } = useContext(userStatusContext);
     const { name, surname, rol } = userData;
+
+    const handleLogout = () => {
+        localStorage.removeItem('token');
+        setUserData({
+            address: null,
+            auth: false,
+            ci: null,
+            email: null,
+            name: null,
+            phone: null,
+            rol: null,
+            surname: null
+        })
+        navigate('/admin/login');
+    }
 
     return (
         !(rol)
@@ -18,7 +36,7 @@ const ContainerBase = ({ children }) => {
         <>
             <header className="header-admin">
                 <div className="header-admin_config">
-                    <FontAwesomeIcon icon={faGear} />
+                    <FontAwesomeIcon icon={faRightFromBracket} onClick={handleLogout} />
                     <div>
                         <span>{capitalizeString(`${name} ${surname}`)}</span>
                         <small>{capitalizeString(rol)}</small>
@@ -28,7 +46,7 @@ const ContainerBase = ({ children }) => {
 
             <main className="container-admin">
                 <Aside />
-                {!children ? <section><h1>Elige una opcion</h1></section> : children }
+                {!children ? <SelectAnyOptionScreen/> : children }
             </main>
 
 

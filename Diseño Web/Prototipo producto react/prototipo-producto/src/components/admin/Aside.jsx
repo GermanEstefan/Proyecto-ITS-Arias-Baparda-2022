@@ -39,14 +39,9 @@ const Aside = () => {
                         &&
                         <ul>
                             <li 
-                                onClick={() => navigate('/admin/users/create') }
-                                className={ (action === 'create' && page === 'users') ? 'selected' : '' } 
-                            >Crear un nuevo usuario</li>
-
-                            <li 
-                                onClick={() => navigate('/admin/users/list') }
-                                className={ (action === 'list' && page === 'users') ? 'selected' : '' }
-                            >Listar usuarios</li>
+                                onClick={() => navigate('/admin/users/managment') }
+                                className={ (page === 'users') ? 'selected' : '' } 
+                            >Gestionar usuarios</li>
 
                         </ul>
                     }
@@ -120,7 +115,7 @@ const Aside = () => {
                 <li className="aside_menu_item">
                     <div className="aside_menu_item_container" onClick={() => handleOpenSubMenu('shipments')} >
                         <FontAwesomeIcon icon={faShippingFast} className="aside_menu_item_container_icon"/>
-                        <span>Envios</span>
+                        <span>Ventas</span>
                         <FontAwesomeIcon icon={faChevronDown} className="aside_menu_item_container_icon2"/>
                     </div>
                     {

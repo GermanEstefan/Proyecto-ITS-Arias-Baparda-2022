@@ -96,6 +96,10 @@
     color: $orange;
     font-size: 1.3rem;
     cursor: pointer;
+    transition: color .3s;
+    &:hover{
+      color: lighten($color: $orange, $amount: 20);
+    }
   }
 }
 
@@ -218,6 +222,7 @@
   color: rgb(209, 27, 27);
   transition: color .3s;
   font-size: 1.2rem;
+  cursor: pointer;
   &:hover{
     color: lighten($color: rgb(209, 27, 27), $amount: 20);
   }
