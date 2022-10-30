@@ -1,3 +1,5 @@
+/** @format */
+
 import React, { useEffect, useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import Imagen from "../../assets/img/Obreros.jpg";
@@ -47,11 +49,7 @@ const Register = () => {
       });
     }
     try {
-      const resp = await fetchApi(
-        "auth-customers.php?url=register",
-        "POST",
-        values
-      );
+      const resp = await fetchApi("auth-customers.php?url=register", "POST", values);
       if (resp.status === "error") {
         return Swal.fire({
           icon: "error",
@@ -87,47 +85,51 @@ const Register = () => {
   return (
     <ContainerBase>
       <div className="form-container">
-        <img className={"form-img"} src={Imagen ? Imagen: NoPhoto} alt="Imagen" />
+        <img className={"form-img"} src={Imagen ? Imagen : NoPhoto} alt="Imagen" />
         <form onSubmit={handleSubmit} autoComplete="off">
           <h1>Registrate para comenzar tu experiencia</h1>
           {/* Solucionar bug de campo 'name' dando error en errorStatusForm. */}
-          <Input
-            name="name"
-            id="name"
-            value={values.name}
-            placeholder="Nombre"
-            onChange={handleValuesChange}
-            setErrorStatusForm={setErrorStatusForm}
-            validateFunction={isEmpty}
-          />
-          <Input
-            name="surname"
-            id="surname"
-            value={values.surname}
-            placeholder="Apellido"
-            onChange={handleValuesChange}
-            setErrorStatusForm={setErrorStatusForm}
-            validateFunction={isEmpty}
-          />
-          <Input
-            name="email"
-            id="email"
-            value={values.email}
-            placeholder="Email"
-            onChange={handleValuesChange}
-            setErrorStatusForm={setErrorStatusForm}
-            validateFunction={isEmail}
-          />
-          <Input
-            name="password"
-            id="password"
-            type={"password"}
-            value={values.password}
-            placeholder="Contraseña"
-            onChange={handleValuesChange}
-            setErrorStatusForm={setErrorStatusForm}
-            validateFunction={isValidPassword}
-          />
+          <div className="inputSection">
+            <Input
+              name="name"
+              id="name"
+              value={values.name}
+              placeholder="Nombre"
+              onChange={handleValuesChange}
+              setErrorStatusForm={setErrorStatusForm}
+              validateFunction={isEmpty}
+            />
+            <Input
+              name="surname"
+              id="surname"
+              value={values.surname}
+              placeholder="Apellido"
+              onChange={handleValuesChange}
+              setErrorStatusForm={setErrorStatusForm}
+              validateFunction={isEmpty}
+            />
+          </div>
+          <div className="inputSection">
+            <Input
+              name="email"
+              id="email"
+              value={values.email}
+              placeholder="Email"
+              onChange={handleValuesChange}
+              setErrorStatusForm={setErrorStatusForm}
+              validateFunction={isEmail}
+            />
+            <Input
+              name="password"
+              id="password"
+              type={"password"}
+              value={values.password}
+              placeholder="Contraseña"
+              onChange={handleValuesChange}
+              setErrorStatusForm={setErrorStatusForm}
+              validateFunction={isValidPassword}
+            />
+          </div>
           <label>
             <Input
               name="type"
@@ -146,24 +148,26 @@ const Register = () => {
               animationInDuration={500}
               isVisible={true}
             >
-              <Input
-                name="nRut"
-                id="nRut"
-                value={values.nRut}
-                placeholder="nRut"
-                onChange={handleValuesChange}
-                setErrorStatusForm={setErrorStatusForm}
-                validateFunction={isEmpty}
-              />
-              <Input
-                name="company"
-                id="company"
-                value={values.company}
-                placeholder="Empresa"
-                onChange={handleValuesChange}
-                setErrorStatusForm={setErrorStatusForm}
-                validateFunction={isEmpty}
-              />
+              <div className="inputSection">
+                <Input
+                  name="nRut"
+                  id="nRut"
+                  value={values.nRut}
+                  placeholder="nRut"
+                  onChange={handleValuesChange}
+                  setErrorStatusForm={setErrorStatusForm}
+                  validateFunction={isEmpty}
+                />
+                <Input
+                  name="company"
+                  id="company"
+                  value={values.company}
+                  placeholder="Empresa"
+                  onChange={handleValuesChange}
+                  setErrorStatusForm={setErrorStatusForm}
+                  validateFunction={isEmpty}
+                />
+              </div>
             </Animated>
           )}
           <button className="submit-button" type="submit">

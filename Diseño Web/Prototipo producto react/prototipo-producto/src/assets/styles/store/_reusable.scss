@@ -3,56 +3,30 @@
  *
  * @format
  */
+.mt-5 {
+  margin-top: 5px;
+}
+.ml-5 {
+  margin-left: 5px;
+}
 
 .form-container {
   min-width: 1000px;
-  height: 600px;
+  height: 100%;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   background-color: #fff;
   align-items: center;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   border-radius: 10px;
-  margin: 13em auto;
+  margin-top: 13vh;
 
-  @media (max-width: 800px) {
+  @media (max-width: 1400px) {
     flex-direction: column;
     height: initial;
     min-width: initial;
     box-shadow: none;
     width: 90vw;
-    margin: 7em auto;
-  }
-  .mt-5 {
-    margin-top: 5px;
-  }
-  .radioSection {
-    border: 5px rgb(211, 211, 211) solid;
-    padding: 10px;
-    border-radius: 5px;
-    width: 60%;
-    @media (max-width: 800px) {
-      width: 80%;
-    }
-    margin: auto;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    .radioGroup {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      input {
-        @media (max-width: 800px) {
-          margin: 10px auto;
-          
-        }
-      }
-      .formInput {
-        margin-top: 5px;
-        width: 90%;
-      }
-    }
   }
 
   img {
@@ -71,29 +45,68 @@
 
   form {
     padding: 20px;
-    width: 60%;
-    background-color: #fff;
+    width: 50%;
     display: flex;
     flex-direction: column;
 
-    @media (max-width: 800px) {
-      width: 100%;
-      height: 50%;
+    .inputSection {
+      width: 60%;
+      display: flex;
       justify-content: center;
+      margin: auto;
+      @media (max-width: 900px) {
+        flex-direction: column;
+        width: 80%;
+        align-items: center;
+      }
     }
 
+    .radioSection {
+      border: 5px rgb(211, 211, 211) solid;
+      padding: 10px;
+      border-radius: 5px;
+      width: 60%;
+      @media (max-width: 800px) {
+        width: 80%;
+      }
+      margin: auto;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      .radioGroup {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        input {
+          @media (max-width: 800px) {
+            margin: 10px auto;
+          }
+        }
+        .formInput {
+          margin-top: 5px;
+          width: 90%;
+        }
+      }
+    }
+    .textareaSection {
+      width: 60%;
+      display: flex;
+      justify-content: center;
+      margin: auto;
+      flex-direction: column;
+      blockquote {
+        margin: 0 10px;
+        padding: 0;
+      }
+    }
     .select {
       width: 65%;
     }
 
-    h1 {
-      width: 100%;
-      text-align: center;
-    }
-
     a,
     span,
-    p {
+    p,
+    h1 {
       text-align: center;
     }
 
@@ -101,7 +114,7 @@
     input[type="password"],
     textarea {
       display: block;
-      margin: 10px auto;
+      margin: 5px;
     }
 
     label {
@@ -120,12 +133,16 @@
   margin: 10px auto;
   display: block;
   padding: 1em;
-  background-color: $gray;
+  background-color: $orange;
   border: 15px;
   border-radius: 6px;
   font-weight: bold;
   font-size: large;
   cursor: pointer;
+  width: 60%;
+  @media (max-width: 800px) {
+    width: 80%;
+  }
 
   &:hover {
     background: $dark_gray;
@@ -135,11 +152,9 @@
 
 /*Componente input*/
 .input-wrapper {
-  position: relative;
   text-align: center;
   .input-wrapper__input {
     display: block;
-    font-family: inherit;
     &:focus {
       outline: none;
     }
@@ -156,13 +171,14 @@
 /*Componente ShoppingCart*/
 .shopping-cart-mobile {
   position: fixed;
-  bottom: 20px;
+  bottom: 100px;
   left: 20px;
   font-size: 2rem;
   color: $orange;
   padding: 25px;
   border-radius: 50px;
   background-color: rgba(0, 0, 0, 0.637);
+  z-index: 9999;
 }
 
 .shopping-cart-desktop {

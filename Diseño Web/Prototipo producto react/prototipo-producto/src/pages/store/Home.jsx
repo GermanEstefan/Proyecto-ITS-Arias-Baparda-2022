@@ -27,7 +27,7 @@ const Home = () => {
               Lideres del mercado, excelente calidad y precio, somos tu mejor
               opcion.
             </p>
-            <button onClick={goToProductsView}>Ver productos</button>
+            <button onClick={goToProductsView}>Ver categorías</button>
           </div>
 
           {!isMobile && (

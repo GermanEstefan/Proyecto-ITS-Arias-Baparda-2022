@@ -1,3 +1,5 @@
+/** @format */
+
 import React, { useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
@@ -12,7 +14,6 @@ import ContainerBase from "../../components/store/ContainerBase";
 import NoPhoto from "../../assets/img/no-photo.png";
 
 const Login = () => {
-
   const { setUserData } = useContext(userStatusContext);
   const navigate = useNavigate();
 
@@ -27,8 +28,8 @@ const Login = () => {
     e.preventDefault();
     if (Object.values(errorStatusForm).includes(true)) return;
     try {
-      const resp = await fetchApi("auth-customers.php?url=login", "POST", values)
-      if (resp.status === 'error') {
+      const resp = await fetchApi("auth-customers.php?url=login", "POST", values);
+      if (resp.status === "error") {
         return Swal.fire({
           icon: "error",
           text: resp.result.error_msg,
@@ -36,14 +37,14 @@ const Login = () => {
           showConfirmButton: true,
         });
       }
-      if (resp.status === 'successfully') {
+      if (resp.status === "successfully") {
         setUserData({
           name: resp.result.data.name,
           surname: resp.result.data.surname,
           email: resp.result.data.email,
           phone: resp.result.data.phone,
           address: resp.result.data.address,
-          auth: true
+          auth: true,
         });
         localStorage.setItem("token", resp.result.data.token);
         Swal.fire({
@@ -56,17 +57,17 @@ const Login = () => {
       }
     } catch (error) {
       console.error(error);
-      alert('ERROR, comunicarse con el administrador')
+      alert("ERROR, comunicarse con el administrador");
     }
-  }
+  };
 
   return (
     <ContainerBase>
-      <main className="login-page main-client">
-        <div className="form-container">
-          <img className={"form-img"} src={Imagen ? Imagen : NoPhoto} alt="Imagen"></img>
-          <form onSubmit={handleSubmit} autoComplete="off">
-            <h1>Bienvenido, por favor ingresa tus datos</h1>
+      <div className="form-container">
+        <img className={"form-img"} src={Imagen ? Imagen : NoPhoto} alt="Imagen"></img>
+        <form onSubmit={handleSubmit} autoComplete="off">
+          <h1>Bienvenido, por favor ingresa tus datos</h1>
+          <div className="inputSection">
             <Input
               name="email"
               id="email"
@@ -76,6 +77,8 @@ const Login = () => {
               setErrorStatusForm={setErrorStatusForm}
               validateFunction={isEmail}
             />
+          </div>
+          <div className="inputSection">
             <Input
               name="password"
               id="password"
@@ -86,16 +89,16 @@ const Login = () => {
               setErrorStatusForm={setErrorStatusForm}
               validateFunction={isValidPassword}
             />
-            <button className="submit-button" type="submit">
-              Ingresar
-            </button>
-            <br />
-            <Link className="link" to={"/register"}>
-              Registrarse
-            </Link>
-          </form>
-        </div>
-      </main>
+          </div>
+          <button className="submit-button" type="submit">
+            Ingresar
+          </button>
+          <br />
+          <Link className="link" to={"/register"}>
+            Registrarse
+          </Link>
+        </form>
+      </div>
     </ContainerBase>
   );
 };

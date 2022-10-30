@@ -161,14 +161,13 @@ const ShoppingCartPage = () => {
         return {
           ...product,
           quantity: parseInt(e.target.value),
-          
         };
       } else {
         return product;
       }
     });
     // setProductTotalPrice(price * parseInt(e.target.value));
-    setProductsList(cartWithNewQuantity)
+    setProductsList(cartWithNewQuantity);
     console.log(cartWithNewQuantity);
     setCart(cartWithNewQuantity);
     setTotalPrice();
@@ -198,6 +197,8 @@ const ShoppingCartPage = () => {
             <span className="center">No tienes productos en tu carrito</span>
           )}
         </div>
+      </div>
+
         <div ref={buyForm} className="form-container">
           <img className="form-img" src={Purchase} alt="Imagen" />
           <form>
@@ -269,7 +270,7 @@ const ShoppingCartPage = () => {
             </button>
           </form>
         </div>
-      </div>
+        <div style={{ height: "12vh" }}></div>
     </ContainerBase>
   );
 };

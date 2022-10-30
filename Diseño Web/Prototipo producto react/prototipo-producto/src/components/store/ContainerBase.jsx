@@ -9,12 +9,12 @@ const ContainerBase = ({ children }) => {
     const isMobile = useMediaQuery({ query: "(max-width: 800px)" });
 
     return (
-        <>
+        <main className="main-client">
             <Header />
             {children}
             {isMobile && <ShoppingCart />}
             <Footer />
-        </>
+        </main>
     )
 }
 

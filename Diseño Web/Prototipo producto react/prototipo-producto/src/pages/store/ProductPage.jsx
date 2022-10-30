@@ -36,7 +36,10 @@ const ProductPage = () => {
 
   console.log(product);
   const handleAddToCart = () => {
-    setCart([...cart, { barcode: product.barcode, quantity: quantitySelected, price: product.price }]);
+    setCart([
+      ...cart,
+      { barcode: product.barcode, quantity: quantitySelected, price: product.price },
+    ]);
 
     setIsAddedToCart(true);
   };
@@ -131,7 +134,8 @@ const ProductPage = () => {
                       setQuantitySelected(e.target.value);
                       setIsEnoughStock(quantitySelected <= parseInt(product.stock));
                     }}
-                    max={product.stock}
+                    
+                    min={1}
                     defaultValue={1}
                   />
                 </div>

@@ -1,11 +1,12 @@
-import React, { useEffect } from "react";
+/** @format */
+
+import React, { useEffect, useState } from "react";
 import Imagen from "../../assets/img/Obreros.jpg";
 import Swal from "sweetalert2";
 import ContainerBase from "../../components/store/ContainerBase";
-import NoPhoto from "../../assets/img/no-photo.png";
 
 const Contact = () => {
-
+  const [message, setMessage] = useState("");
   useEffect(() => {
     window.scroll(0, 0);
   }, []);
@@ -21,31 +22,27 @@ const Contact = () => {
   };
   return (
     <ContainerBase>
-      <main className="form-container main-client">
-        <img className="form-img" src={Imagen? Imagen : NoPhoto} alt="Imagen"/>
-        <form className="form" onSubmit={handleSubmit} autoComplete="off">
+      <main className="form-container">
+        <img className="form-img" src={Imagen} alt="Imagen" />
+        <form onSubmit={handleSubmit} autoComplete="off">
           <h1>Envianos tu mensaje</h1>
-          <input
-            name="topic"
-            id="topic"
-            placeholder="Asunto"
-            className="input"
-          />
-
-          <textarea
-            name="message"
-            id="message"
-            rows={7}
-            maxLength={130}
-            placeholder="Mensaje"
-          ></textarea>
-
-          <button
-            className="submit-button"
-            type="submit"
-            to={"/register"}
-          >Enviar</button>
-
+          <div className="inputSection">
+            <input style={{width: '100%'}} type="text" name="topic" id="topic" placeholder="Asunto" />
+          </div>
+          <div className="textareaSection">
+            <textarea
+              name="message"
+              id="message"
+              onChange={(e) => setMessage(e.target.value)}
+              rows={7}
+              maxLength={250}
+              placeholder="Mensaje"
+            />
+            <blockquote>{message.length}/250</blockquote>
+          </div>
+          <button className="submit-button" type="submit" to={"/register"}>
+            Enviar
+          </button>
         </form>
       </main>
     </ContainerBase>
