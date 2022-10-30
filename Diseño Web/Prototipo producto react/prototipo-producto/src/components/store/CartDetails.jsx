@@ -6,7 +6,7 @@ const CartDetails = ({ total, onClick }) => {
     <>
       <div className="cartItem">
         <div className="cartItem__text">
-          <span className="total">Total: {total}$</span>
+          <span className="total">Total del carrito: {total}$</span>
           <button className="buyBtn" onClick={onClick}>Confirmar compra</button>
         </div>
       </div>

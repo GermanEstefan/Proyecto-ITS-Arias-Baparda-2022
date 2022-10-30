@@ -1,3 +1,5 @@
+/** @format */
+
 import React, { useEffect, useState, useRef } from "react";
 import NoPhoto from "../../assets/img/no-photo.png";
 import PageTitle from "../../components/store/PageTitle";
@@ -73,9 +75,7 @@ const ShoppingCartPage = () => {
     const productsData = products.map((product) => product.result.data);
 
     // Agregamos la cantidad de productos que tiene cada producto en el carrito a el objeto data
-    cart.map(
-      ({ quantity }, index) => (productsData[index]["quantity"] = quantity)
-    );
+    cart.map(({ quantity }, index) => (productsData[index]["quantity"] = quantity));
 
     setProductsList(productsData);
     setTotalPrice();
@@ -106,9 +106,7 @@ const ShoppingCartPage = () => {
     setTotal(
       cart.length > 0 &&
         cart
-          .map(
-            (product) => parseInt(product.price) * parseInt(product.quantity)
-          )
+          .map((product) => parseInt(product.price) * parseInt(product.quantity))
           .reduce((a, b) => parseInt(a) + parseInt(b))
     );
   };
@@ -156,7 +154,25 @@ const ShoppingCartPage = () => {
       setIsShipping(false);
     }
   };
-
+  const updateProductQuantity = (e, barcode) => {
+    console.log(e.target.value);
+    const cartWithNewQuantity = productsList.map((product) => {
+      if (product.barcode === barcode) {
+        return {
+          ...product,
+          quantity: parseInt(e.target.value),
+          
+        };
+      } else {
+        return product;
+      }
+    });
+    // setProductTotalPrice(price * parseInt(e.target.value));
+    setProductsList(cartWithNewQuantity)
+    console.log(cartWithNewQuantity);
+    setCart(cartWithNewQuantity);
+    setTotalPrice();
+  };
   return (
     <ContainerBase>
       <div className="cartContainer">
@@ -174,6 +190,8 @@ const ShoppingCartPage = () => {
               setTotalPrice={setTotalPrice}
               size={product.size}
               design={product.design}
+              setProductsList={setProductsList}
+              updateProductQuantity={updateProductQuantity}
             />
           ))}
           {productsList.length === 0 && (
@@ -186,13 +204,11 @@ const ShoppingCartPage = () => {
             <h1>Confirma tu compra</h1>
             <div className="radioSection">
               <strong>Dirección de envío</strong>
-              <div
-                className="radioGroup"
-                onChange={(e) => handleRadioChange(e.target.value)}
-              >
+              <div className="radioGroup" onChange={(e) => handleRadioChange(e.target.value)}>
                 <label>
                   <input
                     type="radio"
+                    defaultChecked={true}
                     value={"Dirección actual"}
                     name="addressRadio"
                     id=""
@@ -200,22 +216,12 @@ const ShoppingCartPage = () => {
                   Dirección actual
                 </label>
                 <label>
-                  <input
-                    type="radio"
-                    value={"Dirección alternativa"}
-                    name="addressRadio"
-                    id=""
-                  />{" "}
+                  <input type="radio" value={"Dirección alternativa"} name="addressRadio" id="" />{" "}
                   Dirección alternativa
                 </label>
                 <label>
-                  <input
-                    type="radio"
-                    value={"Retiro en local"}
-                    name="addressRadio"
-                    id=""
-                  />{" "}
-                  Retiro en local
+                  <input type="radio" value={"Retiro en local"} name="addressRadio" id="" /> Retiro
+                  en local
                 </label>
               </div>
               <Input
@@ -229,9 +235,7 @@ const ShoppingCartPage = () => {
                 disabled={isAddressDisable}
               />
             </div>
-            <span className="mt-5">
-              {isShipping ? "Horarios de envío" : "Horarios del local"}
-            </span>
+            <span className="mt-5">{isShipping ? "Horarios de envío" : "Horarios del local"}</span>
             <Select
               name="deliveryTime"
               id="deliveryTime"
@@ -239,7 +243,7 @@ const ShoppingCartPage = () => {
               onChange={(e) => setDeliveryTime(e.value)}
               options={isShipping ? deliveryHours : storeHours}
               placeholder={"Horario"}
-              // defaultValue={isShipping ? deliveryTimes[0] : storeHours[0]}
+              // defaultValue={isShipping ? deliveryHours[0] : storeHours[0]}
             />
             <span className="mt-5">{"Metodo de pago"}</span>
             <Select
@@ -253,10 +257,11 @@ const ShoppingCartPage = () => {
             <button
               className="submit-button"
               onClick={(e) => handleConfirmPurchase(e)}
+              style={{ width: "65%" }}
               type="submit"
               disabled={
                 values.address === "" ||
-                // values.deliveryTime === null ||
+                values.deliveryTime === null ||
                 values.paymentMenthod === null
               }
             >

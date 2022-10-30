@@ -1,3 +1,5 @@
+/** @format */
+
 import React, { useState, useEffect } from "react";
 import { Animated } from "react-animated-css";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
@@ -16,6 +18,8 @@ const CartItem = ({
   setTotalPrice,
   size,
   design,
+  setProductsList,
+  updateProductQuantity,
 }) => {
   const { cart, setCart } = useContext(cartContext);
 
@@ -26,10 +30,10 @@ const CartItem = ({
     getProductByBarcode();
   }, []);
 
-  const handleDeleteItemFromCart = (e) => {
-    e.preventDefault();
-    setCart(cart.filter((barcode) => barcode !== barcode));
-    localStorage.setItem("cart", JSON.stringify(cart));
+  const handleDeleteItemFromCart = () => {
+    setProductsList(cart.filter((product) => product.barcode !== barcode));
+    setCart(cart.filter((product) => product.barcode !== barcode));
+    // window.location.reload(false);
   };
 
   const getProductByBarcode = async () => {
@@ -37,25 +41,24 @@ const CartItem = ({
     setProduct(resp.result.data);
   };
 
-  const updateProductQuantity = (e) => {
-    e.preventDefault();
-    console.log(e.target.value);
-    const cartWithNewQuantity = cart.map((product) => {
-      if (product.barcode === barcode) {
-        return {
-          barcode: barcode,
-          quantity: parseInt(e.target.value),
-          price: product.price,
-        };
-      } else {
-        return product;
-      }
-    });
-    setProductTotalPrice(price * parseInt(e.target.value));
-    console.log(cartWithNewQuantity);
-    setCart(cartWithNewQuantity);
-    setTotalPrice();
-  };
+  // const updateProductQuantity = (e) => {
+  //   console.log(e.target.value);
+  //   const cartWithNewQuantity = cart.map((product) => {
+  //     if (product.barcode === barcode) {
+  //       return {
+  //         barcode: barcode,
+  //         quantity: parseInt(e.target.value),
+  //         price: product.price,
+  //       };
+  //     } else {
+  //       return product;
+  //     }
+  //   });
+  //   setProductTotalPrice(price * parseInt(e.target.value));
+  //   console.log(cartWithNewQuantity);
+  //   setCart(cartWithNewQuantity);
+  //   setTotalPrice();
+  // };
   return (
     <Animated
       animationIn="fadeInLeft"
@@ -64,12 +67,7 @@ const CartItem = ({
       isVisible={true}
     >
       <div className="cartItem">
-        <img
-          className="cartItem__img"
-          src={img ? img : NoPhoto}
-          width="100px"
-          alt=""
-        />
+        <img className="cartItem__img" src={img ? img : NoPhoto} width="100px" alt="" />
 
         <div className="cartItem__text">
           <div>
@@ -85,13 +83,13 @@ const CartItem = ({
             className="CartItem__actionsQuantity"
             defaultValue={quantity}
             type="number"
-            onChange={updateProductQuantity}
+            onChange={(e) => {
+              updateProductQuantity(e, barcode);
+              setProductTotalPrice(price * parseInt(e.target.value));
+            }}
             min={1}
           />
-          <button
-            className="CartItem__actionsQuantity"
-            onClick={(e) => handleDeleteItemFromCart(e)}
-          >
+          <button className="CartItem__actionsQuantity" onClick={handleDeleteItemFromCart}>
             <FontAwesomeIcon icon={faTrash} />
           </button>
         </div>
