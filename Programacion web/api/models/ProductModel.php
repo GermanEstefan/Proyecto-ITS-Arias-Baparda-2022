@@ -90,10 +90,10 @@
             p.id_product,
             p.name,
             p.price,
-            c.name,
+            c.name AS category,
             p.description,
             p.picture
-            from product p
+            from product p, category c
             where p.name LIKE'%$name%'
             AND p.product_category = c.id_category
             AND p.product_category != 1
