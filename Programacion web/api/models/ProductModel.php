@@ -209,7 +209,8 @@
             p.picture
             from product p
             where p.state = 1
-            AND p.product_category = 1";
+            AND p.product_category = 1
+            AND p.id_product != 1000";
             return $conecction->getData($query)->fetch_all(MYSQLI_ASSOC);
         }
 
