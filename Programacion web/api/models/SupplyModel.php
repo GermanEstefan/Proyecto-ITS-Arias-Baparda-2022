@@ -76,7 +76,7 @@ class SupplyModel extends Connection
         s.id_supply AS idSupply,
         date_format(s.date, '%d/%m/%Y %T') AS date,
         s.supplier_id AS idSupplier,
-        sp.company_name AS supplierName,
+        sp.company_name AS nameSupplier,
         e.employee_user AS idEmployee,
         s.employee_ci AS ciEmployee,
         concat_ws(' ', u.name , u.surname) AS employeeName, 
