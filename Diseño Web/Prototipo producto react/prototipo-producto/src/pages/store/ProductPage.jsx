@@ -132,6 +132,7 @@ const ProductPage = () => {
                       setIsEnoughStock(quantitySelected <= parseInt(product.stock));
                     }}
                     max={product.stock}
+                    defaultValue={1}
                   />
                 </div>
                 <div className="buyAndAddToCartContainer">
