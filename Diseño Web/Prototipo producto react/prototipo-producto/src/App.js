@@ -1,3 +1,5 @@
+/** @format */
+
 import React, { createContext, useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import Register from "./pages/store/Register";
@@ -32,6 +34,7 @@ import ListBuys from "./pages/admin/ListBuys";
 import EditPromo from "./pages/admin/EditPromo";
 import DetailBuys from "./pages/admin/DetailsBuy";
 import UserEdit from "./pages/admin/UserEdit";
+import SearchResultsPage from "./pages/store/SearchResultsPage";
 
 export const userStatusContext = createContext({});
 export const cartContext = createContext([]);
@@ -68,6 +71,7 @@ const App = () => {
           <Route path="/shoppingCart" element={<ShoppingCartPage />} />
           <Route path="/category/:category" element={<CategoryPage />} />
           <Route path="/category/:category/:id" element={<ProductPage />} />
+          <Route path="/results/:data" element={<SearchResultsPage />} />
           <Route path="/panel-user" element={<UserPanel />} />
           <Route path="/admin/login" element={<LoginAdm />} />
           <Route path="/admin" element={<ContainerBase />} />
@@ -78,14 +82,14 @@ const App = () => {
           <Route path="/admin/generals/sizes" element={<Sizes />} />
           <Route path="/admin/generals/sizes/edit/:idOfSize" element={<EditSize />} />
           <Route path="/admin/generals/designs" element={<Design />} />
-          <Route path="/admin/generals/designs/edit/:idOfDesign" element={<EditDesign />}/>
+          <Route path="/admin/generals/designs/edit/:idOfDesign" element={<EditDesign />} />
           <Route path="/admin/generals/supplier" element={<Supplier />} />
-          <Route path="/admin/generals/supplier/edit/:rut" element={<EditSupplier />}/>
+          <Route path="/admin/generals/supplier/edit/:rut" element={<EditSupplier />} />
           <Route path="/admin/products/create" element={<CreateProducts />} />
-          <Route path="/admin/products-promo/create" element={<CreatePromotion />}/>
+          <Route path="/admin/products-promo/create" element={<CreatePromotion />} />
           <Route path="/admin/products/edit-model/:barcode" element={<EditModelProduct />} />
-          <Route path="/admin/products/edit-product/:idProduct" element={<EditProducts />}/>
-          <Route path="/admin/products/edit-promo/:idPromo" element={<EditPromo />}/>
+          <Route path="/admin/products/edit-product/:idProduct" element={<EditProducts />} />
+          <Route path="/admin/products/edit-promo/:idPromo" element={<EditPromo />} />
           <Route path="/admin/products/buy" element={<BuyProducts />} />
           <Route path="/admin/products/buy-list" element={<ListBuys />} />
           <Route path="/admin/products/buy-details/:idBuy" element={<DetailBuys />} />

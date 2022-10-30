@@ -1,6 +1,8 @@
+/** @format */
+
 import React from "react";
 import LogoCliente from "../../assets/img/Cliente-nombre1.svg";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
 import NavMobile from "./NavMobile";
 import NavDesktop from "./NavDesktop";
@@ -12,15 +14,19 @@ import { useRef } from "react";
 const Header = () => {
   const isMobile = useMediaQuery({ query: "(max-width: 800px)" });
   const [openMenu, setOpenMenu] = useState(false);
-
+  const navigate = useNavigate();
   const navMobileRef = useRef(null);
   const shadowCloseRef = useRef(null);
+  const [searchData, setSearchData] = useState("");
   const handleCloseMenu = () => {
     navMobileRef.current.classList.add("close-menu");
     shadowCloseRef.current.classList.add("fade-out");
-    navMobileRef.current.addEventListener("animationend", () =>
-      setOpenMenu(false)
-    );
+    navMobileRef.current.addEventListener("animationend", () => setOpenMenu(false));
+  };
+
+  const handleSearch = (e) => {
+    
+    searchData !== "" && navigate(`/results/${searchData}`);
   };
 
   return (
@@ -30,19 +36,15 @@ const Header = () => {
           <img src={LogoCliente} alt="Logo de la empresa" />
         </Link>
         {!isMobile && (
-          <form className="header-store__search">
+          <form className="header-store__search" onSubmit={(e) => handleSearch(e)}>
             <div>
               <FontAwesomeIcon icon={faSearch} />
-              <input type="text" placeholder="Buscar productos" />
+              <input
+                type="text"
+                placeholder="Buscar productos"
+                onChange={(e) => setSearchData(e.target.value)}
+              />
             </div>
-
-            {/* <ul>
-              <li>ad</li>
-              <li>asda</li>
-              <li>asdasd</li>
-              <li>asdasd</li>
-              <li>asdasd</li>
-            </ul> */}
           </form>
         )}
         {isMobile ? (
@@ -56,18 +58,10 @@ const Header = () => {
         )}
       </header>
       {isMobile && (
-        <NavMobile
-          openMenu={openMenu}
-          setOpenMenu={setOpenMenu}
-          refMenu={navMobileRef}
-        />
+        <NavMobile openMenu={openMenu} setOpenMenu={setOpenMenu} refMenu={navMobileRef} />
       )}
       {isMobile && openMenu && (
-        <div
-          onClick={handleCloseMenu}
-          ref={shadowCloseRef}
-          className="shadow-close"
-        ></div>
+        <div onClick={handleCloseMenu} ref={shadowCloseRef} className="shadow-close"></div>
       )}
     </>
   );

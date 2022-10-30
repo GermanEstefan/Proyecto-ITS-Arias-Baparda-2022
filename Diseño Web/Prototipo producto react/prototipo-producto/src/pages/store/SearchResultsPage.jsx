@@ -9,24 +9,22 @@ import Pagination from "../../components/store/Pagination";
 import { fetchApi } from "../../API/api";
 import ProductCard from "../../components/store/ProductCard";
 
-const CategoryPage = () => {
-  const { category } = useParams();
+const SearchResultsPage = () => {
+  const { data } = useParams();
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(3);
   const [productList, setProductList] = useState([]);
   useEffect(() => {
     window.scroll(0, 0);
-    getProductsByCategory();
+    getProductsBySearchInput();
   }, []);
-
-  const getProductsByCategory = async () => {
-    if (category === "PROMOCIONES") {
-      const resp = await fetchApi(`products.php?promos`, "GET");
-      setProductList(resp.result.data);
-    } else {
-      const resp = await fetchApi(`products.php?categoryName=${category}`, "GET");
-      setProductList(resp.result.data);
-    }
+  useEffect(() => {
+    getProductsBySearchInput();
+  }, [data]);
+  const getProductsBySearchInput = async () => {
+    const resp = await fetchApi(`products.php?name=${data}`, "GET");
+    console.log("data:" + data);
+    setProductList(resp.result.data);
   };
 
   const indexOfLastItem = currentPage * itemsPerPage;
@@ -40,7 +38,7 @@ const CategoryPage = () => {
   return (
     <ContainerBase>
       <div className="main">
-        <PageTitle title={category} isArrow={true} arrowGoTo={"/"} />
+        <PageTitle title={`Resultados de ${data}`} isArrow={true} arrowGoTo={"/"} />
 
         <div className="card-container">
           {productList.length === 0 && <p>No hay productos en esta categoría</p>}
@@ -70,4 +68,4 @@ const CategoryPage = () => {
   );
 };
 
-export default CategoryPage;
+export default SearchResultsPage;
