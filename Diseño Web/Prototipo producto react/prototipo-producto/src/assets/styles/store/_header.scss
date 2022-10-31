@@ -2,7 +2,7 @@
 
 .header-store {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   position: fixed;
   top: 0;
@@ -15,80 +15,77 @@
   .header-store__logo {
     width: 60vw;
     max-width: 300px;
-    position: absolute;
-    left: 20px;
-  }
-
-  .header-store__hamb {
-    font-size: 2rem;
-    color: $orange;
-    right: 20px;
-    position: absolute;
+    // position: absolute;
+    // left: 20px;
   }
 
   .header-store__search {
-    display: flex;
-    position: relative;
+    // position: relative;
     display: flex;
     align-items: center;
-
-    min-width: 500px;
+    width: 100%;
+    min-width: 300px;
     max-width: 700px;
-    @media (max-width: 1100px) {
+    @media (max-width: 1000px) {
       display: none;
     }
     div {
       width: 100%;
       svg {
+        padding: 10px;
         position: absolute;
-        left: 14px;
-        top: 8px;
         color: $orange;
         font-size: 1.5rem;
       }
       input {
         padding: 10px 10px 10px 50px;
         border: 2px solid $orange;
-        width: 100%;
+        width: 80%;
       }
     }
+  }
+  .header-store__hamb {
+    font-size: 2rem;
+    color: $orange;
+    right: 30px;
+    position: absolute;
   }
 
   .header-store__nav-desktop {
-    position: absolute;
+    // position: absolute;
     right: 20px;
-  }
 
-  .header-store__nav-desktop > ul {
-    display: flex;
-    align-items: center;
-    a {
-      position: relative;
-      cursor: pointer;
-      margin-right: 40px;
-      font-size: 1.4rem;
-      &::after {
-        content: "";
-        height: 2px;
-        width: 0;
-        background-color: $orange;
-        position: absolute;
-        bottom: -10px;
-        left: 0;
-        transition: 0.5s;
+    ul {
+      display: flex;
+      align-items: center;
+      a {
+        position: relative;
+        cursor: pointer;
+        margin-right: 35px;
+        font-size: 1.4rem;
+        &::after {
+          content: "";
+          height: 2px;
+          width: 0;
+          background-color: $orange;
+          position: absolute;
+          bottom: -10px;
+          left: 0;
+          transition: 0.5s;
+        }
+        &:hover::after {
+          width: 100%;
+        }
       }
-      &:hover::after {
-        width: 100%;
-      }
-    }
-    svg {
-      font-size: 2rem;
-      color: $orange;
-      cursor: pointer;
-      margin-right: 20px;
-      transition: color 0.5s;
-      &:hover {
-        color: $transparent_orange;
+      svg {
+        font-size: 2rem;
+        color: $orange;
+        cursor: pointer;
+        margin-right: 20px;
+        transition: color 0.5s;
+        &:hover {
+          color: $transparent_orange;
+        }
       }
     }
   }

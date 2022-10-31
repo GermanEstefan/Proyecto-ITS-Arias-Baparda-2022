@@ -64,7 +64,7 @@ const Login = () => {
   return (
     <ContainerBase>
       <div className="form-container">
-        <img className={"form-img"} src={Imagen ? Imagen : NoPhoto} alt="Imagen"></img>
+        <img src={Imagen ? Imagen : NoPhoto} alt="Imagen"></img>
         <form onSubmit={handleSubmit} autoComplete="off">
           <h1>Bienvenido, por favor ingresa tus datos</h1>
           <div className="inputSection">

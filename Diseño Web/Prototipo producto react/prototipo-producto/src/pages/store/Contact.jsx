@@ -23,11 +23,17 @@ const Contact = () => {
   return (
     <ContainerBase>
       <main className="form-container">
-        <img className="form-img" src={Imagen} alt="Imagen" />
+        <img src={Imagen} alt="Imagen" />
         <form onSubmit={handleSubmit} autoComplete="off">
           <h1>Envianos tu mensaje</h1>
           <div className="inputSection">
-            <input style={{width: '100%'}} type="text" name="topic" id="topic" placeholder="Asunto" />
+            <input
+              style={{ width: "100%" }}
+              type="text"
+              name="topic"
+              id="topic"
+              placeholder="Asunto"
+            />
           </div>
           <div className="textareaSection">
             <textarea

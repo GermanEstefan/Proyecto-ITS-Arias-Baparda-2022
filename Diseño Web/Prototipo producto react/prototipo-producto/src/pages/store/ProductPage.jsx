@@ -32,14 +32,18 @@ const ProductPage = () => {
   }, []);
   useEffect(() => {
     setIsEnoughStock(quantitySelected <= parseInt(product.stock));
+    setIsAddedToCart(
+      cart.filter((cartProduct) => cartProduct.barcode === product.barcode).length > 0
+    );
   }, [product, quantitySelected]);
 
-  console.log(product);
   const handleAddToCart = () => {
-    setCart([
-      ...cart,
-      { barcode: product.barcode, quantity: quantitySelected, price: product.price },
-    ]);
+    if (!isAddedToCart) {
+      setCart([
+        ...cart,
+        { barcode: product.barcode, quantity: quantitySelected, price: product.price },
+      ]);
+    }
 
     setIsAddedToCart(true);
   };
@@ -122,7 +126,6 @@ const ProductPage = () => {
                   placeholder="Talle..."
                   className="select"
                   onChange={(e) => handleChangeSize(e.value)}
-                  
                 />
               </div>
               <div className="buttonsFlexContainer">

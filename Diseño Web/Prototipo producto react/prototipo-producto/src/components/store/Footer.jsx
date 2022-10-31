@@ -14,10 +14,10 @@ const Footer = () => {
       </ul>
       <div className="img-container">
         <a href="www.google.com" target="_blank" rel="noopener noreferrer">
-          <FontAwesomeIcon icon={faFacebook} size="4x" color="white" />
+          <FontAwesomeIcon icon={faFacebook} size="3x" color="white" />
         </a>
         <a href="www.google.com" target="_blank" rel="noopener noreferrer">
-          <FontAwesomeIcon icon={faInstagram} size="4x" color="white" />
+          <FontAwesomeIcon icon={faInstagram} size="3x" color="white" />
         </a>
       </div>
     </footer>

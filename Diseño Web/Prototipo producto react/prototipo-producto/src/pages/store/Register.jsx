@@ -85,7 +85,7 @@ const Register = () => {
   return (
     <ContainerBase>
       <div className="form-container">
-        <img className={"form-img"} src={Imagen ? Imagen : NoPhoto} alt="Imagen" />
+        <img src={Imagen ? Imagen : NoPhoto} alt="Imagen" />
         <form onSubmit={handleSubmit} autoComplete="off">
           <h1>Registrate para comenzar tu experiencia</h1>
           {/* Solucionar bug de campo 'name' dando error en errorStatusForm. */}
