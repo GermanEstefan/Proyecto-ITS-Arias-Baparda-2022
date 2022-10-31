@@ -5,7 +5,7 @@ DATABASE="bindev"
 USER="master"
 PASSWORD="1234"
 RESPALDOS="/home/master/respaldos"
-SERVIDOR="respaldo@192.168.1.2:/home/respaldo/respaldos"
+SERVIDOR="respaldo@backupServer:/home/respaldo/respaldos"
 
 echo "Ejecutando el script de respaldo de la base de datos"
 logger -p local1.info "Backup de la BD automatico iniciado"

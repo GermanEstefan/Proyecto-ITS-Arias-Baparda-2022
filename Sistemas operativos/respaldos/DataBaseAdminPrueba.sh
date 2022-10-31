@@ -5,7 +5,7 @@ DATABASE="bindev"
 USER="master"
 PASSWORD="1234"
 RESPALDOS="/home/master/respaldos"
-SERVIDOR="respaldo@192.168.1.2:/home/respaldo/respaldos"
+SERVIDOR="respaldo@backupServer:/home/respaldo/respaldos"
 logger -p local1.info "Ingreso al menu de respaldos de la Base de datos"
 
 

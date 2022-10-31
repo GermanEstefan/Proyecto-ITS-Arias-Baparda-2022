@@ -1,4 +1,4 @@
-#!bin/bash
+#!/bin/bash
 
 logger -p local1.info "Ejecutando el script de logs de auditoria"
 sudo last > /var/log/customlogs/last.log

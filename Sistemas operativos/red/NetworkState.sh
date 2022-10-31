@@ -1,4 +1,4 @@
-#!bin/bash
+#!/bin/bash
 logger -p local1.info "Inicia el script de diagnostico del servidor"
 op=1
 while [ $op != 0 ]
@@ -20,11 +20,11 @@ do
 	echo "Comprobando, esto puede tardar unos minutos...."
 	echo "-----------------------------------------------"
 	logger -p local1.info "Intentando hacer ping al servidor"
-	ping -c3 192.168.1.2 | grep "Destination Host Unreachable"
-	if [ $? != 0 ]
+	ping -c3 backupServer | grep "Destination Host Unreachable"
+	if [ $? == 0 ]
 	then
 		logger -p local1.info "ping realizado con exito, intentando escanear puertos"
-		nmap -Pn 192.168.1.2
+		timeout 30s nmap -Pn 192.168.1.2
 		if [ $? == 0 ]
 		then
 			logger -p local1.info "puertos escaneados con exito"
@@ -37,7 +37,7 @@ do
 			logger -p local1.info "todos los puertos filtrados, no se encontraron puertos disponibles"
 			echo "------------------------------------------"
 			echo "__________________________________________"
-			echo "El servidor tiene "
+			echo "No hay puertos disponibles en el servidor"
 			read exit
 		fi
 	else
@@ -53,7 +53,7 @@ do
 	clear
 	logger -p local1.info "intentando comprobar si el servicio ssh esta disponible"
 	echo "Comprobando..."
-	nmap 192.168.1.2 -p 2244 -Pn | grep open
+	timeout 30s nmap backupServer -p 2244 -Pn | grep open
 	if [ $? == 0 ]
 	then
 		logger -p local1.info "...servicio ssh disponible"
@@ -79,7 +79,7 @@ do
 	clear
 	echo "Comprobando..."
 	echo "Puede tardar unos minutos...."
-	rsync -ahzP --dry-run -e "ssh -p 2244" respaldo@192.168.1.2:/home/respaldo/respaldos /home/master/respaldos | grep respaldo.tar.gz
+	timeout 30s rsync -ahzP --dry-run -e "ssh -p 2244" respaldo@192.168.1.2:/home/respaldo/respaldos /home/master/respaldos | grep respaldo.tar.gz
 	if [ $? == 0 ]
 	then
 		logger -p local1.info "...conexion con la carpeta de respaldos establecida"

@@ -710,6 +710,8 @@ do
 		*)
 		logger -p local1.info "error, se ingreso una opcion invalida"
 		echo "Error, ingrese una opcion valida"
+		echo "Presione enter para continuar"
+		read exit
 		;;
 	esac
 	;;
