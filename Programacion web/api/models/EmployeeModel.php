@@ -26,6 +26,7 @@
             e.ci,
             e.state,
             u.email, 
+            u.password, 
             u.name,
             u.surname,
             u.address,

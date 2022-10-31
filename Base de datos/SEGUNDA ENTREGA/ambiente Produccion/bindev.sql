@@ -454,9 +454,9 @@ DELIMITER ;
 -- USUARIOS PARA TENER INGRESAR AL SISTEMA 
 -- ----------------------------------------------------- 
 INSERT INTO `bindev`.`user` (`email`, `name`, `surname`, `address`, `phone`, `password`) VALUES ('system@seguridadcorporal.com', 'System', 'Response', 'Null', '0','--,.r.ad');
-INSERT INTO `bindev`.`user` (`email`, `name`, `surname`, `address`, `phone`, `password`) VALUES ('master@seguridadcorporal.com', 'master', 'master', 'Address master', '22334455', 'master');
-INSERT INTO `bindev`.`user` (`email`, `name`, `surname`, `address`, `phone`, `password`) VALUES ('ventas@seguridadcorporal.com', 'vendedor', 'vendedor', 'Address vendedor', '22334455', 'vendedor');
-INSERT INTO `bindev`.`user` (`email`, `name`, `surname`, `address`, `phone`, `password`) VALUES ('compras@seguridadcorporal.com', 'comprador ', 'comprador', 'Address comprador', '22334455', 'comprador');
+INSERT INTO `bindev`.`user` (`email`, `name`, `surname`, `address`, `phone`, `password`) VALUES ('master@seguridadcorporal.com', 'usuario', 'master', 'Address master', '22334455', 'master');
+INSERT INTO `bindev`.`user` (`email`, `name`, `surname`, `address`, `phone`, `password`) VALUES ('ventas@seguridadcorporal.com', 'usuario', 'vendedor', 'Address vendedor', '22334455', 'vendedor');
+INSERT INTO `bindev`.`user` (`email`, `name`, `surname`, `address`, `phone`, `password`) VALUES ('compras@seguridadcorporal.com', 'usuario ', 'comprador', 'Address comprador', '22334455', 'comprador');
 INSERT INTO `bindev`.`role` (`name_role`, `description`) VALUES ('SYSTEM', 'RESPUESTA AUTOMATICA DEL SISTEMA');
 INSERT INTO `bindev`.`role` (`name_role`, `description`) VALUES ('VENDEDOR', 'Personal de ventas');
 INSERT INTO `bindev`.`role` (`name_role`, `description`) VALUES ('COMPRADOR', 'Personal de compras');
@@ -484,15 +484,28 @@ INSERT INTO `bindev`.`delivery_time` (`name`, `description`) VALUES ('Lun a Vie 
 INSERT INTO `bindev`.`delivery_time` (`name`, `description`) VALUES ('Lun a Vie de 14:00 a 19:00', 'Horario 2 abarca desde el descanso hasta la hora de cierre');
 INSERT INTO `bindev`.`delivery_time` (`name`, `description`) VALUES ('Sabados de 8:00 a 15:00', 'Horario 3 abarca desde la apertura del dia Sabado');
 INSERT INTO `bindev`.`delivery_time` (`name`, `description`) VALUES ('Domingos de 8:00 a 12:00', 'Horario 4 abarca desde la apertura del dia Domingo');
+INSERT INTO `bindev`.`user` (`email`, `name`, `surname`, `address`, `phone`, `password`) VALUES ('nicolas@gmail.com', 'Nicolas', 'Alvarez', 'direccion123', '998877','Nicolas');
+INSERT INTO `bindev`.`user` (`email`, `name`, `surname`, `address`, `phone`, `password`) VALUES ('Matias4371@gmail.com', 'Nacho', 'Arman-Duon', 'Casa de Nacho', '998877','Nacho');
+INSERT INTO `bindev`.`user` (`email`, `name`, `surname`, `address`, `phone`, `password`) VALUES ('fabricioRivera@gmail.com', 'Fabricio', 'Rivera', 'Casa de Fabri', '998877','Fabricio');
+INSERT INTO `bindev`.`user` (`email`, `name`, `surname`, `address`, `phone`, `password`) VALUES ('german.estefan81@gmail.com', 'German', 'Estefan', 'Casa de German', '998877','German');
+INSERT INTO `bindev`.`user` (`email`, `name`, `surname`, `address`, `phone`, `password`) VALUES ('lauraacuna@gmail.com', 'Laura', 'Acuña', 'Laboratorio 1', '','DisenoWeb');
+INSERT INTO `bindev`.`user` (`email`, `name`, `surname`, `address`, `phone`, `password`) VALUES ('LeoCarambula@gmail.com', 'Leonardo', 'Carambula', 'Laboratorio 2', '998877','ProgramacionWeb');
+INSERT INTO `bindev`.`user` (`email`, `name`, `surname`, `address`, `phone`, `password`) VALUES ('chrisBarrios1@gmail.com', 'Christian', 'Barrios', 'Laboratorio 3', '998877','SistemasOperativos');
+INSERT INTO `bindev`.`user` (`email`, `name`, `surname`, `address`, `phone`, `password`) VALUES ('LuisSuarez@gmail.com', 'Luis', 'Suarez', 'Nacional', '9','LuisSuarez');
+INSERT INTO `bindev`.`user` (`email`, `name`, `surname`, `address`, `phone`, `password`) VALUES ('TonyPacheco@gmail.com', 'Tony', 'Pacheco', 'Penarol', '7','TonyPacheco');
 
--- -----------------------------------------------------
--- DATOS BASICOS PARA PRUEBAS
--- -----------------------------------------------------
+INSERT INTO `bindev`.`supplier` (`rut`, `company_name`, `address`, `phone`) VALUES ('211003420017', 'Montevideo Uniformes', 'Dr. Salvador Ferrer Serra 2172', '24015020 - 29000000');
+INSERT INTO `bindev`.`supplier` (`rut`, `company_name`, `address`, `phone`) VALUES ('211003420016', 'fupi SRL', 'Av. Uruguay 1124', '29011024');
+INSERT INTO `bindev`.`supplier` (`rut`, `company_name`, `address`, `phone`) VALUES ('211003420015', 'Vicas SRL', ' Río Negro 1566', '29023624');
+INSERT INTO `bindev`.`supplier` (`rut`, `company_name`, `address`, `phone`) VALUES ('211003420014', 'Garimport', 'Vilardebó 2133', '22095620 - Cajas 098748234');
+INSERT INTO `bindev`.`supplier` (`rut`, `company_name`, `address`, `phone`) VALUES ('211003420013', 'Mundo Trabajo', 'Justicia 2233', '22010377 hablar con Carlos');
 INSERT INTO `bindev`.`category` (`name`, `description`) VALUES ('Remeras', 'CATEGORIA DESIGNADA PARA REMERAS');
 INSERT INTO `bindev`.`category` (`name`, `description`) VALUES ('Chalecos', 'CATEGORIA DESIGNADA PARA CHALECOS');
 INSERT INTO `bindev`.`category` (`name`, `description`) VALUES ('Pantalones', 'CATEGORIA DESIGNADA PARA PANTALONES');
 INSERT INTO `bindev`.`category` (`name`, `description`) VALUES ('Guantes', 'CATEGORIA DESIGNADA PARA GUANTES');
 INSERT INTO `bindev`.`category` (`name`, `description`) VALUES ('Cascos', 'CATEGORIA DESIGNADA PARA CASCOS');
+INSERT INTO `bindev`.`category` (`name`, `description`) VALUES ('Botas', 'CATEGORIA DESIGNADA PARA BOTAS');
+INSERT INTO `bindev`.`category` (`name`, `description`) VALUES ('Varios', 'CATEGORIA DESIGNADA PARA VARIOS ARTICULOS');
 INSERT INTO `bindev`.`category` (`name`, `description`) VALUES ('Zapatos', 'CATEGORIA DESIGNADA PARA ZAPATOS');
 INSERT INTO `bindev`.`design` (`name`, `description`) VALUES ('BLANCO', 'COLOR BLANCO');
 INSERT INTO `bindev`.`design` (`name`, `description`) VALUES ('NEGRO', 'COLOR NEGRO');
@@ -516,6 +529,14 @@ INSERT INTO `bindev`.`size` (`name`, `description`) VALUES ('TALLE 41', 'DESCRIP
 INSERT INTO `bindev`.`size` (`name`, `description`) VALUES ('TALLE 42', 'DESCRIPCION DEL TALLE');
 INSERT INTO `bindev`.`size` (`name`, `description`) VALUES ('TALLE 43', 'DESCRIPCION DEL TALLE');
 INSERT INTO `bindev`.`size` (`name`, `description`) VALUES ('TALLE 44', 'DESCRIPCION DEL TALLE');
+
+
+
+
+-- -----------------------------------------------------
+-- DATOS BASICOS PARA PRUEBAS
+-- -----------------------------------------------------
+
 INSERT INTO `bindev`.`PRODUCT` (`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`) VALUES ('11', 'REMERA Clasica', '2', '2', '2', '30', '500', 'Descripcion del producto');
 INSERT INTO `bindev`.`PRODUCT` (`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`) VALUES ('11', 'REMERA Clasica', '2', '3', '2', '8', '500', 'Descripcion del producto');
 INSERT INTO `bindev`.`PRODUCT` (`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`) VALUES ('11', 'REMERA Clasica', '2', '3', '3', '11', '500', 'Descripcion del producto');
@@ -537,13 +558,21 @@ INSERT INTO `bindev`.`product` (`id_product`, `name`, `product_category`, `produ
 INSERT INTO `bindev`.`product` (`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`) VALUES ('13', 'PANTALON Clasico', '4', '3', '4', '21', '1400', 'Descripcion del producto');
 INSERT INTO `bindev`.`product` (`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`) VALUES ('13', 'PANTALON Clasico', '4', '3', '5', '12', '1400', 'Descripcion del producto');
 INSERT INTO `bindev`.`product` (`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`) VALUES ('13', 'PANTALON Clasico', '4', '3', '6', '1', '1400', 'Descripcion del producto');
-INSERT INTO `bindev`.`product` (`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`) VALUES ('14', 'PANTALON alta calidad', '4', '7', '4', '22', '2000', 'Descripcion del producto');
-INSERT INTO `bindev`.`product` (`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`) VALUES ('14', 'PANTALON alta calidad', '4', '7', '5', '81', '2000', 'Descripcion del producto');
-INSERT INTO `bindev`.`product` (`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`) VALUES ('14', 'PANTALON alta calidad', '4', '7', '6', '41', '2000', 'Descripcion del producto');
-INSERT INTO `bindev`.`product` (`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`) VALUES ('14', 'PANTALON alta calidad', '4', '7', '7', '9', '2000', 'Descripcion del producto');
-INSERT INTO `bindev`.`product` (`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`) VALUES ('14', 'PANTALON alta calidad', '4', '3', '3', '20', '2000', 'Descripcion del producto');
-INSERT INTO `bindev`.`product` (`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`) VALUES ('14', 'PANTALON alta calidad', '4', '3', '6', '0', '2000', 'Descripcion del producto');
-INSERT INTO `bindev`.`product` (`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`) VALUES ('14', 'PANTALON alta calidad', '4', '3', '7', '12', '2000', 'Descripcion del producto');
+INSERT INTO `bindev`.`product` (`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`) VALUES ('14', 'PANTALON FORMAL', '4', '7', '4', '22', '2000', 'Descripcion del producto');
+INSERT INTO `bindev`.`product` (`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`) VALUES ('14', 'PANTALON FORMAL', '4', '7', '5', '81', '2000', 'Descripcion del producto');
+INSERT INTO `bindev`.`product` (`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`) VALUES ('14', 'PANTALON FORMAL', '4', '7', '6', '41', '2000', 'Descripcion del producto');
+INSERT INTO `bindev`.`product` (`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`) VALUES ('14', 'PANTALON FORMAL', '4', '7', '7', '9', '2000', 'Descripcion del producto');
+INSERT INTO `bindev`.`product` (`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`) VALUES ('14', 'PANTALON FORMAL', '4', '3', '3', '20', '2000', 'Descripcion del producto');
+INSERT INTO `bindev`.`product` (`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`) VALUES ('14', 'PANTALON FORMAL', '4', '3', '6', '0', '2000', 'Descripcion del producto');
+INSERT INTO `bindev`.`product` (`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`) VALUES ('14', 'PANTALON FORMAL', '4', '3', '7', '12', '2000', 'Descripcion del producto');
+INSERT INTO `bindev`.`product` (`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`) VALUES ('13', 'PANTALON ECONOMICO', '4', '3', '6', '1', '1400', 'Descripcion del producto');
+INSERT INTO `bindev`.`product` (`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`) VALUES ('14', 'PANTALON ECONOMICO', '4', '7', '4', '22', '2000', 'Descripcion del producto');
+INSERT INTO `bindev`.`product` (`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`) VALUES ('14', 'PANTALON ECONOMICO', '4', '7', '5', '81', '2000', 'Descripcion del producto');
+INSERT INTO `bindev`.`product` (`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`) VALUES ('14', 'PANTALON ECONOMICO', '4', '7', '6', '41', '2000', 'Descripcion del producto');
+INSERT INTO `bindev`.`product` (`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`) VALUES ('14', 'PANTALON ECONOMICO', '4', '7', '7', '9', '2000', 'Descripcion del producto');
+INSERT INTO `bindev`.`product` (`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`) VALUES ('14', 'PANTALON ECONOMICO', '4', '3', '3', '20', '2000', 'Descripcion del producto');
+INSERT INTO `bindev`.`product` (`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`) VALUES ('14', 'PANTALON ECONOMICO', '4', '3', '6', '0', '2000', 'Descripcion del producto');
+INSERT INTO `bindev`.`product` (`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`) VALUES ('14', 'PANTALON ECONOMICO', '4', '3', '7', '12', '2000', 'Descripcion del producto');
 INSERT INTO `bindev`.`product` (`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`) VALUES ('17', 'CASCO clasico', '6', '8', '3', '100', '1200', 'Descripcion del producto');
 INSERT INTO `bindev`.`product` (`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`) VALUES ('17', 'CASCO clasico', '6', '8', '4', '40', '1200', 'Descripcion del producto');
 INSERT INTO `bindev`.`product` (`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`) VALUES ('17', 'CASCO clasico', '6', '8', '5', '70', '1200', 'Descripcion del producto');
@@ -567,21 +596,6 @@ INSERT INTO `bindev`.`product` (`id_product`, `name`, `product_category`, `produ
 INSERT INTO `bindev`.`product` (`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`) VALUES ('19', 'GUANTES clasico', '5', '7', '5', '9', '450', 'Descripcion del producto');
 INSERT INTO `bindev`.`product` (`id_product`, `name`, `product_category`, `product_design`, `product_size`, `stock`, `price`, `description`,`picture`,`state`) VALUES ('1000', 'PROMO 0', '1', '1', '1', '0', '0', 'promoHardcodeada',NULL,'0');
 
-INSERT INTO `bindev`.`user` (`email`, `name`, `surname`, `address`, `phone`, `password`) VALUES ('nicolas@gmail.com', 'Nicolas', 'Alvarez', 'Casa de nico', '998877','Nicolas');
-INSERT INTO `bindev`.`user` (`email`, `name`, `surname`, `address`, `phone`, `password`) VALUES ('Matias4371@gmail.com', 'Nacho', 'Arman-Duon', 'Casa de Nacho', '998877','Nacho');
-INSERT INTO `bindev`.`user` (`email`, `name`, `surname`, `address`, `phone`, `password`) VALUES ('fabricioRivera@gmail.com', 'Fabricio', 'Rivera', 'Casa de Fabri', '998877','Fabricio');
-INSERT INTO `bindev`.`user` (`email`, `name`, `surname`, `address`, `phone`, `password`) VALUES ('german.estefan81@gmail.com', 'German', 'Estefan', 'Casa de German', '998877','German');
-INSERT INTO `bindev`.`user` (`email`, `name`, `surname`, `address`, `phone`, `password`) VALUES ('lauraacuna@gmail.com', 'Laura', 'Acuña', 'Laboratorio 1', '','DisenoWeb');
-INSERT INTO `bindev`.`user` (`email`, `name`, `surname`, `address`, `phone`, `password`) VALUES ('LeoCarambula@gmail.com', 'Leonardo', 'Carambula', 'Laboratorio 2', '998877','ProgramacionWeb');
-INSERT INTO `bindev`.`user` (`email`, `name`, `surname`, `address`, `phone`, `password`) VALUES ('chrisBarrios1@gmail.com', 'Christian', 'Barrios', 'Laboratorio 3', '998877','SistemasOperativos');
-INSERT INTO `bindev`.`user` (`email`, `name`, `surname`, `address`, `phone`, `password`) VALUES ('LuisSuarez@gmail.com', 'Luis', 'Suarez', 'Nacional', '9','LuisSuarez');
-INSERT INTO `bindev`.`user` (`email`, `name`, `surname`, `address`, `phone`, `password`) VALUES ('TonyPacheco@gmail.com', 'Tony', 'Pacheco', 'Penarol', '7','TonyPacheco');
-
-INSERT INTO `bindev`.`supplier` (`rut`, `company_name`, `address`, `phone`) VALUES ('211003420017', 'Montevideo Uniformes', 'Dr. Salvador Ferrer Serra 2172', '24015020 - 29000000');
-INSERT INTO `bindev`.`supplier` (`rut`, `company_name`, `address`, `phone`) VALUES ('211003420016', 'fupi SRL', 'Av. Uruguay 1124', '29011024');
-INSERT INTO `bindev`.`supplier` (`rut`, `company_name`, `address`, `phone`) VALUES ('211003420015', 'Vicas SRL', ' Río Negro 1566', '29023624');
-INSERT INTO `bindev`.`supplier` (`rut`, `company_name`, `address`, `phone`) VALUES ('211003420014', 'Garimport', 'Vilardebó 2133', '22095620 - Cajas 098748234');
-INSERT INTO `bindev`.`supplier` (`rut`, `company_name`, `address`, `phone`) VALUES ('211003420013', 'Mundo Trabajo', 'Justicia 2233', '22010377 hablar con Carlos');
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
