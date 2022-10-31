@@ -8,7 +8,7 @@ then
 else
 	logger -p local1.info "fallo al intentar exportar los logs de last"
 fi
-sudo echo "$(lastlog | grep -v "Nunca ha accedido")" > /var/log/customlogs/last_log.log
+sudo lastlog | grep -v "Nunca ha accedido" > /var/log/customlogs/last_log.log
 if [ $? == 0 ]
 then
 	logger -p local1.info "exito al ejecutar los lastlog del sistema"

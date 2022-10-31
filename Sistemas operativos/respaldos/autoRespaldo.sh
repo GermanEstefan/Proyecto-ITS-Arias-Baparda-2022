@@ -18,7 +18,8 @@ then
 	if [ $? -eq 0 ]
 	then
 		rm $RESPALDOS/$DATABASE".sql"
-		rsync --remove-source-files -ahvzP -e "ssh -p 2244" $RESPALDOS/ $SERVIDOR
+		echo "Intentando sincronizar con el servidor de respaldo"
+		timeout 1m rsync --remove-source-files -ahvzP -e "ssh -p 2244" $RESPALDOS/ $SERVIDOR
 		if [ $? -eq 0 ]
 		then
 			echo "Backup realizado"
