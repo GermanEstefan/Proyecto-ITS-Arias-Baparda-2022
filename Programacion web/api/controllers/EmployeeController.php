@@ -151,8 +151,8 @@ class EmployeeController{
         echo json_encode($employees); 
     }
     public function getInfoByidEmployee($idEmployee){
-        $this->jwt->verifyTokenAndGetIdUserFromRequest();
-        $employee = EmployeeModel::getRoleOfEmployeeById($idEmployee);
+        $idOfUser = $this->jwt->verifyTokenAndGetIdUserFromRequest();
+        $employee = EmployeeModel::getRoleOfEmployeeById($idOfUser);
         $rolOfEmployee = $employee["employee_role"];
         if(!($rolOfEmployee == 'JEFE')){
             http_response_code(401);
