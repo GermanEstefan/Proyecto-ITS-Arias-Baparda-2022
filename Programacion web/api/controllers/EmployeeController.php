@@ -31,7 +31,7 @@ class EmployeeController{
         || !isset($userData['surname']) 
         || !isset($userData['password']) 
         || !isset($userData['phone']) 
-        || !isset($userData['phone'])){
+        || !isset($userData['address'])){
             return false;
         } else {
             return $userData;
@@ -50,13 +50,12 @@ class EmployeeController{
         $rolOfEmployee = $employee['employee_role'];
         if(!($rolOfEmployee == 'JEFE')){
             http_response_code(401);
-            echo $this->response->error401("Usted no esta autorizado para relizar esta accion");
+            echo $this->response->error401("Rol no valido para relizar esta accion");
             die();
         }
         $bodyIsValid = $this->validateBodyOfRegisterEmployee($userData);
         if (!$bodyIsValid) {
-            http_response_code(400);
-            echo $this->response->error400();
+            echo $this->response->error203('Error en los datos enviados');
             die();
         }
         $email = $userData['email'];
@@ -70,14 +69,12 @@ class EmployeeController{
 
         $employeeExist = EmployeeModel::getEmployeeByCi($ci);
         if ($employeeExist) {
-            http_response_code(200);
-            echo $this->response->error200("Ya existe un empleado ingresado con la CI: " . $employeeExist['ci']);
+            echo $this->response->error203("Ya existe el empleado $ci");
             die();
         }
         $employeeExistByEmail = UserModel::getUserByEmail($email);
         if($employeeExistByEmail){
-            http_response_code(200);
-            echo $this->response->error200("Ya existe un empleado ingresado con el email: " . $employeeExistByEmail['email']);
+            echo $this->response->error203("Ya existe un registro para $email");
             die();
         }
         

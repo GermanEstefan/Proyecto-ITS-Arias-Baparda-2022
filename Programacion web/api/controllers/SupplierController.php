@@ -38,6 +38,10 @@ class SupplierController {
         }
 
         $rut = $supplierData['rut'];
+        if (strlen($rut)<8){
+            echo $this->response->error203("El Rut ingresado no es valido");
+            die();
+        }
         $companyName = $supplierData['companyName'];
         $address = $supplierData['address'];
         $phone = $supplierData['phone'];

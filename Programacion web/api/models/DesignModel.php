@@ -16,6 +16,11 @@
             $query = "SELECT * from design WHERE name='$name'";
             return $conecction->getData($query)->fetch_assoc();
         }
+        public static function getNameByIdDesign($idDesign){
+            $conecction = new Connection();
+            $query = "SELECT name from design WHERE id_design='$idDesign'";
+            return $conecction->getData($query)->fetch_assoc();
+        }
 
         public static function getDesignById($idDesign){
             $conecction = new Connection();

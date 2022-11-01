@@ -92,10 +92,15 @@ class DesignController {
             echo $this->response->error203('El diseño indicado no es correcto');
             die();
         }
-        $notChangeName = DesignModel::getDesignByName($nameDesign);
-        if ($notChangeName){
+        $notChangeName = DesignModel::getNameByIdDesign($idDesign);
+        if ($notChangeName['name'] == $nameDesign){
             $result = DesignModel::updateDesignNotName($idDesign,$descriptionDesign);
-            echo $this->response->successfully("Diseño actualizado con exito");
+            echo $this->response->successfully("Atributos del diseño actualizado con exito");
+            die();
+        }
+        $nameInUse = DesignModel::getDesignByName($nameDesign);
+        if ($nameInUse){
+            echo $this->response->error203("El diseño $nameDesign ya existe");
             die();
         }
         $result = DesignModel::updateDesign($idDesign,$nameDesign,$descriptionDesign);

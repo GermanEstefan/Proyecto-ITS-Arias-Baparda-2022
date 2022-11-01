@@ -16,6 +16,11 @@
             $query = "SELECT * from size WHERE name='$name'";
             return $conecction->getData($query)->fetch_assoc();
         }
+        public static function getNameByIdSize($idSize){
+            $conecction = new Connection();
+            $query = "SELECT name from size WHERE id_size='$idSize'";
+            return $conecction->getData($query)->fetch_assoc();
+        }
 
         public static function getSizeById($idSize){
             $conecction = new Connection();
