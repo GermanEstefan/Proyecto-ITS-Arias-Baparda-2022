@@ -1,3 +1,5 @@
+/** @format */
+
 import React, { useContext, useState } from "react";
 import { useEffect } from "react";
 import { fetchApi } from "../../API/api";
@@ -13,28 +15,22 @@ const SalesHistory = () => {
   }, []);
 
   const getSalesHistory = async () => {
-    const resp = await fetchApi(
-      `sales.php?salesClient=${userData.email}`,
-      "GET"
-    );
+    const resp = await fetchApi(`sales.php?salesClient=${userData.email}`, "GET");
     if (resp.status === "error") {
       setSales([]);
     }
     if (resp.status === "successfully") {
-      console.log(resp.result.data.sales)
-      setSales(resp.result.data.sales);
+      console.log(resp.result.data.sales);
+      setSales(resp.result.data.sales || []);
     }
   };
 
   return (
     <>
       <h1 style={{ marginLeft: "15px" }}>Historial de compras</h1>
-      {sales.length > 0 &&
-        sales.map((sale, index) => <HistoryItem key={index} sale={sale} />)}
+      {sales.length > 0 && sales.map((sale, index) => <HistoryItem key={index} sale={sale} />)}
       {sales.length === 0 && (
-        <p style={{ marginLeft: "15px" }}>
-          Aún no has realizado ninguna compra
-        </p>
+        <p style={{ marginLeft: "15px" }}>Aún no has realizado ninguna compra</p>
       )}
     </>
   );
