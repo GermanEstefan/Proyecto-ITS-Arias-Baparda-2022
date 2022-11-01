@@ -232,6 +232,7 @@
   color: rgb(58, 182, 42);
   transition: color .3s;
   font-size: 1.2rem;
+  cursor: pointer;
   &:hover{
     color: lighten($color: rgb(58, 182, 42), $amount: 20);
   }

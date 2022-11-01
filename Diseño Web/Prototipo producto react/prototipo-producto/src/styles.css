@@ -1223,6 +1223,7 @@
   color: rgb(58, 182, 42);
   transition: color 0.3s;
   font-size: 1.2rem;
+  cursor: pointer;
 }
 .successfully-control:hover {
   color: #77dd6a;

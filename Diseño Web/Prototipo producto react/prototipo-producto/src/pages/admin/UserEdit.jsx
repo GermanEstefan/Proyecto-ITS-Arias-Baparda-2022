@@ -9,21 +9,21 @@ const UserEdit = () => {
     const { idUser } = useParams();
 
     const [userValues, setUserValues] = useState({
-        nameEmployee,
-        surnameEmployee,
-        passwordEmployee,
-        addressEmployee,
-        phoneEmployee,
-        rolEmployee
+        name,
+        surname,
+        password,
+        address,
+        phone,
+        rol
     })
 
     const {
-        nameEmployee,
-        surnameEmployee,
-        passwordEmployee,
-        addressEmployee,
-        phoneEmployee,
-        rolEmployee
+        name,
+        surname,
+        password,
+        address,
+        phone,
+        rol
     } = userValues;
 
     const handleChangeInputs = ({ target }) => {
@@ -41,11 +41,12 @@ const UserEdit = () => {
     const [error, setError] = useState(initStateLoading);
     const [loading, setLoading] = useState(false);
 
-    const handleSubmit = async (e) => {
+    const handleEditUser = async (e) => {
         e.preventDefault();
         setLoading(true);
         try {
-            const resp = await fetchApi(`${idUser}`, 'PATCH', userValues);
+            const resp = await fetchApi(`auth-employees.php?idEmployee=${idUser}&action=edit`, 'PATCH', userValues);
+            console.log(resp)
             if (resp.status === 'error') {
                 setError({ showMessage: true, message: resp.result.error_msg, error: true });
                 return setTimeout(() => setError(initStateLoading), 3000)
@@ -65,6 +66,12 @@ const UserEdit = () => {
                 console.log(res)
                 const userData = res.result.data;
                 setUserValues({
+                    name: userData.name,
+                    surname: userData.surname,
+                    password: userData.password,
+                    phone: userData.phone,
+                    rol: userData.employee_role,
+                    address: userData.address
                 })
             })
             .catch(err => console.error(err))
@@ -74,7 +81,7 @@ const UserEdit = () => {
         <ContainerBase>
             <section className="container_section edit-user-admin flex-column-center-xy">
                 <h1>Editar usuario</h1>
-                <form onSubmit={handleSubmit} className="flex-column-center-xy">
+                <form onSubmit={handleEditUser} className="flex-column-center-xy">
 
                     <div className='form-row-two-columns-with-label'>
                         <div>
@@ -82,8 +89,8 @@ const UserEdit = () => {
                             <input
                                 type="text"
                                 onChange={handleChangeInputs}
-                                name='nameEmployee'
-                                value={nameEmployee}
+                                name='name'
+                                value={name}
                                 className='input-form'
                             />
                         </div>
@@ -92,8 +99,8 @@ const UserEdit = () => {
                             <input
                                 type="text"
                                 onChange={handleChangeInputs}
-                                name='surnameEmployee'
-                                value={surnameEmployee}
+                                name='surname'
+                                value={surname}
                                 className='input-form'
                             />
                         </div>
@@ -105,8 +112,8 @@ const UserEdit = () => {
                             <input
                                 type="password"
                                 onChange={handleChangeInputs}
-                                name='passwordEmployee'
-                                value={passwordEmployee}
+                                name='password'
+                                value={password}
                                 className='input-form'
                             />
                         </div>
@@ -115,8 +122,8 @@ const UserEdit = () => {
                             <input
                                 type="text"
                                 onChange={handleChangeInputs}
-                                name='addressEmployee'
-                                value={addressEmployee}
+                                name='address'
+                                value={address}
                                 className='input-form'
                             />
                         </div>
@@ -128,8 +135,8 @@ const UserEdit = () => {
                             <input
                                 type="text"
                                 onChange={handleChangeInputs}
-                                name='phoneEmployee'
-                                value={phoneEmployee}
+                                name='phone'
+                                value={phone}
                                 className='input-form'
                             />
                         </div>
@@ -138,8 +145,8 @@ const UserEdit = () => {
                             <label>Rol: </label>
                             <select
                                 onChange={handleChangeInputs}
-                                name='rolEmployee'
-                                value={rolEmployee}
+                                name='rol'
+                                value={rol}
                                 className='select-form'
                             >
                                 <option value='JEFE'>Jefe</option>
