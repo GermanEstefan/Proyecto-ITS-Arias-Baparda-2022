@@ -155,11 +155,6 @@ class EmployeeController{
     }
     public function getInfoByidEmployee($idEmployee){
         $this->jwt->verifyTokenAndGetIdUserFromRequest();
-        $employeeExist = EmployeeModel::getEmployeeById($idEmployee);
-        if(!$employeeExist){
-            echo $this->response->error203("El empleado no existe");
-            die(); 
-        }
         $employee = EmployeeModel::getRoleOfEmployeeById($idEmployee);
         $rolOfEmployee = $employee["employee_role"];
         if(!($rolOfEmployee == 'JEFE')){
