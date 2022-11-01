@@ -1,68 +1,80 @@
-.user-panel-page{
-    margin-top: 12vh;
-    display: flex;
+/** @format */
+
+.user-panel-page {
+  margin-top: 12vh;
+  display: flex;
+  @media (max-width: 800px) {
+    flex-direction: column;
+    padding: 0;
+  }
+  aside {
+    padding: 60px;
+    width: 20%;
+    border-right: 1px solid $orange;
+    text-align: center;
     @media (max-width: 800px) {
-        flex-direction: column;
-        padding: 0;
+      width: 100%;
+      padding: 0;
+      border-right: none;
     }
-    aside{
-        padding: 60px;
-        width: 20%;
-        border-right: 1px solid $orange;
+    h1 {
+      color: $orange;
+      margin: 30px 0;
+    }
+    ul {
+      li {
+        margin-bottom: 30px;
+        font-size: 1.1rem;
+        cursor: pointer;
+        font-weight: bold;
+        transition: 0.1s;
+      }
+      li:hover {
+        color: $orange;
+        letter-spacing: 1px;
+        transition: 0.1s ;
+      }
+      .danger {
+        color: red;
+        font-weight: bold;
+      }
+      .danger:hover {
+        color: red;
+      }
+    }
+  }
+  section {
+    padding: 30px;
+    width: 80%;
+    @media (max-width: 800px) {
+      width: 100%;
+      padding: 0;
+    }
+    form {
+      width: 90vw;
+      max-width: 350px;
+      margin: 0 auto;
+      @media (max-width: 800px) {
+        margin: 20px 0;
+        margin: 0 auto;
+      }
+      span {
+        margin: 5px 0 15px 0;
+        color: rgba(0, 0, 0, 0.421);
+      }
+      h2 {
         text-align: center;
-        @media (max-width: 800px) {
-            width: 100%;
-            padding: 0;
-            border-right: none;
+      }
+      div {
+        display: flex;
+        flex-direction: column;
+        input {
+          margin-bottom: 10px;
         }
-        h1{
-            color: $orange;
-            margin: 30px 0;
+        label {
+          margin-bottom: 8px;
         }
-        ul{
-            li{
-                margin-bottom: 30px;
-                font-size: 1.1rem;
-                cursor: pointer;
-            }
-            :last-child{
-                color: red;
-                font-weight: bold;
-            }
-        }
+      }
     }
-    section{
-        padding: 30px;
-        width: 80%;
-        @media (max-width: 800px) {
-          width: 100%;
-          padding: 0;
-        }
-        form{
-            width: 90vw;
-            max-width: 350px;
-            margin: 0 auto;
-            @media (max-width: 800px) {
-                margin: 20px 0;
-                margin: 0 auto;
-            }
-            span{
-                margin: 5px 0 15px 0;
-                color: rgba(0, 0, 0, 0.421);
-            }
-            h2{
-                text-align: center;
-            }
-            div{
-                display: flex;
-                flex-direction: column;
-                input{
-                    margin-bottom: 10px;
-                }
-                label{
-                    margin-bottom: 8px;
-                }
-            }
-        }
-    }
+  }
 }

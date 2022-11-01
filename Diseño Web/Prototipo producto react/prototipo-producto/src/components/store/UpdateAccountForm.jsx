@@ -1,9 +1,12 @@
-import React, {useEffect} from "react";
+/** @format */
+
+import React, { useEffect } from "react";
 import { useContext, useState } from "react";
 import { userStatusContext } from "../../App";
 import { isEmpty } from "../../helpers/validateForms";
 import { useForm } from "../../hooks/useForm";
 import Swal from "sweetalert2";
+import { Animated } from "react-animated-css";
 import Input from "./Input";
 import { fetchApi } from "../../API/api";
 
@@ -28,11 +31,7 @@ const UpdateAccountForm = () => {
     e.preventDefault();
     if (Object.values(errorStatusForm).includes(true)) return;
     try {
-      const resp = await fetchApi(
-        "auth-customers.php?url=update",
-        "PUT",
-        values
-      );
+      const resp = await fetchApi("auth-customers.php?url=update", "PUT", values);
       if (resp.status === "successfully") {
         Swal.fire({
           icon: "success",
@@ -59,56 +58,53 @@ const UpdateAccountForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="animate__animated animate__bounce">
-      <h2>Datos personales</h2>
+    <Animated
+      animationIn="fadeIn"
+      animationOut="fadeOutRight"
+      animationInDuration={500}
+      isVisible={true}
+    >
+      <form onSubmit={handleSubmit} className="animate__animated animate__bounce">
+        <h2>Datos personales</h2>
 
-      <label htmlFor="">Email:</label>
-      <span>{userData.email}</span>
+        <label htmlFor="">Email:</label>
+        <span>{userData.email}</span>
 
-      <div>
-        <label htmlFor="">Nombre: </label>
-        <Input
-          onChange={handleValuesChange}
-          validateFunction={isEmpty}
-          value={values.name}
-          name="name"
-          setErrorStatusForm={setErrorStatusForm}
-        />
-      </div>
+        <div>
+          <label htmlFor="">Nombre: </label>
+          <Input
+            onChange={handleValuesChange}
+            validateFunction={isEmpty}
+            value={values.name}
+            name="name"
+            setErrorStatusForm={setErrorStatusForm}
+          />
+        </div>
 
-      <div>
-        <label htmlFor="">Apellido: </label>
-        <Input
-          onChange={handleValuesChange}
-          validateFunction={isEmpty}
-          value={values.surname}
-          setErrorStatusForm={setErrorStatusForm}
-          name="surname"
-        />
-      </div>
+        <div>
+          <label htmlFor="">Apellido: </label>
+          <Input
+            onChange={handleValuesChange}
+            validateFunction={isEmpty}
+            value={values.surname}
+            setErrorStatusForm={setErrorStatusForm}
+            name="surname"
+          />
+        </div>
 
-      <div>
-        <label htmlFor="">Direccion: </label>
-        <input
-          type="text"
-          onChange={handleValuesChange}
-          value={values.address}
-          name="address"
-        />
-      </div>
+        <div>
+          <label htmlFor="">Direccion: </label>
+          <input type="text" onChange={handleValuesChange} value={values.address} name="address" />
+        </div>
 
-      <div>
-        <label htmlFor="">Telefono: </label>
-        <input
-          type="text"
-          onChange={handleValuesChange}
-          value={values.phone}
-          name="phone"
-        />
-      </div>
+        <div>
+          <label htmlFor="">Telefono: </label>
+          <input type="text" onChange={handleValuesChange} value={values.phone} name="phone" />
+        </div>
 
-      <button className="submit-button">Modificar</button>
-    </form>
+        <button className="submit-button">Modificar</button>
+      </form>
+    </Animated>
   );
 };
 

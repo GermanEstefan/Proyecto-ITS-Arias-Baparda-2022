@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import { fetchApi } from "../../API/api";
 import { userStatusContext } from "../../App";
 import { HistoryItem } from "./HistoryItem";
+import { Animated } from "react-animated-css";
 
 const SalesHistory = () => {
   const { userData } = useContext(userStatusContext);
@@ -26,13 +27,18 @@ const SalesHistory = () => {
   };
 
   return (
-    <>
+    <Animated
+      animationIn="fadeIn"
+      animationOut="fadeOutRight"
+      animationInDuration={500}
+      isVisible={true}
+    >
       <h1 style={{ marginLeft: "15px" }}>Historial de compras</h1>
       {sales.length > 0 && sales.map((sale, index) => <HistoryItem key={index} sale={sale} />)}
       {sales.length === 0 && (
         <p style={{ marginLeft: "15px" }}>Aún no has realizado ninguna compra</p>
       )}
-    </>
+    </Animated>
   );
 };
 
