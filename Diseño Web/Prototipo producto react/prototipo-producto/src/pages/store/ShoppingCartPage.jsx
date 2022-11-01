@@ -170,6 +170,12 @@ const ShoppingCartPage = () => {
     setCart(cartWithNewQuantity);
     setTotalPrice();
   };
+  const handleDeleteItemFromCart = (barcode) => {
+    console.log('borra')
+    setProductsList(cart.filter((product) => product.barcode !== barcode));
+    setCart(cart.filter((product) => product.barcode !== barcode));
+  };
+
   return (
     <ContainerBase>
       <div className="cartContainer">
@@ -189,6 +195,7 @@ const ShoppingCartPage = () => {
               design={product.design}
               setProductsList={setProductsList}
               updateProductQuantity={updateProductQuantity}
+              handleDeleteItemFromCart={handleDeleteItemFromCart}
             />
           ))}
           {productsList.length === 0 && (

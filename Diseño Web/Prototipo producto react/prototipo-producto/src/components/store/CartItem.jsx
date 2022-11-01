@@ -15,11 +15,10 @@ const CartItem = ({
   name,
   price,
   quantity,
-  setTotalPrice,
   size,
   design,
-  setProductsList,
   updateProductQuantity,
+  handleDeleteItemFromCart
 }) => {
   const { cart, setCart } = useContext(cartContext);
 
@@ -30,35 +29,16 @@ const CartItem = ({
     getProductByBarcode();
   }, []);
 
-  const handleDeleteItemFromCart = () => {
-    setProductsList(cart.filter((product) => product.barcode !== barcode));
-    setCart(cart.filter((product) => product.barcode !== barcode));
-    // window.location.reload(false);
-  };
+  // const handleDeleteItemFromCart = () => {
+  //   setProductsList(cart.filter((product) => product.barcode !== barcode));
+  //   setCart(cart.filter((product) => product.barcode !== barcode));
+    
+  // };
 
   const getProductByBarcode = async () => {
     const resp = await fetchApi(`products.php?barcode=${barcode}`, "GET");
     setProduct(resp.result.data);
   };
-
-  // const updateProductQuantity = (e) => {
-  //   console.log(e.target.value);
-  //   const cartWithNewQuantity = cart.map((product) => {
-  //     if (product.barcode === barcode) {
-  //       return {
-  //         barcode: barcode,
-  //         quantity: parseInt(e.target.value),
-  //         price: product.price,
-  //       };
-  //     } else {
-  //       return product;
-  //     }
-  //   });
-  //   setProductTotalPrice(price * parseInt(e.target.value));
-  //   console.log(cartWithNewQuantity);
-  //   setCart(cartWithNewQuantity);
-  //   setTotalPrice();
-  // };
   return (
     <Animated
       animationIn="fadeInLeft"
@@ -89,7 +69,7 @@ const CartItem = ({
             }}
             min={1}
           />
-          <button className="CartItem__actionsQuantity" onClick={handleDeleteItemFromCart}>
+          <button className="CartItem__actionsQuantity" onClick={handleDeleteItemFromCart(barcode)}>
             <FontAwesomeIcon icon={faTrash} />
           </button>
         </div>

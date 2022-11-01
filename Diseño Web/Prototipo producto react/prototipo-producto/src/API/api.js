@@ -1,10 +1,11 @@
+/** @format */
+
 const urlBase =
   process.env.REACT_APP_API_URL === "PROD"
     ? window.origin + "/api/"
     : process.env.REACT_APP_API_URL;
 
 export const fetchApi = async (endpoint, method, data) => {
-  console.log(localStorage.getItem("token") )
   const resp = await fetch(`${urlBase}${endpoint}`, {
     method,
     headers: {
