@@ -95,10 +95,15 @@ class CategoryController {
             die();
         }
         //Validamos que solo quiera actualizar el nombre
-        $notChangeName = CategoryModel::getCategoryByName($nameCategory);
-        if ($notChangeName){
+        $notChangeName = CategoryModel::getNameByIdCategory($idCategory);
+        if ($notChangeName['name'] == $nameCategory){
             $result = CategoryModel::updateCategoryNotName($idCategory,$descriptionCategory,$pictureCategory);
-            echo $this->response->successfully("Categoria actualizada con exitos");
+            echo $this->response->successfully("Atributos de la categoria actualizados");
+            die();
+        }
+        $nameInUse = CategoryModel::getCategoryByName($nameCategory);
+        if ($nameInUse){
+            echo $this->response->error203("La categoria $nameCategory ya existe");
             die();
         }
 

@@ -18,6 +18,11 @@
             $query = "SELECT * from category WHERE name='$name'";
             return $conecction->getData($query)->fetch_assoc();
         }
+        public static function getNameByIdCategory($idCategory){
+            $conecction = new Connection();
+            $query = "SELECT name from category WHERE id_category ='$idCategory'";
+            return $conecction->getData($query)->fetch_assoc();
+        }
 
         public static function getCategoryById($idCategory){
             $conecction = new Connection();

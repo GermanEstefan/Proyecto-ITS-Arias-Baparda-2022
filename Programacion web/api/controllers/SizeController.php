@@ -92,10 +92,15 @@ class SizeController {
             die();
         }
 
-        $notChangeName = SizeModel::getSizeByName($nameSize);
-        if ($notChangeName){
+        $notChangeName = SizeModel::getNameByIdSize($idSize);
+        if ($notChangeName['name'] == $nameSize){
             $result = SizeModel::updateSizeNotName($idSize,$descriptionSize);
-            echo $this->response->successfully("Talle actualizado con exito");
+            echo $this->response->successfully("Atributos del Talle actualizado con exito");
+            die();
+        }
+        $nameInUse = SizeModel::getSizeByName($nameSize);
+        if ($nameInUse){
+            echo $this->response->error203("El talle $nameSize ya existe");
             die();
         }
         
