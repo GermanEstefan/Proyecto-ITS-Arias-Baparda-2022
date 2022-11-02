@@ -18,7 +18,7 @@ export const HistoryItem = ({ sale }) => {
   };
   const getSaleProducts = async () => {
     const resp = await fetchApi(`sales.php?saleDetail=${sale.ID}`, "GET");
-
+    console.log(resp);
     if (resp.status === "successfully") {
       setSaleProducts(resp.result.data.details || []);
     }
@@ -28,7 +28,6 @@ export const HistoryItem = ({ sale }) => {
       <div className="historyItem">
         <div>
           <span>{sale.date}</span>
-          {/* Pendiente Confirmado En viaje Entregado PickUp Cancelada */}
           <strong>{sale.status}</strong>
         </div>
         <div>
@@ -38,13 +37,13 @@ export const HistoryItem = ({ sale }) => {
       </div>
       <div className="historyCollapse">
         <Collapse isOpened={toggleCollapse}>
-          {saleProducts.map((sale) => (
+          {saleProducts.map((saleDetail) => (
             <div className="collapseSale">
               <div>
-                <span>{sale.product}</span>
-                <span>{sale.quantity > 1 && `x${sale.quantity}`}</span>
+                <span>{saleDetail.product}</span>
+                <span>{saleDetail.quantity > 1 && `x${saleDetail.quantity}`}</span>
               </div>
-              <span>{sale.total} $</span>
+              <span>{saleDetail.total} $</span>
             </div>
           ))}
         </Collapse>

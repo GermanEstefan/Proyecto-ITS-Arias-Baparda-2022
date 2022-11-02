@@ -17,8 +17,9 @@ const SalesHistory = () => {
 
   const getSalesHistory = async () => {
     const resp = await fetchApi(`sales.php?salesClient=${userData.email}`, "GET");
+    console.log(resp)
     if (resp.status === "error") {
-      setSales([]);
+      setSales([]); 
     }
     if (resp.status === "successfully") {
       console.log(resp.result.data.sales);

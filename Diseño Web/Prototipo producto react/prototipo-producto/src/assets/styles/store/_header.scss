@@ -15,12 +15,10 @@
   .header-store__logo {
     width: 60vw;
     max-width: 300px;
-    // position: absolute;
-    // left: 20px;
   }
 
   .header-store__search {
-    // position: relative;
+    
     display: flex;
     align-items: center;
     width: 100%;
@@ -29,6 +27,7 @@
     }
     div {
       width: 100%;
+      margin: auto 10px;
       svg {
         padding: 10px;
         position: absolute;
@@ -38,7 +37,8 @@
       input {
         padding: 10px 10px 10px 50px;
         border: 2px solid $orange;
-        width: 80%;
+        
+        width: 60%;
       }
     }
   }

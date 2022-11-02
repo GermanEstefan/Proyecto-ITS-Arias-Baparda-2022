@@ -8,7 +8,7 @@ import CartItem from "../../components/store/CartItem";
 import CartDetails from "../../components/store/CartDetails";
 import { fetchApi } from "../../API/api";
 import { useContext } from "react";
-import { cartContext, userStatusContext } from "../../App";
+import { cartContext } from "../../App";
 
 import BuyForm from "./BuyForm";
 
@@ -53,7 +53,6 @@ const ShoppingCartPage = () => {
   };
 
   const updateProductQuantity = (e, barcode) => {
-    
     const cartWithNewQuantity = productsList.map((product) => {
       if (product.barcode === barcode) {
         return {
@@ -73,13 +72,14 @@ const ShoppingCartPage = () => {
     setCart(cart.filter((product) => product.barcode !== barcode));
     setProductsList(cart.filter((product) => product.barcode !== barcode));
   };
+  console.log(productsList.length === 0);
 
   return (
     <ContainerBase>
       <div className="cartContainer">
         <PageTitle title={"Carrito"} isArrow={true} goBack />
         <div className="cartPage">
-          <CartDetails total={total || 0} />
+          <CartDetails total={total || 0} isCartEmpty={productsList.length === 0} />
           {productsList.map((product, index) => (
             <CartItem
               key={index}

@@ -13,11 +13,6 @@
   margin-left: 5px;
 }
 
-.formAndTitleContainer {
-  margin: 15vh auto auto auto;
-  max-width: 900px;
-}
-
 .form-container {
   max-width: 1300px;
   display: flex;
@@ -494,6 +489,7 @@
 }
 .header-store .header-store__search div {
   width: 100%;
+  margin: auto 10px;
 }
 .header-store .header-store__search div svg {
   padding: 10px;
@@ -504,7 +500,7 @@
 .header-store .header-store__search div input {
   padding: 10px 10px 10px 50px;
   border: 2px solid rgba(245, 153, 15, 0.9529411765);
-  width: 80%;
+  width: 60%;
 }
 .header-store .header-store__hamb {
   font-size: 2rem;
@@ -859,7 +855,7 @@
 /** @format */
 .productContainer {
   margin: 20vh auto auto auto;
-  min-height: 80vh;
+  min-height: 100%;
   max-width: 900px;
 }
 @media screen and (max-width: 600px) {
@@ -1004,7 +1000,6 @@
   display: flex;
   align-items: center;
   background: linear-gradient(15deg, #bccddb 70%, rgba(245, 153, 15, 0.9529411765));
-  margin-bottom: 10px;
   min-width: 900px;
 }
 .main_header div {
@@ -1285,6 +1280,7 @@
   color: rgb(0, 0, 122);
 }
 
+/** @format */
 .cartContainer {
   margin: 15vh auto auto auto;
   height: 100%;
@@ -1299,6 +1295,7 @@
   display: flex;
   align-items: center;
   margin: 5px auto 5px auto;
+  padding: 15px 5px;
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 }
 @media screen and (max-width: 600px) {
@@ -2038,6 +2035,17 @@ textarea {
 input:focus,
 textarea:focus {
   outline: none;
+}
+
+button:disabled {
+  background-color: #bccddb;
+  color: #9ba6af;
+}
+
+button:disabled:hover {
+  cursor: auto;
+  background-color: #bccddb;
+  color: #9ba6af;
 }
 
 ::-webkit-scrollbar {

@@ -2,13 +2,12 @@
 
 import React, { useEffect, useState, useContext } from "react";
 import { fetchApi } from "../../API/api";
-
+import Swal from "sweetalert2";
 import Input from "../../components/store/Input";
 import Purchase from "../../assets/img/purchase.jpg";
 import Select from "react-select";
 import { cartContext, userStatusContext } from "../../App";
 import ContainerBase from "../../components/store/ContainerBase";
-import PageTitle from "../../components/store/PageTitle";
 
 const paymentMethods = [
   { value: 0, label: "Efectivo" },
@@ -31,7 +30,9 @@ const BuyForm = () => {
   useEffect(() => {
     getStoreHours();
     getDeliveryHours();
+    window.scroll(0, 0);
   }, []);
+
   const setAddress = (value) => {
     setValues({
       ...values,
@@ -68,7 +69,7 @@ const BuyForm = () => {
     }
   };
 
-  const handleConfirmPurchase = (e) => {
+  const handleConfirmPurchase = async (e) => {
     e.preventDefault();
     const purchaseData = {
       address: values.address,
@@ -81,10 +82,24 @@ const BuyForm = () => {
       })),
     };
     console.log(purchaseData);
-    const resp = fetchApi("sales.php", "POST", purchaseData);
+    const resp = await fetchApi("sales.php", "POST", purchaseData);
+    console.log(resp);
     if (resp.status === "successfully") {
       console.log("successfully");
       setCart([]);
+      return Swal.fire({
+        icon: "success",
+        text: 'Compra concretada!',
+        timer: 1500,
+        showConfirmButton: true,
+      });
+    }else{
+      return Swal.fire({
+        icon: "error",
+        text: 'Error al concretar la compra',
+        timer: 1500,
+        showConfirmButton: true,
+      });
     }
   };
 
@@ -108,77 +123,74 @@ const BuyForm = () => {
   };
   return (
     <ContainerBase>
-      <div className="formAndTitleContainer">
-        <PageTitle title={"Confirmar compra"} isArrow goBack />
-        <div style={{ marginTop: "0" }} className="form-container">
-          <img className="form-img" src={Purchase} alt="Imagen" />
-          <form>
-            <div className="radioSection">
-              <strong>Dirección de envío</strong>
-              <div className="radioGroup" onChange={(e) => handleRadioChange(e.target.value)}>
-                <label>
-                  <input
-                    type="radio"
-                    defaultChecked={true}
-                    value={"Dirección actual"}
-                    name="addressRadio"
-                    id=""
-                  />{" "}
-                  Dirección actual
-                </label>
-                <label>
-                  <input type="radio" value={"Dirección alternativa"} name="addressRadio" id="" />{" "}
-                  Dirección alternativa
-                </label>
-                <label>
-                  <input type="radio" value={"Retiro en local"} name="addressRadio" id="" /> Retiro
-                  en local
-                </label>
-              </div>
-              <Input
-                name="address"
-                id="address"
-                value={values.address}
-                placeholder="Dirección"
-                onChange={(e) => setAddress(e.target.value)}
-                className={"formInput"}
-                disabled={isAddressDisable}
-              />
+      <div className="form-container">
+        <img className="form-img" src={Purchase} alt="Imagen" />
+        <form>
+          <div className="radioSection">
+            <strong>Dirección de envío</strong>
+            <div className="radioGroup" onChange={(e) => handleRadioChange(e.target.value)}>
+              <label>
+                <input
+                  type="radio"
+                  defaultChecked={true}
+                  value={"Dirección actual"}
+                  name="addressRadio"
+                  id=""
+                />{" "}
+                Dirección actual
+              </label>
+              <label>
+                <input type="radio" value={"Dirección alternativa"} name="addressRadio" id="" />{" "}
+                Dirección alternativa
+              </label>
+              <label>
+                <input type="radio" value={"Retiro en local"} name="addressRadio" id="" /> Retiro en
+                local
+              </label>
             </div>
-            <span className="mt-5">{isShipping ? "Horarios de envío" : "Horarios del local"}</span>
-            <Select
-              name="deliveryTime"
-              id="deliveryTime"
-              className="select"
-              onChange={(e) => setDeliveryTime(e.value)}
-              options={isShipping ? deliveryHours : storeHours}
-              placeholder={"Horario"}
-              // defaultValue={isShipping ? deliveryHours[0] : storeHours[0]}
+            <Input
+              name="address"
+              id="address"
+              value={values.address}
+              placeholder="Dirección"
+              onChange={(e) => setAddress(e.target.value)}
+              className={"formInput"}
+              disabled={isAddressDisable}
             />
-            <span className="mt-5">{"Metodo de pago"}</span>
-            <Select
-              name="paymentMenthod"
-              id="paymentMenthod"
-              className="select"
-              onChange={(e) => setPaymentMethod(e.value)}
-              options={paymentMethods}
-              placeholder={"Metodo de pago"}
-            />
-            <button
-              className="submit-button"
-              onClick={(e) => handleConfirmPurchase(e)}
-              style={{ width: "65%" }}
-              type="submit"
-              disabled={
-                values.address === "" ||
-                values.deliveryTime === null ||
-                values.paymentMenthod === null
-              }
-            >
-              Confirmar
-            </button>
-          </form>
-        </div>
+          </div>
+          <span className="mt-5">{isShipping ? "Horarios de envío" : "Horarios del local"}</span>
+          <Select
+            name="deliveryTime"
+            id="deliveryTime"
+            className="select"
+            onChange={(e) => setDeliveryTime(e.value)}
+            options={isShipping ? deliveryHours : storeHours}
+            placeholder={"Horario"}
+          />
+          <span className="mt-5">{"Metodo de pago"}</span>
+          <Select
+            name="paymentMenthod"
+            id="paymentMenthod"
+            className="select"
+            onChange={(e) => setPaymentMethod(e.value)}
+            options={paymentMethods}
+            placeholder={"Metodo de pago"}
+          />
+          <button
+            className="submit-button"
+            onClick={(e) => handleConfirmPurchase(e)}
+            style={{ width: "65%" }}
+            type="submit"
+            disabled={
+              cart === [] ||
+              values.address === "" ||
+              values.deliveryTime === null ||
+              values.paymentMenthod === null
+            }
+          >
+            Confirmar
+          </button>
+        </form>
       </div>
     </ContainerBase>
   );
