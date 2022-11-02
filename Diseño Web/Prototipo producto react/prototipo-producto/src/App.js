@@ -35,6 +35,7 @@ import EditPromo from "./pages/admin/EditPromo";
 import DetailBuys from "./pages/admin/DetailsBuy";
 import UserEdit from "./pages/admin/UserEdit";
 import SearchResultsPage from "./pages/store/SearchResultsPage";
+import BuyForm from "./pages/store/BuyForm";
 
 export const userStatusContext = createContext({});
 export const cartContext = createContext([]);
@@ -73,6 +74,7 @@ const App = () => {
           <Route path="/category/:category/:id" element={<ProductPage />} />
           <Route path="/results/:data" element={<SearchResultsPage />} />
           <Route path="/panel-user" element={<UserPanel />} />
+          <Route path="/buyForm" element={<BuyForm />} />
           <Route path="/admin/login" element={<LoginAdm />} />
           <Route path="/admin" element={<ContainerBase />} />
           <Route path="/admin/users/managment" element={<UserManagment />} />

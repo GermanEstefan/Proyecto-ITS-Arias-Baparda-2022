@@ -1,3 +1,5 @@
+/** @format */
+
 import React, { useState, useEffect } from "react";
 import { Collapse } from "react-collapse";
 import { fetchApi } from "../../API/api";
@@ -16,8 +18,10 @@ export const HistoryItem = ({ sale }) => {
   };
   const getSaleProducts = async () => {
     const resp = await fetchApi(`sales.php?saleDetail=${sale.ID}`, "GET");
-    console.log(resp.result.data.details)
-    resp && setSaleProducts(resp.result.data.details);
+
+    if (resp.status === "successfully") {
+      setSaleProducts(resp.result.data.details || []);
+    }
   };
   return (
     <div onClick={handleClick}>

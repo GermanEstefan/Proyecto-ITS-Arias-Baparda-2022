@@ -10,7 +10,7 @@ const ShoppingCart = () => {
 
   const isMobile = useMediaQuery({ query: "(max-width: 800px)" });
 
-  const { cart, setCart } = useContext(cartContext);
+  const { cart } = useContext(cartContext);
 
   const [cartLength, setCartLength] = useState(cart.length);
   useEffect(() => {

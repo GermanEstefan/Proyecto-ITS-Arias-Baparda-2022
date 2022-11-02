@@ -148,7 +148,7 @@ const ProductPage = () => {
                     disabled={!userData.auth || !isEnoughStock}
                     onClick={() => {
                       handleAddToCart();
-                      navigate("/shoppingCart");
+                      navigate("/buyForm");
                     }}
                   >
                     Comprar

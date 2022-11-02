@@ -5,6 +5,9 @@
   min-height: 80vh;
 
   max-width: 900px;
+  @media screen and (max-width: 600px) {
+    margin-bottom: 10vh;
+  }
 
   .productPage {
     margin-bottom: 2em;
@@ -36,6 +39,9 @@
         margin-left: 15px;
         p {
           text-align: justify;
+          @media (max-width: 900px) {
+            margin-left: 20px;
+          }
         }
       }
 
@@ -47,6 +53,9 @@
           display: flex;
           justify-content: space-between;
           @media screen and (max-width: 800px) {
+          justify-content: space-around;
+          }
+          @media screen and (max-width: 600px) {
             flex-direction: column;
           }
           .quantityInputContainer {
@@ -54,8 +63,13 @@
             align-items: flex-start;
             margin-top: 26px;
             justify-content: space-evenly;
+            @media screen and (max-width: 600px) {
+              margin-bottom: 20px;
+              justify-content: center;
+            }
             input {
-              width: 30%;
+              margin-left: 10px;
+              width: 40px;
               transition: 0.3s;
             }
             input:hover {
@@ -102,7 +116,7 @@
         .selectsContainer {
           display: flex;
           justify-content: space-between;
-          @media screen and (max-width: 800px) {
+          @media screen and (max-width: 600px) {
             flex-direction: column;
           }
           .select {
