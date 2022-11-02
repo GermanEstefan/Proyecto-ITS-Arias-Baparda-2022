@@ -43,17 +43,30 @@
         }
         public static function getDetailSaleById($idSale){
             $conecction = new Connection();
-            $query = "SELECT 
-            sd.sale_id,
-            p.name as product,
+            $query = "SELECT
+            s.id_sale,
+            date_format(s.date, '%d/%m/%Y %T') AS saleDate,
+            st.name AS statusActual,
+            s.address,
+            dt.name AS delivery,
+            s.user_purchase AS idUser,
+            c.company_name AS razonSocial,
+            c.rut_nr AS rut,
+            u.name AS name,
+            u.surname AS lastname,
+            s.payment,
             sd.product_sale as barcode, 
-            sz.name as size, 
-            d.name as design, 
+			concat_ws(' ', p.name, d.name , sz.name) AS productName,
             sd.quantity,
             sd.total,
             s.total AS totalSale
-            FROM sale_detail sd, product p, sale s, design d, size sz 
-            WHERE sale_id = '$idSale'
+            FROM sale s, customer c, user u,report r, status st, delivery_time dt, sale_detail sd, product p, design d, size sz
+            WHERE s.id_sale = 700000
+            AND c.customer_user = s.user_purchase
+            AND u.id_user = s.user_purchase
+            AND s.id_sale = r.sale_report
+            AND r.status_report = st.id_status
+            AND s.sale_delivery = dt.id_delivery
             AND sd.product_sale = p.barcode
             AND sd.sale_id = s.id_sale
             AND sz.id_size = p.product_size
@@ -66,14 +79,15 @@
             r.sale_report AS idSale,
             s.name AS nameStatus,
             r.employee_report AS docEmployee,
-            concat_ws(' ', u.name , u.surname) AS employeeName,
-            date_format(r.date, '%d/%m/%Y %T') AS lastUpdate,
-            r.comment AS lastComment
-            FROM report r , status s, employee e, user u
-            WHERE r.status_report = s.id_status
-            AND s.name LIKE '$status'
+            u.email AS employeeMail,
+            sl.total AS totalSale,
+            date_format(r.date, '%d/%m/%Y %T') AS lastUpdate
+            FROM report r , status s, employee e, user u, sale sl
+            WHERE s.name LIKE '$status'
+            AND r.status_report = s.id_status
             AND r.employee_report = e.ci
-            AND e.employee_user = u.id_user";
+            AND e.employee_user = u.id_user
+            AND sl.id_sale = r.sale_report";
             return $conecction->getData($query)->fetch_all(MYSQLI_ASSOC);
         }
         public static function getSalesForUserID($idClient){
