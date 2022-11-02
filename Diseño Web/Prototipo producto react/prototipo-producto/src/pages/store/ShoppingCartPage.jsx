@@ -131,8 +131,14 @@ const ShoppingCartPage = () => {
       })),
     };
     setCart([]);
+    setProductsList([]);
     console.log(purchaseData);
-    fetchApi("sales.php", "POST", purchaseData);
+    const resp = fetchApi("sales.php", "POST", purchaseData);
+    if (resp.status === "successfully") {
+      console.log('successfully')
+      setCart([]);
+      setProductsList([]);
+    }
   };
 
   const handleRadioChange = (value) => {
@@ -164,17 +170,17 @@ const ShoppingCartPage = () => {
         return product;
       }
     });
-    // setProductTotalPrice(price * parseInt(e.target.value));
     setProductsList(cartWithNewQuantity);
     console.log(cartWithNewQuantity);
     setCart(cartWithNewQuantity);
     setTotalPrice();
   };
   const handleDeleteItemFromCart = (barcode) => {
-    console.log('borra')
-    setProductsList(cart.filter((product) => product.barcode !== barcode));
+    console.log("borra");
     setCart(cart.filter((product) => product.barcode !== barcode));
+    setProductsList(cart.filter((product) => product.barcode !== barcode));
   };
+  console.log(productsList);
 
   return (
     <ContainerBase>

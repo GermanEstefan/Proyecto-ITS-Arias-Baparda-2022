@@ -28,27 +28,42 @@ const UserPanel = () => {
         <aside>
           <h1>Configuracion</h1>
           <ul>
-            <li onClick={() => handleChangeView("personalInformation")}>Datos personales</li>
-            <li onClick={() => handleChangeView("changePassword")}>Cambiar contraseña</li>
-            <li onClick={() => handleChangeView("buyHistory")}>Historial de compras</li>
-            <li onClick={() => handleChangeView("disabledAccount")}>Desactivar cuenta</li>
+            <li
+              className={view === "personalInformation" && "isOrange"}
+              onClick={() => handleChangeView("personalInformation")}
+            >
+              Datos personales
+            </li>
+            <li
+              className={view === "changePassword" && "isOrange"}
+              onClick={() => handleChangeView("changePassword")}
+            >
+              Cambiar contraseña
+            </li>
+            <li
+              className={view === "buyHistory" && "isOrange"}
+              onClick={() => handleChangeView("buyHistory")}
+            >
+              Historial de compras
+            </li>
+            <li className={view === "disabledAccount" && "isOrange"} onClick={() => handleChangeView("disabledAccount")}>Desactivar cuenta</li>
             <li className="danger" onClick={handleLogout}>
               Cerrar sesion
             </li>
           </ul>
         </aside>
-        
-          <section>
-            {view === "personalInformation" ? (
-              <UpdateAccountForm />
-            ) : view === "changePassword" ? (
-              <UpdatePasswordForm />
-            ) : view === "buyHistory" ? (
-              <SalesHistory />
-            ) : view === "disabledAccount" ? (
-              <h1>Desactivar cuenta</h1>
-            ) : null}
-          </section>
+
+        <section>
+          {view === "personalInformation" ? (
+            <UpdateAccountForm />
+          ) : view === "changePassword" ? (
+            <UpdatePasswordForm />
+          ) : view === "buyHistory" ? (
+            <SalesHistory />
+          ) : view === "disabledAccount" ? (
+            <h1>Desactivar cuenta</h1>
+          ) : null}
+        </section>
       </main>
     </ContainerBase>
   );

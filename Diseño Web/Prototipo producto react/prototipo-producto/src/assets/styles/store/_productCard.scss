@@ -18,10 +18,11 @@
     h2 {
       padding: 0.5em;
       font-size: small;
-      width: 100%;
+      width: 90%;
+      border-radius: 2px;
       overflow: hidden;
       text-align: left;
-      background-color: #bccddb;
+      background: linear-gradient(90deg, $gray 90%, rgba(255, 255, 255, 0));
     }
     p {
       overflow-y: hidden;

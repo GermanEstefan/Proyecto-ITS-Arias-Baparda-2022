@@ -56,6 +56,11 @@
             justify-content: space-evenly;
             input {
               width: 30%;
+              transition: 0.3s;
+            }
+            input:hover {
+              box-shadow: rgba(182, 182, 182, 0.705) 0px 8px 24px;
+              transition: 0.3s;
             }
             span {
               margin-top: 5px;
@@ -69,18 +74,28 @@
             width: 50%;
             button {
               border: none;
-              padding: 8px;
+              padding: 10px;
               cursor: pointer;
               width: 100%;
-              margin: 5px auto;
+              font-weight: 700;
+              margin: 3px auto;
+              transition: 0.3s;
             }
             .buyBtn {
               background-color: $orange;
               color: white;
             }
+            .buyBtn:hover {
+              background-color: $dark-orange;
+              transition: 0.3s;
+            }
 
             .addBtn {
               background-color: $gray;
+            }
+            .addBtn:hover {
+              background-color: $dark-gray;
+              transition: 0.3s;
             }
           }
         }

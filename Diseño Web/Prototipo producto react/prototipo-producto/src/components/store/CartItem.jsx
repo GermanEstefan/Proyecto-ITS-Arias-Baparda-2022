@@ -4,9 +4,7 @@ import React, { useState, useEffect } from "react";
 import { Animated } from "react-animated-css";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { fetchApi } from "../../API/api";
-import { useContext } from "react";
-import { cartContext } from "../../App";
+
 import NoPhoto from "../../assets/img/no-photo.png";
 
 const CartItem = ({
@@ -18,27 +16,25 @@ const CartItem = ({
   size,
   design,
   updateProductQuantity,
-  handleDeleteItemFromCart
+  handleDeleteItemFromCart,
 }) => {
-  const { cart, setCart } = useContext(cartContext);
-
-  const [product, setProduct] = useState({});
+  // const [product, setProduct] = useState({});
   const [productTotalPrice, setProductTotalPrice] = useState(price);
 
-  useEffect(() => {
-    getProductByBarcode();
-  }, []);
+  // useEffect(() => {
+  //   getProductByBarcode();
+  // }, []);
 
   // const handleDeleteItemFromCart = () => {
   //   setProductsList(cart.filter((product) => product.barcode !== barcode));
   //   setCart(cart.filter((product) => product.barcode !== barcode));
-    
+
   // };
 
-  const getProductByBarcode = async () => {
-    const resp = await fetchApi(`products.php?barcode=${barcode}`, "GET");
-    setProduct(resp.result.data);
-  };
+  // const getProductByBarcode = async () => {
+  //   const resp = await fetchApi(`products.php?barcode=${barcode}`, "GET");
+  //   setProduct(resp.result.data);
+  // };
   return (
     <Animated
       animationIn="fadeInLeft"
@@ -69,7 +65,7 @@ const CartItem = ({
             }}
             min={1}
           />
-          <button className="CartItem__actionsQuantity" onClick={handleDeleteItemFromCart(barcode)}>
+          <button className="CartItem__actionsQuantity" onClick={() => handleDeleteItemFromCart(barcode)}>
             <FontAwesomeIcon icon={faTrash} />
           </button>
         </div>
