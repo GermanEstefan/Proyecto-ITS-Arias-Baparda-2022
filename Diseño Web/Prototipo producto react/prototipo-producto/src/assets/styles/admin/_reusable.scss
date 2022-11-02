@@ -237,3 +237,16 @@
     color: lighten($color: rgb(58, 182, 42), $amount: 20);
   }
 }
+
+.table-control-text{
+  > span {
+      color: blue;
+      cursor: pointer;
+      transition: color .3s;
+      font-weight: bold;
+      font-size: 1.1rem;
+      &:hover{
+          color: rgb(0, 0, 122);
+      }
+  }
+}

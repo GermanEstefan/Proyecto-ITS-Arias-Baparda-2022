@@ -9,16 +9,4 @@
         }
         margin-bottom: 50px;
     }
-    .table-control-text{
-        > span {
-            color: blue;
-            cursor: pointer;
-            transition: color .3s;
-            font-weight: bold;
-            font-size: 1.1rem;
-            &:hover{
-                color: rgb(0, 0, 122);
-            }
-        }
-    }
 }

@@ -1249,6 +1249,17 @@
   color: #77dd6a;
 }
 
+.table-control-text > span {
+  color: blue;
+  cursor: pointer;
+  transition: color 0.3s;
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+.table-control-text > span:hover {
+  color: rgb(0, 0, 122);
+}
+
 .cartContainer {
   margin: 15vh auto auto auto;
   min-height: 80vh;
@@ -1875,16 +1886,6 @@
 .list-buys .list-buys_general-info > :first-child {
   margin-bottom: 10px;
 }
-.list-buys .table-control-text > span {
-  color: blue;
-  cursor: pointer;
-  transition: color 0.3s;
-  font-weight: bold;
-  font-size: 1.1rem;
-}
-.list-buys .table-control-text > span:hover {
-  color: rgb(0, 0, 122);
-}
 
 .detail-buys h1 {
   margin: 50px 0 0 0;
@@ -1939,6 +1940,36 @@
   justify-content: space-between;
   padding: 5px 10px;
   margin: 50px 0;
+}
+
+.sale-detail .sale-detail-content {
+  display: flex;
+}
+.sale-detail .sale-detail-content .sale-detail-content_info-card {
+  background-color: #f2f2f2;
+  padding: 20px 40px 20px 40px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  margin-right: 50px;
+}
+.sale-detail .sale-detail-content .sale-detail-content_info-card > span > strong {
+  color: rgba(245, 153, 15, 0.9529411765);
+  font-size: 1.1rem;
+}
+.sale-detail .sale-detail-content .sale-detail-content_info-card > div {
+  border-bottom: 1px solid rgba(245, 153, 15, 0.9529411765);
+  margin: 20px 0;
+  padding-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+}
+.sale-detail .sale-detail-content .sale-detail-content_info-card > div strong {
+  align-self: center;
+}
+.sale-detail .sale-detail-content .sale-detail-content_info-card > div ul {
+  margin-top: 15px;
+}
+.sale-detail .sale-detail-content .sale-detail-content_info-card > div ul > li {
+  margin-bottom: 5px;
 }
 
 html {
