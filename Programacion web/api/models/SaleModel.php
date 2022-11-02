@@ -44,23 +44,21 @@
         public static function getDetailSaleById($idSale){
             $conecction = new Connection();
             $query = "SELECT
-            s.id_sale,
+            s.id_sale as idSale,
             date_format(s.date, '%d/%m/%Y %T') AS saleDate,
             st.name AS statusActual,
-            s.address,
-            dt.name AS delivery,
-            s.user_purchase AS idUser,
-            c.company_name AS razonSocial,
-            c.rut_nr AS rut,
-            u.name AS name,
-            u.surname AS lastname,
+            s.address as addressSale,
+            dt.name AS deliverySale,
+            u.email AS clientMail,
+            c.company_name AS nameCompany,
+			concat_ws(' ', u.name , u.surname) AS clientName,
             s.payment,
             sd.product_sale as barcode, 
 			concat_ws(' ', p.name, d.name , sz.name) AS productName,
             sd.quantity,
             sd.total,
             s.total AS totalSale
-            FROM sale s, customer c, user u,report r, status st, delivery_time dt, sale_detail sd, product p, design d, size sz
+            FROM sale s, customer c,report r, status st, delivery_time dt, sale_detail sd, product p, design d, size sz, user u
             WHERE s.id_sale = $idSale
             AND c.customer_user = s.user_purchase
             AND u.id_user = s.user_purchase
