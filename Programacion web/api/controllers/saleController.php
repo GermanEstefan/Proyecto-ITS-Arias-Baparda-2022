@@ -114,6 +114,7 @@ class SaleController {
         //Data en comun
         $saleID = $sale[0]['sale_id'];
         $totalSale = $sale[0]['totalSale'];
+        $dateSale = $sale[0]['saleDate'];
         $details = array();
         foreach($sale as $detail){
         array_push( $details, array( "barcode" => $detail['barcode'],"product" => $detail['product'],"size" => $detail['size'],"design" => $detail['design'],"quantity" => $detail['quantity'],"total" => $detail['total']));

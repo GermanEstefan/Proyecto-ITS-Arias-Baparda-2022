@@ -61,7 +61,7 @@
             sd.total,
             s.total AS totalSale
             FROM sale s, customer c, user u,report r, status st, delivery_time dt, sale_detail sd, product p, design d, size sz
-            WHERE s.id_sale = 700000
+            WHERE s.id_sale = $idSale
             AND c.customer_user = s.user_purchase
             AND u.id_user = s.user_purchase
             AND s.id_sale = r.sale_report
