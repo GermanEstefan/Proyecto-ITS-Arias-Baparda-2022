@@ -14,14 +14,14 @@ const Footer = () => {
       </ul>
       <div className="img-container">
         <a
-          href="https://www.instagram.com/seguridadcorporal/"
+          href="https://www.facebook.com/people/Natalia-Viera-Seguridad-Corporal/100076407723343/"
           target="_blank"
           rel="noopener noreferrer"
         >
           <FontAwesomeIcon icon={faFacebook} size="3x" color="white" />
         </a>
         <a
-          href="https://www.facebook.com/people/Natalia-Viera-Seguridad-Corporal/100076407723343/"
+          href="https://www.instagram.com/seguridadcorporal/"
           target="_blank"
           rel="noopener noreferrer"
         >

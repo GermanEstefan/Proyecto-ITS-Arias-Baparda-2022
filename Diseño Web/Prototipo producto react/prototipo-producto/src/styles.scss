@@ -36,20 +36,19 @@ $black: #121212;
 
 html {
   scroll-behavior: smooth;
-  min-height: 100vh;  
+  min-height: 100vh;
 }
 body {
   overflow-x: hidden;
-  min-height: 100vh;  
+  min-height: 100vh;
   font-family: "Open Sans", sans-serif;
 }
 .main-client {
   display: flex;
   min-height: 100vh;
-  width: 100vw;  
+  width: 100vw;
   justify-content: space-between;
-  
-  
+
   flex-direction: column;
 }
 ul {
@@ -70,6 +69,16 @@ textarea {
   &:focus {
     outline: none;
   }
+}
+
+button:disabled {
+  background-color: $gray;
+  color: $dark_gray;
+}
+button:disabled:hover {
+  cursor: auto;
+  background-color: $gray;
+  color: $dark_gray;
 }
 //  width
 ::-webkit-scrollbar {

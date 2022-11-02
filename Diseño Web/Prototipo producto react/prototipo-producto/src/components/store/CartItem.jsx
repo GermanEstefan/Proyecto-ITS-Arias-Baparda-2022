@@ -49,7 +49,7 @@ const CartItem = ({
           <div>
             <h3>{name}</h3>
             <span>
-              Talle: {size} Color: {design}
+              Talle: {size}, Color: {design}
             </span>
           </div>
           <p>{productTotalPrice}$</p>
