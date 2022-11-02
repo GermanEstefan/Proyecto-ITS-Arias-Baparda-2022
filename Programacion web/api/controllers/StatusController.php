@@ -50,8 +50,8 @@ class StatusController {
     }
     //consultas
     public function getAllStatus(){
-        $statusToJson = json_encode(StatusModel::getAllStatus()); 
-        echo $statusToJson;
+        $state = StatusModel::getAllStatus();
+        echo $this->response->successfully("Estados obtenidos:$state");
     }
 
     public function getStatusByName($name){

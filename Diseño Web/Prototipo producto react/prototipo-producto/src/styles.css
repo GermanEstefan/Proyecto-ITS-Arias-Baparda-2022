@@ -427,10 +427,11 @@
 .product-card .product-text-container h2 {
   padding: 0.5em;
   font-size: small;
-  width: 100%;
+  width: 90%;
+  border-radius: 2px;
   overflow: hidden;
   text-align: left;
-  background-color: #bccddb;
+  background: linear-gradient(90deg, #bccddb 90%, rgba(255, 255, 255, 0));
 }
 .product-card .product-text-container p {
   overflow-y: hidden;
@@ -777,7 +778,7 @@
 .user-panel-page aside {
   padding: 60px;
   width: 20%;
-  border-right: 1px solid rgba(245, 153, 15, 0.9529411765);
+  border-right: 2px solid rgba(245, 153, 15, 0.9529411765);
   text-align: center;
 }
 @media (max-width: 800px) {
@@ -790,6 +791,10 @@
 .user-panel-page aside h1 {
   color: rgba(245, 153, 15, 0.9529411765);
   margin: 30px 0;
+}
+.user-panel-page aside ul .isOrange {
+  color: rgba(245, 153, 15, 0.9529411765);
+  letter-spacing: 1px;
 }
 .user-panel-page aside ul li {
   margin-bottom: 30px;
@@ -914,6 +919,11 @@
 }
 .productContainer .productPage .productPage__description .productPage__description__buttons .buttonsFlexContainer .quantityInputContainer input {
   width: 30%;
+  transition: 0.3s;
+}
+.productContainer .productPage .productPage__description .productPage__description__buttons .buttonsFlexContainer .quantityInputContainer input:hover {
+  box-shadow: rgba(182, 182, 182, 0.705) 0px 8px 24px;
+  transition: 0.3s;
 }
 .productContainer .productPage .productPage__description .productPage__description__buttons .buttonsFlexContainer .quantityInputContainer span {
   margin-top: 5px;
@@ -927,17 +937,27 @@
 }
 .productContainer .productPage .productPage__description .productPage__description__buttons .buttonsFlexContainer .buyAndAddToCartContainer button {
   border: none;
-  padding: 8px;
+  padding: 10px;
   cursor: pointer;
   width: 100%;
-  margin: 5px auto;
+  font-weight: 700;
+  margin: 3px auto;
+  transition: 0.3s;
 }
 .productContainer .productPage .productPage__description .productPage__description__buttons .buttonsFlexContainer .buyAndAddToCartContainer .buyBtn {
   background-color: rgba(245, 153, 15, 0.9529411765);
   color: white;
 }
+.productContainer .productPage .productPage__description .productPage__description__buttons .buttonsFlexContainer .buyAndAddToCartContainer .buyBtn:hover {
+  background-color: #e18e11;
+  transition: 0.3s;
+}
 .productContainer .productPage .productPage__description .productPage__description__buttons .buttonsFlexContainer .buyAndAddToCartContainer .addBtn {
   background-color: #bccddb;
+}
+.productContainer .productPage .productPage__description .productPage__description__buttons .buttonsFlexContainer .buyAndAddToCartContainer .addBtn:hover {
+  background-color: #9ba6af;
+  transition: 0.3s;
 }
 .productContainer .productPage .productPage__description .productPage__description__buttons .selectsContainer {
   display: flex;

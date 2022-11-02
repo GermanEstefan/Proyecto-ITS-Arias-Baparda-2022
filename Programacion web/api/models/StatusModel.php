@@ -25,7 +25,7 @@
 
         public static function getAllStatus(){
             $conecction = new Connection();
-            $query = "SELECT * from status";
+            $query = "SELECT id_status,name from status";
             return $conecction->getData($query)->fetch_all(MYSQLI_ASSOC);
         }
 

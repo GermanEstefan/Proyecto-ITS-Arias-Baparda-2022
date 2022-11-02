@@ -271,16 +271,6 @@
             $resultCreateSale = $instanceMySql->query($saleInsert);
             if(!$resultCreateSale)  $result_transaccion = false;
             $idSale = $instanceMySql->insert_id;
-            //aca
-            $getInfoClientToMail = SaleModel::getInfoClientForMail($this->idClient);
-            $clientMail = $getInfoClientToMail["email"];
-            $clientBussines = $getInfoClientToMail["company"];
-            $clientName = $getInfoClientToMail["Nombre"];
-            if (!$clientBussines){
-                mail($clientMail,"Nueva compra","Gracias por tu compra! $clientName Podras ver el estado actual de tu pedido en tu perfil");
-            }else{
-                mail($clientMail,"Nueva compra","Gracias por tu compra! $clientBussines Podras ver el estado actual de tu pedido en tu perfil");
-            }
             
             //INICIO SALE_DETAIL Array de productos
             $queries = array();
