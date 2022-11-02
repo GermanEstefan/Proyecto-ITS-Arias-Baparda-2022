@@ -38,6 +38,7 @@ import SearchResultsPage from "./pages/store/SearchResultsPage";
 import BuyForm from "./pages/store/BuyForm";
 
 import ManageSales from "./pages/admin/ManageSales";
+import DetailsSales from "./pages/admin/DetailsSale";
 
 export const userStatusContext = createContext({});
 export const cartContext = createContext([]);
@@ -100,6 +101,7 @@ const App = () => {
           <Route path="/admin/shipments/list" element={<ListShipments />} />
           <Route path="/admin/products/list" element={<ListProducts />} />
           <Route path="/admin/sales/manage" element={<ManageSales />} />
+          <Route path="/admin/sales/manage/details/:idSale" element={<DetailsSales />} />
         </Routes>
       </cartContext.Provider>
     </userStatusContext.Provider>
