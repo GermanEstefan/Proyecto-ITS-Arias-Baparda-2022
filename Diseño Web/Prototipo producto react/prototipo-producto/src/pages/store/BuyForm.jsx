@@ -62,11 +62,6 @@ const BuyForm = () => {
       setAddress("");
       setIsShipping(true);
     }
-    if (value === "Retiro en local") {
-      setAddress("Retiro en local");
-      setIsAddressDisable(true);
-      setIsShipping(false);
-    }
   };
 
   const handleConfirmPurchase = async (e) => {
@@ -89,14 +84,14 @@ const BuyForm = () => {
       setCart([]);
       return Swal.fire({
         icon: "success",
-        text: 'Compra concretada!',
+        text: "Compra concretada!",
         timer: 1500,
         showConfirmButton: true,
       });
-    }else{
+    } else {
       return Swal.fire({
         icon: "error",
-        text: 'Error al concretar la compra',
+        text: "Error al concretar la compra",
         timer: 1500,
         showConfirmButton: true,
       });
@@ -128,7 +123,10 @@ const BuyForm = () => {
         <form>
           <div className="radioSection">
             <strong>Dirección de envío</strong>
-            <div className="radioGroup" onChange={(e) => handleRadioChange(e.target.value)}>
+            <div
+              className="radioGroup"
+              onChange={(e) => handleRadioChange(e.target.value)}
+            >
               <label>
                 <input
                   type="radio"
@@ -140,25 +138,28 @@ const BuyForm = () => {
                 Dirección actual
               </label>
               <label>
-                <input type="radio" value={"Dirección alternativa"} name="addressRadio" id="" />{" "}
+                <input
+                  type="radio"
+                  value={"Dirección alternativa"}
+                  name="addressRadio"
+                  id=""
+                />{" "}
                 Dirección alternativa
-              </label>
-              <label>
-                <input type="radio" value={"Retiro en local"} name="addressRadio" id="" /> Retiro en
-                local
               </label>
             </div>
             <Input
               name="address"
               id="address"
               value={values.address}
-              placeholder="Dirección"
+              placeholder="Ingrese direccion..."
               onChange={(e) => setAddress(e.target.value)}
               className={"formInput"}
               disabled={isAddressDisable}
             />
           </div>
-          <span className="mt-5">{isShipping ? "Horarios de envío" : "Horarios del local"}</span>
+          <span className="mt-5">
+            {isShipping ? "Horarios de envío" : "Horarios del local"}
+          </span>
           <Select
             name="deliveryTime"
             id="deliveryTime"

@@ -41,7 +41,9 @@ export const HistoryItem = ({ sale }) => {
             <div className="collapseSale">
               <div>
                 <span>{saleDetail.product}</span>
-                <span>{saleDetail.quantity > 1 && `x${saleDetail.quantity}`}</span>
+                <span>
+                  {saleDetail.quantity > 1 && `x${saleDetail.quantity}`}
+                </span>
               </div>
               <span>{saleDetail.total} $</span>
             </div>

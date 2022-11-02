@@ -30,7 +30,7 @@
 
         public static function getAllDesigns(){
             $conecction = new Connection();
-            $query = "SELECT * from design ";
+            $query = "SELECT * from design WHERE id_design != 1 ";
             return $conecction->getData($query)->fetch_all(MYSQLI_ASSOC);
         }
 

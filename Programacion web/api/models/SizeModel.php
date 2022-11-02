@@ -30,7 +30,7 @@
 
         public static function getAllSizes(){
             $conecction = new Connection();
-            $query = "SELECT * from size ";
+            $query = "SELECT * from size WHERE ID_SIZE != 1 ";
             return $conecction->getData($query)->fetch_all(MYSQLI_ASSOC);
         }
 

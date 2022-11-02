@@ -36,6 +36,26 @@
             inner join user u on e.employee_user = u.id_user and e.employee_user != 5000 and e.employee_user = '$id'";
             return $conecction->getData($query)->fetch_assoc();
         }
+        public static function getActiveEmployeeById($id){
+            $conecction = new Connection();
+            $query = "SELECT 
+            e.employee_user,
+            e.employee_role,
+            e.ci,
+            e.state,
+            u.email, 
+            u.password, 
+            u.name,
+            u.surname,
+            u.address,
+            u.phone 
+            from 
+            employee e 
+            inner join user u on e.employee_user = u.id_user and e.employee_user != 5000 and 
+            e.state = 1 
+            and e.employee_user = '$id'";
+            return $conecction->getData($query)->fetch_assoc();
+        }
         public static function getEmployeesByRole($nameRole){
             $conecction = new Connection();
             $query = "SELECT e.employee_user as ID_EMPLEADO,e.employee_role AS ROL_ASIGNADO ,e.state AS ESTADO ,u.email, u.name AS NOMBRE,u.surname AS APELLIDO,u.address AS DIRECCION,u.phone AS TELEFONO from employee e inner join user u on e.employee_user = u.id_user and e.employee_role = '$nameRole'";
@@ -62,8 +82,9 @@
             $resultUserInsert = $instanceMySql->query($userInsert);
             if(!$resultUserInsert)  $result_transaccion = false;
             $idGeneratedFromUserInsert = $instanceMySql->insert_id;
-            $employeeInsert = "INSERT INTO employee(employee_user, employee_role, ci) VALUES ($idGeneratedFromUserInsert, '$this->rol', $this->ci)";
+            $employeeInsert = "INSERT INTO employee (ci, employee_user, employee_role) VALUES ($this->ci,$idGeneratedFromUserInsert, '$this->rol')";
             $resultEmployeeInsert = $instanceMySql->query($employeeInsert);
+            var_dump($resultEmployeeInsert);
             if(!$resultEmployeeInsert) $result_transaccion = false;
             if($result_transaccion){
                 $instanceMySql->commit();

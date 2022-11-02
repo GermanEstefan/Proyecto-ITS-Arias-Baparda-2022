@@ -34,12 +34,12 @@
         }
         public static function getLocalHours(){
             $conecction = new Connection();
-            $query = "SELECT * from delivery_time WHERE id_delivery < 5";
+            $query = "SELECT * from delivery_time WHERE id_delivery";
             return $conecction->getData($query)->fetch_all(MYSQLI_ASSOC);
         }
         public static function getDeliveryHours(){
             $conecction = new Connection();
-            $query = "SELECT * from delivery_time WHERE id_delivery > 4";
+            $query = "SELECT * from delivery_time WHERE id_delivery";
             return $conecction->getData($query)->fetch_all(MYSQLI_ASSOC);
         }
         public static function updateDelivery($idDelivery,$name, $description ){
