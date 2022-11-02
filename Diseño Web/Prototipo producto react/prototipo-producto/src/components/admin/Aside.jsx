@@ -6,7 +6,7 @@ import {  useLocation, useNavigate } from "react-router-dom";
 
 const Aside = () => {
 
-    const visibilityInit = { users: false, generals: false, products: false, "products-promo":false, shipments: false }
+    const visibilityInit = { users: false, generals: false, products: false, "products-promo":false, sales: false }
     const [visibility, setVisibility] = useState(visibilityInit);
     const [actualPageAndAction, setActualPageAndAction] = useState({action: '', page: ''});
     const {action, page} = actualPageAndAction;
@@ -119,13 +119,13 @@ const Aside = () => {
                         <FontAwesomeIcon icon={faChevronDown} className="aside_menu_item_container_icon2"/>
                     </div>
                     {
-                        visibility.shipments
+                        visibility.sales
                         &&
                         <ul>
                             <li 
-                                onClick={() => navigate('/admin/shipments/list') } 
-                                className={ (action === 'list' && page === 'shipments') ? 'selected' : '' } 
-                            >Listar envios</li>
+                                onClick={() => navigate('/admin/sales/manage') } 
+                                className={ (action === 'manage' && page === 'sales') ? 'selected' : '' } 
+                            >Gestionar envios</li>
                         </ul>
                     }
                 </li>
