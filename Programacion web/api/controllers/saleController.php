@@ -112,25 +112,17 @@ class SaleController {
             die();
         }
         //Data en comun
-        $saleID = $sale[0]['sale_id'];
+        $saleID = $sale[0]['idSale'];
         $totalSale = $sale[0]['totalSale'];
-        $dateSale = $sale[0]['dateSate'];
-        $statusSale = $sale[0]['statusSale'];
-        
-        if(!$sale)
-        $details = array();
+        $dateSale = $sale[0]['saleDate'];
+        $statusSale = $sale[0]['statusActual'];
+        $clientInfo = array("clientMail" => $sale[0]['clientMail'],"clientName" => $sale[0]['clientName'],"companyName" => $sale[0]['nameCompany']);
+        $saleInfo = array( "addressSale" => $sale[0]['addressSale'],"deliverySale" => $sale[0]['deliverySale'],"payment" => $sale[0]['payment']);
+        $productSale = array();
         foreach($sale as $detail){
-        array_push( $details, array( "barcode" => $detail['barcode'],"product" => $detail['product'],"size" => $detail['size'],"design" => $detail['design'],"quantity" => $detail['quantity'],"total" => $detail['total']));
+        array_push( $productSale, array( "barcode" => $detail['barcode'],"productName" => $detail['productName'],"quantity" => $detail['quantity'],"total" => $detail['total']));
         }
-        
-        
-        
-        
-        $details = array();
-        foreach($sale as $detail){
-        array_push( $details, array( "barcode" => $detail['barcode'],"product" => $detail['product'],"size" => $detail['size'],"design" => $detail['design'],"quantity" => $detail['quantity'],"total" => $detail['total']));
-        }
-        $response = array("saleID" => $saleID,"totalSale" =>$totalSale, "details" => $details);
+        $response = array("idSale"=>$saleID,"totalSale"=>$totalSale,"dateSale"=>$dateSale,"statusSale"=>$statusSale,"clientInfo"=>$clientInfo,"saleInfo"=>$saleInfo,"productSale"=>$productSale);
         echo $this->response->successfully("Detalle de ventas para ID:$idSale", $response);  
     }
     public function getReportHistory($idSale){
