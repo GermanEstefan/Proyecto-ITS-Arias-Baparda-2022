@@ -114,6 +114,18 @@ class SaleController {
         //Data en comun
         $saleID = $sale[0]['sale_id'];
         $totalSale = $sale[0]['totalSale'];
+        $dateSale = $sale[0]['dateSate'];
+        $statusSale = $sale[0]['statusSale'];
+        
+        if(!$sale)
+        $details = array();
+        foreach($sale as $detail){
+        array_push( $details, array( "barcode" => $detail['barcode'],"product" => $detail['product'],"size" => $detail['size'],"design" => $detail['design'],"quantity" => $detail['quantity'],"total" => $detail['total']));
+        }
+        
+        
+        
+        
         $details = array();
         foreach($sale as $detail){
         array_push( $details, array( "barcode" => $detail['barcode'],"product" => $detail['product'],"size" => $detail['size'],"design" => $detail['design'],"quantity" => $detail['quantity'],"total" => $detail['total']));
@@ -154,20 +166,12 @@ class SaleController {
     }
     public function getSaleByStatus($status){
         $sale = SaleModel::getSalesByStatus($status);
-        if(!$sale){
-            echo $this->response->error203("No existen ventas para $status");
-            die();
-        }
-        //Data en comun
-        $name = $sale[0]['nameStatus'];
         //Data de cada venta en ese estado
         $sales = array();
         foreach($sale as $salesInState){
-        array_push( $sales, array( "idSale" => $salesInState['idSale'],"docEmployee" => $salesInState['docEmployee'],"employeeName" => $salesInState['employeeName'],"lastUpdate" => $salesInState['lastUpdate'],"lastComment" => $salesInState['lastComment']));
+        array_push( $sales, array( "idSale" => $salesInState['idSale'],"nameStatus" => $salesInState['nameStatus'],"totalSale" => $salesInState['totalSale'],"employeeMail" => $salesInState['employeeMail'],"lastUpdate" => $salesInState['lastUpdate']));
         }
-        $totalSales = (count($sales));
-        $response = array("nameStatus" => $name,"totalSales" => $totalSales, "sales" => $sales);
-        echo $this->response->successfully("Ventas en estado $status:", $response);  
+        echo $this->response->successfully("Ventas en estado $status:", $sales);  
     }
     public function getSalesForUser($email){
         $mailExist = UserModel::validEmailForSale($email);

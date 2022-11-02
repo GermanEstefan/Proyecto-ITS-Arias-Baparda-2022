@@ -51,7 +51,7 @@ class StatusController {
     //consultas
     public function getAllStatus(){
         $state = StatusModel::getAllStatus();
-        echo $this->response->successfully("Estados obtenidos:$state");
+        echo $this->response->successfully("Estados obtenidos:",$state);
     }
 
     public function getStatusByName($name){

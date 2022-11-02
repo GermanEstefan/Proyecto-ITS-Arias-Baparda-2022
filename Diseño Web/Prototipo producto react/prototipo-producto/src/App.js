@@ -16,7 +16,7 @@ import ContainerBase from "./components/admin/ContainerBase";
 import UserManagment from "./pages/admin/UserManagment";
 import ListProducts from "./pages/admin/ListProducts";
 import CreateProducts from "./pages/admin/CreateProducts";
-import ListShipments from "./pages/admin/ListShipments";
+import ListShipments from "./pages/admin/ManageSales";
 import ShoppingCartPage from "./pages/store/ShoppingCartPage";
 import Categorys from "./pages/admin/Categorys";
 import Sizes from "./pages/admin/Sizes";
@@ -36,6 +36,8 @@ import DetailBuys from "./pages/admin/DetailsBuy";
 import UserEdit from "./pages/admin/UserEdit";
 import SearchResultsPage from "./pages/store/SearchResultsPage";
 import BuyForm from "./pages/store/BuyForm";
+
+import ManageSales from "./pages/admin/ManageSales";
 
 export const userStatusContext = createContext({});
 export const cartContext = createContext([]);
@@ -97,7 +99,7 @@ const App = () => {
           <Route path="/admin/products/buy-details/:idBuy" element={<DetailBuys />} />
           <Route path="/admin/shipments/list" element={<ListShipments />} />
           <Route path="/admin/products/list" element={<ListProducts />} />
-          <Route path="/admin/shipments/list" element={<ListShipments />} />
+          <Route path="/admin/sales/manage" element={<ManageSales />} />
         </Routes>
       </cartContext.Provider>
     </userStatusContext.Provider>
