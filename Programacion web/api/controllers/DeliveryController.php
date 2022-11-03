@@ -30,6 +30,11 @@ class DeliveryController {
             echo $this->response->error203("PERMISO DENEGADO");
             die();
         }
+        if($employeeRole != 'JEFE' ||$employeeRole !='VENDEDOR'){
+            http_response_code(401);
+            echo $this->response->error401("Rol no valido para relizar esta accion");
+            die();
+        }
 
         $bodyIsValid = $this->validateBodyOfDelivery($deliveryData);
         if(!$bodyIsValid){
@@ -92,6 +97,15 @@ class DeliveryController {
             echo $this->response->error203("PERMISO DENEGADO");
             die();
         }
+        if($employeeRole != 'JEFE' ||$employeeRole !='VENDEDOR'){
+            http_response_code(401);
+            echo $this->response->error401("Rol no valido para relizar esta accion");
+            die();
+        }
+        if(!$employeeRole){
+            echo $this->response->error203("PERMISO DENEGADO");
+            die();
+        }
 
         $bodyIsValid = $this->validateBodyOfDelivery($deliveryData);
         if(!$bodyIsValid) {
@@ -125,6 +139,15 @@ class DeliveryController {
     //ELIMINAR
     public function deleteDelivery($idDelivery){
         $employeeRole = $this->jwt->verifyTokenAndValidateEmployeeUser();
+        if(!$employeeRole){
+            echo $this->response->error203("PERMISO DENEGADO");
+            die();
+        }
+        if($employeeRole != 'JEFE' ||$employeeRole !='VENDEDOR'){
+            http_response_code(401);
+            echo $this->response->error401("Rol no valido para relizar esta accion");
+            die();
+        }
         if(!$employeeRole){
             echo $this->response->error203("PERMISO DENEGADO");
             die();
