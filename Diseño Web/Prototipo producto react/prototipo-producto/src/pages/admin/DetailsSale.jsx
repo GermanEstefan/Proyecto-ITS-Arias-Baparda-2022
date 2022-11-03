@@ -33,15 +33,17 @@ const DetailsSales = () => {
         console.log(resp)
     }
 
-    const handleChangeState = async (e) => {
+    const handleChangeState = async (e, newStateName) => {
         e.preventDefault();
         const newState = e.target[0].value;
+        const {name} = states.find( state => state.id_status === newState);
         const bodyOfRequest = {
-            state: newState,
+            status: newState,
             employeeDoc: ci
         }
         const resp = await fetchApi(`sales.php?actualizeSale=${e}`, 'PATCH', bodyOfRequest);
         console.log(resp)
+        console.log(bodyOfRequest)
         if (resp.status === 'error') {
             setSaleDetail({ ...saleDetail, statusSale: newState })
             return Swal.fire({
@@ -51,7 +53,7 @@ const DetailsSales = () => {
                 showConfirmButton: false,
             });
         }
-        setSaleDetail({ ...saleDetail, statusSale: newState })
+        setSaleDetail({ ...saleDetail, statusSale: name })
         return Swal.fire({
             icon: "success",
             text: "Estado de venta cambiado con exito",
