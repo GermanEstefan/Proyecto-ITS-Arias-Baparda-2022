@@ -38,22 +38,17 @@ const ProductPage = () => {
   }, [product, quantitySelected]);
 
   const handleAddToCart = () => {
+    
     if (!isAddedToCart) {
       setCart([
         ...cart,
         { barcode: product.barcode, quantity: quantitySelected, price: product.price },
       ]);
+      // navigate('/shoppingCart')
     }
 
     setIsAddedToCart(true);
   };
-  const handleDeleteItemFromCart = () => {
-    const newCart = cart;
-    newCart.pop();
-    setCart(newCart);
-    setIsAddedToCart(false);
-  };
-
   const getProductById = async () => {
     const resp = await fetchApi(`products.php?modelsOfProduct=${id}`, "GET");
     setProduct(resp.result.data.models[0] ? resp.result.data.models[0] : {});
@@ -162,15 +157,16 @@ const ProductPage = () => {
                   >
                     Agregar al carrito
                   </button>
-                  {isAddedToCart && (
-                    <button className="addBtn" onClick={handleDeleteItemFromCart}>
-                      Cancelar
-                    </button>
-                  )}
+                  
                 </div>
               </div>
               {isAddedToCart && <p>Este producto ya está en tu carrito</p>}
-              {!userData.auth && <p>Registrate e ingresa para comenzar a comprar</p>}
+              {!userData.auth && (
+                <p>
+                  <a href="/register">Registrate</a> o <a href="/login">ingresa</a> para comenzar a
+                  comprar
+                </p>
+              )}
               {!isEnoughStock && <p>Maximo disponible: {product.stock}</p>}
             </div>
           </div>

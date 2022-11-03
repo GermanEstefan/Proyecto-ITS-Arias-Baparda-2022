@@ -18,15 +18,16 @@ const CartItem = ({
   updateProductQuantity,
   handleDeleteItemFromCart,
   stock,
+  category,
+  id
 }) => {
-  const [productTotalPrice, setProductTotalPrice] = useState(price);
+  const [productTotalPrice, setProductTotalPrice] = useState(parseInt(price) * parseInt(quantity));
   const handleSetPrice = (e) => {
-    
-    if (parseInt(e.target.value) > 0 && e.target.value != '' && parseInt(e.target.value) <= stock) {
+    if (parseInt(e.target.value) > 0 && e.target.value != "" && parseInt(e.target.value) <= stock) {
       const thisPrice = price * parseInt(e.target.value);
       setProductTotalPrice(thisPrice);
     }
-    if(e.target.value == ''){
+    if (e.target.value == "") {
       setProductTotalPrice(0);
     }
   };
@@ -42,7 +43,7 @@ const CartItem = ({
 
         <div className="cartItem__text">
           <div>
-            <h3>{name}</h3>
+            <h3><a href={`/category/${category}/${id}`}>{name}</a></h3>
             <span>
               Talle: {size}, Color: {design}
             </span>

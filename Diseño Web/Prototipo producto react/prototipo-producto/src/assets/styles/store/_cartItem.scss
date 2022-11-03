@@ -29,6 +29,15 @@
         width: 100%;
         justify-content: space-between;
         align-items: center;
+        h3 {
+          a {
+            transition: 0.3s;
+            &:hover {
+              text-decoration: underline;
+              transition: 0.3s;
+            }
+          }
+        }
         @media screen and (max-width: 600px) {
           justify-content: space-around;
         }
@@ -44,10 +53,17 @@
           border-radius: 5px;
           background-color: $orange;
           color: white;
-        }
-        button:hover {
-          background-color: $dark-orange;
-          transition: 0.3s;
+          &:hover {
+            background-color: $dark-orange;
+            transition: 0.3s;
+          }
+          &:disabled {
+            background-color: $gray;
+            color: $dark_gray;
+          }
+          &:disabled:hover {
+            cursor: auto;
+          }
         }
         .total {
           font-weight: bold;

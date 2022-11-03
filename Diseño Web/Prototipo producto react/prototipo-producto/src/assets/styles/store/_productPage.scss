@@ -49,11 +49,19 @@
         display: flex;
         flex-direction: column;
 
+        p {
+          a {
+            color: $orange;
+            text-decoration: underline;
+            font-weight:bold;
+          }
+        }
+
         .buttonsFlexContainer {
           display: flex;
           justify-content: space-between;
           @media screen and (max-width: 800px) {
-          justify-content: space-around;
+            justify-content: space-around;
           }
           @media screen and (max-width: 600px) {
             flex-direction: column;

@@ -12,7 +12,7 @@ import ProductCard from "../../components/store/ProductCard";
 const CategoryPage = () => {
   const { category } = useParams();
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage, setItemsPerPage] = useState(3);
+  const [itemsPerPage] = useState(3);
   const [productList, setProductList] = useState([]);
   useEffect(() => {
     window.scroll(0, 0);

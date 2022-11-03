@@ -20,9 +20,7 @@ const BuyForm = () => {
   const navigate = useNavigate();
   const { userData } = useContext(userStatusContext);
   const [isAddressDisable, setIsAddressDisable] = useState(true);
-  const [storeHours, setStoreHours] = useState([]);
   const [deliveryHours, setDeliveryHours] = useState([]);
-  const [isShipping, setIsShipping] = useState(true);
   const [values, setValues] = useState({
     email: userData.email,
     address: userData.address,
@@ -30,7 +28,6 @@ const BuyForm = () => {
     paymentMenthod: null,
   });
   useEffect(() => {
-    getStoreHours();
     getDeliveryHours();
     window.scroll(0, 0);
   }, []);
@@ -57,12 +54,10 @@ const BuyForm = () => {
     if (value === "Dirección actual") {
       setAddress(userData.address);
       setIsAddressDisable(true);
-      setIsShipping(true);
     }
     if (value === "Dirección alternativa") {
       setIsAddressDisable(false);
       setAddress("");
-      setIsShipping(true);
     }
   };
 
@@ -103,15 +98,6 @@ const BuyForm = () => {
     }
   };
 
-  const getStoreHours = async () => {
-    const resp = await fetchApi("Deliverys.php?local", "GET");
-    setStoreHours(
-      resp.result.data.map((hourFromBack) => ({
-        value: hourFromBack.id_local,
-        label: hourFromBack.name,
-      }))
-    );
-  };
   const getDeliveryHours = async () => {
     const resp = await fetchApi("Deliverys.php?delivery", "GET");
     setDeliveryHours(
@@ -155,13 +141,13 @@ const BuyForm = () => {
               disabled={isAddressDisable}
             />
           </div>
-          <span className="mt-5">{isShipping ? "Horarios de envío" : "Horarios del local"}</span>
+          <span className="mt-5">{"Horarios de envío"}</span>
           <Select
             name="deliveryTime"
             id="deliveryTime"
             className="select"
             onChange={(e) => setDeliveryTime(e.value)}
-            options={isShipping ? deliveryHours : storeHours}
+            options={deliveryHours}
             placeholder={"Horario"}
           />
           <span className="mt-5">{"Metodo de pago"}</span>
@@ -187,6 +173,7 @@ const BuyForm = () => {
           >
             Confirmar
           </button>
+          <a href="/shoppingCart">Volver al carrito</a>
         </form>
       </div>
     </ContainerBase>

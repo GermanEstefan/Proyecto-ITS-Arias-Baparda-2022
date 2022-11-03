@@ -39,6 +39,7 @@ const ShoppingCartPage = () => {
 
     setProductsList(productsData);
     setTotalPrice();
+    console.log(productsList);
   };
 
   const setTotalPrice = () => {
@@ -51,6 +52,7 @@ const ShoppingCartPage = () => {
   };
 
   const updateProductQuantity = (e, barcode, stock) => {
+    console.log(productsList);
     if (e.target.value == "" || parseInt(e.target.value) <= stock) {
       const cartWithNewQuantity = productsList.map((product) => {
         if (product.barcode === barcode) {
@@ -98,6 +100,8 @@ const ShoppingCartPage = () => {
               setProductsList={setProductsList}
               updateProductQuantity={updateProductQuantity}
               handleDeleteItemFromCart={handleDeleteItemFromCart}
+              category={product.category}
+              id={product.id_product}
             />
           ))}
           {productsList.length === 0 && (
