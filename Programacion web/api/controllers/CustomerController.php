@@ -74,7 +74,11 @@ class CustomerController
 
         $old = $userData['oldPassword'];
         $new = $userData['newPassword'];
-        if (strlen($old)<5 ||strlen($old)<5 ){
+        if (strlen($old)<5 ){
+            echo $this->response->error203("La contraseña debe tener 5 caracteres minimo");
+            die();
+        }
+        if (strlen($new)<5 ){
             echo $this->response->error203("La contraseña debe tener 5 caracteres minimo");
             die();
         }
