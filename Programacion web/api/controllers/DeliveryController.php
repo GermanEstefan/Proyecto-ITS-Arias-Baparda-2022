@@ -16,11 +16,10 @@ class DeliveryController {
         $this->jwt = new Token();
     }
 
-    private function validateBodyOfDelivery($deliveryData){
-        if( !isset($deliveryData['name']) 
+    private function validateBodyOfDelivery($deliveryData) {
+        if ( !isset($deliveryData['name']) 
         ||  !isset($deliveryData['description']))
         return false;
-        //aca tenemos que validar mas cosas como que tenga un largo especifico (se pueden enviar nombre de ctegoria con valor " ")
         return $deliveryData;
     }
     //ALTA
@@ -129,38 +128,38 @@ class DeliveryController {
             die();
         }
         
-        $result = DeliveryModel::updateDelivery($idDelivery,$nameDelivery,$descriptionDelivery);
-        if(!$result){
+        $result = DeliveryModel::updateDelivery($idDelivery , $nameDelivery , $descriptionDelivery);
+        if (!$result) {
             echo $this->response->error500();
             die();
         }
         echo $this->response->successfully("Horario de entrega actualizado con exito");
     }
     //ELIMINAR
-    public function deleteDelivery($idDelivery){
+    public function deleteDelivery($idDelivery) {
         $employeeRole = $this->jwt->verifyTokenAndValidateEmployeeUser();
-        if(!$employeeRole){
+        if (!$employeeRole) { 
             echo $this->response->error203("PERMISO DENEGADO");
             die();
         }
-        if($employeeRole != 'JEFE' ||$employeeRole !='VENDEDOR'){
+        if ($employeeRole != 'JEFE' ||$employeeRole !='VENDEDOR') {
             http_response_code(401);
             echo $this->response->error401("Rol no valido para relizar esta accion");
             die();
         }
-        if(!$employeeRole){
+        if (!$employeeRole) {
             echo $this->response->error203("PERMISO DENEGADO");
             die();
         }
 
         $existDelivery = DeliveryModel::getDeliveryById($idDelivery);
-        if (!$existDelivery){
+        if (!$existDelivery) {
             echo $this->response->error203('Horario indicado no es correcto');
             die();
         }
         
         $result = DeliveryModel::deleteDelivery($idDelivery);
-        if(!$result){
+        if (!$result) {
             echo $this->response->error500();
             die();
         }
