@@ -41,7 +41,7 @@ const DetailsSales = () => {
             status: newState,
             employeeDoc: ci
         }
-        const resp = await fetchApi(`sales.php?actualizeSale=${e}`, 'PATCH', bodyOfRequest);
+        const resp = await fetchApi(`sales.php?actualizeSale=${idSale}`, 'PATCH', bodyOfRequest);
         console.log(resp)
         console.log(bodyOfRequest)
         if (resp.status === 'error') {
@@ -133,6 +133,7 @@ const DetailsSales = () => {
                                 disabled={statusSale === 'CANCELADA' ? true : false}
                             >Cambiar estado</button>
                         </form>
+                        {(statusSale === 'CANCELADA') && <strong className="bija">No se puede cambiar de estado una venta que fue cancelada</strong> }
                         <hr />
                         <button>Ver historial de venta</button>
 

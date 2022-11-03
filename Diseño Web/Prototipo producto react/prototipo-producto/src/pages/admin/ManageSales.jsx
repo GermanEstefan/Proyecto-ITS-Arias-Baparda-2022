@@ -48,7 +48,7 @@ const ManageSales = () => {
                         {
                             !sales
                                 ? 'No hay ventas registradas por el momento'
-                                : (sales.length === 1) ? '1 venta registrada' : `${sales.length + 1} ventas registradas`
+                                : (sales.length === 1) ? '1 venta registrada' : `${sales.length} ventas registradas`
                         }
                     </strong>
 

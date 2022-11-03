@@ -1987,6 +1987,11 @@
   border-bottom: none;
 }
 
+.bija {
+  color: rgb(216, 11, 11);
+  font-size: 1.1rem !important;
+}
+
 .manage-sales .manage-sales_filters {
   display: flex;
   align-items: center;
@@ -2053,9 +2058,15 @@
 }
 .sale-detail .sale-detail_controls {
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 .sale-detail .sale-detail_controls strong {
   font-size: 1.2rem;
+}
+.sale-detail .sale-detail_controls hr {
+  width: 100%;
 }
 .sale-detail .sale-detail_controls > form {
   margin: 30px 0;
