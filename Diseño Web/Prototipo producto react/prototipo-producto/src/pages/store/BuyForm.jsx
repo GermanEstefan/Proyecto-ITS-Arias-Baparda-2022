@@ -8,6 +8,7 @@ import Purchase from "../../assets/img/purchase.jpg";
 import Select from "react-select";
 import { cartContext, userStatusContext } from "../../App";
 import ContainerBase from "../../components/store/ContainerBase";
+import { useNavigate } from "react-router-dom";
 
 const paymentMethods = [
   { value: 0, label: "Efectivo" },
@@ -16,8 +17,9 @@ const paymentMethods = [
 
 const BuyForm = () => {
   const { cart, setCart } = useContext(cartContext);
+  const navigate = useNavigate();
   const { userData } = useContext(userStatusContext);
-  const [isAddressDisable, setIsAddressDisable] = useState(false);
+  const [isAddressDisable, setIsAddressDisable] = useState(true);
   const [storeHours, setStoreHours] = useState([]);
   const [deliveryHours, setDeliveryHours] = useState([]);
   const [isShipping, setIsShipping] = useState(true);
@@ -82,11 +84,13 @@ const BuyForm = () => {
     if (resp.status === "successfully") {
       console.log("successfully");
       setCart([]);
+      navigate("/");
       return Swal.fire({
         icon: "success",
         text: "Compra concretada!",
         timer: 1500,
         showConfirmButton: true,
+        confirmButtonColor: "#f5990ff3",
       });
     } else {
       return Swal.fire({
@@ -94,6 +98,7 @@ const BuyForm = () => {
         text: "Error al concretar la compra",
         timer: 1500,
         showConfirmButton: true,
+        confirmButtonColor: "#f5990ff3",
       });
     }
   };
@@ -116,6 +121,7 @@ const BuyForm = () => {
       }))
     );
   };
+  console.log(!userData.auth);
   return (
     <ContainerBase>
       <div className="form-container">
@@ -123,10 +129,7 @@ const BuyForm = () => {
         <form>
           <div className="radioSection">
             <strong>Dirección de envío</strong>
-            <div
-              className="radioGroup"
-              onChange={(e) => handleRadioChange(e.target.value)}
-            >
+            <div className="radioGroup" onChange={(e) => handleRadioChange(e.target.value)}>
               <label>
                 <input
                   type="radio"
@@ -138,12 +141,7 @@ const BuyForm = () => {
                 Dirección actual
               </label>
               <label>
-                <input
-                  type="radio"
-                  value={"Dirección alternativa"}
-                  name="addressRadio"
-                  id=""
-                />{" "}
+                <input type="radio" value={"Dirección alternativa"} name="addressRadio" id="" />{" "}
                 Dirección alternativa
               </label>
             </div>
@@ -157,9 +155,7 @@ const BuyForm = () => {
               disabled={isAddressDisable}
             />
           </div>
-          <span className="mt-5">
-            {isShipping ? "Horarios de envío" : "Horarios del local"}
-          </span>
+          <span className="mt-5">{isShipping ? "Horarios de envío" : "Horarios del local"}</span>
           <Select
             name="deliveryTime"
             id="deliveryTime"

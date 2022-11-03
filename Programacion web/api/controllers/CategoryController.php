@@ -26,11 +26,12 @@ class CategoryController {
     }
     //ALTA
     public function saveCategory($categoryData){
-        /*
-            En este metodo no precisamos el ID del usuario, lo unico que validamos es que tenga un token y sea valido. 
-            Si no tiene token, no pasa de la funcion para abajo por que el metodo mismo le niega el acceso.
-        */
-        $this->jwt->verifyTokenAndGetIdUserFromRequest(); 
+        //Verificamos el token y si es valido, obtenemos el id de usuario.
+        $employeeRole = $this->jwt->verifyTokenAndValidateEmployeeUser();
+        if(!$employeeRole){
+            echo $this->response->error203("PERMISO DENEGADO");
+            die();
+        }
         $bodyIsValid = $this->validateBodyOfCategory($categoryData);
         if(!$bodyIsValid){
              echo $this->response->error400('Error en los datos enviados');
@@ -55,6 +56,7 @@ class CategoryController {
         echo $this->response->successfully("Categoria dada de alta con exito");
     }
     //CONSULTAS
+    
     public function getCategorys(){
         $categorys = CategoryModel::getAllCategorys();
         echo $this->response->successfully('Categorias obtenidas:',$categorys);
@@ -77,8 +79,14 @@ class CategoryController {
         echo $this->response->successfully("Categoria obtenida:", $category); 
     }
     //MODIFICACIONES
+    
     public function updateCategory($idCategory,$categoryData){
-        $this->jwt->verifyTokenAndGetIdUserFromRequest(); 
+        $employeeRole = $this->jwt->verifyTokenAndValidateEmployeeUser();
+        if(!$employeeRole){
+            echo $this->response->error203("PERMISO DENEGADO");
+            die();
+        }
+ 
         $bodyIsValid = $this->validateBodyOfCategory($categoryData);
         if(!$bodyIsValid) {
         echo $this->response->error400('Error en los datos enviados');
@@ -116,8 +124,11 @@ class CategoryController {
     }
     //ELIMINAR
     public function deleteCategory($idCategory){
-        $this->jwt->verifyTokenAndGetIdUserFromRequest();
-        
+        $employeeRole = $this->jwt->verifyTokenAndValidateEmployeeUser();
+        if(!$employeeRole){
+            echo $this->response->error203("PERMISO DENEGADO");
+            die();
+        }        
         //Valido que exista la categoria
         $existCategory = CategoryModel::getCategoryById($idCategory);
         if (!$existCategory){

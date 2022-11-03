@@ -10,8 +10,6 @@ import { fetchApi } from "../../API/api";
 import { useContext } from "react";
 import { cartContext } from "../../App";
 
-import BuyForm from "./BuyForm";
-
 const ShoppingCartPage = () => {
   const { cart, setCart } = useContext(cartContext);
 
@@ -52,27 +50,32 @@ const ShoppingCartPage = () => {
     );
   };
 
-  const updateProductQuantity = (e, barcode) => {
-    const cartWithNewQuantity = productsList.map((product) => {
-      if (product.barcode === barcode) {
-        return {
-          ...product,
-          quantity: parseInt(e.target.value),
-        };
-      } else {
-        return product;
-      }
-    });
-    setProductsList(cartWithNewQuantity);
+  const updateProductQuantity = (e, barcode, stock) => {
+    if (e.target.value == "" || parseInt(e.target.value) <= stock) {
+      const cartWithNewQuantity = productsList.map((product) => {
+        if (product.barcode === barcode) {
+          return {
+            ...product,
+            quantity: e.target.value != "" && parseInt(e.target.value),
+          };
+        } else {
+          return product;
+        }
+      });
 
-    setCart(cartWithNewQuantity);
-    setTotalPrice();
+      setProductsList(cartWithNewQuantity);
+
+      setCart(cartWithNewQuantity);
+      setTotalPrice();
+    } else {
+      console.log("cantidad mal");
+    }
   };
   const handleDeleteItemFromCart = (barcode) => {
     setCart(cart.filter((product) => product.barcode !== barcode));
     setProductsList(cart.filter((product) => product.barcode !== barcode));
+    window.location.reload(false);
   };
-  console.log(productsList.length === 0);
 
   return (
     <ContainerBase>
@@ -91,6 +94,7 @@ const ShoppingCartPage = () => {
               setTotalPrice={setTotalPrice}
               size={product.size}
               design={product.design}
+              stock={product.stock}
               setProductsList={setProductsList}
               updateProductQuantity={updateProductQuantity}
               handleDeleteItemFromCart={handleDeleteItemFromCart}

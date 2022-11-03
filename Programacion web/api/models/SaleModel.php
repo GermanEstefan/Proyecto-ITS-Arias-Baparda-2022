@@ -71,6 +71,26 @@
             AND d.id_design = p.product_design";
             return $conecction->getData($query)->fetch_all(MYSQLI_ASSOC);
         }
+        public static function saleIsCanceled($idSale){
+            $conecction = new Connection();
+            $query = "SELECT
+            s.id_sale as idSale,
+            st.name AS statusActual,
+            sd.product_sale as barcode,
+            sd.quantity
+            FROM sale s, customer c,report r, status st, delivery_time dt, sale_detail sd, product p, design d, size sz, user u
+            WHERE s.id_sale = $idSale
+            AND c.customer_user = s.user_purchase
+            AND u.id_user = s.user_purchase
+            AND s.id_sale = r.sale_report
+            AND r.status_report = st.id_status
+            AND s.sale_delivery = dt.id_delivery
+            AND sd.product_sale = p.barcode
+            AND sd.sale_id = s.id_sale
+            AND sz.id_size = p.product_size
+            AND d.id_design = p.product_design";
+            return $conecction->getData($query)->fetch_all(MYSQLI_ASSOC);
+        }
         public static function getSalesByStatus($status){
             $conecction = new Connection();
             $query = "SELECT 

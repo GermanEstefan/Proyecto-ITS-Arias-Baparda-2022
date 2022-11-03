@@ -15,6 +15,7 @@ const UpdatePasswordForm = () => {
     newPassword: "",
     newPassword2: "",
   });
+  const [doPasswordsMatch, setDoPasswordsMatch] = useState(true);
 
   const [errorStatusForm, setErrorStatusForm] = useState({
     oldPassword: false,
@@ -28,8 +29,23 @@ const UpdatePasswordForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (Object.values(errorStatusForm).includes(true)) return;
+    if (values.newPassword !== values.newPassword2)
+      return Swal.fire({
+        icon: "error",
+        text: "Las contraseñas no coinciden",
+        showConfirmButton: true,
+      });
+    if (values.newPassword == values.oldPassword)
+      return Swal.fire({
+        icon: "error",
+        text: "La contraseña nueva es igual a la antigua",
+        showConfirmButton: true,
+      });
     try {
-      const resp = await fetchApi("auth-customers.php?url=update", "PUT", values);
+      const resp = await fetchApi("auth-customers.php?url=updatePassword", "PUT", {
+        oldPassword: values.oldPassword,
+        newPassword: values.newPassword,
+      });
       if (resp.status === "successfully") {
         Swal.fire({
           icon: "success",

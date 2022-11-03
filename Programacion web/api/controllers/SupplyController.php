@@ -30,7 +30,16 @@ class SupplyController {
     }
     //ALTA
     public function saveSupply($supplyData){
-        $this->jwt->verifyTokenAndGetIdUserFromRequest(); 
+        $employeeRole = $this->jwt->verifyTokenAndValidateEmployeeUser();
+        if(!$employeeRole){
+            echo $this->response->error203("PERMISO DENEGADO");
+            die();
+        }
+        if($employeeRole != 'JEFE' ||$employeeRole !='COMPRADOR'){
+            http_response_code(401);
+            echo $this->response->error401("Rol no valido para relizar esta accion");
+            die();
+        }
         $bodyIsValid = $this->validateBodyOfSupply($supplyData);
         if(!$bodyIsValid){
             echo $this->response->error400('La informacion recibida es incorrecta');
@@ -64,6 +73,16 @@ class SupplyController {
 
     //CONSULTAS
     public function getSupplyId($idSupply){
+        $employeeRole = $this->jwt->verifyTokenAndValidateEmployeeUser();
+        if(!$employeeRole){
+            echo $this->response->error203("PERMISO DENEGADO");
+            die();
+        }
+        if($employeeRole != 'JEFE' ||$employeeRole !='COMPRADOR'){
+            http_response_code(401);
+            echo $this->response->error401("Rol no valido para relizar esta accion");
+            die();
+        }
         $supply = SupplyModel::getSupplyById($idSupply);
         if(!$supply){
             echo $this->response->error203("No se encuentra compra para el id $idSupply");
@@ -84,6 +103,16 @@ class SupplyController {
         echo $this->response->successfully("Compra encontrada:", $response);  
     }
     public function getDetailForSupply($idSupply){
+        $employeeRole = $this->jwt->verifyTokenAndValidateEmployeeUser();
+        if(!$employeeRole){
+            echo $this->response->error203("PERMISO DENEGADO");
+            die();
+        }
+        if($employeeRole != 'JEFE' ||$employeeRole !='COMPRADOR'){
+            http_response_code(401);
+            echo $this->response->error401("Rol no valido para relizar esta accion");
+            die();
+        }
         $supply = SupplyModel::getSupplyDetailById($idSupply);
         if(!$supply){
             echo $this->response->error203("No se encuentra compra con id $idSupply");
@@ -105,6 +134,16 @@ class SupplyController {
         echo $this->response->successfully("Detalle de compras para :$idSupply", $response);  
     }
     public function getAllSupplysForDay($day){
+        $employeeRole = $this->jwt->verifyTokenAndValidateEmployeeUser();
+        if(!$employeeRole){
+            echo $this->response->error203("PERMISO DENEGADO");
+            die();
+        }
+        if($employeeRole != 'JEFE' ||$employeeRole !='COMPRADOR'){
+            http_response_code(401);
+            echo $this->response->error401("Rol no valido para relizar esta accion");
+            die();
+        }
         $supply = SupplyModel::getAllSupplysByDay($day);
         if(!$supply){
             echo $this->response->error203("No se encuentran compras para la fecha $day");
@@ -124,6 +163,16 @@ class SupplyController {
      
     }
     public function getAllSupplys(){
+        $employeeRole = $this->jwt->verifyTokenAndValidateEmployeeUser();
+        if(!$employeeRole){
+            echo $this->response->error203("PERMISO DENEGADO");
+            die();
+        }
+        if($employeeRole != 'JEFE' ||$employeeRole !='COMPRADOR'){
+            http_response_code(401);
+            echo $this->response->error401("Rol no valido para relizar esta accion");
+            die();
+        }
         $supply = SupplyModel::getAllSupplys();
         
         $totalSpent = 0;

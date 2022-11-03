@@ -29,8 +29,7 @@ class SaleController {
     }
     private function validateBodyOfReport($saleData){
         if(!isset($saleData['employeeDoc'])
-        ||  !isset($saleData['status'])
-        ||  !isset($saleData['comment']))
+        ||  !isset($saleData['status']))
         return false;
         return $saleData;
     }
@@ -280,7 +279,16 @@ class SaleController {
     
     //ACTUALIZAR
     public function updateReport($idSale,$saleData){
-        $this->jwt->verifyTokenAndGetIdUserFromRequest(); 
+        $employeeRole = $this->jwt->verifyTokenAndValidateEmployeeUser();
+        if(!$employeeRole){
+            echo $this->response->error203("PERMISO DENEGADO");
+            die();
+        }
+        if($employeeRole != 'JEFE' ||$employeeRole !='VENDEDOR'){
+            http_response_code(401);
+            echo $this->response->error401("Rol no valido para relizar esta accion");
+            die();
+        } 
         $bodyIsValid = $this->validateBodyOfReport($saleData);
         if(!$bodyIsValid){
              echo $this->response->error400('No se puede actualizar - Revise informacion');
@@ -288,7 +296,7 @@ class SaleController {
         }
         $status = $saleData['status'];
         $employeeDoc = $saleData['employeeDoc'];
-        $comment = $saleData['comment'];
+        $comment = 'Comentario';
 
         $saleExist = SaleModel::getSaleById($idSale);
         if(!$saleExist){
@@ -305,6 +313,9 @@ class SaleController {
             echo $this->response->error203("No existe el estado $status");
             die();
         }
+        if($status == 'CANCELADA'){
+            $getProducts = SaleModel::saleIsCanceled($idSale);
+        }
         $result = SaleModel::updateReportOfSale($idSale,$status,$employeeDoc,$comment);
         if(!$result){
             echo $this->response->error500();
@@ -312,13 +323,7 @@ class SaleController {
         }
         echo $this->response->successfully("Reporte de venta $idSale actualizado con exito");
     }
-        
-        
-        
-        
-        
-        
-    //ELIMINAR
+
 }
 
 ?>

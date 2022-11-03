@@ -37,6 +37,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         case 'update':
             $customerController->updateCustomer($userData);
             die();
+        case 'updatePassword':
+                $customerController->updatePasswordOfCustomer($userData);
+                die();    
         default:
             http_response_code(400);
             echo $response->error400("Parametro URL invalido");

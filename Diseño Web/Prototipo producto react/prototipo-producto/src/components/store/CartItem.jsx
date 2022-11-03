@@ -17,24 +17,19 @@ const CartItem = ({
   design,
   updateProductQuantity,
   handleDeleteItemFromCart,
+  stock,
 }) => {
-  // const [product, setProduct] = useState({});
   const [productTotalPrice, setProductTotalPrice] = useState(price);
-
-  // useEffect(() => {
-  //   getProductByBarcode();
-  // }, []);
-
-  // const handleDeleteItemFromCart = () => {
-  //   setProductsList(cart.filter((product) => product.barcode !== barcode));
-  //   setCart(cart.filter((product) => product.barcode !== barcode));
-
-  // };
-
-  // const getProductByBarcode = async () => {
-  //   const resp = await fetchApi(`products.php?barcode=${barcode}`, "GET");
-  //   setProduct(resp.result.data);
-  // };
+  const handleSetPrice = (e) => {
+    
+    if (parseInt(e.target.value) > 0 && e.target.value != '' && parseInt(e.target.value) <= stock) {
+      const thisPrice = price * parseInt(e.target.value);
+      setProductTotalPrice(thisPrice);
+    }
+    if(e.target.value == ''){
+      setProductTotalPrice(0);
+    }
+  };
   return (
     <Animated
       animationIn="fadeInLeft"
@@ -58,14 +53,20 @@ const CartItem = ({
           <input
             className="CartItem__actionsQuantity"
             defaultValue={quantity}
+            value={quantity}
             type="number"
+            onkeydown={false}
             onChange={(e) => {
-              updateProductQuantity(e, barcode);
-              setProductTotalPrice(price * parseInt(e.target.value));
+              updateProductQuantity(e, barcode, stock);
+              handleSetPrice(e);
             }}
             min={1}
+            max={stock}
           />
-          <button className="CartItem__actionsQuantity" onClick={() => handleDeleteItemFromCart(barcode)}>
+          <button
+            className="CartItem__actionsQuantity"
+            onClick={() => handleDeleteItemFromCart(barcode)}
+          >
             <FontAwesomeIcon icon={faTrash} />
           </button>
         </div>

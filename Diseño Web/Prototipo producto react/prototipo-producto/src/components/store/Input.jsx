@@ -30,11 +30,12 @@ const Input = ({ validateFunction, setErrorStatusForm, ...args }) => {
         onFocus={validateInput}
         onBlur={validateInput}
         className="input-wrapper__input"
-        style={
-          errorState.error
-            ? { border: "1px solid red" }
-            : { border: "2px $gray black" }
-        }
+        //No funciona padre
+        // style={
+        //   errorState.error
+        //     ? { border: "1px solid red" }
+        //     : { border: "2px $gray black" }
+        // }
         {...args}
       />
       {errorState.error && (

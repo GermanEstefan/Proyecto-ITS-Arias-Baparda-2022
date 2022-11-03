@@ -54,6 +54,11 @@
             $query = "UPDATE user SET password = '$password' WHERE email = '$email' ";
             return $conecction->setData($query);
         }
+        public static function updatePassword($idUser, $password){
+            $conecction = new Connection();
+            $query = "UPDATE user SET password = '$password' WHERE id_user = $idUser";
+            return $conecction->setData($query);
+        }
 
         public static function disableUser($email){
             $conecction = new Connection();

@@ -25,11 +25,17 @@ class DeliveryController {
     }
     //ALTA
     public function saveDelivery($deliveryData){
-        /*
-            En este metodo no precisamos el ID del usuario, lo unico que validamos es que tenga un token y sea valido. 
-            Si no tiene token, no pasa de la funcion para abajo por que el metodo mismo le niega el acceso.
-        */
-        $this->jwt->verifyTokenAndGetIdUserFromRequest(); 
+        $employeeRole = $this->jwt->verifyTokenAndValidateEmployeeUser();
+        if(!$employeeRole){
+            echo $this->response->error203("PERMISO DENEGADO");
+            die();
+        }
+        if($employeeRole != 'JEFE' ||$employeeRole !='VENDEDOR'){
+            http_response_code(401);
+            echo $this->response->error401("Rol no valido para relizar esta accion");
+            die();
+        }
+
         $bodyIsValid = $this->validateBodyOfDelivery($deliveryData);
         if(!$bodyIsValid){
              echo $this->response->error400('Error en los datos enviados');
@@ -86,7 +92,21 @@ class DeliveryController {
     }
     //ACTUALIZAR
     public function updateDelivery($idDelivery,$deliveryData){
-        $this->jwt->verifyTokenAndGetIdUserFromRequest(); 
+        $employeeRole = $this->jwt->verifyTokenAndValidateEmployeeUser();
+        if(!$employeeRole){
+            echo $this->response->error203("PERMISO DENEGADO");
+            die();
+        }
+        if($employeeRole != 'JEFE' ||$employeeRole !='VENDEDOR'){
+            http_response_code(401);
+            echo $this->response->error401("Rol no valido para relizar esta accion");
+            die();
+        }
+        if(!$employeeRole){
+            echo $this->response->error203("PERMISO DENEGADO");
+            die();
+        }
+
         $bodyIsValid = $this->validateBodyOfDelivery($deliveryData);
         if(!$bodyIsValid) {
         echo $this->response->error400('Error en los datos enviados');
@@ -118,8 +138,21 @@ class DeliveryController {
     }
     //ELIMINAR
     public function deleteDelivery($idDelivery){
-        $this->jwt->verifyTokenAndGetIdUserFromRequest();
-        //Valido que el talle exista
+        $employeeRole = $this->jwt->verifyTokenAndValidateEmployeeUser();
+        if(!$employeeRole){
+            echo $this->response->error203("PERMISO DENEGADO");
+            die();
+        }
+        if($employeeRole != 'JEFE' ||$employeeRole !='VENDEDOR'){
+            http_response_code(401);
+            echo $this->response->error401("Rol no valido para relizar esta accion");
+            die();
+        }
+        if(!$employeeRole){
+            echo $this->response->error203("PERMISO DENEGADO");
+            die();
+        }
+
         $existDelivery = DeliveryModel::getDeliveryById($idDelivery);
         if (!$existDelivery){
             echo $this->response->error203('Horario indicado no es correcto');

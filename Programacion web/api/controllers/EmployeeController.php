@@ -41,14 +41,12 @@ class EmployeeController{
     public function registerEmployee($userData)
     {
         //Verificamos el token y si es valido, obtenemos el id de usuario.
-        $idOfUser = $this->jwt->verifyTokenAndGetIdUserFromRequest();
-        if(!$idOfUser){
-            echo $this->response->error401("no esta autorizado para relizar esta accion");
-            die();    
+        $employeeRole = $this->jwt->verifyTokenAndValidateEmployeeUser();
+        if(!$employeeRole){
+            echo $this->response->error203("PERMISO DENEGADO");
+            die();
         }
-        $employee = EmployeeModel::getRoleOfEmployeeById($idOfUser);        
-        $rolOfEmployee = $employee['employee_role'];
-        if(!($rolOfEmployee == 'JEFE')){
+        if($employeeRole != 'JEFE'){
             http_response_code(401);
             echo $this->response->error401("Rol no valido para relizar esta accion");
             die();
@@ -108,13 +106,6 @@ class EmployeeController{
             die();
         }
 
-        $employeeState = $employeeExistInDatabase['state'];
-        if($employeeState == 0){
-            http_response_code(401);
-            echo $this->response->error401("El empleado con la ci: $ci se encuentra dado de baja");
-            die();
-        }
-
         $employeeRol = $employeeExistInDatabase['employee_role'];
         $employeeId = $employeeExistInDatabase['employee_user'];
         $userInDatabase = UserModel::getUserById($employeeId);
@@ -139,24 +130,30 @@ class EmployeeController{
     }
 
     public function getEmployees(){
-        $idOfUser = $this->jwt->verifyTokenAndGetIdUserFromRequest();
-        $employee = EmployeeModel::getRoleOfEmployeeById($idOfUser);
-        $rolOfEmployee = $employee['employee_role'];
-        if(!($rolOfEmployee == 'JEFE')){
+        $employeeRole = $this->jwt->verifyTokenAndValidateEmployeeUser();
+        if(!$employeeRole){
+            echo $this->response->error203("PERMISO DENEGADO");
+            die();
+        }
+
+        if($employeeRole != 'JEFE'){
             http_response_code(401);
-            echo $this->response->error401("Usted no esta autorizado para relizar esta accion");
+            echo $this->response->error401("Rol no valido para relizar esta accion");
             die();
         }
         $employees = EmployeeModel::getEmployees();
         echo json_encode($employees); 
     }
     public function getInfoByidEmployee($idEmployee){
-        $idOfUser = $this->jwt->verifyTokenAndGetIdUserFromRequest();
-        $employee = EmployeeModel::getRoleOfEmployeeById($idOfUser);
-        $rolOfEmployee = $employee["employee_role"];
-        if(!($rolOfEmployee == 'JEFE')){
+        
+        $employeeRole = $this->jwt->verifyTokenAndValidateEmployeeUser();
+        if(!$employeeRole){
+            echo $this->response->error203("PERMISO DENEGADO");
+            die();
+        }
+        if($employeeRole != 'JEFE'){
             http_response_code(401);
-            echo $this->response->error401("Usted no esta autorizado para relizar esta accion");
+            echo $this->response->error401("Rol no valido para relizar esta accion");
             die();
         }
         $dataEmployee = EmployeeModel::getEmployeeById($idEmployee);
@@ -171,18 +168,17 @@ class EmployeeController{
     //edit
     public function updateEmployee($idEmployee,$userData){
        //Verificamos el token y si es valido, obtenemos el id de usuario.
-       $idOfUser = $this->jwt->verifyTokenAndGetIdUserFromRequest();
-       if(!$idOfUser){
-           echo $this->response->error401("no esta autorizado para relizar esta accion");
-           die();    
-       }
-       $employee = EmployeeModel::getRoleOfEmployeeById($idOfUser);        
-       $rolOfEmployee = $employee['employee_role'];
-       if(!($rolOfEmployee == 'JEFE')){
-           http_response_code(401);
-           echo $this->response->error401("Usted no esta autorizado para relizar esta accion");
+       $employeeRole = $this->jwt->verifyTokenAndValidateEmployeeUser();
+       if(!$employeeRole){
+           echo $this->response->error203("PERMISO DENEGADO");
            die();
        }
+       if($employeeRole != 'JEFE'){
+           http_response_code(401);
+           echo $this->response->error401("Rol no valido para relizar esta accion");
+           die();
+       }
+
         $bodyIsValid = $this->validateBodyOfUpdateEmployee($userData);
         if (!$bodyIsValid) {
             http_response_code(400);
@@ -218,17 +214,15 @@ class EmployeeController{
 
     //edit
     public function activeEmployee($idEmployee){
-        //Verificamos el token y si es valido, obtenemos el id de usuario.
-        $idOfUser = $this->jwt->verifyTokenAndGetIdUserFromRequest();
-        if(!$idOfUser){
-            echo $this->response->error401("no esta autorizado para relizar esta accion");
-            die();    
+       //Verificamos el token y si es valido, obtenemos el id de usuario.
+        $employeeRole = $this->jwt->verifyTokenAndValidateEmployeeUser();
+        if(!$employeeRole){
+            echo $this->response->error203("PERMISO DENEGADO");
+            die();
         }
-        $employee = EmployeeModel::getRoleOfEmployeeById($idOfUser);        
-        $rolOfEmployee = $employee['employee_role'];
-        if(!($rolOfEmployee == 'JEFE')){
+        if($employeeRole != 'JEFE'){
             http_response_code(401);
-            echo $this->response->error401("Usted no esta autorizado para relizar esta accion");
+            echo $this->response->error401("Rol no valido para relizar esta accion");
             die();
         }
  
@@ -242,18 +236,17 @@ class EmployeeController{
     //edit
     public function disableEmployee($idEmployee){
         //Verificamos el token y si es valido, obtenemos el id de usuario.
-        $idOfUser = $this->jwt->verifyTokenAndGetIdUserFromRequest();
-        if(!$idOfUser){
-            echo $this->response->error401("no esta autorizado para relizar esta accion");
-            die();    
-        }
-        $employee = EmployeeModel::getRoleOfEmployeeById($idOfUser);        
-        $rolOfEmployee = $employee['employee_role'];
-        if(!($rolOfEmployee == 'JEFE')){
-            http_response_code(401);
-            echo $this->response->error401("Usted no esta autorizado para relizar esta accion");
-            die();
-        }
+       //Verificamos el token y si es valido, obtenemos el id de usuario.
+       $employeeRole = $this->jwt->verifyTokenAndValidateEmployeeUser();
+       if(!$employeeRole){
+           echo $this->response->error203("PERMISO DENEGADO");
+           die();
+       }
+       if($employeeRole != 'JEFE'){
+           http_response_code(401);
+           echo $this->response->error401("Rol no valido para relizar esta accion");
+           die();
+       }
  
         $disableEmployee = EmployeeModel::disableEmployee($idEmployee);
         if(!$disableEmployee){

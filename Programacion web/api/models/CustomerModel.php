@@ -22,6 +22,11 @@
             $query = "SELECT c.customer_user,c.company_name, c.rut_nr,u.email, u.name,u.surname,u.address,u.phone,u.state from customer c inner join user u on c.customer_user = u.id_user and c.rut_nr = '$nRut'";
             return $conecction->getData($query)->fetch_assoc();
         }
+        public static function getPassOfUser($idUser){
+            $conecction = new Connection();
+            $query = "SELECT u.password AS pass FROM user u WHERE u.id_user = $idUser";
+            return $conecction->getData($query)->fetch_assoc();
+        }
         
         public static function getAllCustomers(){
             $conecction = new Connection();

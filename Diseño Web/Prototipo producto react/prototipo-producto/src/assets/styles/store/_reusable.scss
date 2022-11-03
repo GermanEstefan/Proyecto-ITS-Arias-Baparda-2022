@@ -112,9 +112,11 @@
     }
 
     input[type="text"],
+    input[type="email"],
     input[type="password"],
     textarea {
       display: block;
+      padding: 5px;
       margin: 5px;
     }
 

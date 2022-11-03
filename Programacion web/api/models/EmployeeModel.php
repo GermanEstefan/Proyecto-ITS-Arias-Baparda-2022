@@ -36,24 +36,12 @@
             inner join user u on e.employee_user = u.id_user and e.employee_user != 5000 and e.employee_user = '$id'";
             return $conecction->getData($query)->fetch_assoc();
         }
-        public static function getActiveEmployeeById($id){
+        public static function getRoleEmployeeById($id){
             $conecction = new Connection();
             $query = "SELECT 
-            e.employee_user,
-            e.employee_role,
-            e.ci,
-            e.state,
-            u.email, 
-            u.password, 
-            u.name,
-            u.surname,
-            u.address,
-            u.phone 
-            from 
-            employee e 
-            inner join user u on e.employee_user = u.id_user and e.employee_user != 5000 and 
-            e.state = 1 
-            and e.employee_user = '$id'";
+            e.employee_role
+            FROM employee e
+            WHERE e.employee_user = $id and e.employee_user != 5000 and e.state = 1";
             return $conecction->getData($query)->fetch_assoc();
         }
         public static function getEmployeesByRole($nameRole){
