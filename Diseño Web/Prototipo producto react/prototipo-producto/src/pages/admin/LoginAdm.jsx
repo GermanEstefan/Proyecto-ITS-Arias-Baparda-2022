@@ -33,6 +33,7 @@ const LoginAdm = () => {
                     phone: resp.result.data.phone,
                     address: resp.result.data.address,
                     rol: resp.result.data.rol,
+                    ci : resp.result.data.ci,
                     auth: true
                 });
                 localStorage.setItem("token", resp.result.data.token);
