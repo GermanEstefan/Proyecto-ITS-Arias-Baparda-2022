@@ -11,7 +11,7 @@ import Input from "./Input";
 import { fetchApi } from "../../API/api";
 
 const UpdateAccountForm = () => {
-  const { userData } = useContext(userStatusContext);
+  const { userData, setUserData } = useContext(userStatusContext);
   const [values, handleValuesChange] = useForm({
     name: userData.name,
     surname: userData.surname,
@@ -33,6 +33,13 @@ const UpdateAccountForm = () => {
     try {
       const resp = await fetchApi("auth-customers.php?url=update", "PUT", values);
       if (resp.status === "successfully") {
+        setUserData({
+          ...userData,
+          name: values.name,
+          surname: values.surname,
+          phone: values.phone,
+          address: values.address,
+        });
         Swal.fire({
           icon: "success",
           text: "Datos acutalizados correctamente",
@@ -45,6 +52,7 @@ const UpdateAccountForm = () => {
           text: resp.result.error_msg,
           timer: 3000,
           showConfirmButton: true,
+          confirmButtonColor: "#f5990ff3",
         });
       }
     } catch (error) {

@@ -10,7 +10,7 @@
   height: 10vh;
   background-color: rgba(255, 255, 255, 0.952);
   z-index: 1;
-  padding: 12px 0 2px 0;
+  padding: 8px 0 0 0;
 
   .header-store__logo {
     width: 60vw;
@@ -35,7 +35,7 @@
         font-size: 1.5rem;
       }
       input {
-        padding: 10px 10px 10px 50px;
+        padding: 10px 10px 10px 45px;
         border: 2px solid $orange;
         
         width: 60%;
@@ -50,9 +50,14 @@
   }
 
   .header-store__nav-desktop {
-    // position: absolute;
     right: 20px;
-
+    .userName {
+      font-weight: 800;
+      font-size: larger;
+      width: 300px;
+      text-align: right;
+      margin-right: 15px;
+    }
     ul {
       display: flex;
       align-items: center;

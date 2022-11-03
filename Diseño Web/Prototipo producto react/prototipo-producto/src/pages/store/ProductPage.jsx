@@ -114,20 +114,22 @@ const ProductPage = () => {
               <p>{productDescription}</p>
             </div>
             <div className="productPage__description__buttons">
-              <div className="selectsContainer">
-                <Select
-                  options={getOptions(designsList)}
-                  placeholder={"Diseño..."}
-                  className="select"
-                  onChange={(e) => handleChangeDesign(e.value)}
-                />
-                <Select
-                  options={getOptions(sizesList)}
-                  placeholder="Talle..."
-                  className="select"
-                  onChange={(e) => handleChangeSize(e.value)}
-                />
-              </div>
+              {category !== "PROMOCIONES" && (
+                <div className="selectsContainer">
+                  <Select
+                    options={getOptions(designsList)}
+                    placeholder={"Diseño..."}
+                    className="select"
+                    onChange={(e) => handleChangeDesign(e.value)}
+                  />
+                  <Select
+                    options={getOptions(sizesList)}
+                    placeholder="Talle..."
+                    className="select"
+                    onChange={(e) => handleChangeSize(e.value)}
+                  />
+                </div>
+              )}
               <div className="buttonsFlexContainer">
                 <div className="quantityInputContainer">
                   <span>Cantidad:</span>

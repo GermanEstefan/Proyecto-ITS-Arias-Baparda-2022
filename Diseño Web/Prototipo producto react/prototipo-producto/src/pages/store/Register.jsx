@@ -3,16 +3,14 @@
 import React, { useEffect, useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import Imagen from "../../assets/img/Obreros.jpg";
-import { useForm } from "../../hooks/useForm";
+
 import Swal from "sweetalert2";
 import { userStatusContext } from "../../App";
 import { useNavigate } from "react-router-dom";
-import { isEmail, isEmpty, isValidPassword } from "../../helpers/validateForms";
-import Input from "../../components/store/Input";
+
 import { fetchApi } from "../../API/api";
 import ContainerBase from "../../components/store/ContainerBase";
 import { Animated } from "react-animated-css";
-import NoPhoto from "../../assets/img/no-photo.png";
 
 const Register = () => {
   const { setUserData } = useContext(userStatusContext);
@@ -27,27 +25,57 @@ const Register = () => {
     surname: "",
     password: "",
     type: "NORMAL",
+    nRut: "",
+    company: "",
+  };
+  const errorsInitialValues = {
+    email: { error: false, message: "" },
+    name: { error: false, message: "" },
+    surname: { error: false, message: "" },
+    password: { error: false, message: "" },
+    nRut: { error: false, message: "" },
+    company: { error: false, message: "" },
+  };
+  const [errors, setErrors] = useState(errorsInitialValues);
+  const [values, setValues] = useState(initialValues);
+  const [isEnterprise, setIsEnterprise] = useState(false);
+
+  const handleSetValues = ({ target }) => {
+    if (target.value !== "") {
+      setErrors({ ...errors, [target.name]: { error: false, message: "" } });
+    }
+    if (isEnterprise) {
+      if (target.value === "") {
+        setErrors({ ...errors, [target.name]: { error: true, message: "Campo requerido" } });
+      }
+    }
+    if (!isEnterprise) {
+      if (target.name !== "nRut" && target.name !== "company")
+        if (target.value === "") {
+          setErrors({ ...errors, [target.name]: { error: true, message: "Campo requerido" } });
+        }
+    }
+    if(target.name === 'password') {
+      if(target.value.length < 6){
+        setErrors({ ...errors, [target.name]: { error: true, message: "Contraseña muy corta" } });
+      }
+    }
+    console.log(errors);
+    setValues({ ...values, [target.name]: target.value });
   };
 
-  const [values, handleValuesChange] = useForm(initialValues);
-  const [errorStatusForm, setErrorStatusForm] = useState({
-    email: true,
-    nameCurrent: true,
-    surname: true,
-    password: true,
-  });
-
+  const handleCheckbox = ({ target }) => {
+    setIsEnterprise(target.checked);
+    if (target.checked) {
+      setValues({ ...values, type: "COMPANY" });
+    }
+    if (!target.checked) {
+      setValues({ ...values, nRut: "", company: "", type: "NORMAL" });
+    }
+  };
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(errorStatusForm);
-    if (Object.values(errorStatusForm).includes(true)) {
-      return Swal.fire({
-        icon: "error",
-        text: "Formulario incompleto",
-        timer: 3000,
-        showConfirmButton: true,
-      });
-    }
+    console.log(values);
     try {
       const resp = await fetchApi("auth-customers.php?url=register", "POST", values);
       if (resp.status === "error") {
@@ -56,6 +84,7 @@ const Register = () => {
           text: resp.result.error_msg,
           timer: 3000,
           showConfirmButton: true,
+          confirmButtonColor: "#f5990ff3",
         });
       }
       if (resp.status === "successfully") {
@@ -85,63 +114,87 @@ const Register = () => {
   return (
     <ContainerBase>
       <div className="form-container">
-        <img src={Imagen ? Imagen : NoPhoto} alt="Imagen" />
+        <img src={Imagen} alt="Imagen" />
         <form onSubmit={handleSubmit} autoComplete="off">
           <h1>Registrate para comenzar tu experiencia</h1>
           {/* Solucionar bug de campo 'name' dando error en errorStatusForm. */}
           <div className="inputSection">
-            <Input
-              name="name"
-              id="name"
-              value={values.name}
-              placeholder="Nombre"
-              onChange={handleValuesChange}
-              setErrorStatusForm={setErrorStatusForm}
-              validateFunction={isEmpty}
-            />
-            <Input
-              name="surname"
-              id="surname"
-              value={values.surname}
-              placeholder="Apellido"
-              onChange={handleValuesChange}
-              setErrorStatusForm={setErrorStatusForm}
-              validateFunction={isEmpty}
-            />
+            <div>
+              <input
+                name="name"
+                id="name"
+                style={errors.name.error ? { borderColor: "red" } : {}}
+                value={values.name}
+                type={"text"}
+                placeholder="Nombre"
+                onChange={(e) => handleSetValues(e)}
+                onBlur={(e) => handleSetValues(e)}
+              />
+
+              {errors.name.error && (
+                <span style={{ marginLeft: "10px", color: "red" }}>{errors.name.message}</span>
+              )}
+            </div>
+            <div>
+              <input
+                name="surname"
+                id="surname"
+                type={"text"}
+                style={errors.surname.error ? { borderColor: "red" } : {}}
+                value={values.surname}
+                placeholder="Apellido"
+                onChange={(e) => handleSetValues(e)}
+                onBlur={(e) => handleSetValues(e)}
+              />
+              {errors.surname.error && (
+                <span style={{ marginLeft: "10px", color: "red" }}>{errors.surname.message}</span>
+              )}
+            </div>
           </div>
           <div className="inputSection">
-            <Input
-              name="email"
-              id="email"
-              value={values.email}
-              placeholder="Email"
-              onChange={handleValuesChange}
-              setErrorStatusForm={setErrorStatusForm}
-              validateFunction={isEmail}
-            />
-            <Input
-              name="password"
-              id="password"
-              type={"password"}
-              value={values.password}
-              placeholder="Contraseña"
-              onChange={handleValuesChange}
-              setErrorStatusForm={setErrorStatusForm}
-              validateFunction={isValidPassword}
-            />
+            <div>
+              <input
+                name="email"
+                id="email"
+                type={"email"}
+                style={errors.email.error ? { borderColor: "red" } : {}}
+                value={values.email}
+                placeholder="Email"
+                onChange={(e) => handleSetValues(e)}
+                onBlur={(e) => handleSetValues(e)}
+              />
+              {errors.email.error && (
+                <span style={{ marginLeft: "10px", color: "red" }}>{errors.email.message}</span>
+              )}
+            </div>
+            <div>
+              <input
+                name="password"
+                id="password"
+                type={"password"}
+                style={errors.password.error ? { borderColor: "red" } : {}}
+                value={values.password}
+                placeholder="Contraseña"
+                onChange={(e) => handleSetValues(e)}
+                onBlur={(e) => handleSetValues(e)}
+              />
+              {errors.password.error && (
+                <span style={{ marginLeft: "10px", color: "red" }}>{errors.password.message}</span>
+              )}
+            </div>
           </div>
           <label>
-            <Input
+            <input
               name="type"
               id="type"
               type={"checkbox"}
               value={values.type === "COMPANY"}
-              onChange={handleValuesChange}
-              setErrorStatusForm={setErrorStatusForm}
+              onChange={(e) => handleCheckbox(e)}
+              onBlur={(e) => handleSetValues(e)}
             />
             Empresa
           </label>
-          {values.type === "COMPANY" && (
+          {isEnterprise && (
             <Animated
               animationIn="fadeInDown"
               animationOut="fadeOutUp"
@@ -149,24 +202,38 @@ const Register = () => {
               isVisible={true}
             >
               <div className="inputSection">
-                <Input
-                  name="nRut"
-                  id="nRut"
-                  value={values.nRut}
-                  placeholder="nRut"
-                  onChange={handleValuesChange}
-                  setErrorStatusForm={setErrorStatusForm}
-                  validateFunction={isEmpty}
-                />
-                <Input
-                  name="company"
-                  id="company"
-                  value={values.company}
-                  placeholder="Empresa"
-                  onChange={handleValuesChange}
-                  setErrorStatusForm={setErrorStatusForm}
-                  validateFunction={isEmpty}
-                />
+                <div>
+                  <input
+                    name="nRut"
+                    id="nRut"
+                    type={"text"}
+                    style={errors.nRut.error ? { borderColor: "red" } : {}}
+                    value={values.nRut}
+                    placeholder="nRut"
+                    onChange={(e) => handleSetValues(e)}
+                    onBlur={(e) => handleSetValues(e)}
+                  />
+                  {errors.nRut.error && (
+                    <span style={{ marginLeft: "10px", color: "red" }}>{errors.nRut.message}</span>
+                  )}
+                </div>
+                <div>
+                  <input
+                    name="company"
+                    id="company"
+                    type={"text"}
+                    style={errors.company.error ? { borderColor: "red" } : {}}
+                    value={values.company}
+                    placeholder="Empresa"
+                    onChange={(e) => handleSetValues(e)}
+                    onBlur={(e) => handleSetValues(e)}
+                  />
+                  {errors.company.error && (
+                    <span style={{ marginLeft: "10px", color: "red" }}>
+                      {errors.company.message}
+                    </span>
+                  )}
+                </div>
               </div>
             </Animated>
           )}

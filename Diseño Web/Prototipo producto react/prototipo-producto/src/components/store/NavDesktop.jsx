@@ -1,3 +1,5 @@
+/** @format */
+
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
@@ -7,28 +9,30 @@ import { userStatusContext } from "../../App";
 import ShoppingCart from "./ShoppingCart";
 
 const NavDesktop = () => {
+  const { userData } = useContext(userStatusContext);
+  const navigate = useNavigate();
 
-    const {userData} = useContext(userStatusContext);
-    const navigate  = useNavigate();
-
-    return (
-        <nav className="header-store__nav-desktop">
-            <ul>
-                {
-                    userData.auth
-                    ?
-                    <FontAwesomeIcon icon={faUser} onClick={() => navigate('/panel-user') } />
-                    :
-                    <>
-                        <Link to='/login'><li>Ingresar</li></Link>
-                        <Link to='/register'><li>Registrarse</li></Link>
-                    </>
-                }
-                <ShoppingCart/>
-            </ul>
-        </nav>
-    )
-}
+  return (
+    <nav className="header-store__nav-desktop">
+        
+      <ul>
+        <p className="userName">{userData.name} {userData.surname} </p>
+        {userData.auth ? (
+          <FontAwesomeIcon icon={faUser} onClick={() => navigate("/panel-user")} />
+        ) : (
+          <>
+            <Link to="/login">
+              <li>Ingresar</li>
+            </Link>
+            <Link to="/register">
+              <li>Registrarse</li>
+            </Link>
+          </>
+        )}
+        <ShoppingCart />
+      </ul>
+    </nav>
+  );
+};
 
 export default NavDesktop;
-

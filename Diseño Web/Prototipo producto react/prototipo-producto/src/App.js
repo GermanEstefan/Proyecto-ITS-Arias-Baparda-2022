@@ -69,15 +69,15 @@ const App = () => {
       <cartContext.Provider value={{ cart, setCart }}>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
+          <Route path="/login" element={!userData.auth ? <Login /> : <Home />} />
+          <Route path="/register" element={!userData.auth ? <Register /> : <Home />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/shoppingCart" element={<ShoppingCartPage />} />
           <Route path="/category/:category" element={<CategoryPage />} />
           <Route path="/category/:category/:id" element={<ProductPage />} />
           <Route path="/results/:data" element={<SearchResultsPage />} />
-          <Route path="/panel-user" element={<UserPanel />} />
-          <Route path="/buyForm" element={<BuyForm />} />
+          <Route path="/panel-user" element={userData.auth ? <UserPanel /> : <Home />} />
+          <Route path="/buyForm" element={userData.auth ? <BuyForm /> : <Home />} />
           <Route path="/admin/login" element={<LoginAdm />} />
           <Route path="/admin" element={<ContainerBase />} />
           <Route path="/admin/users/managment" element={<UserManagment />} />

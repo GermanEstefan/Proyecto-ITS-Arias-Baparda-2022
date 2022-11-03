@@ -11,7 +11,6 @@ import { useForm } from "../../hooks/useForm";
 import Input from "../../components/store/Input";
 import { fetchApi } from "../../API/api";
 import ContainerBase from "../../components/store/ContainerBase";
-import NoPhoto from "../../assets/img/no-photo.png";
 
 const Login = () => {
   const { setUserData } = useContext(userStatusContext);
@@ -25,8 +24,16 @@ const Login = () => {
   }, []);
 
   const handleSubmit = async (e) => {
+    console.log(errorStatusForm);
     e.preventDefault();
-    if (Object.values(errorStatusForm).includes(true)) return;
+    if (errorStatusForm.email)
+      return Swal.fire({
+        icon: "error",
+        text: "Formato de correo incorrecto",
+        timer: 3000,
+        confirmButtonColor: "#f5990ff3",
+        showConfirmButton: true,
+      });
     try {
       const resp = await fetchApi("auth-customers.php?url=login", "POST", values);
       if (resp.status === "error") {
@@ -35,6 +42,7 @@ const Login = () => {
           text: resp.result.error_msg,
           timer: 3000,
           showConfirmButton: true,
+          confirmButtonColor: "#f5990ff3",
         });
       }
       if (resp.status === "successfully") {
@@ -64,7 +72,7 @@ const Login = () => {
   return (
     <ContainerBase>
       <div className="form-container">
-        <img src={Imagen ? Imagen : NoPhoto} alt="Imagen"></img>
+        <img src={Imagen} alt="Imagen" />
         <form onSubmit={handleSubmit} autoComplete="off">
           <h1>Bienvenido, por favor ingresa tus datos</h1>
           <div className="inputSection">
@@ -90,7 +98,11 @@ const Login = () => {
               validateFunction={isValidPassword}
             />
           </div>
-          <button className="submit-button" type="submit">
+          <button
+            className="submit-button"
+            disabled={values.password === "" || values.email === ""}
+            type="submit"
+          >
             Ingresar
           </button>
           <br />
