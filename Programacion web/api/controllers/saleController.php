@@ -7,6 +7,7 @@ include_once("./models/DeliveryModel.php");
 include_once("./models/UserModel.php");
 include_once("./models/EmployeeModel.php");
 include_once("./models/StatusModel.php");
+include_once("./models/ProductModel.php");
 class SaleController {
 
     private $response;
@@ -29,7 +30,7 @@ class SaleController {
     }
     private function validateBodyOfReport($saleData){
         if(!isset($saleData['employeeDoc'])
-        ||  !isset($saleData['status']))
+        ||  !isset($saleData['state']))
         return false;
         return $saleData;
     }
@@ -284,7 +285,7 @@ class SaleController {
             echo $this->response->error203("PERMISO DENEGADO");
             die();
         }
-        if($employeeRole != 'JEFE' ||$employeeRole !='VENDEDOR'){
+        if($employeeRole !== 'JEFE' ||$employeeRole !== 'VENDEDOR'){
             http_response_code(401);
             echo $this->response->error401("Rol no valido para relizar esta accion");
             die();
@@ -294,15 +295,16 @@ class SaleController {
              echo $this->response->error400('No se puede actualizar - Revise informacion');
             die();
         }
-        $status = $saleData['status'];
+        $status = $saleData['state'];
         $employeeDoc = $saleData['employeeDoc'];
-        $comment = 'Comentario';
 
         $statusActualIsCanceled = SaleModel::getSaleById($idSale);
-        if($statusActualIsCanceled['statusActual'] == 'CANCELADA'){
-            echo $this->response->error203("LA VENTA FUE CANCELADA");
+        $statusActual = $statusActualIsCanceled['statusActual'];
+        if($statusActual == 'CANCELADA'){
+            echo $this->response->error203("LA VENTA SE ENCUENTRA CANCELADA");
             die();
         }
+    
         $saleExist = SaleModel::getSaleById($idSale);
         if(!$saleExist){
             echo $this->response->error203("Esta intentando editar una venta que no existe");
@@ -320,12 +322,17 @@ class SaleController {
         }
         if($status == 'CANCELADA'){
             $getProducts = SaleModel::saleIsCanceled($idSale);
-            $products = array();
             foreach($getProducts as $individual){
-            array_push( $products, array( "barcode" => $individual['barcode'],"quantity" => $individual['quantity'] ));
+            $barcode = $individual['barcode'];
+            $quantity = $individual['quantity'];
+            $reloadStock = ProductModel::updateMoreStockProductsOfPromo($barcode,$quantity);
             }
-        }
-
+        if(!$reloadStock){
+            echo $this->response->error203("Error al devolver el stock a productos");
+            die();
+        }    
+    }
+        $comment = "$employeeDoc cambia $idSale de estado $statusActual a $status";
         $result = SaleModel::updateReportOfSale($idSale,$status,$employeeDoc,$comment);
         if(!$result){
             echo $this->response->error500();
