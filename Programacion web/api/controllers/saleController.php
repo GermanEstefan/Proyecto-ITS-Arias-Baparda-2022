@@ -29,8 +29,7 @@ class SaleController {
     }
     private function validateBodyOfReport($saleData){
         if(!isset($saleData['employeeDoc'])
-        ||  !isset($saleData['status'])
-        ||  !isset($saleData['comment']))
+        ||  !isset($saleData['status']))
         return false;
         return $saleData;
     }
@@ -288,7 +287,7 @@ class SaleController {
         }
         $status = $saleData['status'];
         $employeeDoc = $saleData['employeeDoc'];
-        $comment = $saleData['comment'];
+        $comment = 'Comentario';
 
         $saleExist = SaleModel::getSaleById($idSale);
         if(!$saleExist){
