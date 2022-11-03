@@ -72,7 +72,6 @@
             $idGeneratedFromUserInsert = $instanceMySql->insert_id;
             $employeeInsert = "INSERT INTO employee (ci, employee_user, employee_role) VALUES ($this->ci,$idGeneratedFromUserInsert, '$this->rol')";
             $resultEmployeeInsert = $instanceMySql->query($employeeInsert);
-            var_dump($resultEmployeeInsert);
             if(!$resultEmployeeInsert) $result_transaccion = false;
             if($result_transaccion){
                 $instanceMySql->commit();

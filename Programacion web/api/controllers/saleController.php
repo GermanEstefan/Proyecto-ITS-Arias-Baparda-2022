@@ -298,6 +298,11 @@ class SaleController {
         $employeeDoc = $saleData['employeeDoc'];
         $comment = 'Comentario';
 
+        $statusActualIsCanceled = SaleModel::getSaleById($idSale);
+        if($statusActualIsCanceled['statusActual'] == 'CANCELADA'){
+            echo $this->response->error203("LA VENTA FUE CANCELADA");
+            die();
+        }
         $saleExist = SaleModel::getSaleById($idSale);
         if(!$saleExist){
             echo $this->response->error203("Esta intentando editar una venta que no existe");
@@ -315,7 +320,12 @@ class SaleController {
         }
         if($status == 'CANCELADA'){
             $getProducts = SaleModel::saleIsCanceled($idSale);
+            $products = array();
+            foreach($getProducts as $individual){
+            array_push( $products, array( "barcode" => $individual['barcode'],"quantity" => $individual['quantity'] ));
+            }
         }
+
         $result = SaleModel::updateReportOfSale($idSale,$status,$employeeDoc,$comment);
         if(!$result){
             echo $this->response->error500();
