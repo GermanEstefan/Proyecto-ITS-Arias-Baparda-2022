@@ -7,7 +7,6 @@ import ContainerBase from "../../components/admin/ContainerBase";
 import { useForm } from "../../hooks/useForm";
 
 const UserManagment = () => {
-
   const navigate = useNavigate();
   const [employees, setEmployees] = useState([]);
   const [loadingFlags, setLoadingFlags] = useState({ fetchingUsers: true });
@@ -37,11 +36,11 @@ const UserManagment = () => {
 
   useEffect(() => {
     fetchApi("auth-employees.php", "GET")
-      .then( resp => {
+      .then((resp) => {
         console.log(resp);
         setEmployees(resp);
       })
-      .catch( err => {
+      .catch((err) => {
         alert("Error interno");
         console.log(err);
       })
@@ -52,7 +51,11 @@ const UserManagment = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      const resp = await fetchApi("auth-employees.php?url=register","POST",values);
+      const resp = await fetchApi(
+        "auth-employees.php?url=register",
+        "POST",
+        values
+      );
       console.log(resp);
       if (resp.status === "error") {
         setError({
@@ -74,9 +77,14 @@ const UserManagment = () => {
   };
 
   const handleDisableUser = async (idUser) => {
-    const confirm = window.confirm("¿Estas seguro que desas desactivar el usuario?");
+    const confirm = window.confirm(
+      "¿Estas seguro que desas desactivar el usuario?"
+    );
     if (!confirm) return;
-    const resp = await fetchApi(`auth-employees.php?idEmployee=${idUser}&action=disable`, "PATCH");
+    const resp = await fetchApi(
+      `auth-employees.php?idEmployee=${idUser}&action=disable`,
+      "PATCH"
+    );
     console.log(resp);
     if (resp.status === "error") return alert(resp.result.error_msg);
     const userFiltered = employees.filter((employee) => {
@@ -89,11 +97,16 @@ const UserManagment = () => {
   };
 
   const handleEnableUser = async (idUser) => {
-    const confirm = window.confirm("¿Estas seguro que desas activar el usuario?");
+    const confirm = window.confirm(
+      "¿Estas seguro que desas activar el usuario?"
+    );
     if (!confirm) return;
-    const resp = await fetchApi(`auth-employees.php?idEmployee=${idUser}&action=active`, "PATCH");
+    const resp = await fetchApi(
+      `auth-employees.php?idEmployee=${idUser}&action=active`,
+      "PATCH"
+    );
     console.log(resp);
-    if (resp.status === "error")  return alert(resp.result.error_msg);
+    if (resp.status === "error") return alert(resp.result.error_msg);
     const userFiltered = employees.filter((employee) => {
       if (employee.employee_user === idUser) {
         employee.state = "1";
@@ -233,6 +246,9 @@ const UserManagment = () => {
                     required
                     className="select-form"
                   >
+                    <option selected value="">
+                      Seleccione un Rol
+                    </option>
                     <option value="JEFE">Jefe</option>
                     <option value="VENDEDOR">Vendedor</option>
                     <option value="COMPRADOR">Comprador</option>
@@ -247,8 +263,9 @@ const UserManagment = () => {
               </button>
               {error.showMessage && (
                 <span
-                  className={`${error.error ? "warning-message" : "successfully-message"
-                    } `}
+                  className={`${
+                    error.error ? "warning-message" : "successfully-message"
+                  } `}
                 >
                   {error.message}
                 </span>
@@ -283,16 +300,24 @@ const UserManagment = () => {
                     <td>{employe.state}</td>
                     <td
                       className="controls-table"
-                      onClick={() => navigate(`/admin/users/edit/${employe.employee_user}`)}
+                      onClick={() =>
+                        navigate(`/admin/users/edit/${employe.employee_user}`)
+                      }
                     >
                       <FontAwesomeIcon icon={faPencil} />
                     </td>
                     {employe.state === "1" ? (
-                      <td className="warning-control" onClick={() => handleDisableUser(employe.employee_user)}>
+                      <td
+                        className="warning-control"
+                        onClick={() => handleDisableUser(employe.employee_user)}
+                      >
                         <FontAwesomeIcon icon={faTrash} />
                       </td>
                     ) : (
-                      <td className="successfully-control" onClick={() => handleEnableUser(employe.employee_user)}>
+                      <td
+                        className="successfully-control"
+                        onClick={() => handleEnableUser(employe.employee_user)}
+                      >
                         <FontAwesomeIcon icon={faCheck} />
                       </td>
                     )}

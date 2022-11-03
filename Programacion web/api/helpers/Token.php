@@ -50,7 +50,8 @@ class Token {
         if(!$employeeRole){
             return false;
         }else{
-            return $employeeRole['employee_role'];
+            $role = $employeeRole['employee_role'];
+            return $role;
         }
     }
 

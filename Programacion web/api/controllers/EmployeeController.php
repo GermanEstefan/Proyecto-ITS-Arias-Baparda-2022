@@ -115,6 +115,11 @@ class EmployeeController{
             echo $this->response->error401('Credenciales incorrectas');
             die();
         }
+        $isActive = EmployeeModel::getStateOfEmployee($employeeId);
+        if(!$isActive){
+            echo $this->response->error200("El empleado con la ci: $ci no se encuentra activo");
+            die();
+        }
 
         $userToken = $this->jwt->generateToken($employeeId, $employeeRol);
         $bodyResponse = array(

@@ -49,6 +49,11 @@
             $query = "SELECT e.employee_user as ID_EMPLEADO,e.employee_role AS ROL_ASIGNADO ,e.state AS ESTADO ,u.email, u.name AS NOMBRE,u.surname AS APELLIDO,u.address AS DIRECCION,u.phone AS TELEFONO from employee e inner join user u on e.employee_user = u.id_user and e.employee_role = '$nameRole'";
             return $conecction->getData($query)->fetch_assoc();
         }
+        public static function getStateOfEmployee($employeeID){
+            $conecction = new Connection();
+            $query = "SELECT e.state from employee e WHERE e.employee_user = $employeeID and e.state = 1";
+            return $conecction->getData($query)->fetch_assoc();
+        }
 
         public static function getRoleOfEmployeeById($id){
             $conecction = new Connection();
@@ -72,7 +77,6 @@
             $idGeneratedFromUserInsert = $instanceMySql->insert_id;
             $employeeInsert = "INSERT INTO employee (ci, employee_user, employee_role) VALUES ($this->ci,$idGeneratedFromUserInsert, '$this->rol')";
             $resultEmployeeInsert = $instanceMySql->query($employeeInsert);
-            var_dump($resultEmployeeInsert);
             if(!$resultEmployeeInsert) $result_transaccion = false;
             if($result_transaccion){
                 $instanceMySql->commit();
