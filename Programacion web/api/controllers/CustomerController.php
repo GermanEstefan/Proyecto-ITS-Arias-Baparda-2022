@@ -18,8 +18,7 @@ class CustomerController
         $this->jwt = new Token();
     }
 
-    private function validateBodyOfRegisterCustomer($userData)
-    {
+    private function validateBodyOfRegisterCustomer($userData){
         $bodyOfRequest = UserController::validateBodyOfRegisterUser($userData);
 
         if(!$bodyOfRequest || !isset($userData['type'])){
@@ -34,6 +33,13 @@ class CustomerController
         }
         return $userData;
     }
+    private function validateBodyUpdatePassword($userData){
+        if( !isset($userData['oldPassword']) 
+        ||  !isset($userData['newPassword']))
+        return false;
+        //aca tenemos que validar mas cosas como que tenga un largo especifico (se pueden enviar nombre de ctegoria con valor " ")
+        return $userData;
+    }
 
     public function updateCustomer($userData)
     {
@@ -41,7 +47,7 @@ class CustomerController
         $bodyOfRequest = UserController::validateBodyOfUpdateUser($userData);
         if(!$bodyOfRequest){
             http_response_code(400);
-            echo $this->response->error400();
+            echo $this->response->error203("Error en los datos enviados");
             die();
         }
 
@@ -56,6 +62,33 @@ class CustomerController
             die();
         } 
         echo $this->response->successfully("Actualizacion realizada con exito");
+    }
+    public function updatePasswordOfCustomer($userData){
+        $idOfUserRequested = $this->jwt->verifyTokenAndGetIdUserFromRequest();
+        $bodyOfRequest = CustomerController::validateBodyUpdatePassword($userData);
+        if(!$bodyOfRequest){
+            http_response_code(400);
+            echo $this->response->error203("Error en los datos enviados");
+            die();
+        }
+
+        $old = $userData['oldPassword'];
+        $new = $userData['newPassword'];
+        if (strlen($old)<5 ||strlen($old)<5 ){
+            echo $this->response->error203("La contraseña debe tener 5 caracteres minimo");
+            die();
+        }
+        $isOldPass = CustomerModel::getPassOfUser($idOfUserRequested);
+        if($old != $isOldPass['pass']){
+            echo $this->response->error203("Contraseña ingresada no es valida");
+            die();
+        }
+        $setNewPass = UserModel::updatePassword($idOfUserRequested,$new);
+        if(!$setNewPass){
+            echo $this->response->error203("No se pudo actualizar la contraseña");
+            die();
+        }
+        echo $this->response->successfully("Contraseña actualizada con exito");
     }
 
     public function registerCustomer($userData)

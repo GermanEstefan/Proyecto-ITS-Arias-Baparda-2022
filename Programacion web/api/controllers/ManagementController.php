@@ -18,17 +18,18 @@ class ManagementController {
         $this->jwt = new Token();
     }
 
-    private function validateBodyOfManagement($managementData){
-        if( !isset($managementData['rut']) 
-        ||  !isset($managementData['companyName']) 
-        ||  !isset($managementData['address']) 
-        ||  !isset($managementData['phone'])
-        ) return false;
-
-        return $managementData;
-    }
     //consultas
     public function getBalances(){
+        $employeeRole = $this->jwt->verifyTokenAndValidateEmployeeUser();
+        if(!$employeeRole){
+            echo $this->response->error203("PERMISO DENEGADO");
+            die();
+        }
+        if($employeeRole != 'JEFE'){
+            http_response_code(401);
+            echo $this->response->error401("Rol no valido para relizar esta accion");
+            die();
+        }
         $management = ManagementModel::getBalances(); 
         $balance = array();
         $totalSale = $management['totalSale'];
@@ -38,6 +39,16 @@ class ManagementController {
         echo $this->response->successfully("Balance de saldos:",$balance);
     }
     public function getBestClients($limit){
+        $employeeRole = $this->jwt->verifyTokenAndValidateEmployeeUser();
+        if(!$employeeRole){
+            echo $this->response->error203("PERMISO DENEGADO");
+            die();
+        }
+        if($employeeRole != 'JEFE'){
+            http_response_code(401);
+            echo $this->response->error401("Rol no valido para relizar esta accion");
+            die();
+        }
         if($limit<0){     
             echo $this->response->error203("El limite $limit no es correcto");
             die();
@@ -57,6 +68,16 @@ class ManagementController {
         echo $this->response->successfully("Los mejores $limit clientes", $response);
     }
     public function getBestProducts($limit){
+        $employeeRole = $this->jwt->verifyTokenAndValidateEmployeeUser();
+        if(!$employeeRole){
+            echo $this->response->error203("PERMISO DENEGADO");
+            die();
+        }
+        if($employeeRole != 'JEFE'){
+            http_response_code(401);
+            echo $this->response->error401("Rol no valido para relizar esta accion");
+            die();
+        }
         if($limit<0){     
             echo $this->response->error203("El limite $limit no es correcto");
             die();

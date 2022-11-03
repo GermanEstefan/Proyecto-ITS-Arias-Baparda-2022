@@ -83,7 +83,11 @@ class ProductController
             En este metodo no precisamos el ID del usuario, lo unico que validamos es que tenga un token y sea valido. 
             Si no tiene token, no pasa de la funcion para abajo por que el metodo mismo le niega el acceso.
         */
-        $this->jwt->verifyTokenAndGetIdUserFromRequest();
+        $employeeRole = $this->jwt->verifyTokenAndValidateEmployeeUser();
+        if(!$employeeRole){
+            echo $this->response->error203("PERMISO DENEGADO");
+            die();
+        }
         $bodyIsValid = $this->validateBodyOfProduct($productData);
         if (!$bodyIsValid) {
             echo $this->response->error400('Error en los datos enviados');

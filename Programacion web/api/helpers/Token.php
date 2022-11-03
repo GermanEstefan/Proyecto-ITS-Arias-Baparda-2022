@@ -46,9 +46,7 @@ class Token {
 
     public function verifyTokenAndValidateEmployeeUser(){
         $idOfUser = $this->verifyTokenAndGetIdUserFromRequest();
-        $employeeActive = EmployeeModel::getActiveEmployeeById($idOfUser);
-        if(!$employeeActive) return false;
-        $employeeRole = EmployeeModel::getEmployeeById($idOfUser);
+        $employeeRole = EmployeeModel::getRoleEmployeeById($idOfUser);
         if(!$employeeRole){
             return false;
         }else{
