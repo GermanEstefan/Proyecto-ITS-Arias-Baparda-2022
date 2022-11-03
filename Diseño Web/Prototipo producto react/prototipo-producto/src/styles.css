@@ -1951,9 +1951,6 @@
   border-bottom: none;
 }
 
-.manage-sales {
-  border: 1px solid red;
-}
 .manage-sales .manage-sales_filters {
   display: flex;
   align-items: center;
@@ -1967,32 +1964,90 @@
 
 .sale-detail .sale-detail-content {
   display: flex;
+  align-items: center;
 }
 .sale-detail .sale-detail-content .sale-detail-content_info-card {
   background-color: #f2f2f2;
   padding: 20px 40px 20px 40px;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   margin-right: 50px;
+  display: flex;
+  flex-direction: column;
+  width: 80vw;
+  max-width: 400px;
+}
+.sale-detail .sale-detail-content .sale-detail-content_info-card > span {
+  text-align: center;
 }
 .sale-detail .sale-detail-content .sale-detail-content_info-card > span > strong {
   color: rgba(245, 153, 15, 0.9529411765);
   font-size: 1.1rem;
 }
-.sale-detail .sale-detail-content .sale-detail-content_info-card > div {
+.sale-detail .sale-detail-content .sale-detail-content_info-card .sale-detail-content_info-card_section {
   border-bottom: 1px solid rgba(245, 153, 15, 0.9529411765);
   margin: 20px 0;
   padding-bottom: 10px;
   display: flex;
   flex-direction: column;
 }
-.sale-detail .sale-detail-content .sale-detail-content_info-card > div strong {
+.sale-detail .sale-detail-content .sale-detail-content_info-card .sale-detail-content_info-card_section > strong {
   align-self: center;
+  font-size: 1.2rem;
 }
-.sale-detail .sale-detail-content .sale-detail-content_info-card > div ul {
+.sale-detail .sale-detail-content .sale-detail-content_info-card .sale-detail-content_info-card_section > ul {
   margin-top: 15px;
 }
-.sale-detail .sale-detail-content .sale-detail-content_info-card > div ul > li {
+.sale-detail .sale-detail-content .sale-detail-content_info-card .sale-detail-content_info-card_section > ul > li {
   margin-bottom: 5px;
+}
+.sale-detail .sale-detail-content .sale-detail-content_info-card .sale-detail-content_info-card_section > div {
+  display: flex;
+  flex-direction: column;
+}
+.sale-detail .sale-detail-content .sale-detail-content_info-card .sale-detail-content_info-card_section > div > span {
+  font-weight: bold;
+  align-self: center;
+  margin: 15px 0;
+  border-bottom: 1px solid rgba(245, 153, 15, 0.9529411765);
+  padding: 3px 10px;
+  font-size: 1.1rem;
+}
+.sale-detail .sale-detail-content .sale-detail-content_info-card .sale-detail-content_info-card_section > div > ul > li {
+  margin-bottom: 5px;
+}
+.sale-detail .sale-detail_controls {
+  text-align: center;
+}
+.sale-detail .sale-detail_controls strong {
+  font-size: 1.2rem;
+}
+.sale-detail .sale-detail_controls > form {
+  margin: 30px 0;
+  display: flex;
+}
+.sale-detail .sale-detail_controls > form > select {
+  max-width: 180px;
+}
+.sale-detail .sale-detail_controls > form button {
+  margin-left: 20px;
+  padding: 0 10px;
+}
+.sale-detail .sale-detail_controls > button {
+  margin-top: 20px;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 3px;
+  font-weight: bold;
+  background-color: #f2f2f2;
+  cursor: pointer;
+  transition: 0.3s ease-in;
+}
+.sale-detail .sale-detail_controls > button:hover {
+  background-color: #d9d9d9;
+}
+
+.title-card-section {
+  font-size: 1.2rem;
 }
 
 html {

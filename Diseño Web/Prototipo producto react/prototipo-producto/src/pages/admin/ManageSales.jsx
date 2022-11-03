@@ -17,8 +17,7 @@ const ManageSales = () => {
         Promise.all([statesPromise, salesPromise])
             .then(([states, sales]) => {
                 const statesData = states.result.data;
-                const salesData = sales.result.data.sales;
-                console.log(salesData)
+                const salesData = sales.result.data;
                 setStates(statesData);
                 setSales(salesData);
             })
@@ -29,7 +28,7 @@ const ManageSales = () => {
         try {
             const resp = await fetchApi(`sales.php?status=${target.value}`, 'GET');
             console.log(resp)
-            const salesData = resp.result.data.sales;
+            const salesData = resp.result.data;
             setSales(salesData);
         } catch (error) {
             console.error(error);
@@ -47,7 +46,7 @@ const ManageSales = () => {
 
                     <strong>
                         {
-                            sales && !sales.length
+                            !sales
                                 ? 'No hay ventas registradas por el momento'
                                 : (sales.length === 1) ? '1 venta registrada' : `${sales.length + 1} ventas registradas`
                         }
@@ -59,7 +58,7 @@ const ManageSales = () => {
                             {
                                 states.map(state => (
                                     (state.id_status !== 1) &&
-                                    <option key={state.id_status} value={state.id_status}>{state.name}</option>
+                                    <option selected={state.name === 'PENDIENTE' && true} key={state.id_status} value={state.name}>{state.name}</option>
                                 ))
                             }
                         </select>
@@ -67,7 +66,7 @@ const ManageSales = () => {
                 </div>
                 {
                     !(sales.length)
-                        ? <h1>No hay ventas registradas</h1>
+                        ? <h2>No hay ventas registradas</h2>
                         : <table className='table-template'>
                             <tbody>
                                 <tr>

@@ -1,31 +1,91 @@
 .sale-detail{
     .sale-detail-content{
         display: flex;
+        align-items: center;
         .sale-detail-content_info-card{
             background-color: #f2f2f2;
             padding: 20px 40px 20px 40px;
             box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
             margin-right: 50px;
+            display: flex;
+            flex-direction: column;
+            width: 80vw;
+            max-width: 400px;
             > span {
+                text-align: center;
                 > strong {
                     color: $orange;
                     font-size: 1.1rem;
                 }
             }
-            > div {
+            .sale-detail-content_info-card_section{
                 border-bottom: 1px solid $orange;
                 margin: 20px 0;
                 padding-bottom: 10px;
                 display: flex;
                 flex-direction: column;
-                strong{align-self: center;}
-                ul{
+                > strong{
+                    align-self: center;
+                    font-size: 1.2rem;
+                }
+                > ul{
                     margin-top: 15px;
                     > li {
                         margin-bottom: 5px;
                     }
                 }
+                > div {
+                    display: flex;
+                    flex-direction: column;
+                    > span{
+                        font-weight: bold;
+                        align-self: center;
+                        margin: 15px 0;
+                        border-bottom: 1px solid $orange;
+                        padding: 3px 10px;
+                        font-size: 1.1rem;
+                    }
+                    > ul{
+                        > li {
+                            margin-bottom: 5px;
+                        }
+                    }
+                   
+                }
             }
         }
     }
+    .sale-detail_controls{
+        text-align: center;
+        strong{
+            font-size: 1.2rem;
+        }
+        > form {
+            margin: 30px 0;
+            display: flex;
+            > select{
+                max-width: 180px;
+            }
+            button{
+                margin-left: 20px;
+                padding: 0 10px;
+            }
+        }
+        >button{
+            margin-top: 20px;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 3px;
+            font-weight: bold;
+            background-color: #f2f2f2;
+            cursor: pointer;
+            transition: .3s ease-in;
+            &:hover{
+                background-color: darken($color: #f2f2f2, $amount: 10);
+            }
+        }
+    }
+}
+.title-card-section{
+    font-size: 1.2rem;
 }

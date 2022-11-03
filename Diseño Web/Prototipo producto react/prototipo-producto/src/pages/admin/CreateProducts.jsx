@@ -217,6 +217,7 @@ const CreateProducts = () => {
                     Seleccione Categoria
                   </option>
                   {categorys.map((category) => (
+                    !(category.id_category === '1') &&
                     <option
                       key={category.id_category}
                       value={category.id_category}

@@ -113,7 +113,7 @@ const Aside = () => {
                 </li>
 
                 <li className="aside_menu_item">
-                    <div className="aside_menu_item_container" onClick={() => handleOpenSubMenu('shipments')} >
+                    <div className="aside_menu_item_container" onClick={() => handleOpenSubMenu('sales')} >
                         <FontAwesomeIcon icon={faShippingFast} className="aside_menu_item_container_icon"/>
                         <span>Ventas</span>
                         <FontAwesomeIcon icon={faChevronDown} className="aside_menu_item_container_icon2"/>
