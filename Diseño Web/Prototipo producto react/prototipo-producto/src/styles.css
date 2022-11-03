@@ -1,5 +1,6 @@
 /** @format */
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap");
+@import "~sweetalert2/dist/sweetalert2.min.css";
 /**
  * /*Formularios(Registro, login, contacto)
  *
@@ -117,9 +118,11 @@
   text-align: center;
 }
 .form-container form input[type=text],
+.form-container form input[type=email],
 .form-container form input[type=password],
 .form-container form textarea {
   display: block;
+  padding: 5px;
   margin: 5px;
 }
 .form-container form label {
@@ -471,7 +474,7 @@
   height: 10vh;
   background-color: rgba(255, 255, 255, 0.952);
   z-index: 1;
-  padding: 12px 0 2px 0;
+  padding: 8px 0 0 0;
 }
 .header-store .header-store__logo {
   width: 60vw;
@@ -498,7 +501,7 @@
   font-size: 1.5rem;
 }
 .header-store .header-store__search div input {
-  padding: 10px 10px 10px 50px;
+  padding: 10px 10px 10px 45px;
   border: 2px solid rgba(245, 153, 15, 0.9529411765);
   width: 60%;
 }
@@ -510,6 +513,13 @@
 }
 .header-store .header-store__nav-desktop {
   right: 20px;
+}
+.header-store .header-store__nav-desktop .userName {
+  font-weight: 800;
+  font-size: larger;
+  width: 300px;
+  text-align: right;
+  margin-right: 15px;
 }
 .header-store .header-store__nav-desktop ul {
   display: flex;
