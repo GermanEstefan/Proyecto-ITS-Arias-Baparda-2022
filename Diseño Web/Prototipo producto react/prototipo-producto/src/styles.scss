@@ -87,6 +87,12 @@ button:disabled:hover {
   cursor: auto;
   background-color: $gray;
 }
+
+.spanError {
+  margin: 3px 0 3px 10px;
+  color: red;
+}
+
 //  width
 ::-webkit-scrollbar {
   width: 10px;
@@ -136,5 +142,3 @@ button:disabled:hover {
   width: 100%;
   left: 0;
 }
-
-

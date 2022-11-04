@@ -55,12 +55,12 @@ const Register = () => {
           setErrors({ ...errors, [target.name]: { error: true, message: "Campo requerido" } });
         }
     }
-    if(target.name === 'password') {
-      if(target.value.length < 6){
+    if (target.name === "password") {
+      if (target.value.length < 6) {
         setErrors({ ...errors, [target.name]: { error: true, message: "Contraseña muy corta" } });
       }
     }
-    
+
     setValues({ ...values, [target.name]: target.value });
   };
 
@@ -131,9 +131,7 @@ const Register = () => {
                 onBlur={(e) => handleSetValues(e)}
               />
 
-              {errors.name.error && (
-                <span style={{ marginLeft: "10px", color: "red" }}>{errors.name.message}</span>
-              )}
+              {errors.name.error && <span className="spanError">{errors.name.message}</span>}
             </div>
             <div>
               <input
@@ -146,9 +144,7 @@ const Register = () => {
                 onChange={(e) => handleSetValues(e)}
                 onBlur={(e) => handleSetValues(e)}
               />
-              {errors.surname.error && (
-                <span style={{ marginLeft: "10px", color: "red" }}>{errors.surname.message}</span>
-              )}
+              {errors.surname.error && <span className="spanError">{errors.surname.message}</span>}
             </div>
           </div>
           <div className="inputSection">
@@ -163,9 +159,7 @@ const Register = () => {
                 onChange={(e) => handleSetValues(e)}
                 onBlur={(e) => handleSetValues(e)}
               />
-              {errors.email.error && (
-                <span style={{ marginLeft: "10px", color: "red" }}>{errors.email.message}</span>
-              )}
+              {errors.email.error && <span className="spanError">{errors.email.message}</span>}
             </div>
             <div>
               <input
@@ -179,7 +173,7 @@ const Register = () => {
                 onBlur={(e) => handleSetValues(e)}
               />
               {errors.password.error && (
-                <span style={{ marginLeft: "10px", color: "red" }}>{errors.password.message}</span>
+                <span className="spanError">{errors.password.message}</span>
               )}
             </div>
           </div>
@@ -213,9 +207,7 @@ const Register = () => {
                     onChange={(e) => handleSetValues(e)}
                     onBlur={(e) => handleSetValues(e)}
                   />
-                  {errors.nRut.error && (
-                    <span style={{ marginLeft: "10px", color: "red" }}>{errors.nRut.message}</span>
-                  )}
+                  {errors.nRut.error && <span className="spanError">{errors.nRut.message}</span>}
                 </div>
                 <div>
                   <input
@@ -229,9 +221,7 @@ const Register = () => {
                     onBlur={(e) => handleSetValues(e)}
                   />
                   {errors.company.error && (
-                    <span style={{ marginLeft: "10px", color: "red" }}>
-                      {errors.company.message}
-                    </span>
+                    <span className="spanError">{errors.company.message}</span>
                   )}
                 </div>
               </div>

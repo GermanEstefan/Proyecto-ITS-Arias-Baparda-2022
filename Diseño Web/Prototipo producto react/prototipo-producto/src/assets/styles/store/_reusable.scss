@@ -129,9 +129,10 @@
     input[type="email"],
     input[type="password"],
     textarea {
+      margin: 5px;
       display: block;
       padding: 5px;
-      margin: 5px;
+      
     }
 
     label {
@@ -168,6 +169,7 @@
     transition: 0.2s;
   }
 }
+
 
 /*Componente input*/
 .input-wrapper {
