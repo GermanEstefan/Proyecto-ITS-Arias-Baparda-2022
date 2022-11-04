@@ -27,6 +27,18 @@ const SalesHistory = () => {
     }
   };
 
+  const statusMock = [
+    "PENDIENTE",
+    "CONFIRMADO",
+    "EN VIAJE",
+    "PICK UP",
+    "ENTREGADO",
+    "CANCELADA",
+    "EN VIAJE",
+    "PICK UP",
+    "ENTREGADO",
+  ];
+
   return (
     <Animated
       animationIn="fadeIn"
@@ -37,9 +49,9 @@ const SalesHistory = () => {
       <h1 style={{ marginLeft: "15px" }}>Historial de compras</h1>
       {sales.length > 0 &&
         sales.map((sale, index) => (
-          <div>
-            <SaleStatusHistory saleId={sale.ID} />
-            <HistoryItem key={index} sale={sale} />
+          <div style={{marginTop: '20px ', borderBottom: '1px solid black', width: '630px'}}>
+            <SaleStatusHistory saleId={sale.ID} status={statusMock[index]}/>
+            <HistoryItem key={index} sale={sale} status={statusMock[index]}/>
           </div>
         ))}
       {sales.length === 0 && (

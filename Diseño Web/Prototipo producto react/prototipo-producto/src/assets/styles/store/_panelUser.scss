@@ -3,7 +3,7 @@
 .user-panel-page {
   margin-top: 12vh;
   display: flex;
-
+  
   @media (max-width: 800px) {
     flex-direction: column;
     padding: 0;

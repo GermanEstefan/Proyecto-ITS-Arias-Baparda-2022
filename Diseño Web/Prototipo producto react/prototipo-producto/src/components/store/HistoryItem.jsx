@@ -6,7 +6,7 @@ import { fetchApi } from "../../API/api";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretDown, faCaretUp } from "@fortawesome/free-solid-svg-icons";
 
-export const HistoryItem = ({ sale }) => {
+export const HistoryItem = ({ sale, status }) => {
   const [toggleCollapse, setToggleCollapse] = useState(false);
   const [saleProducts, setSaleProducts] = useState([]);
   useEffect(() => {
@@ -27,7 +27,7 @@ export const HistoryItem = ({ sale }) => {
       <div className="historyItem">
         <div>
           <span>{sale.date}</span>
-          <strong>{sale.status}</strong>
+          <strong>{status}</strong>
         </div>
         <div>
           <span>{sale.total}$</span>
