@@ -25,6 +25,7 @@ const ProductPage = () => {
   const [img, setImg] = useState("");
   const [quantitySelected, setQuantitySelected] = useState(1);
   const [isEnoughStock, setIsEnoughStock] = useState(true);
+  const [promoProducts, setPromoProducts] = useState([]);
 
   useEffect(() => {
     window.scroll(0, 0);
@@ -35,10 +36,10 @@ const ProductPage = () => {
     setIsAddedToCart(
       cart.filter((cartProduct) => cartProduct.barcode === product.barcode).length > 0
     );
+    console.log(promoProducts);
   }, [product, quantitySelected]);
 
   const handleAddToCart = () => {
-    
     if (!isAddedToCart) {
       setCart([
         ...cart,
@@ -50,14 +51,25 @@ const ProductPage = () => {
     setIsAddedToCart(true);
   };
   const getProductById = async () => {
-    const resp = await fetchApi(`products.php?modelsOfProduct=${id}`, "GET");
-    setProduct(resp.result.data.models[0] ? resp.result.data.models[0] : {});
-    setAllModels(resp.result.data.models);
-    setImg(resp.result.data.picture);
-    setproductName(resp.result.data.name);
-    setproductDescription(resp.result.data.description);
-    getDesignsList(resp.result.data.models);
-    getSizesList(resp.result.data.models);
+    if (category === "PROMOCIONES") {
+      const respPromo = await fetchApi(`products.php?productsOfPromo=${id}`, "GET");
+      setPromoProducts(respPromo.result.data.products);
+      const resp = await fetchApi(`products.php?modelsOfProduct=${id}`, "GET");
+      setProduct(resp.result.data.models[0] ? resp.result.data.models[0] : {});
+      setImg(resp.result.data.picture);
+      setproductName(resp.result.data.name);
+      setproductDescription(resp.result.data.description);
+      console.log(resp);
+    } else {
+      const resp = await fetchApi(`products.php?modelsOfProduct=${id}`, "GET");
+      setProduct(resp.result.data.models[0] ? resp.result.data.models[0] : {});
+      setAllModels(resp.result.data.models);
+      setImg(resp.result.data.picture);
+      setproductName(resp.result.data.name);
+      setproductDescription(resp.result.data.description);
+      getDesignsList(resp.result.data.models);
+      getSizesList(resp.result.data.models);
+    }
   };
 
   const getDesignsList = (models) => {
@@ -100,13 +112,32 @@ const ProductPage = () => {
         <div className="productPage">
           <div className="productPage__img">
             <div>
-              <img src={img || NoPhoto} width="200" />
+              <img src={img || NoPhoto}  />
             </div>
           </div>
           <div className="productPage__description">
             <div className="productPage__description__body">
               <p>{product.price}$</p>
               <p>{productDescription}</p>
+              <p>Esta promo contiene: </p>
+              <table border={0}>
+                <thead>
+                  <tr>
+                    <th>Producto</th>
+                    <th>Color</th>
+                    
+                    <th>Unidades</th>
+                  </tr>
+                </thead>
+                {promoProducts.map((product) => (
+                  <tr>
+                    <td>{product.name}</td>
+                    <td>{product.design}</td>
+                    
+                    <td>{product.quantity}</td>
+                  </tr>
+                ))}
+              </table>
             </div>
             <div className="productPage__description__buttons">
               {category !== "PROMOCIONES" && (
@@ -157,7 +188,6 @@ const ProductPage = () => {
                   >
                     Agregar al carrito
                   </button>
-                  
                 </div>
               </div>
               {isAddedToCart && <p>Este producto ya está en tu carrito</p>}

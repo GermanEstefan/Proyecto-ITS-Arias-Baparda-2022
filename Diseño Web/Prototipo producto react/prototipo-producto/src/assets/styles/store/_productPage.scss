@@ -5,8 +5,11 @@
   min-height: 100%;
 
   max-width: 900px;
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: 800px) {
     margin-bottom: 10vh;
+    
+      font-size: x-large;
+    
   }
 
   .productPage {
@@ -21,11 +24,12 @@
       margin-top: 4em;
       width: 40%;
       img {
+        width: 250px;
         margin: auto;
         display: block;
-      }
-      @media screen and (max-width: 800px) {
-        width: 100%;
+        @media screen and (max-width: 800px) {
+          width: 100%;
+        }
       }
     }
     .productPage__description {
@@ -53,7 +57,7 @@
           a {
             color: $orange;
             text-decoration: underline;
-            font-weight:bold;
+            font-weight: bold;
           }
         }
 

@@ -38,10 +38,15 @@ $black: #121212;
 
 html {
   scroll-behavior: smooth;
+  width: 100vw;
   min-height: 100vh;
+  @media screen and (max-width: 800px) {
+    font-size: large;
+  }
 }
 body {
   overflow-x: hidden;
+  width: 100vw;
   min-height: 100vh;
   font-family: "Open Sans", sans-serif;
 }
@@ -129,4 +134,20 @@ button:disabled:hover {
 .underline_animated:hover::after {
   width: 100%;
   left: 0;
+}
+
+table,
+th,
+td {
+  border: 1px solid $dark_gray;
+  padding: 3px;
+  border-collapse: collapse;
+}
+table {
+  margin: 10px 0;
+  width: 100%;
+  @media (max-width: 900px) {
+    width: 95%;
+    margin: auto;
+  }
 }

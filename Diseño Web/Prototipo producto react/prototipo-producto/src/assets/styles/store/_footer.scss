@@ -1,4 +1,5 @@
 .footer {
+  
   background: linear-gradient(
     190deg,
     rgba(245, 153, 15, 0.5041725308287377) 0%,
@@ -11,13 +12,13 @@
   }
 
   bottom: 0;
-  min-width: 100vw;
+  width: 100vw;
   z-index: 99;
   display: flex;
   align-items: center;
-
+  
   justify-content: space-around;
-  padding: .5em 0;
+  
   ul {
     list-style: none;
     display: flex;
@@ -42,9 +43,9 @@
 
   .img-container {
     a {
-      @media (max-width: 600px) {
+      @media (max-width: 800px) {
         margin: auto;
-        padding: 1em;
+        padding: 2em;
       }
       margin-right: 2em;
     }

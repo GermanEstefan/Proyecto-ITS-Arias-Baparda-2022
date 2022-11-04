@@ -15,7 +15,7 @@ const SelectAnyOptionScreen = () => {
             <div className="flex-column-center-xy">
                 <h1>Bienvenido :</h1> 
                 <h2>{capitalizeString(`${name} ${surname}`)}</h2>
-                <p>Seleccione alguna opcion del menu para comenzar la gestion</p>
+                <p>Seleccione alguna opción del menú para comenzar la gestión</p>
                 <FontAwesomeIcon icon={faStar} />
             </div>
         </section>

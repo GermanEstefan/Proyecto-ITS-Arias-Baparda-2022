@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ContainerBase from "../../components/store/ContainerBase";
 import SalesHistory from "../../components/store/SalesHistory";
-
+import Swal from "sweetalert2";
 import UpdateAccountForm from "../../components/store/UpdateAccountForm";
 import UpdatePasswordForm from "../../components/store/UpdatePasswordForm";
 
@@ -13,9 +13,23 @@ const UserPanel = () => {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    localStorage.removeItem("token");
-    navigate("/");
-    window.location.reload();
+    Swal.fire({
+      icon: "warning",
+      text: "¿Desea cerrar sesión?",
+
+      showConfirmButton: true,
+      showCancelButton: true,
+      confirmButtonColor: "#f5990ff3",
+      confirmButtonText: 'Si',
+      cancelButtonText: 'No'
+    }).then((result) => {
+      console.log(result);
+      if (result.isConfirmed) {
+        localStorage.removeItem("token");
+        navigate("/");
+        window.location.reload();
+      }
+    });
   };
 
   const handleChangeView = (view) => {
@@ -46,7 +60,12 @@ const UserPanel = () => {
             >
               Historial de compras
             </li>
-            <li className={view === "disabledAccount" && "isOrange"} onClick={() => handleChangeView("disabledAccount")}>Desactivar cuenta</li>
+            <li
+              className={view === "disabledAccount" && "isOrange"}
+              onClick={() => handleChangeView("disabledAccount")}
+            >
+              Desactivar cuenta
+            </li>
             <li className="danger" onClick={handleLogout}>
               Cerrar sesion
             </li>

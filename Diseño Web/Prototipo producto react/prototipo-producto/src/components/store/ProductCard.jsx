@@ -19,7 +19,7 @@ const ProductCard = ({ img, product, description, id, categoryFromProps }) => {
       isVisible={true}
     >
       {isMobile ? (
-        <Card img={img} title={product} to={`${product}/${id}`} />
+        <Card img={img} title={product} to={`${category}/${id}`} />
       ) : (
         <div className="product-card">
           <img src={img ? img : NoPhoto} width="200px" alt="" />
