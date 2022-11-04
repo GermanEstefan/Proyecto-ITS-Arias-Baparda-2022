@@ -60,7 +60,7 @@ const Register = () => {
         setErrors({ ...errors, [target.name]: { error: true, message: "Contraseña muy corta" } });
       }
     }
-    console.log(errors);
+    
     setValues({ ...values, [target.name]: target.value });
   };
 
@@ -70,7 +70,7 @@ const Register = () => {
       setValues({ ...values, type: "COMPANY" });
     }
     if (!target.checked) {
-      setValues({ ...values, nRut: "", company: "", type: "NORMAL" });
+      setValues({ ...values, type: "NORMAL" });
     }
   };
   const handleSubmit = async (e) => {
@@ -190,7 +190,7 @@ const Register = () => {
               type={"checkbox"}
               value={values.type === "COMPANY"}
               onChange={(e) => handleCheckbox(e)}
-              onBlur={(e) => handleSetValues(e)}
+              onBlur={(e) => handleCheckbox(e)}
             />
             Empresa
           </label>

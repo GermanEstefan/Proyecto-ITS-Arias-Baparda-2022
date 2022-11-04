@@ -10,7 +10,7 @@ import UpdatePasswordForm from "../../components/store/UpdatePasswordForm";
 import DisableAccount from "../../components/store/DisableAccount";
 
 const UserPanel = () => {
-  const [view, setView] = useState("disabledAccount");
+  const [view, setView] = useState("personalInformation");
   const navigate = useNavigate();
 
   const handleLogout = () => {

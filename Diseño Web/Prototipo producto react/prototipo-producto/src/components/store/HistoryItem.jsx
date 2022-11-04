@@ -39,6 +39,7 @@ export const HistoryItem = ({ sale }) => {
           {saleProducts.map((saleDetail, index) => (
             <div key={index} className="collapseSale">
               <div>
+                
                 <span>{saleDetail.productName}</span>
                 <span>x{saleDetail.quantity}</span>
               </div>
