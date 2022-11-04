@@ -210,7 +210,7 @@ class CustomerController
         $customerInDatabaseState = $customerExistInDatabase['state'];
         if($customerInDatabaseState == 0){
             http_response_code(401);
-            echo $this->response->error401("Usuario se encuentra dado de baja, contacte con el administrador.");
+            echo $this->response->error401("Usuario se encuentra dado de baja");
             die();
         }
 

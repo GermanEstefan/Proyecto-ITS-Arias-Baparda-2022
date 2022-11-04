@@ -334,6 +334,12 @@ class SaleController {
             die();
         }    
     }
+    $setZeroInSale = SaleModel::setTotalForCanceled($idSale);
+    if(!$setZeroInSale){
+        echo $this->response->error203("Error al setear la venta a 0");
+        die();
+    }
+
     $getName = StatusModel::getStatusById($status);
     $nameStatus = $getName['name'];
         $comment = "$employeeDoc cambia $idSale de estado $statusActual a $nameStatus";

@@ -214,6 +214,13 @@
             WHERE sale_report = $idSale";
             return $conecction->setData($query);
         }
+        public static function setTotalForCanceled($idSale){
+            $conecction = new Connection();
+            $query = "UPDATE sale 
+            SET total = 0
+            WHERE sale_report = $idSale";
+            return $conecction->setData($query);
+        }
 
 
 
