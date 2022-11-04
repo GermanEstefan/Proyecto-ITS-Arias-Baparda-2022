@@ -336,7 +336,7 @@ class SaleController {
     }
     $getName = StatusModel::getStatusById($status);
     $nameStatus = $getName['name'];
-        $comment = "$employeeDoc cambia $idSale de estado $statusActual a $status";
+        $comment = "$employeeDoc cambia $idSale de estado $statusActual a $nameStatus";
         $result = SaleModel::updateReportOfSale($idSale,$status,$employeeDoc,$comment);
         if(!$result){
             echo $this->response->error500();

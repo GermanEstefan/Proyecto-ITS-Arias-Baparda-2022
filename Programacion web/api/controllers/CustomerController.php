@@ -40,6 +40,13 @@ class CustomerController
         //aca tenemos que validar mas cosas como que tenga un largo especifico (se pueden enviar nombre de ctegoria con valor " ")
         return $userData;
     }
+    private function validateBodyDisableAccount($userData){
+        if( !isset($userData['password']) 
+        ||  !isset($userData['email']))
+        return false;
+        //aca tenemos que validar mas cosas como que tenga un largo especifico (se pueden enviar nombre de ctegoria con valor " ")
+        return $userData;
+    }
 
     public function updateCustomer($userData)
     {
@@ -93,6 +100,30 @@ class CustomerController
             die();
         }
         echo $this->response->successfully("Contraseña actualizada con exito");
+    }
+    public function updateStateOfCustomer($userData){
+        $idOfUserRequested = $this->jwt->verifyTokenAndGetIdUserFromRequest();
+        $bodyOfRequest = CustomerController::validateBodyDisableAccount($userData);
+        if(!$bodyOfRequest){
+            http_response_code(400);
+            echo $this->response->error400();
+            die();
+        }
+
+        $password = $userData['password'];
+        $email = $userData['email'];
+
+        $isPass = CustomerModel::getPassOfUser($idOfUserRequested);
+        if($password != $isPass['pass']){
+            echo $this->response->error203("Contraseña ingresada no es valida");
+            die();
+        }
+        $disableAccount = UserModel::disableUser($email);
+        if(!$disableAccount){
+            echo $this->response->error203("Error al eliminar cuenta");
+            die();
+        }
+        echo $this->response->successfully("Su cuenta a sido eliminada con exito");
     }
 
     public function registerCustomer($userData)
