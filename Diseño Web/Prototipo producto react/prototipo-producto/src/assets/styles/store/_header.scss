@@ -74,7 +74,7 @@
           position: absolute;
           bottom: -10px;
           left: 0;
-          transition: 0.5s;
+          transition: 0.3s;
         }
         &:hover::after {
           width: 100%;
@@ -85,9 +85,9 @@
         color: $orange;
         cursor: pointer;
         margin-right: 20px;
-        transition: color 0.5s;
+        transition: color 0.3s;
         &:hover {
-          color: $transparent_orange;
+          color: $dark-orange;
         }
       }
     }

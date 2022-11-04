@@ -1,3 +1,5 @@
+/** @format */
+
 .card-container {
   display: flex;
   flex-wrap: wrap;
@@ -5,7 +7,7 @@
   margin: 11px 0;
   padding: 30px;
   width: 80%;
-  @media screen and (max-width: 800px){
+  @media screen and (max-width: 800px) {
     margin: 50px 0;
   }
 
@@ -16,13 +18,13 @@
     padding: 1em;
     border-radius: 5px;
     cursor: pointer;
-    transition: transform .5s;
+    transition: transform 0.5s;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-    margin: 15px 10px 10px 10px;
-    @media screen and (max-width: 800px){
+
+    @media screen and (max-width: 800px) {
       margin: 10px 0 10px 0;
     }
-  
+
     img {
       padding-bottom: 2em;
       display: block;

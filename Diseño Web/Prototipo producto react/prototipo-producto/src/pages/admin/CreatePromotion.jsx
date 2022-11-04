@@ -236,7 +236,7 @@ const CreatePromotion = () => {
                       type="number"
                       className="input-form"
                       name="quantity"
-                      min="0"
+                      min="1"
                       value={contain.quantity}
                       onChange={(e) => handleChangeContainPromo(e, i)}
                     />

@@ -16,6 +16,7 @@ const CategoryPage = () => {
   const [productList, setProductList] = useState([]);
   useEffect(() => {
     window.scroll(0, 0);
+    window.scrollTo( 0, 0 );
     getProductsByCategory();
   }, []);
 
