@@ -54,7 +54,7 @@
 			concat_ws(' ', u.name , u.surname) AS clientName,
             s.payment,
             sd.product_sale as barcode, 
-			concat_ws(' ', p.name, d.name , sz.name) AS productName,
+			concat_ws(' ', p.name , d.name , sz.name) AS productName,
             sd.quantity,
             sd.total,
             s.total AS totalSale
@@ -97,7 +97,8 @@
             r.sale_report AS idSale,
             s.name AS nameStatus,
             r.employee_report AS docEmployee,
-            u.email AS employeeMail,
+            /*u.email AS employeeMail, NO TIENE SENTIDO QUE MOSTREMOS EL MAIL, SIEMPRE HABLAMOS DE CI Y NAME*/
+            concat_ws(' ', e.ci , u.name , u.surname) AS employeeMail,
             sl.total AS totalSale,
             date_format(r.date, '%d/%m/%Y %T') AS lastUpdate
             FROM report r , status s, employee e, user u, sale sl
