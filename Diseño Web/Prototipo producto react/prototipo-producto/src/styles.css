@@ -2092,6 +2092,16 @@
 .sale-detail .sale-detail_controls > button:hover {
   background-color: #d9d9d9;
 }
+.sale-detail .sale-detail_controls > ul {
+  margin-top: 30px;
+}
+.sale-detail .sale-detail_controls > ul > li {
+  margin-bottom: 10px;
+}
+.sale-detail .sale-detail_controls > ul > li > strong {
+  font-size: 1.1rem;
+  margin-right: 5px;
+}
 
 .title-card-section {
   font-size: 1.2rem;

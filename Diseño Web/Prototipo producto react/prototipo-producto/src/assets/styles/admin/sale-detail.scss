@@ -88,6 +88,17 @@
                 background-color: darken($color: #f2f2f2, $amount: 10);
             }
         }
+        > ul {
+            margin-top: 30px;
+
+            > li {
+                > strong {
+                    font-size: 1.1rem;
+                    margin-right: 5px;
+                }
+                margin-bottom: 10px;
+            }
+        }
     }
 }
 .title-card-section{

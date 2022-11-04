@@ -9,10 +9,11 @@ import ContainerBase from "../../components/admin/ContainerBase";
 const DetailsSales = () => {
 
     const { idSale } = useParams();
+    const { ci } = useContext(userStatusContext).userData;
     const [saleDetail, setSaleDetail] = useState({});
     const { statusSale, totalSale, clientInfo, saleInfo, productSale } = saleDetail;
     const [states, setStates] = useState([]);
-    const { ci } = useContext(userStatusContext).userData;
+    const [historySale, setHistorySale] = useState([]);
 
     useEffect(() => {
         const statesPromise = fetchApi('status.php', 'GET');
@@ -29,8 +30,13 @@ const DetailsSales = () => {
     }, [])
 
     const handleGetHistoryOfSale = async () => {
-        const resp = await fetchApi(`sales.php?reportHistory=${idSale}`, 'GET');
-        console.log(resp)
+        try {
+            const resp = await fetchApi(`sales.php?reportHistory=${idSale}`, 'GET');
+            console.log(resp)
+            setHistorySale(resp.result.data.history)
+        } catch (error) {
+            console.error(error)
+        }
     }
 
     const handleChangeState = async (e, newStateName) => {
@@ -135,8 +141,33 @@ const DetailsSales = () => {
                         </form>
                         {(statusSale === 'CANCELADA') && <strong className="bija">No se puede cambiar de estado una venta que fue cancelada</strong> }
                         <hr />
-                        <button>Ver historial de venta</button>
-
+                        <button onClick={handleGetHistoryOfSale}>Ver historial de venta</button>
+                        {
+                            (historySale.length > 0) &&
+                            historySale.map( sale => (
+                                <>
+                                <ul>
+                                    <li> 
+                                        <strong>Responsable del cambio de estado:</strong> 
+                                        <span>{sale.employeeName}</span> 
+                                    </li>
+                                    <li>
+                                        <strong>Fecha del cambio:</strong>
+                                        <span> {sale.date} </span>
+                                    </li>
+                                    <li>
+                                        <strong>Estado al que se cambio:</strong>
+                                        <span>{sale.status}</span>
+                                    </li>
+                                    <li>
+                                        <strong>Comentario</strong>
+                                        <span>{sale.comment} </span>
+                                    </li>
+                                </ul>
+                                <hr />
+                                </>
+                            ))
+                        }
                     </div>
 
                 </div>
