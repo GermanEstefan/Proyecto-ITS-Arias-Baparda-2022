@@ -163,6 +163,8 @@ class ProductController
             die();
         }
         echo $this->response->successfully("Producto creado con exito");
+        
+        
     }
     public function savePromo($promoData)
     {   
