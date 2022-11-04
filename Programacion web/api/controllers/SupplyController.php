@@ -45,7 +45,7 @@ class SupplyController {
             echo $this->response->error400('La informacion recibida es incorrecta');
             die();
         }
-        
+
 
         $idSupplier = $supplyData['idSupplier'];
         $employee_ci = $supplyData['employee_ci'];
@@ -79,7 +79,7 @@ class SupplyController {
             echo $this->response->error203("PERMISO DENEGADO");
             die();
         }
-        if($employeeRole != 'JEFE' ||$employeeRole !='COMPRADOR'){
+        if (! ($employeeRole === 'JEFE' || $employeeRole === 'COMPRADOR')) {
             http_response_code(401);
             echo $this->response->error401("Rol no valido para relizar esta accion");
             die();
@@ -109,7 +109,7 @@ class SupplyController {
             echo $this->response->error203("PERMISO DENEGADO");
             die();
         }
-        if($employeeRole != 'JEFE' ||$employeeRole !='COMPRADOR'){
+        if (! ($employeeRole === 'JEFE' || $employeeRole === 'COMPRADOR')) {
             http_response_code(401);
             echo $this->response->error401("Rol no valido para relizar esta accion");
             die();
@@ -140,7 +140,7 @@ class SupplyController {
             echo $this->response->error203("PERMISO DENEGADO");
             die();
         }
-        if($employeeRole != 'JEFE' ||$employeeRole !='COMPRADOR'){
+        if (! ($employeeRole === 'JEFE' || $employeeRole === 'COMPRADOR')) {
             http_response_code(401);
             echo $this->response->error401("Rol no valido para relizar esta accion");
             die();
@@ -169,7 +169,7 @@ class SupplyController {
             echo $this->response->error203("PERMISO DENEGADO");
             die();
         }
-        if($employeeRole != 'JEFE' ||$employeeRole !='COMPRADOR'){
+        if (! ($employeeRole === 'JEFE' || $employeeRole === 'COMPRADOR')) {
             http_response_code(401);
             echo $this->response->error401("Rol no valido para relizar esta accion");
             die();
