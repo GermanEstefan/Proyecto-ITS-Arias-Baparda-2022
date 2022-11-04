@@ -300,7 +300,7 @@ class SaleController {
 
         $statusActualIsCanceled = SaleModel::getSaleById($idSale);
         $statusActual = $statusActualIsCanceled['statusActual'];
-        if($statusActual == 'CANCELADA'){
+        if($statusActual === 'CANCELADA'){
             echo $this->response->error203("LA VENTA SE ENCUENTRA CANCELADA");
             die();
         }
@@ -320,7 +320,9 @@ class SaleController {
             echo $this->response->error203("No existe el estado $status");
             die();
         }
-        if($status == 'CANCELADA'){
+        $getName = StatusModel::getStatusById($status);
+        $nameStatus = $getName['name'];
+        if($nameStatus === 'CANCELADA'){
             $getProducts = SaleModel::saleIsCanceled($idSale);
             foreach($getProducts as $individual){
             $barcode = $individual['barcode'];
@@ -332,6 +334,8 @@ class SaleController {
             die();
         }    
     }
+    $getName = StatusModel::getStatusById($status);
+    $nameStatus = $getName['name'];
         $comment = "$employeeDoc cambia $idSale de estado $statusActual a $status";
         $result = SaleModel::updateReportOfSale($idSale,$status,$employeeDoc,$comment);
         if(!$result){
