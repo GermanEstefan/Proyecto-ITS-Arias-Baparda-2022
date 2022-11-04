@@ -106,7 +106,8 @@
             AND r.status_report = s.id_status
             AND r.employee_report = e.ci
             AND e.employee_user = u.id_user
-            AND sl.id_sale = r.sale_report";
+            AND sl.id_sale = r.sale_report
+            ORDER BY lastUpdate desc";
             return $conecction->getData($query)->fetch_all(MYSQLI_ASSOC);
         }
         public static function getSalesForUserID($idClient){
