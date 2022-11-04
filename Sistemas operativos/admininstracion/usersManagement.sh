@@ -1,8 +1,9 @@
-#!bin/bash
+#!/bin/bash
 logger -p local1.info "Ingresando a menu de administracion de usuarios y grupos"
 opt=0
 while [ "$opt" != 10 ]
 do
+	clear
 	echo "Selecciona una opcion"
 	echo "-----------------------------------"
 	echo "-------------USUARIOS--------------"
@@ -21,6 +22,8 @@ do
 	echo "9- Listar grupos"
 	echo "10- Salir"
 	read opt
+	if [[ $opt =~ ^[0-9]+$ ]]
+	then
 	case $opt in
 		1)
 		logger -p local1.info "Ingresando en la opcion de agregar usuarios"
@@ -384,6 +387,13 @@ do
 		*)
 		clear
 		echo "Opcion incorrecta"
+		sleep 2s
 		;;
 	esac
+	else
+		logger -p local1.info "Se ingreso un valor que no es numerico"
+		echo "error, se ingreso un valor que no es numerico"
+		echo "presione enter para continuar"
+		read exit
+	fi
 done

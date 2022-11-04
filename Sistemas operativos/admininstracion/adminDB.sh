@@ -1,4 +1,4 @@
-#!bin/bash
+#!/bin/bash
 logger -p local1.info "Inicia el script de administracion de la base de datos"
 #administracion de la base de datos
 #variables
@@ -19,6 +19,8 @@ do
 	echo ".........................................."
 	echo "Seleccione una opcion.."
 	read op
+	if [[ $op =~ ^[0-9]+$ ]]
+	then
 	case $op in 
 	1)
 	logger -p local1.info "intentando crear un usuario"
@@ -365,5 +367,11 @@ do
 	echo "Opcion incorrecta"
 	;;
 	esac
+	else
+		logger -p local1.info "error, se quiso ingresar un valor no numerico"
+		echo "se quiso ingresar un valor que no es numerico"
+		echo "presione enter para continuar"
+		read exit
+	fi
 done
 

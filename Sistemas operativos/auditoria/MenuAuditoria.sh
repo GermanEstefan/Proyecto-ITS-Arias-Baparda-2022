@@ -15,8 +15,11 @@ do
 	echo "6) ver logs por cambios en el sistema"
 	echo "7) ver los ultimos inicios de sesion"
 	echo "8) ver los intentos fallidos de acceso al servidor de respaldos"
+	echo "9) ver los logs de los menus de administracion"
 	echo "0) Salir"
 	read op
+	if [[ $op =~ ^[0-9]+$ ]]
+	then
 	case $op in
 	1)
 	logger -p local1.info "opcion: ver quien se encuentra conectado"
@@ -70,6 +73,8 @@ do
 	echo "Seleccione el mes: 1-Ene 2-Feb 3-Mar 4-Abr 5-May 6-Jun 7-Jul 8-Ago 9-Sep 10-Oct 11-Nov 12-Dic"
 	echo "--para ver los logs de un mes en particular ingrese 0 cuando se le pida el dia--"
 	read monthNumber
+	if [[ $monthNumber =~ ^[0-9]+$ ]]
+	then
 	case $monthNumber in
 		1)
 		logger -p local1.info "buscando en el mes de enero" 
@@ -714,6 +719,12 @@ do
 		read exit
 		;;
 	esac
+	else
+		logger -p local1.info "error, se quiso ingresar un valor que no es numerico"
+		echo "error se ingreso un valor que no es numerico"
+		echo "presione enter para continuar"
+		read exit
+	fi
 	;;
 	6)
 	logger -p local1.info "opcion: ver registros de cambios en el sistema"
@@ -754,9 +765,16 @@ do
 		read exit
 	fi
 	;;
+	9)
+	logger -p local1.info "opcion: mostrar los logs de los menus de sistema"
+	echo "Logs de menus"
+	cat /var/log/customlogs/menu_backup.log | less
+	echo "presione enter para continuar"
+	read exit
+	;;
 	0)
 	logger -p local1.info "saliendo del menu de auditoria"
-	echo "bye"
+	clear
 	;;
 	*)
 	logger -p local1.info "error, se ingreso una opcion invalida"
@@ -764,4 +782,10 @@ do
 	sleep 2s
 	;;
 	esac
+	else
+	logger -p local1.info "error el valor ingresado debe ser numerico"
+	echo "error, el valor debe ser numerico"
+	echo "presione enter para continuar"
+	read exit
+	fi
 done

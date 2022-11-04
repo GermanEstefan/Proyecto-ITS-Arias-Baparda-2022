@@ -20,12 +20,12 @@ do
 	echo "Comprobando, esto puede tardar unos minutos...."
 	echo "-----------------------------------------------"
 	logger -p local1.info "Intentando hacer ping al servidor"
-	ping -c3 backupServer | grep "Destination Host Unreachable"
+	ping -c3 backupServer
 	if [ $? == 0 ]
 	then
 		logger -p local1.info "ping realizado con exito, intentando escanear puertos"
-		timeout 30s nmap -Pn 192.168.1.2
-		if [ $? == 0 ]
+		timeout 30s nmap -Pn backupServer
+		if [ $? != 0 ]
 		then
 			logger -p local1.info "puertos escaneados con exito"
 			echo "------------------------------------------"
