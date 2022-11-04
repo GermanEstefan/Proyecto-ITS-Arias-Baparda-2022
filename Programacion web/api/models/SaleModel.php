@@ -218,7 +218,7 @@
             $conecction = new Connection();
             $query = "UPDATE sale 
             SET total = 0
-            WHERE sale_report = $idSale";
+            WHERE id_sale = $idSale";
             return $conecction->setData($query);
         }
 
