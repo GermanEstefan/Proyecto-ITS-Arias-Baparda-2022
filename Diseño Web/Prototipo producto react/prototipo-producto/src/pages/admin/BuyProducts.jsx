@@ -105,8 +105,11 @@ const BuyProducts = () => {
               onChange={handleValuesChange}
               name="idSupplier"
             >
+              <option value="" selected disabled>
+                Seleccione Proveedor
+              </option>
               {suppliers.map(({ id_supplier, company_name }) => (
-                <option value={id_supplier} key={id_supplier}>
+                <option required value={id_supplier} key={id_supplier}>
                   {company_name}
                 </option>
               ))}

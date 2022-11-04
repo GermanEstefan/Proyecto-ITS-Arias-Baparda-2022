@@ -179,7 +179,7 @@ const CreatePromotion = () => {
                   type="number"
                   name="stock"
                   placeholder="Ingrese Stock promo"
-                  min="0"
+                  min="1"
                   onChange={handleValuesChange}
                   value={stock}
                   className="input-form"

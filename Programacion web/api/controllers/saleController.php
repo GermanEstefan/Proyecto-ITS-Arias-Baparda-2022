@@ -285,7 +285,7 @@ class SaleController {
             echo $this->response->error203("PERMISO DENEGADO");
             die();
         }
-        if (! ($employeeRole === 'JEFE' || $employeeRole === 'COMPRADOR')) {
+        if (! ($employeeRole === 'JEFE' || $employeeRole === 'VENDEDOR')) {
             http_response_code(401);
             echo $this->response->error401("Rol no valido para relizar esta accion");
             die();

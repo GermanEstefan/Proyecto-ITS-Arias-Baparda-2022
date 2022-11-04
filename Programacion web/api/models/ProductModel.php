@@ -207,6 +207,7 @@
             p.name,
             p.price,
             p.description,
+            p.stock, 
             p.state, 
             p.picture
             from product p
