@@ -529,6 +529,9 @@ INSERT INTO `bindev`.`size` (`name`, `description`) VALUES ('TALLE 41', 'DESCRIP
 INSERT INTO `bindev`.`size` (`name`, `description`) VALUES ('TALLE 42', 'DESCRIPCION DEL TALLE');
 INSERT INTO `bindev`.`size` (`name`, `description`) VALUES ('TALLE 43', 'DESCRIPCION DEL TALLE');
 INSERT INTO `bindev`.`size` (`name`, `description`) VALUES ('TALLE 44', 'DESCRIPCION DEL TALLE');
+INSERT INTO `bindev`.`size` (`name`, `description`) VALUES ('CHICO', 'DESCRIPCION DEL TALLE');
+INSERT INTO `bindev`.`size` (`name`, `description`) VALUES ('MEDIO', 'DESCRIPCION DEL TALLE');
+INSERT INTO `bindev`.`size` (`name`, `description`) VALUES ('GRANDE', 'DESCRIPCION DEL TALLE');
 
 
 
