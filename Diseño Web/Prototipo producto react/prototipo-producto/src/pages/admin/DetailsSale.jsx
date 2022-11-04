@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, Fragment } from "react";
 import { useParams } from "react-router-dom";
 import Swal from "sweetalert2";
 import { fetchApi } from "../../API/api";
@@ -145,7 +145,7 @@ const DetailsSales = () => {
                         {
                             (historySale.length > 0) &&
                             historySale.map( sale => (
-                                <>
+                                <Fragment key={sale.regNr} >
                                 <ul>
                                     <li> 
                                         <strong>Responsable del cambio de estado:</strong> 
@@ -165,7 +165,7 @@ const DetailsSales = () => {
                                     </li>
                                 </ul>
                                 <hr />
-                                </>
+                                </Fragment>
                             ))
                         }
                     </div>

@@ -171,6 +171,7 @@ const ListProducts = () => {
                                         <th>Nombre</th>
                                         <th>Descripcion</th>
                                         <th>Precio</th>
+                                        <th>Stock</th>
                                         <th>Estado</th>
                                         <th colSpan={2}>Controles</th>
                                     </tr>
@@ -182,6 +183,7 @@ const ListProducts = () => {
                                                     <td>{promo.name}</td>
                                                     <td>{promo.description}</td>
                                                     <td>{promo.price}</td>
+                                                    <td>{promo.stock}</td>
                                                     <td>{promo.state}</td>
                                                     <td className="controls-table" onClick={() => navigate(`/admin/products/edit-promo/${promo.id_product}`)} ><FontAwesomeIcon icon={faPencil} /></td>
                                                     <td className="controls-table" onClick={() => alert('eliminar producto')}><FontAwesomeIcon icon={faTrash} /></td>
