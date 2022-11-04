@@ -24,15 +24,14 @@ class SupplierController {
 
         return $supplierData;
     }
-    public function saveSupplier($supplierData)
-    {
+    public function saveSupplier($supplierData) {
        
         $employeeRole = $this->jwt->verifyTokenAndValidateEmployeeUser();
-        if(!$employeeRole){
+        if (!$employeeRole) {
             echo $this->response->error203("PERMISO DENEGADO");
             die();
         }
-        if($employeeRole != 'JEFE' ||$employeeRole !='COMPRADOR'){
+        if (! ($employeeRole === 'JEFE' || $employeeRole === 'COMPRADOR')) {
             http_response_code(401);
             echo $this->response->error401("Rol no valido para relizar esta accion");
             die();
@@ -104,14 +103,14 @@ class SupplierController {
         echo $this->response->successfully("Proveedor con idN°:$idSupplier", $supplier);
     }
     //ACTUALIZAR
-    public function updateSupplier($supplierId, $supplierData){
+    public function updateSupplier($supplierId, $supplierData) {
 
         $employeeRole = $this->jwt->verifyTokenAndValidateEmployeeUser();
-        if(!$employeeRole){
+        if (!$employeeRole) {
             echo $this->response->error203("PERMISO DENEGADO");
             die();
         }
-        if($employeeRole != 'JEFE' ||$employeeRole !='COMPRADOR'){
+        if (! ($employeeRole === 'JEFE' || $employeeRole === 'COMPRADOR')) {
             http_response_code(401);
             echo $this->response->error401("Rol no valido para relizar esta accion");
             die();
@@ -133,14 +132,14 @@ class SupplierController {
             die();
         }
         $notChangeRut = SupplierModel::getSupplierByRut($rut);
-        if ($notChangeRut){
+        if ($notChangeRut) {
             $result = SupplierModel::updateSupplierNotRut($supplierId,$companyName,$address,$phone);
             echo $this->response->successfully("Informacion del proveedor actualizada con exito");
             die();
         }
 
         $result = SupplierModel::updateSupplier($supplierId,$rut,$companyName,$address,$phone);
-        if(!$result){
+        if (!$result) {
             echo $this->response->error500();
             die();
         }
@@ -149,11 +148,11 @@ class SupplierController {
     public function disableSupplier($supplierId)
     {
         $employeeRole = $this->jwt->verifyTokenAndValidateEmployeeUser();
-        if(!$employeeRole){
+        if (!$employeeRole) {
             echo $this->response->error203("PERMISO DENEGADO");
             die();
         }
-        if($employeeRole != 'JEFE' ||$employeeRole !='COMPRADOR'){
+        if (! ($employeeRole === 'JEFE' || $employeeRole === 'COMPRADOR')) {
             http_response_code(401);
             echo $this->response->error401("Rol no valido para relizar esta accion");
             die();
@@ -174,11 +173,12 @@ class SupplierController {
     public function activeSupplier($supplierId)
     {
         $employeeRole = $this->jwt->verifyTokenAndValidateEmployeeUser();
-        if(!$employeeRole){
+        $employeeRole = $this->jwt->verifyTokenAndValidateEmployeeUser();
+        if (!$employeeRole) {
             echo $this->response->error203("PERMISO DENEGADO");
             die();
         }
-        if($employeeRole != 'JEFE' ||$employeeRole !='COMPRADOR'){
+        if (! ($employeeRole === 'JEFE' || $employeeRole === 'COMPRADOR')) {
             http_response_code(401);
             echo $this->response->error401("Rol no valido para relizar esta accion");
             die();

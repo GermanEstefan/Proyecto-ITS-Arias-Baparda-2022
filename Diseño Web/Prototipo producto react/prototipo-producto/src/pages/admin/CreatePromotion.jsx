@@ -179,7 +179,7 @@ const CreatePromotion = () => {
                   type="number"
                   name="stock"
                   placeholder="Ingrese Stock promo"
-                  min="0"
+                  min="1"
                   onChange={handleValuesChange}
                   value={stock}
                   className="input-form"
@@ -236,7 +236,7 @@ const CreatePromotion = () => {
                       type="number"
                       className="input-form"
                       name="quantity"
-                      min="0"
+                      min="1"
                       value={contain.quantity}
                       onChange={(e) => handleChangeContainPromo(e, i)}
                     />

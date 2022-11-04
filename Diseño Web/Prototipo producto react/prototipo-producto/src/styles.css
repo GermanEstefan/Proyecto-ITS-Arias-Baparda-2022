@@ -50,6 +50,13 @@
   display: flex;
   flex-direction: column;
 }
+.form-container form a {
+  margin: 10px auto;
+  text-align: center;
+  color: rgba(245, 153, 15, 0.9529411765);
+  text-decoration: underline;
+  font-weight: bold;
+}
 .form-container form .inputSection {
   width: 60%;
   display: flex;
@@ -920,6 +927,11 @@
   display: flex;
   flex-direction: column;
 }
+.productContainer .productPage .productPage__description .productPage__description__buttons p a {
+  color: rgba(245, 153, 15, 0.9529411765);
+  text-decoration: underline;
+  font-weight: bold;
+}
 .productContainer .productPage .productPage__description .productPage__description__buttons .buttonsFlexContainer {
   display: flex;
   justify-content: space-between;
@@ -1326,6 +1338,13 @@
   justify-content: space-between;
   align-items: center;
 }
+.cartContainer .cartPage .cartItem .cartItem__text h3 a {
+  transition: 0.3s;
+}
+.cartContainer .cartPage .cartItem .cartItem__text h3 a:hover {
+  text-decoration: underline;
+  transition: 0.3s;
+}
 @media screen and (max-width: 600px) {
   .cartContainer .cartPage .cartItem .cartItem__text {
     justify-content: space-around;
@@ -1349,6 +1368,13 @@
 .cartContainer .cartPage .cartItem .cartItem__text button:hover {
   background-color: #e18e11;
   transition: 0.3s;
+}
+.cartContainer .cartPage .cartItem .cartItem__text button:disabled {
+  background-color: #bccddb;
+  color: #9ba6af;
+}
+.cartContainer .cartPage .cartItem .cartItem__text button:disabled:hover {
+  cursor: auto;
 }
 .cartContainer .cartPage .cartItem .cartItem__text .total {
   font-weight: bold;
@@ -1961,6 +1987,11 @@
   border-bottom: none;
 }
 
+.bija {
+  color: rgb(216, 11, 11);
+  font-size: 1.1rem !important;
+}
+
 .manage-sales .manage-sales_filters {
   display: flex;
   align-items: center;
@@ -2027,9 +2058,15 @@
 }
 .sale-detail .sale-detail_controls {
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 .sale-detail .sale-detail_controls strong {
   font-size: 1.2rem;
+}
+.sale-detail .sale-detail_controls hr {
+  width: 100%;
 }
 .sale-detail .sale-detail_controls > form {
   margin: 30px 0;
@@ -2054,6 +2091,16 @@
 }
 .sale-detail .sale-detail_controls > button:hover {
   background-color: #d9d9d9;
+}
+.sale-detail .sale-detail_controls > ul {
+  margin-top: 30px;
+}
+.sale-detail .sale-detail_controls > ul > li {
+  margin-bottom: 10px;
+}
+.sale-detail .sale-detail_controls > ul > li > strong {
+  font-size: 1.1rem;
+  margin-right: 5px;
 }
 
 .title-card-section {
@@ -2109,8 +2156,6 @@ button:disabled {
 
 button:disabled:hover {
   cursor: auto;
-  background-color: #bccddb;
-  color: #9ba6af;
 }
 
 ::-webkit-scrollbar {

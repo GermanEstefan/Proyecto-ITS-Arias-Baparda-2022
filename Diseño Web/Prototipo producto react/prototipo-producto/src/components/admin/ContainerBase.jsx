@@ -38,8 +38,8 @@ const ContainerBase = ({ children }) => {
                 <div className="header-admin_config">
                     <FontAwesomeIcon icon={faRightFromBracket} onClick={handleLogout} />
                     <div>
-                        <span>{capitalizeString(`${name} ${surname}`)}</span>
-                        <small>{capitalizeString(rol)}</small>
+                        <span>{ (name && surname) && capitalizeString(`${name} ${surname}`)}</span>
+                        <small>{ rol && capitalizeString(rol)}</small>
                     </div>
                 </div>
             </header>

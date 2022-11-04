@@ -30,7 +30,7 @@ class SaleController {
     }
     private function validateBodyOfReport($saleData){
         if(!isset($saleData['employeeDoc'])
-        ||  !isset($saleData['state']))
+        ||  !isset($saleData['status']))
         return false;
         return $saleData;
     }
@@ -285,17 +285,17 @@ class SaleController {
             echo $this->response->error203("PERMISO DENEGADO");
             die();
         }
-        if($employeeRole !== 'JEFE' ||$employeeRole !== 'VENDEDOR'){
+        if (! ($employeeRole === 'JEFE' || $employeeRole === 'VENDEDOR')) {
             http_response_code(401);
             echo $this->response->error401("Rol no valido para relizar esta accion");
             die();
-        } 
+        }
         $bodyIsValid = $this->validateBodyOfReport($saleData);
         if(!$bodyIsValid){
              echo $this->response->error400('No se puede actualizar - Revise informacion');
             die();
         }
-        $status = $saleData['state'];
+        $status = $saleData['status'];
         $employeeDoc = $saleData['employeeDoc'];
 
         $statusActualIsCanceled = SaleModel::getSaleById($idSale);

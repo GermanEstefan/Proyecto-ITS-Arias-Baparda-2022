@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, Fragment } from "react";
 import { useParams } from "react-router-dom";
 import Swal from "sweetalert2";
 import { fetchApi } from "../../API/api";
@@ -9,10 +9,11 @@ import ContainerBase from "../../components/admin/ContainerBase";
 const DetailsSales = () => {
 
     const { idSale } = useParams();
+    const { ci } = useContext(userStatusContext).userData;
     const [saleDetail, setSaleDetail] = useState({});
     const { statusSale, totalSale, clientInfo, saleInfo, productSale } = saleDetail;
     const [states, setStates] = useState([]);
-    const { ci } = useContext(userStatusContext).userData;
+    const [historySale, setHistorySale] = useState([]);
 
     useEffect(() => {
         const statesPromise = fetchApi('status.php', 'GET');
@@ -29,19 +30,26 @@ const DetailsSales = () => {
     }, [])
 
     const handleGetHistoryOfSale = async () => {
-        const resp = await fetchApi(`sales.php?reportHistory=${idSale}`, 'GET');
-        console.log(resp)
+        try {
+            const resp = await fetchApi(`sales.php?reportHistory=${idSale}`, 'GET');
+            console.log(resp)
+            setHistorySale(resp.result.data.history)
+        } catch (error) {
+            console.error(error)
+        }
     }
 
-    const handleChangeState = async (e) => {
+    const handleChangeState = async (e, newStateName) => {
         e.preventDefault();
         const newState = e.target[0].value;
+        const {name} = states.find( state => state.id_status === newState);
         const bodyOfRequest = {
-            state: newState,
+            status: newState,
             employeeDoc: ci
         }
-        const resp = await fetchApi(`sales.php?actualizeSale=${e}`, 'PATCH', bodyOfRequest);
+        const resp = await fetchApi(`sales.php?actualizeSale=${idSale}`, 'PATCH', bodyOfRequest);
         console.log(resp)
+        console.log(bodyOfRequest)
         if (resp.status === 'error') {
             setSaleDetail({ ...saleDetail, statusSale: newState })
             return Swal.fire({
@@ -51,7 +59,7 @@ const DetailsSales = () => {
                 showConfirmButton: false,
             });
         }
-        setSaleDetail({ ...saleDetail, statusSale: newState })
+        setSaleDetail({ ...saleDetail, statusSale: name })
         return Swal.fire({
             icon: "success",
             text: "Estado de venta cambiado con exito",
@@ -131,9 +139,35 @@ const DetailsSales = () => {
                                 disabled={statusSale === 'CANCELADA' ? true : false}
                             >Cambiar estado</button>
                         </form>
+                        {(statusSale === 'CANCELADA') && <strong className="bija">No se puede cambiar de estado una venta que fue cancelada</strong> }
                         <hr />
-                        <button>Ver historial de venta</button>
-
+                        <button onClick={handleGetHistoryOfSale}>Ver historial de venta</button>
+                        {
+                            (historySale.length > 0) &&
+                            historySale.map( sale => (
+                                <Fragment key={sale.regNr} >
+                                <ul>
+                                    <li> 
+                                        <strong>Responsable del cambio de estado:</strong> 
+                                        <span>{sale.employeeName}</span> 
+                                    </li>
+                                    <li>
+                                        <strong>Fecha del cambio:</strong>
+                                        <span> {sale.date} </span>
+                                    </li>
+                                    <li>
+                                        <strong>Estado al que se cambio:</strong>
+                                        <span>{sale.status}</span>
+                                    </li>
+                                    <li>
+                                        <strong>Comentario</strong>
+                                        <span>{sale.comment} </span>
+                                    </li>
+                                </ul>
+                                <hr />
+                                </Fragment>
+                            ))
+                        }
                     </div>
 
                 </div>

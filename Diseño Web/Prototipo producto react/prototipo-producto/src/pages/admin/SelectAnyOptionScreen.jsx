@@ -16,6 +16,8 @@ const SelectAnyOptionScreen = () => {
                 <h1>Bienvenido :</h1> 
                 <h2>{capitalizeString(`${name} ${surname}`)}</h2>
                 <p>Seleccione alguna opción del menú para comenzar la gestión</p>
+                <h2>{ (name && surname) && capitalizeString(`${name} ${surname}`)}</h2>
+                <p>Seleccione alguna opcion del menu para comenzar la gestion</p>
                 <FontAwesomeIcon icon={faStar} />
             </div>
         </section>

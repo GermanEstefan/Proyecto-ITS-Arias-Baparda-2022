@@ -48,7 +48,7 @@ const ManageSales = () => {
                         {
                             !sales
                                 ? 'No hay ventas registradas por el momento'
-                                : (sales.length === 1) ? '1 venta registrada' : `${sales.length + 1} ventas registradas`
+                                : (sales.length === 1) ? '1 venta registrada' : `${sales.length} ventas registradas`
                         }
                     </strong>
 
@@ -57,7 +57,7 @@ const ManageSales = () => {
                         <select onChange={handleChangeState}>
                             {
                                 states.map(state => (
-                                    (state.id_status !== 1) &&
+                                    (state.id_status !== "1") &&
                                     <option selected={state.name === 'PENDIENTE' && true} key={state.id_status} value={state.name}>{state.name}</option>
                                 ))
                             }
