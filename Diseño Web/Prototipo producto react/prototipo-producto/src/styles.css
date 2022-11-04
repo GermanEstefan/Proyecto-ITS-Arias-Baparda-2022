@@ -1560,6 +1560,7 @@
 }
 .container-admin aside .aside_menu_item {
   margin-bottom: 50px;
+  position: relative;
 }
 .container-admin aside .aside_menu_item .aside_menu_item_container {
   display: flex;
@@ -1586,6 +1587,7 @@
   padding-left: 15px;
 }
 .container-admin aside .aside_menu_item ul li {
+  position: relative;
   margin-bottom: 15px;
   font-size: 1.1rem;
   cursor: pointer;
@@ -1596,6 +1598,18 @@
 }
 .container-admin > section {
   margin-top: 80px;
+}
+
+.wrapper-menu {
+  width: 100px;
+  height: 20px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  z-index: 2;
 }
 
 .selected {

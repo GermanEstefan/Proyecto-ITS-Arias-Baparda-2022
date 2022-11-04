@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useState } from 'react'
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 import { fetchApi } from '../../API/api';
 import ContainerBase from '../../components/admin/ContainerBase';
 import { useForm } from '../../hooks/useForm';
@@ -65,7 +66,12 @@ const Design = () => {
         const resp = await fetchApi(`designs.php?idDesign=${idDesign} `, 'DELETE');
         console.log(resp)
         if(resp.status === 'error'){
-            return alert(resp.result.error_msg)
+            return Swal.fire({
+                icon: "error",
+                text: resp.result.error_msg,
+                timer: 2000,
+                showConfirmButton: false,
+            });
         }
         const designsFiltered = designs.filter( design => design.id_design !== idDesign);
         return setDesigns(designsFiltered);

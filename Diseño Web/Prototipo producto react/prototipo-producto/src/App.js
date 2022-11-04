@@ -102,6 +102,7 @@ const App = () => {
           <Route path="/admin/products/list" element={<ListProducts />} />
           <Route path="/admin/sales/manage" element={<ManageSales />} />
           <Route path="/admin/sales/manage/details/:idSale" element={<DetailsSales />} />
+          <Route path="*" element={ <h1> 404 - No existe la ruta especificada</h1> } />
         </Routes>
       </cartContext.Provider>
     </userStatusContext.Provider>

@@ -1,12 +1,15 @@
 import { faCheck, faPencil, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { fetchApi } from "../../API/api";
+import { userStatusContext } from "../../App";
 import ContainerBase from "../../components/admin/ContainerBase";
 import { useForm } from "../../hooks/useForm";
 
 const UserManagment = () => {
+
+  const {rol:rolContext} = useContext(userStatusContext).userData
   const navigate = useNavigate();
   const [employees, setEmployees] = useState([]);
   const [loadingFlags, setLoadingFlags] = useState({ fetchingUsers: true });
@@ -117,6 +120,10 @@ const UserManagment = () => {
   };
 
   return (
+    !(rolContext === 'JEFE')
+    ?
+    <h1>Ruta no permitida para este rol</h1>
+    :
     <ContainerBase>
       <section className="container_section list-users">
         {loadingFlags.fetchingUsers ? (

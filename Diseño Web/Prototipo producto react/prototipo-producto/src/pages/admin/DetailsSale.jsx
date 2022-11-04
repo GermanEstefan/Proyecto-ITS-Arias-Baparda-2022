@@ -48,8 +48,6 @@ const DetailsSales = () => {
             employeeDoc: ci
         }
         const resp = await fetchApi(`sales.php?actualizeSale=${idSale}`, 'PATCH', bodyOfRequest);
-        console.log(resp)
-        console.log(bodyOfRequest)
         if (resp.status === 'error') {
             setSaleDetail({ ...saleDetail, statusSale: newState })
             return Swal.fire({
@@ -125,7 +123,7 @@ const DetailsSales = () => {
                     <div className="sale-detail_controls">
                         <strong>Cambiar estado de venta:</strong>
                         <form onSubmit={handleChangeState}>
-                            <select className="select-form">
+                            <select className="select-form" required >
                                 <option value="" selected disabled>Seleccione un estado</option>
                                 {
                                     states.map(state => (

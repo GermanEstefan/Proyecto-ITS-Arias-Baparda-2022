@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useState } from "react";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 import { fetchApi } from "../../API/api";
 import ContainerBase from "../../components/admin/ContainerBase";
 import imgToBase64 from "../../helpers/imgToBase64";
@@ -93,7 +94,13 @@ const Categorys = () => {
       "DELETE"
     );
     if (resp.status === "error") {
-      return alert(resp.result.error_msg);
+      return Swal.fire({
+        icon: "error",
+        text: resp.result.error_msg,
+        timer: 2000,
+        showConfirmButton: false,
+      });
+
     }
     const categorysFiltered = categorys.filter(
       (category) => category.id_category !== idCategory
@@ -154,9 +161,8 @@ const Categorys = () => {
                 </button>
                 {error.showMessage && (
                   <span
-                    className={`${
-                      error.error ? "warning-message" : "successfully-message"
-                    } `}
+                    className={`${error.error ? "warning-message" : "successfully-message"
+                      } `}
                   >
                     {error.message}
                   </span>

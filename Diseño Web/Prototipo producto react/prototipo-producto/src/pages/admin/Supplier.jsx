@@ -2,6 +2,7 @@ import { faCheck, faPencil, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 import { fetchApi } from "../../API/api";
 import ContainerBase from "../../components/admin/ContainerBase";
 import { useForm } from "../../hooks/useForm";
@@ -79,7 +80,12 @@ const Supplier = () => {
     );
     console.log(resp);
     if (resp.status === "error") {
-      return alert(resp.result.error_msg);
+      return Swal.fire({
+        icon: "error",
+        text: resp.result.error_msg,
+        timer: 2000,
+        showConfirmButton: false,
+    });
     }
     const suppliersFiltered = suppliers.filter((supplier) => {
       if (supplier.id_supplier === idSupplier) {
@@ -101,7 +107,12 @@ const Supplier = () => {
     );
     console.log(resp);
     if (resp.status === "error") {
-      return alert(resp.result.error_msg);
+      return Swal.fire({
+        icon: "error",
+        text: resp.result.error_msg,
+        timer: 2000,
+        showConfirmButton: false,
+      });
     }
     const suppliersFiltered = suppliers.filter((supplier) => {
       if (supplier.id_supplier === idSupplier) {
@@ -193,9 +204,8 @@ const Supplier = () => {
                 </button>
                 {error.showMessage && (
                   <span
-                    className={`${
-                      error.error ? "warning-message" : "successfully-message"
-                    } `}
+                    className={`${error.error ? "warning-message" : "successfully-message"
+                      } `}
                   >
                     {error.message}
                   </span>
