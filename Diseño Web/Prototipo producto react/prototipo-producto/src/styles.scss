@@ -85,6 +85,7 @@ button:disabled {
 }
 button:disabled:hover {
   cursor: auto;
+  background-color: $gray;
 }
 //  width
 ::-webkit-scrollbar {
@@ -136,18 +137,4 @@ button:disabled:hover {
   left: 0;
 }
 
-table,
-th,
-td {
-  border: 1px solid $dark_gray;
-  padding: 3px;
-  border-collapse: collapse;
-}
-table {
-  margin: 10px 0;
-  width: 100%;
-  @media (max-width: 900px) {
-    width: 95%;
-    margin: auto;
-  }
-}
+

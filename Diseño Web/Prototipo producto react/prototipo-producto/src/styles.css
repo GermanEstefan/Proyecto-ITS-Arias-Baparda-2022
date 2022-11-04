@@ -85,10 +85,16 @@
     width: 80%;
   }
 }
+.form-container form .radioSection strong {
+  margin-bottom: 8px;
+}
 .form-container form .radioSection .radioGroup {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+}
+.form-container form .radioSection .radioGroup label {
+  margin-top: 5px;
 }
 @media (max-width: 800px) {
   .form-container form .radioSection .radioGroup input {
@@ -145,7 +151,7 @@
 .submit-button {
   margin: 10px auto;
   display: block;
-  padding: 1em;
+  padding: 10px;
   background-color: rgba(245, 153, 15, 0.9529411765);
   color: white;
   border: 15px;
@@ -249,12 +255,11 @@
   background: linear-gradient(190deg, rgba(245, 153, 15, 0.5041725308) 0%, rgb(245, 153, 15) 30%);
   padding: 20px 0;
   bottom: 0;
-  min-width: 100vw;
+  width: 100vw;
   z-index: 99;
   display: flex;
   align-items: center;
   justify-content: space-around;
-  padding: 0.5em 0;
 }
 @media (max-width: 600px) {
   .footer {
@@ -290,13 +295,14 @@
 .footer .img-container a {
   margin-right: 2em;
 }
-@media (max-width: 600px) {
+@media (max-width: 800px) {
   .footer .img-container a {
     margin: auto;
-    padding: 1em;
+    padding: 2em;
   }
 }
 
+/** @format */
 .card-container {
   display: flex;
   flex-wrap: wrap;
@@ -314,12 +320,12 @@
   max-width: 230px;
   min-width: 200px;
   height: auto;
-  padding: 1em;
+  padding: 0px 10px;
   border-radius: 5px;
   cursor: pointer;
   transition: transform 0.5s;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-  margin: 15px 10px 10px 10px;
+  margin: 10px;
 }
 @media screen and (max-width: 800px) {
   .card-container .card {
@@ -359,6 +365,7 @@
   .main {
     width: 100%;
     min-height: 100%;
+    margin-top: 5em;
   }
 }
 .main .card-container {
@@ -546,7 +553,7 @@
   position: absolute;
   bottom: -10px;
   left: 0;
-  transition: 0.5s;
+  transition: 0.3s;
 }
 .header-store .header-store__nav-desktop ul a:hover::after {
   width: 100%;
@@ -556,10 +563,10 @@
   color: rgba(245, 153, 15, 0.9529411765);
   cursor: pointer;
   margin-right: 20px;
-  transition: color 0.5s;
+  transition: color 0.3s;
 }
 .header-store .header-store__nav-desktop ul svg:hover {
-  color: rgba(245, 153, 15, 0.4862745098);
+  color: #e18e11;
 }
 
 .nav-mobile-store {
@@ -722,7 +729,7 @@
   }
 }
 .home-page .home-page__banner .home-page__banner__info button {
-  padding: 10px 100px;
+  padding: 10px 50px;
   border: none;
   font-size: 1.2rem;
   background-color: rgba(245, 153, 15, 0.9529411765);
@@ -730,10 +737,10 @@
   border-radius: 5px;
   cursor: pointer;
   color: #fff;
-  transition: background 0.5s;
+  transition: background 0.3s;
 }
 .home-page .home-page__banner .home-page__banner__info button:hover {
-  background-color: rgba(245, 153, 15, 0.7607843137);
+  background-color: #e18e11;
 }
 .home-page .home-page__banner .home-page__banner__contact {
   position: absolute;
@@ -756,7 +763,7 @@
 .home-page .home-page__banner .home-page__banner__contact div a img {
   width: 40px;
   margin-right: 50px;
-  transition: transform 0.5s;
+  transition: transform 0.3s;
   cursor: pointer;
 }
 .home-page .home-page__banner .home-page__banner__contact div a img:hover {
@@ -855,6 +862,17 @@
   margin: 5px 0 15px 0;
   color: rgba(0, 0, 0, 0.421);
 }
+.user-panel-page section form .warning {
+  display: flex;
+  background-color: rgb(255, 91, 91);
+  color: white;
+  padding: 5px;
+  border-radius: 5px;
+}
+.user-panel-page section form .warning .warningIcon {
+  display: block;
+  padding: 10px;
+}
 .user-panel-page section form h2 {
   text-align: center;
 }
@@ -875,9 +893,10 @@
   min-height: 100%;
   max-width: 900px;
 }
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 800px) {
   .productContainer {
     margin-bottom: 10vh;
+    font-size: x-large;
   }
 }
 .productContainer .productPage {
@@ -895,11 +914,12 @@
   width: 40%;
 }
 .productContainer .productPage .productPage__img img {
+  width: 250px;
   margin: auto;
   display: block;
 }
 @media screen and (max-width: 800px) {
-  .productContainer .productPage .productPage__img {
+  .productContainer .productPage .productPage__img img {
     width: 100%;
   }
 }
@@ -1016,6 +1036,23 @@
 }
 .productContainer .productPage .productPage__description .productPage__description__buttons p {
   text-align: center;
+}
+.productContainer table,
+.productContainer th,
+.productContainer td {
+  border: 1px solid #9ba6af;
+  padding: 3px;
+  border-collapse: collapse;
+}
+.productContainer table {
+  margin: 10px 0;
+  width: 100%;
+}
+@media (max-width: 900px) {
+  .productContainer table {
+    width: 95%;
+    margin: auto;
+  }
 }
 
 .main_header {
@@ -2123,11 +2160,18 @@
 
 html {
   scroll-behavior: smooth;
+  width: 100vw;
   min-height: 100vh;
+}
+@media screen and (max-width: 800px) {
+  html {
+    font-size: large;
+  }
 }
 
 body {
   overflow-x: hidden;
+  width: 100vw;
   min-height: 100vh;
   font-family: "Open Sans", sans-serif;
 }
@@ -2170,6 +2214,7 @@ button:disabled {
 
 button:disabled:hover {
   cursor: auto;
+  background-color: #bccddb;
 }
 
 ::-webkit-scrollbar {

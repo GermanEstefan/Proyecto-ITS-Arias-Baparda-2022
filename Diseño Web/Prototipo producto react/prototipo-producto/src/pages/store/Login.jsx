@@ -40,7 +40,7 @@ const Login = () => {
         return Swal.fire({
           icon: "error",
           text: resp.result.error_msg,
-          timer: 3000,
+          
           showConfirmButton: true,
           confirmButtonColor: "#f5990ff3",
         });

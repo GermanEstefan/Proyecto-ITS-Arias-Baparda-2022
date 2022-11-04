@@ -15,11 +15,12 @@
     max-width: 230px;
     min-width: 200px;
     height: auto;
-    padding: 1em;
+    padding: 0px 10px;
     border-radius: 5px;
     cursor: pointer;
     transition: transform 0.5s;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    margin: 10px;
 
     @media screen and (max-width: 800px) {
       margin: 10px 0 10px 0;

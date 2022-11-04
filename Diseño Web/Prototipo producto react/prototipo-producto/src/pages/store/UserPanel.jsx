@@ -7,9 +7,10 @@ import SalesHistory from "../../components/store/SalesHistory";
 import Swal from "sweetalert2";
 import UpdateAccountForm from "../../components/store/UpdateAccountForm";
 import UpdatePasswordForm from "../../components/store/UpdatePasswordForm";
+import DisableAccount from "../../components/store/DisableAccount";
 
 const UserPanel = () => {
-  const [view, setView] = useState("personalInformation");
+  const [view, setView] = useState("disabledAccount");
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -80,7 +81,7 @@ const UserPanel = () => {
           ) : view === "buyHistory" ? (
             <SalesHistory />
           ) : view === "disabledAccount" ? (
-            <h1>Desactivar cuenta</h1>
+            <DisableAccount/>
           ) : null}
         </section>
       </main>

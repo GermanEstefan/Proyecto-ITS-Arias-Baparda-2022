@@ -78,10 +78,17 @@
       display: flex;
       flex-direction: column;
       align-items: flex-start;
+
+      strong {
+        margin-bottom: 8px;
+      }
       .radioGroup {
         display: flex;
         flex-direction: column;
         align-items: flex-start;
+        label{
+          margin-top: 5px;
+        }
         input {
           @media (max-width: 800px) {
             margin: 10px auto;
@@ -142,7 +149,7 @@
 .submit-button {
   margin: 10px auto;
   display: block;
-  padding: 1em;
+  padding: 10px;
   background-color: $orange;
   color: white;
   border: 15px;
