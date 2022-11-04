@@ -15,7 +15,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { fetchApi } from "../../API/api";
 
-const SaleStatusHistory = ({ saleId, status }) => {
+const SaleStatusHistory = ({ saleId }) => {
   const [lastStatus, setLastStatus] = useState("");
 
   useEffect(() => {
@@ -28,45 +28,41 @@ const SaleStatusHistory = ({ saleId, status }) => {
     setLastStatus(resp.result.data.history[resp.result.data.history.length - 1].status || "");
   };
   return (
-    <div
-      style={{
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "space-around",
-        width: "220px",
-        margin: "10px",
-      }}
-    >
+    <div className="statusHistory">
       <FontAwesomeIcon
+        className="icon"
         icon={faHourglass}
         size={"lg"}
-        color={status === "PENDIENTE" ? "orange" : "black"}
+        color={lastStatus === "PENDIENTE" ? "orange" : "black"}
       />
-      <FontAwesomeIcon icon={faArrowRightLong} size={"sm"} />
+      <FontAwesomeIcon className="icon" icon={faArrowRightLong} size={"sm"} />
       <FontAwesomeIcon
+        className="icon"
         icon={faCheck}
         size={"lg"}
-        color={status === "CONFIRMADO" ? "orange" : "black"}
+        color={lastStatus === "CONFIRMADO" ? "orange" : "black"}
       />
-      <FontAwesomeIcon icon={faArrowRightLong} size={"sm"} />
-      {status !== "PICK UP" ? (
+      <FontAwesomeIcon className="icon" icon={faArrowRightLong} size={"sm"} />
+      {lastStatus !== "PICK UP" ? (
         <FontAwesomeIcon
+          className="icon"
           icon={faTruckFast}
           size={"lg"}
-          color={status === "EN VIAJE" ? "orange" : "black"}
+          color={lastStatus === "EN VIAJE" ? "orange" : "black"}
         />
       ) : (
-        <FontAwesomeIcon icon={faLocationDot} size={"lg"} color={"orange"} />
+        <FontAwesomeIcon className="icon" icon={faLocationDot} size={"lg"} color={"orange"} />
       )}
-      <FontAwesomeIcon icon={faArrowRightLong} size={"sm"} />
-      {status !== "CANCELADA" ? (
+      <FontAwesomeIcon className="icon" icon={faArrowRightLong} size={"sm"} />
+      {lastStatus !== "CANCELADA" ? (
         <FontAwesomeIcon
+          className="icon"
           icon={faHouseCircleCheck}
           size={"lg"}
-          color={status === "ENTREGADO" ? "orange" : "black"}
+          color={lastStatus === "ENTREGADO" ? "orange" : "black"}
         />
       ) : (
-        <FontAwesomeIcon icon={faXmark} size={"lg"} color={"red"} />
+        <FontAwesomeIcon className="icon" icon={faXmark} size={"lg"} color={"red"} />
       )}
     </div>
   );

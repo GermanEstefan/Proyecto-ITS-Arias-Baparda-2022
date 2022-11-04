@@ -105,10 +105,8 @@ const Login = () => {
           >
             Ingresar
           </button>
-          <br />
-          <Link className="link" to={"/register"}>
-            Registrarse
-          </Link>
+          
+          <a href="/register">Registrarse</a>
         </form>
       </div>
     </ContainerBase>
