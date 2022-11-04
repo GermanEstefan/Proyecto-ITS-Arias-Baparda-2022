@@ -20,6 +20,9 @@
             $this->conecction = new Connection();
         }
 
+        public static function hashPass($password){
+            return password_hash($password, PASSWORD_DEFAULT);
+        }
         public static function getUserByEmail($email){
             $conecction = new Connection();
             $query = "SELECT * from user WHERE email='$email'";
@@ -67,7 +70,8 @@
         }
 
         public function save(){
-            $userInsert = "INSERT INTO user(email, name, surname, password) VALUES ('$this->email', '$this->name', '$this->surname', '$this->password' )";
+            $pwd = UserModel::hashPass($this->password);
+            $userInsert = "INSERT INTO user(email, name, surname, password) VALUES ('$this->email', '$this->name', '$this->surname', '$pwd' )";
             $result = $this->conecction->setData($userInsert);
             if($result){
                 return $this->conecction->getLastIdInserted();

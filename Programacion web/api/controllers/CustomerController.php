@@ -192,37 +192,38 @@ class CustomerController
 
         $email = $userData['email'];
         $password = $userData['password'];
-        $customerExistInDatabase = UserModel::getUserByEmail($email);
+        $CustomerData = UserModel::getUserByEmail($email);
 
-        if (!$customerExistInDatabase) {
+        if (!$CustomerData) {
             http_response_code(200);
-            echo $this->response->error200("El cliente con el email: $email no existe");
+            echo $this->response->error200("EL $email NO SE ENCUENTRA REGISTRADO");
             die();
         }
 
-        $customerInDatabasePassword = $customerExistInDatabase['password'];
-        if (!($password == $customerInDatabasePassword)) {
+        $verifyPass = $CustomerData['password'];
+        $compare = UserModel::hashPass($password);
+        if (password_verify($compare, $verifyPass)) {
             http_response_code(401);
             echo $this->response->error401('Credenciales incorrectas');
             die();
         }
 
-        $customerInDatabaseState = $customerExistInDatabase['state'];
-        if($customerInDatabaseState == 0){
+        $customerState = $CustomerData['state'];
+        if($customerState != 1){
             http_response_code(401);
             echo $this->response->error401("Usuario se encuentra dado de baja");
             die();
         }
 
-        $customerInDatabaseId = $customerExistInDatabase['id_user'];
+        $customerInDatabaseId = $CustomerData['id_user'];
         $userToken = $this->jwt->generateToken($customerInDatabaseId);
         $bodyResponse = array(
             "token" => $userToken,
-            "email" => $customerExistInDatabase['email'],
-            "name" => $customerExistInDatabase['name'],
-            "surname" => $customerExistInDatabase['surname'],
-            "phone" => $customerExistInDatabase['phone'],
-            "address" => $customerExistInDatabase['address']
+            "email" => $CustomerData['email'],
+            "name" => $CustomerData['name'],
+            "surname" => $CustomerData['surname'],
+            "phone" => $CustomerData['phone'],
+            "address" => $CustomerData['address']
         );
         
         echo $this->response->successfully("Autenticacion realizada con exito", $bodyResponse);
