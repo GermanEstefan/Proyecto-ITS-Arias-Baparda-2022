@@ -80,32 +80,28 @@ const DetailsSales = () => {
         <div className="sale-detail-content">
           <div className="sale-detail-content_info-card">
             <span>
-              ID: <strong> {idSale} </strong>{" "}
-            </span>
-            <span>
-              Estado actual: <strong> {statusSale} </strong>{" "}
+              Estado actual: <strong> {statusSale} </strong>
             </span>
             <div className="sale-detail-content_info-card_section">
               <strong>Info venta</strong>
               <ul>
                 <li>
-                  {" "}
-                  <strong>Total:</strong> {totalSale}{" "}
+                  <strong>ID:</strong> {idSale}
                 </li>
                 <li>
-                  {" "}
-                  <strong>Forma de pago:</strong>{" "}
+                  <strong>Total:</strong> {totalSale}
+                </li>
+                <li>
+                  <strong>Forma de pago:</strong>
                   {saleInfo &&
-                    (saleInfo.payment === "0" ? "Efectivo" : "Online")}{" "}
+                    (saleInfo.payment === "0" ? "Efectivo" : "Online")}
                 </li>
                 <li>
-                  {" "}
-                  <strong>Horario de entrega:</strong>{" "}
+                  <strong>Horario de entrega:</strong>
                   {saleInfo && saleInfo.deliverySale}
                 </li>
                 <li>
-                  {" "}
-                  <strong>Direccion:</strong> {saleInfo && saleInfo.addressSale}{" "}
+                  <strong>Direccion:</strong> {saleInfo && saleInfo.addressSale}
                 </li>
               </ul>
             </div>
@@ -113,16 +109,14 @@ const DetailsSales = () => {
               <strong>Info cliente</strong>
               <ul>
                 <li>
-                  {" "}
-                  <strong>Email:</strong> {clientInfo && clientInfo.clientMail}{" "}
+                  <strong>Email:</strong> {clientInfo && clientInfo.clientMail}
                 </li>
                 <li>
-                  {" "}
-                  <strong>Nombre:</strong>{" "}
+                  <strong>Nombre:</strong>
                   {clientInfo &&
                     (clientInfo.companyName
                       ? clientInfo.companyName
-                      : clientInfo.clientName)}{" "}
+                      : clientInfo.clientName)}
                 </li>
               </ul>
             </div>
