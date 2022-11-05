@@ -1241,6 +1241,7 @@
   border-radius: 5px;
   position: relative;
   margin-bottom: 50px;
+  border-collapse: collapse;
 }
 .table-template caption {
   font-size: 1.4rem;
@@ -1254,6 +1255,7 @@
   padding: 8px;
   font-weight: bold;
   text-align: center;
+  border: 1px solid rgb(122, 122, 122);
 }
 .table-template th {
   color: rgba(245, 153, 15, 0.9529411765);
@@ -1294,10 +1296,16 @@
   font-weight: bold;
   font-size: 1.1rem;
 }
+.child-table .child-table_row-header th, .child-table .child-table_row-header td {
+  border: none;
+}
 .child-table .child-table_row td {
   font-size: 0.9rem;
   background-color: transparent;
   border-radius: 5px;
+}
+.child-table .child-table_row th, .child-table .child-table_row td {
+  border: none;
 }
 
 .select {
@@ -2269,6 +2277,71 @@
 
 .title-card-section {
   font-size: 1.2rem;
+}
+
+.queries .queries_balance {
+  margin-bottom: 20px;
+}
+.queries .queries_balance ul {
+  background-color: #f2f2f2;
+  padding: 15px 15px 5px 15px;
+  border-radius: 5px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+.queries .queries_balance ul > li {
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+.queries .queries_balance ul > li > strong {
+  margin-right: 5px;
+  color: rgba(245, 153, 15, 0.9529411765);
+}
+.queries .queries_filters {
+  margin-bottom: 20px;
+}
+.queries .queries_filters > select {
+  width: 50vw;
+  max-width: 200px;
+  text-align: center;
+}
+.queries .queries_table-container {
+  margin-top: 20px;
+}
+.queries .queries_table-container form {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.queries .queries_table-container form > span {
+  margin-right: 5px;
+  font-weight: bold;
+}
+.queries .queries_table-container form > input {
+  width: 100px;
+  height: 15px;
+  border: none;
+  outline: 1px solid rgb(136, 136, 136);
+  transition: 0.3s outline;
+}
+.queries .queries_table-container form > input:focus {
+  outline: 1px solid rgba(245, 153, 15, 0.9529411765);
+  border: none;
+}
+.queries .queries_table-container form > button {
+  margin-left: 5px;
+  border: none;
+  font-size: 1.5rem;
+  background-color: transparent;
+  color: rgba(245, 153, 15, 0.9529411765);
+  cursor: pointer;
+  transition: color 0.4s;
+}
+.queries .queries_table-container form > button:hover {
+  color: rgba(201, 124, 8, 0.9529411765);
+}
+
+.subtitle-queries {
+  font-size: 1.5rem;
 }
 
 html {
