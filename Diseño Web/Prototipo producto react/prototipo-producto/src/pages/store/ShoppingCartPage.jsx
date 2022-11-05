@@ -82,7 +82,7 @@ const ShoppingCartPage = () => {
   return (
     <ContainerBase>
       <div className="cartContainer">
-        <PageTitle title={"Carrito"} isArrow={true} goBack />
+        <PageTitle title={"Carrito"} isArrow goBack />
         <div className="cartPage">
           <CartDetails total={total || 0} isCartEmpty={productsList.length === 0} />
           {productsList.map((product, index) => (

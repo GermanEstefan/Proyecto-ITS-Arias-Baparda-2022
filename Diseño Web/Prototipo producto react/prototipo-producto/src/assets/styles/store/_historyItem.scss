@@ -1,19 +1,26 @@
 .historyItem {
   display: flex;
   justify-content: space-between;
-  width: 600px;
+  width: 100%;  
   padding: 5px 15px;
   border: 3px rgb(211, 211, 211) solid;
   align-items: center;
   span {
     margin-right: 10px;
   }
+  .status {
+    @media (max-width: 800px) {
+      display: none;
+    }
+  }
   @media (max-width: 800px) {
-    width: 90%;
+    width: 85%;
     margin: auto;
   }
 }
-
+.priceAndCollapse{
+  display: flex;
+}
 .historyItem:hover {
   background-color: rgba(220, 220, 220, 0.203);
   transition: 0.3s;
@@ -21,7 +28,7 @@
 }
 
 .historyCollapse {
-  width: 600px;
+  width: 100%;
   padding: 5px 15px;
   background-color: rgba(235, 235, 235, 0.582);
   @media (max-width: 800px) {
@@ -44,20 +51,23 @@
 
 .historyContainer {
   margin: 20px 0;
-  
-  width: 630px;
+  width: 100%;
   display: flex;
-  
+  align-items: flex-start;
   @media (max-width: 800px) {
-    flex-direction: column;
+    flex-direction: column-reverse;
     border-bottom: 1px solid black;
     margin: 30px auto;
   }
   .statusHistory{
     display: flex;
-    align-items: center;
+    align-items:flex-start;
     justify-content: space-around;
-    width: 250px;
+    width: 240px;
+    @media (min-width: 800px) {
+      margin-left: 50px;
+      
+    }
     margin: 10px;
     .icon {
       margin-left: 10px;

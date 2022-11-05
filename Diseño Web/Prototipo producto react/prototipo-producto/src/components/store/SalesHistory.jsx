@@ -34,7 +34,7 @@ const SalesHistory = () => {
       animationInDuration={500}
       isVisible={true}
     >
-      <div style={{ height: "85vh" }}>
+      <div >
         <h1 style={{ marginLeft: "15px" }}>Historial de compras</h1>
         {sales.length > 0 &&
           sales.map((sale, index) => (

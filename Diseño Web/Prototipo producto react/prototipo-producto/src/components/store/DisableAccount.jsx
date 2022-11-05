@@ -69,18 +69,18 @@ const DisableAccount = () => {
           desactivas tu cuenta no podrás volver a recuperarla
         </p>
         <div>
-          <div style={{ display: "flex", justifyContent: "flex-end" }}>
+          <div style={{ display: "flex", justifyContent: "flex-end", flexDirection: 'row' }}>
             <input
               name="password"
               type={viewPassword ? "password" : "text"}
               onChange={(e) => handleChange(e)}
               onBlur={(e) => handleChange(e)}
-              style={{width: '50%'}}
+              style={{width: '100%'}}
             />
 
             <FontAwesomeIcon
               style={{
-                margin: "13px 0 13px -18px",
+                margin: '10px 0 15px -10px',
                 position: "absolute",
                 cursor: "pointer",
               }}

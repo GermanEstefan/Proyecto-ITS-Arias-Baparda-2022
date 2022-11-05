@@ -26,11 +26,11 @@ export const HistoryItem = ({ sale }) => {
     <div onClick={handleClick}>
       <div className="historyItem">
         <div>
-          <strong>{sale.ID}</strong>
+          <strong>#{sale.ID}{" "} </strong>
           <span>{sale.date}</span>
-          <strong>{sale.status}</strong>
+          <strong className="status">{sale.status}</strong>
         </div>
-        <div>
+        <div className="priceAndCollapse">
           <span>{sale.total}$</span>
           <FontAwesomeIcon icon={toggleCollapse ? faCaretUp : faCaretDown} />
         </div>

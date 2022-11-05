@@ -1,8 +1,14 @@
+/** @format */
+
 .paginationContainer {
   display: flex;
-  width: 100%;
+  width: 100vw;
   justify-content: center;
   align-items: center;
+  @media (max-width: 800px) {
+    justify-content: space-around;
+    width: 70vw;
+  }
 }
 
 .paginationBtn {
@@ -17,6 +23,10 @@
   font-weight: bold;
   font-size: large;
   cursor: pointer;
+  @media (max-width: 800px) {
+    
+    width: 100px;
+  }
 }
 .paginationBtn:hover {
   background: $dark_gray;

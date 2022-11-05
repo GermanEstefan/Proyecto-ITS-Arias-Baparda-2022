@@ -21,6 +21,10 @@
 
     .productPage__img {
       margin-top: 4em;
+      @media screen and (max-width: 800px) {
+        width: 100%;
+        margin: 20px auto;
+      }
       width: 40%;
       img {
         width: 250px;
@@ -97,6 +101,9 @@
             flex-direction: column;
             align-self: center;
             width: 50%;
+            @media screen and (max-width: 600px) {
+              width: 90%;
+            }
             button {
               border: none;
               padding: 10px;
@@ -133,6 +140,9 @@
           .select {
             width: 49%;
             display: inline-block;
+            @media screen and (max-width: 600px) {
+              width: 90%;
+            }
           }
         }
         p {
