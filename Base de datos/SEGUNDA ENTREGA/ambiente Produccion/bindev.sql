@@ -15,7 +15,7 @@ USE `bindev` ;
 CREATE TABLE IF NOT EXISTS `bindev`.`category` (
   `id_category` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(100) NOT NULL,
-  `description` VARCHAR(500) NOT NULL,
+  `description` VARCHAR(250) NOT NULL,
   `picture` LONGBLOB NULL,
   PRIMARY KEY (`id_category`),
   constraint `category_UNIQUE` UNIQUE  (`name`))
@@ -79,7 +79,7 @@ CREATE TABLE IF NOT EXISTS `bindev`.`user` (
   `email` VARCHAR(200) NOT NULL,
   `name` VARCHAR(150) NOT NULL,
   `surname` VARCHAR(150) NOT NULL,
-  `address` VARCHAR(500) NULL,
+  `address` VARCHAR(250) NULL,
   `phone` VARCHAR(50) NULL,
   `password` VARCHAR(200) NOT NULL,
   `state` TINYINT default 1,
@@ -189,7 +189,7 @@ CREATE TABLE IF NOT EXISTS `bindev`.`product` (
   `product_size` INT NOT NULL,
   `stock` INT NOT NULL,
   `price` DECIMAL(10,2) NOT NULL,
-  `description` VARCHAR(500) NOT NULL,
+  `description` VARCHAR(250) NOT NULL,
   `picture` LONGBLOB NULL,
   `state` TINYINT default 1,
   PRIMARY KEY (`barcode`),
