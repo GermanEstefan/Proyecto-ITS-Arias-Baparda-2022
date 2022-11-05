@@ -1004,7 +1004,7 @@
     justify-content: space-around;
   }
 }
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 800px) {
   .productContainer .productPage .productPage__description .productPage__description__buttons .buttonsFlexContainer {
     flex-direction: column;
   }
@@ -1112,7 +1112,13 @@
   display: flex;
   align-items: center;
   background: linear-gradient(15deg, #bccddb 70%, rgba(245, 153, 15, 0.9529411765));
-  min-width: 900px;
+}
+@media screen and (min-width: 900px) {
+  .main_header {
+    min-width: 900px;
+    font-size: large;
+    width: auto;
+  }
 }
 @media screen and (max-width: 900px) {
   .main_header {
