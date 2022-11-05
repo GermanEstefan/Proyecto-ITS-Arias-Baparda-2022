@@ -14,11 +14,12 @@ const NavDesktop = () => {
 
   return (
     <nav className="header-store__nav-desktop">
-        
       <ul>
-        <p className="userName">{userData.name} {userData.surname} </p>
         {userData.auth ? (
-          <FontAwesomeIcon icon={faUser} onClick={() => navigate("/panel-user")} />
+          <a className="userName" href="/panel-user">
+            {userData.name} {userData.surname}
+            <FontAwesomeIcon icon={faUser} />
+          </a>
         ) : (
           <>
             <Link to="/login">

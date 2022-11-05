@@ -18,7 +18,6 @@
   }
 
   .header-store__search {
-    
     display: flex;
     align-items: center;
     width: 100%;
@@ -37,7 +36,7 @@
       input {
         padding: 10px 10px 10px 45px;
         border: 2px solid $orange;
-        
+
         width: 60%;
       }
     }
@@ -52,11 +51,16 @@
   .header-store__nav-desktop {
     right: 20px;
     .userName {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+
       font-weight: 800;
       font-size: larger;
       width: 300px;
+
       text-align: right;
-      margin-right: 15px;
+      margin-right: 0px;
     }
     ul {
       display: flex;

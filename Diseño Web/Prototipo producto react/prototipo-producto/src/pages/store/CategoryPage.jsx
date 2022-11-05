@@ -44,7 +44,7 @@ const CategoryPage = () => {
         <PageTitle title={category} isArrow={true} arrowGoTo={"/"} />
 
         <div className="card-container">
-          {productList.length === 0 && <p>No hay productos en esta categoría</p>}
+          {productList.length === 0 && <p style={{margin: '10em auto'}}>No hay productos en esta categoría</p>}
           {currentItems.map((product, index) => {
             return (
               <ProductCard
@@ -54,6 +54,7 @@ const CategoryPage = () => {
                 img={product.picture ? product.picture : NoPhoto}
                 key={index}
                 id={product.id_product}
+                price={product.price}
               />
             );
           })}

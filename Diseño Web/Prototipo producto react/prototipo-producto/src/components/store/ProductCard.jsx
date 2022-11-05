@@ -7,7 +7,7 @@ import Card from "./Card";
 import { Animated } from "react-animated-css";
 import NoPhoto from "../../assets/img/no-photo.png";
 
-const ProductCard = ({ img, product, description, id, categoryFromProps }) => {
+const ProductCard = ({ img, product, description, id, categoryFromProps, price }) => {
   const { category } = useParams();
   const isMobile = useMediaQuery({ query: "(max-width: 700px)" });
 
@@ -26,7 +26,8 @@ const ProductCard = ({ img, product, description, id, categoryFromProps }) => {
 
           <div className="product-text-container">
             <h2>{product}</h2>
-            <p>{description}</p>
+            <p>${price}</p>
+            <p className="description">{description}</p>
             <Link to={`/category/${category || categoryFromProps}/${id}`}>
               <span>Ver mas</span>
               <i className="fas fa-arrow-right"></i>

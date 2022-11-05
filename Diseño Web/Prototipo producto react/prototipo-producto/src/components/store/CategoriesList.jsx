@@ -36,6 +36,7 @@ const CategoriesList = () => {
   };
 
   return (
+    
     <div className="card-container">
       {currentItems.map((category, index) => {
         return (

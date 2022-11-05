@@ -19,7 +19,7 @@ const BuyForm = () => {
   const { cart, setCart } = useContext(cartContext);
   const navigate = useNavigate();
   const { userData } = useContext(userStatusContext);
-  const [isAddressDisable, setIsAddressDisable] = useState(true);
+  const [isAddressDisable, setIsAddressDisable] = useState(false);
   const [deliveryHours, setDeliveryHours] = useState([]);
   const [hasAddress, setHasAddress] = useState(false);
   const [values, setValues] = useState({
@@ -124,7 +124,7 @@ const BuyForm = () => {
               <label>
                 <input
                   type="radio"
-                  defaultChecked={true}
+                  defaultChecked={hasAddress}
                   value={"Dirección actual"}
                   name="addressRadio"
                   disabled={hasAddress}
@@ -137,7 +137,7 @@ const BuyForm = () => {
                 </i>
               )}
               <label>
-                <input type="radio" value={"Dirección alternativa"} name="addressRadio" /> Dirección
+                <input type="radio" defaultChecked={!hasAddress} value={"Dirección alternativa"} name="addressRadio" /> Dirección
                 alternativa
               </label>
             </div>
@@ -152,6 +152,7 @@ const BuyForm = () => {
             />
           </div>
           <span className="mt-5">{"Horarios de envío"}</span>
+          <div className="selectSection">
           <Select
             name="deliveryTime"
             id="deliveryTime"
@@ -169,6 +170,7 @@ const BuyForm = () => {
             options={paymentMethods}
             placeholder={"Metodo de pago"}
           />
+          </div>
           <button
             className="submit-button"
             onClick={(e) => handleConfirmPurchase(e)}

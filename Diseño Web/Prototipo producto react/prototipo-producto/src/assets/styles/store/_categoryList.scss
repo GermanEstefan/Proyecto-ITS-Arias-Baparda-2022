@@ -3,12 +3,13 @@
 .card-container {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content:center;
   
   padding: 30px;
-  width: 80%;
+  
   @media screen and (max-width: 800px) {
     margin: 10px 0;
+    width: 80%;
   }
 
   .card {
@@ -16,14 +17,15 @@
     min-width: 200px;
     height: auto;
     padding: 0px 10px;
-    border-radius: 5px;
+    border-radius: 2px;
     cursor: pointer;
     transition: transform 0.5s;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-    margin: 10px;
+    margin: 8px;
 
     @media screen and (max-width: 800px) {
-      margin: 10px 0 10px 0;
+      margin: 10px;
+      padding: 0;
     }
 
     img {
@@ -35,7 +37,7 @@
 
     .text-container {
       h2 {
-        padding: 1em;
+        padding: 1em 0 ;
         width: auto;
         overflow: hidden;
         text-align: center;
