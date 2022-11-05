@@ -1,21 +1,71 @@
 /** @format */
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useState } from "react";
 import { useEffect } from "react";
+import {
+  faArrowRightLong,
+  faCheck,
+  faTruckFast,
+  faHouseCircleCheck,
+  faHourglass,
+  faLocationDot,
+  faXmark,
+  faTruck,
+} from "@fortawesome/free-solid-svg-icons";
 import { fetchApi } from "../../API/api";
 
 const SaleStatusHistory = ({ saleId }) => {
-  const [statusList, setStatusList] = useState([]);
+  const [lastStatus, setLastStatus] = useState("");
+
   useEffect(() => {
     getStatuslist();
   }, []);
 
   const getStatuslist = async () => {
     const resp = await fetchApi(`sales.php?History=${saleId}`, "GET");
-    console.log(resp.result.data.history);
-    setStatusList(resp.result.data.history || []);
+    console.log(resp);
+    setLastStatus(resp.result.data.history[resp.result.data.history.length - 1].status || "");
   };
-  return <div>Historial de estados</div>;
+  return (
+    <div className="statusHistory">
+      <FontAwesomeIcon
+        className="icon"
+        icon={faHourglass}
+        size={"lg"}
+        color={lastStatus === "PENDIENTE" ? "orange" : "black"}
+      />
+      <FontAwesomeIcon className="icon" icon={faArrowRightLong} size={"sm"} />
+      <FontAwesomeIcon
+        className="icon"
+        icon={faCheck}
+        size={"lg"}
+        color={lastStatus === "CONFIRMADO" ? "orange" : "black"}
+      />
+      <FontAwesomeIcon className="icon" icon={faArrowRightLong} size={"sm"} />
+      {lastStatus !== "PICK UP" ? (
+        <FontAwesomeIcon
+          className="icon"
+          icon={faTruckFast}
+          size={"lg"}
+          color={lastStatus === "EN VIAJE" ? "orange" : "black"}
+        />
+      ) : (
+        <FontAwesomeIcon className="icon" icon={faLocationDot} size={"lg"} color={"orange"} />
+      )}
+      <FontAwesomeIcon className="icon" icon={faArrowRightLong} size={"sm"} />
+      {lastStatus !== "CANCELADA" ? (
+        <FontAwesomeIcon
+          className="icon"
+          icon={faHouseCircleCheck}
+          size={"lg"}
+          color={lastStatus === "ENTREGADO" ? "orange" : "black"}
+        />
+      ) : (
+        <FontAwesomeIcon className="icon" icon={faXmark} size={"lg"} color={"red"} />
+      )}
+    </div>
+  );
 };
 
 export default SaleStatusHistory;

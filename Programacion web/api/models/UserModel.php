@@ -20,6 +20,10 @@
             $this->conecction = new Connection();
         }
 
+        public static function hashPass($password){
+            $hash = password_hash($password, PASSWORD_DEFAULT);
+            return $hash;
+        }
         public static function getUserByEmail($email){
             $conecction = new Connection();
             $query = "SELECT * from user WHERE email='$email'";
@@ -51,12 +55,14 @@
         
         public static function updatePass($email, $password){
             $conecction = new Connection();
-            $query = "UPDATE user SET password = '$password' WHERE email = '$email' ";
+            $pwd = UserModel::hashPass($password);
+            $query = "UPDATE user SET password = '$pwd' WHERE email = '$email' ";
             return $conecction->setData($query);
         }
         public static function updatePassword($idUser, $password){
             $conecction = new Connection();
-            $query = "UPDATE user SET password = '$password' WHERE id_user = $idUser";
+            $pwd = UserModel::hashPass($password);
+            $query = "UPDATE user SET password = '$pwd' WHERE id_user = $idUser";
             return $conecction->setData($query);
         }
 
@@ -67,7 +73,8 @@
         }
 
         public function save(){
-            $userInsert = "INSERT INTO user(email, name, surname, password) VALUES ('$this->email', '$this->name', '$this->surname', '$this->password' )";
+            $pwd = UserModel::hashPass($this->password);
+            $userInsert = "INSERT INTO user(email, name, surname, password) VALUES ('$this->email', '$this->name', '$this->surname', '$pwd' )";
             $result = $this->conecction->setData($userInsert);
             if($result){
                 return $this->conecction->getLastIdInserted();

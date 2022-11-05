@@ -12,9 +12,12 @@ import { fetchApi } from "../../API/api";
 import ContainerBase from "../../components/store/ContainerBase";
 import { Animated } from "react-animated-css";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 const Register = () => {
   const { setUserData } = useContext(userStatusContext);
   const navigate = useNavigate();
+  const [viewPassword, setViewPassword] = useState(true);
   useEffect(() => {
     window.scroll(0, 0);
   }, []);
@@ -55,12 +58,12 @@ const Register = () => {
           setErrors({ ...errors, [target.name]: { error: true, message: "Campo requerido" } });
         }
     }
-    if(target.name === 'password') {
-      if(target.value.length < 6){
+    if (target.name === "password") {
+      if (target.value.length < 6) {
         setErrors({ ...errors, [target.name]: { error: true, message: "Contraseña muy corta" } });
       }
     }
-    console.log(errors);
+
     setValues({ ...values, [target.name]: target.value });
   };
 
@@ -70,7 +73,7 @@ const Register = () => {
       setValues({ ...values, type: "COMPANY" });
     }
     if (!target.checked) {
-      setValues({ ...values, nRut: "", company: "", type: "NORMAL" });
+      setValues({ ...values, type: "NORMAL" });
     }
   };
   const handleSubmit = async (e) => {
@@ -131,9 +134,7 @@ const Register = () => {
                 onBlur={(e) => handleSetValues(e)}
               />
 
-              {errors.name.error && (
-                <span style={{ marginLeft: "10px", color: "red" }}>{errors.name.message}</span>
-              )}
+              {errors.name.error && <span className="spanError">{errors.name.message}</span>}
             </div>
             <div>
               <input
@@ -146,9 +147,7 @@ const Register = () => {
                 onChange={(e) => handleSetValues(e)}
                 onBlur={(e) => handleSetValues(e)}
               />
-              {errors.surname.error && (
-                <span style={{ marginLeft: "10px", color: "red" }}>{errors.surname.message}</span>
-              )}
+              {errors.surname.error && <span className="spanError">{errors.surname.message}</span>}
             </div>
           </div>
           <div className="inputSection">
@@ -163,23 +162,34 @@ const Register = () => {
                 onChange={(e) => handleSetValues(e)}
                 onBlur={(e) => handleSetValues(e)}
               />
-              {errors.email.error && (
-                <span style={{ marginLeft: "10px", color: "red" }}>{errors.email.message}</span>
-              )}
+              {errors.email.error && <span className="spanError">{errors.email.message}</span>}
             </div>
             <div>
-              <input
-                name="password"
-                id="password"
-                type={"password"}
-                style={errors.password.error ? { borderColor: "red" } : {}}
-                value={values.password}
-                placeholder="Contraseña"
-                onChange={(e) => handleSetValues(e)}
-                onBlur={(e) => handleSetValues(e)}
-              />
+              <div style={{ display: "flex", justifyContent: "flex-end" }}>
+                <input
+                  name="password"
+                  id="password"
+                  type={viewPassword ? "password" : "text"}
+                  value={values.password}
+                  style={errors.password.error ? { borderColor: "red" } : {}}
+                  placeholder="Contraseña"
+                  onChange={(e) => handleSetValues(e)}
+                  onBlur={(e) => handleSetValues(e)}
+                />
+
+                <FontAwesomeIcon
+                  style={{
+                    margin: "13px 18px 13px -18px",
+                    position: "absolute",
+                    cursor: "pointer",
+                  }}
+                  onClick={() => setViewPassword(!viewPassword)}
+                  icon={!viewPassword ? faEye : faEyeSlash}
+                  color="gray"
+                />
+              </div>
               {errors.password.error && (
-                <span style={{ marginLeft: "10px", color: "red" }}>{errors.password.message}</span>
+                <span className="spanError">{errors.password.message}</span>
               )}
             </div>
           </div>
@@ -190,7 +200,7 @@ const Register = () => {
               type={"checkbox"}
               value={values.type === "COMPANY"}
               onChange={(e) => handleCheckbox(e)}
-              onBlur={(e) => handleSetValues(e)}
+              onBlur={(e) => handleCheckbox(e)}
             />
             Empresa
           </label>
@@ -213,9 +223,7 @@ const Register = () => {
                     onChange={(e) => handleSetValues(e)}
                     onBlur={(e) => handleSetValues(e)}
                   />
-                  {errors.nRut.error && (
-                    <span style={{ marginLeft: "10px", color: "red" }}>{errors.nRut.message}</span>
-                  )}
+                  {errors.nRut.error && <span className="spanError">{errors.nRut.message}</span>}
                 </div>
                 <div>
                   <input
@@ -229,9 +237,7 @@ const Register = () => {
                     onBlur={(e) => handleSetValues(e)}
                   />
                   {errors.company.error && (
-                    <span style={{ marginLeft: "10px", color: "red" }}>
-                      {errors.company.message}
-                    </span>
+                    <span className="spanError">{errors.company.message}</span>
                   )}
                 </div>
               </div>

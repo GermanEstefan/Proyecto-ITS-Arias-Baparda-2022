@@ -161,7 +161,11 @@ class SaleController {
         //Data de cada venta en ese estado
         $sales = array();
         foreach($sale as $salesInState){
-        array_push( $sales, array( "idSale" => $salesInState['idSale'],"nameStatus" => $salesInState['nameStatus'],"totalSale" => $salesInState['totalSale'],"employeeMail" => $salesInState['employeeMail'],"lastUpdate" => $salesInState['lastUpdate']));
+        $employeeIsSystem = $salesInState['employeeMail'];
+        if($employeeIsSystem === '1 System Response') {
+            $salesInState['employeeMail']= 'Resp. Automatica del Sistema';
+        }
+            array_push( $sales, array( "idSale" => $salesInState['idSale'],"nameStatus" => $salesInState['nameStatus'],"totalSale" => $salesInState['totalSale'],"employeeMail" => $salesInState['employeeMail'],"lastUpdate" => $salesInState['lastUpdate']));
         }
         echo $this->response->successfully("Ventas en estado $status:", $sales);  
     }
@@ -304,7 +308,16 @@ class SaleController {
             echo $this->response->error203("LA VENTA SE ENCUENTRA CANCELADA");
             die();
         }
-    
+        $getName = StatusModel::getStatusById($status);
+        $nameStatus = $getName['name'];
+        if($statusActual !== 'PENDIENTE' && $nameStatus === 'PENDIENTE') {
+            echo $this->response->error203("LA VENTA YA FUE CONFIRMADA");
+            die();
+        }
+        if($nameStatus === $statusActual){
+            echo $this->response->error203("LA VENTA YA SE ENCUENTRA EN ESTADO $nameStatus");
+            die();
+        }
         $saleExist = SaleModel::getSaleById($idSale);
         if(!$saleExist){
             echo $this->response->error203("Esta intentando editar una venta que no existe");
@@ -320,8 +333,7 @@ class SaleController {
             echo $this->response->error203("No existe el estado $status");
             die();
         }
-        $getName = StatusModel::getStatusById($status);
-        $nameStatus = $getName['name'];
+        
         if($nameStatus === 'CANCELADA'){
             $getProducts = SaleModel::saleIsCanceled($idSale);
             foreach($getProducts as $individual){
@@ -329,14 +341,19 @@ class SaleController {
             $quantity = $individual['quantity'];
             $reloadStock = ProductModel::updateMoreStockProductsOfPromo($barcode,$quantity);
             }
-        if(!$reloadStock){
-            echo $this->response->error203("Error al devolver el stock a productos");
-            die();
-        }    
-    }
-    $getName = StatusModel::getStatusById($status);
-    $nameStatus = $getName['name'];
-        $comment = "$employeeDoc cambia $idSale de estado $statusActual a $status";
+            if(!$reloadStock){
+                echo $this->response->error203("Error al devolver el stock a productos");
+                die();
+            }
+            $setZeroInSale = SaleModel::setTotalForCanceled($idSale);
+            if(!$setZeroInSale){
+                echo $this->response->error203("Error al setear sale");
+                die();
+            }    
+        }
+        $getName = StatusModel::getStatusById($status);
+        $nameStatus = $getName['name'];
+        $comment = "Empleado:$employeeDoc cambio la venta:$idSale de estado $statusActual a $nameStatus";
         $result = SaleModel::updateReportOfSale($idSale,$status,$employeeDoc,$comment);
         if(!$result){
             echo $this->response->error500();

@@ -26,6 +26,7 @@ export const HistoryItem = ({ sale }) => {
     <div onClick={handleClick}>
       <div className="historyItem">
         <div>
+          <strong>{sale.ID}</strong>
           <span>{sale.date}</span>
           <strong>{sale.status}</strong>
         </div>
@@ -39,6 +40,7 @@ export const HistoryItem = ({ sale }) => {
           {saleProducts.map((saleDetail, index) => (
             <div key={index} className="collapseSale">
               <div>
+                
                 <span>{saleDetail.productName}</span>
                 <span>x{saleDetail.quantity}</span>
               </div>

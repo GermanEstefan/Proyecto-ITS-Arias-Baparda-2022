@@ -7,9 +7,8 @@
   max-width: 900px;
   @media screen and (max-width: 800px) {
     margin-bottom: 10vh;
-    
-      font-size: x-large;
-    
+
+    font-size: x-large;
   }
 
   .productPage {
@@ -140,6 +139,21 @@
           text-align: center;
         }
       }
+    }
+  }
+  table,
+  th,
+  td {
+    border: 1px solid $dark_gray;
+    padding: 3px;
+    border-collapse: collapse;
+  }
+  table {
+    margin: 10px 0;
+    width: 100%;
+    @media (max-width: 900px) {
+      width: 95%;
+      margin: auto;
     }
   }
 }

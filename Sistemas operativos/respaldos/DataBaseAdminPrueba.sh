@@ -108,7 +108,7 @@ while [ "$opt" != 0 ]
 		clear
 		echo "Sincronizando con el servidor de respaldo"
 		echo "-----------------------------------------"
-		rsync -ahzP --dry-run -e "ssh -p 2244" $SERVIDOR $RESPALDOS | grep respaldo.tar.gz
+		timeout 1m rsync -ahzP --dry-run -e "ssh -p 2244" $SERVIDOR $RESPALDOS | grep respaldo.tar.gz
 		if [ $? -eq 0 ]
 		then
 			sleep 1s

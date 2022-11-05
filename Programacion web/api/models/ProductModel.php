@@ -213,7 +213,8 @@
             from product p
             where p.state = 1
             AND p.product_category = 1
-            AND p.id_product != 1000";
+            AND p.id_product != 1000
+            ORDER BY id_product";
             return $conecction->getData($query)->fetch_all(MYSQLI_ASSOC);
         }
 
@@ -275,7 +276,8 @@
             INNER JOIN size s
             on p.product_design = d.id_design 
             AND p.product_size = s.id_size  
-            AND p.id_product = '$idProduct'";
+            AND p.id_product = '$idProduct'
+            ORDER BY barcode";
             return $conecction->getData($query)->fetch_all(MYSQLI_ASSOC);
         }
         public static function getAllPromosBO(){
@@ -335,7 +337,8 @@
             AND p2.barcode = pr.have_product
             AND p2.product_design = d.id_design
             AND p2.product_size = s.id_size
-            AND p1.id_product ='$idProduct'";
+            AND p1.id_product ='$idProduct'
+            ORDER BY pr.have_product";
             return $conecction->getData($query)->fetch_all(MYSQLI_ASSOC);
         }
         public static function getProductsDisableBO(){
@@ -377,7 +380,8 @@
             p.description 
             from product p, category c
             WHERE p.product_category = c.id_category
-            AND p.product_category != 1";
+            AND p.product_category != 1
+            ORDER BY id_product";
             return $conecction->getData($query)->fetch_all(MYSQLI_ASSOC);
         }
         public static function getSuggestIdByPromos(){

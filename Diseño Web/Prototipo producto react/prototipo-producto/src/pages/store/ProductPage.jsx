@@ -40,6 +40,7 @@ const ProductPage = () => {
   }, [product, quantitySelected]);
 
   const handleAddToCart = () => {
+    console.log(product)
     if (!isAddedToCart) {
       setCart([
         ...cart,
@@ -97,12 +98,18 @@ const ProductPage = () => {
     const modelsWithSize = allModels.filter((model) => model.size === size);
     setIsAddedToCart(false);
     setProduct(modelsWithSize[0]);
+    setIsAddedToCart(
+      cart.filter((cartProduct) => cartProduct.barcode === product.barcode).length > 0
+    );
   };
 
   const handleChangeDesign = (design) => {
     const modelsWithDesign = allModels.filter((model) => model.design === design);
     setIsAddedToCart(false);
     setProduct(modelsWithDesign[0]);
+    setIsAddedToCart(
+      cart.filter((cartProduct) => cartProduct.barcode === product.barcode).length > 0
+    );
   };
 
   return (
@@ -120,12 +127,11 @@ const ProductPage = () => {
               <p>{product.price}$</p>
               <p>{productDescription}</p>
               <p>Esta promo contiene: </p>
-              <table border={0}>
+             {promoProducts.length !== 0 && <table border={0}>
                 <thead>
                   <tr>
                     <th>Producto</th>
                     <th>Color</th>
-                    
                     <th>Unidades</th>
                   </tr>
                 </thead>
@@ -133,11 +139,10 @@ const ProductPage = () => {
                   <tr>
                     <td>{product.name}</td>
                     <td>{product.design}</td>
-                    
                     <td>{product.quantity}</td>
                   </tr>
                 ))}
-              </table>
+              </table>}
             </div>
             <div className="productPage__description__buttons">
               {category !== "PROMOCIONES" && (

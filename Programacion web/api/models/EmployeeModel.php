@@ -93,7 +93,8 @@
             $instanceMySql = $conecction->getInstance();
             $instanceMySql->begin_transaction(MYSQLI_TRANS_START_READ_WRITE);
             $result_transaccion = true;
-            $userUpdate = "UPDATE user SET name = '$nameEmployee', surname = '$surnameEmployee', password = '$passwordEmployee', phone = '$phoneEmployee', address = '$addressEmployee' WHERE id_user = $idEmployee";
+            $pwd = UserModel::hashPass($passwordEmployee);
+            $userUpdate = "UPDATE user SET name = '$nameEmployee', surname = '$surnameEmployee', password = '$pwd', phone = '$phoneEmployee', address = '$addressEmployee' WHERE id_user = $idEmployee";
             $resultUserUpdate = $instanceMySql->query($userUpdate);
             if(!$resultUserUpdate)  $result_transaccion = false;
             $employeeUpdate = "UPDATE employee SET employee_role = '$rolEmployee' WHERE employee_user = $idEmployee";

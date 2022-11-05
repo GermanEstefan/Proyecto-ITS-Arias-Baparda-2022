@@ -134,7 +134,7 @@ const CreatePromotion = () => {
                   placeholder="Ingrese N° Promo"
                   onChange={handleValuesChange}
                   value={idProduct}
-                  min="0"
+                  min="1000"
                   className="input-form"
                   required
                 />

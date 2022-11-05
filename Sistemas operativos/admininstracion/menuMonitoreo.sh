@@ -31,7 +31,7 @@ do
 	;;
 	0)
 	logger -p local1.info "saliendo del menu de monitoreo"
-	echo "bye"
+	clear
 	;;
 	*)
 	logger -p local1.info "se ingreso una opcion incorrecta"

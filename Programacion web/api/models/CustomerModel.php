@@ -1,4 +1,6 @@
 <?php
+    require_once("./helpers/Response.php");
+    require_once("./database/Connection.php");
     require_once('./models/UserModel.php');
     class CustomerModel extends UserModel{
 
@@ -41,14 +43,15 @@
         }
 
         public function save(){
-            $instanceMySql = parent::$conecction->getInstance();
+            $conecction = new Connection();
+            $instanceMySql = $conecction->getInstance();
             $instanceMySql->begin_transaction(MYSQLI_TRANS_START_READ_WRITE);
             $result_transaccion = true;
             $queryOfUser = "INSERT INTO user(email, name, surname, password) VALUES ('$this->email', '$this->name', '$this->surname', '$this->password' )";
             $resultOfQueryUser = $instanceMySql->query($queryOfUser);
             if(!$resultOfQueryUser)  $result_transaccion = false;
             $idOfUserGenerated = $instanceMySql->insert_id;
-            $queryOfCustomer = "UPDATE customer SET company_name = '$this->company', rut_nr =  $this->nRut WHERE customer_user = $idOfUserGenerated";
+            $queryOfCustomer = "UPDATE customer SET company_name = '$this->company', rut_nr =  '$this->nRut' WHERE customer_user = $idOfUserGenerated";
             $resultOfQueryCustomer = $instanceMySql->query($queryOfCustomer);
             if(!$resultOfQueryCustomer) $result_transaccion = false;
             if($result_transaccion){

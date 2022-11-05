@@ -122,10 +122,12 @@ const BuyForm = () => {
                   defaultChecked={true}
                   value={"Dirección actual"}
                   name="addressRadio"
+                  disabled={!values.address}
                   id=""
                 />{" "}
                 Dirección actual
               </label>
+              {!values.address && <i style={{fontSize: 'small', marginLeft: '15px'}}>No tienes una dirección asignada</i>}
               <label>
                 <input type="radio" value={"Dirección alternativa"} name="addressRadio" id="" />{" "}
                 Dirección alternativa

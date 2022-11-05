@@ -3,7 +3,7 @@
 .user-panel-page {
   margin-top: 12vh;
   display: flex;
-
+  
   @media (max-width: 800px) {
     flex-direction: column;
     padding: 0;
@@ -68,6 +68,17 @@
       span {
         margin: 5px 0 15px 0;
         color: rgba(0, 0, 0, 0.421);
+      }
+      .warning {
+        display: flex;
+        background-color: rgb(255, 91, 91);
+        color: white;
+        padding: 5px;
+        border-radius: 5px;
+        .warningIcon{
+          display: block;
+          padding: 10px;
+        }
       }
       h2 {
         text-align: center;

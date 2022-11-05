@@ -41,3 +41,26 @@
 .ReactCollapse--collapse {
   transition: height 100ms;
 }
+
+.historyContainer {
+  margin: 20px 0;
+  
+  width: 630px;
+  display: flex;
+  
+  @media (max-width: 800px) {
+    flex-direction: column;
+    border-bottom: 1px solid black;
+    margin: 30px auto;
+  }
+  .statusHistory{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 250px;
+    margin: 10px;
+    .icon {
+      margin-left: 10px;
+    }
+  }
+}

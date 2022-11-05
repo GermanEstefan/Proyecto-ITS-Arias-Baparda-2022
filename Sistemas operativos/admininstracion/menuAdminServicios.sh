@@ -1,4 +1,4 @@
-#!bin/bash
+#!/bin/bash
 #Menu de administracion de servicios
 logger -p local1.info "Inicio Menu de administracion de servicios"
 

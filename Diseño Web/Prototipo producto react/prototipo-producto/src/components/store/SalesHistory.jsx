@@ -18,12 +18,11 @@ const SalesHistory = () => {
 
   const getSalesHistory = async () => {
     const resp = await fetchApi(`sales.php?salesClient=${userData.email}`, "GET");
-    console.log(resp);
+
     if (resp.status === "error") {
       setSales([]);
     }
     if (resp.status === "successfully") {
-      console.log(resp.result.data.sales);
       setSales(resp.result.data.sales || []);
     }
   };
@@ -35,17 +34,19 @@ const SalesHistory = () => {
       animationInDuration={500}
       isVisible={true}
     >
-      <h1 style={{ marginLeft: "15px" }}>Historial de compras</h1>
-      {sales.length > 0 &&
-        sales.map((sale, index) => (
-          <div>
-            <SaleStatusHistory saleId={sale.ID} />
-            <HistoryItem key={index} sale={sale} />
-          </div>
-        ))}
-      {sales.length === 0 && (
-        <p style={{ marginLeft: "15px" }}>Aún no has realizado ninguna compra</p>
-      )}
+      <div style={{ height: "85vh" }}>
+        <h1 style={{ marginLeft: "15px" }}>Historial de compras</h1>
+        {sales.length > 0 &&
+          sales.map((sale, index) => (
+            <div className="historyContainer">
+              <HistoryItem key={index} sale={sale} />
+              <SaleStatusHistory saleId={sale.ID} />
+            </div>
+          ))}
+        {sales.length === 0 && (
+          <p style={{ marginLeft: "15px" }}>Aún no has realizado ninguna compra</p>
+        )}
+      </div>
     </Animated>
   );
 };
