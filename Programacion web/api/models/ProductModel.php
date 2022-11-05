@@ -199,6 +199,19 @@
             AND p.state = 1";
             return $conecction->getData($query)->fetch_assoc();
         }
+        public static function getInfoProductForMail($barcode){
+            $conecction = new Connection();
+            $query = "SELECT
+            concat_ws(' ', p.name , d.name, 'Talle:', s.name) AS productName,
+            p.price
+            FROM product p
+            INNER JOIN design d
+            INNER JOIN size s
+            on p.product_design = d.id_design 
+            AND p.product_size = s.id_size  
+            AND p.barcode = $barcode";
+            return $conecction->getData($query)->fetch_assoc();
+        }
          //7-Cliente consulta por todas las promos
          public static function getPromosBO(){
             $conecction = new Connection();
