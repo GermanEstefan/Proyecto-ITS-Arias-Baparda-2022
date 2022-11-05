@@ -2,15 +2,22 @@
   display: flex;
   align-items: center;
   background: linear-gradient(15deg, $gray 70%, $orange);
-  // @media screen and (max-width: 900px) {
-  //   font-size: large;
-  //   width: auto;
-  // }
-  // min-width: 900px;
+  @media screen and (min-width: 900px) {
+    min-width: 900px;
+    font-size: large;
+    width: auto;
+  }
+  @media screen and (max-width: 900px) {
+    font-size: large;
+    width: auto;
+  }
   div {
     border-radius: 100px;
     padding: 10px;
     margin-left: 1.5em;
+    @media screen and (max-width: 600px) {
+      margin-left: 15px;
+    }
     transition: 0.4s;
     i {
       font-size: x-large;
@@ -23,5 +30,8 @@
   h1 {
     font-weight: 200;
     margin-left: 1em;
+    @media screen and (max-width: 600px) {
+      margin-left: 15 px;
+    }
   }
 }

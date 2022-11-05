@@ -323,13 +323,12 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  margin: 11px 0;
   padding: 30px;
   width: 80%;
 }
 @media screen and (max-width: 800px) {
   .card-container {
-    margin: 50px 0;
+    margin: 10px 0;
   }
 }
 .card-container .card {
@@ -649,11 +648,18 @@
     right: -60vw;
   }
 }
+/** @format */
 .paginationContainer {
   display: flex;
-  width: 100%;
+  width: 100vw;
   justify-content: center;
   align-items: center;
+}
+@media (max-width: 800px) {
+  .paginationContainer {
+    justify-content: space-around;
+    width: 70vw;
+  }
 }
 
 .paginationBtn {
@@ -666,6 +672,11 @@
   font-weight: bold;
   font-size: large;
   cursor: pointer;
+}
+@media (max-width: 800px) {
+  .paginationBtn {
+    width: 100px;
+  }
 }
 
 .paginationBtn:hover {
@@ -816,18 +827,27 @@
   padding: 60px;
   width: 20%;
   border-right: 2px solid rgba(245, 153, 15, 0.9529411765);
-  text-align: center;
+  text-align: right;
 }
 @media (max-width: 800px) {
   .user-panel-page aside {
-    width: 100%;
+    width: 70%;
+    max-width: 350px;
+    margin: auto;
     padding: 0;
     border-right: none;
+    text-align: left;
   }
 }
 .user-panel-page aside h1 {
   color: rgba(245, 153, 15, 0.9529411765);
   margin: 30px 0;
+  text-align: right;
+}
+@media (max-width: 800px) {
+  .user-panel-page aside h1 {
+    text-align: left;
+  }
 }
 .user-panel-page aside ul .isOrange {
   color: rgba(245, 153, 15, 0.9529411765);
@@ -860,6 +880,8 @@
   .user-panel-page section {
     width: 100%;
     padding: 0;
+    margin: auto auto 50px auto;
+    border-top: 1px solid #bccddb;
   }
 }
 .user-panel-page section form {
@@ -928,6 +950,12 @@
   margin-top: 4em;
   width: 40%;
 }
+@media screen and (max-width: 800px) {
+  .productContainer .productPage .productPage__img {
+    width: 100%;
+    margin: 20px auto;
+  }
+}
 .productContainer .productPage .productPage__img img {
   width: 250px;
   margin: auto;
@@ -976,7 +1004,7 @@
     justify-content: space-around;
   }
 }
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 800px) {
   .productContainer .productPage .productPage__description .productPage__description__buttons .buttonsFlexContainer {
     flex-direction: column;
   }
@@ -1011,6 +1039,11 @@
   flex-direction: column;
   align-self: center;
   width: 50%;
+}
+@media screen and (max-width: 600px) {
+  .productContainer .productPage .productPage__description .productPage__description__buttons .buttonsFlexContainer .buyAndAddToCartContainer {
+    width: 90%;
+  }
 }
 .productContainer .productPage .productPage__description .productPage__description__buttons .buttonsFlexContainer .buyAndAddToCartContainer button {
   border: none;
@@ -1049,6 +1082,11 @@
   width: 49%;
   display: inline-block;
 }
+@media screen and (max-width: 600px) {
+  .productContainer .productPage .productPage__description .productPage__description__buttons .selectsContainer .select {
+    width: 90%;
+  }
+}
 .productContainer .productPage .productPage__description .productPage__description__buttons p {
   text-align: center;
 }
@@ -1075,11 +1113,29 @@
   align-items: center;
   background: linear-gradient(15deg, #bccddb 70%, rgba(245, 153, 15, 0.9529411765));
 }
+@media screen and (min-width: 900px) {
+  .main_header {
+    min-width: 900px;
+    font-size: large;
+    width: auto;
+  }
+}
+@media screen and (max-width: 900px) {
+  .main_header {
+    font-size: large;
+    width: auto;
+  }
+}
 .main_header div {
   border-radius: 100px;
   padding: 10px;
   margin-left: 1.5em;
   transition: 0.4s;
+}
+@media screen and (max-width: 600px) {
+  .main_header div {
+    margin-left: 15px;
+  }
 }
 .main_header div i {
   font-size: x-large;
@@ -1091,6 +1147,11 @@
 .main_header h1 {
   font-weight: 200;
   margin-left: 1em;
+}
+@media screen and (max-width: 600px) {
+  .main_header h1 {
+    margin-left: 15 px;
+  }
 }
 
 .container_section {
@@ -1365,6 +1426,7 @@
 .cartContainer {
   margin: 15vh auto auto auto;
   height: 100%;
+  padding-bottom: 20px;
 }
 .cartContainer .cartPage {
   min-height: 100%;
@@ -1463,7 +1525,7 @@
 .historyItem {
   display: flex;
   justify-content: space-between;
-  width: 600px;
+  width: 100%;
   padding: 5px 15px;
   border: 3px rgb(211, 211, 211) solid;
   align-items: center;
@@ -1472,10 +1534,19 @@
   margin-right: 10px;
 }
 @media (max-width: 800px) {
+  .historyItem .status {
+    display: none;
+  }
+}
+@media (max-width: 800px) {
   .historyItem {
-    width: 90%;
+    width: 85%;
     margin: auto;
   }
+}
+
+.priceAndCollapse {
+  display: flex;
 }
 
 .historyItem:hover {
@@ -1485,7 +1556,7 @@
 }
 
 .historyCollapse {
-  width: 600px;
+  width: 100%;
   padding: 5px 15px;
   background-color: rgba(235, 235, 235, 0.582);
 }
@@ -1510,22 +1581,28 @@
 
 .historyContainer {
   margin: 20px 0;
-  width: 630px;
+  width: 100%;
   display: flex;
+  align-items: flex-start;
 }
 @media (max-width: 800px) {
   .historyContainer {
-    flex-direction: column;
+    flex-direction: column-reverse;
     border-bottom: 1px solid black;
     margin: 30px auto;
   }
 }
 .historyContainer .statusHistory {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-around;
-  width: 250px;
+  width: 240px;
   margin: 10px;
+}
+@media (min-width: 800px) {
+  .historyContainer .statusHistory {
+    margin-left: 50px;
+  }
 }
 .historyContainer .statusHistory .icon {
   margin-left: 10px;

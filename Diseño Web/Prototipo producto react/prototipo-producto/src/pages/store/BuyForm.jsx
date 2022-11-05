@@ -21,14 +21,19 @@ const BuyForm = () => {
   const { userData } = useContext(userStatusContext);
   const [isAddressDisable, setIsAddressDisable] = useState(true);
   const [deliveryHours, setDeliveryHours] = useState([]);
+  const [hasAddress, setHasAddress] = useState(false);
   const [values, setValues] = useState({
     email: userData.email,
     address: userData.address,
     deliveryTime: 1,
     paymentMenthod: null,
   });
+
   useEffect(() => {
     getDeliveryHours();
+    setHasAddress(userData.address === null);
+    console.log(userData.address !== null);
+
     window.scroll(0, 0);
   }, []);
 
@@ -122,15 +127,18 @@ const BuyForm = () => {
                   defaultChecked={true}
                   value={"Dirección actual"}
                   name="addressRadio"
-                  disabled={!values.address}
-                  id=""
+                  disabled={hasAddress}
                 />{" "}
                 Dirección actual
               </label>
-              {!values.address && <i style={{fontSize: 'small', marginLeft: '15px'}}>No tienes una dirección asignada</i>}
+              {hasAddress && (
+                <i style={{ fontSize: "small", marginLeft: "15px" }}>
+                  No tienes una dirección asignada
+                </i>
+              )}
               <label>
-                <input type="radio" value={"Dirección alternativa"} name="addressRadio" id="" />{" "}
-                Dirección alternativa
+                <input type="radio" value={"Dirección alternativa"} name="addressRadio" /> Dirección
+                alternativa
               </label>
             </div>
             <Input

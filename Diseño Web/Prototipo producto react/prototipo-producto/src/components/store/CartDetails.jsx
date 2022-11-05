@@ -15,7 +15,7 @@ const CartDetails = ({ total, isCartEmpty }) => {
     <>
       <div className="cartItem">
         <div className="cartItem__text">
-          <span className="total">Total del carrito: {total}$</span>
+          <span className="total">Total del carrito: ${total}</span>
           <button className="buyBtn" onClick={() => handleClick()} disabled={isCartEmpty} >
             Confirmar compra
           </button>

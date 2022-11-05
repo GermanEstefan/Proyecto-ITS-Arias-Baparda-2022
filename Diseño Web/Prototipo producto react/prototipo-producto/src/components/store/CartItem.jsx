@@ -48,7 +48,7 @@ const CartItem = ({
               Talle: {size}, Color: {design}
             </span>
           </div>
-          <p>{productTotalPrice}$</p>
+          <p>${productTotalPrice}</p>
         </div>
         <div className="CartItem__actions">
           <input

@@ -153,7 +153,7 @@ class SupplyController {
         $totalSpent = 0;
         $supplys = array();
         foreach($supply as $supplysInDay){
-            $negativeBalance = ($supplysInDay["totalSupply"])*-1; 
+            $negativeBalance = ($supplysInDay["totalSupply"]); 
             $totalSpent += $negativeBalance;           
             array_push( $supplys, array( "idSupply" => $supplysInDay['idSupply'],"date" => $supplysInDay['date'],"idEmployee" => $supplysInDay['idEmployee'],"ciEmployee" => $supplysInDay['ciEmployee'],"employeeName" => $supplysInDay['employeeName'],"totalSupply" => $supplysInDay['totalSupply']));
 
@@ -179,7 +179,7 @@ class SupplyController {
         $totalSpent = 0;
         $supplys = array();
         foreach($supply as $supplysInDay){
-            $negativeBalance = ($supplysInDay["totalSupply"])*-1; 
+            $negativeBalance = ($supplysInDay["totalSupply"]); 
             $totalSpent += $negativeBalance;           
             array_push( $supplys, array( "idSupply" => $supplysInDay['idSupply'],"date" => $supplysInDay['date'],"nameSupplier" => $supplysInDay['nameSupplier'],"idEmployee" => $supplysInDay['idEmployee'],"ciEmployee" => $supplysInDay['ciEmployee'],"employeeName" => $supplysInDay['employeeName'],"totalSupply" => $supplysInDay['totalSupply']));
 

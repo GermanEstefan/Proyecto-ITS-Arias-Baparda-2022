@@ -124,10 +124,10 @@ const ProductPage = () => {
           </div>
           <div className="productPage__description">
             <div className="productPage__description__body">
-              <p>{product.price}$</p>
+              <p>${product.price}</p>
               <p>{productDescription}</p>
-              <p>Esta promo contiene: </p>
              {promoProducts.length !== 0 && <table border={0}>
+              <p>Esta promo contiene: </p>
                 <thead>
                   <tr>
                     <th>Producto</th>
