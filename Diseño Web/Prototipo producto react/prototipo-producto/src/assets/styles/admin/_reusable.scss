@@ -75,6 +75,7 @@
   border-radius: 5px;
   position: relative;
   margin-bottom: 50px;
+  border-collapse: collapse;
   caption{
     font-size: 1.4rem;
     font-weight: bold;
@@ -87,6 +88,7 @@
     padding: 8px;
     font-weight: bold;
     text-align: center;
+    border: 1px solid rgb(122, 122, 122);
   }
   th {
     color: $orange;
@@ -124,12 +126,18 @@
       font-weight: bold;
       font-size: 1.1rem;
     }
+    th,td{
+      border: none;
+    }
   }
   .child-table_row {
     td {
       font-size: 0.9rem;
       background-color: transparent;
       border-radius: 5px;
+    }
+    th,td{
+      border: none;
     }
   }
 }

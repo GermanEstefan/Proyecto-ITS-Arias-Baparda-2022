@@ -21,6 +21,7 @@ const Aside = () => {
     products: false,
     "products-promo": false,
     sales: false,
+    management: false
   };
   const [visibility, setVisibility] = useState(visibilityInit);
   const [actualPageAndAction, setActualPageAndAction] = useState({
@@ -241,7 +242,7 @@ const Aside = () => {
           )}
         </li>
 
-        <li className={`aside_menu_item ${!(rol === "JEFE") && "opacity"}`}>
+        <li className={`aside_menu_item`}>
           <div
             className="aside_menu_item_container"
             onClick={() => handleOpenSubMenu("management")}
@@ -256,41 +257,20 @@ const Aside = () => {
               className="aside_menu_item_container_icon2"
             />
           </div>
-          {visibility.management && (
+          { visibility.management && (
             <ul>
               <li
-                onClick={() => navigate("/admin/management/saldos")}
+                onClick={ () => navigate("/admin/management/queries")}
                 className={
-                  action === "saldos" && page === "management" ? "selected" : ""
+                  action === "queries" && page === "management" ? "selected" : ""
                 }
               >
-                Saldos
-              </li>
-
-              <li
-                onClick={() => navigate("/admin/management/clientes")}
-                className={
-                  action === "clientes" && page === "management"
-                    ? "selected"
-                    : ""
-                }
-              >
-                Mejores Clientes
-              </li>
-
-              <li
-                onClick={() => navigate("/admin/management/productos")}
-                className={
-                  action === "designs" && page === "management"
-                    ? "selected"
-                    : ""
-                }
-              >
-                Mejores Productos
+                Consultas
               </li>
             </ul>
           )}
         </li>
+
       </ul>
     </aside>
   );
