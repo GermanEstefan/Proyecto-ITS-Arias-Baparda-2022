@@ -5,10 +5,13 @@
         public static function getBalances(){
             $conecction = new Connection();
             $query = "SELECT 
-            SUM(s.TOTAL) AS totalSale,
-            SUM(sp.total) AS totalSupply
-            FROM SALE s, supply sp";
-            return $conecction->getData($query)->fetch_assoc();
+            SUM(s.total) AS total
+			FROM sale s
+            union
+            SELECT 
+            SUM(s.total)
+			FROM supply s";
+            return $conecction->getData($query)->fetch_all(MYSQLI_ASSOC);
         }
         public static function getBestClients($limit){
             $conecction = new Connection();

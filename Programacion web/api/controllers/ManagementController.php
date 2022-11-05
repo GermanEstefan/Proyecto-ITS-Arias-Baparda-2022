@@ -25,15 +25,17 @@ class ManagementController {
             echo $this->response->error203("PERMISO DENEGADO");
             die();
         }
-        if($employeeRole != 'JEFE'){
-            http_response_code(401);
-            echo $this->response->error401("Rol no valido para relizar esta accion");
-            die();
-        }
         $management = ManagementModel::getBalances(); 
         $balance = array();
-        $totalSale = $management['totalSale'];
-        $totalSupply = $management['totalSupply']*-1;
+    
+        $totalSale = $management[0]['total'];
+        $totalSupply = $management[1]['total'];
+        if($totalSale){
+            $totalSale = $totalSale*1;
+        }
+        if($totalSupply){
+            $totalSupply = $totalSupply*-1;
+        }
         $diference = ($totalSale + $totalSupply);
         array_push( $balance, array( "TotalSale" => $totalSale,"TotalSupply" => $totalSupply,"Diference" => $diference)); 
         echo $this->response->successfully("Balance de saldos:",$balance);
@@ -44,11 +46,7 @@ class ManagementController {
             echo $this->response->error203("PERMISO DENEGADO");
             die();
         }
-        if($employeeRole != 'JEFE'){
-            http_response_code(401);
-            echo $this->response->error401("Rol no valido para relizar esta accion");
-            die();
-        }
+        
         if($limit<0){     
             echo $this->response->error203("El limite $limit no es correcto");
             die();
@@ -73,11 +71,7 @@ class ManagementController {
             echo $this->response->error203("PERMISO DENEGADO");
             die();
         }
-        if($employeeRole != 'JEFE'){
-            http_response_code(401);
-            echo $this->response->error401("Rol no valido para relizar esta accion");
-            die();
-        }
+        
         if($limit<0){     
             echo $this->response->error203("El limite $limit no es correcto");
             die();
