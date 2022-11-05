@@ -453,11 +453,11 @@ DELIMITER ;
 -- -----------------------------------------------------
 -- USUARIOS PARA TENER INGRESAR AL SISTEMA 
 -- ----------------------------------------------------- 
-INSERT INTO `bindev`.`user` (`email`, `name`, `surname`, `address`, `phone`, `password`) VALUES ('system@seguridadcorporal.com', 'System', 'Response', 'Null', '0','--,.r.ad');
-INSERT INTO `bindev`.`user` (`email`, `name`, `surname`, `address`, `phone`, `password`) VALUES ('master@seguridadcorporal.com', 'usuario', 'master', 'Address master', '22334455', 'master');
-INSERT INTO `bindev`.`user` (`email`, `name`, `surname`, `address`, `phone`, `password`) VALUES ('ventas@seguridadcorporal.com', 'usuario', 'vendedor', 'Address vendedor', '22334455', 'vendedor');
-INSERT INTO `bindev`.`user` (`email`, `name`, `surname`, `address`, `phone`, `password`) VALUES ('compras@seguridadcorporal.com', 'usuario ', 'comprador', 'Address comprador', '22334455', 'comprador');
-INSERT INTO `bindev`.`role` (`name_role`, `description`) VALUES ('SYSTEM', 'RESPUESTA AUTOMATICA DEL SISTEMA');
+INSERT INTO `bindev`.`user` (`email`, `name`, `surname`, `address`, `phone`, `password`) VALUES ('system@seguridadcorporal.com', 'System', 'Response', 'Null', '0','naydzOBmlUOHA3WID9DNf6hsFJJ391gWd1sPLQChk6');
+INSERT INTO `bindev`.`user` (`email`, `name`, `surname`, `address`, `phone`, `password`) VALUES ('master@seguridadcorporal.com', 'usuario', 'master', 'Address master', '22334455', '$2y$10$5cLaj69Z5W/naydzOBmlUOHA3WID9DNf6hsFJJ391gWd1sPLQChk6');
+INSERT INTO `bindev`.`user` (`email`, `name`, `surname`, `address`, `phone`, `password`) VALUES ('ventas@seguridadcorporal.com', 'usuario', 'vendedor', 'Address vendedor', '22334455', '$2y$10$jw2fOlnoc5uxriSjgeyh7O0TMgVD6UpzI6lAuWG/I7vkMJ7NmBiNi');
+INSERT INTO `bindev`.`user` (`email`, `name`, `surname`, `address`, `phone`, `password`) VALUES ('compras@seguridadcorporal.com', 'usuario ', 'comprador', 'Address comprador', '22334455', '$2y$10$cdcUG0sRt2nMRFTcaB.pNOWQEDPOExONv2JfezSF1CfFeKXgnVIya');
+INSERT INTO `bindev`.`role` (`name_role`, `description`) VALUES ('SYSTEM', 'ROL SISTEMA');
 INSERT INTO `bindev`.`role` (`name_role`, `description`) VALUES ('VENDEDOR', 'Personal de ventas');
 INSERT INTO `bindev`.`role` (`name_role`, `description`) VALUES ('COMPRADOR', 'Personal de compras');
 INSERT INTO `bindev`.`role` (`name_role`, `description`) VALUES ('JEFE', 'Cargo de JEFE');
