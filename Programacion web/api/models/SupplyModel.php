@@ -89,7 +89,7 @@ class SupplyModel extends Connection
         s.supplier_id AS idSupplier,
         sp.company_name AS nameSupplier,
         e.employee_user AS idEmployee,
-        s.employee_ci AS ciEmployee,
+        concat_ws(' ', u.name , u.surname) AS ciEmployee, 
         concat_ws(' ', u.name , u.surname) AS employeeName, 
         s.total AS totalSupply
         FROM supply s, employee e, user u, supplier sp 

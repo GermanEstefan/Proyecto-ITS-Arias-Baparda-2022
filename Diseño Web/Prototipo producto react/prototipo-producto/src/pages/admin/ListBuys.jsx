@@ -42,7 +42,7 @@ const ListBuys = () => {
                 <tr>
                   <th>ID</th>
                   <th>Fecha</th>
-                  <th>CI empleado</th>
+                  <th>Responsable</th>
                   <th>Proveedor</th>
                   <th>Total de la compra</th>
                   <th>Controles</th>
@@ -54,7 +54,7 @@ const ListBuys = () => {
                       <td>{supply.date}</td>
                       <td>{`${supply.ciEmployee}`}</td>
                       <td>{supply.nameSupplier}</td>
-                      <td>{supply.totalSupply}</td>
+                      <td>${supply.totalSupply}</td>
                       <td
                         className="table-control-text"
                         onClick={() =>
