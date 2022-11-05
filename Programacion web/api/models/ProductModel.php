@@ -610,6 +610,12 @@
             die();   
             }
             $query = array($index => "INSERT INTO promo (is_product, have_product, quantity) VALUES ($isProduct,$haveProduct, $quantity)");
+            $searchArray = array_search ("INSERT INTO promo (is_product, have_product, quantity) VALUES ($isProduct,$haveProduct, $quantity)", $query);
+            if($searchArray){
+                echo ($response->error203("No se pueden repetir los productos "));
+                $instanceMySql->rollback();
+                die();   
+                }
             array_push($queries, $query);
             $index++;
         }

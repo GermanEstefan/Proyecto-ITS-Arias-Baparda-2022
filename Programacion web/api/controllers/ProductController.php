@@ -152,7 +152,13 @@ class ProductController
                 echo $this->response->error203("Esta intentando ingresar un producto ya existente");
                 die();
             }
+           
             $query = array($index => "INSERT INTO product (id_product, name, product_category, product_design, product_size, stock, price, description, picture) VALUES ('$idProduct','$name','$prodCategory','$prodDesign','$prodSize','$stock','$price', '$description', '$picture')");
+            $searchArray = array_search("INSERT INTO product (id_product, name, product_category, product_design, product_size, stock, price, description, picture) VALUES ('$idProduct','$name','$prodCategory','$prodDesign','$prodSize','$stock','$price', '$description', '$picture')", $query);
+            if($searchArray){
+                echo $this->response->error203("No se pueden repetir modelos");
+                die();
+            }
             array_push($queries, $query);
             $index++;
         }
