@@ -8,12 +8,13 @@ import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import { fetchApi } from "../../API/api";
 import { userStatusContext } from "../../App";
-import { faExclamationCircle } from "@fortawesome/free-solid-svg-icons";
+import { faExclamationCircle, faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 
 const DisableAccount = () => {
   const navigate = useNavigate();
   const { userData } = useContext(userStatusContext);
   const [thisPassword, setThisPassword] = useState("");
+  const [viewPassword, setViewPassword] = useState(true);
   const handleChange = ({ target }) => {
     setThisPassword(target.value);
   };
@@ -68,13 +69,26 @@ const DisableAccount = () => {
           desactivas tu cuenta no podrás volver a recuperarla
         </p>
         <div>
-          <label>Contraseña</label>
-          <input
-            name="password"
-            type="password"
-            onChange={(e) => handleChange(e)}
-            onBlur={(e) => handleChange(e)}
-          />
+          <div style={{ display: "flex", justifyContent: "flex-end" }}>
+            <input
+              name="password"
+              type={viewPassword ? "password" : "text"}
+              onChange={(e) => handleChange(e)}
+              onBlur={(e) => handleChange(e)}
+              style={{width: '50%'}}
+            />
+
+            <FontAwesomeIcon
+              style={{
+                margin: "13px 0 13px -18px",
+                position: "absolute",
+                cursor: "pointer",
+              }}
+              onClick={() => setViewPassword(!viewPassword)}
+              icon={!viewPassword ? faEye : faEyeSlash}
+              color="gray"
+            />
+          </div>
         </div>
         <button className="submit-button" type="submit" disabled={thisPassword.length < 6}>
           Desactivar

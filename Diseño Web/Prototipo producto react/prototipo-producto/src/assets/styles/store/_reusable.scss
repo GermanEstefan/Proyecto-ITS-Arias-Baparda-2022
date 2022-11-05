@@ -45,9 +45,12 @@
     width: 50%;
     display: flex;
     flex-direction: column;
+    @media screen and (max-width: 800px) {
+      width: 100%;
+      margin-bottom: 20px;
+    }
 
     a {
-      
       text-align: center;
       color: $orange;
       text-decoration: underline;
@@ -129,6 +132,7 @@
     input[type="email"],
     input[type="password"],
     textarea {
+      
       margin: 5px;
       display: block;
       padding: 5px;
@@ -192,8 +196,8 @@
 /*Componente ShoppingCart*/
 .shopping-cart-mobile {
   position: fixed;
-  bottom: 100px;
-  left: 20px;
+  bottom: 15px;
+  left: 15px;
   font-size: 2rem;
   color: $orange;
   padding: 25px;

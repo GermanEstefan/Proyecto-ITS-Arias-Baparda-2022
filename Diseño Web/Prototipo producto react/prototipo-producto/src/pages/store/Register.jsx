@@ -12,9 +12,12 @@ import { fetchApi } from "../../API/api";
 import ContainerBase from "../../components/store/ContainerBase";
 import { Animated } from "react-animated-css";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 const Register = () => {
   const { setUserData } = useContext(userStatusContext);
   const navigate = useNavigate();
+  const [viewPassword, setViewPassword] = useState(true);
   useEffect(() => {
     window.scroll(0, 0);
   }, []);
@@ -162,16 +165,29 @@ const Register = () => {
               {errors.email.error && <span className="spanError">{errors.email.message}</span>}
             </div>
             <div>
-              <input
-                name="password"
-                id="password"
-                type={"password"}
-                style={errors.password.error ? { borderColor: "red" } : {}}
-                value={values.password}
-                placeholder="Contraseña"
-                onChange={(e) => handleSetValues(e)}
-                onBlur={(e) => handleSetValues(e)}
-              />
+              <div style={{ display: "flex", justifyContent: "flex-end" }}>
+                <input
+                  name="password"
+                  id="password"
+                  type={viewPassword ? "password" : "text"}
+                  value={values.password}
+                  style={errors.password.error ? { borderColor: "red" } : {}}
+                  placeholder="Contraseña"
+                  onChange={(e) => handleSetValues(e)}
+                  onBlur={(e) => handleSetValues(e)}
+                />
+
+                <FontAwesomeIcon
+                  style={{
+                    margin: "13px 18px 13px -18px",
+                    position: "absolute",
+                    cursor: "pointer",
+                  }}
+                  onClick={() => setViewPassword(!viewPassword)}
+                  icon={!viewPassword ? faEye : faEyeSlash}
+                  color="gray"
+                />
+              </div>
               {errors.password.error && (
                 <span className="spanError">{errors.password.message}</span>
               )}

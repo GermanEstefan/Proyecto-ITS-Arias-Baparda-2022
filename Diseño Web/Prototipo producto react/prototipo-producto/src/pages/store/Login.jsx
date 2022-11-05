@@ -8,6 +8,8 @@ import Swal from "sweetalert2";
 import { userStatusContext } from "../../App";
 import { fetchApi } from "../../API/api";
 import ContainerBase from "../../components/store/ContainerBase";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 
 const Login = () => {
   const { setUserData } = useContext(userStatusContext);
@@ -17,7 +19,7 @@ const Login = () => {
     email: "",
     password: "",
   };
-
+  const [viewPassword, setViewPassword] = useState(true);
   const initialErrors = {
     email: { error: false, message: "" },
     password: { error: false, message: "" },
@@ -127,16 +129,25 @@ const Login = () => {
           </div>
           {errors.email.error && <span className="spanError">{errors.email.message}</span>}
           <div className="inputSection">
-            <input
-              name="password"
-              id="password"
-              type="password"
-              value={values.password}
-              style={errors.password.error ? { borderColor: "red" } : {}}
-              placeholder="Contraseña"
-              onChange={(e) => handleValuesChange(e)}
-              onBlur={(e) => handleValuesChange(e)}
-            />
+            <div style={{ display: "flex", justifyContent: "flex-end" }}>
+              <input
+                name="password"
+                id="password"
+                type={viewPassword ? "password" : "text"}
+                value={values.password}
+                style={errors.password.error ? { borderColor: "red" } : {}}
+                placeholder="Contraseña"
+                onChange={(e) => handleValuesChange(e)}
+                onBlur={(e) => handleValuesChange(e)}
+              />
+
+              <FontAwesomeIcon
+                style={{ margin: "13px 18px 13px -18px", position: "absolute", cursor: "pointer" }}
+                onClick={() => setViewPassword(!viewPassword)}
+                icon={!viewPassword ? faEye : faEyeSlash}
+                color="gray"
+              />
+            </div>
           </div>
           {errors.password.error && <span className="spanError">{errors.password.message}</span>}
           <button

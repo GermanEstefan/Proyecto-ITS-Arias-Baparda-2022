@@ -90,6 +90,7 @@ const Aside = () => {
                                 onClick={() => navigate('/admin/generals/supplier')}
                                 className={(action === 'supplier' && page === 'generals') ? 'selected' : ''}
                             >Proveedores</li>
+                         
                         </ul>
                     }
                 </li>
@@ -139,7 +140,7 @@ const Aside = () => {
                             <li
                                 onClick={() => navigate('/admin/sales/manage')}
                                 className={(action === 'manage' && page === 'sales') ? 'selected' : ''}
-                            >Gestionar envios</li>
+                            >Gestionar envíos</li>
                         </ul>
                     }
                 </li>
