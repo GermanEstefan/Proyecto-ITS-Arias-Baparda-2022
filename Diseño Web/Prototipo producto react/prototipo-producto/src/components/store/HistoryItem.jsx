@@ -26,12 +26,12 @@ export const HistoryItem = ({ sale }) => {
     <div onClick={handleClick}>
       <div className="historyItem">
         <div>
-          <strong>#{sale.ID}{" "} </strong>
+          <strong>#{sale.ID} </strong>
           <span>{sale.date}</span>
           <strong className="status">{sale.status}</strong>
         </div>
         <div className="priceAndCollapse">
-          <span>{sale.total}$</span>
+          <span>{sale.status !== "CANCELADA" ? sale.total : "--.--"}$</span>
           <FontAwesomeIcon icon={toggleCollapse ? faCaretUp : faCaretDown} />
         </div>
       </div>
@@ -40,11 +40,10 @@ export const HistoryItem = ({ sale }) => {
           {saleProducts.map((saleDetail, index) => (
             <div key={index} className="collapseSale">
               <div>
-                
                 <span>{saleDetail.productName}</span>
                 <span>x{saleDetail.quantity}</span>
               </div>
-              <span>{sale.status !== 'CANCELADA' ?  saleDetail.total : '--.--$'} $</span>
+              <span>{saleDetail.total} $</span>
             </div>
           ))}
         </Collapse>
