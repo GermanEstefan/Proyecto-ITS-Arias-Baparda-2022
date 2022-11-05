@@ -73,7 +73,30 @@ class SaleController {
             echo $this->response->error500();
             die();
         }
-        echo $this->response->successfully("Su pedido fue realizado con exito");
+        echo $this->response->successfully("Su pedido fue realizado con exito");        
+        $to = $client;
+        $products = array();
+        foreach ($productsForSale as $product) {
+            $barcode = $product['barcode'];
+            $quantity = $product['quantity'];
+            $getExtraInfo = ProductModel::getInfoProductForMail($barcode);
+            $productName = $getExtraInfo['productName'];
+            $price = $getExtraInfo['price'];
+            $total = ($quantity * $price);
+            array_push($products, array("productName"=>$productName,"quantity"=> $quantity,"price"=> $price,"total"=>$total));
+        }
+        if ($payment === 0){
+            $payment = 'Efectivo';
+        }else{
+            $payment = 'Pago Online';
+        }
+        $getTime = DeliveryModel::getDeliveryById($delivery);
+        $time = $getTime['name'];
+        $date = date("Y/m/d");
+        $infoExtra = array ($payment, $time, $address, $date);
+        
+
+
     }
     //CONSULTAS
     public function getSaleId($idSale){
