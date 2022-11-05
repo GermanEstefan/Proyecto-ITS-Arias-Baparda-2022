@@ -108,9 +108,10 @@ class EmployeeController{
 
         $employeeRol = $employeeExistInDatabase['employee_role'];
         $employeeId = $employeeExistInDatabase['employee_user'];
-        $userInDatabase = UserModel::getUserById($employeeId);
-        $userInDatabasePassword = $userInDatabase['password'];
-        if (!($password == $userInDatabasePassword)) {
+        $userData = UserModel::getUserById($employeeId);
+        $userDataPassword = $userData['password'];
+             
+        if (!(password_verify($password, $userDataPassword))) {
             http_response_code(401);
             echo $this->response->error401('Credenciales incorrectas');
             die();
@@ -124,9 +125,9 @@ class EmployeeController{
         $userToken = $this->jwt->generateToken($employeeId, $employeeRol);
         $bodyResponse = array(
             "token" => $userToken,
-            "email" => $userInDatabase['email'],
-            "name" => $userInDatabase['name'],
-            "surname" => $userInDatabase['surname'],
+            "email" => $userData['email'],
+            "name" => $userData['name'],
+            "surname" => $userData['surname'],
             "rol" => $employeeRol,
             "ci" => $ci
         );

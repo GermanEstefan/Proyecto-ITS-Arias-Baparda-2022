@@ -21,7 +21,8 @@
         }
 
         public static function hashPass($password){
-            return password_hash($password, PASSWORD_DEFAULT);
+            $hash = password_hash($password, PASSWORD_DEFAULT);
+            return $hash;
         }
         public static function getUserByEmail($email){
             $conecction = new Connection();
@@ -54,12 +55,14 @@
         
         public static function updatePass($email, $password){
             $conecction = new Connection();
-            $query = "UPDATE user SET password = '$password' WHERE email = '$email' ";
+            $pwd = UserModel::hashPass($password);
+            $query = "UPDATE user SET password = '$pwd' WHERE email = '$email' ";
             return $conecction->setData($query);
         }
         public static function updatePassword($idUser, $password){
             $conecction = new Connection();
-            $query = "UPDATE user SET password = '$password' WHERE id_user = $idUser";
+            $pwd = UserModel::hashPass($password);
+            $query = "UPDATE user SET password = '$pwd' WHERE id_user = $idUser";
             return $conecction->setData($query);
         }
 

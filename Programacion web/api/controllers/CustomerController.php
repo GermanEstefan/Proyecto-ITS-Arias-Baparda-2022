@@ -89,9 +89,12 @@ class CustomerController
             echo $this->response->error203("La contraseña debe tener 5 caracteres minimo");
             die();
         }
-        $isOldPass = CustomerModel::getPassOfUser($idOfUserRequested);
-        if($old != $isOldPass['pass']){
-            echo $this->response->error203("Contraseña ingresada no es valida");
+        $CustomerData = UserModel::getUserById($idOfUserRequested);
+        $verifyPass = $CustomerData['password'];
+        
+        if (!(password_verify($old, $verifyPass))) {
+            http_response_code(401);
+            echo $this->response->error401('Credenciales incorrectas');
             die();
         }
         $setNewPass = UserModel::updatePassword($idOfUserRequested,$new);
@@ -113,11 +116,15 @@ class CustomerController
         $password = $userData['password'];
         $email = $userData['email'];
 
-        $isPass = CustomerModel::getPassOfUser($idOfUserRequested);
-        if($password != $isPass['pass']){
-            echo $this->response->error203("Contraseña ingresada no es valida");
+        $CustomerData = UserModel::getUserByEmail($email);
+        $verifyPass = $CustomerData['password'];
+        
+        if (!(password_verify($password, $verifyPass))) {
+            http_response_code(401);
+            echo $this->response->error401('Credenciales incorrectas');
             die();
         }
+
         $disableAccount = UserModel::disableUser($email);
         if(!$disableAccount){
             echo $this->response->error203("Error al eliminar cuenta");
@@ -181,8 +188,7 @@ class CustomerController
         }
     }
 
-    public function loginCustomer($userData)
-    {
+    public function loginCustomer($userData){
 
         if (!isset($userData['email']) || !isset($userData['password'])) {
             http_response_code(400);
@@ -199,10 +205,9 @@ class CustomerController
             echo $this->response->error200("EL $email NO SE ENCUENTRA REGISTRADO");
             die();
         }
-
         $verifyPass = $CustomerData['password'];
-        $compare = UserModel::hashPass($password);
-        if (password_verify($compare, $verifyPass)) {
+        
+        if (!(password_verify($password, $verifyPass))) {
             http_response_code(401);
             echo $this->response->error401('Credenciales incorrectas');
             die();
