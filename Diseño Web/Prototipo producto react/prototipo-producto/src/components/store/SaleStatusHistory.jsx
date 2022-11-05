@@ -43,7 +43,7 @@ const SaleStatusHistory = ({ saleId }) => {
         color={lastStatus === "CONFIRMADO" ? "orange" : "black"}
       />
       <FontAwesomeIcon className="icon" icon={faArrowRightLong} size={"sm"} />
-      {lastStatus !== "PICK UP" ? (
+      {lastStatus !== "PICK-UP" ? (
         <FontAwesomeIcon
           className="icon"
           icon={faTruckFast}
