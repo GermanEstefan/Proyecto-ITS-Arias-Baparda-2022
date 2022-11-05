@@ -1,6 +1,4 @@
 
-import { faSearch } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect } from "react"
 import { useState } from "react";
 import { fetchApi } from "../../API/api";
@@ -102,10 +100,7 @@ const Queries = () => {
 
                             <form onSubmit={ (e) => handleApplyLimit(e, 'bestClients')}>
                                 <span>Defina un limite:</span>
-                                <input type="number" />
-                                <button type="submit">
-                                    <FontAwesomeIcon icon={faSearch} />
-                                </button>
+                                <input type="number" required min={1} />
                             </form>
 
                             <table className="table-template">
@@ -133,9 +128,6 @@ const Queries = () => {
                             <form onSubmit={ (e) => handleApplyLimit(e, 'bestProducts')}>
                                 <span>Defina un limite:</span>
                                 <input type="text" />
-                                <button type="submit">
-                                    <FontAwesomeIcon icon={faSearch} />
-                                </button>
                             </form>
 
                             <table className="table-template">

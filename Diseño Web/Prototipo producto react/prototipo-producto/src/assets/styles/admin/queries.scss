@@ -45,18 +45,6 @@
                     border: none;
                 }
             }
-            > button{
-                margin-left: 5px;
-                border: none;
-                font-size: 1.5rem;
-                background-color: transparent;
-                color: $orange;
-                cursor: pointer;
-                transition: color .4s;
-                &:hover{
-                    color: darken($color: $orange, $amount: 10) ;
-                }
-            }
         }
     }
 }
