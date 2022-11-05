@@ -2,8 +2,11 @@
   display: flex;
   align-items: center;
   background: linear-gradient(15deg, $gray 70%, $orange);
-  
-  min-width: 900px;
+  // @media screen and (max-width: 900px) {
+  //   font-size: large;
+  //   width: auto;
+  // }
+  // min-width: 900px;
   div {
     border-radius: 100px;
     padding: 10px;
