@@ -120,11 +120,11 @@ const ListProducts = () => {
               <caption>Productos</caption>
               <tbody>
                 <tr>
-                  <th>Id del producto</th>
+                  <th>ID PRODUCTO</th>
                   <th>Nombre</th>
                   <th>Descripcion</th>
                   <th>Categoria</th>
-                  <th>Precio unitario</th>
+                  <th>Precio</th>
                   <th>Controles</th>
                 </tr>
                 {products.map((product) => (
@@ -176,8 +176,7 @@ const ListProducts = () => {
                                     handleDisableModel(model.barcode)
                                   }
                                 >
-                                  {" "}
-                                  <FontAwesomeIcon icon={faTrash} />{" "}
+                                  <FontAwesomeIcon icon={faTrash} />
                                 </td>
                               ) : (
                                 <td
@@ -186,8 +185,7 @@ const ListProducts = () => {
                                     handleEnableModel(model.barcode)
                                   }
                                 >
-                                  {" "}
-                                  <FontAwesomeIcon icon={faCheck} />{" "}
+                                  <FontAwesomeIcon icon={faCheck} />
                                 </td>
                               )}
                               <td
@@ -198,8 +196,7 @@ const ListProducts = () => {
                                   )
                                 }
                               >
-                                {" "}
-                                <FontAwesomeIcon icon={faPencil} />{" "}
+                                <FontAwesomeIcon icon={faPencil} />
                               </td>
                             </tr>
                           ))}
@@ -215,7 +212,7 @@ const ListProducts = () => {
               <caption>Promociones</caption>
               <tbody>
                 <tr>
-                  <th>Id promo</th>
+                  <th>ID PROMO</th>
                   <th>Nombre</th>
                   <th>Descripcion</th>
                   <th>Precio</th>

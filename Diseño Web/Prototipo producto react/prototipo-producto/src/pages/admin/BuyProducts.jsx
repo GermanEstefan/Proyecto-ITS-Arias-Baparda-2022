@@ -149,7 +149,7 @@ const BuyProducts = () => {
 
                 <div>
                   <label htmlFor="" className="label-form">
-                    Cantidad
+                    Unidades
                   </label>
                   <input
                     type="number"
@@ -164,7 +164,7 @@ const BuyProducts = () => {
 
                 <div>
                   <label htmlFor="" className="label-form">
-                    Costo
+                    Costo unitario
                   </label>
                   <input
                     type="number"
