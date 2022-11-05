@@ -44,7 +44,7 @@ export const HistoryItem = ({ sale }) => {
                 <span>{saleDetail.productName}</span>
                 <span>x{saleDetail.quantity}</span>
               </div>
-              <span>{saleDetail.total} $</span>
+              <span>{sale.status !== 'CANCELADA' ?  saleDetail.total : '--.--$'} $</span>
             </div>
           ))}
         </Collapse>
