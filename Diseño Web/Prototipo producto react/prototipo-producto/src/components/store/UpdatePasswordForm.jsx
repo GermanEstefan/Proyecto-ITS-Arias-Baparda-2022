@@ -90,6 +90,7 @@ const UpdatePasswordForm = () => {
             value={values.oldPassword}
             name="oldPassword"
             setErrorStatusForm={setErrorStatusForm}
+            minLength={6}
           />
         </div>
 
@@ -102,6 +103,7 @@ const UpdatePasswordForm = () => {
             value={values.newPassword}
             setErrorStatusForm={setErrorStatusForm}
             name="newPassword"
+            minLength={6}
           />
         </div>
 
@@ -112,10 +114,11 @@ const UpdatePasswordForm = () => {
             onChange={handleValuesChange}
             value={values.newPassword2}
             name="newPassword2"
+            minLength={6}
           />
         </div>
 
-        <button className="submit-button">Modificar</button>
+        <button className="submit-button" type="submit" >Modificar</button>
       </form>
     </Animated>
   );

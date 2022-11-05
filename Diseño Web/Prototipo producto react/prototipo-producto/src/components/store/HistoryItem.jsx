@@ -31,7 +31,7 @@ export const HistoryItem = ({ sale }) => {
           <strong className="status">{sale.status}</strong>
         </div>
         <div className="priceAndCollapse">
-          <span>{sale.status !== "CANCELADA" ? sale.total : "--.--"}$</span>
+          <span>${sale.status !== "CANCELADA" ? sale.total : "--.--"}</span>
           <FontAwesomeIcon icon={toggleCollapse ? faCaretUp : faCaretDown} />
         </div>
       </div>
@@ -43,7 +43,7 @@ export const HistoryItem = ({ sale }) => {
                 <span>{saleDetail.productName}</span>
                 <span>x{saleDetail.quantity}</span>
               </div>
-              <span>{saleDetail.total} $</span>
+              <span>${saleDetail.total} </span>
             </div>
           ))}
         </Collapse>
