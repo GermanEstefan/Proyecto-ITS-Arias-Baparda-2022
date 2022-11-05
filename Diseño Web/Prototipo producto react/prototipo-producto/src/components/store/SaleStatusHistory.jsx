@@ -25,7 +25,7 @@ const SaleStatusHistory = ({ saleId }) => {
   const getStatuslist = async () => {
     const resp = await fetchApi(`sales.php?History=${saleId}`, "GET");
     console.log(resp);
-    setLastStatus(resp.result.data.history[resp.result.data.history.length - 1].status || "");
+    setLastStatus(resp.result.data.history[0].status || "");
   };
   return (
     <div className="statusHistory">
