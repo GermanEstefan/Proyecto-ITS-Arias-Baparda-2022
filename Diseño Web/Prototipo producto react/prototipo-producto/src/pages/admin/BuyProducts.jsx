@@ -30,7 +30,7 @@ const BuyProducts = () => {
   const [error, setError] = useState(initStateLoading);
 
   useEffect(() => {
-    const supplierPromise = fetchApi("suppliers.php?all", "GET");
+    const supplierPromise = fetchApi("suppliers.php?active", "GET");
     const productsPromise = fetchApi("products.php?BOProducts", "GET");
     Promise.all([supplierPromise, productsPromise]).then(
       ([suppliers, productss]) => {

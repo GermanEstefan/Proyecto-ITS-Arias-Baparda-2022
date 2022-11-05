@@ -116,7 +116,7 @@ class SaleController {
         $totalSale = $sale[0]['totalSale'];
         $dateSale = $sale[0]['saleDate'];
         $statusSale = $sale[0]['statusActual'];
-        $clientInfo = array("clientMail" => $sale[0]['clientMail'],"clientName" => $sale[0]['clientName'],"companyName" => $sale[0]['nameCompany']);
+        $clientInfo = array("clientMail" => $sale[0]['clientMail'],"clientName" => $sale[0]['clientName'],"companyName" => $sale[0]['nameCompany'],"clientPhone" => $sale[0]['clientPhone']);
         $saleInfo = array( "addressSale" => $sale[0]['addressSale'],"deliverySale" => $sale[0]['deliverySale'],"payment" => $sale[0]['payment']);
         $productSale = array();
         foreach($sale as $detail){

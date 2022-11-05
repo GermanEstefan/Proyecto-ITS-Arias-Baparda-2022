@@ -134,7 +134,7 @@ const CreatePromotion = () => {
                   placeholder="Ingrese N° Promo"
                   onChange={handleValuesChange}
                   value={idProduct}
-                  min="1000"
+                  min="1001"
                   className="input-form"
                   required
                 />
@@ -222,8 +222,7 @@ const CreatePromotion = () => {
                       </option>
                       {products.map((product) => (
                         <option key={product.barcode} value={product.barcode}>
-                          {" "}
-                          {`${product.name} - ${product.design} - ${product.size} - ${product.barcode} `}{" "}
+                          {`${product.barcode}-${product.name} ${product.design} Talle:${product.size}  `}
                         </option>
                       ))}
                     </select>

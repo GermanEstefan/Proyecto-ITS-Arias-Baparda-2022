@@ -50,6 +50,7 @@
             s.address as addressSale,
             dt.name AS deliverySale,
             u.email AS clientMail,
+            u.phone AS clientPhone,
             c.company_name AS nameCompany,
 			concat_ws(' ', u.name , u.surname) AS clientName,
             s.payment,

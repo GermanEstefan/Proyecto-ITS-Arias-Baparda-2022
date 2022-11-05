@@ -313,6 +313,7 @@
             on p.product_category = c.id_category 
             AND p.product_design = d.id_design 
             AND p.product_size = s.id_size
+            AND p.product_category != 1
             order by p.barcode";
             return $conecction->getData($query)->fetch_all(MYSQLI_ASSOC);
         }

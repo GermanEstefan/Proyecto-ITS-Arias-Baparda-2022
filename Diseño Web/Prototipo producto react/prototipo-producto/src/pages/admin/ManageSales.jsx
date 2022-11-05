@@ -39,20 +39,20 @@ const ManageSales = () => {
       <section className="container_section flex-column-center-xy manage-sales">
         <div className="manage-sales_filters">
           <div>
-            <label>Filtrar por fecha</label>
-            <input type="date" />
+            <label>Buscar por ID:</label>
+            <input type="number" min="700000" />
           </div>
 
           <strong>
             {!sales
-              ? "No hay ventas registradas por el momento"
+              ? "AUN NO SE REGISTRO NINGUNA VENTA"
               : sales.length === 1
-              ? "1 venta registrada"
-              : `${sales.length} ventas registradas`}
+              ? "1 VENTA REGISTRADA"
+              : `${sales.length} VENTAS REGISTRADAS`}
           </strong>
 
           <div>
-            <label>Seleccione un estado</label>
+            <label>Filtrar por estado:</label>
             <select onChange={handleChangeState}>
               {states.map(
                 (state) =>
@@ -70,7 +70,7 @@ const ManageSales = () => {
           </div>
         </div>
         {!sales.length ? (
-          <h2>No hay ventas registradas</h2>
+          <h2>NO TIENE VENTAS PARA ESTE ESTADO </h2>
         ) : (
           <table className="table-template">
             <tbody>

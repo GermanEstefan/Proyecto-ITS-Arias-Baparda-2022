@@ -83,7 +83,7 @@ const DetailsSales = () => {
               Estado actual: <strong> {statusSale} </strong>
             </span>
             <div className="sale-detail-content_info-card_section">
-              <strong>Info venta</strong>
+              <strong>Informacion VENTA</strong>
               <ul>
                 <li>
                   <strong>ID:</strong> {idSale}
@@ -97,7 +97,7 @@ const DetailsSales = () => {
                     (saleInfo.payment === "0" ? "Efectivo" : "Online")}
                 </li>
                 <li>
-                  <strong>Horario de entrega:</strong>
+                  <strong>Horario de entrega: </strong>
                   {saleInfo && saleInfo.deliverySale}
                 </li>
                 <li>
@@ -106,7 +106,7 @@ const DetailsSales = () => {
               </ul>
             </div>
             <div className="sale-detail-content_info-card_section">
-              <strong>Info cliente</strong>
+              <strong>Informacion CLIENTE</strong>
               <ul>
                 <li>
                   <strong>Email:</strong> {clientInfo && clientInfo.clientMail}
@@ -118,10 +118,17 @@ const DetailsSales = () => {
                       ? clientInfo.companyName
                       : clientInfo.clientName)}
                 </li>
+                <li>
+                  <strong>Contacto:</strong>
+                  {clientInfo &&
+                    (clientInfo.clientPhone
+                      ? clientInfo.clientPhone
+                      : "No ingresado")}
+                </li>
               </ul>
             </div>
             <div className="sale-detail-content_info-card_section">
-              <strong>Productos comprados</strong>
+              <strong>LISTA DE PRODUCTOS</strong>
               {productSale &&
                 productSale.map((product, i) => (
                   <div key={product.barcode}>
@@ -140,7 +147,7 @@ const DetailsSales = () => {
                         <span>{product.quantity}</span>
                       </li>
                       <li>
-                        <strong>Total</strong>
+                        <strong>Total:</strong>
                         <span>{product.total}</span>
                       </li>
                     </ul>
