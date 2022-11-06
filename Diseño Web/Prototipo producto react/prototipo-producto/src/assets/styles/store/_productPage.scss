@@ -127,6 +127,10 @@
               background-color: $dark-gray;
               transition: 0.3s;
             }
+            .addBtn:disabled {
+              background-color: $gray;
+              cursor:default;
+            }
           }
         }
         .selectsContainer {

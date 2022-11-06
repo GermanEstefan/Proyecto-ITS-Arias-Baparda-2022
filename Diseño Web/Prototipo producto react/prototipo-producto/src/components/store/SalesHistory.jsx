@@ -7,6 +7,7 @@ import { userStatusContext } from "../../App";
 import { HistoryItem } from "./HistoryItem";
 import { Animated } from "react-animated-css";
 import SaleStatusHistory from "./SaleStatusHistory";
+import NoData from "./NoData";
 
 const SalesHistory = () => {
   const { userData } = useContext(userStatusContext);
@@ -44,7 +45,7 @@ const SalesHistory = () => {
             </div>
           ))}
         {sales.length === 0 && (
-          <p style={{ marginLeft: "15px" }}>Aún no has realizado ninguna compra</p>
+          <NoData message={'Aún no has realizado ninguna compra'}/>
         )}
       </div>
     </Animated>

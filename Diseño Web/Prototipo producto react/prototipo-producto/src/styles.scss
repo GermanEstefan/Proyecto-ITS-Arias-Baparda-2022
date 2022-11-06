@@ -22,6 +22,7 @@ $black: #121212;
 @import "./assets/styles/admin/reusable";
 @import "./assets/styles/store/cartItem";
 @import "./assets/styles/store/historyItem";
+@import "./assets/styles/store/noData";
 
 @import "./assets/styles/admin/login";
 @import "./assets/styles/admin/containerBase";
@@ -85,7 +86,6 @@ button:disabled {
 }
 button:disabled:hover {
   cursor: auto;
-  background-color: $gray;
 }
 
 .spanError {

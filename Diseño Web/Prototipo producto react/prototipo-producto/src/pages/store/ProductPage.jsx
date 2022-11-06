@@ -6,6 +6,7 @@ import { useParams } from "react-router-dom";
 import PageTitle from "../../components/store/PageTitle";
 import ContainerBase from "../../components/store/ContainerBase";
 import { fetchApi } from "../../API/api";
+import { Animated } from "react-animated-css";
 import { cartContext, userStatusContext } from "../../App";
 import Select from "react-select";
 import NoPhoto from "../../assets/img/no-photo.png";
@@ -26,6 +27,7 @@ const ProductPage = () => {
   const [quantitySelected, setQuantitySelected] = useState(1);
   const [isEnoughStock, setIsEnoughStock] = useState(true);
   const [promoProducts, setPromoProducts] = useState([]);
+  const [isShown, setIsShown] = useState(false);
 
   useEffect(() => {
     window.scroll(0, 0);
@@ -40,13 +42,12 @@ const ProductPage = () => {
   }, [product, quantitySelected]);
 
   const handleAddToCart = () => {
-    console.log(product)
     if (!isAddedToCart) {
       setCart([
         ...cart,
         { barcode: product.barcode, quantity: quantitySelected, price: product.price },
       ]);
-      // navigate('/shoppingCart')
+      navigate("/shoppingCart");
     }
 
     setIsAddedToCart(true);
@@ -112,6 +113,14 @@ const ProductPage = () => {
     );
   };
 
+  const handleUserClick = () => {
+    if (userData.name) {
+      navigate("/buyForm");
+    } else {
+      setIsShown(true);
+    }
+  };
+
   return (
     <ContainerBase>
       <div className="productContainer">
@@ -119,30 +128,34 @@ const ProductPage = () => {
         <div className="productPage">
           <div className="productPage__img">
             <div>
-              <img src={img || NoPhoto}  />
+              <img src={img || NoPhoto} />
             </div>
           </div>
           <div className="productPage__description">
             <div className="productPage__description__body">
               <p>${product.price}</p>
               <p>{productDescription}</p>
-             {promoProducts.length !== 0 && <table border={0}>
-              <p>Esta promo contiene: </p>
-                <thead>
-                  <tr>
-                    <th>Producto</th>
-                    <th>Color</th>
-                    <th>Unidades</th>
-                  </tr>
-                </thead>
-                {promoProducts.map((product) => (
-                  <tr>
-                    <td>{product.name}</td>
-                    <td>{product.design}</td>
-                    <td>{product.quantity}</td>
-                  </tr>
-                ))}
-              </table>}
+              {promoProducts.length !== 0 && (
+                <>
+                  <p>Esta promo contiene: </p>
+                  <table border={0}>
+                    <thead>
+                      <tr>
+                        <th>Producto</th>
+                        <th>Color</th>
+                        <th>Unidades</th>
+                      </tr>
+                    </thead>
+                    {promoProducts.map((product) => (
+                      <tr>
+                        <td>{product.name}</td>
+                        <td>{product.design}</td>
+                        <td>{product.quantity}</td>
+                      </tr>
+                    ))}
+                  </table>
+                </>
+              )}
             </div>
             <div className="productPage__description__buttons">
               {category !== "PROMOCIONES" && (
@@ -178,10 +191,10 @@ const ProductPage = () => {
                 <div className="buyAndAddToCartContainer">
                   <button
                     className="buyBtn"
-                    disabled={!userData.auth || !isEnoughStock}
+                    disabled={!isEnoughStock}
                     onClick={() => {
                       handleAddToCart();
-                      navigate("/buyForm");
+                      handleUserClick();
                     }}
                   >
                     Comprar
@@ -196,11 +209,18 @@ const ProductPage = () => {
                 </div>
               </div>
               {isAddedToCart && <p>Este producto ya está en tu carrito</p>}
-              {!userData.auth && (
-                <p>
-                  <a href="/register">Registrate</a> o <a href="/login">ingresa</a> para comenzar a
-                  comprar
-                </p>
+              {isShown && (
+                <Animated
+                  animationIn="fadeInLeft"
+                  animationOut="fadeOutRight"
+                  animationInDuration={200}
+                  isVisible={true}
+                >
+                  <p>
+                    <a href="/register">Registrate</a> o <a href="/login">ingresa</a> para comenzar
+                    a comprar
+                  </p>
+                </Animated>
               )}
               {!isEnoughStock && <p>Maximo disponible: {product.stock}</p>}
             </div>
