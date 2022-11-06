@@ -14,19 +14,19 @@ class Mail{
         <html>
   <head></head>
   <body
-    style="
+    style='
       color: rgba(0, 0, 0, 0.712);
       font-family: Arial, Helvetica, sans-serif;
       width: 600px;
       margin: 4em auto;
-    "
+    '
   >
-    <div style="background-color: #f5990f; padding: 10px">
-      <h1 style="color: white; text-align: center">Remito de compra:</h1>
+    <div style='background-color: #f5990f; padding: 10px'>
+      <h1 style='color: white; text-align: center'>Remito de compra:</h1>
     </div>
-    <div style="margin: auto; padding: 20px; border: 3px #f5990f solid; border-radius: 0 0 3px 3px">
+    <div style='margin: auto; padding: 20px; border: 3px #f5990f solid; border-radius: 0 0 3px 3px'>
       <h2>Gracias por tu compra!</h2>
-      <h3 style="padding-right: 10px">
+      <h3 style='padding-right: 10px'>
         Tu pedido ha sido recibido y ahora está siendo procesado. Te mantendremos al tento de cada
         novedad.
       </h3>
