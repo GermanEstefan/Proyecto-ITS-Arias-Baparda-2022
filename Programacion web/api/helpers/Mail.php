@@ -11,40 +11,67 @@ class Mail{
     static function sendInvoice($to, $products, $infoExtra){
 
         $bodyMsg = "
-        <h1>Remito de compra: </h1>
-        <p><strong>Fecha: </strong>" . $infoExtra['date'] . "</p>
-        <p><strong>Metodo de pago: </strong>" . $infoExtra['payment'] . "</p>
-        <p><strong>Horario de entrega: </strong>" . $infoExtra['time'] . "</p>
-        <p><strong>Direccion de entrega: </strong>" . $infoExtra['address'] . "</p>
-        <p><strong>Total de la compra: </strong>" . $infoExtra['totalSale'] . "$</p>
-        <h2>Productos comprados: </h2>
+        <html>
+  <head></head>
+  <body
+    style="
+      color: rgba(0, 0, 0, 0.712);
+      font-family: Arial, Helvetica, sans-serif;
+      width: 600px;
+      margin: 4em auto;
+    "
+  >
+    <div style="background-color: #f5990f; padding: 10px">
+      <h1 style="color: white; text-align: center">Remito de compra:</h1>
+    </div>
+    <div style="margin: auto; padding: 20px; border: 3px #f5990f solid; border-radius: 0 0 3px 3px">
+      <h2>Gracias por tu compra!</h2>
+      <h3 style="padding-right: 10px">
+        Tu pedido ha sido recibido y ahora está siendo procesado. Te mantendremos al tento de cada
+        novedad.
+      </h3>
+      <hr />
+      <p><strong>Fecha: </strong>" . $infoExtra['date'] . "</p>
+      <p><strong>Metodo de pago: </strong>" . $infoExtra['payment'] . "</p>
+      <p><strong>Horario de entrega: </strong>" . $infoExtra['time'] . "</p>
+      <p><strong>Direccion de entrega: </strong>" . $infoExtra['address'] . "</p>
+      <p><strong>Total de la compra: </strong>" . $infoExtra['totalSale'] . "$</p>
+      <hr />
+      <h2>Productos comprados:</h2>
         ";
 
         $index = 0;
         foreach ($products as $product) {
             $bodyMsg .= "
-                <h3>Producto " . ($index + 1) . "</h3>
-                <ul>
-                    <li>
-                        <strong>Nombre: </strong>
-                        <span>" . $product['productName'] . "</span>
-                    </li>
-                    <li>
-                        <strong>Cantidad: </strong>
-                        <span>" . $product['quantity'] . "</span>
-                    </li>
-                    <li>
-                        <strong>Precio por unidad: </strong>
-                        <span>" . $product['price'] . "</span>
-                    </li>
-                    <li>
-                        <strong>Precio total</strong>
-                        <span>" . $product['total'] . "</span> 
-                    </li>
-                </ul>
+            <h3>Producto " . ($index + 1) . "</h3>
+            <ul>
+              <li>
+                <strong>Nombre: </strong>
+                <span>" . $product['productName'] . "</span>
+              </li>
+              <li>
+                <strong>Cantidad: </strong>
+                <span>" . $product['quantity'] . "</span>
+              </li>
+              <li>
+                <strong>Precio por unidad: </strong>
+                <span>" . $product['price'] . "</span>
+              </li>
+              <li>
+                <strong>Precio total</strong>
+                <span>" . $product['total'] . "</span>
+              </li>
+            </ul>
             ";
             $index++;
         }
+
+        $bodyMsg .= "<hr />
+        <i>Natalia Viera: seguridad corporal</i>
+      </div>
+    </body>
+  </html>
+  ";
 
         $mail = new PHPMailer(true);
         try {
