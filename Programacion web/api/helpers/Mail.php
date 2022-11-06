@@ -79,8 +79,8 @@ class Mail{
         $bodyMsg = "
         <h1>NUEVA CONSULTA! </h1>
         <p><strong>CLIENTE: </strong>" . $client . "</p>
-        <p><strong>Asunto:" . $subject['payment'] . "</p>
-        <p><strong>Consulta: </strong>" . $text['time'] . "</p>";
+        <p><strong>Asunto:  </strong>" . $subject . "</p>
+        <p><strong>Consulta:</strong>" . $text . "</p>";
         $mail = new PHPMailer(true);
         try {
             //Server settings
