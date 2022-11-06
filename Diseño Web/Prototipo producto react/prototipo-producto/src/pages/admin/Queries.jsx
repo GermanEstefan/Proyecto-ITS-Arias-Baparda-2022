@@ -81,9 +81,9 @@ const Queries = () => {
           <ul>
             <li>
               <strong>TOTAL GANANCIA:</strong>
-              <span>${balanceData.TotalSale || 0}</span>|
+              <span>${balanceData.TotalSale || 0}</span> |
               <strong>TOTAL INVERTIDO:</strong>
-              <span>${balanceData.TotalSupply || 0}</span>|
+              <span>${balanceData.TotalSupply || 0}</span> |
               <strong>SALDO ACTUAL:</strong>
               <span>${balanceData.Diference || 0}</span>
             </li>
