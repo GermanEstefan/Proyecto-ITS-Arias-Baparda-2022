@@ -74,7 +74,8 @@ class SaleController {
             echo $this->response->error500();
             die();
         }
-        echo $this->response->successfully("Su pedido fue realizado con exito");        
+        echo $this->response->successfully("Su pedido fue realizado con exito");
+        
         $to = $client;
         $totalSale = 0;
         $products = array();
@@ -98,6 +99,7 @@ class SaleController {
         $date = date("Y/m/d");
         $infoExtra = array("payment" => $payment, "time" => $time, "address" => $address, "date" => $date, "totalSale" => $totalSale);
         Mail::sendInvoice($to, $products, $infoExtra);
+        
     }
     //CONSULTAS
     public function getSaleId($idSale){

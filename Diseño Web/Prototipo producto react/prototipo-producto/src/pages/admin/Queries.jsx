@@ -77,19 +77,15 @@ const Queries = () => {
     <ContainerBase>
       <section className="container_section queries flex-column-center-xy">
         <div className="queries_balance flex-column-center-xy">
-          <h3 className="subtitle-queries">Balance total :</h3>
+          <h3 className="subtitle-queries">BALANCE DE SALDOS</h3>
           <ul>
             <li>
               <strong>TOTAL GANANCIA:</strong>
-              <span>${balanceData.TotalSale}</span>
-            </li>
-            <li>
+              <span>${balanceData.TotalSale || 0}</span>|
               <strong>TOTAL INVERTIDO:</strong>
-              <span>${balanceData.TotalSupply}</span>
-            </li>
-            <li>
+              <span>${balanceData.TotalSupply || 0}</span>|
               <strong>SALDO ACTUAL:</strong>
-              <span>${balanceData.Diference}</span>
+              <span>${balanceData.Diference || 0}</span>
             </li>
           </ul>
         </div>
@@ -121,7 +117,7 @@ const Queries = () => {
                   <th>Correo</th>
                   <th>Nombre Cliente</th>
                   <th>Cantidad de compras</th>
-                  <th>Total Gastado</th>
+                  <th>Total Facturado</th>
                 </tr>
                 {querieData.queryInfo.map((infoRow) => (
                   <tr key={infoRow.idClient}>

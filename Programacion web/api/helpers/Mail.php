@@ -51,7 +51,7 @@ class Mail{
         try {
 
             //Server settings
-            $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      
+            $mail->SMTPDebug = false;                      
             $mail->isSMTP();                                           
             $mail->Host       = 'smtp.gmail.com';                     
             $mail->SMTPAuth   = true;                                   
@@ -63,7 +63,6 @@ class Mail{
             //Recipients
             $mail->setFrom('seguridadcorporalnv@gmail.com', 'Seguridad Corporal - Natalia Viera');
             $mail->addAddress($to, 'Compra web');
-            $mail->addAddress("formacionalvareznicolas@gmail.com", 'Compra web');
 
             //Content
             $mail->isHTML(true);
@@ -71,7 +70,6 @@ class Mail{
             $mail->Body    = $bodyMsg;
             $mail->AltBody = '.';
             $mail->send();
-            echo 'Message has been sent';
         } catch (Exception $e) {
             echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
         }
