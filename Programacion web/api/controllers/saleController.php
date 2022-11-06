@@ -8,6 +8,7 @@ include_once("./models/UserModel.php");
 include_once("./models/EmployeeModel.php");
 include_once("./models/StatusModel.php");
 include_once("./models/ProductModel.php");
+include_once("./helpers/Mail.php");
 class SaleController {
 
     private $response;
@@ -75,6 +76,7 @@ class SaleController {
         }
         echo $this->response->successfully("Su pedido fue realizado con exito");        
         $to = $client;
+        $totalSale = 0;
         $products = array();
         foreach ($productsForSale as $product) {
             $barcode = $product['barcode'];
@@ -83,6 +85,7 @@ class SaleController {
             $productName = $getExtraInfo['productName'];
             $price = $getExtraInfo['price'];
             $total = ($quantity * $price);
+            $totalSale += $total;
             array_push($products, array("productName"=>$productName,"quantity"=> $quantity,"price"=> $price,"total"=>$total));
         }
         if ($payment === 0){
@@ -93,10 +96,8 @@ class SaleController {
         $getTime = DeliveryModel::getDeliveryById($delivery);
         $time = $getTime['name'];
         $date = date("Y/m/d");
-        $infoExtra = array ($payment, $time, $address, $date);
-        
-
-
+        $infoExtra = array("payment" => $payment, "time" => $time, "address" => $address, "date" => $date, "totalSale" => $totalSale);
+        Mail::sendInvoice($to, $products, $infoExtra);
     }
     //CONSULTAS
     public function getSaleId($idSale){
