@@ -471,27 +471,19 @@ INSERT INTO `bindev`.`employee` (`ci`, `employee_user`, `employee_role`) VALUES 
 -- ATRIBUTOS BASICOS DEL SISTEMA
 -- -----------------------------------------------------
 INSERT INTO `bindev`.`category` (`name`, `description`) VALUES ('PROMOCIONES', 'CATEGORIA DESIGNADA PARA PROMOS');
-INSERT INTO `bindev`.`design` (`name`, `description`) VALUES ('PROMOCIONES', 'DISEÑO DESIGNADO PARA PROMOS');
-INSERT INTO `bindev`.`size` (`name`, `description`) VALUES ('PROMOCIONES', 'TALLE DESIGNADO PARA LA PROMO');
+INSERT INTO `bindev`.`design` (`name`, `description`) VALUES (' ', 'DISEÑO DESIGNADO PARA PROMOS');
+INSERT INTO `bindev`.`size` (`name`, `description`) VALUES (' ', 'TALLE DESIGNADO PARA LA PROMO');
 INSERT INTO `bindev`.`status` (`name`, `description`) VALUES ('RESPUESTA AUTOMATICA DEL SISTEMA', 'Respuesta automatica del sistema');
 INSERT INTO `bindev`.`status` (`name`, `description`) VALUES ('PENDIENTE', 'Estado pendiente de cobro, la venta aun no fue confirmada pero su mercaderia se encuentra reservada');
 INSERT INTO `bindev`.`status` (`name`, `description`) VALUES ('CONFIRMADO', 'Venta confirmada, dinero capturado, la mercaderia tiene dueño');
-INSERT INTO `bindev`.`status` (`name`, `description`) VALUES ('EN VIAJE', 'Venta en calle, en viaje a la direccion ingresada en la venta');
-INSERT INTO `bindev`.`status` (`name`, `description`) VALUES ('ENTREGADO', 'Entrega de la venta confirmada');
-INSERT INTO `bindev`.`status` (`name`, `description`) VALUES ('PICK-UP', 'Levanta en el local');
+INSERT INTO `bindev`.`status` (`name`, `description`) VALUES ('PICK-UP', 'Venta en calle, en viaje a la direccion ingresada en la venta');
+INSERT INTO `bindev`.`status` (`name`, `description`) VALUES ('EN VIAJE', 'Entrega de la venta confirmada');
+INSERT INTO `bindev`.`status` (`name`, `description`) VALUES ('ENTREGADO', 'Levanta en el local');
 INSERT INTO `bindev`.`status` (`name`, `description`) VALUES ('CANCELADA', 'La venta fue cancelada');
 INSERT INTO `bindev`.`delivery_time` (`name`, `description`) VALUES ('Lun a Vie de 9:00 a 13:00', 'Horario 1');
 INSERT INTO `bindev`.`delivery_time` (`name`, `description`) VALUES ('Lun a Vie de 14:00 a 18:00', 'Horario 2');
 INSERT INTO `bindev`.`delivery_time` (`name`, `description`) VALUES ('Sabados de 9:00 a 12:00', 'Horario 3');
 INSERT INTO `bindev`.`delivery_time` (`name`, `description`) VALUES ('Sabados de 13:00 a 16:00', 'Horario 4');
-INSERT INTO `bindev`.`user` (`email`, `name`, `surname`, `address`, `phone`, `password`) VALUES ('nicolas@gmail.com', 'Nicolas', 'Alvarez', 'direccion123', '998877','Nicolas');
-INSERT INTO `bindev`.`user` (`email`, `name`, `surname`, `address`, `phone`, `password`) VALUES ('Matias4371@gmail.com', 'Nacho', 'Arman-Duon', 'Casa de Nacho', '998877','Nacho');
-INSERT INTO `bindev`.`user` (`email`, `name`, `surname`, `address`, `phone`, `password`) VALUES ('fabricioRivera@gmail.com', 'Fabricio', 'Rivera', 'Casa de Fabri', '998877','Fabricio');
-INSERT INTO `bindev`.`user` (`email`, `name`, `surname`, `address`, `phone`, `password`) VALUES ('german.estefan81@gmail.com', 'German', 'Estefan', 'Casa de German', '998877','German');
-INSERT INTO `bindev`.`user` (`email`, `name`, `surname`, `address`, `phone`, `password`) VALUES ('lauraacuna@gmail.com', 'Laura', 'Acuña', 'Laboratorio 1', '','disenoWeb');
-INSERT INTO `bindev`.`user` (`email`, `name`, `surname`, `address`, `phone`, `password`) VALUES ('leonardoCarambula@gmail.com', 'Leonardo', 'Carambula', 'Laboratorio 2', '998877','programacionWeb');
-INSERT INTO `bindev`.`user` (`email`, `name`, `surname`, `address`, `phone`, `password`) VALUES ('christianBarrios1@gmail.com', 'Christian', 'Barrios', 'Laboratorio 3', '998877','sistemasOperativos');
-INSERT INTO `bindev`.`user` (`email`, `name`, `surname`, `address`, `phone`, `password`) VALUES ('noraHernandez@gmail.com', 'Nora', 'Hernandez', 'utu', '998877','cordinadora');
 
 
 INSERT INTO `bindev`.`supplier` (`rut`, `company_name`, `address`, `phone`) VALUES ('211003420017', 'Montevideo Uniformes', 'Dr. Salvador Ferrer Serra 2172', '24015020 - 29000000');
@@ -505,15 +497,15 @@ INSERT INTO `bindev`.`category` (`name`, `description`) VALUES ('Pantalones', 'C
 INSERT INTO `bindev`.`category` (`name`, `description`) VALUES ('Guantes', 'CATEGORIA DESIGNADA PARA GUANTES');
 INSERT INTO `bindev`.`category` (`name`, `description`) VALUES ('Cascos', 'CATEGORIA DESIGNADA PARA CASCOS');
 INSERT INTO `bindev`.`category` (`name`, `description`) VALUES ('Botas', 'CATEGORIA DESIGNADA PARA BOTAS');
-INSERT INTO `bindev`.`category` (`name`, `description`) VALUES ('Varios', 'CATEGORIA DESIGNADA PARA VARIOS ARTICULOS');
+INSERT INTO `bindev`.`category` (`name`, `description`) VALUES ('Generales', 'CATEGORIA DESIGNADA PARA VARIOS ARTICULOS');
 INSERT INTO `bindev`.`category` (`name`, `description`) VALUES ('Zapatos', 'CATEGORIA DESIGNADA PARA ZAPATOS');
-INSERT INTO `bindev`.`design` (`name`, `description`) VALUES ('BLANCO', 'COLOR BLANCO');
-INSERT INTO `bindev`.`design` (`name`, `description`) VALUES ('NEGRO', 'COLOR NEGRO');
-INSERT INTO `bindev`.`design` (`name`, `description`) VALUES ('ROJO', 'COLOR ROJO');
-INSERT INTO `bindev`.`design` (`name`, `description`) VALUES ('VERDE', 'COLOR VERDE');
-INSERT INTO `bindev`.`design` (`name`, `description`) VALUES ('AZUL', 'COLOR AZUL');
-INSERT INTO `bindev`.`design` (`name`, `description`) VALUES ('NARANJA', 'COLOR NARANJA');
-INSERT INTO `bindev`.`design` (`name`, `description`) VALUES ('AMARILLO', 'COLOR AMARILLO');
+INSERT INTO `bindev`.`design` (`name`, `description`) VALUES ('Blanco', 'COLOR BLANCO');
+INSERT INTO `bindev`.`design` (`name`, `description`) VALUES ('Negro', 'COLOR NEGRO');
+INSERT INTO `bindev`.`design` (`name`, `description`) VALUES ('Rojo', 'COLOR ROJO');
+INSERT INTO `bindev`.`design` (`name`, `description`) VALUES ('Verde', 'COLOR VERDE');
+INSERT INTO `bindev`.`design` (`name`, `description`) VALUES ('Azul', 'COLOR AZUL');
+INSERT INTO `bindev`.`design` (`name`, `description`) VALUES ('Naranja', 'COLOR NARANJA');
+INSERT INTO `bindev`.`design` (`name`, `description`) VALUES ('Amarillo', 'COLOR AMARILLO');
 INSERT INTO `bindev`.`size` (`name`, `description`) VALUES ('XS', 'DESCRIPCION DEL TALLE');
 INSERT INTO `bindev`.`size` (`name`, `description`) VALUES ('S', 'DESCRIPCION DEL TALLE');
 INSERT INTO `bindev`.`size` (`name`, `description`) VALUES ('M', 'DESCRIPCION DEL TALLE');

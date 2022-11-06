@@ -8,8 +8,7 @@ import ContainerBase from "../../components/admin/ContainerBase";
 import { useForm } from "../../hooks/useForm";
 
 const UserManagment = () => {
-
-  const {rol:rolContext} = useContext(userStatusContext).userData
+  const { rol: rolContext } = useContext(userStatusContext).userData;
   const navigate = useNavigate();
   const [employees, setEmployees] = useState([]);
   const [loadingFlags, setLoadingFlags] = useState({ fetchingUsers: true });
@@ -119,11 +118,9 @@ const UserManagment = () => {
     return setEmployees(userFiltered);
   };
 
-  return (
-    !(rolContext === 'JEFE')
-    ?
+  return !(rolContext === "JEFE") ? (
     <h1>Ruta no permitida para este rol</h1>
-    :
+  ) : (
     <ContainerBase>
       <section className="container_section list-users">
         {loadingFlags.fetchingUsers ? (
@@ -132,7 +129,7 @@ const UserManagment = () => {
           <>
             <h1>Gestion de usuarios</h1>
             <form autoComplete="off" onSubmit={handleSubmit}>
-              <h2>Crear un nuevo empleado</h2>
+              <h2>Ingresar nuevo funcionario</h2>
               <div className="form-row-two-columns-with-label">
                 <div>
                   <label htmlFor="name" className="label-form">
@@ -280,7 +277,7 @@ const UserManagment = () => {
             </form>
 
             <table className="table-template">
-              <caption>Lista de usuarios</caption>
+              <caption>Listado de funcionarios</caption>
               <tbody>
                 <tr>
                   <th>Id</th>

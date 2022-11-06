@@ -90,19 +90,21 @@ const Queries = () => {
           </ul>
         </div>
         <div className="queries_filters flex-column-center-xy">
-          <h3 className="subtitle-queries">
-            Selecciona la consulta a realizar:
-          </h3>
-          <select
-            className="select-form"
-            name="typeQuery"
-            onChange={handleChangeQuery}
-          >
-            <option value="bestClients" selected>
-              Listar Clientes
-            </option>
-            <option value="bestProducts">Listar Productos</option>
-          </select>
+          <h2 className="subtitle-queries">
+            Consulta:
+            <select
+              className="select-form"
+              name="typeQuery"
+              onChange={handleChangeQuery}
+            >
+              <option value="bestClients" selected>
+                Listar clientes con mas compras
+              </option>
+              <option value="bestProducts">
+                Listar productos mas vendidos
+              </option>
+            </select>
+          </h2>
         </div>
         {querieData.queryInfo && querieData.queryToShow === "bestClients" ? (
           <div className="queries_table-container">
