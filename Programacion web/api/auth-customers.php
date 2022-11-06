@@ -26,6 +26,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         case 'register':
             $customerController->registerCustomer($userData);
             die();
+        case 'consult':
+            $customerController->consultCustomer($userData);
+            die();
         default:
             http_response_code(400);
             echo $response->error400("Parametro URL invalido");

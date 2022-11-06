@@ -5,6 +5,7 @@ include_once("./helpers/Token.php");
 include_once("./models/CustomerModel.php");
 include_once("./controllers/UserController.php");
 include_once("./models/UserModel.php");
+include_once("./helpers/Mail.php");
 
 
 class CustomerController
@@ -47,7 +48,33 @@ class CustomerController
         //aca tenemos que validar mas cosas como que tenga un largo especifico (se pueden enviar nombre de ctegoria con valor " ")
         return $userData;
     }
+    private function validateBodyOfConsult($userData){
+        if( !isset($userData['client']) 
+        ||  !isset($userData['subject'])
+        ||  !isset($userData['text']))
+        return false;
+        //aca tenemos que validar mas cosas como que tenga un largo especifico (se pueden enviar nombre de ctegoria con valor " ")
+        return $userData;
+    }
 
+    public function consultCustomer($userData){
+        $bodyOfRequest = CustomerController::validateBodyOfConsult($userData);
+        if(!$bodyOfRequest){
+            http_response_code(400);
+            echo $this->response->error400;
+            die();
+        }
+        $client = $userData['client'];
+        $subject = $userData['subject'];
+        $text = $userData['text'];
+
+        $getConsult = Mail::getConsult($client,$subject,$text);
+        if(!$getConsult){
+            http_response_code(200);
+            $this->response->error203("Algo salio mal");
+            die();
+        }
+    }
     public function updateCustomer($userData)
     {
         $idOfUserRequested = $this->jwt->verifyTokenAndGetIdUserFromRequest();
@@ -105,7 +132,7 @@ class CustomerController
         echo $this->response->successfully("Contraseña actualizada con exito");
     }
     public function updateStateOfCustomer($userData){
-        $idOfUserRequested = $this->jwt->verifyTokenAndGetIdUserFromRequest();
+        
         $bodyOfRequest = CustomerController::validateBodyDisableAccount($userData);
         if(!$bodyOfRequest){
             http_response_code(400);

@@ -6,7 +6,6 @@ use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
 require 'vendor/autoload.php';
-
 class Mail{
 
     static function sendInvoice($to, $products, $infoExtra){
@@ -74,7 +73,43 @@ class Mail{
             echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
         }
     }
+    
+    static function getConsult($client, $subject, $text){
+
+        $bodyMsg = "
+        <h1>NUEVA CONSULTA! </h1>
+        <p><strong>CLIENTE: </strong>" . $client . "</p>
+        <p><strong>Asunto:" . $subject['payment'] . "</p>
+        <p><strong>Consulta: </strong>" . $text['time'] . "</p>";
+        $mail = new PHPMailer(true);
+        try {
+            //Server settings
+            $mail->SMTPDebug = false;                      
+            $mail->isSMTP();                                           
+            $mail->Host       = 'smtp.gmail.com';                     
+            $mail->SMTPAuth   = true;                                   
+            $mail->Username   = 'seguridadcorporalnv@gmail.com';                     
+            $mail->Password   = 'keyoxlrlntpcxnuv';                               
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;           
+            $mail->Port       = 465;                                   
+
+            //Recipients
+            $mail->setFrom('seguridadcorporalnv@gmail.com', 'Seguridad Corporal - Natalia Viera');
+            $mail->addAddress('seguridadcorporalnv@gmail.com', 'NUEVA CONSULTA!');
+
+            //Content
+            $mail->isHTML(true);
+            $mail->Subject = 'CONSULTA DE CLIENTE';
+            $mail->Body    = $bodyMsg;
+            $mail->AltBody = '.';
+            $mail->send();
+        } catch (Exception $e) {
+            echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+        }
+    }
 }
+
+
 
 
 ?>
