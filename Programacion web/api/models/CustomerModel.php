@@ -18,6 +18,18 @@
             $query = "SELECT c.customer_user,c.company_name, c.rut_nr,u.email, u.name,u.surname,u.address,u.phone,u.state from customer c inner join user u on c.customer_user = u.id_user and u.email = '$email'";
             return $conecction->getData($query)->fetch_assoc();
         }
+        public static function getInfoClientBySale($idSale){
+            $conecction = new Connection();
+            $query = "SELECT 
+            concat_ws(' ', u.name , u.surname) AS infoClient,
+            u.email AS mail,
+            c.company_name AS infoCompany
+            FROM sale s, customer c, user u  
+            WHERE s.id_sale = $idSale
+            AND s.user_purchase = c.customer_user
+            AND s.user_purchase = u.id_user";
+            return $conecction->getData($query)->fetch_assoc();
+        }
 
         public static function getCustomerByRut($nRut){
             $conecction = new Connection();

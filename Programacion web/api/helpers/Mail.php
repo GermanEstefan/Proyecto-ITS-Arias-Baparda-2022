@@ -25,17 +25,17 @@ class Mail{
       <h1 style='color: white; text-align: center'>Remito de compra:</h1>
     </div>
     <div style='margin: auto; padding: 20px; border: 3px #f5990f solid; border-radius: 0 0 3px 3px'>
-      <h2>Gracias por tu compra!</h2>
+      <h2 style='color: #000000; text-decoration: underline rgba(245, 175, 61, 0.896)'> GRACIAS POR TU COMPRA!</h2>
       <h3 style='padding-right: 10px'>
-        Tu pedido ha sido recibido y ahora está siendo procesado. Te mantendremos al tento de cada
-        novedad.
+        Tu pedido ha sido recibido y se encuentra en estado   " . $infoExtra['status'] . ".
       </h3>
+      
       <hr />
-      <p><strong>Fecha: </strong>" . $infoExtra['date'] . "</p>
-      <p><strong>Metodo de pago: </strong>" . $infoExtra['payment'] . "</p>
-      <p><strong>Horario de entrega: </strong>" . $infoExtra['time'] . "</p>
-      <p><strong>Direccion de entrega: </strong>" . $infoExtra['address'] . "</p>
-      <p><strong>Total de la compra: </strong>" . $infoExtra['totalSale'] . "$</p>
+      <p style='font-size: 125%'>Fecha:" ."$<strong>" . $infoExtra['date'] . "</strong></p>
+      <p style='font-size: 125%'>Metodo de pago:" ."$<strong>" . $infoExtra['payment'] . "</strong></p>
+      <p style='font-size: 125%'>Horario de entrega:"."$<strong>" . $infoExtra['time'] . "</strong></p>
+      <p style='font-size: 125%'>Direccion de entrega:"."$<strong>" . $infoExtra['address'] . "</strong></p>
+      <p style='font-size: 125%'>Total de la compra:"."$<strong>" . $infoExtra['totalSale'] . "</strong></p>
       <hr />
       <h2>Productos comprados:</h2>
         ";
@@ -43,7 +43,7 @@ class Mail{
         $index = 0;
         foreach ($products as $product) {
             $bodyMsg .= "
-            <h3>Producto " . ($index + 1) . "</h3>
+            <h3 style='background-color: #ffc526;'>Producto " . ($index + 1) . "</h3>
             <ul>
               <li>
                 <strong>Nombre: </strong>
@@ -134,7 +134,7 @@ class Mail{
             echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
         }
     }
-}
+  }
 
 
 

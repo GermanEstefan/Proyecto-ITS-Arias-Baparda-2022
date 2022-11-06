@@ -96,8 +96,13 @@ class SaleController {
         }
         $getTime = DeliveryModel::getDeliveryById($delivery);
         $time = $getTime['name'];
-        $date = date("Y/m/d");
-        $infoExtra = array("payment" => $payment, "time" => $time, "address" => $address, "date" => $date, "totalSale" => $totalSale);
+        $date = date("d/m/Y");
+        if ($payment === 'Efectivo'){
+            $status = 'PENDIENTE';
+        }else{
+            $status = 'CONFIRMADO';
+        } 
+        $infoExtra = array( "status" => $status,"payment" => $payment, "time" => $time, "address" => $address, "date" => $date, "totalSale" => $totalSale);
         Mail::sendInvoice($to, $products, $infoExtra);
         
     }

@@ -74,6 +74,7 @@ class CustomerController
             $this->response->error203("Algo salio mal");
             die();
         }
+        echo $this->response->successfully("Consulta enviada con exito!");
     }
     public function updateCustomer($userData)
     {
