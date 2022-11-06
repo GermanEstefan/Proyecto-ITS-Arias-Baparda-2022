@@ -180,6 +180,10 @@
     background: $dark-orange;
     transition: 0.2s;
   }
+  &:disabled {
+    background: $gray;
+    transition: 0.2s;
+  }
 }
 
 /*Componente input*/

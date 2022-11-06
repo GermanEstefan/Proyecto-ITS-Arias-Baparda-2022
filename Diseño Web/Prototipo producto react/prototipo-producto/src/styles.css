@@ -187,6 +187,10 @@
   background: #e18e11;
   transition: 0.2s;
 }
+.submit-button:disabled {
+  background: #bccddb;
+  transition: 0.2s;
+}
 
 /*Componente input*/
 .input-wrapper {
@@ -1059,6 +1063,10 @@
   background-color: #9ba6af;
   transition: 0.3s;
 }
+.productContainer .productPage .productPage__description .productPage__description__buttons .buttonsFlexContainer .buyAndAddToCartContainer .addBtn:disabled {
+  background-color: #bccddb;
+  cursor: default;
+}
 .productContainer .productPage .productPage__description .productPage__description__buttons .selectsContainer {
   display: flex;
   justify-content: space-between;
@@ -1607,6 +1615,24 @@
 }
 .historyContainer .statusHistory .icon {
   margin-left: 10px;
+}
+
+/** @format */
+.noDataContainer {
+  margin-top: 20px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  justify-content: centers;
+}
+.noDataContainer img {
+  width: 200px;
+  margin: auto;
+}
+.noDataContainer h3 {
+  text-align: center;
+  color: #d4d4d4;
 }
 
 .login-page-adm {
@@ -2389,7 +2415,6 @@ button:disabled {
 
 button:disabled:hover {
   cursor: auto;
-  background-color: #bccddb;
 }
 
 .spanError {

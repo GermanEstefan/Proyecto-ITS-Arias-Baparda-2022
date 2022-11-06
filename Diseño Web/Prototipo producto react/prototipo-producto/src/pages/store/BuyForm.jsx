@@ -22,6 +22,7 @@ const BuyForm = () => {
   const [isAddressDisable, setIsAddressDisable] = useState(false);
   const [deliveryHours, setDeliveryHours] = useState([]);
   const [hasAddress, setHasAddress] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [values, setValues] = useState({
     email: userData.email,
     address: userData.address,
@@ -67,39 +68,43 @@ const BuyForm = () => {
   };
 
   const handleConfirmPurchase = async (e) => {
+    setIsLoading(true);
     e.preventDefault();
-    const purchaseData = {
-      address: values.address,
-      client: userData.email,
-      delivery: values.deliveryTime,
-      payment: values.paymentMenthod,
-      products: cart.map((product) => ({
-        barcode: product.barcode,
-        quantity: product.quantity,
-      })),
-    };
-    console.log(purchaseData);
-    const resp = await fetchApi("sales.php", "POST", purchaseData);
-    console.log(resp);
-    if (resp.status === "successfully") {
-      console.log("successfully");
-      setCart([]);
-      navigate("/");
-      return Swal.fire({
-        icon: "success",
-        text: "Compra concretada!",
-        timer: 1500,
-        showConfirmButton: true,
-        confirmButtonColor: "#f5990ff3",
-      });
-    } else {
-      return Swal.fire({
-        icon: "error",
-        text: "Error al concretar la compra",
-        timer: 1500,
-        showConfirmButton: true,
-        confirmButtonColor: "#f5990ff3",
-      });
+    if (!isLoading) {
+      const purchaseData = {
+        address: values.address,
+        client: userData.email,
+        delivery: values.deliveryTime,
+        payment: values.paymentMenthod,
+        products: cart.map((product) => ({
+          barcode: product.barcode,
+          quantity: product.quantity,
+        })),
+      };
+      console.log(purchaseData);
+      const resp = await fetchApi("sales.php", "POST", purchaseData);
+      console.log(resp);
+      if (resp.status === "successfully") {
+        setIsLoading(true);
+        setCart([]);
+        navigate("/");
+        return Swal.fire({
+          icon: "success",
+          text: "Compra concretada!",
+          timer: 1500,
+          showConfirmButton: true,
+          confirmButtonColor: "#f5990ff3",
+        });
+      } else {
+        setIsLoading(false);
+        return Swal.fire({
+          icon: "error",
+          text: resp.result.error_msg,
+          timer: 1500,
+          showConfirmButton: true,
+          confirmButtonColor: "#f5990ff3",
+        });
+      }
     }
   };
 
@@ -137,8 +142,13 @@ const BuyForm = () => {
                 </i>
               )}
               <label>
-                <input type="radio" defaultChecked={!hasAddress} value={"Dirección alternativa"} name="addressRadio" /> Dirección
-                alternativa
+                <input
+                  type="radio"
+                  defaultChecked={!hasAddress}
+                  value={"Dirección alternativa"}
+                  name="addressRadio"
+                />{" "}
+                Dirección alternativa
               </label>
             </div>
             <Input
@@ -153,23 +163,23 @@ const BuyForm = () => {
           </div>
           <span className="mt-5">{"Horarios de envío"}</span>
           <div className="selectSection">
-          <Select
-            name="deliveryTime"
-            id="deliveryTime"
-            className="select"
-            onChange={(e) => setDeliveryTime(e.value)}
-            options={deliveryHours}
-            placeholder={"Horario"}
-          />
-          <span className="mt-5">{"Metodo de pago"}</span>
-          <Select
-            name="paymentMenthod"
-            id="paymentMenthod"
-            className="select"
-            onChange={(e) => setPaymentMethod(e.value)}
-            options={paymentMethods}
-            placeholder={"Metodo de pago"}
-          />
+            <Select
+              name="deliveryTime"
+              id="deliveryTime"
+              className="select"
+              onChange={(e) => setDeliveryTime(e.value)}
+              options={deliveryHours}
+              placeholder={"Horario"}
+            />
+            <span className="mt-5">{"Metodo de pago"}</span>
+            <Select
+              name="paymentMenthod"
+              id="paymentMenthod"
+              className="select"
+              onChange={(e) => setPaymentMethod(e.value)}
+              options={paymentMethods}
+              placeholder={"Metodo de pago"}
+            />
           </div>
           <button
             className="submit-button"
@@ -177,10 +187,7 @@ const BuyForm = () => {
             style={{ width: "65%" }}
             type="submit"
             disabled={
-              cart === [] ||
-              values.address === "" ||
-              values.deliveryTime === null ||
-              values.paymentMenthod === null
+              isLoading
             }
           >
             Confirmar
