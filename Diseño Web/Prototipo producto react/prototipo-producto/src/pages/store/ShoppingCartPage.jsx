@@ -9,6 +9,7 @@ import CartDetails from "../../components/store/CartDetails";
 import { fetchApi } from "../../API/api";
 import { useContext } from "react";
 import { cartContext } from "../../App";
+import NoData from "../../components/store/NoData";
 
 const ShoppingCartPage = () => {
   const { cart, setCart } = useContext(cartContext);
@@ -105,7 +106,7 @@ const ShoppingCartPage = () => {
             />
           ))}
           {productsList.length === 0 && (
-            <span className="center">No tienes productos en tu carrito</span>
+           <NoData message='No tienes productos en tu carrito'/>
           )}
         </div>
       </div>

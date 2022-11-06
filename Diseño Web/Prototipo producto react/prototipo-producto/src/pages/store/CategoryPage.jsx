@@ -8,6 +8,7 @@ import PageTitle from "../../components/store/PageTitle";
 import Pagination from "../../components/store/Pagination";
 import { fetchApi } from "../../API/api";
 import ProductCard from "../../components/store/ProductCard";
+import NoData from "../../components/store/NoData";
 
 const CategoryPage = () => {
   const { category } = useParams();
@@ -44,7 +45,7 @@ const CategoryPage = () => {
         <PageTitle title={category} isArrow={true} arrowGoTo={"/"} />
 
         <div className="card-container">
-          {productList.length === 0 && <p style={{margin: '10em auto'}}>No hay productos en esta categoría</p>}
+          {productList.length === 0 && <NoData message={'No hay productos en esta categoría'}/>}
           {currentItems.map((product, index) => {
             return (
               <ProductCard
