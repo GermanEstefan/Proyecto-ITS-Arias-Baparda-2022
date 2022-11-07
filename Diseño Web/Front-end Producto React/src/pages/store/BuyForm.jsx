@@ -5,6 +5,7 @@ import { fetchApi } from "../../API/api";
 import Swal from "sweetalert2";
 import Input from "../../components/store/Input";
 import Purchase from "../../assets/img/purchase.jpg";
+import loading from "../../assets/img/loading.gif";
 import Select from "react-select";
 import { cartContext, userStatusContext } from "../../App";
 import ContainerBase from "../../components/store/ContainerBase";
@@ -181,14 +182,14 @@ const BuyForm = () => {
               placeholder={"Metodo de pago"}
             />
           </div>
+
+          {isLoading && <img src={loading} style={{ width: "200px", margin: "auto" }} />}
           <button
             className="submit-button"
             onClick={(e) => handleConfirmPurchase(e)}
             style={{ width: "65%" }}
             type="submit"
-            disabled={
-              isLoading
-            }
+            disabled={isLoading}
           >
             Confirmar
           </button>
