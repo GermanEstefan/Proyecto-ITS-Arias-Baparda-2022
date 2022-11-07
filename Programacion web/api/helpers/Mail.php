@@ -43,7 +43,7 @@ class Mail{
         $index = 0;
         foreach ($products as $product) {
             $bodyMsg .= "
-            <h3 style='background-color: #ffc526;'>Producto " . ($index + 1) . "</h3>
+            <h3 style='background-color: #f5990f; color: white; padding: 5px 8px; border-radius: 3px;'>Producto " . ($index + 1) . ":</h3>
             <ul>
               <li>
                 <strong>Nombre: </strong>
