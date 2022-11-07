@@ -40,15 +40,26 @@ const Contact = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(values)
+    console.log(values);
     const resp = await fetchApi("auth-customers.php?url=consult", "POST", values);
-    console.log(resp)
-    Swal.fire({
-      icon: "warning",
-      text: "Esta funcionalidad aún no está implementada",
-      timer: 1500,
-      showConfirmButton: false,
-    });
+    console.log(resp);
+    if (resp.status === "successfully") {
+      Swal.fire({
+        icon: "success",
+        text: "Consulta enviada",
+        timer: 1500,
+        showConfirmButton: true,
+          confirmButtonColor: "#f5990ff3",
+      });
+    }else {
+      Swal.fire({
+        icon: "error",
+        text: resp.result.error_msg,
+        timer: 1500,
+        showConfirmButton: true,
+          confirmButtonColor: "#f5990ff3",
+      });
+    }
   };
   return (
     <ContainerBase>
