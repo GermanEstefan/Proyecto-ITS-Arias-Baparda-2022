@@ -79,6 +79,7 @@ const Contact = () => {
               placeholder="Mail"
               onChange={(e) => handleSetValues(e)}
               onBlur={(e) => handleSetValues(e)}
+              required
             />
           </div>
           <span className="spanError">{errors.client.message}</span>
@@ -90,6 +91,8 @@ const Contact = () => {
               placeholder="Asunto"
               onChange={(e) => handleSetValues(e)}
               onBlur={(e) => handleSetValues(e)}
+              minLength={5}
+              
             />
           </div>
           <div className="textareaSection">
@@ -100,6 +103,7 @@ const Contact = () => {
               placeholder="Mensaje"
               onChange={(e) => handleSetValues(e)}
               onBlur={(e) => handleSetValues(e)}
+              minLength={10}
             />
             <blockquote>{values.text.length}/250</blockquote>
           </div>

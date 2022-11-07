@@ -57,6 +57,8 @@ class CustomerController
         return $userData;
     }
 
+
+
     public function consultCustomer($userData){
         $bodyOfRequest = CustomerController::validateBodyOfConsult($userData);
         if(!$bodyOfRequest){
@@ -69,13 +71,20 @@ class CustomerController
         $text = $userData['text'];
 
         $getConsult = Mail::getConsult($client,$subject,$text);
+
+        var_dump($getConsult);
+        die();
         if(!$getConsult){
-            http_response_code(200);
+            // http_response_code(400);
             $this->response->error203("Algo salio mal");
             die();
         }
         echo $this->response->successfully("Consulta enviada con exito!");
     }
+
+
+
+
     public function updateCustomer($userData)
     {
         $idOfUserRequested = $this->jwt->verifyTokenAndGetIdUserFromRequest();
