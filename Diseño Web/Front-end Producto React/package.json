@@ -1,6 +1,7 @@
 {
   "name": "prototipo-producto",
   "version": "0.1.0",
+  "homepage": ".",
   "private": true,
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.1.2",

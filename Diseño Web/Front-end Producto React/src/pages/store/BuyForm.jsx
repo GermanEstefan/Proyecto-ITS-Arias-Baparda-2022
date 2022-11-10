@@ -111,7 +111,7 @@ const BuyForm = () => {
   };
 
   const getDeliveryHours = async () => {
-    const resp = await fetchApi("Deliverys.php?delivery", "GET");
+    const resp = await fetchApi("deliverys.php?delivery", "GET");
     setDeliveryHours(
       resp.result.data.map((hourFromBack) => ({
         value: hourFromBack.id_delivery,
