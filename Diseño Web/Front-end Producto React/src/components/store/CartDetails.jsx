@@ -4,7 +4,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 
 const CartDetails = ({ total, isCartEmpty }) => {
-  console.log(isCartEmpty);
+  
   const naviage = useNavigate();
   const handleClick = () => {
     if (!isCartEmpty) {

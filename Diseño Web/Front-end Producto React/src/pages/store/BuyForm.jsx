@@ -11,7 +11,6 @@ import { cartContext, userStatusContext } from "../../App";
 import ContainerBase from "../../components/store/ContainerBase";
 import { useNavigate, Link } from "react-router-dom";
 
-
 const paymentMethods = [
   { value: 0, label: "Efectivo" },
   { value: 1, label: "Online" },
@@ -35,7 +34,7 @@ const BuyForm = () => {
   useEffect(() => {
     getDeliveryHours();
     setHasAddress(userData.address === null);
-    console.log(userData.address !== null);
+    
 
     window.scroll(0, 0);
   }, []);
@@ -83,43 +82,51 @@ const BuyForm = () => {
           quantity: product.quantity,
         })),
       };
-      console.log(purchaseData);
-      const resp = await fetchApi("sales.php", "POST", purchaseData);
-      console.log(resp);
-      if (resp.status === "successfully") {
-        setIsLoading(true);
-        setCart([]);
-        navigate("/");
-        return Swal.fire({
-          icon: "success",
-          text: "Compra concretada!",
-          timer: 1500,
-          showConfirmButton: true,
-          confirmButtonColor: "#f5990ff3",
-        });
-      } else {
-        setIsLoading(false);
-        return Swal.fire({
-          icon: "error",
-          text: resp.result.error_msg,
-          timer: 1500,
-          showConfirmButton: true,
-          confirmButtonColor: "#f5990ff3",
-        });
+      try {
+        const resp = await fetchApi("sales.php", "POST", purchaseData);
+        if (resp.status === "successfully") {
+          setIsLoading(true);
+          setCart([]);
+          navigate("/");
+          return Swal.fire({
+            icon: "success",
+            text: "Compra concretada!",
+            timer: 1500,
+            showConfirmButton: true,
+            confirmButtonColor: "#f5990ff3",
+          });
+        } else {
+          setIsLoading(false);
+          return Swal.fire({
+            icon: "error",
+            text: resp.result.error_msg,
+            timer: 1500,
+            showConfirmButton: true,
+            confirmButtonColor: "#f5990ff3",
+          });
+        }
+      } catch (error) {
+        console.error(error);
+        alert("ERROR, comunicarse con el administrador");
       }
     }
   };
 
   const getDeliveryHours = async () => {
-    const resp = await fetchApi("deliverys.php?delivery", "GET");
-    setDeliveryHours(
-      resp.result.data.map((hourFromBack) => ({
-        value: hourFromBack.id_delivery,
-        label: hourFromBack.name,
-      }))
-    );
+    try {
+      const resp = await fetchApi("deliverys.php?delivery", "GET");
+      setDeliveryHours(
+        resp.result.data.map((hourFromBack) => ({
+          value: hourFromBack.id_delivery,
+          label: hourFromBack.name,
+        }))
+      );
+    } catch (error) {
+      console.error(error);
+      alert("ERROR, comunicarse con el administrador");
+    }
   };
-  console.log(!userData.auth);
+  
   return (
     <ContainerBase>
       <div className="form-container">
@@ -127,7 +134,10 @@ const BuyForm = () => {
         <form>
           <div className="radioSection">
             <strong>Dirección de envío</strong>
-            <div className="radioGroup" onChange={(e) => handleRadioChange(e.target.value)}>
+            <div
+              className="radioGroup"
+              onChange={(e) => handleRadioChange(e.target.value)}
+            >
               <label>
                 <input
                   type="radio"
@@ -184,7 +194,9 @@ const BuyForm = () => {
             />
           </div>
 
-          {isLoading && <img src={loading} style={{ width: "200px", margin: "auto" }} />}
+          {isLoading && (
+            <img src={loading} style={{ width: "200px", margin: "auto" }} />
+          )}
           <button
             className="submit-button"
             onClick={(e) => handleConfirmPurchase(e)}

@@ -28,32 +28,34 @@ const ShoppingCartPage = () => {
 
   const getProductsListByBarcode = async () => {
     const promises = [];
-    cart.map(({ barcode }) => {
-      promises.push(fetchApi(`products.php?barcode=${barcode}`, "GET"));
-    });
-    const responses = Promise.all(promises);
-    const products = await responses;
+    try {
+      cart.map(({ barcode }) => {
+        promises.push(fetchApi(`products.php?barcode=${barcode}`, "GET"));
+      });
+      const responses = Promise.all(promises);
+      const products = await responses;
 
-    const productsData = products.map((product) => product.result.data);
+      const productsData = products.map((product) => product.result.data);
 
-    cart.map(({ quantity }, index) => (productsData[index]["quantity"] = quantity));
+      cart.map(({ quantity }, index) => (productsData[index]["quantity"] = quantity));
 
-    setProductsList(productsData);
-    setTotalPrice();
-    console.log(productsList);
+      setProductsList(productsData);
+      setTotalPrice();
+      
+    } catch (error) {
+      console.error(error);
+      alert("ERROR, comunicarse con el administrador");
+    }
   };
 
   const setTotalPrice = () => {
     setTotal(
-      cart.length > 0 &&
-        cart
-          .map((product) => parseInt(product.price) * parseInt(product.quantity))
-          .reduce((a, b) => parseInt(a) + parseInt(b))
+      cart.length > 0 && cart.map((product) => parseInt(product.price) * parseInt(product.quantity)).reduce((a, b) => parseInt(a) + parseInt(b))
     );
   };
 
   const updateProductQuantity = (e, barcode, stock) => {
-    console.log(productsList);
+    
     if (e.target.value == "" || parseInt(e.target.value) <= stock) {
       const cartWithNewQuantity = productsList.map((product) => {
         if (product.barcode === barcode) {
@@ -70,8 +72,6 @@ const ShoppingCartPage = () => {
 
       setCart(cartWithNewQuantity);
       setTotalPrice();
-    } else {
-      console.log("cantidad mal");
     }
   };
   const handleDeleteItemFromCart = (barcode) => {
@@ -105,9 +105,7 @@ const ShoppingCartPage = () => {
               id={product.id_product}
             />
           ))}
-          {productsList.length === 0 && (
-           <NoData message='No tienes productos en tu carrito'/>
-          )}
+          {productsList.length === 0 && <NoData message="No tienes productos en tu carrito" />}
         </div>
       </div>
     </ContainerBase>

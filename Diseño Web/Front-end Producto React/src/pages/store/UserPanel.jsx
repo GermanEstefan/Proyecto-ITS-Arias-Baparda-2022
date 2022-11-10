@@ -24,7 +24,7 @@ const UserPanel = () => {
       confirmButtonText: 'Si',
       cancelButtonText: 'No'
     }).then((result) => {
-      console.log(result);
+      
       if (result.isConfirmed) {
         localStorage.removeItem("token");
         navigate("/");

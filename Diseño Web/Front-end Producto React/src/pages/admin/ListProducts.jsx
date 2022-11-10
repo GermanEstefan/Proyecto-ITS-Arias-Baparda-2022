@@ -28,7 +28,7 @@ const ListProducts = () => {
     const productsPromise = fetchApi("products.php?BOonlyProducts", "GET");
     Promise.all([productsPromise, promoPromise])
       .then(([products, promos]) => {
-        console.log(promos);
+        
         setProducts(products.result.data);
         setPromos(promos.result.data);
       })
@@ -41,7 +41,7 @@ const ListProducts = () => {
 
   const handleGetModelsOfProduct = async (idProduct) => {
     const resp = await fetchApi(`products.php?BOmodelsOfProduct=${idProduct}`);
-    console.log(resp);
+    
     setModelsOfProduct({ idProduct, models: resp.result.data.models });
   };
 
@@ -51,7 +51,7 @@ const ListProducts = () => {
         `products.php?barcode=${barcode}&actionMin=disable`,
         "PATCH"
       );
-      console.log(resp);
+      
       if (resp.status === "successfully") {
         const modelsMapped = modelsOfProduct.models.map((model) => {
           if (model.barcode === barcode) {
@@ -78,7 +78,7 @@ const ListProducts = () => {
         `products.php?barcode=${barcode}&actionMin=active`,
         "PATCH"
       );
-      console.log(resp);
+      
       if (resp.status === "successfully") {
         const modelsMapped = modelsOfProduct.models.map((model) => {
           if (model.barcode === barcode) {
@@ -101,7 +101,7 @@ const ListProducts = () => {
 
   const handleGetProductsOfPromo = async (idPromo) => {
     const resp = await fetchApi(`products.php?BOproductsOfPromo=${idPromo}`);
-    console.log(resp);
+    
     setProductOfPromos({ idPromo, productsPromo: resp.result.data.products });
   };
 

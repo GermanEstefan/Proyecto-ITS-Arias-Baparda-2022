@@ -10,8 +10,7 @@ import {
   faHouseCircleCheck,
   faHourglass,
   faLocationDot,
-  faXmark,
-  faTruck,
+  faXmark
 } from "@fortawesome/free-solid-svg-icons";
 import { fetchApi } from "../../API/api";
 
@@ -23,9 +22,13 @@ const SaleStatusHistory = ({ saleId }) => {
   }, []);
 
   const getStatuslist = async () => {
-    const resp = await fetchApi(`sales.php?History=${saleId}`, "GET");
-    console.log(resp);
-    setLastStatus(resp.result.data.history[0].status || "");
+    try {
+      const resp = await fetchApi(`sales.php?History=${saleId}`, "GET");
+      setLastStatus(resp.result.data.history[0].status || "");
+    } catch (error) {
+      console.error(error);
+      alert("ERROR, comunicarse con el administrador");
+    }
   };
   return (
     <div className="statusHistory">
@@ -51,7 +54,12 @@ const SaleStatusHistory = ({ saleId }) => {
           color={lastStatus === "EN VIAJE" ? "orange" : "black"}
         />
       ) : (
-        <FontAwesomeIcon className="icon" icon={faLocationDot} size={"lg"} color={"orange"} />
+        <FontAwesomeIcon
+          className="icon"
+          icon={faLocationDot}
+          size={"lg"}
+          color={"orange"}
+        />
       )}
       <FontAwesomeIcon className="icon" icon={faArrowRightLong} size={"sm"} />
       {lastStatus !== "CANCELADA" ? (
@@ -62,7 +70,12 @@ const SaleStatusHistory = ({ saleId }) => {
           color={lastStatus === "ENTREGADO" ? "orange" : "black"}
         />
       ) : (
-        <FontAwesomeIcon className="icon" icon={faXmark} size={"lg"} color={"red"} />
+        <FontAwesomeIcon
+          className="icon"
+          icon={faXmark}
+          size={"lg"}
+          color={"red"}
+        />
       )}
     </div>
   );

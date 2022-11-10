@@ -17,17 +17,27 @@ const CategoryPage = () => {
   const [productList, setProductList] = useState([]);
   useEffect(() => {
     window.scroll(0, 0);
-    window.scrollTo( 0, 0 );
+    window.scrollTo(0, 0);
     getProductsByCategory();
   }, []);
 
   const getProductsByCategory = async () => {
     if (category === "PROMOCIONES") {
-      const resp = await fetchApi(`products.php?promos`, "GET");
-      setProductList(resp.result.data);
+      try {
+        const resp = await fetchApi(`products.php?promos`, "GET");
+        setProductList(resp.result.data);
+      } catch (error) {
+        console.error(error);
+        alert("ERROR, comunicarse con el administrador");
+      }
     } else {
-      const resp = await fetchApi(`products.php?categoryName=${category}`, "GET");
-      setProductList(resp.result.data);
+      try {
+        const resp = await fetchApi(`products.php?categoryName=${category}`, "GET");
+        setProductList(resp.result.data);
+      } catch (error) {
+        console.error(error);
+        alert("ERROR, comunicarse con el administrador");
+      }
     }
   };
 
@@ -45,7 +55,7 @@ const CategoryPage = () => {
         <PageTitle title={category} isArrow={true} arrowGoTo={"/"} />
 
         <div className="card-container">
-          {productList.length === 0 && <NoData message={'No hay productos en esta categoría'}/>}
+          {productList.length === 0 && <NoData message={"No hay productos en esta categoría"} />}
           {currentItems.map((product, index) => {
             return (
               <ProductCard
@@ -61,12 +71,7 @@ const CategoryPage = () => {
           })}
         </div>
         {productList.length > itemsPerPage && (
-          <Pagination
-            currentPage={currentPage}
-            itemsPerPage={itemsPerPage}
-            totalItems={productList.length}
-            paginate={paginate}
-          />
+          <Pagination currentPage={currentPage} itemsPerPage={itemsPerPage} totalItems={productList.length} paginate={paginate} />
         )}
       </div>
     </ContainerBase>

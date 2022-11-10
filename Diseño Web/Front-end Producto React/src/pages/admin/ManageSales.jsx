@@ -26,7 +26,7 @@ const ManageSales = () => {
   const handleChangeState = async ({ target }) => {
     try {
       const resp = await fetchApi(`sales.php?status=${target.value}`, "GET");
-      console.log(resp);
+      
       const salesData = resp.result.data;
       setSales(salesData);
     } catch (error) {

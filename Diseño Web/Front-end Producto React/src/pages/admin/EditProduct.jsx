@@ -46,8 +46,6 @@ const EditProducts = () => {
           price: productData.price,
           picture: productData.picture,
         });
-        console.log(categorys.result.data);
-        console.log(productData);
         setCategorys(categorys.result.data);
       })
       .catch((err) => console.error(err));
@@ -68,7 +66,7 @@ const EditProducts = () => {
         "PATCH",
         bodyOfRequest
       );
-      console.log(resp);
+      
       if (resp.status === "error") {
         setError({
           showMessage: true,

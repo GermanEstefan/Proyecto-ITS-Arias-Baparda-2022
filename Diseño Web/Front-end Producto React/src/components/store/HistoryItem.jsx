@@ -17,9 +17,15 @@ export const HistoryItem = ({ sale }) => {
     setToggleCollapse(!toggleCollapse);
   };
   const getSaleProducts = async () => {
-    const resp = await fetchApi(`sales.php?saleDetail=${sale.ID}`, "GET");
-    if (resp.status === "successfully") {
-      setSaleProducts(resp.result.data.productSale || []);
+    try {
+      const resp = await fetchApi(`sales.php?saleDetail=${sale.ID}`, "GET");
+      if (resp.status === "successfully") {
+        setSaleProducts(resp.result.data.productSale || []);
+      }
+      
+    } catch (error) {
+      console.error(error);
+      alert("ERROR, comunicarse con el administrador");
     }
   };
   return (

@@ -36,7 +36,7 @@ const Supplier = () => {
     setLoadingFlags({ ...loadingFlags, createSupplier: true });
     try {
       const resp = await fetchApi("suppliers.php", "POST", values);
-      console.log(resp);
+      
       if (resp.status === "error") {
         setError({
           showMessage: true,
@@ -78,7 +78,6 @@ const Supplier = () => {
       `suppliers.php?idSupplier=${idSupplier}&action=disable `,
       "PATCH"
     );
-    console.log(resp);
     if (resp.status === "error") {
       return Swal.fire({
         icon: "error",
@@ -105,7 +104,6 @@ const Supplier = () => {
       `suppliers.php?idSupplier=${idSupplier}&action=active`,
       "PATCH"
     );
-    console.log(resp);
     if (resp.status === "error") {
       return Swal.fire({
         icon: "error",

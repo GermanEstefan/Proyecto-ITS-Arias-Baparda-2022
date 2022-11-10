@@ -18,13 +18,21 @@ const SalesHistory = () => {
   }, []);
 
   const getSalesHistory = async () => {
-    const resp = await fetchApi(`sales.php?salesClient=${userData.email}`, "GET");
+    try {
+      const resp = await fetchApi(
+        `sales.php?salesClient=${userData.email}`,
+        "GET"
+      );
 
-    if (resp.status === "error") {
-      setSales([]);
-    }
-    if (resp.status === "successfully") {
-      setSales(resp.result.data.sales || []);
+      if (resp.status === "error") {
+        setSales([]);
+      }
+      if (resp.status === "successfully") {
+        setSales(resp.result.data.sales || []);
+      }
+    } catch (error) {
+      console.error(error);
+      alert("ERROR, comunicarse con el administrador");
     }
   };
 
@@ -35,7 +43,7 @@ const SalesHistory = () => {
       animationInDuration={500}
       isVisible={true}
     >
-      <div >
+      <div>
         <h1 style={{ marginLeft: "15px" }}>Historial de compras</h1>
         {sales.length > 0 &&
           sales.map((sale, index) => (
@@ -45,7 +53,7 @@ const SalesHistory = () => {
             </div>
           ))}
         {sales.length === 0 && (
-          <NoData message={'Aún no has realizado ninguna compra'}/>
+          <NoData message={"Aún no has realizado ninguna compra"} />
         )}
       </div>
     </Animated>

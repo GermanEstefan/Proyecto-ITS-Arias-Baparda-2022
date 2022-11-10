@@ -1,3 +1,5 @@
+/** @format */
+
 import { faPlusCircle, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
@@ -98,14 +100,13 @@ const CreateProducts = () => {
       picture: imageToBase64,
     };
     setLoading(true);
-    console.log(bodyOfRequest);
     try {
       const resp = await fetchApi(
         "products.php?type=product",
         "POST",
         bodyOfRequest
       );
-      console.log(resp);
+      
       if (resp.status === "error") {
         setError({
           showMessage: true,
@@ -120,7 +121,6 @@ const CreateProducts = () => {
       image.value = "";
       return setTimeout(() => setError(initStateLoading), 3000);
     } catch (error) {
-      console.log("entro");
       console.error(error);
     } finally {
       setLoading(false);
@@ -216,15 +216,17 @@ const CreateProducts = () => {
                   <option value="" selected disabled>
                     Seleccione Categoria
                   </option>
-                  {categorys.map((category) => (
-                    !(category.id_category === '1') &&
-                    <option
-                      key={category.id_category}
-                      value={category.id_category}
-                    >
-                      {category.name}
-                    </option>
-                  ))}
+                  {categorys.map(
+                    (category) =>
+                      !(category.id_category === "1") && (
+                        <option
+                          key={category.id_category}
+                          value={category.id_category}
+                        >
+                          {category.name}
+                        </option>
+                      )
+                  )}
                 </select>
               </div>
             </div>

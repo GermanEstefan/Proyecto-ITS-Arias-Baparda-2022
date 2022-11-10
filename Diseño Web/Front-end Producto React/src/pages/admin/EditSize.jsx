@@ -26,7 +26,7 @@ const EditSize = () => {
     useEffect(() => {
         fetchApi(`sizes.php?idSize=${idOfSize}`, 'GET')
             .then(res => {
-                console.log(res)
+                
                 const sizeData = res.result.data;
                 setSizeValues({
                     name: sizeData.name,
@@ -41,7 +41,7 @@ const EditSize = () => {
         setLoading(true);
         try {
             const resp = await fetchApi(`sizes.php?idSize=${idOfSize}`, 'PATCH', sizeValues);
-            console.log(resp);
+            
             if (resp.status === 'error') {
                 setError({ showMessage: true, message: resp.result.error_msg, error: true });
                 return setTimeout(() => setError(initStateLoading), 3000)

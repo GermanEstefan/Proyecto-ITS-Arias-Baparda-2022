@@ -16,7 +16,7 @@ const LoginAdm = () => {
         e.preventDefault();
         try {
             const resp = await fetchApi("auth-employees.php?url=login", 'POST', values)
-            console.log(resp)
+            
             if (resp.status === 'error') {
                 return Swal.fire({
                     icon: "error",

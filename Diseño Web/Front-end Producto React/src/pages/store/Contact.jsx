@@ -40,25 +40,29 @@ const Contact = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(values);
-    const resp = await fetchApi("auth-customers.php?url=consult", "POST", values);
-    console.log(resp);
-    if (resp.status === "successfully") {
-      Swal.fire({
-        icon: "success",
-        text: "Consulta enviada",
-        timer: 1500,
-        showConfirmButton: true,
+    
+    try {
+      const resp = await fetchApi("auth-customers.php?url=consult", "POST", values);
+      if (resp.status === "successfully") {
+        Swal.fire({
+          icon: "success",
+          text: "Consulta enviada",
+          timer: 1500,
+          showConfirmButton: true,
           confirmButtonColor: "#f5990ff3",
-      });
-    }else {
-      Swal.fire({
-        icon: "error",
-        text: resp.result.error_msg,
-        timer: 1500,
-        showConfirmButton: true,
+        });
+      } else {
+        Swal.fire({
+          icon: "error",
+          text: resp.result.error_msg,
+          timer: 1500,
+          showConfirmButton: true,
           confirmButtonColor: "#f5990ff3",
-      });
+        });
+      }
+    } catch (error) {
+      console.error(error);
+      alert("ERROR, comunicarse con el administrador");
     }
   };
   return (
@@ -69,9 +73,7 @@ const Contact = () => {
           <h1>Envianos tu mensaje</h1>
           <div className="inputSection">
             <input
-              style={
-                errors.client.error ? { borderColor: "red", width: "100%" } : { width: "100%" }
-              }
+              style={errors.client.error ? { borderColor: "red", width: "100%" } : { width: "100%" }}
               type="text"
               name="client"
               value={userData.email && userData.email}
@@ -92,7 +94,6 @@ const Contact = () => {
               onChange={(e) => handleSetValues(e)}
               onBlur={(e) => handleSetValues(e)}
               minLength={5}
-              
             />
           </div>
           <div className="textareaSection">

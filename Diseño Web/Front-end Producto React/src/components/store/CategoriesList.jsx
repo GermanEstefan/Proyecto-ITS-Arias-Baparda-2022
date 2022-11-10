@@ -13,18 +13,19 @@ const CategoriesList = () => {
   const [itemsPerPage, setItemsPerPage] = useState(5);
   const [categories, setCategories] = useState([]);
 
-
   useEffect(() => {
     getCategories();
-    console.log(isMobile)
-    setItemsPerPage(isMobile ? 1 : 5)
-    console.log(itemsPerPage)
+    setItemsPerPage(isMobile ? 1 : 5);
   }, []);
 
   const getCategories = async () => {
-    const resp = await fetchApi("categorys.php", "GET");
-
-    setCategories(resp.result.data);
+    try {
+      const resp = await fetchApi("categorys.php", "GET");
+      setCategories(resp.result.data);
+    } catch (error) {
+      console.error(error);
+      alert("ERROR, comunicarse con el administrador");
+    }
   };
 
   const indexOfLastItem = currentPage * itemsPerPage;
@@ -36,7 +37,6 @@ const CategoriesList = () => {
   };
 
   return (
-    
     <div className="card-container">
       {currentItems.map((category, index) => {
         return (

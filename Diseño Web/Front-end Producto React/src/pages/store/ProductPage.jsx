@@ -37,7 +37,7 @@ const ProductPage = () => {
   useEffect(() => {
     setIsEnoughStock(quantitySelected <= parseInt(product.stock));
     setIsAddedToCart(cart.filter((cartProduct) => cartProduct.barcode === product.barcode).length > 0);
-    console.log(promoProducts);
+    
   }, [product, quantitySelected]);
 
   const handleAddToCart = () => {
@@ -49,23 +49,33 @@ const ProductPage = () => {
   };
   const getProductById = async () => {
     if (category === "PROMOCIONES") {
-      const respPromo = await fetchApi(`products.php?productsOfPromo=${id}`, "GET");
-      setPromoProducts(respPromo.result.data.products);
-      const resp = await fetchApi(`products.php?modelsOfProduct=${id}`, "GET");
-      setProduct(resp.result.data.models[0] ? resp.result.data.models[0] : {});
-      setImg(resp.result.data.picture);
-      setproductName(resp.result.data.name);
-      setproductDescription(resp.result.data.description);
-      console.log(resp);
+      try {
+        const respPromo = await fetchApi(`products.php?productsOfPromo=${id}`, "GET");
+        setPromoProducts(respPromo.result.data.products);
+        const resp = await fetchApi(`products.php?modelsOfProduct=${id}`, "GET");
+        setProduct(resp.result.data.models[0] ? resp.result.data.models[0] : {});
+        setImg(resp.result.data.picture);
+        setproductName(resp.result.data.name);
+        setproductDescription(resp.result.data.description);
+        
+      } catch (error) {
+        console.error(error);
+        alert("ERROR, comunicarse con el administrador");
+      }
     } else {
-      const resp = await fetchApi(`products.php?modelsOfProduct=${id}`, "GET");
-      setProduct(resp.result.data.models[0] ? resp.result.data.models[0] : {});
-      setAllModels(resp.result.data.models);
-      setImg(resp.result.data.picture);
-      setproductName(resp.result.data.name);
-      setproductDescription(resp.result.data.description);
-      getDesignsList(resp.result.data.models);
-      getSizesList(resp.result.data.models);
+      try {
+        const resp = await fetchApi(`products.php?modelsOfProduct=${id}`, "GET");
+        setProduct(resp.result.data.models[0] ? resp.result.data.models[0] : {});
+        setAllModels(resp.result.data.models);
+        setImg(resp.result.data.picture);
+        setproductName(resp.result.data.name);
+        setproductDescription(resp.result.data.description);
+        getDesignsList(resp.result.data.models);
+        getSizesList(resp.result.data.models);
+      } catch (error) {
+        console.error(error);
+        alert("ERROR, comunicarse con el administrador");
+      }
     }
   };
 

@@ -37,7 +37,7 @@ const EditSupplier = () => {
         setLoading(true);
         try {
             const resp = await fetchApi(`suppliers.php?idSupplier=${idSupplier}&action=edit`, 'PATCH', supplierValues);
-            console.log(resp);
+            
             if (resp.status === 'error') {
                 setError({ showMessage: true, message: resp.result.error_msg, error: true });
                 return setTimeout(() => setError(initStateLoading), 3000)
@@ -55,7 +55,7 @@ const EditSupplier = () => {
         fetchApi(`suppliers.php?rut=${rutParams}`, 'GET')
             .then(res => {
                 const values = res.result.data;
-                console.log(res)
+                
                 setSupplierValues({
                     rut: values.rut,
                     companyName: values.company_name,

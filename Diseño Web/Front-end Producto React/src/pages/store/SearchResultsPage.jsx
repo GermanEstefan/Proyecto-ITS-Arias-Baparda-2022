@@ -22,9 +22,13 @@ const SearchResultsPage = () => {
     getProductsBySearchInput();
   }, [data]);
   const getProductsBySearchInput = async () => {
-    const resp = await fetchApi(`products.php?name=${data}`, "GET");
-    console.log(resp);
-    setProductList(resp.result.data);
+    try {
+      const resp = await fetchApi(`products.php?name=${data}`, "GET");
+      setProductList(resp.result.data);
+    } catch (error) {
+      console.error(error);
+      alert("ERROR, comunicarse con el administrador");
+    }
   };
 
   const indexOfLastItem = currentPage * itemsPerPage;
@@ -57,12 +61,7 @@ const SearchResultsPage = () => {
           })}
         </div>
         {productList.length > itemsPerPage && (
-          <Pagination
-            currentPage={currentPage}
-            itemsPerPage={itemsPerPage}
-            totalItems={productList.length}
-            paginate={paginate}
-          />
+          <Pagination currentPage={currentPage} itemsPerPage={itemsPerPage} totalItems={productList.length} paginate={paginate} />
         )}
       </div>
     </ContainerBase>

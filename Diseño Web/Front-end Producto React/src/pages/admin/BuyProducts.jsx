@@ -35,7 +35,7 @@ const BuyProducts = () => {
     Promise.all([supplierPromise, productsPromise]).then(
       ([suppliers, productss]) => {
         setSuppliers(suppliers.result.data);
-        console.log(productss);
+        
         setProducts(productss.result.data);
       }
     );
@@ -69,8 +69,8 @@ const BuyProducts = () => {
     setLoading(true);
     try {
       const resp = await fetchApi("supply.php", "POST", bodyOfRequest);
-      console.log(bodyOfRequest);
-      console.log(resp);
+      
+      
       if (resp.status === "error") {
         setError({
           showMessage: true,
