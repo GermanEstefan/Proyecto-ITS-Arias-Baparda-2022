@@ -9,7 +9,8 @@ import loading from "../../assets/img/loading.gif";
 import Select from "react-select";
 import { cartContext, userStatusContext } from "../../App";
 import ContainerBase from "../../components/store/ContainerBase";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
+
 
 const paymentMethods = [
   { value: 0, label: "Efectivo" },
@@ -193,7 +194,7 @@ const BuyForm = () => {
           >
             Confirmar
           </button>
-          <a href="/shoppingCart">Volver al carrito</a>
+          <Link to="/shoppingCart">Volver al carrito</Link>
         </form>
       </div>
     </ContainerBase>

@@ -16,10 +16,11 @@ const NavDesktop = () => {
     <nav className="header-store__nav-desktop">
       <ul>
         {userData.auth ? (
-          <a className="userName" href="/panel-user">
+          <Link to="/panel-user">
             {userData.name} {userData.surname}
             <FontAwesomeIcon icon={faUser} />
-          </a>
+          </Link>
+        
         ) : (
           <>
             <Link to="/login">

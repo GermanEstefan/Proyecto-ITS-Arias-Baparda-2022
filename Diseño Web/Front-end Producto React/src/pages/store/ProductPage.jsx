@@ -2,13 +2,14 @@
 
 import React, { useState, useEffect, useContext } from "react";
 
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import PageTitle from "../../components/store/PageTitle";
 import ContainerBase from "../../components/store/ContainerBase";
 import { fetchApi } from "../../API/api";
 import { Animated } from "react-animated-css";
 import { cartContext, userStatusContext } from "../../App";
 import Select from "react-select";
+
 import NoPhoto from "../../assets/img/no-photo.png";
 import { useNavigate } from "react-router-dom";
 const ProductPage = () => {
@@ -35,19 +36,13 @@ const ProductPage = () => {
   }, []);
   useEffect(() => {
     setIsEnoughStock(quantitySelected <= parseInt(product.stock));
-    setIsAddedToCart(
-      cart.filter((cartProduct) => cartProduct.barcode === product.barcode).length > 0
-    );
+    setIsAddedToCart(cart.filter((cartProduct) => cartProduct.barcode === product.barcode).length > 0);
     console.log(promoProducts);
   }, [product, quantitySelected]);
 
   const handleAddToCart = () => {
     if (!isAddedToCart) {
-      setCart([
-        ...cart,
-        { barcode: product.barcode, quantity: quantitySelected, price: product.price },
-      ]);
-      navigate("/shoppingCart");
+      setCart([...cart, { barcode: product.barcode, quantity: quantitySelected, price: product.price }]);
     }
 
     setIsAddedToCart(true);
@@ -99,18 +94,14 @@ const ProductPage = () => {
     const modelsWithSize = allModels.filter((model) => model.size === size);
     setIsAddedToCart(false);
     setProduct(modelsWithSize[0]);
-    setIsAddedToCart(
-      cart.filter((cartProduct) => cartProduct.barcode === product.barcode).length > 0
-    );
+    setIsAddedToCart(cart.filter((cartProduct) => cartProduct.barcode === product.barcode).length > 0);
   };
 
   const handleChangeDesign = (design) => {
     const modelsWithDesign = allModels.filter((model) => model.design === design);
     setIsAddedToCart(false);
     setProduct(modelsWithDesign[0]);
-    setIsAddedToCart(
-      cart.filter((cartProduct) => cartProduct.barcode === product.barcode).length > 0
-    );
+    setIsAddedToCart(cart.filter((cartProduct) => cartProduct.barcode === product.barcode).length > 0);
   };
 
   const handleUserClick = () => {
@@ -166,12 +157,7 @@ const ProductPage = () => {
                     className="select"
                     onChange={(e) => handleChangeDesign(e.value)}
                   />
-                  <Select
-                    options={getOptions(sizesList)}
-                    placeholder="Talle..."
-                    className="select"
-                    onChange={(e) => handleChangeSize(e.value)}
-                  />
+                  <Select options={getOptions(sizesList)} placeholder="Talle..." className="select" onChange={(e) => handleChangeSize(e.value)} />
                 </div>
               )}
               <div className="buttonsFlexContainer">
@@ -199,26 +185,16 @@ const ProductPage = () => {
                   >
                     Comprar
                   </button>
-                  <button
-                    className="addBtn"
-                    disabled={isAddedToCart || !isEnoughStock}
-                    onClick={handleAddToCart}
-                  >
+                  <button className="addBtn" disabled={isAddedToCart || !isEnoughStock} onClick={handleAddToCart}>
                     Agregar al carrito
                   </button>
                 </div>
               </div>
               {isAddedToCart && <p>Este producto ya está en tu carrito</p>}
               {isShown && (
-                <Animated
-                  animationIn="fadeInLeft"
-                  animationOut="fadeOutRight"
-                  animationInDuration={200}
-                  isVisible={true}
-                >
+                <Animated animationIn="fadeInLeft" animationOut="fadeOutRight" animationInDuration={200} isVisible={true}>
                   <p>
-                    <a href="/register">Registrate</a> o <a href="/login">ingresa</a> para comenzar
-                    a comprar
+                    <Link to="/register">Registrate</Link> o <Link to="/login">ingresa</Link> para comenzar a comprar
                   </p>
                 </Animated>
               )}

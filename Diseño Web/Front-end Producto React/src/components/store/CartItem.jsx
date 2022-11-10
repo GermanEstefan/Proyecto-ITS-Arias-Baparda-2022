@@ -4,23 +4,10 @@ import React, { useState, useEffect } from "react";
 import { Animated } from "react-animated-css";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
+import { Link } from "react-router-dom";
 import NoPhoto from "../../assets/img/no-photo.png";
 
-const CartItem = ({
-  barcode,
-  img,
-  name,
-  price,
-  quantity,
-  size,
-  design,
-  updateProductQuantity,
-  handleDeleteItemFromCart,
-  stock,
-  category,
-  id
-}) => {
+const CartItem = ({ barcode, img, name, price, quantity, size, design, updateProductQuantity, handleDeleteItemFromCart, stock, category, id }) => {
   const [productTotalPrice, setProductTotalPrice] = useState(parseInt(price) * parseInt(quantity));
   const handleSetPrice = (e) => {
     if (parseInt(e.target.value) > 0 && e.target.value != "" && parseInt(e.target.value) <= stock) {
@@ -32,18 +19,15 @@ const CartItem = ({
     }
   };
   return (
-    <Animated
-      animationIn="fadeInLeft"
-      animationOut="fadeOut"
-      animationInDuration={500}
-      isVisible={true}
-    >
+    <Animated animationIn="fadeInLeft" animationOut="fadeOut" animationInDuration={500} isVisible={true}>
       <div className="cartItem">
         <img className="cartItem__img" src={img ? img : NoPhoto} width="100px" alt="" />
 
         <div className="cartItem__text">
           <div>
-            <h3><a href={`/category/${category}/${id}`}>{name}</a></h3>
+            <h3>
+              <Link to={`/category/${category}/${id}`}>{name}</Link>
+            </h3>
             <span>
               Talle: {size}, Color: {design}
             </span>
@@ -64,10 +48,7 @@ const CartItem = ({
             min={1}
             max={stock}
           />
-          <button
-            className="CartItem__actionsQuantity"
-            onClick={() => handleDeleteItemFromCart(barcode)}
-          >
+          <button className="CartItem__actionsQuantity" onClick={() => handleDeleteItemFromCart(barcode)}>
             <FontAwesomeIcon icon={faTrash} />
           </button>
         </div>

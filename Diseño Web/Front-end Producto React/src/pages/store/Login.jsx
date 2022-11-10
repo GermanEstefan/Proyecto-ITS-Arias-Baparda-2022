@@ -1,7 +1,7 @@
 /** @format */
 
 import React, { useContext, useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import Imagen from "../../assets/img/Obreros.jpg";
 import { isEmail, isEmpty, isValidPassword } from "../../helpers/validateForms";
 import Swal from "sweetalert2";
@@ -158,7 +158,7 @@ const Login = () => {
             Ingresar
           </button>
 
-          <a href="/register">Registrarse</a>
+          <Link to="/register">Registrarse</Link>
         </form>
       </div>
     </ContainerBase>

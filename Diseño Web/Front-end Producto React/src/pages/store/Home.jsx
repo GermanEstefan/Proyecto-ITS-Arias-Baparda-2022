@@ -7,7 +7,7 @@ import instagramIcon from "../../assets/img/instagram-brands.svg";
 import messageIcon from "../../assets/img/message-solid.svg";
 import whatsappIcon from "../../assets/img/whatsapp.svg";
 import { useMediaQuery } from "react-responsive";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import ContainerBase from "../../components/store/ContainerBase";
 
 const Home = () => {
@@ -43,9 +43,9 @@ const Home = () => {
                   <img src={instagramIcon} alt="instagram" />
                 </a>
 
-                <a href="/contact">
+                <Link to="/contact">
                   <img src={messageIcon} alt="message" />
-                </a>
+                </Link>
                 <a href="">
                   <img src={whatsappIcon} alt="whatsapp" />
                 </a>
