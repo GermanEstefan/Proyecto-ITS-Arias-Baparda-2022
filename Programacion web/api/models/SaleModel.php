@@ -313,7 +313,6 @@
             $resultCreateSale = $instanceMySql->query($saleInsert);
             if(!$resultCreateSale)  $result_transaccion = false;
             $idSale = $instanceMySql->insert_id;
-            
             //INICIO SALE_DETAIL Array de productos
             $queries = array();
             $index = 0;

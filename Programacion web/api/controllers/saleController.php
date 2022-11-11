@@ -55,6 +55,7 @@ class SaleController {
             echo $this->response->error203("El Horario indicado no es correcto");
             die();
         }
+      
         $mailExist = UserModel::validEmailForSale($client);
         if (!$mailExist) {
             echo $this->response->error203("El mail no existe");
