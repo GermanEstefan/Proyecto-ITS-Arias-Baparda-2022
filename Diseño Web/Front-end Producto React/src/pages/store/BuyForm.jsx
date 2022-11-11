@@ -22,7 +22,7 @@ const BuyForm = () => {
   const { userData } = useContext(userStatusContext);
   const [isAddressDisable, setIsAddressDisable] = useState(false);
   const [deliveryHours, setDeliveryHours] = useState([]);
-  const [hasAddress, setHasAddress] = useState(false);
+  const [hasAddress, setHasAddress] = useState(userData.address !== null);
   const [isLoading, setIsLoading] = useState(false);
   const [values, setValues] = useState({
     email: userData.email,
@@ -34,8 +34,6 @@ const BuyForm = () => {
   useEffect(() => {
     getDeliveryHours();
     setHasAddress(userData.address === null);
-    
-
     window.scroll(0, 0);
   }, []);
 
@@ -107,12 +105,15 @@ const BuyForm = () => {
         }
       } catch (error) {
         console.error(error);
+
         return Swal.fire({
           icon: "error",
           text: "Error 500, servidor caido",
           timer: 3000,
           showConfirmButton: true,
         });
+      }finally{
+        setIsLoading(false);
       }
     }
   };

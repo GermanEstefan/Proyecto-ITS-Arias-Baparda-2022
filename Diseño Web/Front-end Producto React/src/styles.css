@@ -920,7 +920,7 @@
 
 /** @format */
 .productContainer {
-  margin: 20vh auto auto auto;
+  margin: 11vh auto 3em auto;
   min-height: 100%;
   max-width: 900px;
 }
@@ -1427,7 +1427,7 @@
   padding-bottom: 20px;
 }
 .cartContainer .cartPage {
-  min-height: 100%;
+  min-height: 50vh;
 }
 .cartContainer .cartPage .cartItem {
   max-width: 1100px;
