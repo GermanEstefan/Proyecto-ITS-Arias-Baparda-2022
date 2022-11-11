@@ -12,7 +12,9 @@ import {
   faLocationDot,
   faXmark
 } from "@fortawesome/free-solid-svg-icons";
+
 import { fetchApi } from "../../API/api";
+import Swal from "sweetalert2";
 
 const SaleStatusHistory = ({ saleId }) => {
   const [lastStatus, setLastStatus] = useState("");
@@ -27,7 +29,12 @@ const SaleStatusHistory = ({ saleId }) => {
       setLastStatus(resp.result.data.history[0].status || "");
     } catch (error) {
       console.error(error);
-      alert("ERROR, comunicarse con el administrador");
+      return Swal.fire({
+        icon: "error",
+        text: "Error 500, servidor caido",
+        timer: 3000,
+        showConfirmButton: true,
+      });
     }
   };
   return (

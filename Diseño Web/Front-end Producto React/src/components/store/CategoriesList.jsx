@@ -6,6 +6,7 @@ import { fetchApi } from "../../API/api";
 import NoPhoto from "../../assets/img/no-photo.png";
 import Card from "./Card";
 import Pagination from "./Pagination";
+import Swal from "sweetalert2";
 
 const CategoriesList = () => {
   const isMobile = useMediaQuery({ query: "(max-width: 800px)" });
@@ -24,7 +25,12 @@ const CategoriesList = () => {
       setCategories(resp.result.data);
     } catch (error) {
       console.error(error);
-      alert("ERROR, comunicarse con el administrador");
+      return Swal.fire({
+        icon: "error",
+        text: "Error 500, servidor caido",
+        timer: 3000,
+        showConfirmButton: true,
+      });
     }
   };
 

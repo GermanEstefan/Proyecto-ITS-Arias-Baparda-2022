@@ -9,6 +9,7 @@ import { fetchApi } from "../../API/api";
 import { Animated } from "react-animated-css";
 import { cartContext, userStatusContext } from "../../App";
 import Select from "react-select";
+import Swal from "sweetalert2";
 
 import NoPhoto from "../../assets/img/no-photo.png";
 import { useNavigate } from "react-router-dom";
@@ -60,7 +61,12 @@ const ProductPage = () => {
         
       } catch (error) {
         console.error(error);
-        alert("ERROR, comunicarse con el administrador");
+        return Swal.fire({
+          icon: "error",
+          text: "Error 500, servidor caido",
+          timer: 3000,
+          showConfirmButton: true,
+        });
       }
     } else {
       try {
@@ -74,7 +80,12 @@ const ProductPage = () => {
         getSizesList(resp.result.data.models);
       } catch (error) {
         console.error(error);
-        alert("ERROR, comunicarse con el administrador");
+        return Swal.fire({
+          icon: "error",
+          text: "Error 500, servidor caido",
+          timer: 3000,
+          showConfirmButton: true,
+        });
       }
     }
   };

@@ -8,6 +8,7 @@ import { HistoryItem } from "./HistoryItem";
 import { Animated } from "react-animated-css";
 import SaleStatusHistory from "./SaleStatusHistory";
 import NoData from "./NoData";
+import Swal from "sweetalert2";
 
 const SalesHistory = () => {
   const { userData } = useContext(userStatusContext);
@@ -32,7 +33,12 @@ const SalesHistory = () => {
       }
     } catch (error) {
       console.error(error);
-      alert("ERROR, comunicarse con el administrador");
+      return Swal.fire({
+        icon: "error",
+        text: "Error 500, servidor caido",
+        timer: 3000,
+        showConfirmButton: true,
+      });
     }
   };
 

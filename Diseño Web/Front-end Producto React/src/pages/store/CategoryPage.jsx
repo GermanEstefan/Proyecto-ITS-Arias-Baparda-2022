@@ -9,6 +9,7 @@ import Pagination from "../../components/store/Pagination";
 import { fetchApi } from "../../API/api";
 import ProductCard from "../../components/store/ProductCard";
 import NoData from "../../components/store/NoData";
+import Swal from "sweetalert2";
 
 const CategoryPage = () => {
   const { category } = useParams();
@@ -28,7 +29,12 @@ const CategoryPage = () => {
         setProductList(resp.result.data);
       } catch (error) {
         console.error(error);
-        alert("ERROR, comunicarse con el administrador");
+        return Swal.fire({
+          icon: "error",
+          text: "Error 500, servidor caido",
+          timer: 3000,
+          showConfirmButton: true,
+        });
       }
     } else {
       try {
@@ -36,7 +42,12 @@ const CategoryPage = () => {
         setProductList(resp.result.data);
       } catch (error) {
         console.error(error);
-        alert("ERROR, comunicarse con el administrador");
+        return Swal.fire({
+          icon: "error",
+          text: "Error 500, servidor caido",
+          timer: 3000,
+          showConfirmButton: true,
+        });
       }
     }
   };

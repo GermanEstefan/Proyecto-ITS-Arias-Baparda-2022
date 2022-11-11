@@ -107,7 +107,12 @@ const BuyForm = () => {
         }
       } catch (error) {
         console.error(error);
-        alert("ERROR, comunicarse con el administrador");
+        return Swal.fire({
+          icon: "error",
+          text: "Error 500, servidor caido",
+          timer: 3000,
+          showConfirmButton: true,
+        });
       }
     }
   };
@@ -123,7 +128,12 @@ const BuyForm = () => {
       );
     } catch (error) {
       console.error(error);
-      alert("ERROR, comunicarse con el administrador");
+      return Swal.fire({
+        icon: "error",
+        text: "Error 500, servidor caido",
+        timer: 3000,
+        showConfirmButton: true,
+      });
     }
   };
   

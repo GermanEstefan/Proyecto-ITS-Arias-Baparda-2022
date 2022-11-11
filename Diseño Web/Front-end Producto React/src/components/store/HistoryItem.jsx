@@ -5,6 +5,7 @@ import { Collapse } from "react-collapse";
 import { fetchApi } from "../../API/api";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretDown, faCaretUp } from "@fortawesome/free-solid-svg-icons";
+import Swal from "sweetalert2";
 
 export const HistoryItem = ({ sale }) => {
   const [toggleCollapse, setToggleCollapse] = useState(false);
@@ -25,7 +26,12 @@ export const HistoryItem = ({ sale }) => {
       
     } catch (error) {
       console.error(error);
-      alert("ERROR, comunicarse con el administrador");
+      return Swal.fire({
+        icon: "error",
+        text: "Error 500, servidor caido",
+        timer: 3000,
+        showConfirmButton: true,
+      });
     }
   };
   return (
