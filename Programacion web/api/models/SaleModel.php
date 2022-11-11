@@ -224,29 +224,7 @@
             WHERE id_sale = $idSale";
             return $conecction->setData($query);
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        
 //ESTO NO ESTA CHEQUEADO NI CONTEMPLADO
         public static function getAllSales(){
             $conecction = new Connection();

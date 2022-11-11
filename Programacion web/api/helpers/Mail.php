@@ -31,11 +31,11 @@ class Mail{
       </h3>
       
       <hr />
-      <p style='font-size: 125%'>Fecha:" ."$<strong>" . $infoExtra['date'] . "</strong></p>
-      <p style='font-size: 125%'>Metodo de pago:" ."$<strong>" . $infoExtra['payment'] . "</strong></p>
-      <p style='font-size: 125%'>Horario de entrega:"."$<strong>" . $infoExtra['time'] . "</strong></p>
-      <p style='font-size: 125%'>Direccion de entrega:"."$<strong>" . $infoExtra['address'] . "</strong></p>
-      <p style='font-size: 125%'>Total de la compra:"."$<strong>" . $infoExtra['totalSale'] . "</strong></p>
+      <p style='font-size: 125%'>Fecha:" ."<strong>" . $infoExtra['date'] . "</strong></p>
+      <p style='font-size: 125%'>Metodo de pago:" ."<strong>" . $infoExtra['payment'] . "</strong></p>
+      <p style='font-size: 125%'>Horario de entrega:"."<strong>" . $infoExtra['time'] . "</strong></p>
+      <p style='font-size: 125%'>Direccion de entrega:"."<strong>" . $infoExtra['address'] . "</strong></p>
+      <p style='font-size: 125%'>Total de la compra:"."<strong>$" . $infoExtra['totalSale'] . "</strong></p>
       <hr />
       <h2>Productos comprados:</h2>
         ";
