@@ -9,6 +9,7 @@ import Pagination from "../../components/store/Pagination";
 import { fetchApi } from "../../API/api";
 import ProductCard from "../../components/store/ProductCard";
 import NoData from "../../components/store/NoData";
+import Swal from "sweetalert2";
 
 const CategoryPage = () => {
   const { category } = useParams();
@@ -17,17 +18,37 @@ const CategoryPage = () => {
   const [productList, setProductList] = useState([]);
   useEffect(() => {
     window.scroll(0, 0);
-    window.scrollTo( 0, 0 );
+    window.scrollTo(0, 0);
     getProductsByCategory();
   }, []);
 
   const getProductsByCategory = async () => {
     if (category === "PROMOCIONES") {
-      const resp = await fetchApi(`products.php?promos`, "GET");
-      setProductList(resp.result.data);
+      try {
+        const resp = await fetchApi(`products.php?promos`, "GET");
+        setProductList(resp.result.data);
+      } catch (error) {
+        console.error(error);
+        return Swal.fire({
+          icon: "error",
+          text: "Error 500, servidor caido",
+          timer: 3000,
+          showConfirmButton: true,
+        });
+      }
     } else {
-      const resp = await fetchApi(`products.php?categoryName=${category}`, "GET");
-      setProductList(resp.result.data);
+      try {
+        const resp = await fetchApi(`products.php?categoryName=${category}`, "GET");
+        setProductList(resp.result.data);
+      } catch (error) {
+        console.error(error);
+        return Swal.fire({
+          icon: "error",
+          text: "Error 500, servidor caido",
+          timer: 3000,
+          showConfirmButton: true,
+        });
+      }
     }
   };
 
@@ -45,7 +66,7 @@ const CategoryPage = () => {
         <PageTitle title={category} isArrow={true} arrowGoTo={"/"} />
 
         <div className="card-container">
-          {productList.length === 0 && <NoData message={'No hay productos en esta categoría'}/>}
+          {productList.length === 0 && <NoData message={"No hay productos en esta categoría"} />}
           {currentItems.map((product, index) => {
             return (
               <ProductCard
@@ -61,12 +82,7 @@ const CategoryPage = () => {
           })}
         </div>
         {productList.length > itemsPerPage && (
-          <Pagination
-            currentPage={currentPage}
-            itemsPerPage={itemsPerPage}
-            totalItems={productList.length}
-            paginate={paginate}
-          />
+          <Pagination currentPage={currentPage} itemsPerPage={itemsPerPage} totalItems={productList.length} paginate={paginate} />
         )}
       </div>
     </ContainerBase>

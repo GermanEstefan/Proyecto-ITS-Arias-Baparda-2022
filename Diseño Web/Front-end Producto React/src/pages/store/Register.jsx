@@ -78,7 +78,6 @@ const Register = () => {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(values);
     try {
       const resp = await fetchApi("auth-customers.php?url=register", "POST", values);
       if (resp.status === "error") {

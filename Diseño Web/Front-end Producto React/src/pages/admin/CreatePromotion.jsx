@@ -16,7 +16,7 @@ const CreatePromotion = () => {
   useEffect(() => {
     fetchApi("products.php?BOProducts", "GET")
       .then((res) => {
-        console.log(res);
+        
         setProducts(res.result.data);
       })
       .catch((err) => console.log(err));
@@ -68,14 +68,14 @@ const CreatePromotion = () => {
       picture: imageToBase64,
     };
     setLoading(true);
-    console.log(bodyOfRequest);
+    
     try {
       const resp = await fetchApi(
         "products.php?type=promo",
         "POST",
         bodyOfRequest
       );
-      console.log(resp);
+      
       if (resp.status === "error") {
         setError({
           showMessage: true,

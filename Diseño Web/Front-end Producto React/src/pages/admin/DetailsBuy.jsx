@@ -18,7 +18,7 @@ const DetailBuys = () => {
     fetchApi(`supply.php?supplyDetail=${idBuy}`, "GET")
       .then((res) => {
         const detailsBuyData = res.result.data;
-        console.log(detailsBuyData);
+        
         setDetailsBuy(detailsBuyData);
       })
       .catch((err) => console.error(err));

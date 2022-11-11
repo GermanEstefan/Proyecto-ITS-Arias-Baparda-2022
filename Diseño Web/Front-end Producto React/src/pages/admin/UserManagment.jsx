@@ -1,3 +1,5 @@
+/** @format */
+
 import { faCheck, faPencil, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useState, useContext } from "react";
@@ -39,7 +41,6 @@ const UserManagment = () => {
   useEffect(() => {
     fetchApi("auth-employees.php", "GET")
       .then((resp) => {
-        console.log(resp);
         setEmployees(resp);
       })
       .catch((err) => {
@@ -58,7 +59,6 @@ const UserManagment = () => {
         "POST",
         values
       );
-      console.log(resp);
       if (resp.status === "error") {
         setError({
           showMessage: true,
@@ -87,7 +87,6 @@ const UserManagment = () => {
       `auth-employees.php?idEmployee=${idUser}&action=disable`,
       "PATCH"
     );
-    console.log(resp);
     if (resp.status === "error") return alert(resp.result.error_msg);
     const userFiltered = employees.filter((employee) => {
       if (employee.employee_user === idUser) {
@@ -107,7 +106,6 @@ const UserManagment = () => {
       `auth-employees.php?idEmployee=${idUser}&action=active`,
       "PATCH"
     );
-    console.log(resp);
     if (resp.status === "error") return alert(resp.result.error_msg);
     const userFiltered = employees.filter((employee) => {
       if (employee.employee_user === idUser) {

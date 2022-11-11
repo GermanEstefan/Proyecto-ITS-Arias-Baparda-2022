@@ -6,6 +6,7 @@ import { fetchApi } from "../../API/api";
 import NoPhoto from "../../assets/img/no-photo.png";
 import Card from "./Card";
 import Pagination from "./Pagination";
+import Swal from "sweetalert2";
 
 const CategoriesList = () => {
   const isMobile = useMediaQuery({ query: "(max-width: 800px)" });
@@ -13,18 +14,24 @@ const CategoriesList = () => {
   const [itemsPerPage, setItemsPerPage] = useState(5);
   const [categories, setCategories] = useState([]);
 
-
   useEffect(() => {
     getCategories();
-    console.log(isMobile)
-    setItemsPerPage(isMobile ? 1 : 5)
-    console.log(itemsPerPage)
+    setItemsPerPage(isMobile ? 1 : 5);
   }, []);
 
   const getCategories = async () => {
-    const resp = await fetchApi("categorys.php", "GET");
-
-    setCategories(resp.result.data);
+    try {
+      const resp = await fetchApi("categorys.php", "GET");
+      setCategories(resp.result.data);
+    } catch (error) {
+      console.error(error);
+      return Swal.fire({
+        icon: "error",
+        text: "Error 500, servidor caido",
+        timer: 3000,
+        showConfirmButton: true,
+      });
+    }
   };
 
   const indexOfLastItem = currentPage * itemsPerPage;
@@ -36,7 +43,6 @@ const CategoriesList = () => {
   };
 
   return (
-    
     <div className="card-container">
       {currentItems.map((category, index) => {
         return (

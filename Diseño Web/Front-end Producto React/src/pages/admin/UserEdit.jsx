@@ -46,8 +46,7 @@ const UserEdit = () => {
         e.preventDefault();
         setLoading(true);
         try {
-            const resp = await fetchApi(`auth-employees.php?idEmployee=${idUser}&action=edit`, 'PATCH', userValues);
-            console.log(resp)
+            const resp = await fetchApi(`auth-employees.php?idEmployee=${idUser}&action=edit`, 'PATCH', userValues);            
             if (resp.status === 'error') {
                 setError({ showMessage: true, message: resp.result.error_msg, error: true });
                 return setTimeout(() => setError(initStateLoading), 3000)

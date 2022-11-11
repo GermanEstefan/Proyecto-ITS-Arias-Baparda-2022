@@ -8,6 +8,7 @@ import { HistoryItem } from "./HistoryItem";
 import { Animated } from "react-animated-css";
 import SaleStatusHistory from "./SaleStatusHistory";
 import NoData from "./NoData";
+import Swal from "sweetalert2";
 
 const SalesHistory = () => {
   const { userData } = useContext(userStatusContext);
@@ -18,13 +19,26 @@ const SalesHistory = () => {
   }, []);
 
   const getSalesHistory = async () => {
-    const resp = await fetchApi(`sales.php?salesClient=${userData.email}`, "GET");
+    try {
+      const resp = await fetchApi(
+        `sales.php?salesClient=${userData.email}`,
+        "GET"
+      );
 
-    if (resp.status === "error") {
-      setSales([]);
-    }
-    if (resp.status === "successfully") {
-      setSales(resp.result.data.sales || []);
+      if (resp.status === "error") {
+        setSales([]);
+      }
+      if (resp.status === "successfully") {
+        setSales(resp.result.data.sales || []);
+      }
+    } catch (error) {
+      console.error(error);
+      return Swal.fire({
+        icon: "error",
+        text: "Error 500, servidor caido",
+        timer: 3000,
+        showConfirmButton: true,
+      });
     }
   };
 
@@ -35,7 +49,7 @@ const SalesHistory = () => {
       animationInDuration={500}
       isVisible={true}
     >
-      <div >
+      <div>
         <h1 style={{ marginLeft: "15px" }}>Historial de compras</h1>
         {sales.length > 0 &&
           sales.map((sale, index) => (
@@ -45,7 +59,7 @@ const SalesHistory = () => {
             </div>
           ))}
         {sales.length === 0 && (
-          <NoData message={'Aún no has realizado ninguna compra'}/>
+          <NoData message={"Aún no has realizado ninguna compra"} />
         )}
       </div>
     </Animated>

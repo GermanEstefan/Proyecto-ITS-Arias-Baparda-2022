@@ -10,17 +10,15 @@ import ShoppingCart from "./ShoppingCart";
 
 const NavDesktop = () => {
   const { userData } = useContext(userStatusContext);
-  const navigate = useNavigate();
 
   return (
     <nav className="header-store__nav-desktop">
       <ul>
         {userData.auth ? (
-          <Link to="/panel-user">
+          <Link className="userName" to="/panel-user">
             {userData.name} {userData.surname}
             <FontAwesomeIcon icon={faUser} />
           </Link>
-        
         ) : (
           <>
             <Link to="/login">

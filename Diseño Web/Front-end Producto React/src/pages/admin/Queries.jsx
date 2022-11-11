@@ -1,3 +1,5 @@
+/** @format */
+
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { fetchApi } from "../../API/api";
@@ -17,7 +19,7 @@ const Queries = () => {
       .then(([balanceData, queryData]) => {
         const balanceInfo = balanceData.result.data[0];
         const queryInfo = queryData.result.data.clients;
-        console.log(queryInfo);
+
         setBalanceData(balanceInfo);
         setQuerieData({ queryToShow: "bestClients", queryInfo });
       })
@@ -40,7 +42,7 @@ const Queries = () => {
           "GET"
         );
         const data = queryDataPromise.result.data;
-        console.log(data);
+
         setQuerieData({ queryToShow: "bestProducts", queryInfo: data });
       }
     } catch (error) {

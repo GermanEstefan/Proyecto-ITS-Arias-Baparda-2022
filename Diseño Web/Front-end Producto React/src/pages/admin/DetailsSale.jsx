@@ -36,7 +36,7 @@ const DetailsSales = () => {
   const handleGetHistoryOfSale = async () => {
     try {
       const resp = await fetchApi(`sales.php?reportHistory=${idSale}`, "GET");
-      console.log(resp);
+      
       setHistorySale(resp.result.data.history);
     } catch (error) {
       console.error(error);

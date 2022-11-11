@@ -58,7 +58,7 @@ const EditModelProduct = () => {
         "PATCH",
         values
       );
-      console.log(resp);
+      
       if (resp.status === "error") {
         setError({
           showMessage: true,

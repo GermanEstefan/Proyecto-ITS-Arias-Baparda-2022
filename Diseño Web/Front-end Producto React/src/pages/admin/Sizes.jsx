@@ -24,7 +24,7 @@ const Sizes = () => {
     useEffect(() => {
         fetchApi('sizes.php', 'GET')
             .then(sizes => {
-                console.log(sizes);
+                
                 setSizes(sizes.result.data);
             })
             .catch(err => console.error(err))
@@ -36,7 +36,7 @@ const Sizes = () => {
         setLoadingFlags({ ...loadingFlags, createSize: true });
         try {
             const resp = await fetchApi('sizes.php', 'POST', values);
-            console.log(resp)
+            
             if (resp.status === 'error') {
                 setError({ showMessage: true, message: resp.result.error_msg, error: true });
                 return setTimeout(() => setError(initStateLoading), 3000)
@@ -61,7 +61,7 @@ const Sizes = () => {
         if (!confirm) return;
         try {
             const resp = await fetchApi(`sizes.php?idSize=${idSize}`, 'DELETE');
-            console.log(resp);
+            
             if (resp.status === 'error') {
                 return alert(resp.result.error_msg);
             }

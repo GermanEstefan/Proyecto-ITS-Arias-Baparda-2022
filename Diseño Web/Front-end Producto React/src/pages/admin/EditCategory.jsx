@@ -27,7 +27,7 @@ const EditCategory = () => {
     useEffect(() => {
         fetchApi(`categorys.php?idCategory=${idOfCategory}`, 'GET')
             .then(res => {
-                console.log(res)
+                
                 const categoryData = res.result.data
                 setCategoryValues({
                     name: categoryData.name,
@@ -50,7 +50,7 @@ const EditCategory = () => {
                 bodyOfRequest = {...categoryValues, picture: base64Img};       
             } 
             const resp = await fetchApi(`categorys.php?idCategory=${idOfCategory}`, 'PATCH', bodyOfRequest);
-            console.log(resp);
+            
             if (resp.status === 'error') {
                 setError({ showMessage: true, message: resp.result.error_msg, error: true });
                 return setTimeout(() => setError(initStateLoading), 3000)

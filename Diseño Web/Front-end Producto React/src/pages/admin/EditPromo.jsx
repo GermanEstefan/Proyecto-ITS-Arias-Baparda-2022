@@ -28,7 +28,7 @@ const EditPromo = () => {
         fetchApi(`products.php?BOproductsOfPromo=${idPromo}}`)
             .then(res => {
                 const productData = res.result.data;
-                console.log(productData)
+                
                 setValues({
                     name: productData.namePromo,
                     stock: productData.stockPromo,
@@ -52,8 +52,8 @@ const EditPromo = () => {
                 bodyOfRequest = { ...values, picture: base64Img };
             }
             const resp = await fetchApi(`products.php?idProduct=${idPromo}&actionMax=editPromo`, 'PATCH', bodyOfRequest);
-            console.log(resp);
-            console.log(bodyOfRequest);
+            
+            
             if (resp.status === 'error') {
                 setError({ showMessage: true, message: resp.result.error_msg, error: true });
                 return setTimeout(() => setError(initStateLoading), 3000)

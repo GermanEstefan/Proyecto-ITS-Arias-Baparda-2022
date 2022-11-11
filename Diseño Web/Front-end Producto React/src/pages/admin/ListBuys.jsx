@@ -13,7 +13,7 @@ const ListBuys = () => {
   useEffect(() => {
     fetchApi("supply.php?AllSupply", "GET")
       .then((res) => {
-        console.log(res);
+        
         const supplyData = res.result.data;
         setSupply(supplyData);
       })

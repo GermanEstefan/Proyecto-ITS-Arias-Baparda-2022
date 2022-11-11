@@ -5,6 +5,7 @@ import { Collapse } from "react-collapse";
 import { fetchApi } from "../../API/api";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretDown, faCaretUp } from "@fortawesome/free-solid-svg-icons";
+import Swal from "sweetalert2";
 
 export const HistoryItem = ({ sale }) => {
   const [toggleCollapse, setToggleCollapse] = useState(false);
@@ -17,9 +18,20 @@ export const HistoryItem = ({ sale }) => {
     setToggleCollapse(!toggleCollapse);
   };
   const getSaleProducts = async () => {
-    const resp = await fetchApi(`sales.php?saleDetail=${sale.ID}`, "GET");
-    if (resp.status === "successfully") {
-      setSaleProducts(resp.result.data.productSale || []);
+    try {
+      const resp = await fetchApi(`sales.php?saleDetail=${sale.ID}`, "GET");
+      if (resp.status === "successfully") {
+        setSaleProducts(resp.result.data.productSale || []);
+      }
+      
+    } catch (error) {
+      console.error(error);
+      return Swal.fire({
+        icon: "error",
+        text: "Error 500, servidor caido",
+        timer: 3000,
+        showConfirmButton: true,
+      });
     }
   };
   return (

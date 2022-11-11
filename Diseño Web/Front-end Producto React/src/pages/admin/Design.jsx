@@ -26,7 +26,7 @@ const Design = () => {
     useEffect(() => {
         fetchApi('designs.php', 'GET')
             .then(res => {
-                console.log(res)
+                
                 setDesigns(res.result.data)
             })
             .catch(error => {
@@ -41,7 +41,7 @@ const Design = () => {
         setLoadingFlags({ ...loadingFlags, createDesign: true });
         try {
             const resp = await fetchApi('designs.php', 'POST', values);
-            console.log(resp)
+            
             if (resp.status === 'error') {
                 setError({ showMessage: true, message: resp.result.error_msg, error: true });
                 return setTimeout(() => setError(initStateLoading), 3000)
@@ -64,7 +64,7 @@ const Design = () => {
         const confirm = window.confirm('¿Estas seguro que desas borrar el diseño?')
         if(!confirm) return;
         const resp = await fetchApi(`designs.php?idDesign=${idDesign} `, 'DELETE');
-        console.log(resp)
+        
         if(resp.status === 'error'){
             return Swal.fire({
                 icon: "error",

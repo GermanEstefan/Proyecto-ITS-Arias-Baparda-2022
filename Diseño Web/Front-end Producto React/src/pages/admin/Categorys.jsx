@@ -31,7 +31,7 @@ const Categorys = () => {
   useEffect(() => {
     fetchApi("categorys.php", "GET")
       .then((res) => {
-        console.log(res);
+        
         if (res.result.data.length === 0) return;
         setCategorys(res.result.data);
       })
@@ -51,9 +51,9 @@ const Categorys = () => {
     const imageToBase64 = await imgToBase64(image.files[0]);
     const bodyOfRequest = { ...values, picture: imageToBase64 };
     try {
-      console.log(bodyOfRequest);
+      
       const resp = await fetchApi("categorys.php", "POST", bodyOfRequest);
-      console.log(resp);
+      
       if (resp.status === "error") {
         setError({
           showMessage: true,
