@@ -69,16 +69,7 @@ class CustomerController
         $client = $userData['client'];
         $subject = $userData['subject'];
         $text = $userData['text'];
-
-        $getConsult = Mail::getConsult($client,$subject,$text);
-
-        var_dump($getConsult);
-        die();
-        if(!$getConsult){
-            // http_response_code(400);
-            $this->response->error203("Algo salio mal");
-            die();
-        }
+        Mail::getConsult($client,$subject,$text);
         echo $this->response->successfully("Consulta enviada con exito!");
     }
 
