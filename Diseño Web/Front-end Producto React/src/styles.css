@@ -977,7 +977,8 @@
 }
 @media (max-width: 900px) {
   .productContainer .productPage .productPage__description .productPage__description__body p {
-    margin-left: 20px;
+    width: 90%;
+    margin: auto;
   }
 }
 .productContainer .productPage .productPage__description .productPage__description__buttons {

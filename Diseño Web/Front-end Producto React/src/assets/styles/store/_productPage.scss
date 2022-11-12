@@ -45,7 +45,8 @@
         p {
           text-align: justify;
           @media (max-width: 900px) {
-            margin-left: 20px;
+            width: 90%;
+            margin: auto;
           }
         }
       }
