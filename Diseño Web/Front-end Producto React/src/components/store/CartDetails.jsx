@@ -1,15 +1,26 @@
 /** @format */
 
 import React from "react";
+import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
+import { userStatusContext } from "../../App";
 
 const CartDetails = ({ total, isCartEmpty }) => {
-  
-  const naviage = useNavigate();
+
+  const { auth } = useContext(userStatusContext).userData;
+
+  const navigate = useNavigate();
   const handleClick = () => {
-    if (!isCartEmpty) {
-      naviage("/buyForm");
+    if (!auth) {
+      return Swal.fire({
+        icon: "warning",
+        text: "Debes iniciar sesion para efecutar una compra",
+        showConfirmButton: true,
+        confirmButtonColor: "#f5990ff3",
+      }).then( res => res.isConfirmed ? navigate('/login') : null )
     }
+    navigate("/buyForm");
   };
   return (
     <>

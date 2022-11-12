@@ -85,14 +85,12 @@ const BuyForm = () => {
         if (resp.status === "successfully") {
           setIsLoading(true);
           setCart([]);
-          navigate("/");
           return Swal.fire({
             icon: "success",
-            text: "Compra concretada!",
-            timer: 1500,
+            text: "Compra efectuada con exito, te hemos enviado un mail con los detalles de la misma.",
             showConfirmButton: true,
             confirmButtonColor: "#f5990ff3",
-          });
+          }).then( res => res.isConfirmed && navigate('/'))
         } else {
           setIsLoading(false);
           return Swal.fire({
