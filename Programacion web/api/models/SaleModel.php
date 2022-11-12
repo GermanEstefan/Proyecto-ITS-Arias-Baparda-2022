@@ -309,7 +309,8 @@ class SaleModel extends Connection
         $instanceMySql = $conecction->getInstance();
         $instanceMySql->begin_transaction(MYSQLI_TRANS_START_READ_WRITE);
         $result_transaccion = true;
-        $saleInsert = "INSERT INTO sale (address, user_purchase, sale_delivery, payment) VALUES ('$this->address', '$this->idClient','$this->delivery', '$this->payment')";
+        $nowDate = date('Y-m-d H:i:s');
+        $saleInsert = "INSERT INTO sale (date, address, user_purchase, sale_delivery, payment) VALUES ( '$nowDate', '$this->address', '$this->idClient','$this->delivery', '$this->payment')";
         $resultCreateSale = $instanceMySql->query($saleInsert);
         if (!$resultCreateSale)  $result_transaccion = false;
         $idSale = $instanceMySql->insert_id;
@@ -351,20 +352,20 @@ class SaleModel extends Connection
             }
             array_push($queries, "INSERT INTO sale_detail (sale_id, product_sale, quantity) VALUES ($idSale,$barcode, $quantity)");
         }
-
         foreach ($queries as $query) {
             $resultInsertQuerys = $instanceMySql->query($query);
             if (!$resultInsertQuerys) {
-                echo ($response->error203("Hubo un error para el detalle de la venta. Contacte al soporte tecnico"));
+                echo $response->error203("Hubo un error para el detalle de la venta. Contacte al soporte tecnico");
                 $instanceMySql->rollback();
                 die();
             }
         }
         $payment = $this->payment;
+        $nowDate = date('Y-m-d H:i:s');
         //ALTA EN REPORTES
         if ($payment == 0) {
             //el pago es en efectivo, queda pendiente de confirmacion
-            $firstReportForSalePending = "INSERT INTO report (sale_report, status_report, employee_report, comment) VALUES ($idSale, 2, 1, 'Respuesta Automatica: Pedido pendiente de pago')";
+            $firstReportForSalePending = "INSERT INTO report (sale_report, date, status_report, employee_report, comment) VALUES ($idSale,'$nowDate', 2, 1, 'Respuesta Automatica: Pedido pendiente de pago')";
             $generateReportForSale = $instanceMySql->query($firstReportForSalePending);
             if(!$generateReportForSale) $result_transaccion = false;
             if ($result_transaccion) {
@@ -377,7 +378,7 @@ class SaleModel extends Connection
         }
         if ($payment == 1) {
             //el pago ya fue confirmado por algun medio electronico, queda Confirmado
-            $firstReportForSaleConfirmed = "INSERT INTO report (sale_report, status_report, employee_report, comment) VALUES ($idSale, 3, 1, 'Respuesta Automatica: Venta Confirmada')";
+            $firstReportForSaleConfirmed = "INSERT INTO report (sale_report,date, status_report, employee_report, comment) VALUES ($idSale,'$nowDate', 3, 1, 'Respuesta Automatica: Venta Confirmada')";
             $generateReportForSale = $instanceMySql->query($firstReportForSaleConfirmed);
             if (!$generateReportForSale) $result_transaccion = false;
             if ($result_transaccion) {

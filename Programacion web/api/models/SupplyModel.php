@@ -105,7 +105,8 @@ class SupplyModel extends Connection
         $instanceMySql = $conecction->getInstance();
         $instanceMySql->begin_transaction(MYSQLI_TRANS_START_READ_WRITE);
         $result_transaccion = true;
-        $supplyInsert = "INSERT INTO supply (supplier_id, employee_ci, comment) VALUES ('$this->supplier_id', '$this->employee_ci','$this->comment')";
+        $nowDate = date('Y-m-d H:i:s');
+        $supplyInsert = "INSERT INTO supply (date, supplier_id, employee_ci, comment) VALUES ( '$nowDate', '$this->supplier_id', '$this->employee_ci','$this->comment')";
         $resultCreateSupply = $instanceMySql->query($supplyInsert);
         if(!$resultCreateSupply)  $result_transaccion = false;
         $idSupply = $instanceMySql->insert_id;
