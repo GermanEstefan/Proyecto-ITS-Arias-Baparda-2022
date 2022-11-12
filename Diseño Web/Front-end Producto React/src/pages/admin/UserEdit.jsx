@@ -68,7 +68,7 @@ const UserEdit = () => {
                 setUserValues({
                     name: userData.name,
                     surname: userData.surname,
-                    password: userData.password,
+                    password: "",
                     phone: userData.phone,
                     rol: userData.employee_role,
                     address: userData.address
@@ -119,7 +119,7 @@ const UserEdit = () => {
                                     type="password"
                                     onChange={handleChangeInputs}
                                     name='password'
-                                    value=""
+                                    value={password}
                                     className='input-form'
                                     required
                                 />

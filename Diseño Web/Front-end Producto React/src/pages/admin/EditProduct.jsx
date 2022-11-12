@@ -133,7 +133,7 @@ const EditProducts = () => {
           </select>
 
           <label className="label-form">Imagen</label>
-          <input type="file" required id="img-prod-edit" />
+          <input type="file" id="img-prod-edit" />
           <br />
           <img src={values.picture} alt="img" />
           <br />
