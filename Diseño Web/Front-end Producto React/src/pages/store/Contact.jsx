@@ -102,6 +102,7 @@ const Contact = () => {
               onChange={(e) => handleSetValues(e)}
               onBlur={(e) => handleSetValues(e)}
               minLength={5}
+              required
             />
           </div>
           <div className="textareaSection">
@@ -113,6 +114,7 @@ const Contact = () => {
               onChange={(e) => handleSetValues(e)}
               onBlur={(e) => handleSetValues(e)}
               minLength={10}
+              required
             />
             <blockquote>{values.text.length}/250</blockquote>
           </div>
