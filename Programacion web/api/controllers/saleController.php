@@ -383,10 +383,11 @@ class SaleController {
                 die();
             }    
         }
+        $nowDate = date('Y-m-d H:i:s');
         $getName = StatusModel::getStatusById($status);
         $nameStatus = $getName['name'];
         $comment = "Empleado:$employeeDoc cambio la venta:$idSale de estado $statusActual a $nameStatus";
-        $result = SaleModel::updateReportOfSale($idSale,$status,$employeeDoc,$comment);
+        $result = SaleModel::updateReportOfSale($idSale,$status,$employeeDoc,$comment, $nowDate);
         if(!$result){
             echo $this->response->error500();
             die();

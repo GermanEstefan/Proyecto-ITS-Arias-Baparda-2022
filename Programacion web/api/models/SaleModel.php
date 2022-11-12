@@ -220,13 +220,14 @@ class SaleModel extends Connection
     }
 
     //update
-    public static function updateReportOfSale($idSale, $status, $employeeDoc, $comment)
+    public static function updateReportOfSale($idSale, $status, $employeeDoc, $comment, $nowDate)
     {
         $conecction = new Connection();
         $query = "UPDATE report 
             SET status_report = $status,
             employee_report = $employeeDoc,
-            comment = '$comment'
+            comment = '$comment',
+            date = '$nowDate'
             WHERE sale_report = $idSale";
         return $conecction->setData($query);
     }
