@@ -96,6 +96,7 @@ const UserEdit = () => {
                                     name='name'
                                     value={name}
                                     className='input-form'
+                                    required
                                 />
                             </div>
                             <div>
@@ -106,6 +107,7 @@ const UserEdit = () => {
                                     name='surname'
                                     value={surname}
                                     className='input-form'
+                                    required
                                 />
                             </div>
                         </div>
@@ -117,8 +119,9 @@ const UserEdit = () => {
                                     type="password"
                                     onChange={handleChangeInputs}
                                     name='password'
-                                    value={password}
+                                    value=""
                                     className='input-form'
+                                    required
                                 />
                             </div>
                             <div>
@@ -129,6 +132,7 @@ const UserEdit = () => {
                                     name='address'
                                     value={address}
                                     className='input-form'
+                                    required
                                 />
                             </div>
                         </div>
@@ -142,6 +146,7 @@ const UserEdit = () => {
                                     name='phone'
                                     value={phone}
                                     className='input-form'
+                                    required
                                 />
                             </div>
 
@@ -152,6 +157,7 @@ const UserEdit = () => {
                                     name='rol'
                                     value={rol}
                                     className='select-form'
+                                    required
                                 >
                                     <option value='JEFE'>Jefe</option>
                                     <option value='VENDEDOR'>Vendedor</option>

@@ -25,6 +25,7 @@ const Contact = () => {
   };
   const [values, setValues] = useState(initialValues);
   const [errors, setErrors] = useState(initialValuesErrors);
+  const [sendingMail, setSendingMail] = useState(false);
 
   useEffect(() => {
     window.scroll(0, 0);
@@ -40,8 +41,8 @@ const Contact = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
     try {
+      setSendingMail(true);
       const resp = await fetchApi("auth-customers.php?url=consult", "POST", values);
       if (resp.status === "successfully") {
         Swal.fire({
@@ -68,6 +69,8 @@ const Contact = () => {
         timer: 3000,
         showConfirmButton: true,
       });
+    } finally {
+      setSendingMail(false);
     }
   };
   return (
@@ -113,7 +116,7 @@ const Contact = () => {
             />
             <blockquote>{values.text.length}/250</blockquote>
           </div>
-          <button className="submit-button" type="submit" disabled={errors.client.error}>
+          <button className="submit-button" type="submit" disabled={errors.client.error || sendingMail}>
             Enviar
           </button>
         </form>

@@ -38,11 +38,6 @@ const ManageSales = () => {
     <ContainerBase>
       <section className="container_section flex-column-center-xy manage-sales">
         <div className="manage-sales_filters">
-          <div>
-            <label>Buscar por ID:</label>
-            <input type="number" min="700000" />
-          </div>
-
           <strong>
             {!sales
               ? "AUN NO SE REGISTRO NINGUNA VENTA"
